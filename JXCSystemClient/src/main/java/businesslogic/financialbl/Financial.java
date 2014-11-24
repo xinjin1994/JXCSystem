@@ -1,5 +1,7 @@
 package businesslogic.financialbl;
 
+import java.rmi.RemoteException;
+
 import po.AllBillPO;
 import po.OperatingConditionPO;
 import po.PaymentPO;
@@ -13,8 +15,7 @@ import businesslogicservice.financialblservice.FinancialblService;
 import data.financialdata.FinancialDataService_Stub;
 import dataservice.financialdataservice.FinancialDataService;
 
-public class Financial implements FinancialblService,
-			businesslogic.accountbl.FinancialInfo{
+public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public FinancialDataService financial=new FinancialDataService_Stub();
 	public AccountInfo account=new Account();
@@ -27,8 +28,13 @@ public class Financial implements FinancialblService,
 			String good_type, String customer_name, String clerk, int warehouse) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
-		if(financial.getSaleList()!=null){
-			return "�ɹ�";
+		try {
+			if(financial.getSaleList()!=null){
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -37,8 +43,13 @@ public class Financial implements FinancialblService,
 			String customer_name, String clerk, int warehouse) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
-		if(financial.getAllBill()!=null){
-			return " �ɹ�";
+		try {
+			if(financial.getAllBill()!=null){
+				return " �ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -46,8 +57,13 @@ public class Financial implements FinancialblService,
 	public String operatingCondition(String time1, String time2) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
-		if(financial.getOperatingCondition()!=null){
-			return " �ɹ�";
+		try {
+			if(financial.getOperatingCondition()!=null){
+				return " �ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -56,41 +72,83 @@ public class Financial implements FinancialblService,
 	
 	public boolean addSaleList(SaleListPO po) {
 //		financial= new FinancialDataService_Stub();
-		return financial.addSaleList(po);
+		try {
+			return financial.addSaleList(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public boolean addAllBill(AllBillPO po) {
 //		financial= new FinancialDataService_Stub();
-		return financial.addAllBill(po);
+		try {
+			return financial.addAllBill(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean addAllBill(ReceiptPO po) {
 //		financial= new FinancialDataService_Stub();
 		AllBillPO po1=new AllBillPO(po);
-		return financial.addAllBill(po1);
+		try {
+			return financial.addAllBill(po1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean addAllBill(PaymentPO po) {
 //		financial= new FinancialDataService_Stub();
 		AllBillPO po1=new AllBillPO(po);
-		return financial.addAllBill(po1);
+		try {
+			return financial.addAllBill(po1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public boolean addOperatingCondition(OperatingConditionPO po) {
 //		financial= new FinancialDataService_Stub();
-		return financial.addOperatingCondition(po);
+		try {
+			return financial.addOperatingCondition(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean addOperatingCondition(ReceiptPO po) {
 //		financial= new FinancialDataService_Stub();
 		OperatingConditionPO po1=new OperatingConditionPO(po.getTotal(),0,0,0);
-		return financial.addOperatingCondition(po1);
+		try {
+			return financial.addOperatingCondition(po1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean addOperatingCondition(PaymentPO po) {
 //		financial= new FinancialDataService_Stub();
 		OperatingConditionPO po1=new OperatingConditionPO(0,0,po.getTotal(),0);
-		return financial.addOperatingCondition(po1);
+		try {
+			return financial.addOperatingCondition(po1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

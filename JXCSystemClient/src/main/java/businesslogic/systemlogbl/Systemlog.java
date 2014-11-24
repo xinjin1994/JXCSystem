@@ -1,6 +1,8 @@
 package businesslogic.systemlogbl;
 
 
+import java.rmi.RemoteException;
+
 import po.SystemlogPO;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 import data.systemlogdata.SystemlogDataService_Stub;
@@ -12,7 +14,7 @@ public class Systemlog implements SystemlogblService, businesslogic.commoditybl.
 			businesslogic.promotionbl.SystemlogInfo, businesslogic.salesbl.SystemlogInfo,
 			businesslogic.userbl.SystemlogInfo{
 	
-	SystemlogDataService sys = new SystemlogDataService_Stub();
+	public SystemlogDataService sys = new SystemlogDataService_Stub();
 
 	public SystemlogDataService getSys() {
 		return sys;
@@ -25,8 +27,13 @@ public class Systemlog implements SystemlogblService, businesslogic.commoditybl.
 	public String show() {
 		// TODO Auto-generated method stub
 		//SystemlogDataService sys = new SystemlogDataService_Stub();
-		if(sys.get()!=null){
-			return "成功";
+		try {
+			if(sys.get()!=null){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
@@ -35,8 +42,13 @@ public class Systemlog implements SystemlogblService, businesslogic.commoditybl.
 		// TODO Auto-generated method stub
 		SystemlogPO system = new SystemlogPO("operation","time");
 		//SystemlogDataService sys = new SystemlogDataService_Stub();
-		if(sys.add(system)){
-			return "成功";
+		try {
+			if(sys.add(system)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}

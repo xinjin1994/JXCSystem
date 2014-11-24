@@ -4,7 +4,7 @@ import businesslogicservice.commodityblservice.CommodityblService;
 
 public class CommodityController implements CommodityblService{
 
-	Commodity commodity;
+	public Commodity commodity;
 	
 	public String addCommodity(String name, String type) {
 		// TODO Auto-generated method stub

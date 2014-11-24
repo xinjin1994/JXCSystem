@@ -4,7 +4,7 @@ import businesslogicservice.promotionblservice.PromotionblService;
 
 public class PromotionController implements PromotionblService{
 	
-	Promotion promotion=new Promotion();
+	public Promotion promotion=new Promotion();
 
 	public String makeDiscount(int start_money, int discount, int end_money,
 			String time1, String time2) {

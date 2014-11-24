@@ -4,7 +4,7 @@ import businesslogicservice.salesblservice.SalesblService;
 
 public class SalesController implements SalesblService{
 	
-	Sales sale=new Sales();
+	public Sales sale=new Sales();
 
 	public String addCustomer(String name, int level, String phone, String zip,
 			String mail, int money, String clerk) {

@@ -1,5 +1,7 @@
 package businesslogic.salesbl;
 
+import java.rmi.RemoteException;
+
 import po.CustomerPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
@@ -14,7 +16,7 @@ import dataservice.salesdataservice.SalesDataService;
 public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 			businesslogic.financialbl.SalesInfo{
 	
-	SalesDataService sale=new SaleDataService_Stub();
+	public SalesDataService sale=new SaleDataService_Stub();
 	public InvoiceInfo invoice=new Invoice();
 	SystemlogInfo systemlog=new Systemlog();
 	
@@ -32,9 +34,14 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
 		
-		if(sale.addCustomer(customer)){
-			systemlog.add("AddCustomer:");
-			return "�ɹ�";
+		try {
+			if(sale.addCustomer(customer)){
+				systemlog.add("AddCustomer:");
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -45,9 +52,14 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
 		
-		if(sale.delCustomer(customer)){
-			systemlog.add("DelCustomer:");
-			return "�ɹ�";
+		try {
+			if(sale.delCustomer(customer)){
+				systemlog.add("DelCustomer:");
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -62,9 +74,14 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 				"phone", "zip", "mail", 2000, 4000,
 				"clerk", "address");
 		
-		if(sale.updateCustomer(customer1,customer2)){
-			systemlog.add("UpdateCustomer:");
-			return "�ɹ�";
+		try {
+			if(sale.updateCustomer(customer1,customer2)){
+				systemlog.add("UpdateCustomer:");
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -72,8 +89,13 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 	public String searchCustomer(String word) {
 		// TODO Auto-generated method stub
 		
-		if(sale.findCustomer(word)!=null){
-			return "�ɹ�";
+		try {
+			if(sale.findCustomer(word)!=null){
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -160,23 +182,53 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 	
 	public CustomerPO findCustomer(String name) {
 		// TODO Auto-generated method stub
-		return sale.findCustomer(name);
+		try {
+			return sale.findCustomer(name);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public ImportPO[] getAllImport() {
 		// TODO Auto-generated method stub
-		return sale.getAllImport();
+		try {
+			return sale.getAllImport();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public Import_ReturnPO[] getAllImport_Return() {
 		// TODO Auto-generated method stub
-		return sale.getAllImport_Return();
+		try {
+			return sale.getAllImport_Return();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public ExportPO[] getAllExport() {
 		// TODO Auto-generated method stub
-		return sale.getAllExport();
+		try {
+			return sale.getAllExport();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public Export_ReturnPO[] getAllExport_Return() {
 		// TODO Auto-generated method stub
-		return sale.getAllExport_Return();
+		try {
+			return sale.getAllExport_Return();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

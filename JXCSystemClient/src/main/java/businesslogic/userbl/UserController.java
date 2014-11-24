@@ -4,7 +4,7 @@ import businesslogicservice.userblservice.UserblService;
 
 public class UserController implements UserblService{
 	
-	User user=new User();
+	public User user=new User();
 
 	public String addUser(String name, String password, int duty) {
 		// TODO Auto-generated method stub

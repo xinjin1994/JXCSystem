@@ -3,7 +3,7 @@ package businesslogic.accountbl;
 import businesslogicservice.accountblservice.AccountblService;
 
 public class AccountController implements AccountblService{
-	Account account=new Account();
+	public Account account=new Account();
 
 	public String checkAccount() {
 		// TODO Auto-generated method stub

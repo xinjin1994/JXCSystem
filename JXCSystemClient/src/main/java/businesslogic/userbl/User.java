@@ -1,5 +1,7 @@
 package businesslogic.userbl;
 
+import java.rmi.RemoteException;
+
 import po.UserPO;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.userblservice.UserblService;
@@ -8,7 +10,7 @@ import dataservice.userdataservice.UserDataService;
 
 public class User implements UserblService {
 	
-	UserDataService us=new UserDataService_Stub("password", "duty", 10);
+	public UserDataService us=new UserDataService_Stub("password", "duty", 10);
 	SystemlogInfo systemlog=new Systemlog();
 	
 	public UserDataService getUser() {
@@ -22,34 +24,54 @@ public class User implements UserblService {
 		// TODO Auto-generated method stub
 		UserPO user = new UserPO(name, password, duty);
 		
-		if (us.addUser(user)) {
-			systemlog.add("AddUser:");
-			return "�ɹ�";
+		try {
+			if (us.addUser(user)) {
+				systemlog.add("AddUser:");
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
 
 	public String delUser(String name) {
 		// TODO Auto-generated method stub
-		if(us.getUser("user")!=null){
-			systemlog.add("DelUser:");
-			return "�ɹ�";
+		try {
+			if(us.getUser("user")!=null){
+				systemlog.add("DelUser:");
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
 
 	public String show() {
 		// TODO Auto-generated method stub
-		if(us.show()!=null){
-			return "�ɹ�";
+		try {
+			if(us.show()!=null){
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
 
 	public String login(String name, String password) {
 		// TODO Auto-generated method stub
-		if(us.getUser("user")!=null){
-			return "�ɹ�";
+		try {
+			if(us.getUser("user")!=null){
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}

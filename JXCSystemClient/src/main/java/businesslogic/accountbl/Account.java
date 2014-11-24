@@ -1,5 +1,7 @@
 package businesslogic.accountbl;
 
+import java.rmi.RemoteException;
+
 import po.AccountPO;
 import po.PaymentPO;
 import po.ReceiptPO;
@@ -22,8 +24,13 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 	public String checkAccount() {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
-		if (account.getAccount() != null) {
-			return "�ɹ�";
+		try {
+			if (account.getAccount() != null) {
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -32,9 +39,14 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		AccountPO acc = new AccountPO(name, money);
-		if (account.addAccount(acc)) {
-			systemlog.add("addAccount:"+acc.getName()+","+acc.getMoney());
-			return "�ɹ�";
+		try {
+			if (account.addAccount(acc)) {
+				systemlog.add("addAccount:"+acc.getName()+","+acc.getMoney());
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -42,10 +54,17 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 	public String delAccount(String name) {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
-		AccountPO acc = account.findAccount(name);
-		if (account.delAccount(acc)) {
-			systemlog.add("delAccount:"+acc.getName());
-			return "�ɹ�";
+		AccountPO acc;
+		try {
+			acc = account.findAccount(name);
+	
+			if (account.delAccount(acc)) {
+				systemlog.add("delAccount:"+acc.getName());
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -53,11 +72,20 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 	public String updateAccount(String name1, String name2) {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
-		AccountPO acc1 = account.findAccount(name1);
-		AccountPO acc2 = new AccountPO(name2, acc1.getMoney());
-		if (account.updateAccount(acc1, acc2)) {
-			systemlog.add("updateAccount:"+acc1.getName()+","+acc2.getName());
-			return "�ɹ�";
+		AccountPO acc1;
+		AccountPO acc2;
+		try {
+			acc1 = account.findAccount(name1);
+	
+		acc2 = new AccountPO(name2, acc1.getMoney());
+
+			if (account.updateAccount(acc1, acc2)) {
+				systemlog.add("updateAccount:"+acc1.getName()+","+acc2.getName());
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -65,8 +93,13 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 	public String searchAccount(String word) {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
-		if (account.findAccount(word) != null) {
-			return "�ɹ�";
+		try {
+			if (account.findAccount(word) != null) {
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "ʧ��";
 	}
@@ -78,10 +111,15 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		String[] accountList={account_name};
 		int[] price={10};
 		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, "ps", price);
-		if(account.addReceipt(po)){
-			invoice.add(po);
-			systemlog.add("addReceipt:"+po.getOperator()+","+po.getName()+","+po.getTotal());
-			return "�ɹ�";
+		try {
+			if(account.addReceipt(po)){
+				invoice.add(po);
+				systemlog.add("addReceipt:"+po.getOperator()+","+po.getName()+","+po.getTotal());
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return  "ʧ��";
 	}
@@ -94,10 +132,15 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		int[] price={10};
 		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", "ps", price);
 		
-		if(account.addPayment(po)){
-			invoice.add(po);
-			systemlog.add("addPayment:"+po.getOperator()+","+po.getName()+","+po.getTotal());
-			return "�ɹ�";
+		try {
+			if(account.addPayment(po)){
+				invoice.add(po);
+				systemlog.add("addPayment:"+po.getOperator()+","+po.getName()+","+po.getTotal());
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return  "ʧ��";
 	}
@@ -109,8 +152,13 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		String[] accountList={account_name};
 		int[] price={10};
 		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, "ps", price);
-		if(account.addReceipt(po)){
-			return "�ɹ�";
+		try {
+			if(account.addReceipt(po)){
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return  "ʧ��";
 	}
@@ -122,20 +170,37 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		String[] accountList={account_name};
 		int[] price={10};
 		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", "ps", price);
-		if(account.addPayment(po)){
-			return "�ɹ�";
+		try {
+			if(account.addPayment(po)){
+				return "�ɹ�";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return  "ʧ��";
 	}
 	
 	public ReceiptPO[] getAllReceipt(){
 //		account=new AccountDataService_Stub("accountName",10);
-		return account.getAllReceipt();
+		try {
+			return account.getAllReceipt();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public PaymentPO[] getAllPayment(){
 //		AccountDataService account=new AccountDataService_Stub("accountName",10);
-		return account.getAllPayment();
+		try {
+			return account.getAllPayment();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String addReceipt_Data(ReceiptPO po) {

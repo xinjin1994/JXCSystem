@@ -1,16 +1,19 @@
 package dataservice.promotiondataservice;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 import po.DiscountPO;
 import po.ProGiftPO;
 
-public interface PromotionDataService {
-	public boolean addDiscount(DiscountPO po);
-	public boolean addGift(ProGiftPO po);
-	public boolean delDiscount(DiscountPO po);
-	public boolean delGift(ProGiftPO po);
-	public DiscountPO getDiscount();
-	public ProGiftPO getGift();
-	public DiscountPO[] showDiscount();
-	public ProGiftPO[] showProGift();
+public interface PromotionDataService extends Remote {
+	public boolean addDiscount(DiscountPO po) throws RemoteException;
+	public boolean addGift(ProGiftPO po) throws RemoteException;
+	public boolean delDiscount(DiscountPO po) throws RemoteException;
+	public boolean delGift(ProGiftPO po) throws RemoteException;
+	public DiscountPO getDiscount() throws RemoteException;
+	public ProGiftPO getGift() throws RemoteException;
+	public DiscountPO[] showDiscount() throws RemoteException;
+	public ProGiftPO[] showProGift() throws RemoteException;
 }
 	
