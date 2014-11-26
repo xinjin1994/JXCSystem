@@ -2,6 +2,7 @@ package data.promotiondata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import po.CommodityPO;
 import po.DiscountPO;
@@ -9,31 +10,12 @@ import po.ProGiftPO;
 import dataservice.promotiondataservice.PromotionDataService;
 
 public class PromotionDataService_Stub extends UnicastRemoteObject implements PromotionDataService{
-//	public PromotionDataService_Stub(int dm, String t1, String t2, int sm,
-//			int em, int d, CommodityPO gift, String time1, String time2) {
-//		this.dm = dm;
-//		this.t1 = t1;
-//		this.t2 = t2;
-//		this.sm = sm;
-//		this.em = em;
-//		this.d = d;
-//		this.gift = gift;
-//		this.time1 = time1;
-//		this.time2 = time2;
-//	}
-//
-//	int dm;
-//	String t1;
-//	String t2;
-//	int sm;
-//	int em;
-//	int d;
-//	
-//	CommodityPO gift;
-//	String time1;
-//	String time2;
-	
 
+	ProGiftPO nowProGift;
+	ProGiftPO nowDiscount;
+	
+	ArrayList<ProGiftPO> proGiftList=new ArrayList<ProGiftPO>();
+	ArrayList<DiscountPO> discountPO=new ArrayList<DiscountPO>();
 
 	public PromotionDataService_Stub() throws RemoteException {
 		super();

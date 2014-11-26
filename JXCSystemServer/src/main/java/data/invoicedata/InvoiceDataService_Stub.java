@@ -2,6 +2,7 @@ package data.invoicedata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import po.InvoicePO;
 import dataservice.invoicedataservice.InvoiceDataService;
@@ -10,6 +11,8 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	String invoiceType;
 	String invoiceNum;
 	String condition;
+	
+	ArrayList<InvoicePO> invoiceList=new ArrayList<InvoicePO>();
 	
 	public InvoiceDataService_Stub(String invoiceType,
 			String invoiceNum, String condition) throws RemoteException{

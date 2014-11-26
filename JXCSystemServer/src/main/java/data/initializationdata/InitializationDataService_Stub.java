@@ -2,6 +2,7 @@ package data.initializationdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import po.AccountPO;
 import po.CommodityPO;
@@ -14,6 +15,9 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 	CustomerPO customer;
 	CommodityPO commodity;
 	AccountPO account;
+	
+	ArrayList<InitializationPO> initializationList=new ArrayList<InitializationPO>();
+	
 	public InitializationDataService_Stub(CommodityPO commodity,CustomerPO customer,AccountPO account) throws RemoteException {
 		this.commodity = commodity;
 		this.customer = customer;

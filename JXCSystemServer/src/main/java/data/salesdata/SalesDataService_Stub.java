@@ -2,6 +2,7 @@ package data.salesdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import po.CustomerPO;
 import po.ExportPO;
@@ -11,7 +12,15 @@ import po.Import_ReturnPO;
 import dataservice.salesdataservice.SalesDataService;
 
 public class SalesDataService_Stub extends UnicastRemoteObject implements SalesDataService{
-public SalesDataService_Stub() throws RemoteException {
+	
+	
+	ArrayList<CustomerPO> customerList=new ArrayList<CustomerPO>();
+	ArrayList<ImportPO> importList=new ArrayList<ImportPO>();
+	ArrayList<ExportPO> exportList=new ArrayList<ExportPO>();
+	ArrayList<Import_ReturnPO> import_returnList=new ArrayList<Import_ReturnPO>();
+	ArrayList<Export_ReturnPO> export_returnList=new ArrayList<Export_ReturnPO>();
+	
+	public SalesDataService_Stub() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -2,6 +2,7 @@ package data.financialdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import po.AllBillPO;
 import po.OperatingConditionPO;
@@ -10,6 +11,10 @@ import dataservice.financialdataservice.FinancialDataService;
 
 public class FinancialDataService_Stub extends UnicastRemoteObject implements FinancialDataService{
 
+	ArrayList<SaleListPO> saleListList=new ArrayList<SaleListPO>();
+	ArrayList<AllBillPO> allBillList=new ArrayList<AllBillPO>();
+	ArrayList<OperatingConditionPO> operationConditionList=new ArrayList<OperatingConditionPO>();
+	
 	public FinancialDataService_Stub() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub

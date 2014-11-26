@@ -2,6 +2,7 @@ package data.userdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import po.UserPO;
 import dataservice.userdataservice.UserDataService;
@@ -10,6 +11,8 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	String n;
 	String p;
 	int d;
+	
+	ArrayList<UserPO> userList=new ArrayList<UserPO>();
 	
 	public UserDataService_Stub(String n, String p, int d) throws RemoteException{
 		this.n = n;

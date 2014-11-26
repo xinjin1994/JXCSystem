@@ -2,6 +2,7 @@ package data.accountdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import po.AccountPO;
 import po.PaymentPO;
@@ -12,6 +13,13 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	
 	String name;
 	int money;
+	
+	ArrayList<AccountPO> accountList=new ArrayList<AccountPO>();
+	ArrayList<ReceiptPO> receiptList=new ArrayList<ReceiptPO>();
+	ArrayList<PaymentPO> paymentList=new ArrayList<PaymentPO>();
+	
+	
+	
 	public AccountDataService_Stub(String name, int money) throws RemoteException {
 		super();
 		this.name = name;

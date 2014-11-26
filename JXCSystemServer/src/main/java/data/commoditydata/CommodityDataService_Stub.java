@@ -5,32 +5,14 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.PatchPO;
 import po.SortPO;
 import dataservice.commoditydataservice.CommodityDataService;
 
 public class CommodityDataService_Stub extends UnicastRemoteObject implements CommodityDataService{
-//	Boolean g;
-//	String n;
-//	String t;
-//	int i;
-//	int o;
-//	int no;
-//	int rei;
-//	int reo;
-//	int num;
-//	public CommodityDataService_Stub(Boolean g, String n, String t, int i,
-//			int o, int no, int rei, int reo, int num) {
-//		super();
-//		this.g = g;
-//		this.n = n;
-//		this.t = t;
-//		this.i = i;
-//		this.o = o;
-//		this.no = no;
-//		this.rei = rei;
-//		this.reo = reo;
-//		this.num = num;
-//	}
+
+	ArrayList<SortPO> sortList=new ArrayList<SortPO>();
+	ArrayList<PatchPO> patchPO=new ArrayList<PatchPO>();
 
 	public CommodityDataService_Stub() throws RemoteException {
 		super();
