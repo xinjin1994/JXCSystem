@@ -1,20 +1,23 @@
 package data.userdata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import po.UserPO;
 import dataservice.userdataservice.UserDataService;
 
-public class UserDataService_Stub implements UserDataService{
+public class UserDataService_Stub extends UnicastRemoteObject implements UserDataService{
 	String n;
 	String p;
 	int d;
 	
-	public UserDataService_Stub(String n, String p, int d) {
+	public UserDataService_Stub(String n, String p, int d) throws RemoteException{
 		this.n = n;
 		this.p = p;
 		this.d = d;
 	}
 	
-	public UserDataService_Stub(){
+	public UserDataService_Stub() throws RemoteException {
 		
 	}
 	

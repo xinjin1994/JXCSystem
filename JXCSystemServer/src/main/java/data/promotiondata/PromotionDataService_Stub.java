@@ -1,11 +1,14 @@
 package data.promotiondata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
 import dataservice.promotiondataservice.PromotionDataService;
 
-public class PromotionDataService_Stub implements PromotionDataService{
+public class PromotionDataService_Stub extends UnicastRemoteObject implements PromotionDataService{
 //	public PromotionDataService_Stub(int dm, String t1, String t2, int sm,
 //			int em, int d, CommodityPO gift, String time1, String time2) {
 //		this.dm = dm;
@@ -31,6 +34,11 @@ public class PromotionDataService_Stub implements PromotionDataService{
 //	String time2;
 	
 
+
+	public PromotionDataService_Stub() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public boolean addDiscount(DiscountPO po) {
 		return true;

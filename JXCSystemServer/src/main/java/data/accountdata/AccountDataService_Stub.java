@@ -1,15 +1,18 @@
 package data.accountdata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import po.AccountPO;
 import po.PaymentPO;
 import po.ReceiptPO;
 import dataservice.accountdataservice.AccountDataService;
 
-public class AccountDataService_Stub implements AccountDataService{
+public class AccountDataService_Stub extends UnicastRemoteObject implements AccountDataService{
 	
 	String name;
 	int money;
-	public AccountDataService_Stub(String name, int money) {
+	public AccountDataService_Stub(String name, int money) throws RemoteException {
 		super();
 		this.name = name;
 		this.money = money;

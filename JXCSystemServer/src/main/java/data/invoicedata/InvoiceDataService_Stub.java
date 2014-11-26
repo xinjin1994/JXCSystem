@@ -1,15 +1,18 @@
 package data.invoicedata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import po.InvoicePO;
 import dataservice.invoicedataservice.InvoiceDataService;
 
-public class InvoiceDataService_Stub implements InvoiceDataService{
+public class InvoiceDataService_Stub extends UnicastRemoteObject implements InvoiceDataService{
 	String invoiceType;
 	String invoiceNum;
 	String condition;
 	
 	public InvoiceDataService_Stub(String invoiceType,
-			String invoiceNum, String condition) {
+			String invoiceNum, String condition) throws RemoteException{
 		this.invoiceNum = invoiceNum;
 		this.invoiceType = invoiceType;
 		this.condition = condition;

@@ -1,11 +1,19 @@
 package data.financialdata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import po.AllBillPO;
 import po.OperatingConditionPO;
 import po.SaleListPO;
 import dataservice.financialdataservice.FinancialDataService;
 
-public class FinancialDataService_Stub implements FinancialDataService{
+public class FinancialDataService_Stub extends UnicastRemoteObject implements FinancialDataService{
+
+	public FinancialDataService_Stub() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public SaleListPO[] getSaleList() {
 		return new SaleListPO[1];
