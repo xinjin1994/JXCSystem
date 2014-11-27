@@ -23,4 +23,9 @@ public class AccountPO implements Serializable{
 	public int getMoney() {
 		return money;
 	}
+	
+	public AccountPO copy(){
+		return new AccountPO(this.name,this.money);
+	}
+	
 }

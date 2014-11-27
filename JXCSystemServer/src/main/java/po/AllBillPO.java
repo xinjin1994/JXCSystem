@@ -69,5 +69,6 @@ public class AllBillPO implements Serializable{
 	public ReceiptPO getReceiptList() {
 		return receiptList;
 	}
+	
 
 }

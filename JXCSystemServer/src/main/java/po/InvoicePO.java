@@ -11,6 +11,8 @@ public class InvoicePO implements Serializable{
 		
 	}
 	
+	
+	
 	public InvoicePO(String draft_condition, String submit_condition,
 			String approve_condition) {
 		

@@ -3,12 +3,12 @@ package po;
 import java.io.Serializable;
 
 public class DiscountPO implements Serializable{
-	String time1;//¿ªÊ¼Ê±¼ä
-	String time2;//½áÊøÊ±¼ä
-	int start_money;//ÕÛÈÃÇ°¼Û¸ñ
-	int end_money;//ÕÛÈÃºó¼Û¸ñ
-	int discount;//ÕÛÈÃµÄ´ú½ğÈ¯¼Û¸ñ
-	int discountMoney;//ÕÛÈÃ½ğ¶î
+	String time1;//ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
+	String time2;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	int start_money;//ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Û¸ï¿½
+	int end_money;//ï¿½ï¿½ï¿½Ãºï¿½Û¸ï¿½
+	int discount;//ï¿½ï¿½ï¿½ÃµÄ´ï¿½ï¿½È¯ï¿½Û¸ï¿½
+	int discountMoney;//ï¿½ï¿½ï¿½Ã½ï¿½ï¿½
 	
 	public DiscountPO(int dm,String t1,String t2,int sm,int em,int d) {
 		time1 = t1;
@@ -18,6 +18,13 @@ public class DiscountPO implements Serializable{
 		discount = d;
 		discountMoney = dm;
 	}
+	
+	
+	public DiscountPO copy(){
+		return new DiscountPO(discountMoney, time1, time2, start_money, end_money, discount);
+	}
+	
+	
 	public String getTime1() {
 		return time1;
 	}

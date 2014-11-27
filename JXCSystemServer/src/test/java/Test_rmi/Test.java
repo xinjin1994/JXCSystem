@@ -45,7 +45,7 @@ public class Test {
 			LocateRegistry.createRegistry(8888);
 			Naming.bind("rmi://127.0.0.1:8888/CommodityDataService",commoditydataservice);
 			
-			accountdataservice = new AccountDataService_Stub("name", 1000);		
+			accountdataservice = new AccountDataService_Stub();		
 			LocateRegistry.createRegistry(8888);
 			Naming.bind("rmi://127.0.0.1:8888/AccountDataService",accountdataservice);
 			

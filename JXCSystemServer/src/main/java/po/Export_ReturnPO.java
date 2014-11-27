@@ -23,26 +23,36 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 	int total_price;//�ܼ� 
 	
 
-	public Export_ReturnPO(String ti,int tp,int sm,int em,int dm,String cn,String gn,String gt,String p,String sn,String c,String o,
-			int wh,int num,int pr,int dis,int i) {
-		time = ti;
-		total_price = tp;
-		start_money = sm;
-		end_money = em;
-		discountMoney = dm;
-		customerName = cn;
-		good_name = gn;
-		good_type = gt;
-		ps = p;
-		serialnum = sn;
-		clerk = c;
-		operator = o;
-		wareHouse = wh;
-		number = num;
-		price = pr;
-		discount = dis;	
-		id = i;
+	public Export_ReturnPO(String time,int total_price,int start_money,int end_money,int discountMoney,
+			String customerName,String good_name,String good_type,String ps,String serialnum,
+			String clerk,String operator,int wareHouse,int number,int price,int discouns,int id) {
+		this.time = time;
+		this.total_price = total_price;
+		this.start_money = start_money;
+		this.end_money = end_money;
+		this.discountMoney = discountMoney;
+		this.customerName = customerName;
+		this.good_name = good_name;
+		this.good_type = good_type;
+		this.ps = ps;
+		this.serialnum = serialnum;
+		this.clerk = clerk;
+		this.operator = operator;
+		this.wareHouse = wareHouse;
+		this.number = number;
+		this.price = price;
+		this.discount = discouns;	
+		this.id = id;
 	}
+	
+	
+	public Export_ReturnPO copy(){
+		return new Export_ReturnPO(time, total_price, start_money, end_money, discountMoney,
+				customerName, good_name, good_type, ps, serialnum, clerk, operator, wareHouse,
+				number, price, discount, id);
+	}
+	
+	
 	public String getTimr(){
 		return time;
 	}

@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 public class SystemlogPO implements Serializable{
 
-	String operation;//²Ù×÷
-	String time;//Ê±¼ä
+	String operation;//ï¿½ï¿½ï¿½ï¿½
+	String time;//Ê±ï¿½ï¿½
 	
 	public SystemlogPO(String operation, String time) {
 		this.operation = operation;
 		this.time = time;
+	}
+	
+	public SystemlogPO copy(){
+		return new SystemlogPO(operation, time);
 	}
 	
 	public String getOperation() {

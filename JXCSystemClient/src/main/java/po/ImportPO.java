@@ -34,6 +34,11 @@ public class ImportPO extends InvoicePO implements Serializable{
 		this.id = id;
 		this.total_money = total_money;
 	}
+	
+	public ImportPO copy(){
+		return new ImportPO(time, customerName, good_name, good_type, ps, serialnum, clerk,
+				operator, wareHouse, number, price, id, total_money);
+	}
 
 	public String getTime(){
 		return time;

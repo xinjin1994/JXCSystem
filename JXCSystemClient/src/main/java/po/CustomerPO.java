@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class CustomerPO implements Serializable{
 
-	int id;//¿Í»§±àºÅ
-	String name;//¿Í»§Ãû³Æ
-	int level;//¿Í»§µÈ¼¶
-	String type;//¿Í»§·ÖÀà
-	String phone;//ÁªÏµ·½Ê½
-	String zip;//ÓÊ±à
-	String mail;//ÓÊÏä
-	int money;//Ó¦ÊÕ¶î¶È
-	int amount;//Ó¦ÊÕÓ¦¸¶
-	String clerk;//ÒµÎñÔ±
-	String address;//µØÖ·
+	int id;//ï¿½Í»ï¿½ï¿½ï¿½ï¿½
+	String name;//ï¿½Í»ï¿½ï¿½ï¿½ï¿½
+	int level;//ï¿½Í»ï¿½ï¿½È¼ï¿½
+	String type;//ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½
+	String phone;//ï¿½ï¿½Ïµï¿½ï¿½Ê½
+	String zip;//ï¿½Ê±ï¿½
+	String mail;//ï¿½ï¿½ï¿½ï¿½
+	int money;//Ó¦ï¿½Õ¶ï¿½ï¿½
+	int amount;//Ó¦ï¿½ï¿½Ó¦ï¿½ï¿½
+	String clerk;//Òµï¿½ï¿½Ô±
+	String address;//ï¿½ï¿½Ö·
 	
 	public CustomerPO(int id, String name, int level, String type,
 			String phone, String zip, String mail, int money, int amount,
@@ -37,6 +37,11 @@ public class CustomerPO implements Serializable{
 		this.level=level;
 		this.type=type;
 		this.phone=phone;
+	}
+	
+	
+	public CustomerPO copy(){
+		return new CustomerPO( id, name, level, type, phone, zip, mail, money, amount,clerk, address);
 	}
 
 

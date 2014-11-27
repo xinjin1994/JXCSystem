@@ -17,9 +17,6 @@ import dataservice.accountdataservice.AccountDataService;
 
 public class AccountDataService_Stub extends UnicastRemoteObject implements AccountDataService{
 	
-	String name;
-	int money;
-	
 	AccountPO nowAccount=new AccountPO("name",1000);
 	
 	public ArrayList<AccountPO> accountList=new ArrayList<AccountPO>();
@@ -138,7 +135,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void readReceipt(){
+	public void readReceiptList(){
 		
 		FileInputStream fis;
 		ObjectInputStream ois;
@@ -211,22 +208,30 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	
 	
 	
-	public AccountDataService_Stub(String name, int money) throws RemoteException {
+	public AccountDataService_Stub() throws RemoteException {
 		super();
-		this.name = name;
-		this.money = money;
-	}
-	
-	public AccountPO getAccount() {
-		return new AccountPO(name, money);
+		this.readNowAccount();
+		this.readAccountList();
+		this.readReceiptList();
+		this.readPaymentList();
 	}
 
 	public boolean addAccount(AccountPO po) {
+		this.accountList.add(po);
 		return true;
 	}
 
+	public AccountPO getAccount() throws RemoteException {
+		// TODO Auto-generated method stub
+		return nowAccount;
+	}
+	
 	public boolean delAccount(AccountPO po) {
-		return true;
+		if(accountList.remove(po)){
+			return true;
+		}
+		return false;
+		
 	}
 
 	public boolean updateAccount(AccountPO po1, AccountPO po2) {
@@ -235,7 +240,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 
 	public AccountPO findAccount(String name) {
 		
-		return new AccountPO(name,money);
+		return new AccountPO(name);
 	}
 
 	public ArrayList<AccountPO> getAllAccount() {
@@ -261,5 +266,6 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	public boolean clear() {
 		return true;
 	}
+
 
 }

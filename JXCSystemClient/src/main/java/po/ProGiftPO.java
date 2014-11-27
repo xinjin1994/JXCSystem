@@ -3,15 +3,20 @@ package po;
 import java.io.Serializable;
 
 public class ProGiftPO implements Serializable{
-	CommodityPO gift;//Òª´ÙÏúµÄÉÌÆ·
-	String time1;//¿ªÊ¼´ÙÏúÊ±¼ä
-	String time2;//½áÊø´ÙÏúµÄÊ±¼ä
+	CommodityPO gift;//Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
+	String time1;//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	String time2;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	
 	public ProGiftPO(CommodityPO gift, String time1, String time2) {
 		super();
 		this.gift = gift;
 		this.time1 = time1;
 		this.time2 = time2;
 	}	
+	
+	public ProGiftPO copy(){
+		return new ProGiftPO(gift, time1, time2);
+	}
 
 	public CommodityPO getGift() {
 		return gift;

@@ -11,9 +11,8 @@ public class Test_Serializable {
 		
 		AccountDataService_Stub acc;
 		try {
-			acc = new AccountDataService_Stub("name1",10001);
+			acc = new AccountDataService_Stub();
 
-		
 			acc.accountList.add(new AccountPO("name",1000));
 //			System.out.println(acc.accountList.get(0).getName());
 			acc.writeAccountList();

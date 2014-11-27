@@ -3,7 +3,12 @@ package po;
 import java.io.Serializable;
 
 public class PatchPO extends InvoicePO implements Serializable{
-
+	
+	String name;//���
+	String type;//����
+	int number;//����
+	String serialNum;//���
+	
 	public PatchPO(String name, String type, int number, String serialNum) {
 		this.name = name;
 		this.type = type;
@@ -11,10 +16,10 @@ public class PatchPO extends InvoicePO implements Serializable{
 		this.serialNum = serialNum;
 	}
 	
-	String name;//���
-	String type;//����
-	int number;//����
-	String serialNum;//���
+	public PatchPO copy(){
+		return new PatchPO(name, type, number, serialNum);
+	}
+
 	
 	public String getName() {
 		return name;

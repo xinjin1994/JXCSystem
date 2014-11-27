@@ -27,6 +27,10 @@ public class PaymentPO extends InvoicePO implements Serializable{
 		}
 	}
 	
+	public PaymentPO copy(){
+		return new PaymentPO(serialnum, operator, name, account, item, ps, price);
+	}
+	
 	public String getSerialnum() {
 		return serialnum;
 	}

@@ -3,15 +3,20 @@ package po;
 import java.io.Serializable;
 
 public class UserPO implements Serializable{
-	String name;//Ãû³Æ
-	String password;//ÃÜÂë
-	int duty;//Ö°Ôð
+	String name;//ï¿½ï¿½ï¿½
+	String password;//ï¿½ï¿½ï¿½ï¿½
+	int duty;//Ö°ï¿½ï¿½
 	
 	public UserPO(String n,String p,int d) {
 		name = n;
 		password = p;
 		duty = d;
 	}
+	
+	public UserPO copy(){
+		return new UserPO(name, password, duty);
+	}
+	
 	public String getName() {
 		return name;
 	}

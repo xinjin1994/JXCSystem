@@ -14,6 +14,10 @@ public class SortPO implements Serializable{
 		this.level = level;
 	}
 	
+	public SortPO copy(){
+		return new SortPO(sort, level);
+	}
+	
 	public String getSort() {
 		return sort;
 	}

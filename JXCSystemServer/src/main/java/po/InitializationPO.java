@@ -16,6 +16,8 @@ public class InitializationPO implements Serializable{
 		this.account = account;
 	}
 	
+	
+	
 	public CommodityPO getCommodity() {
 		return commodity;
 	}

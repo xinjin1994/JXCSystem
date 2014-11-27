@@ -25,6 +25,10 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 		}
 	}
 	
+	public ReceiptPO copy(){
+		return new ReceiptPO(serialnum, operator, name, account, ps, price);
+	}
+	
 	public String getSerialnum() {
 		return serialnum;
 	}

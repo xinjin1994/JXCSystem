@@ -50,7 +50,10 @@ public class CommodityPO extends InvoicePO implements Serializable{
 		this.isGift = false;
 	}
 	
-	
+	public CommodityPO copy(){
+		return new CommodityPO(isGift, name, type, in_price, out_price,note,
+				recent_in_price, recent_out_price, number);
+	}
 	
 	public boolean getGift(){
 		return false;
