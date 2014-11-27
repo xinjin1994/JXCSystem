@@ -20,9 +20,58 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	String name;
 	int money;
 	
+	AccountPO nowAccount=new AccountPO("name",1000);
+	
 	public ArrayList<AccountPO> accountList=new ArrayList<AccountPO>();
 	ArrayList<ReceiptPO> receiptList=new ArrayList<ReceiptPO>();
 	ArrayList<PaymentPO> paymentList=new ArrayList<PaymentPO>();
+	
+	
+	public void writeNowAccount(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("nowAccount.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(nowAccount);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readNowAccount(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("nowAccount.out");
+			ois=new ObjectInputStream(fis);
+			nowAccount=(AccountPO) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
 	
 	public void writeAccountList(){
 		
