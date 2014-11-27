@@ -14,4 +14,5 @@ public class GetVO {
 		this.transferList=transferList;
 		this.total=total;
 	}
+
 }
