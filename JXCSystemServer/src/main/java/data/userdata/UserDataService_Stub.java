@@ -88,8 +88,8 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		return new UserPO(n, p, d);
 	}
 
-	public UserPO[] show() {
-		return new UserPO[1];
+	public ArrayList<UserPO> show() {
+		return userList;
 	}
 
 	public boolean clear() {

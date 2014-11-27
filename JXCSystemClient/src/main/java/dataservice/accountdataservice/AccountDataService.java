@@ -2,6 +2,7 @@ package dataservice.accountdataservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.AccountPO;
 import po.PaymentPO;
@@ -18,15 +19,15 @@ public interface AccountDataService extends Remote {
 
 	public AccountPO findAccount(String name) throws RemoteException;
 
-	public AccountPO[] getAllAccount() throws RemoteException;
+	public ArrayList<AccountPO> getAllAccount() throws RemoteException;
 
 	public boolean addReceipt(ReceiptPO po) throws RemoteException;
 
 	public boolean addPayment(PaymentPO po) throws RemoteException;
 
-	public ReceiptPO[] getAllReceipt() throws RemoteException;
+	public ArrayList<ReceiptPO> getAllReceipt() throws RemoteException;
 
-	public PaymentPO[] getAllPayment() throws RemoteException;
+	public ArrayList<PaymentPO> getAllPayment() throws RemoteException;
 
 	public boolean clear() throws RemoteException;
 }

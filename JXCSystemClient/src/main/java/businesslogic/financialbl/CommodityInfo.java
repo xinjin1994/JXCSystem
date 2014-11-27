@@ -1,9 +1,11 @@
 package businesslogic.financialbl;
 
+import java.util.ArrayList;
+
 import po.CommodityPO;
 
 public interface CommodityInfo {
 	
-	public CommodityPO[] getAllCommodity();
+	public ArrayList<CommodityPO> getAllCommodity();
 
 }

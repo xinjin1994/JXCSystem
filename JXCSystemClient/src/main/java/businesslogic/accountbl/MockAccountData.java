@@ -47,11 +47,9 @@ public class MockAccountData implements AccountDataService{
 		return acc;
 	}
 
-	public AccountPO[] getAllAccount() {
+	public ArrayList<AccountPO> getAllAccount() {
 		// TODO Auto-generated method stub
-		AccountPO[] acc=new AccountPO[1];
-		acc[0]=array.get(0);
-		return acc;
+		return new ArrayList<AccountPO>();
 	}
 
 	public boolean addReceipt(ReceiptPO po) {
@@ -64,18 +62,18 @@ public class MockAccountData implements AccountDataService{
 		return true;
 	}
 
-	public ReceiptPO[] getAllReceipt() {
+	public ArrayList<ReceiptPO> getAllReceipt() {
 		// TODO Auto-generated method stub
 		ReceiptPO[] rec=new ReceiptPO[1];
 		rec[0]=arrayRec.get(0);
-		return rec;
+		return new ArrayList<ReceiptPO>();
 	}
 
-	public PaymentPO[] getAllPayment() {
+	public ArrayList<PaymentPO> getAllPayment() {
 		// TODO Auto-generated method stub
 		PaymentPO[] pay=new PaymentPO[1];
 		pay[0]=arrayPay.get(0);
-		return pay;
+		return new ArrayList<PaymentPO>();
 	}
 
 	public boolean clear() {

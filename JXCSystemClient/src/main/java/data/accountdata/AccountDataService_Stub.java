@@ -1,5 +1,7 @@
 package data.accountdata;
 
+import java.util.ArrayList;
+
 import po.AccountPO;
 import po.PaymentPO;
 import po.ReceiptPO;
@@ -36,9 +38,9 @@ public class AccountDataService_Stub implements AccountDataService{
 		return new AccountPO(name,money);
 	}
 
-	public AccountPO[] getAllAccount() {
+	public ArrayList<AccountPO> getAllAccount() {
 
-		return new AccountPO[1];
+		return new ArrayList<AccountPO>();
 	}
 
 	public boolean addReceipt(ReceiptPO po) {
@@ -49,12 +51,12 @@ public class AccountDataService_Stub implements AccountDataService{
 		return true;
 	}
 
-	public ReceiptPO[] getAllReceipt() {
-		return new ReceiptPO[1];
+	public ArrayList<ReceiptPO> getAllReceipt() {
+		return new ArrayList<ReceiptPO>();
 	}
 
-	public PaymentPO[] getAllPayment() {
-		return new PaymentPO[1];
+	public ArrayList<PaymentPO> getAllPayment() {
+		return new ArrayList<PaymentPO>();
 	}
 
 	public boolean clear() {

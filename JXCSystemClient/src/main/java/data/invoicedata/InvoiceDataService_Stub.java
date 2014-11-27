@@ -1,5 +1,7 @@
 package data.invoicedata;
 
+import java.util.ArrayList;
+
 import po.InvoicePO;
 import dataservice.invoicedataservice.InvoiceDataService;
 
@@ -27,8 +29,8 @@ public class InvoiceDataService_Stub implements InvoiceDataService{
 		return true;
 	}
 
-	public InvoicePO[] getAllInvoice() {
-		return new InvoicePO[1];
+	public ArrayList<InvoicePO> getAllInvoice() {
+		return new ArrayList<InvoicePO>();
 	}
 
 	public boolean clear() {

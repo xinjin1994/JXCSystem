@@ -1,5 +1,7 @@
 package data.salesdata;
 
+import java.util.ArrayList;
+
 import po.CustomerPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
@@ -65,24 +67,24 @@ public class SaleDataService_Stub implements SalesDataService{
 		return true;
 	}
 
-	public CustomerPO[] getAllCustomer() {
-		return new CustomerPO[1];
+	public ArrayList<CustomerPO> getAllCustomer() {
+		return new ArrayList<CustomerPO>();
 	}
 
-	public ImportPO[] getAllImport() {
-		return new ImportPO[1];
+	public ArrayList<ImportPO> getAllImport() {
+		return new ArrayList<ImportPO>();
 	}
 
-	public Import_ReturnPO[] getAllImport_Return() {
-		return new Import_ReturnPO[1];
+	public ArrayList<Import_ReturnPO> getAllImport_Return() {
+		return new ArrayList<Import_ReturnPO>();
 	}
 
-	public ExportPO[] getAllExport() {
-		return new ExportPO[1];
+	public ArrayList<ExportPO> getAllExport() {
+		return new ArrayList<ExportPO>();
 	}
 
-	public Export_ReturnPO[] getAllExport_Return() {
-		return new Export_ReturnPO[1];
+	public ArrayList<Export_ReturnPO> getAllExport_Return() {
+		return new ArrayList<Export_ReturnPO>();
 	}
 
 	public boolean clear() {

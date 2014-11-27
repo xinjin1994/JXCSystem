@@ -175,11 +175,11 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return true;
 	}
 
-	public CommodityPO[] getAll() {
+	public ArrayList<CommodityPO> getAll() {
 		CommodityPO com=new CommodityPO(true,"name","type",10,10,10,20,20,100);
-		CommodityPO[] coms=new CommodityPO[1];
-		coms[0]=com;
-		return coms;
+		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
+		array.add(com);
+		return array;
 	}
 
 	public boolean clear() {

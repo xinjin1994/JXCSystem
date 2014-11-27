@@ -1,6 +1,7 @@
 package businesslogic.salesbl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.CustomerPO;
 import po.ExportPO;
@@ -190,7 +191,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
-	public ImportPO[] getAllImport() {
+	public ArrayList<ImportPO> getAllImport() {
 		// TODO Auto-generated method stub
 		try {
 			return sale.getAllImport();
@@ -200,7 +201,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
-	public Import_ReturnPO[] getAllImport_Return() {
+	public ArrayList<Import_ReturnPO> getAllImport_Return() {
 		// TODO Auto-generated method stub
 		try {
 			return sale.getAllImport_Return();
@@ -210,7 +211,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
-	public ExportPO[] getAllExport() {
+	public ArrayList<ExportPO> getAllExport() {
 		// TODO Auto-generated method stub
 		try {
 			return sale.getAllExport();
@@ -220,7 +221,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
-	public Export_ReturnPO[] getAllExport_Return() {
+	public ArrayList<Export_ReturnPO> getAllExport_Return() {
 		// TODO Auto-generated method stub
 		try {
 			return sale.getAllExport_Return();

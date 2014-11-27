@@ -1,5 +1,7 @@
 package businesslogic.invoicebl;
 
+import java.util.ArrayList;
+
 import dataservice.invoicedataservice.InvoiceDataService;
 import po.InvoicePO;
 
@@ -23,7 +25,7 @@ public class MockInvoiceData implements InvoiceDataService{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public InvoicePO[] getAllInvoice() {
+	public ArrayList<InvoicePO> getAllInvoice() {
 		// TODO Auto-generated method stub
 		return null;
 	}

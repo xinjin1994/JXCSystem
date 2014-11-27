@@ -1,6 +1,7 @@
 package businesslogic.accountbl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.AccountPO;
 import po.PaymentPO;
@@ -181,7 +182,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return  "ʧ��";
 	}
 	
-	public ReceiptPO[] getAllReceipt(){
+	public ArrayList<ReceiptPO> getAllReceipt(){
 //		account=new AccountDataService_Stub("accountName",10);
 		try {
 			return account.getAllReceipt();
@@ -192,7 +193,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return null;
 	}
 	
-	public PaymentPO[] getAllPayment(){
+	public ArrayList<PaymentPO> getAllPayment(){
 //		AccountDataService account=new AccountDataService_Stub("accountName",10);
 		try {
 			return account.getAllPayment();

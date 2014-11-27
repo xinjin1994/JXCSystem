@@ -234,12 +234,12 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		return new ProGiftPO(gift, "time1", "time2");
 	}
 
-	public DiscountPO[] showDiscount() {
-		return new DiscountPO[1];
+	public ArrayList<DiscountPO> showDiscount() {
+		return discountList;
 	}
 
-	public ProGiftPO[] showProGift() {
-		return new ProGiftPO[1];
+	public ArrayList<ProGiftPO> showProGift() {
+		return proGiftList;
 	}
 
 }

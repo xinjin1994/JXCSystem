@@ -87,11 +87,11 @@ public class MockCommodityData implements CommodityDataService{
 		return true;
 	}
 
-	public CommodityPO[] getAll() {
+	public ArrayList<CommodityPO> getAll() {
 		// TODO Auto-generated method stub
 		CommodityPO[] com=new CommodityPO[1];
 		com[0]=array.get(0);
-		return com;
+		return new ArrayList<CommodityPO>();
 	}
 
 	public boolean clear() {

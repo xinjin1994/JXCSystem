@@ -2,6 +2,7 @@ package dataservice.commoditydataservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.CommodityPO;
 import po.SortPO;
@@ -19,7 +20,7 @@ public interface CommodityDataService extends Remote{
 	public boolean addGift(CommodityPO po) throws RemoteException;
 	public CommodityPO findGift(String name,String type) throws RemoteException;
 	public boolean delGift(CommodityPO po) throws RemoteException;
-	public CommodityPO[] getAll() throws RemoteException;
+	public ArrayList<CommodityPO> getAll() throws RemoteException;
 	public boolean clear() throws RemoteException;
 }
 

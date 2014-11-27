@@ -1,29 +1,31 @@
 package businesslogic.financialbl;
 
+import java.util.ArrayList;
+
 import po.PaymentPO;
 import po.ReceiptPO;
 
 public class MockAccount implements AccountInfo{
 
-	public ReceiptPO[] getAllReceipt() {
+	public ArrayList<ReceiptPO> getAllReceipt() {
 		// TODO Auto-generated method stub
 		String[] accountList={"account_name"};
 		int[] price={10};
 		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, "ps", price);
 		
-		ReceiptPO[] rec=new ReceiptPO[1];
-		rec[0]=po;
+		ArrayList<ReceiptPO> rec=new ArrayList<ReceiptPO>();
+		rec.add(po);
 		return rec;
 	}
 
-	public PaymentPO[] getAllPayment() {
+	public ArrayList<PaymentPO> getAllPayment() {
 		// TODO Auto-generated method stub
 		String[] accountList={"account_name"};
 		int[] price={10};
 		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", "ps", price);
 		
-		PaymentPO[] pay=new PaymentPO[1];
-		pay[0]=po;
+		ArrayList<PaymentPO> pay=new ArrayList<PaymentPO>();
+		pay.add(po);
 		return pay;
 	}
 

@@ -166,16 +166,16 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		// TODO Auto-generated constructor stub
 	}
 
-	public SaleListPO[] getSaleList() {
-		return new SaleListPO[1];
+	public ArrayList<SaleListPO> getSaleList() {
+		return saleListList;
 	}
 
-	public AllBillPO[] getAllBill() {
-		return new AllBillPO[1];
+	public ArrayList<AllBillPO> getAllBill() {
+		return allBillList;
 	}
 
-	public OperatingConditionPO[] getOperatingCondition() {
-		return new OperatingConditionPO[1];
+	public ArrayList<OperatingConditionPO> getOperatingCondition() {
+		return operatingConditionList;
 	}
 
 	public boolean addSaleList(SaleListPO po) {

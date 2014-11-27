@@ -14,43 +14,43 @@ public class MockSales implements SalesInfo{
 	ArrayList<Import_ReturnPO> arrayImp_ret=new ArrayList<Import_ReturnPO>();
 	ArrayList<Export_ReturnPO> arrayExp_ret=new ArrayList<Export_ReturnPO>();
 
-	public ImportPO[] getAllImport() {
+	public ArrayList<ImportPO> getAllImport() {
 		// TODO Auto-generated method stub
 		ImportPO po = new ImportPO("2222/2/2","name","good_name","good_type",
 				"ps", "serialnum", "clerk", "operator",1,50,50, 1, 500);
 		
-		ImportPO[] imp=new ImportPO[1];
-		imp[0]=po;
+		ArrayList<ImportPO> imp=new ArrayList<ImportPO>();
+		imp.add(po);
 		return imp;
 	}
 
-	public Import_ReturnPO[] getAllImport_Return() {
+	public ArrayList<Import_ReturnPO> getAllImport_Return() {
 		// TODO Auto-generated method stub
 		Import_ReturnPO po = new Import_ReturnPO("2222/2/2","name","good_name","good_type",
 				"ps", "serialnum", "clerk", "operator",1,50,50, 1, 500);
 		
-		Import_ReturnPO[] imp_ret=new Import_ReturnPO[1];
-		imp_ret[0]=po;
+		ArrayList<Import_ReturnPO> imp_ret=new ArrayList<Import_ReturnPO>();
+		imp_ret.add(po);
 		return imp_ret;
 	}
 
-	public ExportPO[] getAllExport() {
+	public ArrayList<ExportPO> getAllExport() {
 		// TODO Auto-generated method stub
 		ExportPO po = new ExportPO("2222/2/2",300,400,300,100,"name","good_name","good_type","ps","serialnum",
 				"clerk","operator",1,50,50,1,500);
 		
-		ExportPO[] exp=new ExportPO[1];
-		exp[0]=po;
+		ArrayList<ExportPO> exp=new ArrayList<ExportPO>();
+		exp.add(po);
 		return exp;
 	}
 
-	public Export_ReturnPO[] getAllExport_Return() {
+	public ArrayList<Export_ReturnPO> getAllExport_Return() {
 		// TODO Auto-generated method stub
 		Export_ReturnPO po = new Export_ReturnPO("2222/2/2",300,400,300,100,"name","good_name","good_type",
 				"ps","serialnum","clerk","operator",1,50,50,1,500);
 		
-		Export_ReturnPO[] exp_ret=new Export_ReturnPO[1];
-		exp_ret[0]=po;
+		ArrayList<Export_ReturnPO> exp_ret=new ArrayList<Export_ReturnPO>();
+		exp_ret.add(po);
 		return exp_ret;
 	}
 

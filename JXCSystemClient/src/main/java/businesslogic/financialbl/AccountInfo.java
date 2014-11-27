@@ -1,12 +1,14 @@
 package businesslogic.financialbl;
 
+import java.util.ArrayList;
+
 import po.PaymentPO;
 import po.ReceiptPO;
 
 public interface AccountInfo {
 	
-	public ReceiptPO[] getAllReceipt();
+	public ArrayList<ReceiptPO> getAllReceipt();
 	
-	public PaymentPO[] getAllPayment();
+	public ArrayList<PaymentPO> getAllPayment();
 
 }

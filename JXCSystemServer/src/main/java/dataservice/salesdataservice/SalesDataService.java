@@ -2,6 +2,7 @@ package dataservice.salesdataservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.CustomerPO;
 import po.ExportPO;
@@ -18,11 +19,11 @@ public interface SalesDataService extends Remote{
 	public boolean addImport_Return(Import_ReturnPO po) throws RemoteException;
 	public boolean addExport(ExportPO po) throws RemoteException;
 	public boolean addExport_Return(Export_ReturnPO po) throws RemoteException;
-	public CustomerPO[] getAllCustomer() throws RemoteException;
-	public ImportPO[] getAllImport() throws RemoteException;
-	public Import_ReturnPO[] getAllImport_Return() throws RemoteException;
-	public ExportPO[] getAllExport();
-	public Export_ReturnPO[] getAllExport_Return() throws RemoteException;
+	public ArrayList<CustomerPO> getAllCustomer() throws RemoteException;
+	public ArrayList<ImportPO> getAllImport() throws RemoteException;
+	public ArrayList<Import_ReturnPO> getAllImport_Return() throws RemoteException;
+	public ArrayList<ExportPO> getAllExport();
+	public ArrayList<Export_ReturnPO> getAllExport_Return() throws RemoteException;
 	public boolean clear() throws RemoteException;
 	
 }

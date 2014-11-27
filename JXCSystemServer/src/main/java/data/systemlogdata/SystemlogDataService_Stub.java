@@ -68,8 +68,8 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 		// TODO Auto-generated constructor stub
 	}
 
-	public SystemlogPO[] get() {
-		return new SystemlogPO[1];
+	public ArrayList<SystemlogPO> get() {
+		return systemlogList;
 	}
 
 	public boolean add(SystemlogPO po) {

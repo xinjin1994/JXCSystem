@@ -88,8 +88,8 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		return true;
 	}
 
-	public InvoicePO[] getAllInvoice() {
-		return new InvoicePO[1];
+	public ArrayList<InvoicePO> getAllInvoice() {
+		return invoiceList;
 	}
 
 	public boolean clear() {

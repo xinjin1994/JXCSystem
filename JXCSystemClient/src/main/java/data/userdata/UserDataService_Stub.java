@@ -1,5 +1,7 @@
 package data.userdata;
 
+import java.util.ArrayList;
+
 import po.UserPO;
 import dataservice.userdataservice.UserDataService;
 
@@ -30,8 +32,10 @@ public class UserDataService_Stub implements UserDataService{
 		return new UserPO(n, p, d);
 	}
 
-	public UserPO[] show() {
-		return new UserPO[1];
+	public ArrayList<UserPO> show() {
+		ArrayList<UserPO> array=new ArrayList<UserPO>();
+		array.add(new UserPO("name","123",1));
+		return array;
 	}
 
 	public boolean clear() {

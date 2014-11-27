@@ -1,6 +1,7 @@
 package businesslogic.commoditybl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.CommodityPO;
 import po.PatchPO;
@@ -192,7 +193,7 @@ public class Commodity implements CommodityblService, businesslogic.financialbl.
 		try {
 			if(sto.getAll()!=null){
 				
-				return sto.getAll()[0].getName()+","+sto.getAll()[0].getType();
+				return sto.getAll().get(0).getName()+","+sto.getAll().get(0).getType();
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -261,7 +262,7 @@ public class Commodity implements CommodityblService, businesslogic.financialbl.
 		return "ʧ��";
 	}
 	
-	public CommodityPO[] getAllCommodity(){
+	public ArrayList<CommodityPO> getAllCommodity(){
 //		sto = new CommodityDataService_Stub();
 		
 		try {

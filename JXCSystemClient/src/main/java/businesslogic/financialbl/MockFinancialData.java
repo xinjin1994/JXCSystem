@@ -13,25 +13,25 @@ public class MockFinancialData implements FinancialDataService{
 	public ArrayList<AllBillPO> arrayAll=new ArrayList<AllBillPO>();
 	public ArrayList<OperatingConditionPO> arrayOpe=new ArrayList<OperatingConditionPO>();
 
-	public SaleListPO[] getSaleList() {
+	public ArrayList<SaleListPO> getSaleList() {
 		// TODO Auto-generated method stub
 		SaleListPO[] sale=new SaleListPO[1];
 		sale[0]=arraySale.get(0);
-		return sale;
+		return new ArrayList<SaleListPO>();
 	}
 
-	public AllBillPO[] getAllBill() {
+	public ArrayList<AllBillPO> getAllBill() {
 		// TODO Auto-generated method stub
 		AllBillPO[] all=new AllBillPO[1];
 		all[0]=arrayAll.get(0);
-		return all;
+		return new ArrayList<AllBillPO>();
 	}
 
-	public OperatingConditionPO[] getOperatingCondition() {
+	public ArrayList<OperatingConditionPO> getOperatingCondition() {
 		// TODO Auto-generated method stub
 		OperatingConditionPO[] ope=new OperatingConditionPO[1];
 		ope[0]=arrayOpe.get(0);
-		return ope;
+		return new ArrayList<OperatingConditionPO>();
 	}
 
 	public boolean addSaleList(SaleListPO po) {

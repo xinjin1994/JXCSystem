@@ -1,5 +1,7 @@
 package data.commoditydata;
 
+import java.util.ArrayList;
+
 import po.CommodityPO;
 import po.SortPO;
 import dataservice.commoditydataservice.CommodityDataService;
@@ -79,10 +81,10 @@ public class CommodityDataService_Stub implements CommodityDataService{
 		return true;
 	}
 
-	public CommodityPO[] getAll() {
+	public ArrayList<CommodityPO> getAll() {
 		CommodityPO com=new CommodityPO(true,"name","type",10,10,10,20,20,100);
-		CommodityPO[] coms=new CommodityPO[1];
-		coms[0]=com;
+		ArrayList<CommodityPO> coms=new ArrayList<CommodityPO>();
+		coms.add(com);
 		return coms;
 	}
 

@@ -1,12 +1,16 @@
 package data.systemlogdata;
 
+import java.util.ArrayList;
+
 import po.SystemlogPO;
 import dataservice.systemlogdataservice.SystemlogDataService;
 
 public class SystemlogDataService_Stub implements SystemlogDataService{
 
-	public SystemlogPO[] get() {
-		return new SystemlogPO[1];
+	public ArrayList<SystemlogPO> get() {
+		ArrayList<SystemlogPO> array=new ArrayList<SystemlogPO>();
+		array.add(new SystemlogPO("1111/1/1","123"));
+		return array;
 	}
 
 	public boolean add(SystemlogPO po) {

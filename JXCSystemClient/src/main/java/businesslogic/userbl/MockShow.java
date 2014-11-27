@@ -1,16 +1,17 @@
 package businesslogic.userbl;
 
+import java.util.ArrayList;
+
 import po.UserPO;
 import dataservice.userdataservice.UserDataService;
 
 public class MockShow implements UserDataService{
 	
 	
-	public UserPO[] show() {
+	public ArrayList<UserPO> show() {
 		
-		
-		UserPO[] user=new UserPO[1];
-		user[0]=new UserPO("test","2222/2/2", 0);
+		ArrayList<UserPO> user=new ArrayList<UserPO>();
+		user.add(new UserPO("test","2222/2/2", 0));
 		return user;
 		
 	}

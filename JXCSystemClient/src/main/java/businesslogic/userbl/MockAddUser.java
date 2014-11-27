@@ -1,5 +1,7 @@
 package businesslogic.userbl;
 
+import java.util.ArrayList;
+
 import po.UserPO;
 import dataservice.userdataservice.UserDataService;
 
@@ -19,7 +21,7 @@ public class MockAddUser implements UserDataService{
 		return null;
 	}
 
-	public UserPO[] show() {
+	public ArrayList<UserPO> show() {
 		// TODO Auto-generated method stub
 		return null;
 	}

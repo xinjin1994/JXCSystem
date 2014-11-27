@@ -1,5 +1,7 @@
 package data.promotiondata;
 
+import java.util.ArrayList;
+
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
@@ -57,12 +59,12 @@ public class PromotionDataService_Stub implements PromotionDataService{
 		return new ProGiftPO(gift, "time1", "time2");
 	}
 
-	public DiscountPO[] showDiscount() {
-		return new DiscountPO[1];
+	public ArrayList<DiscountPO> showDiscount() {
+		return new ArrayList<DiscountPO>();
 	}
 
-	public ProGiftPO[] showProGift() {
-		return new ProGiftPO[1];
+	public ArrayList<ProGiftPO> showProGift() {
+		return new ArrayList<ProGiftPO>();
 	}
 
 }

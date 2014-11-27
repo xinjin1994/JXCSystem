@@ -1,16 +1,18 @@
 package businesslogic.financialbl;
 
+import java.util.ArrayList;
+
 import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
 
 public interface SalesInfo {
-	public ImportPO[] getAllImport();
+	public ArrayList<ImportPO> getAllImport();
 	
-	public Import_ReturnPO[] getAllImport_Return();
+	public ArrayList<Import_ReturnPO> getAllImport_Return();
 	
-	public ExportPO[] getAllExport();
+	public ArrayList<ExportPO> getAllExport();
 	
-	public Export_ReturnPO[] getAllExport_Return();
+	public ArrayList<Export_ReturnPO> getAllExport_Return();
 }

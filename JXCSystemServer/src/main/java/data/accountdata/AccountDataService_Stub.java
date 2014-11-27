@@ -238,9 +238,8 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		return new AccountPO(name,money);
 	}
 
-	public AccountPO[] getAllAccount() {
-
-		return new AccountPO[1];
+	public ArrayList<AccountPO> getAllAccount() {
+		return accountList;
 	}
 
 	public boolean addReceipt(ReceiptPO po) {
@@ -251,12 +250,12 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		return true;
 	}
 
-	public ReceiptPO[] getAllReceipt() {
-		return new ReceiptPO[1];
+	public ArrayList<ReceiptPO> getAllReceipt() {
+		return receiptList;
 	}
 
-	public PaymentPO[] getAllPayment() {
-		return new PaymentPO[1];
+	public ArrayList<PaymentPO> getAllPayment() {
+		return paymentList;
 	}
 
 	public boolean clear() {

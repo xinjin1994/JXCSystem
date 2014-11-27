@@ -319,24 +319,24 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 		return true;
 	}
 
-	public CustomerPO[] getAllCustomer() {
-		return new CustomerPO[1];
+	public ArrayList<CustomerPO> getAllCustomer() {
+		return customerList;
 	}
 
-	public ImportPO[] getAllImport() {
-		return new ImportPO[1];
+	public ArrayList<ImportPO> getAllImport() {
+		return importList;
 	}
 
-	public Import_ReturnPO[] getAllImport_Return() {
-		return new Import_ReturnPO[1];
+	public ArrayList<Import_ReturnPO> getAllImport_Return() {
+		return import_returnList;
 	}
 
-	public ExportPO[] getAllExport() {
-		return new ExportPO[1];
+	public ArrayList<ExportPO> getAllExport() {
+		return exportList;
 	}
 
-	public Export_ReturnPO[] getAllExport_Return() {
-		return new Export_ReturnPO[1];
+	public ArrayList<Export_ReturnPO> getAllExport_Return() {
+		return export_returnList;
 	}
 
 	public boolean clear() {
