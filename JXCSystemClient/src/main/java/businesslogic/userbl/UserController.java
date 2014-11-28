@@ -21,7 +21,7 @@ public class UserController implements UserblService{
 		return user.show();
 	}
 
-	public String login(String name, String password) {
+	public int login(String name, String password) {
 		// TODO Auto-generated method stub
 		return user.login(name, password);
 	}
