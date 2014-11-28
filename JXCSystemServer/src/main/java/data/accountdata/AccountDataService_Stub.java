@@ -217,54 +217,104 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	}
 
 	public boolean addAccount(AccountPO po) {
-		this.accountList.add(po);
-		return true;
+		if(findAccount_true(po.getName())==null){
+			AccountPO po1=po.copy();
+			this.accountList.add(po1);
+			return true;
+		}
+		return false;
 	}
 
 	public AccountPO getAccount() throws RemoteException {
 		// TODO Auto-generated method stub
-		return nowAccount;
+		AccountPO po1=nowAccount.copy();
+		return po1;
 	}
 	
 	public boolean delAccount(AccountPO po) {
-		if(accountList.remove(po)){
-			return true;
+		AccountPO po1=findAccount_true(po.getName());
+		if(po1!=null){
+			if(po1.getMoney()==po.getMoney()){
+				accountList.remove(po1);
+				return true;
+			}
 		}
 		return false;
-		
 	}
 
 	public boolean updateAccount(AccountPO po1, AccountPO po2) {
-		return true;
+		if(delAccount(po1)){
+			if(addAccount(po2)){
+				return true;
+			}
+		}
+		return false;
 	}
 
+	//此处将返回数据层对象的拷贝
 	public AccountPO findAccount(String name) {
-		
-		return new AccountPO(name);
+		int i=0;
+		for(i=0;i<accountList.size();i++){
+			if(accountList.get(i).getName().equals(name)){
+				return accountList.get(i).copy();
+			}
+		}
+		return null;
 	}
 
 	public ArrayList<AccountPO> getAllAccount() {
-		return accountList;
+		int i=0;
+		ArrayList<AccountPO> array=new ArrayList<AccountPO>();
+		for(i=0;i<accountList.size();i++){
+			array.add(accountList.get(i).copy());
+		}
+		return array;
 	}
 
 	public boolean addReceipt(ReceiptPO po) {
+		receiptList.add(po.copy());
 		return true;
 	}
 
 	public boolean addPayment(PaymentPO po) {
+		paymentList.add(po.copy());
 		return true;
 	}
 
 	public ArrayList<ReceiptPO> getAllReceipt() {
-		return receiptList;
+		int i=0;
+		ArrayList<ReceiptPO> array=new ArrayList<ReceiptPO>();
+		for(i=0;i<receiptList.size();i++){
+			array.add(receiptList.get(i).copy());
+		}
+		return array;
 	}
 
 	public ArrayList<PaymentPO> getAllPayment() {
-		return paymentList;
+		int i=0;
+		ArrayList<PaymentPO> array=new ArrayList<PaymentPO>();
+		for(i=0;i<paymentList.size();i++){
+			array.add(paymentList.get(i).copy());
+		}
+		return array;
 	}
 
 	public boolean clear() {
+		accountList=new ArrayList<AccountPO>();
+		receiptList=new ArrayList<ReceiptPO>();
+		paymentList=new ArrayList<PaymentPO>();
+		nowAccount=new AccountPO(nowAccount.getName(),0);
 		return true;
+	}
+	
+	private AccountPO findAccount_true(String name){
+		int i=0;
+		for(i=0;i<accountList.size();i++){
+			if(accountList.get(i).getName().equals(name)){
+				return accountList.get(i);
+			}
+		}
+		return null;
 	}
 
 

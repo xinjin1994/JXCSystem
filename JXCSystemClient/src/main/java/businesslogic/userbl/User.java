@@ -63,17 +63,17 @@ public class User implements UserblService {
 		return "ʧ��";
 	}
 
-	public String login(String name, String password) {
+	public int login(String name, String password) {
 		// TODO Auto-generated method stub
 		try {
 			if(us.getUser("user")!=null){
-				return "�ɹ�";
+				return 1;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return 0;
 	}
 
 }

@@ -50,4 +50,9 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 	public int getTotal(){
 		return total;
 	}
+	
+	public int getNote(){
+		String[] str=serialnum.split("-");
+		return Integer.parseInt(str[1]);
+	}
 }

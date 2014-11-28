@@ -10,7 +10,7 @@ public class CommodityPO extends InvoicePO implements Serializable{
 	int note;//���
 	int recent_in_price;//���һ�ν��
 	int recent_out_price;//���һ���ۼ�
-	int number;//��Ʒ����
+	public int number;//��Ʒ����
 	boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
 	
 	public CommodityPO(Boolean isGift,String name,String type,int in_price,int out_price,

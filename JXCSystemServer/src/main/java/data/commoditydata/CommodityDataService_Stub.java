@@ -20,7 +20,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	ArrayList<SortPO> sortList=new ArrayList<SortPO>();
 	ArrayList<PatchPO> patchList=new ArrayList<PatchPO>();
-	ArrayList<CommodityPO> sto=new ArrayList<CommodityPO>();
+//	ArrayList<CommodityPO> sto=new ArrayList<CommodityPO>();
 	
 	public CommodityDataService_Stub() throws RemoteException {
 		super();
@@ -137,10 +137,13 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 
 	public boolean addGood(CommodityPO po1, SortPO po2) {
-		SortPO sort=new SortPO("name",1);
-		sto.add(po1);
-		System.out.println("Add Success!");
-		return true;
+		SortPO sort=findSort_true(po2.getName());
+		if(sort!=null&&sort.hasCommodity()){
+			sort.addCommodity(po1);
+			System.out.println("Add Success!");
+			return true;
+		}
+		return false;
 	}
 
 	public boolean delGood(CommodityPO po) {
@@ -180,6 +183,16 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
 		array.add(com);
 		return array;
+	}
+	
+	public SortPO findSort_true(String name){
+		int i=0;
+		for(i=0;i<sortList.size();i++){
+			if(sortList.get(i).getName().equals(name)){
+				return sortList.get(i);
+			}
+		}
+		return null;
 	}
 
 	public boolean clear() {
