@@ -123,8 +123,14 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	
 	
 	public CommodityPO findGood(String name, String type) {
-		
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		int i=0;
+		for(i=0;i<sortList.size();i++){
+			CommodityPO po=sortList.get(i).findCommodity_true(name, type);
+			if(po!=null){
+				return po.copy();
+			}
+		}
+		return null;
 	}
 
 	public CommodityPO findName(String name) {
@@ -147,11 +153,25 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 
 	public boolean delGood(CommodityPO po) {
-		return true;
+		CommodityPO po1=findGood_true(po.getName(),po.getType());
+		int i=0;
+		if(po1.number==0){
+			for(i=0;i<sortList.size();i++){
+				if(sortList.get(i).delCommodity(po1)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean updateGood(CommodityPO po1, CommodityPO po2) {
-		return true;
+		CommodityPO po=findGood_true(po1.getName(),po1.getType());
+		if(po!=null){
+			po.number=po2.number+po.number;
+			return true;
+		}
+		return false;
 	}
 
 	public boolean addSort(SortPO po) {
@@ -194,8 +214,21 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		}
 		return null;
 	}
+	
+	public CommodityPO findGood_true(String name, String type) {
+		int i=0;
+		for(i=0;i<sortList.size();i++){
+			CommodityPO po=sortList.get(i).findCommodity_true(name, type);
+			if(po!=null){
+				return po.copy();
+			}
+		}
+		return null;
+	}
 
 	public boolean clear() {
+		sortList=new ArrayList<SortPO>();
+		patchList=new ArrayList<PatchPO>();
 		return true;
 	}
 
