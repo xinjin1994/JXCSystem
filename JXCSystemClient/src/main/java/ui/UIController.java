@@ -15,7 +15,8 @@ public class UIController {
 
 	public UIController() {
 		this.frame = new MyFrame();
-		this.welcomePanel();
+	    this.welcomePanel();
+	    //this.loginPanel();
 	}
 
 	public void welcomePanel() {
@@ -24,8 +25,9 @@ public class UIController {
 	}
 
 	public void loginPanel() {
-		loginPanel = new LoginPanel("Image/login.jpg", this);
 		frame.remove(welcomePanel);
+		frame.repaint();
+		loginPanel = new LoginPanel("Image/login.jpg", this);
 		frame.setPanel(loginPanel);
 	}
 
