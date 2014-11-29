@@ -14,7 +14,7 @@ public interface CommodityDataService extends Remote{
 	public boolean addGood(CommodityPO po1,SortPO po2) throws RemoteException;
 	public boolean delGood(CommodityPO po) throws RemoteException;
 	public boolean updateGood(CommodityPO po1,CommodityPO po2) throws RemoteException;
-	public boolean addSort(SortPO po) throws RemoteException;
+	public boolean addSort(SortPO po1,SortPO po2) throws RemoteException;
 	public boolean delSort(SortPO po) throws RemoteException;
 	public boolean updateSort(SortPO po1,SortPO po2) throws RemoteException;
 	public boolean addGift(CommodityPO po) throws RemoteException;

@@ -57,7 +57,7 @@ public class CommodityDataService_Stub implements CommodityDataService{
 		return true;
 	}
 
-	public boolean addSort(SortPO po) {
+	public boolean addSort(SortPO po1,SortPO po2) {
 		return true;
 	}
 

@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SortPO implements Serializable{
-	String sort;
-	int level;
+	public String sort;
+	public int level;
 	
 	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
-	ArrayList<SortPO> sortList;
+	public ArrayList<SortPO> sortList;
 	
 	public boolean hasCommodity(){
 		if(sortList!=null){
@@ -55,10 +55,24 @@ public class SortPO implements Serializable{
 			if(po1!=null){
 				return false;
 			}else {
+				sortList.add(po);
 				return true;
 			}
 		}
-		
+	}
+	
+	public boolean delSort(SortPO po){
+		if(hasCommodity()){
+			return false;
+		}else{
+			SortPO po1=findSort_true(po.getName());
+			if(po1!=null){
+				sortList.remove(po1);
+				return true;
+			}else {
+				return false;
+			}
+		}
 	}
 	
 	public SortPO findSort_true(String name){

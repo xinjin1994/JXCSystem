@@ -22,8 +22,7 @@ public class SalesManagerPanel extends FatherPanel {
 	}
 	private void addButton() {
 		
-		MyButton customerManageButton = new MyFirstButton
-				("Image/Sales/Sales_image/客户管理.png", 2, 110, this,"Image/Sales/Sales_image/客户管理_stop.png","Image/Sales/Sales_image/客户管理_press_on.png");
+		MyButton customerManageButton = new MyFirstButton();
 			
 	}
 

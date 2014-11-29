@@ -220,16 +220,52 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return false;
 	}
 
-	public boolean addSort(SortPO po) {
+	public boolean addSort(SortPO po1,SortPO po2) {
+		SortPO po=findSort_true(po1.getName());
+		if(po!=null){
+			return false;
+		}else if(po2!=null){
+			if(po2.hasCommodity()){
+				return false;
+			}
+			
+			if(po2.sortList==null){
+				po2.sortList=new ArrayList<SortPO>();
+			}
+			po2.sortList.add(po1.copy());
+			return true;
+			
+		}else{
+			sortList.add(po1);
+		}
 		return true;
 	}
 
 	public boolean delSort(SortPO po) {
-		return true;
+		SortPO po1=findSort_true(po.getName());
+		
+		int i=0;
+		for(i=0;i<sortList.size();i++){
+			if(po1.getName().equals(sortList.get(i).getName())){
+				sortList.remove(po1);
+				return true;
+			}else{
+				if(sortList.get(i).delSort(po1)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean updateSort(SortPO po1, SortPO po2) {
-		return true;
+		SortPO po=findSort_true(po1.getName());
+		if(po!=null){
+			po1.sort=po2.sort;
+			po1.level=po2.getLevel();
+			return true;
+		}
+		return false;
 	}
 
 	public boolean addGift(CommodityPO po) {
@@ -257,7 +293,6 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				return giftList.get(i).copy();
 			}
 		}
-		
 		return null;
 	}
 
@@ -278,7 +313,6 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				}
 			}
 		}
-		
 		return false;
 	}
 
@@ -294,6 +328,13 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(i=0;i<sortList.size();i++){
 			if(sortList.get(i).getName().equals(name)){
 				return sortList.get(i);
+			}
+			if(!sortList.get(i).hasCommodity()){
+				SortPO po=sortList.get(i).findSort_true(name);
+				if(po!=null){
+					return po;
+				}
+				
 			}
 		}
 		return null;
