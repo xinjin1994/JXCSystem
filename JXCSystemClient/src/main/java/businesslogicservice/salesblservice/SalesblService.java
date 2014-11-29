@@ -1,37 +1,35 @@
 package businesslogicservice.salesblservice;
 
+import java.util.ArrayList;
+
+import vo.CustomerVO;
+import vo.ExportMenuVO;
+import vo.ImportMenuVO;
+
 public interface SalesblService {
 	
 	//添加客户
-	public String addCustomer(String name, int level, String phone, 
-			String zip, String mail, int money, String clerk);
+	public String addCustomer(CustomerVO customerVO);
 	
 	//删除客户
-	public String delCustomer(String name);
+	public String delCustomer(CustomerVO customerVO);
 	
 	//修改客户
-	public String updateCustomer(String name, int level, String phone,
-			String zip, String mail, int money, String clerk);
+	public String updateCustomer(CustomerVO customerVO);
 	
 	//查找客户
-	public String searchCustomer(String word);
+	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO);
 	
 	//添加进货单
-	public String addImport(String name, int warehouse, String good_name,
-			String good_type, String ps, int number);
+	public String addImport(ImportMenuVO importMenuVO);
 	
 	//添加进货退货单
-	public String addImport_Return(String name, int warehouse, String good_name,
-			String good_type, String ps, int number);
-	public String addImport_Return(String note, int number);
+	public String addImport_Return(ImportMenuVO importMenuVO);
 	
 	//添加销售单
-	public String addExport(String name, int warehouse, String good_name,
-			String good_type, String ps, int number, int price, int discount);
+	public String addExport(ExportMenuVO exportMenuVO);
 	
 	//添加销售退货单
-	public String addExport_Return(String name, int warehouse, String good_name,
-			String good_type, String ps, int number, int price, int discount);
-	public String addExport_Return(String note, int number);
+	public String addExport_Return(ExportMenuVO exportMenuVO);
 	
 }

@@ -16,7 +16,7 @@ public class UIController {
 	public UIController() {
 		this.frame = new MyFrame();
 	    this.welcomePanel();
-	    //this.loginPanel();
+//	    this.SalesManagerPanel();
 	}
 
 	public void welcomePanel() {
@@ -32,6 +32,12 @@ public class UIController {
 		frame.repaint();
 	}
 
+	public void SalesManagerPanel() {
+		frame.remove(loginPanel);
+		salesManager = new SalesManagerPanel(frame, "Image/Sales/sales.jpg", this);
+		frame.setPanel(salesManager);
+		frame.repaint();
+	}
 	public void AdminPanel() {
 		admin = new AdminPanel(frame,"",this);
 		frame.remove(loginPanel);
@@ -56,11 +62,6 @@ public class UIController {
 		frame.setPanel(manager);
 	}
 
-	public void SalesManagerPanel() {
-		salesManager = new SalesManagerPanel(frame,"",this);
-		frame.remove(loginPanel);
-		frame.setPanel(salesManager);
-	}
 
 	public void SalesPersonPanel() {
 		salesPerson = new SalesPersonPanel(frame,"",this);

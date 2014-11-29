@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -41,21 +42,20 @@ public class LoginPanel extends FatherPanel {
 	private String passwordText;
 	private JLabel failure;
 	private JLabel close1, close2;
-	private JLabel minimize1,minimize2;
+	private JLabel minimize1, minimize2;
 	private ImageIcon closeImage, closeImage2, miniImage1, miniImage2;
 
-	public LoginPanel(JFrame frame,String url,UIController controller) {
-        super(frame,url,controller);
+	public LoginPanel(JFrame frame, String url, UIController controller) {
+		super(frame, url, controller);
 		this.addUserField();
 		this.addField();
-		// this.addPasswordField();
 		this.addCloseLabel();
 		this.addMiniLabel();
 		this.addLogin();
 		this.repaint();
 	}
-
-	private void addMiniLabel(){
+	
+	private void addMiniLabel() {
 		miniImage1 = new ImageIcon("Image/mini.png");
 		miniImage2 = new ImageIcon("Image/mini-pressON.png");
 		minimize1 = new JLabel(miniImage1);
@@ -67,37 +67,39 @@ public class LoginPanel extends FatherPanel {
 		minimize2.setVisible(false);
 		this.add(minimize2);
 	}
-	
-	class MiniListener implements MouseListener{
 
-		int times=0;
+	class MiniListener implements MouseListener {
+
+		int times = 0;
+
 		public void mouseClicked(MouseEvent e) {
-			frame.setExtendedState(JFrame.ICONIFIED);//最小化
+			frame.setExtendedState(JFrame.ICONIFIED);// 最小化
 		}
 
 		public void mousePressed(MouseEvent e) {
-			
+
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			
+
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			 if(times==0||times==1){
-	             minimize1.setVisible(false);
-	             minimize2.setVisible(true);
-	             }
-				 times++;	
+			if (times == 0 || times == 1) {
+				minimize1.setVisible(false);
+				minimize2.setVisible(true);
+			}
+			times++;
 		}
 
 		public void mouseExited(MouseEvent e) {
-			  minimize2.setVisible(false); 
-				minimize1.setVisible(true);
-				times=0;
+			minimize2.setVisible(false);
+			minimize1.setVisible(true);
+			times = 0;
 		}
-		
+
 	}
+
 	private void addCloseLabel() {
 		closeImage = new ImageIcon("Image/exit.png");
 		closeImage2 = new ImageIcon("Image/exit-pressON.png");
@@ -113,7 +115,8 @@ public class LoginPanel extends FatherPanel {
 
 	class closeListener implements MouseListener {
 
-		int times=0;
+		int times = 0;
+
 		public void mouseClicked(MouseEvent e) {
 			System.exit(0);
 		}
@@ -126,17 +129,17 @@ public class LoginPanel extends FatherPanel {
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			 if(times==0||times==1){
-             close1.setVisible(false);
-             close2.setVisible(true);
-             }
-			 times++;
+			if (times == 0 || times == 1) {
+				close1.setVisible(false);
+				close2.setVisible(true);
+			}
+			times++;
 		}
 
 		public void mouseExited(MouseEvent e) {
-            close2.setVisible(false); 
+			close2.setVisible(false);
 			close1.setVisible(true);
-			times=0;
+			times = 0;
 		}
 
 	}
@@ -145,15 +148,18 @@ public class LoginPanel extends FatherPanel {
 		user = new JTextField("请输入用户名", 20);
 		user.setBounds(inputX, inputY, inputWidth, inputHeight);
 		user.setBorder(BorderFactory.createEmptyBorder());
-		user.addFocusListener(new UserListener());
+		user.addFocusListener(new TextListener());
 		this.add(user);
 	}
 
+	/**
+	 * 提示请输入密码
+	 */
 	private void addField() {
 		jtf = new JTextField("请输入密码", 20);
 		jtf.setBounds(inputX, inputY + interval, inputWidth, inputHeight);
 		jtf.setBorder(BorderFactory.createEmptyBorder());
-		jtf.addFocusListener(new AddListener());
+		jtf.addFocusListener(new TextListener());
 		this.add(jtf);
 	}
 
@@ -161,7 +167,7 @@ public class LoginPanel extends FatherPanel {
 		password = new JPasswordField();
 		password.setBounds(inputX, inputY + interval, inputWidth, inputHeight);
 		password.setBorder(BorderFactory.createEmptyBorder());
-		password.addFocusListener(new PasswordListener());
+		password.addFocusListener(new TextListener());
 		this.add(password);
 	}
 
@@ -169,14 +175,14 @@ public class LoginPanel extends FatherPanel {
 		login = new JButton();
 		login.setBounds(228, 126, 43, 44);
 		login.setBorder(null);
-		login.setContentAreaFilled(false);//将按钮设置为透明
+		login.setContentAreaFilled(false); // 将按钮设置为透明
 		login.addActionListener(new LoginListener());
 		this.add(login);
 	}
 
 	private void addFailure() {
 		failure = new JLabel("您输入的帐户名或密码有误，请重新输入！");
-		failure.setBounds(inputX, inputY + 150, 2*inputWidth, inputHeight);
+		failure.setBounds(inputX, inputY + 150, 2 * inputWidth, inputHeight);
 		failure.setFont(new Font("宋体", 0, 20));
 		failure.setForeground(Color.red);
 		this.add(failure);
@@ -187,58 +193,32 @@ public class LoginPanel extends FatherPanel {
 		this.remove(jtf);
 	}
 
-	class AddListener implements FocusListener {
+	class TextListener implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
-			// TODO Auto-generated method stub
-			jtf.setText("");
-			remove();
-			addPasswordField();
+			if(e.getSource() == user) {
+				user.setText("");
+			} else if(e.getSource() == password) {
+				password.setText("");
+			} else if(e.getSource() == jtf){
+				jtf.setText("");
+				remove();
+				addPasswordField();
+			}
 		}
 
 		public void focusLost(FocusEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 	}
 
-	class UserListener implements FocusListener {
-
-		public void focusGained(FocusEvent e) {
-			// TODO Auto-generated method stub
-			user.setText("");
-		}
-
-		public void focusLost(FocusEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
-
-	class PasswordListener implements FocusListener {
-
-		public void focusGained(FocusEvent e) {
-			// TODO Auto-generated method stub
-			password.setText("");
-		}
-
-		public void focusLost(FocusEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
 
 	class LoginListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			// System.out.println("hello");
 			UserblService userbl = new UserController();
 			int identity = userbl.login(userText, passwordText);
-//			identity=1;
+			identity = 3;
 			userText = user.getText();
 			passwordText = new String(password.getPassword());
 			switch (identity) {
@@ -249,7 +229,6 @@ public class LoginPanel extends FatherPanel {
 				controller.StockPersonPanel();
 				break;
 			case 2:
-				controller.SalesPersonPanel();
 				break;
 			case 3:
 				controller.SalesManagerPanel();
@@ -265,7 +244,7 @@ public class LoginPanel extends FatherPanel {
 				break;
 			default:
 				// 登陆失败
-//				System.out.println("hello");
+				// System.out.println("hello");
 				addFailure();
 
 			}
