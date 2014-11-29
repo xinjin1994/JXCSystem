@@ -20,6 +20,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	ArrayList<SortPO> sortList=new ArrayList<SortPO>();
 	ArrayList<PatchPO> patchList=new ArrayList<PatchPO>();
+	ArrayList<CommodityPO> giftList=new ArrayList<CommodityPO>();
 //	ArrayList<CommodityPO> sto=new ArrayList<CommodityPO>();
 	
 	public CommodityDataService_Stub() throws RemoteException {
@@ -119,6 +120,51 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 
 	
+	public void writeGiftList(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("giftList.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(giftList);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readGiftList(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("giftList.out");
+			ois=new ObjectInputStream(fis);
+			giftList=(ArrayList<CommodityPO>) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
 	
 	
 	
@@ -187,15 +233,53 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 
 	public boolean addGift(CommodityPO po) {
-		return true;
+		
+		CommodityPO po1=findGood_true(po.getName(),po.getType());
+		
+		if(po1!=null){
+			if(!po1.isGift){
+				if(po1.number>=po.number){
+					po1.number=po1.number-po.number;
+					po.isGift=true;
+					giftList.add(po.copy());
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public CommodityPO findGift(String name, String type) {
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		int i=0;
+		for(i=0;i<giftList.size();i++){
+			if(giftList.get(i).getName().equals(name)&&
+					giftList.get(i).getType().equals(type)){
+				return giftList.get(i).copy();
+			}
+		}
+		
+		return null;
 	}
 
 	public boolean delGift(CommodityPO po){
-		return true;
+		int i=0;
+		for(i=0;i<giftList.size();i++){
+			if(giftList.get(i).getName().equals(po.getName())&&
+					giftList.get(i).getType().equals(po.getType())){
+				CommodityPO po1=findGood_true(giftList.get(i).getName(),giftList.get(i).getType());
+				
+				if(po1!=null){
+					po1.number=giftList.get(i).number+po1.number;
+					giftList.remove(i);
+					return true;
+				}else{
+					giftList.get(i).isGift=false;
+					return addGood(giftList.get(i),sortList.get(0));
+				}
+			}
+		}
+		
+		return false;
 	}
 
 	public ArrayList<CommodityPO> getAll() {
