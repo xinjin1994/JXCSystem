@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import vo.CustomerVO;
+import vo.ExportMenuVO;
+import vo.ImportMenuVO;
 import businesslogic.salesbl.MockAddCustomer;
 import businesslogic.salesbl.MockAddExport;
 import businesslogic.salesbl.MockAddExport_Return;
@@ -22,8 +25,8 @@ public class SalesTest {
 		MockAddCustomer mockAdd = new MockAddCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockAdd);
-		assertEquals("�ɹ�", sale.addCustomer("string", 10, "phone", "zip",
-				"mail", 10, "clerk"));
+		assertEquals("�ɹ�", sale.addCustomer(new CustomerVO("string", false, 10, "phone", "zip",
+				"mail", null, null, 10, 0, 0, "clerk")));
 	}
 
 	@Test
@@ -31,7 +34,8 @@ public class SalesTest {
 		MockDelCustomer mockDel = new MockDelCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockDel);
-		assertEquals("�ɹ�", sale.delCustomer("name"));
+		assertEquals("�ɹ�", sale.delCustomer(new CustomerVO("string", false, 10, "phone", "zip",
+				"mail", null, null, 10, 0, 0, "clerk")));
 	}
 
 	@Test
@@ -39,8 +43,8 @@ public class SalesTest {
 		MockUpdateCustomer mockUpdate = new MockUpdateCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockUpdate);
-		assertEquals("�ɹ�", sale.updateCustomer("name", 10, "phone",
-				"zip", "mail", 10, "clerk"));
+		assertEquals("�ɹ�", sale.updateCustomer(new CustomerVO("string", false, 10, "phone", "zip",
+				"mail", null, null, 10, 0, 0, "clerk")));
 	}
 
 	@Test
@@ -48,7 +52,8 @@ public class SalesTest {
 		MockFindCustomer mockFind = new MockFindCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockFind);
-		assertEquals("�ɹ�", sale.searchCustomer("name"));
+		assertEquals("�ɹ�", sale.searchCustomer(new CustomerVO("string", false, 10, "phone", "zip",
+				"mail", null, null, 10, 0, 0, "clerk")));
 	}
 
 	@Test
@@ -58,8 +63,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockAddIm);
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport("name", 10, "good_name",
-				"good_type", "ps", 10));
+		assertEquals("�ɹ�", sale.addImport(new ImportMenuVO(null, null, null, null, null, null, 0)));
 	}
 
 	@Test
@@ -69,8 +73,7 @@ public class SalesTest {
 		sale.setSale(mockAddEx);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport("name", 10,"good_name",
-				"good_type", "ps", 10, 10, 10));
+		assertEquals("�ɹ�", sale.addExport(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null)));
 	}
 
 	@Test
@@ -80,8 +83,7 @@ public class SalesTest {
 		sale.setSale(mockAddExRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport_Return("name", 10,"good_name",
-				"good_type", "ps", 10, 10, 10));
+		assertEquals("�ɹ�", sale.addExport_Return(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null)));
 	}
 
 	@Test
@@ -91,8 +93,7 @@ public class SalesTest {
 		sale.setSale(mockAddImRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport_Return("name", 10, "good_name",
-				"good_type", "ps", 10));
+		assertEquals("�ɹ�", sale.addImport_Return(new ImportMenuVO(null, null, null, null, null, null, 0)));
 	}
 
 }

@@ -1,43 +1,44 @@
 package businesslogic.salesbl;
 
+import java.util.ArrayList;
+
+import vo.CustomerVO;
+import vo.ExportMenuVO;
+import vo.ImportMenuVO;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class SalesController implements SalesblService{
 	
 	public Sales sale=new Sales();
 
-	public String addCustomer(String name, int level, String phone, String zip,
-			String mail, int money, String clerk) {
+	public String addCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.addCustomer(name, level, phone, zip, mail, money, clerk);
+		return sale.addCustomer(customerVO);
 	}
 
-	public String delCustomer(String name) {
+	public String delCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.delCustomer(name);
+		return sale.delCustomer(customerVO);
 	}
 
-	public String updateCustomer(String name, int level, String phone,
-			String zip, String mail, int money, String clerk) {
+	public String updateCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.updateCustomer(name, level, phone, zip, mail, money, clerk);
+		return sale.updateCustomer(customerVO);
 	}
 
-	public String searchCustomer(String word) {
+	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.searchCustomer(word);
+		return sale.searchCustomer(customerVO);
 	}
 
-	public String addImport(String name, int warehouse, String good_name,
-			String good_type, String ps, int number) {
+	public String addImport(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addImport(name, warehouse, good_name, good_type, ps, number);
+		return sale.addImport(importMenuVO);
 	}
 
-	public String addImport_Return(String name, int warehouse,
-			String good_name, String good_type, String ps, int number) {
+	public String addImport_Return(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addImport_Return(name, warehouse, good_name, good_type, ps, number);
+		return sale.addImport_Return(importMenuVO);
 	}
 
 	public String addImport_Return(String note, int number) {
@@ -45,17 +46,14 @@ public class SalesController implements SalesblService{
 		return sale.addImport_Return(note, number);
 	}
 
-	public String addExport(String name, int warehouse, String good_name,
-			String good_type, String ps, int number, int price, int discount) {
+	public String addExport(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addExport(name, warehouse, good_name, good_type, ps, number, price, discount);
+		return sale.addExport(exportMenuVO);
 	}
 
-	public String addExport_Return(String name, int warehouse,
-			String good_name, String good_type, String ps, int number,
-			int price, int discount) {
+	public String addExport_Return(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addExport_Return(name, warehouse, good_name, good_type, ps, number, price, discount);
+		return sale.addExport_Return(exportMenuVO);
 	}
 
 	public String addExport_Return(String note, int number) {

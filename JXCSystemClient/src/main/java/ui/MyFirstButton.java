@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MyFirstButton extends Button{
+public class MyFirstButton extends JButton{
 	
 //	JPanel backPanel;
 //	JLabel stopLabel;

@@ -8,6 +8,9 @@ import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
+import vo.CustomerVO;
+import vo.ExportMenuVO;
+import vo.ImportMenuVO;
 import businesslogic.invoicebl.Invoice;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.salesblservice.SalesblService;
@@ -28,10 +31,9 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		this.sale = sale;
 	}
 	
-	public String addCustomer(String name, int level, String phone, String zip,
-			String mail, int money, String clerk) {
+	public String addCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		CustomerPO customer = new CustomerPO(1,name,1, "type",
+		CustomerPO customer = new CustomerPO(1,"name",1, "type",
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
 		
@@ -47,9 +49,9 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return "ʧ��";
 	}
 
-	public String delCustomer(String name) {
+	public String delCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		CustomerPO customer = new CustomerPO(1,name,1, "type",
+		CustomerPO customer = new CustomerPO(1,"name",1, "type",
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
 		
@@ -65,13 +67,12 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return "ʧ��";
 	}
 
-	public String updateCustomer(String name, int level, String phone,
-			String zip, String mail, int money, String clerk) {
+	public String updateCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		CustomerPO customer1 = new CustomerPO(1,name,1, "type",
+		CustomerPO customer1 = new CustomerPO(1,"name",1, "type",
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
-		CustomerPO customer2 = new CustomerPO(2,name,2, "type",
+		CustomerPO customer2 = new CustomerPO(2,"name",2, "type",
 				"phone", "zip", "mail", 2000, 4000,
 				"clerk", "address");
 		
@@ -87,26 +88,25 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return "ʧ��";
 	}
 
-	public String searchCustomer(String word) {
+	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		
 		try {
-			if(sale.findCustomer(word)!=null){
-				return "�ɹ�";
+			if(sale.findCustomer("word")!=null){
+				return null;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return null;
 	}
 
-	public String addImport(String name, int warehouse, String good_name,
-			String good_type, String ps, int number) {
+	public String addImport(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		ImportPO im = new ImportPO("2222/2/2",name,good_name,good_type,
-				ps, "serialnum", "clerk", "operator",
-				warehouse,number,50, 1, 500);
+		ImportPO im = new ImportPO("2222/2/2","name","good_name","good_type",
+				"ps", "serialnum", "clerk", "operator",
+				1,100,50, 1, 500);
 		
 		if(invoice.add(im)!=null){
 			systemlog.add("AddImport:");
@@ -115,12 +115,11 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return "ʧ��";
 	}
 
-	public String addImport_Return(String name, int warehouse,
-			String good_name, String good_type, String ps, int number) {
+	public String addImport_Return(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		Import_ReturnPO im_re = new Import_ReturnPO("2222/2/2",name,good_name,good_type,
-				ps, "serialnum", "clerk", "operator",
-				warehouse,number,50, 1, 500);
+		Import_ReturnPO im_re = new Import_ReturnPO("2222/2/2","name","good_name","good_type",
+				"ps", "serialnum", "clerk", "operator",
+				1,100,50, 1, 500);
 		
 		if(invoice.add(im_re)!=null){
 			systemlog.add("AddImport_Return:");
@@ -142,8 +141,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return "ʧ��";
 	}
 
-	public String addExport(String name, int warehouse, String good_name,
-			String good_type, String ps, int number, int price, int discount) {
+	public String addExport(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
 		ExportPO ex = new ExportPO("ti",1,2,3,4,"cn","gn","gt","p","sn","c","o",
 				5,6,7,8,9);
@@ -155,9 +153,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return "ʧ��";
 	}
 
-	public String addExport_Return(String name, int warehouse,
-			String good_name, String good_type, String ps, int number,
-			int price, int discount) {
+	public String addExport_Return(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
 		Export_ReturnPO ex_re = new Export_ReturnPO("ti",1,2,3,4,"cn","gn","gt","p","sn","c","o",
 				5,6,7,8,9);
@@ -231,5 +227,38 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
+	
+	
+//	public String delCustomer(CustomerVO customerVO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	public String updateCustomer(CustomerVO customerVO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	
+	
+//	public String addImport(ImportMenuVO importMenuVO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	public String addImport_Return(ImportMenuVO importMenuVO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	
+//	public String addExport(ExportMenuVO exportMenuVO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	public String addExport_Return(ExportMenuVO exportMenuVO) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
