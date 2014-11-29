@@ -48,9 +48,9 @@ public class MockCommodityData implements CommodityDataService{
 		return true;
 	}
 
-	public boolean addSort(SortPO po) {
+	public boolean addSort(SortPO po1,SortPO po2) {
 		// TODO Auto-generated method stub
-		arr.add(po);
+		arr.add(po1);
 		return true;
 	}
 

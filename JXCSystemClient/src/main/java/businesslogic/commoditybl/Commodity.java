@@ -122,9 +122,10 @@ public class Commodity implements CommodityblService, businesslogic.financialbl.
 		SortPO com = new SortPO(name, 10);
 //		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
 //		sto = new CommodityDataService_Stub();
+		SortPO po2=new SortPO(name,10);
 		
 		try {
-			if (sto.addSort(com)) {
+			if (sto.addSort(com,po2)) {
 				return "�ɹ�";
 			}
 		} catch (RemoteException e) {
