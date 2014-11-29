@@ -1,19 +1,39 @@
 package ui;
 
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JFrame;
+
 public class WelcomePanel extends FatherPanel {
 
+	ThreadDis thread;
 	private static final long serialVersionUID = -1660303715688708759L;
-	public WelcomePanel(String url, UIController controller) {
-		super(url, controller);
+	public WelcomePanel(JFrame frame, String url,UIController controller) {
+		super(frame, url,controller);
+		thread=new ThreadDis();
+		thread.start();
 		this.addMouseListener(new JPanelListener());
 	}
-	public void paint(Graphics g){
-		super.paint(g);
-		g.drawImage(bgImage, 0, 0, this);
+	
+	class ThreadDis extends Thread{
+		
+		int times=0;
+		public void run(){
+			while(true){
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				times++;
+				if(times==1){
+					controller.loginPanel();
+					break;
+				}
+			}
+		}
 	}
 	
 	class JPanelListener implements MouseListener {
