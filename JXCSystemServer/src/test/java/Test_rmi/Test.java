@@ -53,7 +53,7 @@ public class Test {
 			LocateRegistry.createRegistry(8888);
 			Naming.bind("rmi://127.0.0.1:8888/FinancialDataService",financialdataservice);
 			
-			initializationdataservice = new InitializationDataService_Stub(null, null, null);		
+			initializationdataservice = new InitializationDataService_Stub();		
 			LocateRegistry.createRegistry(8888);
 			Naming.bind("rmi://127.0.0.1:8888/InitializationDataService",initializationdataservice);
 			

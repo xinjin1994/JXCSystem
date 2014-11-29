@@ -14,16 +14,12 @@ import po.AccountPO;
 import po.CommodityPO;
 import po.CustomerPO;
 import po.InitializationPO;
-import po.PaymentPO;
 import dataservice.initializationdataservice.InitializationDataService;
 
 public class InitializationDataService_Stub extends UnicastRemoteObject implements InitializationDataService{
 	
-	CustomerPO customer;
-	CommodityPO commodity;
-	AccountPO account;
-	
 	ArrayList<InitializationPO> initializationList=new ArrayList<InitializationPO>();
+	InitializationPO nowInitialization;
 	
 	public void writeInitializationList(){
 		
@@ -70,13 +66,71 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 		
 	}
 	
-	public InitializationDataService_Stub(CommodityPO commodity,CustomerPO customer,AccountPO account) throws RemoteException {
-		this.commodity = commodity;
-		this.customer = customer;
-		this.account = account;
+	
+	public void writeNowInitialization(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("nowInitialization.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(nowInitialization);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 	}
+	
+	public void readNowInitialization(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("nowInitializationList.out");
+			ois=new ObjectInputStream(fis);
+			nowInitialization=(InitializationPO) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public InitializationDataService_Stub() throws RemoteException {
+		readInitializationList();
+		readNowInitialization();
+	}
+	
 	public InitializationPO getInfomation() {
-		return new InitializationPO(commodity, customer, account);
+		return nowInitialization;
+	}
+
+	public boolean clear() throws RemoteException {
+		// TODO Auto-generated method stub
+		nowInitialization=new InitializationPO(new ArrayList<CommodityPO>(), new ArrayList<CustomerPO>(), new ArrayList<AccountPO>());
+		return true;
+	}
+
+	public boolean doInitialization(InitializationPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		nowInitialization=po.copy();
+		initializationList.add(po);
+		return true;
 	}
 
 }

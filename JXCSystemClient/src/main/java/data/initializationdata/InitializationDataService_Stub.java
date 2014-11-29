@@ -1,5 +1,8 @@
 package data.initializationdata;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 import po.AccountPO;
 import po.CommodityPO;
 import po.CustomerPO;
@@ -17,7 +20,15 @@ public class InitializationDataService_Stub implements InitializationDataService
 		this.account = account;
 	}
 	public InitializationPO getInfomation() {
-		return new InitializationPO(commodity, customer, account);
+		return new InitializationPO(new ArrayList<CommodityPO>(), new ArrayList<CustomerPO>(), new ArrayList<AccountPO>());
+	}
+	public boolean clear() throws RemoteException {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	public boolean doInitialization(InitializationPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }
