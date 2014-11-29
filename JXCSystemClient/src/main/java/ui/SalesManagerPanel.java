@@ -3,6 +3,7 @@ package ui;
 import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -17,6 +18,13 @@ public class SalesManagerPanel extends FatherPanel {
 
 	public SalesManagerPanel(JFrame frame, String url, UIController controller) {
 		super(frame, url, controller);
+		addButton();
+	}
+	private void addButton() {
+		
+		MyButton customerManageButton = new MyFirstButton
+				("Image/Sales/Sales_image/客户管理.png", 2, 110, this,"Image/Sales/Sales_image/客户管理_stop.png","Image/Sales/Sales_image/客户管理_press_on.png");
+			
 	}
 
 }

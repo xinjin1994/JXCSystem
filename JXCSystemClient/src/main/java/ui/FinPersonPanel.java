@@ -8,4 +8,5 @@ public class FinPersonPanel extends FatherPanel{
 	public FinPersonPanel(JFrame frame,String url,UIController controller){
 		super(frame,url,controller);
 	}
+	
 }
