@@ -22,7 +22,7 @@ public class SalesManagerPanel extends FatherPanel {
 	}
 	private void addButton() {
 		
-		MyButton customerManageButton = new MyFirstButton();
+		MyButton customerManageButton = new MyFirstButton(url, height, height, null, url, url);
 			
 	}
 
