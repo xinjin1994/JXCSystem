@@ -3,8 +3,8 @@ package po;
 import java.io.Serializable;
 
 public class AccountPO implements Serializable{
-	String name;
-	int money;
+	public String name;
+	public int money;
 	
 	public AccountPO(String name,int money){
 		this.name = name;

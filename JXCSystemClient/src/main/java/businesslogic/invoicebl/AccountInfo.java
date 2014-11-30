@@ -9,8 +9,8 @@ public interface AccountInfo {
 
 	public String addPayment_Data(PaymentPO po);
 	
-	public String delReceipt_Data(ReceiptPO po);
-
-	public String delPayment_Data(PaymentPO po);
+//	public String delReceipt_Data(ReceiptPO po);
+//
+//	public String delPayment_Data(PaymentPO po);
 	
 }

@@ -243,10 +243,11 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	}
 
 	public boolean updateAccount(AccountPO po1, AccountPO po2) {
-		if(delAccount(po1)){
-			if(addAccount(po2)){
-				return true;
-			}
+		AccountPO po=findAccount_true(po1.getName());
+		AccountPO poo=findAccount_true(po2.getName());
+		if(po!=null&&poo==null){
+			po.name=po2.getName();
+			return true;
 		}
 		return false;
 	}
@@ -272,11 +273,36 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	}
 
 	public boolean addReceipt(ReceiptPO po) {
+		String[] acc=po.getAccount();
+		int [] price=po.getPrice();
+		int i=0;
+		AccountPO lin;
+		
+		for(i=0;i<acc.length;i++){
+			lin=findAccount_true(acc[i]);
+			if(lin==null){
+				return false;
+			}
+			lin.money=lin.money+price[i];
+		}
 		receiptList.add(po.copy());
 		return true;
 	}
 
 	public boolean addPayment(PaymentPO po) {
+		String[] acc=po.getAccount();
+		int [] price=po.getPrice();
+		int i=0;
+		AccountPO lin;
+		
+		for(i=0;i<acc.length;i++){
+			lin=findAccount_true(acc[i]);
+			if(lin==null){
+				return false;
+			}
+			lin.money=lin.money-price[i];
+		}
+		
 		paymentList.add(po.copy());
 		return true;
 	}
