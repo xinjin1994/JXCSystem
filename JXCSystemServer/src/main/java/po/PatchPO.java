@@ -33,4 +33,5 @@ public class PatchPO extends InvoicePO implements Serializable{
 	public String getSerialNum() {
 		return serialNum;
 	}
+	
 }

@@ -18,7 +18,7 @@ public class InvoiceDataService_Stub implements InvoiceDataService{
 	}
 
 	public InvoicePO getInvoice(String note) {
-		return new InvoicePO(invoiceType,invoiceNum,condition);
+		return new InvoicePO();
 	}
 
 	public boolean addInvoice(InvoicePO po) {

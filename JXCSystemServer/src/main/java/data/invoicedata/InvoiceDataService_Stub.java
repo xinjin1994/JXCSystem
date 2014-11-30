@@ -77,15 +77,31 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	
 
 	public InvoicePO getInvoice(String note) {
-		return new InvoicePO();
+		int i=0;
+		for(i=0;i<invoiceList.size();i++){
+			if(invoiceList.get(i).getNote_Invoice().equals(note)){
+				return invoiceList.get(i).copy();
+			}
+		}
+		return null;
 	}
 
 	public boolean addInvoice(InvoicePO po) {
-		return true;
+		InvoicePO po1=findInvoice_true(po.getNote_Invoice());
+		if(po1==null){
+			invoiceList.add(po.copy());
+			return true;
+		}
+		return false;
 	}
 
 	public boolean delInvoice(InvoicePO po) {
-		return true;
+		InvoicePO po1=findInvoice_true(po.getNote_Invoice());
+		if(po1!=null){
+			invoiceList.remove(po1);
+			return true;
+		}
+		return false;
 	}
 
 	public ArrayList<InvoicePO> getAllInvoice() {
@@ -93,7 +109,18 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	}
 
 	public boolean clear() {
+		invoiceList=new ArrayList<InvoicePO>();
 		return true;
+	}
+	
+	public InvoicePO findInvoice_true(String note){
+		int i=0;
+		for(i=0;i<invoiceList.size();i++){
+			if(invoiceList.get(i).getNote_Invoice().equals(note)){
+				return invoiceList.get(i);
+			}
+		}
+		return null;
 	}
 
 }
