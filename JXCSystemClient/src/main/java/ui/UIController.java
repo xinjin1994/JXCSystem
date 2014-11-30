@@ -1,5 +1,7 @@
 package ui;
 
+import ui.sales.SalesUIController;
+
 public class UIController {
 
 	private MyFrame frame;
@@ -9,15 +11,16 @@ public class UIController {
 	private FinManagerPanel financialManager; // 财务管理界面
 	private FinPersonPanel financialPerson; // 财务人员界面
 	private ManagerPanel manager;
-	private SalesManagerPanel salesManager;
 	private SalesPersonPanel salesPerson;
 	private StockPersonPanel stockPerson;
+	private SalesUIController salesController;
 
 	public UIController() {
 		this.frame = new MyFrame();
 	    this.welcomePanel();
 //	    this.SalesManagerPanel();
 	}
+	
 	public UIController(int i){
 		this.frame = new MyFrame();
 		this.SalesManagerPanel();
@@ -37,10 +40,8 @@ public class UIController {
 	}
 
 	public void SalesManagerPanel() {
-//		frame.remove(loginPanel);
-		salesManager = new SalesManagerPanel(frame, "Image/Sales/sales.jpg", this);
-		frame.setPanel(salesManager);
-		frame.repaint();
+		frame.remove(loginPanel);
+		salesController = new SalesUIController(this, frame);
 	}
 	public void AdminPanel() {
 		admin = new AdminPanel(frame,"",this);
