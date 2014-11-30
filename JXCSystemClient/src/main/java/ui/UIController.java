@@ -1,5 +1,6 @@
 package ui;
 
+import ui.account.AccountUIController;
 import ui.sales.SalesUIController;
 
 public class UIController {
@@ -8,7 +9,7 @@ public class UIController {
 	private WelcomePanel welcomePanel;
 	private LoginPanel loginPanel;
 	private AdminPanel admin;
-	private FinManagerPanel financialManager; // 财务管理界面
+	private AccountPanel accountPanel; // 财务管理界面
 	private FinPersonPanel financialPerson; // 财务人员界面
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
@@ -47,10 +48,9 @@ public class UIController {
 		frame.setPanel(admin);
 	}
 
-	public void FinManagerPanel() {
-		financialManager = new FinManagerPanel(frame,"",this);
+	public void AccountPanel() {
 		frame.remove(loginPanel);
-		frame.setPanel(financialManager);
+		new AccountUIController(this,frame);
 	}
 
 	public void FinPersonPanel() {
