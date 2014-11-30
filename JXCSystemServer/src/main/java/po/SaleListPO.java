@@ -53,6 +53,10 @@ public class SaleListPO implements Serializable{
 	public int getTotalmoney() {
 		return totalmoney;
 	}
+	
+	public SaleListPO copy(){
+		return new SaleListPO(time, name, clerk, wareHouse, type, commodity, price, number,totalmoney);
+	}
 
 	
 	

@@ -20,17 +20,17 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 
 	ArrayList<SaleListPO> saleListList=new ArrayList<SaleListPO>();
 	ArrayList<AllBillPO> allBillList=new ArrayList<AllBillPO>();
-	ArrayList<OperatingConditionPO> operatingConditionList=new ArrayList<OperatingConditionPO>();
+	OperatingConditionPO operatingCondition=new OperatingConditionPO(0,0,0);
 	
 	
-	public void writeOperatingConditionList(){
+	public void writeOperatingCondition(){
 		
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("operatingConditionList.out");
+			fos = new FileOutputStream("operatingCondition.out");
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(operatingConditionList);	
+			oos.writeObject(operatingCondition);	
 			oos.close();
 		} catch (FileNotFoundException e3) {
 			// TODO Auto-generated catch block
@@ -42,17 +42,16 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void readOperatingConditionList(){
+	public void readOperatingCondition(){
 		
 		FileInputStream fis;
 		ObjectInputStream ois;
 		
 		try{
 			
-			fis=new FileInputStream("operatingConditionList.out");
+			fis=new FileInputStream("operatingCondition.out");
 			ois=new ObjectInputStream(fis);
-			operatingConditionList=(ArrayList<OperatingConditionPO>) ois.readObject();
+			operatingCondition=(OperatingConditionPO) ois.readObject();
 			ois.close();
 			
 		} catch (ClassNotFoundException e) {
@@ -164,33 +163,52 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 	public FinancialDataService_Stub() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
+		readSaleListList();
+		readAllBillList();
+		readOperatingCondition();
 	}
 
 	public ArrayList<SaleListPO> getSaleList() {
-		return saleListList;
+		int i=0;
+		ArrayList<SaleListPO> po=new ArrayList<SaleListPO>();
+		for(i=0;i<saleListList.size();i++){
+			po.add(saleListList.get(i));
+		}
+		return po;
 	}
 
 	public ArrayList<AllBillPO> getAllBill() {
-		return allBillList;
+		int i=0;
+		ArrayList<AllBillPO> po=new ArrayList<AllBillPO>();
+		for(i=0;i<allBillList.size();i++){
+			po.add(allBillList.get(i));
+		}
+		return po;
 	}
 
-	public ArrayList<OperatingConditionPO> getOperatingCondition() {
-		return operatingConditionList;
+	public OperatingConditionPO getOperatingCondition() {
+		return operatingCondition.copy();
 	}
 
 	public boolean addSaleList(SaleListPO po) {
+		saleListList.add(po.copy());
 		return true;
 	}
 
 	public boolean addAllBill(AllBillPO po) {
+		allBillList.add(po.copy());
 		return true;
 	}
 
 	public boolean addOperatingCondition(OperatingConditionPO po) {
+		operatingCondition.add(po.copy());
 		return true;
 	}
 
 	public boolean clear() {
+		saleListList=new ArrayList<SaleListPO>();
+		allBillList=new ArrayList<AllBillPO>();
+		operatingCondition=new OperatingConditionPO(0,0,0);
 		return true;
 	}
 

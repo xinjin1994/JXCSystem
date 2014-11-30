@@ -4,18 +4,20 @@ import java.io.Serializable;
 
 public class OperatingConditionPO implements Serializable{
 
-	int income;//ÕÛÈÃºóÊÕÈë
-	int discount;//ÕÛÈÃ
-	int outcome;//Ö§³ö
-	int profit;//ÀûÈó
+	int income;//ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½
+	int discount;//ï¿½ï¿½ï¿½ï¿½
+	int outcome;//Ö§ï¿½ï¿½
+//	int profit;//ï¿½ï¿½ï¿½ï¿½
 	
-	public OperatingConditionPO(int income, int discount, int outcome,
-			int profit) {
+	public OperatingConditionPO(int income, int discount, int outcome) {
 		super();
 		this.income = income;
 		this.discount = discount;
 		this.outcome = outcome;
-		this.profit = profit;
+	}
+	
+	public OperatingConditionPO copy(){
+		return new OperatingConditionPO(income,discount,outcome);
 	}
 
 	public int getIncome() {
@@ -29,8 +31,15 @@ public class OperatingConditionPO implements Serializable{
 	public int getOutcome() {
 		return outcome;
 	}
-
-	public int getProfit() {
-		return profit;
+	
+	public int getProfit(){
+		return income-outcome;
 	}
+	
+	public void add(OperatingConditionPO po){
+		income=po.income+income;
+		outcome=po.outcome+outcome;
+		discount=po.discount+discount;
+	}
+	
 }

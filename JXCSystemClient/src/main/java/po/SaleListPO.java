@@ -3,15 +3,16 @@ package po;
 import java.io.Serializable;
 
 public class SaleListPO implements Serializable{
-	String time;//Ê±¼ä
-	String name;//¿Í»§Ãû³Æ
-	String clerk;//ÒµÎñÔ±
-	String wareHouse;//²Ö¿â
-	String type;//ÐÍºÅ
-	String commodity;//ÉÌÆ·
-	int price;//µ¥¼Û
-	int number;//ÊýÁ¿
-	int totalmoney;//×Ü¼Û
+	String time;//Ê±ï¿½ï¿½
+	String name;//ï¿½Í»ï¿½ï¿½ï¿½ï¿½
+	String clerk;//Òµï¿½ï¿½Ô±
+	String wareHouse;//ï¿½Ö¿ï¿½
+	String type;//ï¿½Íºï¿½
+	String commodity;//ï¿½ï¿½Æ·
+	int price;//ï¿½ï¿½ï¿½ï¿½
+	int number;//ï¿½ï¿½ï¿½ï¿½
+	int totalmoney;//ï¿½Ü¼ï¿½
+	
 	public SaleListPO(String time, String name, String clerk, String wareHouse,
 			String type, String commodity, int price, int number, int totalmoney) {
 		this.time = time;
@@ -51,6 +52,10 @@ public class SaleListPO implements Serializable{
 	}
 	public int getTotalmoney() {
 		return totalmoney;
+	}
+	
+	public SaleListPO copy(){
+		return new SaleListPO(time, name, clerk, wareHouse, type, commodity, price, number,totalmoney);
 	}
 
 	

@@ -129,7 +129,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public boolean addOperatingCondition(ReceiptPO po) {
 //		financial= new FinancialDataService_Stub();
-		OperatingConditionPO po1=new OperatingConditionPO(po.getTotal(),0,0,0);
+		OperatingConditionPO po1=new OperatingConditionPO(po.getTotal(),0,0);
 		try {
 			return financial.addOperatingCondition(po1);
 		} catch (RemoteException e) {
@@ -141,7 +141,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public boolean addOperatingCondition(PaymentPO po) {
 //		financial= new FinancialDataService_Stub();
-		OperatingConditionPO po1=new OperatingConditionPO(0,0,po.getTotal(),0);
+		OperatingConditionPO po1=new OperatingConditionPO(0,0,po.getTotal());
 		try {
 			return financial.addOperatingCondition(po1);
 		} catch (RemoteException e) {

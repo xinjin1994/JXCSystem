@@ -105,7 +105,12 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	}
 
 	public ArrayList<InvoicePO> getAllInvoice() {
-		return invoiceList;
+		ArrayList<InvoicePO> po=new ArrayList<InvoicePO>();
+		int i=0;
+		for(i=0;i<invoiceList.size();i++){
+			po.add(invoiceList.get(i));
+		}
+		return po;
 	}
 
 	public boolean clear() {
