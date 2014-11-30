@@ -1,14 +1,10 @@
 package ui;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
 
-import javax.swing.JButton;
-=======
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
->>>>>>> origin/master
 import javax.swing.JFrame;
 
 import ui.sales.SalesUIController;
@@ -34,7 +30,7 @@ public class SalesManagerPanel extends FatherPanel {
 		super(frame, url, controller);
 		this.salesController = salesController;
 		this.addButton();
-<<<<<<< HEAD
+
 	this.testTable();
 		}
 	
@@ -53,26 +49,6 @@ public class SalesManagerPanel extends FatherPanel {
 		
 	}
 
-
-	public void newPanel(){
-		cusPanel = new JPanel();
-		cusPanel.setLayout(null);
-		cusPanel.setOpaque(false);
-		cusPanel.setBounds(secPanelX, secPanelY, secPanelWidth, secPanelHeight);
-		
-		salesPanel = new JPanel();
-		salesPanel.setLayout(null);
-		salesPanel.setOpaque(false);
-		salesPanel.setBounds(secPanelX, secPanelY, secPanelWidth, secPanelHeight);
-		
-		imPanel = new JPanel();
-		imPanel.setLayout(null);
-		imPanel.setOpaque(false);
-		imPanel.setBounds(secPanelX, secPanelY, secPanelWidth, secPanelHeight);
-=======
-		this.addRestButton();
->>>>>>> origin/master
-	}
 
 	public void addButton() {
 

@@ -13,8 +13,6 @@ public class UIController {
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	private StockPersonPanel stockPerson;
-	private SalesUIController salesController;
-
 	public UIController() {
 		this.frame = new MyFrame();
 	    this.welcomePanel();
@@ -41,7 +39,7 @@ public class UIController {
 
 	public void SalesManagerPanel() {
 		frame.remove(loginPanel);
-		salesController = new SalesUIController(this, frame);
+		new SalesUIController(this, frame);
 	}
 	public void AdminPanel() {
 		admin = new AdminPanel(frame,"",this);

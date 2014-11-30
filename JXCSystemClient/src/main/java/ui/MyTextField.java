@@ -1,7 +1,5 @@
 package ui;
 
-import java.security.PublicKey;
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
