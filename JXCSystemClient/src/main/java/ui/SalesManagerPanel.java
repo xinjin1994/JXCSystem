@@ -1,8 +1,14 @@
 package ui;
 
+<<<<<<< HEAD
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+=======
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+>>>>>>> origin/master
 import javax.swing.JFrame;
 
 import ui.sales.SalesUIController;
@@ -28,7 +34,44 @@ public class SalesManagerPanel extends FatherPanel {
 		super(frame, url, controller);
 		this.salesController = salesController;
 		this.addButton();
+<<<<<<< HEAD
+	this.testTable();
+		}
+	
+	
+	private void testTable() {
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("a;b;c;e");
+		info.add("s,r,t,h");
+		info.add("w;t;x;h");
+		info.add("gg");
+		MyTable testTable = new MyTable(this);
+		testTable.setTable(info);
+		testTable.add("a;g;g");
+		testTable.find(1, 2);
+		testTable.del(3);
+		
+	}
+
+
+	public void newPanel(){
+		cusPanel = new JPanel();
+		cusPanel.setLayout(null);
+		cusPanel.setOpaque(false);
+		cusPanel.setBounds(secPanelX, secPanelY, secPanelWidth, secPanelHeight);
+		
+		salesPanel = new JPanel();
+		salesPanel.setLayout(null);
+		salesPanel.setOpaque(false);
+		salesPanel.setBounds(secPanelX, secPanelY, secPanelWidth, secPanelHeight);
+		
+		imPanel = new JPanel();
+		imPanel.setLayout(null);
+		imPanel.setOpaque(false);
+		imPanel.setBounds(secPanelX, secPanelY, secPanelWidth, secPanelHeight);
+=======
 		this.addRestButton();
+>>>>>>> origin/master
 	}
 
 	public void addButton() {
