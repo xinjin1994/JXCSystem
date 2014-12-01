@@ -326,4 +326,11 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 	}
 
+	public String addCommodity(String name, String type, int in_price,
+			int out_price) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

@@ -61,7 +61,7 @@ public class Promotion implements PromotionblService{
 	public String makeGift(int start_money, String time1, String time2) {
 		// TODO Auto-generated method stub
 //		PromotionDataService pro=new PromotionDataService_Stub(); 
-		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, 10, 10, 10, 10);
+		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, "10", 10, 10, 10);
 		ProGiftPO dis=new ProGiftPO(gift, time1, time2);
 		try {
 			if(promotion.addGift(dis)){

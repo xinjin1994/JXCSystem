@@ -55,7 +55,7 @@ public class PromotionDataService_Stub implements PromotionDataService{
 	}
 
 	public ProGiftPO getGift() {
-		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, 10, 10, 10, 10);
+		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, "10", 10, 10, 10);
 		return new ProGiftPO(gift, "time1", "time2");
 	}
 
