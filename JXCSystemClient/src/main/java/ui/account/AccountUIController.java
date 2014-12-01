@@ -1,5 +1,6 @@
 package ui.account;
 
+import java.awt.Frame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -14,7 +15,8 @@ public class AccountUIController {
 	private int secondY = 35;
 	private int inter = 54;
 	
-	private SecondPanel accountSecondPanel;
+	
+	private SecondPanel accountSecondPanel = new SecondPanel();;
 	private AccountPanel accountPanel;
 	private MyButton addAcc, delAcc, changeAcc, findAcc;
 	private MyButton receipt,paymeent;
@@ -28,15 +30,19 @@ public class AccountUIController {
 	private MyButton []invoiceButtons = new MyButton[]{approButton,disapButton};
 	private MyButton []iniButtons = new MyButton[]{addComInfo,addCusInfo,addAccInfo,check};
 	
-
+	private AccountAllUIController uiController;
+	private MyFrame frame;
 	
-	public AccountUIController(UIController uiController,MyFrame frame){
+	public AccountUIController(AccountAllUIController uiController,MyFrame frame){
+		this.uiController = uiController;
+		this.frame = frame;
 		this.accountPanel = new AccountPanel(frame, "Image/Account/account_背景.jpg",
 				uiController, this);
 		frame.setPanel(accountPanel);
 		
 	}
 	public void toAccPanel() {
+		accountSecondPanel.removeAll();
 		AccButtonListener accListener = new AccButtonListener();
 		String images_ori_acc[] = new String[]{"Image/Account/button/accManage/addAcc.png",
 				"Image/Account/button/accManage/delAcc.png","Image/Account/button/accManage/changeAcc.png",
@@ -48,16 +54,17 @@ public class AccountUIController {
 				"Image/Account/button/accManage/delAcc_press_on.png","Image/Account/button/accManage/changeAcc_press_on.png",
 				"Image/Account/button/accManage/findAcc_press_on.png"};
 		
-		accountSecondPanel = new SecondPanel();
 		for(int i = 0;i < accButtons.length;i++){
 			accButtons[i] = new MyButton(images_ori_acc[i], secondX, secondY+i*inter,
 					images_stop_acc[i], images_press_on_acc[i]);
 			accountSecondPanel.add(accButtons[i]);
+			accButtons[i].addMouseListener(accListener);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
 	}
 	public void toInvoicePanel() {
+		accountSecondPanel.removeAll();
 		String images_ori_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve.png",
 				"Image/Account/button/invoiceManage/disapp.png"};
 		String images_stop_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_stop.png",
@@ -65,17 +72,16 @@ public class AccountUIController {
 		String images_press_on_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_press_on.png",
 				"Image/Account/button/invoiceManage/disapp_press_on.png"};
 		
-		accountSecondPanel = new SecondPanel();
 		for(int i = 0;i < invoiceButtons.length;i++){
 			invoiceButtons[i] = new MyButton(images_ori_invoice[i], secondX, secondY+i*inter,
 					images_stop_invoice[i], images_press_on_invoice[i]);
-			accountSecondPanel.add(accButtons[i]);
+			accountSecondPanel.add(invoiceButtons[i]);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
 	}
 	public void toFinPanel() {
-		
+		accountSecondPanel.removeAll();
 		String images_ori_fin[] = new String[]{"Image/Account/button/finManage/receipt.png",
 		"Image/Account/button/finManage/payment.png"};
 		String images_stop_fin[] = new String[]{"Image/Account/button/finManage/receipt_stop.png",
@@ -83,51 +89,51 @@ public class AccountUIController {
 		String images_press_on_fin[] = new String[]{"Image/Account/button/finManage/receipt_press_on.png",
 		"Image/Account/button/finManage/payment_press_on.png"};
 
-		accountSecondPanel = new SecondPanel();
-		for(int i = 0;i < invoiceButtons.length;i++){
-			invoiceButtons[i] = new MyButton(images_ori_fin[i], secondX, secondY+i*inter,
+		for(int i = 0;i < finButtons.length;i++){
+			finButtons[i] = new MyButton(images_ori_fin[i], secondX, secondY+i*inter,
 					images_stop_fin[i], images_press_on_fin[i]);
-			accountSecondPanel.add(accButtons[i]);
+			accountSecondPanel.add(finButtons[i]);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
 		
 	}
 	public void toRecPanel() {
+		accountSecondPanel.removeAll();
 		String images_ori_rec[] = new String[]{"Image/Account/button/recManage/salesList.png",
 				"Image/Account/button/recManage/allBills.png","Image/Account/button/recManage/opeCon.png"};
-		String images_stop_rec[] = new String[]{"Image/Account/button/rccManage/salesList_stop.png",
+		String images_stop_rec[] = new String[]{"Image/Account/button/recManage/salesList_stop.png",
 				"Image/Account/button/recManage/allBills_stop.png","Image/Account/button/recManage/opeCon_stop.png"};
 		String images_press_on_rec[] = new String[]{"Image/Account/button/recManage/salesList_press_on.png",
 				"Image/Account/button/recManage/allBills_press_on.png","Image/Account/button/recManage/opeCon_press_on.png"};
 		
-		accountSecondPanel = new SecondPanel();
-		for(int i = 0;i < accButtons.length;i++){
-			accButtons[i] = new MyButton(images_ori_rec[i], secondX, secondY+i*inter,
+		for(int i = 0;i < recButtons.length;i++){
+			recButtons[i] = new MyButton(images_ori_rec[i], secondX, secondY+i*inter,
 					images_stop_rec[i], images_press_on_rec[i]);
-			accountSecondPanel.add(accButtons[i]);
+			accountSecondPanel.add(recButtons[i]);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
 		
 	}
 	public void toIniPanel() {
-		
+		accountSecondPanel.removeAll();
 		String images_ori_ini[] = new String[]{"Image/Account/button/iniManage/comInfo.png",
 				"Image/Account/button/iniManage/cusInfo.png","Image/Account/button/iniManage/accInfo.png",
-				"Image/Account/button/iniManage/check"};
+				"Image/Account/button/iniManage/check.png"};
 		String images_stop_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_stop.png",
 				"Image/Account/button/iniManage/cusInfo_stop.png","Image/Account/button/iniManage/accInfo_stop.png",
-				"Image/Account/button/iniManage/check_stop"};
+				"Image/Account/button/iniManage/check_stop.png"};
 		String images_press_on_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_press_on.png",
 				"Image/Account/button/iniManage/cusInfo_press_on.png","Image/Account/button/iniManage/accInfo_press_on.png",
-				"Image/Account/button/iniManage/check_press_on"};
+			"Image/Account/button/iniManage/check_press_on.png"};
 		
-		accountSecondPanel = new SecondPanel();
-		for(int i = 0;i < accButtons.length;i++){
-			accButtons[i] = new MyButton(images_ori_ini[i], secondX, secondY+i*inter,
+		
+		for(int i = 0;i < iniButtons.length;i++){
+			System.out.println(i);
+			iniButtons[i] = new MyButton(images_ori_ini[i], secondX, secondY+i*inter,
 					images_stop_ini[i], images_press_on_ini[i]);
-			accountSecondPanel.add(accButtons[i]);
+			accountSecondPanel.add(iniButtons[i]);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
@@ -137,27 +143,25 @@ public class AccountUIController {
 	class AccButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent event) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseEntered(MouseEvent event) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseExited(MouseEvent event) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mousePressed(MouseEvent event) {
-			// TODO Auto-generated method stub
-			
+			if(event.getSource() == accButtons[0]){
+				frame.remove(accountPanel);	
+				uiController.findAccount();
+			}
 		}
 
 		public void mouseReleased(MouseEvent event) {
-			// TODO Auto-generated method stub
 			
 		}
 		

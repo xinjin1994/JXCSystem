@@ -13,7 +13,7 @@ import ui.sales.SalesUIController;
 //财务经理
 public class AccountPanel extends FatherPanel{
 
-	private int firstX = 1;
+	private int firstX = 0;
 	private int firstY = 110;
 	private int inter = 54;
 	
@@ -45,8 +45,8 @@ public class AccountPanel extends FatherPanel{
 	public void addButton() {
 		FirstButtonListener listener = new FirstButtonListener();
 		for(int i = 0 ;i < buttons.length;i++){
-			buttons[i] = new MyButton(images_ori[0], firstX, firstY +i * inter,
-					images_stop[0], images_press_on[0]);
+			buttons[i] = new MyButton(images_ori[i], firstX, firstY +i * inter,
+					images_stop[i], images_press_on[i]);
 			this.add(buttons[i]);
 			buttons[i].addMouseListener(listener);
 		}
@@ -90,6 +90,7 @@ public class AccountPanel extends FatherPanel{
 				"Image/Sales/Sales_image/返回_press_on.png");
 		this.add(detail);
 		this.add(back);
+	
 	}
 
 }
