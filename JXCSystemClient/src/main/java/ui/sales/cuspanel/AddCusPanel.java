@@ -4,32 +4,39 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyButton;
+import ui.setting.MyFrame;
 import ui.setting.MyStopButton;
 import ui.setting.MyTextFieldFilled;
 import ui.setting.MyTextFieldTrans;
+import vo.CustomerVO;
 
 public class AddCusPanel extends FatherPanel {
 
-	private MyTextFieldTrans cusName, cusTel, cusAdd, cusEBox, cusCode, cusShouldPay;
+	protected MyTextFieldTrans cusName, cusTel, cusAdd, cusEBox, cusCode, cusShouldPay;
 	private int infoX1 = 488, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,
 			infoHeight = 31;
 	private int maxLevel = 6;
 	private int levelX = 105, levelY = 328, levelInter = 42;
-	private MyStopButton supplierButton, sellerButton;
-	private MyButton secondCusBack, forward;
-	private MyStopButton level1,level2,level3,level4,level5;
-	private MyTextFieldFilled idField, salesManField;
+	protected MyStopButton supplierButton, sellerButton;
+	protected MyButton secondCusBack, forward;
+	protected MyStopButton level1,level2,level3,level4,level5;
+	protected MyTextFieldFilled idField,salesManField;
 	SalesUIController salesUIController;
 	private ButtonListener buttonListener;
+	private MyFrame frame;
+	private UIController controller;
+	protected int level = 0;
+	protected boolean classification = true;
 
-	public AddCusPanel(JFrame frame, String url, UIController controller, SalesUIController salesUIController) {
+	public AddCusPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame,url,controller);
+		this.frame = frame;
+		this.controller = controller;
 		buttonListener = new ButtonListener();
 		this.salesUIController = salesUIController;
 		this.addIdButton();
@@ -103,23 +110,46 @@ public class AddCusPanel extends FatherPanel {
 		public void mouseClicked(MouseEvent e) {
 			if (e.getSource() == secondCusBack) {
 				salesUIController.backPanel(AddCusPanel.this);
-			} else if (e.getSource() == forward) {
-				String ID = idField.getText();
 			}else if(e.getSource() == supplierButton){
 				supplierButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供应商_press_on_03.png"));
+				classification = false;
 			}else if(e.getSource() == sellerButton){
 				sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/销售商_press_on_05.png"));
+				classification = true;
 			}else if(e.getSource() == level1){
 				level1.setIcon(new ImageIcon("Image/Sales/对话框/images/level1_press_on.png"));
+				level = 1;
 			}else if(e.getSource() == level2){
 				level2.setIcon(new ImageIcon("Image/Sales/对话框/images/level2_press_on.png"));
+				level = 2;
 			}else if(e.getSource() == level3){
 				level3.setIcon(new ImageIcon("Image/Sales/对话框/images/level3_press_on.png"));
+				level = 3;
 			}else if(e.getSource() == level4){
 				level4.setIcon(new ImageIcon("Image/Sales/对话框/images/level4_press_on.png"));
+				level = 4;
 			}else if(e.getSource() == level5){
 				level5.setIcon(new ImageIcon("Image/Sales/对话框/images/level5_press_on.png"));
-			}
+				level = 5;
+			}else if (e.getSource() == forward) {
+				//CustomerVO(String id,boolean classification,int level,String cusName,String tel,String address,String zipCode,String ezipCode,double mostOwe,double shouldGet,double shouldPay,String person){
+				//编号、分类（供应商、销售商）、级别（五级，一级普通用户，五级VIP客户）、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员
+				//false代表供应商，true代表销售商
+				String ID = idField.getText();
+				String name = cusName.getText();
+				String tel = cusTel.getText();
+				String add = cusAdd.getText();
+				String code = cusCode.getText();
+				String eBox = cusEBox.getText();
+				double mostOwe = Double.parseDouble(cusShouldPay.getText());
+				double shouldGet = 0;
+				double shouldPay = 0;
+				String person = salesManField.getText();
+				CustomerVO customerVO = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
+				frame.remove(AddCusPanel.this);
+				frame.setPanel(new MakeSureCusInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,AddCusPanel.this));
+				frame.repaint();
+			} 
 		}
 
 		public void mousePressed(MouseEvent e) {
