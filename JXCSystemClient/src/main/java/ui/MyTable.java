@@ -144,7 +144,6 @@ public class MyTable extends JTable{
 	        	if(isSelected){
 	        		setSelectionBackground(Color.white);
 	        		setForeground(Color.red);
-	        		System.out.println("kkk");
 	        	}
 	        	else{
 	        		if (row% 2 == 0){

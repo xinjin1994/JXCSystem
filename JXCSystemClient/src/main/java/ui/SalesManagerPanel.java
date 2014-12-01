@@ -28,6 +28,7 @@ public class SalesManagerPanel extends FatherPanel {
 
 	public SalesManagerPanel(JFrame frame, String url, UIController controller, SalesUIController salesController) {
 		super(frame, url, controller);
+		System.out.println("lkl");
 		this.salesController = salesController;
 		this.addButton();
 

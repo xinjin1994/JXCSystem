@@ -1,6 +1,9 @@
 package ui;
 
 import ui.account.AccountUIController;
+import ui.admin.AdminUIController;
+import ui.commodity.CommodityUIController;
+import ui.manager.ManagerUIController;
 import ui.sales.SalesUIController;
 
 public class UIController {
@@ -13,7 +16,6 @@ public class UIController {
 	private FinPersonPanel financialPerson; // 财务人员界面
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
-	private StockPersonPanel stockPerson;
 	public UIController() {
 		this.frame = new MyFrame();
 	    this.welcomePanel();
@@ -32,37 +34,47 @@ public class UIController {
 
 	public void loginPanel() {
 		frame.remove(welcomePanel);
-		//frame.repaint();
-		loginPanel = new LoginPanel(frame,"Image/login.jpg",this);
+		loginPanel = new LoginPanel(frame,"Image/login.jpg",this);		
 		frame.setPanel(loginPanel);
 		frame.repaint();
 	}
 
 	public void SalesManagerPanel() {
+		System.out.println("Imhere");
+		
 		frame.remove(loginPanel);
 		new SalesUIController(this, frame);
+		frame.repaint();
 	}
 	public void AdminPanel() {
-		admin = new AdminPanel(frame,"",this);
 		frame.remove(loginPanel);
-		frame.setPanel(admin);
+		new AdminUIController(this, frame);
+		frame.repaint();
 	}
+	
 
 	public void AccountPanel() {
 		frame.remove(loginPanel);
 		new AccountUIController(this,frame);
+		frame.repaint();
 	}
 
+	public void ManagerPanel() {
+		frame.remove(loginPanel);
+		new ManagerUIController(this, frame);
+		frame.repaint();
+	}
+	
 	public void FinPersonPanel() {
 		financialPerson = new FinPersonPanel(frame,"",this);
 		frame.remove(loginPanel);
 		frame.setPanel(financialPerson);
 	}
 
-	public void ManagerPanel() {
-		manager = new ManagerPanel(frame,"",this);
+	public void CommodityPanel() {
 		frame.remove(loginPanel);
-		frame.setPanel(manager);
+		new CommodityUIController(this, frame);
+		frame.repaint();
 	}
 	
 	public void FinManagerPanel() {
@@ -77,11 +89,7 @@ public class UIController {
 		frame.setPanel(salesPerson);
 	}
 
-	public void StockPersonPanel() {
-		stockPerson = new StockPersonPanel(frame,"",this);
-		frame.remove(loginPanel);
-		frame.setPanel(stockPerson);
-	}
+
 
 
 }

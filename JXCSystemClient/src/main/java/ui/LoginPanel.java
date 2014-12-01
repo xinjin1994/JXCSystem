@@ -129,7 +129,7 @@ public class LoginPanel extends FatherPanel {
 				controller.AdminPanel();
 				break;
 			case 1:
-				controller.StockPersonPanel();
+				controller.CommodityPanel();;
 				break;
 			case 2:
 				break;

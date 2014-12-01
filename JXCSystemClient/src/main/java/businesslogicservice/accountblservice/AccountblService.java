@@ -1,31 +1,27 @@
 package businesslogicservice.accountblservice;
 
-import java.util.ArrayList;
-
-import vo.AccountVO;
-import vo.GetVO;
-import vo.PayVO;
-
 public interface AccountblService {
 	
 	//查看当前账户信息
-	public AccountVO checkAccount();
+	public String checkAccount();
 
 	//添加账户
-	public int addAccount(AccountVO vo);
+	public String addAccount(String name, int money);
 
 	//删除账户
-	public int delAccount(AccountVO vo);
+	public String delAccount(String name);
 
 	//修改账户
-	public int updateAccount(AccountVO vo1, AccountVO vo2);
+	public String updateAccount(String name1, String name2);
 
 	//查找账户
-	public ArrayList<AccountVO> searchAccount(String word);
+	public String searchAccount(String word);
 
 	//添加收款单
-	public int addReceipt(GetVO vo);
+	public String addReceipt(String customer_name, String clerk,
+			String account_name, int money, int all_money, String ps);
 	//添加付款单
-	public int addPayment(PayVO vo);
+	public String addPayment(String customer_name, String clerk,
+			String account_name, int money, int all_money, String ps);
 	
 }

@@ -1,5 +1,8 @@
 package ui.account;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import ui.AccountPanel;
 import ui.MyButton;
 import ui.MyFrame;
@@ -34,6 +37,7 @@ public class AccountUIController {
 		
 	}
 	public void toAccPanel() {
+		AccButtonListener accListener = new AccButtonListener();
 		String images_ori_acc[] = new String[]{"Image/Account/button/accManage/addAcc.png",
 				"Image/Account/button/accManage/delAcc.png","Image/Account/button/accManage/changeAcc.png",
 				"Image/Account/button/accManage/findAcc.png"};
@@ -71,6 +75,7 @@ public class AccountUIController {
 		accountPanel.repaint();
 	}
 	public void toFinPanel() {
+		
 		String images_ori_fin[] = new String[]{"Image/Account/button/finManage/receipt.png",
 		"Image/Account/button/finManage/payment.png"};
 		String images_stop_fin[] = new String[]{"Image/Account/button/finManage/receipt_stop.png",
@@ -107,12 +112,16 @@ public class AccountUIController {
 		
 	}
 	public void toIniPanel() {
+		
 		String images_ori_ini[] = new String[]{"Image/Account/button/iniManage/comInfo.png",
-				"Image/Account/button/iniManage/cusInfo.png","Image/Account/button/iniManage/accInfo.png"};
+				"Image/Account/button/iniManage/cusInfo.png","Image/Account/button/iniManage/accInfo.png",
+				"Image/Account/button/iniManage/check"};
 		String images_stop_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_stop.png",
-				"Image/Account/button/iniManage/cusInfo_stop.png","Image/Account/button/iniManage/accInfo_stop.png"};
+				"Image/Account/button/iniManage/cusInfo_stop.png","Image/Account/button/iniManage/accInfo_stop.png",
+				"Image/Account/button/iniManage/check_stop"};
 		String images_press_on_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_press_on.png",
-				"Image/Account/button/iniManage/cusInfo_press_on.png","Image/Account/button/iniManage/accInfo_press_on.png"};
+				"Image/Account/button/iniManage/cusInfo_press_on.png","Image/Account/button/iniManage/accInfo_press_on.png",
+				"Image/Account/button/iniManage/check_press_on"};
 		
 		accountSecondPanel = new SecondPanel();
 		for(int i = 0;i < accButtons.length;i++){
@@ -122,6 +131,35 @@ public class AccountUIController {
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
+		
+	}
+	
+	class AccButtonListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent event) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseEntered(MouseEvent event) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseExited(MouseEvent event) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent event) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseReleased(MouseEvent event) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 }

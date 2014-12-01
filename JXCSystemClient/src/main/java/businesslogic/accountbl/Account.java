@@ -6,20 +6,12 @@ import java.util.ArrayList;
 import po.AccountPO;
 import po.PaymentPO;
 import po.ReceiptPO;
-import vo.AccountVO;
-import vo.GetVO;
-import vo.PayVO;
 import businesslogic.invoicebl.Invoice;
 import businesslogic.salesbl.Sales;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.accountblservice.AccountblService;
 import data.accountdata.AccountDataService_Stub;
 import dataservice.accountdataservice.AccountDataService;
-
-//-1 未知错误
-//1 账户名称重复
-//2 账户名不存在
-//3 账户中仍存在余额，不能删除
 
 public class Account implements AccountblService, businesslogic.financialbl.AccountInfo,
 			businesslogic.initializationlbl.AccountInfo, businesslogic.invoicebl.AccountInfo {
@@ -30,143 +22,137 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 	public SalesInfo sales=new Sales();
 	public SystemlogInfo systemlog=new Systemlog();
 	
-	public AccountVO checkAccount() {
+	public String checkAccount() {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		try {
-			AccountPO po=account.getAccount();
 			if (account.getAccount() != null) {
-				AccountVO vo=new AccountVO(po);
-				return vo;
+				return "�ɹ�";
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return "ʧ��";
 	}
 
-	public int addAccount(AccountVO vo) {
+	public String addAccount(String name, int money) {
 		// TODO Auto-generated method stub
 		try {
 			
-			if(account.findAccount(vo.name)!=null){
-				return 1;
+			if(account.findAccount(name)!=null){
+				return "账户名称重复";
 			}
 		
-			AccountPO acc = new AccountPO(vo.name, (int) vo.balance);
+			AccountPO acc = new AccountPO(name, money);
 
 			if (account.addAccount(acc)) {
 				systemlog.add("addAccount:"+acc.getName()+","+acc.getMoney());
-				return 0;
+				return "�ɹ�";
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return -1;
+		return "添加失败";
 	}
 
-	public int delAccount(AccountVO vo) {
+	public String delAccount(String name) {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		AccountPO acc;
 		try {
 			
-			acc = account.findAccount(vo.name);
+			acc = account.findAccount(name);
 			
 			if(acc==null){
-				return 2;
+				return "账户不存在";
 			}
 			
 			if(acc.getMoney()!=0){
-				return 3;
+				return "账户仍有余款，不能删除";
 			}
 			
 			if (account.delAccount(acc)) {
 				systemlog.add("delAccount:"+acc.getName());
-				return 0;
+				return "�ɹ�";
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return -1;
+		return "ʧ��";
 	}
 
-	public int updateAccount(AccountVO vo1,AccountVO vo2) {
+	public String updateAccount(String name1, String name2) {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		AccountPO acc1;
 		AccountPO acc2;
 		try {
-			acc1 = account.findAccount(vo1.name);
+			acc1 = account.findAccount(name1);
 			
 			if(acc1==null){
-				return 1;
+				return "账户不存在";
 			}
 			
-			acc2=account.findAccount(vo2.name);
+			acc2=account.findAccount(name2);
 			
 			if(acc2!=null){
-				return 2;
+				return "账户名称重复";
 			}
 	
-			acc2 = new AccountPO(vo2.name, acc1.getMoney());
+			acc2 = new AccountPO(name2, acc1.getMoney());
 
 			if (account.updateAccount(acc1, acc2)) {
 				systemlog.add("updateAccount:"+acc1.getName()+","+acc2.getName());
-				return 0;
+				return "�ɹ�";
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return -1;
+		return "ʧ��";
 	}
 
-	public ArrayList<AccountVO> searchAccount(String word) {
+	public String searchAccount(String word) {
 		// TODO Auto-generated method stub
-		ArrayList<AccountVO> vo=new ArrayList<AccountVO>();
-		try {	
-			ArrayList<AccountPO> po=account.getAllAccount();
-	
-
-
-		
-			AccountPO lin=account.findAccount(word);
-			if(lin!=null){
-				vo.add(new AccountVO(lin));
+//		account = new AccountDataService_Stub("accountName",10);
+		try {
+			if (account.findAccount(word) != null) {
+				return "�ɹ�";
 			}
-	
-			return vo;
-			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return vo;
+		return "ʧ��";
 	}
 
-	public int addReceipt(GetVO vo) {
+	public String addReceipt(String customer_name, String clerk,
+			String account_name, int money, int all_money, String ps) {
 		// TODO Auto-generated method stub
 		
-		ReceiptPO po= new ReceiptPO(vo);
+		String[] accountList={account_name};
+		int[] price={10};
+		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, "ps", price);
 		
 		invoice.add(po);
 		systemlog.add("addReceipt:"+po.getOperator()+","+po.getName()+","+po.getTotal());
 		
-		return 0;
+		return "�ɹ�";
 	}
 
-	public int addPayment(PayVO vo) {
+	public String addPayment(String customer_name, String clerk,
+			String account_name, int money, int all_money, String ps) {
 		// TODO Auto-generated method stub
-		
-		PaymentPO po= new PaymentPO(vo);
+		String[] accountList={account_name};
+		int[] price={10};
+		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", "ps", price);
 		
 		invoice.add(po);
 		systemlog.add("addPayment:"+po.getOperator()+","+po.getName()+","+po.getTotal());
-		return 0;
+		return "�ɹ�";
 	}
 	
 	public String addReceipt_Data(String customer_name, String clerk,
@@ -174,9 +160,9 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		// TODO Auto-generated method stub
 		String[] accountList={account_name};
 		int[] price={10};
-		String[] ps1={"ps"};
-		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, ps1, price);
+		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, "ps", price);
 		
+		invoice.add(po);
 		systemlog.add("addPayment:"+po.getOperator()+","+po.getName()+","+po.getTotal());
 		
 		return  "ʧ��";
@@ -188,8 +174,8 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 //		account=new AccountDataService_Stub("accountName",10);
 		String[] accountList={account_name};
 		int[] price={10};
-		String[] ps1={"ps"};
-		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", ps1, price);
+		
+		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", "ps", price);
 		try {
 			if(account.addPayment(po)){
 				return "�ɹ�";
@@ -245,11 +231,6 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 			e.printStackTrace();
 		}
 		return "失败";
-	}
-
-	public String addAccount(String name, int money) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 //	public String delReceipt_Data(ReceiptPO po) {
