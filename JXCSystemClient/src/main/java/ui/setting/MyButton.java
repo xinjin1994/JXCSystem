@@ -1,4 +1,4 @@
-package ui;
+package ui.setting;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -8,7 +8,6 @@ public class MyButton extends JButton{
 	int y;//坐标
 	
 	public MyButton(String image,int x,int y,String stopImage,String press_onImage) {
-//		this.backPanel = backPanel;
 		this.x = x;
 		this.y = y;
 		
@@ -26,7 +25,6 @@ public class MyButton extends JButton{
 		this.setRolloverIcon(imageIconstop);
 		this.setPressedIcon(imageIconpresson);
 		
-//		backPanel.add(this);
 		
 	}
 }

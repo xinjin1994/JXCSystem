@@ -1,11 +1,10 @@
 package ui.admin;
 
-import ui.AccountPanel;
 import ui.AdminPanel;
-import ui.MyButton;
-import ui.MyFrame;
 import ui.UIController;
-import ui.sales.SecondPanel;
+import ui.setting.MyButton;
+import ui.setting.MyFrame;
+import ui.setting.SecondPanel;
 
 public class AdminUIController {
 

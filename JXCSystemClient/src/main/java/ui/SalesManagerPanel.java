@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import ui.sales.SalesUIController;
+import ui.setting.MyButton;
+import ui.setting.MyFrame;
+import ui.setting.MyTable;
 
 /**
  * 3销售经理
@@ -21,28 +24,32 @@ public class SalesManagerPanel extends FatherPanel {
 	private int firstX = 2;
 	private int firstY = 110;
 	private int inter = 54;
-
+	
 	private MyButton cusManage, salesManage, importManage;
-	private MyButton detail, back;
 	private SalesUIController salesController;
+	public MyFrame frame;
+	private MyButton detail, firstBack;
+	private UIController controller;
 
-	public SalesManagerPanel(JFrame frame, String url, UIController controller, SalesUIController salesController) {
+	public SalesManagerPanel(MyFrame frame, String url, UIController controller, SalesUIController salesController) {
 		super(frame, url, controller);
-		System.out.println("lkl");
+		this.frame = frame;
+		this.controller = controller;
 		this.salesController = salesController;
 		this.addButton();
-
-	this.testTable();
-		}
+        this.testTable();
+	}
 	
-	
+	public void removeThis(JFrame frame) {
+		frame.remove(this);
+	}
 	private void testTable() {
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("a;b;c;e");
 		info.add("s,r,t,h");
 		info.add("w;t;x;h");
 		info.add("gg");
-		MyTable testTable = new MyTable(this);
+		MyTable testTable = new MyTable();
 		testTable.setTable(info);
 		testTable.add("a;g;g");
 		testTable.find(1, 2);
@@ -59,10 +66,17 @@ public class SalesManagerPanel extends FatherPanel {
 				"Image/Sales/Sales_image/销售管理_stop.png", "Image/Sales/Sales_image/销售管理_press_on.png");
 		importManage = new MyButton("Image/Sales/Sales_image/进货管理.png", firstX - 1, firstY + 2 * inter,
 				"Image/Sales/Sales_image/进货管理_stop.png", "Image/Sales/Sales_image/进货管理_press_on.png");
+		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
+				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
+		firstBack = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
+				"Image/Sales/Sales_image/返回_press_on.png");
+		this.add(detail);
+		this.add(firstBack);
 		this.add(cusManage);
 		this.add(salesManage);
 		this.add(importManage);
 		FirstButtonListener listener = new FirstButtonListener();
+		firstBack.addMouseListener(listener);
 		cusManage.addMouseListener(listener);
 		salesManage.addMouseListener(listener);
 		importManage.addMouseListener(listener);
@@ -71,6 +85,12 @@ public class SalesManagerPanel extends FatherPanel {
 	class FirstButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
+			if(e.getSource() == firstBack){
+				frame.remove(SalesManagerPanel.this);
+				controller.backLoginPanel();
+				frame.repaint();
+				
+			}
 		}
 
 		public void mousePressed(MouseEvent e) {
@@ -92,15 +112,6 @@ public class SalesManagerPanel extends FatherPanel {
 		public void mouseExited(MouseEvent e) {
 		}
 		
-	}
-
-	public void addRestButton() {
-		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
-				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
-		back = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
-				"Image/Sales/Sales_image/返回_press_on.png");
-		this.add(detail);
-		this.add(back);
 	}
 
 }

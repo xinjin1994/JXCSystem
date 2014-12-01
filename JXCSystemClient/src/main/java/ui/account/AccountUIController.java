@@ -1,14 +1,12 @@
 package ui.account;
 
-import java.awt.Frame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import ui.AccountPanel;
-import ui.MyButton;
-import ui.MyFrame;
-import ui.UIController;
-import ui.sales.SecondPanel;
+import ui.setting.MyButton;
+import ui.setting.MyFrame;
+import ui.setting.SecondPanel;
 
 public class AccountUIController {
 	private int secondX = 1;

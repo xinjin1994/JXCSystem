@@ -1,4 +1,4 @@
-package ui.sales;
+package ui.setting;
 
 import javax.swing.JPanel;
 

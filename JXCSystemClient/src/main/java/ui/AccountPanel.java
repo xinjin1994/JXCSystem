@@ -2,13 +2,11 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import ui.SalesManagerPanel.FirstButtonListener;
 import ui.account.AccountUIController;
-import ui.sales.SalesUIController;
+import ui.setting.MyButton;
 
 //财务经理
 public class AccountPanel extends FatherPanel{

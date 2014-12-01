@@ -1,12 +1,10 @@
 package ui.commodity;
 
-import businesslogic.commoditybl.Commodity;
-import ui.AccountPanel;
 import ui.CommodityPanel;
-import ui.MyButton;
-import ui.MyFrame;
 import ui.UIController;
-import ui.sales.SecondPanel;
+import ui.setting.MyButton;
+import ui.setting.MyFrame;
+import ui.setting.SecondPanel;
 
 public class CommodityUIController {
 	private int secondX = 1;

@@ -5,9 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
-import ui.AccountPanel.FirstButtonListener;
-import ui.account.AccountUIController;
 import ui.manager.ManagerUIController;
+import ui.setting.MyButton;
 
 /**
  * 6 总经理
