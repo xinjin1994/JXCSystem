@@ -1,5 +1,6 @@
 package ui.account;
 
+import java.awt.Event;
 import java.awt.Frame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -44,6 +45,7 @@ public class AccountUIController {
 	public void toAccPanel() {
 		accountSecondPanel.removeAll();
 		AccButtonListener accListener = new AccButtonListener();
+		
 		String images_ori_acc[] = new String[]{"Image/Account/button/accManage/addAcc.png",
 				"Image/Account/button/accManage/delAcc.png","Image/Account/button/accManage/changeAcc.png",
 				"Image/Account/button/accManage/findAcc.png"};
@@ -65,6 +67,8 @@ public class AccountUIController {
 	}
 	public void toInvoicePanel() {
 		accountSecondPanel.removeAll();
+		InvoiceButtonListener invoiceListener = new InvoiceButtonListener();
+		
 		String images_ori_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve.png",
 				"Image/Account/button/invoiceManage/disapp.png"};
 		String images_stop_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_stop.png",
@@ -76,12 +80,15 @@ public class AccountUIController {
 			invoiceButtons[i] = new MyButton(images_ori_invoice[i], secondX, secondY+i*inter,
 					images_stop_invoice[i], images_press_on_invoice[i]);
 			accountSecondPanel.add(invoiceButtons[i]);
+			invoiceButtons[i].addMouseListener(invoiceListener);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
 	}
 	public void toFinPanel() {
 		accountSecondPanel.removeAll();
+		FinButtonListener finListener = new FinButtonListener();
+		
 		String images_ori_fin[] = new String[]{"Image/Account/button/finManage/receipt.png",
 		"Image/Account/button/finManage/payment.png"};
 		String images_stop_fin[] = new String[]{"Image/Account/button/finManage/receipt_stop.png",
@@ -93,6 +100,7 @@ public class AccountUIController {
 			finButtons[i] = new MyButton(images_ori_fin[i], secondX, secondY+i*inter,
 					images_stop_fin[i], images_press_on_fin[i]);
 			accountSecondPanel.add(finButtons[i]);
+			finButtons[i].addMouseListener(finListener);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
@@ -100,6 +108,8 @@ public class AccountUIController {
 	}
 	public void toRecPanel() {
 		accountSecondPanel.removeAll();
+		RecButtonListener recListener = new RecButtonListener();
+		
 		String images_ori_rec[] = new String[]{"Image/Account/button/recManage/salesList.png",
 				"Image/Account/button/recManage/allBills.png","Image/Account/button/recManage/opeCon.png"};
 		String images_stop_rec[] = new String[]{"Image/Account/button/recManage/salesList_stop.png",
@@ -111,6 +121,7 @@ public class AccountUIController {
 			recButtons[i] = new MyButton(images_ori_rec[i], secondX, secondY+i*inter,
 					images_stop_rec[i], images_press_on_rec[i]);
 			accountSecondPanel.add(recButtons[i]);
+			recButtons[i].addMouseListener(recListener);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
@@ -118,6 +129,8 @@ public class AccountUIController {
 	}
 	public void toIniPanel() {
 		accountSecondPanel.removeAll();
+		IniButtonListener iniListener = new IniButtonListener();
+		
 		String images_ori_ini[] = new String[]{"Image/Account/button/iniManage/comInfo.png",
 				"Image/Account/button/iniManage/cusInfo.png","Image/Account/button/iniManage/accInfo.png",
 				"Image/Account/button/iniManage/check.png"};
@@ -134,6 +147,7 @@ public class AccountUIController {
 			iniButtons[i] = new MyButton(images_ori_ini[i], secondX, secondY+i*inter,
 					images_stop_ini[i], images_press_on_ini[i]);
 			accountSecondPanel.add(iniButtons[i]);
+			iniButtons[i].addMouseListener(iniListener);
 		}
 		accountPanel.add(accountSecondPanel);
 		accountPanel.repaint();
@@ -143,27 +157,142 @@ public class AccountUIController {
 	class AccButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent event) {
-			
 		}
-
 		public void mouseEntered(MouseEvent event) {
-			
 		}
 
 		public void mouseExited(MouseEvent event) {
-			
 		}
 
 		public void mousePressed(MouseEvent event) {
+			frame.remove(accountPanel);	
 			if(event.getSource() == accButtons[0]){
-				frame.remove(accountPanel);	
+				uiController.addAccount();
+			}else if(event.getSource() == accButtons[1]){
+				uiController.delAccount();
+			}else if(event.getSource() == accButtons[2]){
+				uiController.changeAccount();
+			}else if(event.getSource() == accButtons[3]){
 				uiController.findAccount();
 			}
 		}
 
 		public void mouseReleased(MouseEvent event) {
+		}
+	}
+	
+	class FinButtonListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent e) {
+		}
+		public void mouseEntered(MouseEvent e) {
+		}
+		public void mouseExited(MouseEvent e) {
+			
+		}
+		public void mousePressed(MouseEvent e) {
+			frame.remove(accountPanel);
+			if(e.getSource() == finButtons[0]){
+				uiController.addReceipt();
+			}else if(e.getSource() == finButtons[1]){
+				uiController.addPayment();
+			}
+		}
+
+		public void mouseReleased(MouseEvent e) {
+		}
+	}
+	
+	class RecButtonListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			frame.remove(accountPanel);
+			if(e.getSource() == recButtons[0]){
+				uiController.salesList();
+			}else if(e.getSource() == recButtons[1]){
+				uiController.allBills();
+			}else if(e.getSource() == recButtons[2]){
+				uiController.opeCon();
+			}
+		}
+
+		public void mouseReleased(MouseEvent e) {
+		}
+		
+	}
+	
+	class IniButtonListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			frame.remove(accountPanel);
+			if(e.getSource() == iniButtons[0]){
+				uiController.iniCom();
+			}else if(e.getSource() == iniButtons[1]){
+				uiController.iniCus();
+			}else if(e.getSource() == iniButtons[2]){
+				uiController.iniAcc();
+			}else if(e.getSource() == iniButtons[3]){
+				
+			}
+		}
+
+		public void mouseReleased(MouseEvent e) {
 			
 		}
 		
 	}
+	
+	class InvoiceButtonListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			if(e.getSource() == invoiceButtons[0]){
+				
+			}else if(e.getSource() == invoiceButtons[1]){
+				
+			}
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			
+		}
+		
+	}
+	
+	
 }
