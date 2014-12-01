@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class CustomerPO implements Serializable{
 
-	int id;//�ͻ����
+	String id;//�ͻ����
 	String name;//�ͻ����
 	int level;//�ͻ��ȼ�
-	String type;//�ͻ�����
+	boolean type;//�ͻ�����
 	String phone;//��ϵ��ʽ
 	String zip;//�ʱ�
 	String mail;//����
@@ -16,23 +16,23 @@ public class CustomerPO implements Serializable{
 	String clerk;//ҵ��Ա
 	String address;//��ַ
 	
-	public CustomerPO(int id, String name, int level, String type,
-			String phone, String zip, String mail, int money, int amount,
+	public CustomerPO(String id2, String name, int level, boolean b,
+			String phone, String zip, String mail, int money, double mostOwe,
 			String clerk, String address) {
-		this.id = id;
+		this.id = id2;
 		this.name = name;
 		this.level = level;
-		this.type = type;
+		this.type = b;
 		this.phone = phone;
 		this.zip = zip;
 		this.mail = mail;
 		this.money = money;
-		this.amount = amount;
+		this.amount = (int)mostOwe;
 		this.clerk = clerk;
 		this.address = address;
 	}
 	
-	public CustomerPO(String name,int level, String type, String phone){
+	public CustomerPO(String name,int level, boolean type, String phone){
 		this.name=name;
 		this.level=level;
 		this.type=type;
@@ -45,7 +45,7 @@ public class CustomerPO implements Serializable{
 	}
 
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -57,7 +57,7 @@ public class CustomerPO implements Serializable{
 		return level;
 	}
 
-	public String getType() {
+	public boolean getType() {
 		return type;
 	}
 

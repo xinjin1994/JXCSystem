@@ -33,7 +33,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 	
 	public String addCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		CustomerPO customer = new CustomerPO(1,"name",1, "type",
+		CustomerPO customer = new CustomerPO("1","name",1, false,
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
 		
@@ -51,7 +51,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 
 	public String delCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		CustomerPO customer = new CustomerPO(1,"name",1, "type",
+		CustomerPO customer = new CustomerPO("1","name",1, false,
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
 		
@@ -69,10 +69,10 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 
 	public String updateCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		CustomerPO customer1 = new CustomerPO(1,"name",1, "type",
+		CustomerPO customer1 = new CustomerPO("1","name",1, false,
 				"phone", "zip", "mail", 1000, 2000,
 				"clerk", "address");
-		CustomerPO customer2 = new CustomerPO(2,"name",2, "type",
+		CustomerPO customer2 = new CustomerPO("2","name",2, false,
 				"phone", "zip", "mail", 2000, 4000,
 				"clerk", "address");
 		

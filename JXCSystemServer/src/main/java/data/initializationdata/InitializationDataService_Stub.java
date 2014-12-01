@@ -14,6 +14,7 @@ import po.AccountPO;
 import po.CommodityPO;
 import po.CustomerPO;
 import po.InitializationPO;
+import po.UserPO;
 import dataservice.initializationdataservice.InitializationDataService;
 
 public class InitializationDataService_Stub extends UnicastRemoteObject implements InitializationDataService{
@@ -122,7 +123,7 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 
 	public boolean clear() throws RemoteException {
 		// TODO Auto-generated method stub
-		nowInitialization=new InitializationPO(new ArrayList<CommodityPO>(), new ArrayList<CustomerPO>(), new ArrayList<AccountPO>());
+		nowInitialization=new InitializationPO(new ArrayList<CommodityPO>(), new ArrayList<CustomerPO>(), new ArrayList<AccountPO>(),new ArrayList<UserPO>());
 		return true;
 	}
 

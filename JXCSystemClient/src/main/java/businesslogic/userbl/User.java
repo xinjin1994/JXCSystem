@@ -8,7 +8,7 @@ import businesslogicservice.userblservice.UserblService;
 import data.userdata.UserDataService_Stub;
 import dataservice.userdataservice.UserDataService;
 
-public class User implements UserblService {
+public class User implements UserblService ,businesslogic.initializationlbl.UserInfo{
 	
 	public UserDataService us=new UserDataService_Stub("password", "duty", 10);
 	SystemlogInfo systemlog=new Systemlog();
@@ -20,6 +20,22 @@ public class User implements UserblService {
 		this.us = us;
 	}
 	
+	public int addUser_Data(String name, String password, int duty) {
+		// TODO Auto-generated method stub
+		UserPO user = new UserPO(name, password, duty);
+		
+		try {
+			if (us.addUser(user)) {
+				systemlog.add("AddUser:");
+				return 0;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public String addUser(String name, String password, int duty) {
 		// TODO Auto-generated method stub
 		UserPO user = new UserPO(name, password, duty);
@@ -27,13 +43,13 @@ public class User implements UserblService {
 		try {
 			if (us.addUser(user)) {
 				systemlog.add("AddUser:");
-				return "�ɹ�";
+				return "成功";
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return "失败";
 	}
 
 	public String delUser(String name) {

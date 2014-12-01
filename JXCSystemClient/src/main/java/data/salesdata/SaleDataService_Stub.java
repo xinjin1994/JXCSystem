@@ -49,7 +49,7 @@ public class SaleDataService_Stub implements SalesDataService{
 	}
 
 	public CustomerPO findCustomer(String name) {
-		return new CustomerPO(1, name,1, "type", "phone", "zip", "mail", 1000, 2000, "clerk", "address");
+		return new CustomerPO("1", name,1, false, "phone", "zip", "mail", 1000, 2000, "clerk", "address");
 	}
 
 	public boolean addImport(ImportPO po) {
