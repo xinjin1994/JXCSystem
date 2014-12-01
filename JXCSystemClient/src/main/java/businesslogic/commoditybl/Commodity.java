@@ -19,28 +19,48 @@ public class Commodity implements CommodityblService, businesslogic.financialbl.
 	public CommodityDataService sto=new CommodityDataService_Stub();
 
 	public String addCommodity(String name, String type) {
-
+		int i=0;
 		CommodityPO com = new CommodityPO(true, "name", "type", 10, 10, 10, 10, 10, 10);
 //		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
 //		sto = new CommodityDataService_Stub();
 		
 		try {
+			
+			ArrayList<CommodityPO> po=sto.getAll();
+			
+			for(i=0;i<po.size();i++){
+				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
+					return "商品已存在";
+				}
+			}
+			
+			com=new CommodityPO(false,name,type,0,0,0,0,0,0);
+			
 			if (sto.addGood(com,new SortPO("type", 10))) {
-				return "�ɹ�";
+				return "成功";
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "ʧ��";
+		return "失败";
 	}
 	
 	public String addCommodity(String name, String type, int number) throws RemoteException {
-
+		int i=0;
 		CommodityPO com = new CommodityPO(true, "name", "type", 10, 10, 10, 10, 10, 10);
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
+		
+		ArrayList<CommodityPO> po=sto.getAll();
+		
+		for(i=0;i<po.size();i++){
+			if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
+				return "商品已存在";
+			}
+		}
+		
+		com=new CommodityPO(false,name,type,0,0,0,0,0,0);
+		
 		if (sto.addGood(com,new SortPO("type", 10))) {
 			return "�ɹ�";
 		}
