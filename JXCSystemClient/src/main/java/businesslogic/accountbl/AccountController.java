@@ -1,51 +1,54 @@
 package businesslogic.accountbl;
 
 import businesslogicservice.accountblservice.AccountblService;
+import java.util.ArrayList;
+
+import vo.AccountVO;
+import vo.GetVO;
+import vo.PayVO;
 
 public class AccountController implements AccountblService{
 	public Account account=new Account();
 
-	public String checkAccount() {
+	public AccountVO checkAccount() {
 		// TODO Auto-generated method stub
-		String message=account.checkAccount();
+		AccountVO message=account.checkAccount();
 		return message;
 	}
 
-	public String addAccount(String name, int money) {
+	public int addAccount(AccountVO vo) {
 		// TODO Auto-generated method stub
-		String message=account.addAccount(name,money);
+		int message=account.addAccount(vo);
 		return message;
 	}
 
-	public String delAccount(String name) {
+	public int delAccount(AccountVO vo) {
 		// TODO Auto-generated method stub
-		String message=account.delAccount(name);
+		int message=account.delAccount(vo);
 		return message;
 	}
 
-	public String updateAccount(String name1, String name2) {
+	public int updateAccount(AccountVO vo1,AccountVO vo2) {
 		// TODO Auto-generated method stub
-		String message=account.updateAccount(name1,name2);
+		int message=account.updateAccount(vo1,vo2);
 		return message;
 	}
 
-	public String searchAccount(String word) {
+	public ArrayList<AccountVO> searchAccount(String word) {
 		// TODO Auto-generated method stub
-		String result=account.searchAccount(word);
+		ArrayList<AccountVO> result=account.searchAccount(word);
 		return result;
 	}
 
-	public String addReceipt(String customer_name, String clerk,
-			String account_name, int money, int all_money, String ps) {
+	public int addReceipt(GetVO vo) {
 		// TODO Auto-generated method stub
-		String message=account.addReceipt(customer_name, clerk, account_name, money, all_money, ps);
+		int message=account.addReceipt(vo);
 		return message;
 	}
 
-	public String addPayment(String customer_name, String clerk,
-			String account_name, int money, int all_money, String ps) {
+	public int addPayment(PayVO vo) {
 		// TODO Auto-generated method stub
-		String message=account.addPayment(customer_name, clerk, account_name, money, all_money, ps);
+		int message=account.addPayment(vo);
 		return message;
 	}
 
