@@ -13,7 +13,7 @@ public class Initialization {
 	public AccountInfo accountInfo;
 	public CommodityInfo commodityInfo;
 	public SalesInfo salesInfo;
-	public InitializationDataService initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, 10, 10, 10, 10), new CustomerPO(10, "time", 10, "operation", "type", "style", "mail", 10, 10, "zip", "plugin"), new AccountPO("zip", 10));
+	public InitializationDataService initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, "10", 10, 10, 10), new CustomerPO(10, "time", 10, "operation", "type", "style", "mail", 10, 10, "zip", "plugin"), new AccountPO("zip", 10));
 	
 	
 	public String newSystem() {
@@ -39,7 +39,7 @@ public class Initialization {
 
 	public String showInformation() {
 		// TODO Auto-generated method stub
-		initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, 10, 10, 10, 10), new CustomerPO(10, "time", 10, "operation", "type", "style", "mail", 10, 10, "zip", "plugin"), new AccountPO("zip", 10));
+		initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, "10", 10, 10, 10), new CustomerPO(10, "time", 10, "operation", "type", "style", "mail", 10, 10, "zip", "plugin"), new AccountPO("zip", 10));
 		try {
 			if(initialization.getInfomation()!=null){
 				return "�ɹ�";

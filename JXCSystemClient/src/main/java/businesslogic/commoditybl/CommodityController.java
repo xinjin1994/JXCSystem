@@ -1,82 +1,105 @@
 package businesslogic.commoditybl;
 
+import java.util.ArrayList;
+
+import po.CommodityPO;
+import po.SortPO;
+import vo.CommodityVO;
+import vo.PatchVO;
+import vo.SortVO;
+import vo.StockVO;
+import vo.WarnVO;
 import businesslogicservice.commodityblservice.CommodityblService;
 
 public class CommodityController implements CommodityblService{
 
 	public Commodity commodity;
 	
-	public String addCommodity(String name, String type) {
+	public int addCommodity(CommodityVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
 		commodity=new Commodity();
-		return commodity.addCommodity(name,type);
+		
+		return commodity.addCommodity(new CommodityPO(false, null, null, 0, 0, "0", 0, 0, 0),new SortPO(null, 0));
 	}
 
-	public String addCommodity(String name, String type, int in_price,
-			int out_price) {
+//	public String addCommodity(String name, String type, int in_price,
+//			int out_price) {
+//		// TODO Auto-generated method stub
+//		return commodity.addCommodity(name, type, in_price, out_price);
+//	}
+
+	public int delCommodity(CommodityVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.addCommodity(name, type, in_price, out_price);
+		return commodity.delCommodity(vo.name,vo.type);
 	}
 
-	public String delCommodity(String name, String type) {
+	public int updateCommodity(CommodityVO vo1,CommodityVO vo2) {
 		// TODO Auto-generated method stub
-		return commodity.delCommodity(name, type);
+		return commodity.updateCommodity(vo1.name, vo1.type, (int)vo2.inValue, (int)vo2.outValue);
 	}
 
-	public String updateCommodity(String name, String type, int in_price,
-			int out_price) {
+	public ArrayList<CommodityVO> searchCommodity(String word) {
 		// TODO Auto-generated method stub
-		return commodity.updateCommodity(name, type, in_price, out_price);
+		ArrayList<CommodityPO> po=commodity.searchCommodity(word);
+		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
+		int i=0;
+		for(i=0;i<po.size();i++){
+			vo.add(po.get(i).toVO());
+		}
+		
+		return vo;
 	}
 
-	public String searchCommodity(String word) {
+	public int addSort(SortVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
-		return commodity.searchCommodity(word);
+		return commodity.addSort(vo1.name,vo2.name);
 	}
 
-	public String addSort(String name) {
+	public int delSort(SortVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.addSort(name);
+		return commodity.delSort(vo.name);
 	}
 
-	public String delSort(String name) {
+	public int updateSort(SortVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
-		return commodity.delSort(name);
+		return commodity.updateSort(vo1.name, vo2.name);
 	}
 
-	public String updateSort(String name1, String name2) {
+	public ArrayList<CommodityVO> Examine(String time1, String time2) {
 		// TODO Auto-generated method stub
-		return commodity.updateSort(name1, name2);
+		ArrayList<CommodityPO> po=commodity.Examine(time1, time2);
+		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
+		int i=0;
+		for(i=0;i<po.size();i++){
+			vo.add(po.get(i).toVO());
+		}
+		return vo;
 	}
 
-	public String Examine(String time1, String time2) {
+	public ArrayList<StockVO> Iventory() {
 		// TODO Auto-generated method stub
-		return commodity.Examine(time1, time2);
+//		return commodity.Iventory();
+		return null;
 	}
 
-	public String Iventory() {
+	public int addGift(CommodityVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.Iventory();
+		return commodity.addGift(vo.name,vo.type,vo.num);
 	}
 
-	public String addGift(String name, String type) {
+	public int delGift(CommodityVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.addGift(name, type);
+		return commodity.delGift(vo.name,vo.type,vo.num);
 	}
 
-	public String delGift(String name, String type) {
+	public int patch(PatchVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.delGift(name, type);
+		return commodity.patch(vo.name,vo.type,vo.number);
 	}
 
-	public String patch(String name, String type, int number) {
+	public int warn(WarnVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.patch(name, type, number);
-	}
-
-	public String warn(String name, String type, int number) {
-		// TODO Auto-generated method stub
-		return commodity.warn(name, type, number);
+		return commodity.warn(vo.name,vo.type,vo.number);
 	}
 
 }

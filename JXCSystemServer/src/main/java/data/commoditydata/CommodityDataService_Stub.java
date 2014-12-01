@@ -357,4 +357,44 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return true;
 	}
 
+	public ArrayList<SortPO> getAllSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		int i=0,j=0;
+		for(i=0;i<sortList.size();i++){
+			sort.add(sortList.get(i).copy());
+			
+			if(!sortList.get(i).hasCommodity()){
+				ArrayList<SortPO> lin=getSort(sortList.get(i));
+				for(j=0;j<lin.size();j++){
+					sort.add(lin.get(j).copy());
+				}
+			}
+				
+		}
+		
+		return sort;
+	}
+	
+	public ArrayList<SortPO> getSort(SortPO po) throws RemoteException {
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		int i=0,j=0;
+	
+		if(!po.hasCommodity()){
+			for(i=0;i<po.sortList.size();i++){
+				sort.add(po.sortList.get(i));
+			
+				if(!po.sortList.get(i).hasCommodity()){
+					ArrayList<SortPO> lin=getSort(po.sortList.get(i));
+					for(j=0;j<lin.size();j++){
+						sort.add(lin.get(j));
+					}
+				
+				}
+				
+			}
+		}
+		return sort;
+	}
+
 }

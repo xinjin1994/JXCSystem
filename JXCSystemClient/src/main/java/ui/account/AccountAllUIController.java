@@ -1,8 +1,8 @@
 package ui.account;
 
-import businesslogic.invoicebl.SalesList;
-import ui.MyFrame;
+
 import ui.UIController;
+import ui.setting.MyFrame;
 
 public class AccountAllUIController extends UIController{
 	private MyFrame frame;

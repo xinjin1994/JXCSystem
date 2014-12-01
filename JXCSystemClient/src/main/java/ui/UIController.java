@@ -1,11 +1,11 @@
 package ui;
 
 import ui.account.AccountAllUIController;
-import ui.account.AccountUIController;
 import ui.admin.AdminUIController;
 import ui.commodity.CommodityUIController;
 import ui.manager.ManagerUIController;
 import ui.sales.SalesUIController;
+import ui.setting.MyFrame;
 
 public class UIController {
 
@@ -21,6 +21,7 @@ public class UIController {
 	public UIController(){
 		
 	}
+	
 	public UIController() {
 		this.frame = new MyFrame();
 	    this.welcomePanel();
@@ -43,14 +44,16 @@ public class UIController {
 		frame.setPanel(loginPanel);
 		frame.repaint();
 	}
+	public void backLoginPanel() {
+		loginPanel = new LoginPanel(frame,"Image/login.jpg",this);
+		frame.setPanel(loginPanel);
+	}
 
 	public void SalesManagerPanel() {
-		System.out.println("Imhere");
-		
 		frame.remove(loginPanel);
 		new SalesUIController(this, frame);
-		frame.repaint();
 	}
+	
 	public void AdminPanel() {
 		frame.remove(loginPanel);
 		new AdminUIController(this, frame);

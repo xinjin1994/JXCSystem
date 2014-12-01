@@ -90,7 +90,7 @@ public class Start {
 			e.printStackTrace();
 		}
 		
-		commodityController.addCommodity("name", "type",1,2);
+//		commodityController.addCommodity("name", "type",1,2);
 	
 	}
 

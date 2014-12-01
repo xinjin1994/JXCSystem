@@ -11,7 +11,8 @@ public class MockAccount implements AccountInfo{
 		// TODO Auto-generated method stub
 		String[] accountList={"account_name"};
 		int[] price={10};
-		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, "ps", price);
+		String[] ps={"ps"};
+		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, ps, price);
 		
 		ArrayList<ReceiptPO> rec=new ArrayList<ReceiptPO>();
 		rec.add(po);
@@ -22,8 +23,9 @@ public class MockAccount implements AccountInfo{
 		// TODO Auto-generated method stub
 		String[] accountList={"account_name"};
 		int[] price={10};
-		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", "ps", price);
-		
+		String[] ps={"ps"};
+		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", ps, price);	
+	
 		ArrayList<PaymentPO> pay=new ArrayList<PaymentPO>();
 		pay.add(po);
 		return pay;

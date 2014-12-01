@@ -1,4 +1,4 @@
-package ui;
+package ui.setting;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

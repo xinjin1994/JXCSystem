@@ -1,5 +1,6 @@
 package businesslogic.commoditybl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
@@ -13,19 +14,19 @@ public class MockCommodityData implements CommodityDataService{
 
 	public CommodityPO findGood(String name, String type) {
 		// TODO Auto-generated method stub
-		CommodityPO com=new CommodityPO(false, name, type, 50, 60, 99, 0, 0, 0);
+		CommodityPO com=new CommodityPO(false, name, type, 50, 60, "99", 0, 0, 0);
 		return com;
 	}
 
 	public CommodityPO findName(String name) {
 		// TODO Auto-generated method stub
-		CommodityPO com=new CommodityPO(false, name, "type", 50, 60, 99, 0, 0, 0);
+		CommodityPO com=new CommodityPO(false, name, "type", 50, 60, "99", 0, 0, 0);
 		return com;
 	}
 
 	public CommodityPO findType(String type) {
 		// TODO Auto-generated method stub
-		CommodityPO com=new CommodityPO(false, "name", type, 50, 60, 99, 0, 0, 0);
+		CommodityPO com=new CommodityPO(false, "name", type, 50, 60, "99", 0, 0, 0);
 		return com;
 	}
 
@@ -69,14 +70,14 @@ public class MockCommodityData implements CommodityDataService{
 
 	public boolean addGift(CommodityPO po) {
 		// TODO Auto-generated method stub
-		CommodityPO com=new CommodityPO(true, "name", "type", 50, 60, 99, 0, 0, 0);
+		CommodityPO com=new CommodityPO(true, "name", "type", 50, 60, "99", 0, 0, 0);
 		array.add(com);
 		return true;
 	}
 
 	public CommodityPO findGift(String name, String type) {
 		// TODO Auto-generated method stub
-		CommodityPO com=new CommodityPO(true, name, "type", 50, 60, 99, 0, 0, 0);
+		CommodityPO com=new CommodityPO(true, name, "type", 50, 60, "99", 0, 0, 0);
 		return com;
 	}
 
@@ -98,6 +99,11 @@ public class MockCommodityData implements CommodityDataService{
 		// TODO Auto-generated method stub
 		array.clear();
 		return true;
+	}
+
+	public ArrayList<SortPO> getAllSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

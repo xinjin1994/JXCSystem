@@ -5,9 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
-import ui.AccountPanel.FirstButtonListener;
-import ui.account.AccountUIController;
 import ui.admin.AdminUIController;
+import ui.setting.MyButton;
 
 //0 管理员
 public class AdminPanel extends FatherPanel{

@@ -1,7 +1,8 @@
 package ui.account;
 
 import ui.FatherPanel;
-import ui.MyFrame;
+
+import ui.setting.MyFrame;
 
 public class ConfirmReceiptPanel extends FatherPanel{
 	public ConfirmReceiptPanel(MyFrame frame,String url,

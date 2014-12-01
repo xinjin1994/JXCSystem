@@ -1,5 +1,6 @@
 package data.commoditydata;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
@@ -33,16 +34,16 @@ public class CommodityDataService_Stub implements CommodityDataService{
 	
 	public CommodityPO findGood(String name, String type) {
 		
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		return new CommodityPO(true,"name","type",10,10,"10",20,20,100);
 	}
 
 	public CommodityPO findName(String name) {
 
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		return new CommodityPO(true,"name","type",10,10,"10",20,20,100);
 	}
 
 	public CommodityPO findType(String type) {
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		return new CommodityPO(true,"name","type",10,10,"10",20,20,100);
 	}
 
 	public boolean addGood(CommodityPO po1, SortPO po2) {
@@ -74,7 +75,7 @@ public class CommodityDataService_Stub implements CommodityDataService{
 	}
 
 	public CommodityPO findGift(String name, String type) {
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		return new CommodityPO(true,"name","type",10,10,"10",20,20,100);
 	}
 
 	public boolean delGift(CommodityPO po){
@@ -82,7 +83,7 @@ public class CommodityDataService_Stub implements CommodityDataService{
 	}
 
 	public ArrayList<CommodityPO> getAll() {
-		CommodityPO com=new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		CommodityPO com=new CommodityPO(true,"name","type",10,10,"10",20,20,100);
 		ArrayList<CommodityPO> coms=new ArrayList<CommodityPO>();
 		coms.add(com);
 		return coms;
@@ -90,6 +91,11 @@ public class CommodityDataService_Stub implements CommodityDataService{
 
 	public boolean clear() {
 		return true;
+	}
+
+	public ArrayList<SortPO> getAllSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

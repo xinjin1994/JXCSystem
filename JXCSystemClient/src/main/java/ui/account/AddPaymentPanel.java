@@ -1,7 +1,8 @@
 package ui.account;
 
 import ui.FatherPanel;
-import ui.MyFrame;
+
+import ui.setting.MyFrame;
 
 public class AddPaymentPanel extends FatherPanel{
 	public AddPaymentPanel(MyFrame frame,String url,

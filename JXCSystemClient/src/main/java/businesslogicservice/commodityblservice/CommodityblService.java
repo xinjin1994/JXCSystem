@@ -1,48 +1,56 @@
 package businesslogicservice.commodityblservice;
 
+import java.util.ArrayList;
+
+import vo.CommodityVO;
+import vo.PatchVO;
+import vo.SortVO;
+import vo.StockVO;
+import vo.WarnVO;
+
 public interface CommodityblService {
 
 	//添加商品
-	public String addCommodity(String name, String type);
+	public int addCommodity(CommodityVO vo1,SortVO vo2);
 
 	//添加商品
-	public String addCommodity(String name, String type, int in_price,
-			int out_price);
-	//删除商品
-	public String delCommodity(String name, String type);
+//	public int addCommodity(String name, String type, int in_price,
+//			int out_price);
 	
 	//删除商品
-	public String updateCommodity(String name, String type, int in_price,
-			int out_price);
+	public int delCommodity(CommodityVO vo);
+	
+	//删除商品
+	public int updateCommodity(CommodityVO vo1,CommodityVO vo2);
 
 	//模糊查找商品
-	public String searchCommodity(String word);
+	public ArrayList<CommodityVO> searchCommodity(String word);
 
 	//添加分类
-	public String addSort(String name);
+	public int addSort(SortVO vo1, SortVO vo2);
 	
 	//删除分类
-	public String delSort(String name);
+	public int delSort(SortVO vo);
 
 	//修改分类
-	public String updateSort(String name1, String name2);
+	public int updateSort(SortVO vo1, SortVO vo2);
 
 	//查看库存
-	public String Examine(String time1, String time2);
+	public ArrayList<CommodityVO> Examine(String time1, String time2);
 
 	//库存盘点
-	public String Iventory();
+	public ArrayList<StockVO> Iventory();
 
 	//库存赠送单
-	public String addGift(String name, String type);
+	public int addGift(CommodityVO vo);
 
 	//删除库存赠送
-	public String delGift(String name, String type);
+	public int delGift(CommodityVO vo);
 
 	//库存报溢报损单
-	public String patch(String name, String type, int number);
+	public int patch(PatchVO vo);
 
 	//设置库存警戒数量
-	public String warn(String name, String type, int number);
+	public int warn(WarnVO vo);
 
 }

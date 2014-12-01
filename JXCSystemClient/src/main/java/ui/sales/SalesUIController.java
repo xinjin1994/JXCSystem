@@ -1,67 +1,52 @@
 package ui.sales;
 
-import ui.MyButton;
-import ui.MyFrame;
+import ui.FatherPanel;
 import ui.SalesManagerPanel;
 import ui.UIController;
+import ui.sales.cuspanel.AddCusPanel;
+import ui.sales.cuspanel.CusPanel;
+import ui.sales.impanel.ImPanel;
+import ui.sales.salespanel.SalesPanel;
+import ui.setting.MyFrame;
 
+
+/**
+ * controller 作用：用来创建ui，并且实现ui之间的跳转
+ * @author lsy
+ * @version 2014年12月1日下午7:36:37
+ */
 public class SalesUIController {
 
-	private SecondPanel cusPanel, salesPanel, imPanel;
-	private MyButton addCus, delCus, changeCusInfo, seeCusInfo;
-	private MyButton importMenu,importBackMenu;
-	private MyButton salesMenu,salesBackMenu ;
 	private SalesManagerPanel salesManagerPanel;
-	private int secondX = 1;
-	private int secondY = 35;
-	private int inter = 54;
+	private MyFrame frame;
+	private UIController uiController;
+	private FatherPanel delCusPanel, changeCusPanel, seeCusInfoPanel;
+	private AddCusPanel addCusPanel;
+	private CusPanel cusPanel;
+	private SalesPanel salesPanel;
+	private ImPanel imPanel;
 	
 	public SalesUIController(UIController uiController, MyFrame frame) {
+		this.frame = frame;
+		this.uiController = uiController;
 		this.salesManagerPanel = new SalesManagerPanel(frame, "Image/Sales/sales.jpg", uiController, this);
+		this.setSalesPanel();
+		this.setCusPanel();
 		frame.setPanel(salesManagerPanel);
 		frame.repaint();
-		cusPanel = new SecondPanel();
-		salesPanel = new SecondPanel();
-		imPanel = new SecondPanel();
-		this.addCusButton();
-		this.addImportButton();
-		this.addSalesButton();
 	}
 	
-	public void addCusButton() {
-
-		addCus = new MyButton("Image/Sales/Sales_image/增加用户.png", secondX, secondY,
-				"Image/Sales/Sales_image/增加用户_stop.png", "Image/Sales/Sales_image/增加客户_press_on.png");
-		delCus = new MyButton("Image/Sales/Sales_image/删除客户.png", secondX, secondY + inter,
-				"Image/Sales/Sales_image/删除客户_stop.png", "Image/Sales/Sales_image/删除客户_press_on.png");
-		changeCusInfo = new MyButton("Image/Sales/Sales_image/修改客户信息.png", secondX, secondY + 2 * inter,
-				"Image/Sales/Sales_image/修改客户信息_stop.png", "Image/Sales/Sales_image/修改客户信息_press_on.png");
-		seeCusInfo = new MyButton("Image/Sales/Sales_image/查看客户信息.png", secondX, secondY + 3 * inter,
-				"Image/Sales/Sales_image/查看客户信息_stop.png", "Image/Sales/Sales_image/查看客户信息_press_on.png");
-		cusPanel.add(addCus);
-		cusPanel.add(delCus);
-		cusPanel.add(changeCusInfo);
-		cusPanel.add(seeCusInfo);
+	public void setCusPanel() {
+		addCusPanel = new AddCusPanel(frame,"Image/Sales/对话框/添加客户/addCustomer.jpg",uiController,this);
+//		delCusPanel = new FatherPanel(frame,"Image/Sales/对话框/删除客户/删除客户_背景.jpg",uiController);
+		changeCusPanel = new FatherPanel(frame,"",uiController);
+		seeCusInfoPanel = new FatherPanel(frame,"Image/Sales/对话框/查找客户/查找客户对话框_背景.jpg",uiController);
 	}
-
-	public void addImportButton() {
-
-		importMenu = new MyButton("Image/Sales/Sales_image/进货单.png", secondX, secondY,
-				"Image/Sales/Sales_image/进货单_stop.png", "Image/Sales/Sales_image/进货单_press_on.png");
-		importBackMenu = new MyButton("Image/Sales/Sales_image/进货退货单.png", secondX, secondY + inter,
-				"Image/Sales/Sales_image/进货退货单_stop.png", "Image/Sales/Sales_image/进货退货单_press_on.png");
-		imPanel.add(importMenu);
-		imPanel.add(importBackMenu);
-	}
-
-	public void addSalesButton() {
-		salesMenu = new MyButton("Image/Sales/Sales_image/销售单.png", secondX, secondY,
-				"Image/Sales/Sales_image/销售单_stop.png", "Image/Sales/Sales_image/销售单_press_on.png");
-		salesBackMenu = new MyButton("Image/Sales/Sales_image/进货退货单.png", secondX, secondY + inter,
-				"Image/Sales/Sales_image/进货退货单_stop.png", "Image/Sales/Sales_image/进货退货单_press_on.png");
-		salesPanel.add(salesMenu);
-		salesPanel.add(salesBackMenu);
-
+	
+	public void setSalesPanel() {
+		cusPanel = new CusPanel(this);
+		salesPanel = new SalesPanel(this);	
+		imPanel = new ImPanel(this);
 	}
 	
 	public void toCusPanel(){
@@ -88,5 +73,29 @@ public class SalesUIController {
 		salesManagerPanel.repaint();
 	}
 	
+	public void backPanel(FatherPanel panelNow) {
+		frame.remove(panelNow);
+		frame.setPanel(salesManagerPanel);
+		frame.repaint();
+	}
 	
+	public void toPanel(int cusPanelID){
+		frame.remove(salesManagerPanel);
+		switch(cusPanelID){
+		case 0:
+			frame.setPanel(addCusPanel);
+			break;
+		case 1:
+			frame.setPanel(delCusPanel);
+			break;
+		case 2:
+			frame.setPanel(changeCusPanel);
+			break;
+		case 3:
+			frame.setPanel(seeCusInfoPanel);
+			break;
+		}
+		frame.repaint();
+	}
 }
+

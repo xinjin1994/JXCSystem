@@ -2,6 +2,6 @@ package businesslogic.invoicebl;
 
 public interface SystemlogInfo {
 	
-	public String add(String word);
+	public int add(String word);
 
 }

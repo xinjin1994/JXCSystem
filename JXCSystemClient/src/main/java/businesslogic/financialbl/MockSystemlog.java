@@ -2,9 +2,9 @@ package businesslogic.financialbl;
 
 public class MockSystemlog implements SystemlogInfo{
 
-	public String add(String word) {
+	public int add(String word) {
 		// TODO Auto-generated method stub
-		return "³É¹¦";
+		return 0;
 	}
 
 }

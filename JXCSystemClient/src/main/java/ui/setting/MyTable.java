@@ -1,27 +1,21 @@
-package ui;
+package ui.setting;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 /*
  * 实现table初始化，内容添加，删除，显示，查找等操作
  */
 public class MyTable extends JTable{
-	JPanel backPanel;
+//	JPanel backPanel;
 	static JPanel tablePanel;
 	static JScrollPane tableSp ;
 	static JTable table;
@@ -34,9 +28,9 @@ public class MyTable extends JTable{
 	Color oddColor = new Color(245,190,185);
 	Color fontColor = new Color(159,122,116);
 	
-	public MyTable(JPanel backPanel){
+	public MyTable(){
 		
-		this.backPanel = backPanel;
+//		this.backPanel = backPanel;
 		setPanel();
 	}
 	
@@ -50,7 +44,7 @@ public class MyTable extends JTable{
 		tablePanel.removeAll();
 		tablePanel.setOpaque(false);
 		tablePanel.setVisible(true);
-		backPanel.add(tablePanel);
+//		backPanel.add(tablePanel);
 		
 	}
 	
@@ -144,6 +138,7 @@ public class MyTable extends JTable{
 	        	if(isSelected){
 	        		setSelectionBackground(Color.white);
 	        		setForeground(Color.red);
+//	        		System.out.println("kkk");
 	        	}
 	        	else{
 	        		if (row% 2 == 0){
@@ -180,11 +175,11 @@ public class MyTable extends JTable{
 		addInfo.clear();
 		String[] addRow = info.split(";");
 		for(int i = 0;i < addRow.length;i++){
-			System.out.println(addRow[i]);
+//			System.out.println(addRow[i]);
 			addInfo.add(addRow[i]);
-			System.out.println(addInfo.get(i));
+//			System.out.println(addInfo.get(i));
 		}
-		System.out.println(addInfo.get(0));
+//		System.out.println(addInfo.get(0));
 		tableModel.addRow(addInfo);
 	}
 	/*

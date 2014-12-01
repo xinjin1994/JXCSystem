@@ -5,10 +5,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
-import businesslogic.commoditybl.Commodity;
-import ui.ManagerPanel.FirstButtonListener;
-import ui.account.AccountUIController;
 import ui.commodity.CommodityUIController;
+import ui.setting.MyButton;
 
 //1 库存人员
 public class CommodityPanel extends FatherPanel{

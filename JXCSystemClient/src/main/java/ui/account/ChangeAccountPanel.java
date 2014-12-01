@@ -1,7 +1,8 @@
 package ui.account;
 
 import ui.FatherPanel;
-import ui.MyFrame;
+
+import ui.setting.MyFrame;
 
 public class ChangeAccountPanel extends FatherPanel{
 	public ChangeAccountPanel(MyFrame frame,String url,
