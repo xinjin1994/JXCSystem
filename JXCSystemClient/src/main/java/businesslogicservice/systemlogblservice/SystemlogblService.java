@@ -1,11 +1,15 @@
 package businesslogicservice.systemlogblservice;
 
+import java.util.ArrayList;
+
+import vo.SystemlogVO;
+
 public interface SystemlogblService {
 	
 	//显示系统日志
-	public String show();
+	public ArrayList<SystemlogVO> show();
 
 	//添加系统日志
-	public String add(String word);
+	public int add(String word);
 	
 }
