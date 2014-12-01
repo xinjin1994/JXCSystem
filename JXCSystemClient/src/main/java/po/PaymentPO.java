@@ -2,6 +2,8 @@ package po;
 
 import java.io.Serializable;
 
+import vo.PayVO;
+
 public class PaymentPO extends InvoicePO implements Serializable{	
 
 	String serialnum;//���ݱ��
@@ -9,12 +11,12 @@ public class PaymentPO extends InvoicePO implements Serializable{
 	String name;//�ͻ����
 	String[] account;//�����˻�
 	String item;//��Ŀ�嵥
-	String ps;//��ע
+	String[] ps;//��ע
 	int[] price;//������
 	int total;//�����ܶ�
 	
 	public PaymentPO(String serialnum, String operator, String name, String[] account,
-			String item, String ps, int[] price) {
+			String item, String[] ps, int[] price) {
 		this.serialnum = serialnum;
 		this.operator = operator;
 		this.name=name;
@@ -24,6 +26,21 @@ public class PaymentPO extends InvoicePO implements Serializable{
 		this.price = price;
 		for(int pri:price){
 			this.total=this.total+pri;
+		}
+	}
+	
+	public PaymentPO(PayVO vo){
+		this.serialnum=vo.id;
+		this.operator=vo.operator;
+		this.name=vo.cusName;
+		int i=0;
+		account=new String[vo.itemList.length];
+		ps=new String[vo.itemList.length];
+		price=new int[vo.itemList.length];
+		for(i=0;i<vo.itemList.length;i++){
+			account[i]=vo.itemList[i].itemName;
+			ps[i]=vo.itemList[i].remark;
+			price[i]=(int) vo.itemList[i].money;
 		}
 	}
 	
@@ -46,7 +63,7 @@ public class PaymentPO extends InvoicePO implements Serializable{
 	public String getItem() {
 		return item;
 	}
-	public String getPs() {
+	public String[] getPs() {
 		return ps;
 	}
 	public int[] getPrice() {

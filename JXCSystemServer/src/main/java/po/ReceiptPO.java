@@ -2,17 +2,19 @@ package po;
 
 import java.io.Serializable;
 
+
+
 public class ReceiptPO extends InvoicePO implements Serializable{
 	String serialnum;//���ݱ��
 	String operator;//����Ա
 	String name;//�ͻ����
 	String[] account;//�����˻�
-	String ps;//��ע
+	String[] ps;//��ע
 	int[] price;//ת�˽��
 	int total;//ת���ܶ�
 	
 	public ReceiptPO(String serialnum, String operator, String name,
-			String[] account, String ps, int[] price) {
+			String[] account, String[] ps, int[] price) {
 		this.serialnum = serialnum;
 		this.operator = operator;
 		this.name = name;
@@ -41,7 +43,7 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 	public String[] getAccount() {
 		return account;
 	}
-	public String getPs() {
+	public String[] getPs() {
 		return ps;
 	}
 	public int[] getPrice() {
