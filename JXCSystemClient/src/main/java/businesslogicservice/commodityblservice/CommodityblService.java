@@ -27,7 +27,7 @@ public interface CommodityblService {
 	public ArrayList<CommodityVO> searchCommodity(String word);
 
 	//添加分类
-	public int addSort(SortVO vo);
+	public int addSort(SortVO vo1, SortVO vo2);
 	
 	//删除分类
 	public int delSort(SortVO vo);

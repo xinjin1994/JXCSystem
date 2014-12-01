@@ -50,9 +50,9 @@ public class CommodityController implements CommodityblService{
 		return vo;
 	}
 
-	public int addSort(SortVO vo) {
+	public int addSort(SortVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
-		return commodity.addSort(vo.name);
+		return commodity.addSort(vo1.name,vo2.name);
 	}
 
 	public int delSort(SortVO vo) {
@@ -89,7 +89,7 @@ public class CommodityController implements CommodityblService{
 
 	public int delGift(CommodityVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.delGift(vo.name,vo.type);
+		return commodity.delGift(vo.name,vo.type,vo.num);
 	}
 
 	public int patch(PatchVO vo) {

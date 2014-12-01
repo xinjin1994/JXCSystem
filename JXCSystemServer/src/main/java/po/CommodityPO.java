@@ -12,6 +12,7 @@ public class CommodityPO extends InvoicePO implements Serializable{
 	int recent_out_price;//���һ���ۼ�
 	public int number;//��Ʒ����
 	public boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
+	public int warn;
 	
 	public CommodityPO(Boolean isGift,String name,String type,int in_price,int out_price,
 			int note,int recent_in_price,int recent_out_price,int number){
@@ -24,6 +25,7 @@ public class CommodityPO extends InvoicePO implements Serializable{
 		this.recent_out_price = recent_out_price;
 		this.number = number;
 		this.isGift = isGift;
+		this.warn=0;
 	}
 	
 	public CommodityPO(String name, String type){
@@ -36,6 +38,7 @@ public class CommodityPO extends InvoicePO implements Serializable{
 		this.recent_out_price = 0;
 		this.number = 0;
 		this.isGift = false;
+		this.warn=0;
 	}
 	
 	public CommodityPO(String name,String type,int in_price,int out_price){
@@ -48,11 +51,14 @@ public class CommodityPO extends InvoicePO implements Serializable{
 		this.recent_out_price = 0;
 		this.number = 0;
 		this.isGift = false;
+		this.warn=0;
 	}
 	
 	public CommodityPO copy(){
-		return new CommodityPO(isGift, name, type, in_price, out_price,note,
+		CommodityPO po=new CommodityPO(isGift, name, type, in_price, out_price,note,
 				recent_in_price, recent_out_price, number);
+		po.warn=warn;
+		return po;
 	}
 	
 	public boolean getGift(){

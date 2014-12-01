@@ -1,5 +1,6 @@
 package data.commoditydata;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
@@ -90,6 +91,11 @@ public class CommodityDataService_Stub implements CommodityDataService{
 
 	public boolean clear() {
 		return true;
+	}
+
+	public ArrayList<SortPO> getAllSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

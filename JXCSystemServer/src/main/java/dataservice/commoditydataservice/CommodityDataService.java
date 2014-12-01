@@ -21,6 +21,7 @@ public interface CommodityDataService extends Remote{
 	public CommodityPO findGift(String name,String type) throws RemoteException;
 	public boolean delGift(CommodityPO po) throws RemoteException;
 	public ArrayList<CommodityPO> getAll() throws RemoteException;
+	public ArrayList<SortPO> getAllSort() throws RemoteException;
 	public boolean clear() throws RemoteException;
 }
 

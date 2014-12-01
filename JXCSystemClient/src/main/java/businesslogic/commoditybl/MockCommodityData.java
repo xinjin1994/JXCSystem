@@ -1,5 +1,6 @@
 package businesslogic.commoditybl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
@@ -98,6 +99,11 @@ public class MockCommodityData implements CommodityDataService{
 		// TODO Auto-generated method stub
 		array.clear();
 		return true;
+	}
+
+	public ArrayList<SortPO> getAllSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
