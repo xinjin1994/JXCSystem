@@ -20,20 +20,26 @@ public class Commodity implements CommodityblService, businesslogic.financialbl.
 
 	public String addCommodity(String name, String type) {
 
-		CommodityPO com = new CommodityPO(true, "name", "type", 10, 10, 10, 10, 10, 10);
+		CommodityPO com = new CommodityPO(false, name, type, 0, 0, 0, 0, 0, 0);
 //		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
 //		sto = new CommodityDataService_Stub();
 		
 		try {
+			com=sto.findGood(name, type);
+			if(com!=null){
+				return "商品已存在";
+			}
+			com=new CommodityPO(false, name, type, 0, 0, 0, 0, 0, 0);
 			if (sto.addGood(com,new SortPO("type", 10))) {
-				return "�ɹ�";
+				systemlog.add("addCommodity:"+name+","+type);
+				return "成功";
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "ʧ��";
+		return "失败";
 	}
 	
 	public String addCommodity(String name, String type, int number) throws RemoteException {
@@ -50,7 +56,7 @@ public class Commodity implements CommodityblService, businesslogic.financialbl.
 	public String addCommodity(String name, String type, int in_price,
 			int out_price) {
 		// TODO Auto-generated method stub
-		CommodityPO com = new CommodityPO(true, "name", "type", 10, 10, 10, 10, 10, 10);
+		CommodityPO com = new CommodityPO(false, name, type, in_price, out_price, 10, 10, 10, 10);
 //		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
 //		sto = new CommodityDataService_Stub();
 		
