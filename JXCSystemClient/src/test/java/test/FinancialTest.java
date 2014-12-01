@@ -22,7 +22,7 @@ public class FinancialTest {
 		mock.arraySale.add(po);
 		financial.financial=mock;
 		assertEquals("�ɹ�",financial.saleList("1111/1/1", "2222/2/2", "good_name", "good_type",
-				"customer_name","clerk", 1));
+				"customer_name","clerk", "1"));
 	}
 
 	@Test

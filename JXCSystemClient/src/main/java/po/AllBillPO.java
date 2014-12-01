@@ -106,6 +106,21 @@ public class AllBillPO implements Serializable{
 		po.note=note;
 		return po;
 	}
+
+	public int getNote() {
+		// TODO Auto-generated method stub
+		return note;
+	}
+	
+//	public String getTime(){
+//		
+//		switch(note){
+//		case 1:  
+//		
+//		
+//		
+//		}
+//	}
 	
 
 }

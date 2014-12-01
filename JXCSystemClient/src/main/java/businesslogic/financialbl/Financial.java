@@ -1,17 +1,18 @@
 package businesslogic.financialbl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.AllBillPO;
 import po.OperatingConditionPO;
 import po.PaymentPO;
 import po.ReceiptPO;
 import po.SaleListPO;
+import vo.ConditionVO;
 import businesslogic.accountbl.Account;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.salesbl.Sales;
 import businesslogic.systemlogbl.Systemlog;
-import businesslogicservice.financialblservice.FinancialblService;
 import data.financialdata.FinancialDataService_Stub;
 import dataservice.financialdataservice.FinancialDataService;
 
@@ -24,48 +25,69 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	public SystemlogInfo systemlog=new Systemlog();
 	
 
-	public String saleList(String time1, String time2, String good_name,
-			String good_type, String customer_name, String clerk, int warehouse) {
+	public ArrayList<SaleListPO> saleList(String time1, String time2, String good_name,
+			String good_type, String customer_name, String clerk, String wareHouse) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
+		int i=0;
+		ArrayList<SaleListPO> array=new ArrayList<SaleListPO>();
+		
 		try {
-			if(financial.getSaleList()!=null){
-				return "�ɹ�";
+			ArrayList<SaleListPO> fin=financial.getSaleList();
+			
+			for(i=0;i<fin.size();i++){
+				
+				if((time1==null||fin.get(i).getTime().compareTo(time1)>=0)&&
+					(time2==null||fin.get(i).getTime().compareTo(time2)<=0)&&
+					(good_name==null||fin.get(i).getCommodity().equals(good_name))&&
+					(good_type==null||fin.get(i).getType().equals(good_type))&&
+					(customer_name==null||fin.get(i).getName().equals(customer_name))&&
+					(clerk==null||fin.get(i).getClerk().equals(clerk))&&
+					(wareHouse==null||fin.get(i).getWareHouse().equals(wareHouse))){
+					
+					array.add(fin.get(i));
+				}
+				
 			}
+			
+				return array;
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return array;
 	}
 
-	public String allBill(String time1, String time2, String note_type,
-			String customer_name, String clerk, int warehouse) {
+	public ArrayList<AllBillPO> allBill(String time1, String time2, String note_type,
+			String customer_name, String clerk, String warehouse) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
 		try {
-			if(financial.getAllBill()!=null){
-				return " �ɹ�";
+			ArrayList<AllBillPO> array=financial.getAllBill();
+			if(array!=null){
+				return array;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return null;
 	}
 
-	public String operatingCondition(String time1, String time2) {
+	public OperatingConditionPO operatingCondition(String time1, String time2) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
 		try {
-			if(financial.getOperatingCondition()!=null){
-				return " �ɹ�";
+			OperatingConditionPO po=financial.getOperatingCondition();
+			if(po!=null){
+				return po;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return null;
 	}
 	
 	

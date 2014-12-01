@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 
 public class SaleListPO implements Serializable{
-	String time;//ʱ��
+	public String time;//ʱ��
 	String name;//�ͻ����
 	String clerk;//ҵ��Ա
 	String wareHouse;//�ֿ�
