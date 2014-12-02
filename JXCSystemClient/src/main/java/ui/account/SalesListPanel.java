@@ -15,7 +15,7 @@ public class SalesListPanel extends FatherPanel{
 		this.uiController = uiController;
 		this.repaint();
 		
-		uiController.setBack(this);
+		uiController.setBack_second(this,146,57);
 		
 		
 	}

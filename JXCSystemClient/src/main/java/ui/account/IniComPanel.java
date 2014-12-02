@@ -4,14 +4,15 @@ import ui.FatherPanel;
 import ui.setting.MyFrame;
 
 public class IniComPanel extends FatherPanel{
-		AccountAllUIController uiController;
+	AccountAllUIController uiController;
 	public IniComPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
 		this.uiController = uiController;
 		this.repaint();
 		
-		uiController.setBack(this);
+		uiController.setBack_first(this);
+		
 		
 	}
 }

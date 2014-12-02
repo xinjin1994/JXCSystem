@@ -12,7 +12,7 @@ public class FindAccountPanel extends FatherPanel{
 		this.uiController = uiController;
 		this.repaint();
 		
-		uiController.setBack(this);
+		uiController.setBack_second(this,199,141);
 		
 		
 	}

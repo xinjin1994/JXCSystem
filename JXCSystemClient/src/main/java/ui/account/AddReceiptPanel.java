@@ -12,8 +12,7 @@ public class AddReceiptPanel extends FatherPanel{
 		this.uiController = uiController;
 		this.repaint();
 		
-		uiController.setBack(this);
-		
+		uiController.setBack_first(this);
 		
 	}
 }

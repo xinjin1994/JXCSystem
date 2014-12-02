@@ -8,11 +8,14 @@ import javax.swing.JPanel;
 import ui.FatherPanel;
 
 public class BackButton extends MyButton{
-	public MyButton back;
-	public FatherPanel prePanel;
-	public BackButton(FatherPanel prePanel) {
-		back = new MyButton("Image/Sales/Sales_image/返回_白.png", 13, 21, "Image/Sales/Sales_image/返回_press_on.png",
+	public MyButton back_white,back_black;
+	public BackButton() {
+		back_white = new MyButton("Image/Sales/Sales_image/返回_白.png", 13, 21, "Image/Sales/Sales_image/返回_press_on.png",
 				"Image/Sales/Sales_image/返回_press_on.png");
-		prePanel.add(back);
+		
+	}
+	public BackButton(int x,int y){
+		back_black = new MyButton("Image/Sales/Sales_image/返回_白.png", x, y, "Image/Sales/Sales_image/返回.png",
+				"Image/Sales/Sales_image/返回_press_on.png");
 	}
 }

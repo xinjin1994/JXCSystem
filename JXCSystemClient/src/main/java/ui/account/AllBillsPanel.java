@@ -12,6 +12,6 @@ public class AllBillsPanel extends FatherPanel{
 		this.uiController = uiController;
 		
 		this.repaint();
-		uiController.setBack(this);
+		uiController.setBack_second(this,141,57);
 	}
 }

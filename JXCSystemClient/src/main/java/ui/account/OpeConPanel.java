@@ -11,7 +11,7 @@ public class OpeConPanel extends FatherPanel{
 		this.uiController = uiController;
 		this.repaint();
 		
-		uiController.setBack(this);
+		uiController.setBack_second(this,149,137);
 		
 		
 	}

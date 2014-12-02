@@ -47,6 +47,7 @@ public class AccountAllUIController extends UIController{
 	Listener backListener;
 	
 	MyButton backButton;
+
 	public AccountAllUIController(UIController uiController,MyFrame frame) {
 		this.frame = new MyFrame();
 		addMainPanel();
@@ -158,15 +159,28 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
-	public void setBack(FatherPanel prePanel){
+	
+//	
+	public void setBack_first(FatherPanel prePanel){
 		this.prePanel = prePanel;
-	
-		Listener backListener = new Listener();
-		BackButton back = new BackButton(prePanel);
-		backButton = back.back;
-		backButton.addMouseListener(backListener);
-	
+		BackButton back = new BackButton();
+		backButton = back.back_white;
+		setBack();
 	}
+	
+	public void setBack_second(FatherPanel prePanel,int x,int y){
+		this.prePanel = prePanel;
+		BackButton back = new BackButton(x,y);
+		backButton = back.back_black;
+		setBack();
+	}
+	
+	public void setBack(){
+		Listener backListener = new Listener();
+		prePanel.add(backButton);
+		backButton.addMouseListener(backListener);
+	}
+	
 	   class Listener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
