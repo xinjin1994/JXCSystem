@@ -45,13 +45,13 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		try {
 			if (us.addUser(user)) {
 				systemlog.add("AddUser:");
-				return "成功";
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "失败";
+		return -1;
 	}
 
 	public int delUser(String name) {
@@ -59,26 +59,27 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		try {
 			if(us.getUser("user")!=null){
 				systemlog.add("DelUser:");
-				return "�ɹ�";
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return -1;
 	}
 
 	public ArrayList<UserVO> show() {
 		// TODO Auto-generated method stub
+		ArrayList<UserVO> vo=new ArrayList<UserVO>();
 		try {
 			if(us.show()!=null){
-				return "�ɹ�";
+				return vo;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return vo;
 	}
 
 	public int login(String name, String password) {
