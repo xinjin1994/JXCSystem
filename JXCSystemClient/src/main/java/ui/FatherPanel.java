@@ -142,4 +142,6 @@ public class FatherPanel extends JPanel {
 		super.paint(g);
 	}
 	
+	 
+	
 }

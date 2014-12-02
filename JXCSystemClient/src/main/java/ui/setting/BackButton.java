@@ -1,16 +1,18 @@
 package ui.setting;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 
-public class BackButton {
-	JPanel prePanel;
-	JPanel nextPanel;
-	public BackButton(JPanel prePanel,JPanel nextPanel) {
-		this.prePanel = prePanel;
-		this.nextPanel = nextPanel;
-		setButton();
-	}
-	public void setButton() {
-		MyButton fatherButton = new MyButton(null, 0, 0, null, null);
+import ui.FatherPanel;
+
+public class BackButton extends MyButton{
+	public MyButton back;
+	public FatherPanel prePanel;
+	public BackButton(FatherPanel prePanel) {
+		back = new MyButton("Image/Sales/Sales_image/返回_白.png", 13, 21, "Image/Sales/Sales_image/返回_press_on.png",
+				"Image/Sales/Sales_image/返回_press_on.png");
+		prePanel.add(back);
 	}
 }

@@ -32,7 +32,7 @@ public class UIController {
 		this.frame = new MyFrame();
 		this.AccountPanel();
 
-		this.SalesManagerPanel();
+	//	this.SalesManagerPanel();
 
 	}
 
