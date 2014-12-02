@@ -1,8 +1,10 @@
 package businesslogic.userbl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.UserPO;
+import vo.UserVO;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.userblservice.UserblService;
 import data.userdata.UserDataService_Stub;
@@ -36,7 +38,7 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		return -1;
 	}
 	
-	public String addUser(String name, String password, int duty) {
+	public int addUser(String name, String password, int duty) {
 		// TODO Auto-generated method stub
 		UserPO user = new UserPO(name, password, duty);
 		
@@ -52,7 +54,7 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		return "失败";
 	}
 
-	public String delUser(String name) {
+	public int delUser(String name) {
 		// TODO Auto-generated method stub
 		try {
 			if(us.getUser("user")!=null){
@@ -66,7 +68,7 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		return "ʧ��";
 	}
 
-	public String show() {
+	public ArrayList<UserVO> show() {
 		// TODO Auto-generated method stub
 		try {
 			if(us.show()!=null){
