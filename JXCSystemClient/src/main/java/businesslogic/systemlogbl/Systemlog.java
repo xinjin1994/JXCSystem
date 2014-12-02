@@ -44,7 +44,7 @@ public class Systemlog implements SystemlogblService,
 			
 			
 			if (sys.get() != null) {
-				vo=(ArrayList)po.clone();
+				vo=(ArrayList<SystemlogVO>)po.clone();
 				return vo ;
 			}
 		} catch (RemoteException e) {
