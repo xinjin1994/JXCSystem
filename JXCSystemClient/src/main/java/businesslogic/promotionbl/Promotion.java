@@ -1,10 +1,12 @@
 package businesslogic.promotionbl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
+import vo.DiscountVO;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.promotionblservice.PromotionblService;
 import data.promotiondata.PromotionDataService_Stub;
@@ -23,7 +25,7 @@ public class Promotion implements PromotionblService{
 		this.promotion = pro;
 	}
 
-	public String makeDiscount(int start_money, int discount, int end_money,
+	public int makeDiscount(int start_money, int discount, int end_money,
 			String time1, String time2) {
 		// TODO Auto-generated method stub
 		//pro=new PromotionDataService_Stub(); 
@@ -31,34 +33,34 @@ public class Promotion implements PromotionblService{
 		try {
 			if(promotion.addDiscount(dis)){
 				systemlog.add("AddDiscount:");
-				return "成功";
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
-		return "失败";
+		return -1;
 		
 	}
 
-	public String delPromotion(String note) {
+	public int delPromotion(String note) {
 		// TODO Auto-generated method stub
 		//PromotionDataService pro=new PromotionDataService_Stub(); 
 		DiscountPO dis= new DiscountPO(1,"t1","t2",1000,2000,50);
 		try {
 			if(promotion.delDiscount(dis)){
 				systemlog.add("DelDiscount:");
-				return "成功";
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "失败";
+		return -1;
 	}
 
-	public String makeGift(int start_money, String time1, String time2) {
+	public int makeGift(int start_money, String time1, String time2) {
 		// TODO Auto-generated method stub
 //		PromotionDataService pro=new PromotionDataService_Stub(); 
 		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, "10", 10, 10, 10);
@@ -66,33 +68,34 @@ public class Promotion implements PromotionblService{
 		try {
 			if(promotion.addGift(dis)){
 				systemlog.add("AddGift:");
-				return "成功";
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "失败";
+		return -1;
 	}
 
-	public String search() {
+	public ArrayList<DiscountVO> search() {
 		// TODO Auto-generated method stub
 //		PromotionDataService pro=new PromotionDataService_Stub(); 
+		ArrayList<DiscountVO> vo=new ArrayList<DiscountVO>();
 		try {
 			if(promotion.getDiscount()!=null){
 				systemlog.add("Search:");
-				return "成功";
+				return vo;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "失败";
+		return vo;
 	}
 
-	public String makeOther(String word) {
+	public int makeOther(String word) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }

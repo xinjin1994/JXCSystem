@@ -7,6 +7,10 @@ public class MyButton extends JButton{
 	int x;
 	int y;//坐标
 	
+	public MyButton(){
+		
+	}
+	
 	public MyButton(String image,int x,int y,String stopImage,String press_onImage) {
 		this.x = x;
 		this.y = y;

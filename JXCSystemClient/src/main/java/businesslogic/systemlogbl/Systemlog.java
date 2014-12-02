@@ -1,9 +1,13 @@
 package businesslogic.systemlogbl;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import po.AccountPO;
 import po.SystemlogPO;
+import vo.AccountVO;
 import vo.SystemlogVO;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 import data.systemlogdata.SystemlogDataService_Stub;
@@ -31,20 +35,43 @@ public class Systemlog implements SystemlogblService,
 	public ArrayList<SystemlogVO> show() {
 		// TODO Auto-generated method stub
 		// SystemlogDataService sys = new SystemlogDataService_Stub();
+		ArrayList<SystemlogVO> vo=new ArrayList<SystemlogVO>();
+		
 		try {
+			
+			
+			ArrayList<SystemlogPO> po=sys.get();
+			
+			
 			if (sys.get() != null) {
-				return 0;
+				
+				
+				for(int i=0;i<po.size();i++){
+					vo.get(i).time=po.get(i).getTime();
+					vo.get(i).operation=po.get(i).getOperation();
+				}
+				
+				
+			
+				
+				
+				return vo ;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return vo;
 	}
 
 	public int add(String word) {
 		// TODO Auto-generated method stub
-		SystemlogPO system = new SystemlogPO("operation", "time");
+		
+		Date date = new Date(); 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String time = dateFormat.format( date ); //这一段要不要写在这里啊啊啊啊啊啊啊啊
+		
+		SystemlogPO system = new SystemlogPO(word,time);
 		// SystemlogDataService sys = new SystemlogDataService_Stub();
 		try {
 			if (sys.add(system)) {
@@ -54,7 +81,7 @@ public class Systemlog implements SystemlogblService,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 1;// 此数字应该对应某种失败结果
+		return -1;// 此数字应该对应某种失败结果
 	}
 
 }

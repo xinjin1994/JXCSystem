@@ -249,10 +249,13 @@ public class AccountUIController {
 			frame.remove(accountPanel);
 			if(e.getSource() == iniButtons[0]){
 				uiController.iniCom();
+				System.out.println("iniCom");
 			}else if(e.getSource() == iniButtons[1]){
 				uiController.iniCus();
+				System.out.println("iniCus");
 			}else if(e.getSource() == iniButtons[2]){
 				uiController.iniAcc();
+				System.out.println("iniAcc");
 			}else if(e.getSource() == iniButtons[3]){
 				
 			}

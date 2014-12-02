@@ -1,8 +1,10 @@
 package businesslogic.userbl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import po.UserPO;
+import vo.UserVO;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.userblservice.UserblService;
 import data.userdata.UserDataService_Stub;
@@ -36,47 +38,48 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		return -1;
 	}
 	
-	public String addUser(String name, String password, int duty) {
+	public int addUser(String name, String password, int duty) {
 		// TODO Auto-generated method stub
 		UserPO user = new UserPO(name, password, duty);
 		
 		try {
 			if (us.addUser(user)) {
 				systemlog.add("AddUser:");
-				return "成功";
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "失败";
+		return -1;
 	}
 
-	public String delUser(String name) {
+	public int delUser(String name) {
 		// TODO Auto-generated method stub
 		try {
 			if(us.getUser("user")!=null){
 				systemlog.add("DelUser:");
-				return "�ɹ�";
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return -1;
 	}
 
-	public String show() {
+	public ArrayList<UserVO> show() {
 		// TODO Auto-generated method stub
+		ArrayList<UserVO> vo=new ArrayList<UserVO>();
 		try {
 			if(us.show()!=null){
-				return "�ɹ�";
+				return vo;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "ʧ��";
+		return vo;
 	}
 
 	public int login(String name, String password) {

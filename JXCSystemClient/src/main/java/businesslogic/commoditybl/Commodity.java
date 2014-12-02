@@ -473,7 +473,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		CommodityPO com2 =null;
 		
 		try {
-			com1=sto.findGood(po.getName(),po.getType());
+			com1=sto.findGood(po.getGoodName(),po.getGoodType());
 	
 			if(com1==null){
 				return "失败";
@@ -498,7 +498,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		CommodityPO com2 =null;
 		
 		try {
-			com1=sto.findGood(po.getName(),po.getType());
+			com1=sto.findGood(po.getGoodName(),po.getGoodType());
 	
 			if(com1==null){
 				return "失败";
@@ -559,6 +559,36 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		}
 		
 		return "2";
+	}
+
+	public String addGood_Data(CommodityPO po) {
+		// TODO Auto-generated method stub
+		try {
+			sto.addGift(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return " ";
+	}
+
+	public String addPatch_Data(PatchPO po) {
+		// TODO Auto-generated method stub
+
+		try {
+			CommodityPO po1=sto.findGood(po.getGoodName(), po.getGoodType());
+			
+			if(po1==null){
+				return null;
+			}
+			
+			sto.addGood(po1, null);
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

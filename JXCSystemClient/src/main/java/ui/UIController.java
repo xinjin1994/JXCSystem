@@ -18,21 +18,29 @@ public class UIController {
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	
+	
 	/*public UIController(){
 		
 	}*/
 	
 	/*public UIController() {
+=======
+//	public UIController(){
+//		
+//	}
+//	*/
+	public UIController() {
+
 		this.frame = new MyFrame();
 	    this.welcomePanel();
-	    this.SalesManagerPanel();
-	}*/
+//	    this.SalesManagerPanel();
+	}
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
 //		this.AccountPanel();
 
-		this.SalesManagerPanel();
+	//	this.SalesManagerPanel();
 
 	}
 

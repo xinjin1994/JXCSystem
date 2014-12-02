@@ -1,7 +1,18 @@
 package ui.account;
 
 
+import java.awt.Desktop.Action;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
+
+import ui.FatherPanel;
 import ui.UIController;
+import ui.setting.BackButton;
+import ui.setting.MyButton;
 import ui.setting.MyFrame;
 
 public class AccountAllUIController extends UIController{
@@ -31,9 +42,18 @@ public class AccountAllUIController extends UIController{
 	private IniCusPanel iniCusPanel;
 	private IniAccPanel iniAccPanel;
 	
+	FatherPanel prePanel;
+	AccountAllUIController controller;
+	Listener backListener;
 	
+	MyButton backButton;
+
 	public AccountAllUIController(UIController uiController,MyFrame frame) {
 		this.frame = new MyFrame();
+		addMainPanel();
+	}
+	
+	public void addMainPanel(){
 		new AccountUIController(this, frame);
 	}
 	
@@ -137,5 +157,70 @@ public class AccountAllUIController extends UIController{
 		confirmIniCusPanel = new ConfirmIniCusPanel(frame, "Image/Account/iniConCus.jpg", this);
 		frame.setPanel(confirmIniCusPanel);
 		frame.repaint();
+	}
+	
+	
+//	
+	public void setBack_first(FatherPanel prePanel){
+		this.prePanel = prePanel;
+		BackButton back = new BackButton();
+		backButton = back.back_white;
+		setBack();
+	}
+	
+	public void setBack_second(FatherPanel prePanel,int x,int y){
+		this.prePanel = prePanel;
+		BackButton back = new BackButton(x,y);
+		backButton = back.back_black;
+		setBack();
+	}
+	
+	public void setBack(){
+		Listener backListener = new Listener();
+		prePanel.add(backButton);
+		backButton.addMouseListener(backListener);
+	}
+	
+	   class Listener implements MouseListener{
+
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			if(e.getSource() == backButton){
+				System.out.println("lk");
+				frame.remove(prePanel);
+				AccountAllUIController.this.addMainPanel();
+				frame.repaint();
+			}
+			
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		   
+
+//		public void actionPerformed(ActionEvent e) {
+//			if(e.getActionCommand().equals("back")){
+//				System.out.println("klk");
+//				frame.remove(prePanel);
+//				delAccountPanel = new DelAccountPanel(frame,"Image/Account/删除账户.jpg",AccountAllUIController.this);
+//				frame.setPanel(delAccountPanel);
+//				frame.repaint();
+//				
+//			}
+//		
+		
 	}
 }

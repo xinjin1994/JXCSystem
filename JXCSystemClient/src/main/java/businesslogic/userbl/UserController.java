@@ -1,22 +1,25 @@
 package businesslogic.userbl;
 
+import java.util.ArrayList;
+
+import vo.UserVO;
 import businesslogicservice.userblservice.UserblService;
 
 public class UserController implements UserblService{
 	
 	public User user=new User();
 
-	public String addUser(String name, String password, int duty) {
+	public int addUser(String name, String password, int duty) {
 		// TODO Auto-generated method stub
 		return user.addUser(name, password, duty);
 	}
 
-	public String delUser(String name) {
+	public int delUser(String name) {
 		// TODO Auto-generated method stub
 		return user.delUser(name);
 	}
 
-	public String show() {
+	public ArrayList<UserVO> show() {
 		// TODO Auto-generated method stub
 		return user.show();
 	}

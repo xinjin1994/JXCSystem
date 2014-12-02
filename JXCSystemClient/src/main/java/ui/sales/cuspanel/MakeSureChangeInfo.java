@@ -62,7 +62,7 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
 				System.out.println("qianjing!");
 				SalesblService salesBlService = new SalesController();
-				salesBlService.updateCustomer(customerVOBefore,customerVOAfter);
+//				salesBlService.updateCustomer(customerVOBefore,customerVOAfter);
 			} else if (e.getSource() == secondCusBack) {
 				System.out.println("fff");
 				frame.remove(MakeSureChangeInfo.this);

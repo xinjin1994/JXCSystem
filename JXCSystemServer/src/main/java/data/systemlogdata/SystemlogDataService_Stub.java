@@ -8,7 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.PaymentPO;
 import po.SystemlogPO;
@@ -72,7 +74,11 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 		return systemlogList;
 	}
 
-	public boolean add(SystemlogPO po) {
+	public boolean add(SystemlogPO po) {	
+		
+		SystemlogPO po2=po.copy();
+	
+		systemlogList.add(po2);
 		return true;
 	}
 
