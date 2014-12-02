@@ -18,9 +18,9 @@ public class UIController {
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	
-	public UIController(){
-		
-	}
+//	public UIController(){
+//		
+//	}
 //	
 	public UIController() {
 		this.frame = new MyFrame();
