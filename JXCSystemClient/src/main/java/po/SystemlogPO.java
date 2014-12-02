@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class SystemlogPO implements Serializable{
 
-	String operation;//����
+	public String operation;//����
 	public String time;//ʱ��
 	
 	public SystemlogPO(String operation, String time) {
