@@ -1,5 +1,7 @@
 package vo;
 
+import po.UserPO;
+
 public class UserVO {
 	
 	public String name;//���
@@ -10,5 +12,10 @@ public class UserVO {
 		this.name=name;
 		this.password=password;
 		this.duty=duty;
+	
+	}public UserVO(UserPO po){
+		this.name=po.getName();
+		this.password=po.getPassword();
+		this.duty=po.getDuty();
 	}
 }
