@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.SystemlogPO;
+import vo.AccountVO;
 import vo.SystemlogVO;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 import data.systemlogdata.SystemlogDataService_Stub;
@@ -31,15 +32,16 @@ public class Systemlog implements SystemlogblService,
 	public ArrayList<SystemlogVO> show() {
 		// TODO Auto-generated method stub
 		// SystemlogDataService sys = new SystemlogDataService_Stub();
+		ArrayList<SystemlogVO> vo=new ArrayList<SystemlogVO>();
 		try {
 			if (sys.get() != null) {
-				return 0;
+				return vo;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return vo;
 	}
 
 	public int add(String word) {
