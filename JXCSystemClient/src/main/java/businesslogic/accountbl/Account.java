@@ -254,6 +254,22 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return null;
 	}
 
+	public String addAccount_Data(String name, int money) {
+		// TODO Auto-generated method stub
+		try {
+			AccountPO po1=account.findAccount(name);
+			AccountPO po2=po1.copy();
+			po2.money=po1.money+money;
+			if(account.updateAccount(po1, po2)){
+				return " ";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 //	public String delReceipt_Data(ReceiptPO po) {
 //		// TODO Auto-generated method stub
 //		return null;

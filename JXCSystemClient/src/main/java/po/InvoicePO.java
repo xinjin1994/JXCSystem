@@ -8,7 +8,7 @@ public class InvoicePO implements Serializable{
 //	String approve_condition;//�����
 	
 	int condition;   //0 代表草稿，1代表待审批。2代表通过。3代表失败
-	int type;        //1代表CommodityPO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
+	int invoice_type;        //1代表CommodityPO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
 					 //5代表Export_Return， 6代表PatchPO， 7代表ReceiptPO， 8代表PaymentPO
 	String note;
 	
@@ -19,7 +19,7 @@ public class InvoicePO implements Serializable{
 	
 	public InvoicePO copy(){
 		
-		switch(type){
+		switch(invoice_type){
 		
 		case 1: CommodityPO po1=(CommodityPO) this;
 		CommodityPO po1_tem=po1.copy();
@@ -60,7 +60,7 @@ public class InvoicePO implements Serializable{
 	
 	public InvoicePO invoice_copy(InvoicePO po1,InvoicePO po2){
 		po1.condition=po2.condition;
-		po1.type=po2.type;
+		po1.invoice_type=po2.invoice_type;
 		po1.note=po2.note;
 		return po1;
 	}
@@ -68,6 +68,40 @@ public class InvoicePO implements Serializable{
 	public String getNote_Invoice() {
 		// TODO Auto-generated method stub
 		return note;
+	}
+	
+	public int getInvoiceType(){
+		return invoice_type;
+	}
+	
+	public String getNote(){
+		switch(invoice_type){
+		
+		case 1: CommodityPO po1=(CommodityPO) this;
+		return po1.getNote();
+			
+		case 2: ImportPO po2=(ImportPO) this;
+		return po2.getNote();
+		
+		case 3: Import_ReturnPO po3=(Import_ReturnPO) this;
+		return po3.getNote();
+		
+		case 4:ExportPO po4=(ExportPO) this;
+		return po4.getNote();
+		
+		case 5:Export_ReturnPO po5=(Export_ReturnPO) this;
+		return po5.getNote();
+		
+		case 6:PatchPO po6=(PatchPO) this;
+		return po6.getNote();
+		
+		case 7:ReceiptPO po7=(ReceiptPO) this;
+		return po7.getNote();
+		
+		case 8:PaymentPO po8=(PaymentPO) this;
+		return po8.getNote();
+		}
+		return null;
 	}
 
 	
