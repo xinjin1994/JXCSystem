@@ -7,8 +7,8 @@ import javax.swing.border.LineBorder;
 //对应于类似查找客户 有边框的
 public class MyTextFieldBorder extends MyTextField{
 	
-	public MyTextFieldBorder(int width, int height) {
-		super(width, height);
+	public MyTextFieldBorder(int x, int y) {
+		super(x, y);
 		
 		this.setBackground(null);
 		Color borderColor = new Color(230, 230, 230);

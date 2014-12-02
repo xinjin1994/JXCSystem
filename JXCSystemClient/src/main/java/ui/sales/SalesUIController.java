@@ -4,8 +4,15 @@ import ui.FatherPanel;
 import ui.SalesManagerPanel;
 import ui.UIController;
 import ui.sales.cuspanel.AddCusPanel;
+import ui.sales.cuspanel.ChangeCusPanel;
 import ui.sales.cuspanel.CusPanel;
+import ui.sales.cuspanel.DelCusPanel;
+import ui.sales.cuspanel.FindCusPanel;
+import ui.sales.impanel.ImBackPanel;
+import ui.sales.impanel.ImInPanel;
 import ui.sales.impanel.ImPanel;
+import ui.sales.salespanel.SalesBackPanel;
+import ui.sales.salespanel.SalesInPanel;
 import ui.sales.salespanel.SalesPanel;
 import ui.setting.MyFrame;
 
@@ -20,27 +27,37 @@ public class SalesUIController {
 	private SalesManagerPanel salesManagerPanel;
 	private MyFrame frame;
 	private UIController uiController;
-	private FatherPanel delCusPanel, changeCusPanel, seeCusInfoPanel;
+	private FindCusPanel seeCusInfoPanel;
 	private AddCusPanel addCusPanel;
+	private DelCusPanel delCusPanel;
 	private CusPanel cusPanel;
 	private SalesPanel salesPanel;
 	private ImPanel imPanel;
+	private ImInPanel imInPanel;
+	private ChangeCusPanel changeCusPanel;
+	private ImBackPanel imBackPanel;
+	private SalesInPanel salesInPanel;
+	private SalesBackPanel salesBackPanel;
 	
 	public SalesUIController(UIController uiController, MyFrame frame) {
 		this.frame = frame;
 		this.uiController = uiController;
 		this.salesManagerPanel = new SalesManagerPanel(frame, "Image/Sales/sales.jpg", uiController, this);
 		this.setSalesPanel();
-		this.setCusPanel();
+		this.setAllPanel();
 		frame.setPanel(salesManagerPanel);
 		frame.repaint();
 	}
 	
-	public void setCusPanel() {
+	public void setAllPanel() {
 		addCusPanel = new AddCusPanel(frame,"Image/Sales/对话框/添加客户/addCustomer.jpg",uiController,this);
-//		delCusPanel = new FatherPanel(frame,"Image/Sales/对话框/删除客户/删除客户_背景.jpg",uiController);
-		changeCusPanel = new FatherPanel(frame,"",uiController);
-		seeCusInfoPanel = new FatherPanel(frame,"Image/Sales/对话框/查找客户/查找客户对话框_背景.jpg",uiController);
+		delCusPanel = new DelCusPanel(frame,"Image/Sales/对话框/删除客户/删除_查找客户对话框_背景.jpg",uiController,this);
+		changeCusPanel = new ChangeCusPanel(frame,"Image/Sales/对话框/修改客户/修改客户对话框_背景.jpg",uiController,this);
+		seeCusInfoPanel = new FindCusPanel(frame,"Image/Sales/对话框/查找客户/查找客户对话框_背景.jpg",uiController,this);
+		imInPanel = new ImInPanel(frame,"Image/Sales/对话框/创建进货单/创建进货单_背景.jpg",uiController,this);
+		imBackPanel = new ImBackPanel(frame,"Image/Sales/对话框/创建进货单/创建进货退货单_背景.jpg",uiController,this);
+	    salesInPanel = new SalesInPanel(frame,"Image/Sales/对话框/创建销售单/创建销售单_背景.jpg",uiController,this);
+	    salesBackPanel = new SalesBackPanel(frame,"Image/Sales/对话框/创建销售单/创建销售退货单_背景.jpg",uiController,this);
 	}
 	
 	public void setSalesPanel() {
@@ -93,6 +110,18 @@ public class SalesUIController {
 			break;
 		case 3:
 			frame.setPanel(seeCusInfoPanel);
+			break;
+		case 4:
+			frame.setPanel(imInPanel);
+		    break;
+		case 5:
+			frame.setPanel(imBackPanel);
+			break;
+		case 6:
+			frame.setPanel(salesInPanel);
+			break;
+		case 7:
+			frame.setPanel(salesBackPanel);
 			break;
 		}
 		frame.repaint();

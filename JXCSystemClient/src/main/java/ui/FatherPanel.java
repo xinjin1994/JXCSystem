@@ -29,9 +29,9 @@ public class FatherPanel extends JPanel {
 	private JLabel minimize1, minimize2;
 	private ImageIcon closeImage, closeImage2, miniImage1, miniImage2;
 	
-	public FatherPanel(){
+	/*public FatherPanel(){
 		
-	}
+	}*/
 	
 	public FatherPanel(JFrame frame,String url,UIController controller) {
 		this.controller = controller;

@@ -15,10 +15,13 @@ public interface SalesblService {
 	public String delCustomer(CustomerVO customerVO);
 	
 	//修改客户
-	public String updateCustomer(CustomerVO customerVO);
+	public String updateCustomer(CustomerVO customerVO1,CustomerVO customerVO2);
 	
 	//查找客户
-	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO);
+	public ArrayList<CustomerVO> searchCustomer(String name);
+	
+	//精确查找客户
+	public CustomerVO exactSearch(String name);
 	
 	//添加进货单
 	public String addImport(ImportMenuVO importMenuVO);

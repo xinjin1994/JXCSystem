@@ -61,4 +61,14 @@ public class SalesController implements SalesblService{
 		return sale.addExport_Return(note, number);
 	}
 
+	public ArrayList<CustomerVO> searchCustomer(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CustomerVO exactSearch(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
