@@ -1,8 +1,10 @@
 package po;
 
+import java.io.Serializable;
+
 
 //这个是库存赠送单的PO
-public class SendGiftPO extends InvoicePO {
+public class SendGiftPO extends InvoicePO implements Serializable{
 	
 	public CommodityPO commodity;
 	public int number;

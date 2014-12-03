@@ -3,7 +3,6 @@ package businesslogic.invoicebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import po.CommodityPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
@@ -12,6 +11,7 @@ import po.InvoicePO;
 import po.PatchPO;
 import po.PaymentPO;
 import po.ReceiptPO;
+import po.SendGiftPO;
 import data.invoicedata.InvoiceDataService_Stub;
 import dataservice.invoicedataservice.InvoiceDataService;
 
@@ -56,7 +56,7 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			
 			switch(tempInvoice.getInvoiceType()){
 			
-			case 1: CommodityPO po1=(CommodityPO) tempInvoice;
+			case 1: SendGiftPO po1=(SendGiftPO) tempInvoice;
 			if(commodityInfo.addGood_Data(po1)!=null){
 				return 0;
 			}

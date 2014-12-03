@@ -33,7 +33,7 @@ public class ExportPO extends InvoicePO implements Serializable{
 	
 	
 	public ExportPO copy(){
-		return new ExportPO(customer, exportGoodList, ps, clerk, operator, wareHouse,
+		return new ExportPO(customer.copy(), exportGoodList, ps, clerk, operator, wareHouse,
 				total_money_before, total_money_after, discount, voucher);
 	}
 	

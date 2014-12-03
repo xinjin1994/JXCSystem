@@ -4,23 +4,21 @@ import java.io.Serializable;
 
 public class SaleListPO implements Serializable{
 	public String time;//ʱ��
-	String name;//�ͻ����
+	CommodityPO commodity;
+	CustomerPO customer;
 	String clerk;//ҵ��Ա
-	String wareHouse;//�ֿ�
-	String type;//�ͺ�
-	String commodity;//��Ʒ
-	int price;//����
-	int number;//����
-	int totalmoney;//�ܼ�
+	int wareHouse;//�ֿ�
+	int price;//销售单价
+	int number;//销售数量
+	int totalmoney;//销售总价
 	
-	public SaleListPO(String time, String name, String clerk, String wareHouse,
-			String type, String commodity, int price, int number, int totalmoney) {
+	public SaleListPO(String time,CommodityPO commodity, CustomerPO customer, String clerk,
+			int wareHouse, int price, int number, int totalmoney) {
 		this.time = time;
-		this.name = name;
+		this.commodity=commodity;
 		this.clerk = clerk;
 		this.wareHouse = wareHouse;
-		this.type = type;
-		this.commodity = commodity;
+		this.customer = customer;
 		this.price = price;
 		this.number = number;
 		this.totalmoney = totalmoney;
@@ -29,20 +27,17 @@ public class SaleListPO implements Serializable{
 	public String getTime() {
 		return time;
 	}
-	public String getName() {
-		return name;
-	}
 	public String getClerk() {
 		return clerk;
 	}
-	public String getWareHouse() {
+	public int getWareHouse() {
 		return wareHouse;
 	}
-	public String getType() {
-		return type;
-	}
-	public String getCommodity() {
+	public CommodityPO getCommodity() {
 		return commodity;
+	}
+	public CustomerPO getCustomer(){
+		return customer;
 	}
 	public int getPrice() {
 		return price;
@@ -55,7 +50,7 @@ public class SaleListPO implements Serializable{
 	}
 	
 	public SaleListPO copy(){
-		return new SaleListPO(time, name, clerk, wareHouse, type, commodity, price, number,totalmoney);
+		return new SaleListPO(time, commodity.copy(), customer.copy(), clerk, wareHouse, price, number, totalmoney);
 	}
 
 	

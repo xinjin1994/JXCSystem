@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 import po.CommodityPO;
 import po.PatchPO;
+import po.SendGiftPO;
 import po.SortPO;
 import vo.StockVO;
-import businesslogicservice.commodityblservice.CommodityblService;
 import data.commoditydata.CommodityDataService_Stub;
 import dataservice.commoditydataservice.CommodityDataService;
 
@@ -157,7 +157,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			
 			for(i=0;i<po.size();i++){
 				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
-					com=new CommodityPO(false,name,type,in_price,out_price,po.get(i).note,po.get(i).recent_in_price,po.get(i).recent_out_price,po.get(i).number);
+					com=new CommodityPO(false,name,type,in_price,out_price,po.get(i).getNote(),po.get(i).recent_in_price,po.get(i).recent_out_price,po.get(i).number);
 					if(sto.updateGood(com, com)){
 						return 0;
 					}
@@ -416,7 +416,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			
 			String word="patch:"+com.getName()+","+com.getType()+","+number;
 			systemlog.add(word);
-			PatchPO po=new PatchPO(name, type, number, "patch-099");
+			PatchPO po=new PatchPO(com, number);
 			invoice.add(po);
 			return 0;
 		} catch (RemoteException e) {
@@ -473,7 +473,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		CommodityPO com2 =null;
 		
 		try {
-			com1=sto.findGood(po.getGoodName(),po.getGoodType());
+			com1=sto.findGood(po.getCommodity().getName(),po.getCommodity().getType());
 	
 			if(com1==null){
 				return "失败";
@@ -498,7 +498,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		CommodityPO com2 =null;
 		
 		try {
-			com1=sto.findGood(po.getGoodName(),po.getGoodType());
+			com1=sto.findGood(po.getCommodity().getName(),po.getCommodity().getType());
 	
 			if(com1==null){
 				return "失败";
@@ -545,7 +545,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			
 			for(i=0;i<po.size();i++){
 				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
-					com=new CommodityPO(false,name,type,in_price,out_price,po.get(i).note,po.get(i).recent_in_price,po.get(i).recent_out_price,po.get(i).number);
+					com=new CommodityPO(false,name,type,in_price,out_price,po.get(i).getNote(),po.get(i).recent_in_price,po.get(i).recent_out_price,po.get(i).number);
 					if(sto.updateGood(com, com)){
 						return "0";
 					}
@@ -561,10 +561,16 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return "2";
 	}
 
-	public String addGood_Data(CommodityPO po) {
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////////
+	public String addGood_Data(SendGiftPO po) {
 		// TODO Auto-generated method stub
 		try {
-			sto.addGift(po);
+			sto.addGift(new CommodityPO(null, null, null, 0, 0, null, 0, 0, 0));
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -576,7 +582,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		// TODO Auto-generated method stub
 
 		try {
-			CommodityPO po1=sto.findGood(po.getGoodName(), po.getGoodType());
+			CommodityPO po1=sto.findGood(po.getCommodity().getName(),po.getCommodity().getType());
 			
 			if(po1==null){
 				return null;

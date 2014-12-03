@@ -1,9 +1,11 @@
 package po;
 
+import java.io.Serializable;
+
 
 //这个是库存查看中的单个PO对象
 //用以出入库的商品记录
-public class StockViewPO {
+public class StockViewPO implements Serializable{
 
 	CommodityPO commodity;
 	int number;

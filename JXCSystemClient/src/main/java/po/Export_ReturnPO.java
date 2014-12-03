@@ -36,7 +36,7 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 	
 	
 	public Export_ReturnPO copy(){
-		return new Export_ReturnPO(customer, exportGoodList, ps, clerk, operator, wareHouse,
+		return new Export_ReturnPO(customer.copy(), exportGoodList, ps, clerk, operator, wareHouse,
 				total_money_before, total_money_after, discount, voucher,old_note);
 	}
 	

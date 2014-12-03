@@ -1,8 +1,10 @@
 package po;
 
+import java.io.Serializable;
+
 
 //这个是所有促销策略PO的父类
-public class PromotionPO {
+public class PromotionPO implements Serializable{
 
 	int start_money;
 	int end_money;

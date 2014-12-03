@@ -1,6 +1,8 @@
 package po;
 
-public class ExportGoodPO {
+import java.io.Serializable;
+
+public class ExportGoodPO implements Serializable{
 	
 	CommodityPO commodity;
 	int number;

@@ -26,7 +26,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 
 	public ArrayList<SaleListPO> saleList(String time1, String time2, String good_name,
-			String good_type, String customer_name, String clerk, String wareHouse) {
+			String good_type, String customer_name, String clerk, int wareHouse) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
 		int i=0;
@@ -40,10 +40,10 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 				if((time1==null||fin.get(i).getTime().compareTo(time1)>=0)&&
 					(time2==null||fin.get(i).getTime().compareTo(time2)<=0)&&
 					(good_name==null||fin.get(i).getCommodity().equals(good_name))&&
-					(good_type==null||fin.get(i).getType().equals(good_type))&&
-					(customer_name==null||fin.get(i).getName().equals(customer_name))&&
+					(good_type==null||fin.get(i).getCommodity().getType().equals(good_type))&&
+					(customer_name==null||fin.get(i).getCustomer().getName().equals(customer_name))&&
 					(clerk==null||fin.get(i).getClerk().equals(clerk))&&
-					(wareHouse==null||fin.get(i).getWareHouse().equals(wareHouse))){
+					(wareHouse==0||fin.get(i).getWareHouse()==wareHouse)){
 					
 					array.add(fin.get(i));
 				}
@@ -60,7 +60,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	}
 
 	public ArrayList<AllBillPO> allBill(String time1, String time2, String note_type,
-			String customer_name, String clerk, String warehouse) {
+			String customer_name, String clerk, int warehouse) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
 		try {
@@ -151,7 +151,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public boolean addOperatingCondition(ReceiptPO po) {
 //		financial= new FinancialDataService_Stub();
-		OperatingConditionPO po1=new OperatingConditionPO(po.getTotal(),0,0);
+		OperatingConditionPO po1=new OperatingConditionPO(0,0,po.getTotal(), 0, 0);
 		try {
 			return financial.addOperatingCondition(po1);
 		} catch (RemoteException e) {
@@ -163,7 +163,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public boolean addOperatingCondition(PaymentPO po) {
 //		financial= new FinancialDataService_Stub();
-		OperatingConditionPO po1=new OperatingConditionPO(0,0,po.getTotal());
+		OperatingConditionPO po1=new OperatingConditionPO(po.getTotal(),0,0, 0, 0);
 		try {
 			return financial.addOperatingCondition(po1);
 		} catch (RemoteException e) {

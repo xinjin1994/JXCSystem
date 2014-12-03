@@ -4,34 +4,25 @@ import java.io.Serializable;
 
 public class PatchPO extends InvoicePO implements Serializable{
 	
-	String good_name;//���
-	String good_type;//����
+	CommodityPO commodity;
 	int number;//����
-	String serialNum;//���
 	
-	public PatchPO(String name, String type, int number, String serialNum) {
-		this.good_name = name;
-		this.good_type = type;
+	public PatchPO(CommodityPO commodity, int number) {
+		this.commodity=commodity;
 		this.number = number;
-		this.serialNum = serialNum;
 	}
 	
 	public PatchPO copy(){
-		return new PatchPO(good_name, good_type, number, serialNum);
+		return new PatchPO(commodity.copy(), number);
 	}
 
 	
-	public String getGoodName() {
-		return good_name;
+	public CommodityPO getCommodity(){
+		return commodity;
 	}
-	public String getGoodType() {
-		return good_type;
-	}
+	
 	public int getNumber() {
 		return number;
-	}
-	public String getSerialNum() {
-		return serialNum;
 	}
 	
 }

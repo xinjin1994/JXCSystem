@@ -1,6 +1,8 @@
 package po;
 
-public class WarnPO {
+import java.io.Serializable;
+
+public class WarnPO extends DocumentPO implements Serializable{
 	
 	public CommodityPO commodity;
 	public int warn_number;

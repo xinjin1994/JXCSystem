@@ -17,12 +17,10 @@ public class FinancialTest {
 	public void testSaleList() {
 		Financial financial=new Financial();
 		MockFinancialData mock=new MockFinancialData();
-		SaleListPO po=new SaleListPO("2222/2/2", "name", "clerk", "wareHouse","type",
-				"commodity", 50, 10, 500);
+		SaleListPO po=new SaleListPO(null, null, null, null, 0, 0, 0, 0);
 		mock.arraySale.add(po);
 		financial.financial=mock;
-		assertEquals("�ɹ�",financial.saleList("1111/1/1", "2222/2/2", "good_name", "good_type",
-				"customer_name","clerk", "1"));
+		assertEquals("�ɹ�",financial.saleList(null, null, null, null, null, null, 0));
 	}
 
 	@Test

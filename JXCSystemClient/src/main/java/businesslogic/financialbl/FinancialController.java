@@ -17,21 +17,21 @@ public class FinancialController implements FinancialblService{
 	public Financial financial=new Financial();
 
 	public ArrayList<SalesDetailVO> saleList(String time1, String time2, String good_name,
-			String good_type, String customer_name, String clerk, String warehouse) {
+			String good_type, String customer_name, String clerk, int warehouse) {
 		// TODO Auto-generated method stub
 		ArrayList<SaleListPO> array=financial.saleList(time1, time2, good_name, good_type, customer_name, clerk, warehouse);
 	
 		ArrayList<SalesDetailVO> res=new ArrayList<SalesDetailVO>();
 		int i=0;
 		for(i=0;i<array.size();i++){
-			res.add(new SalesDetailVO(array.get(i).time,array.get(i).getCommodity(),array.get(i).getType(),array.get(i).getNumber(),array.get(i).getPrice(),array.get(i).getTotalmoney()));
+			res.add(new SalesDetailVO(array.get(i).time,array.get(i).getCommodity().getName(),array.get(i).getCommodity().getType(),array.get(i).getNumber(),(double) array.get(i).getPrice(),(double) array.get(i).getTotalmoney()));
 		}
 		
 		return res;
 	}
 
 	public ArrayList<AllBillVO> allBill(String time1, String time2, String note_type,
-			String customer_name, String clerk, String warehouse) {
+			String customer_name, String clerk, int warehouse) {
 		// TODO Auto-generated method stub
 		ArrayList<AllBillPO> array=financial.allBill(time1, time2, note_type, customer_name, clerk, warehouse);
 		ArrayList<AllBillVO> res=new ArrayList<AllBillVO>();
