@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * 实现table初始化，内容添加，删除，显示，查找等操作
  */
 public class MyTable extends JTable{
-//	JPanel backPanel;
+	JPanel backPanel;
 	static JPanel tablePanel;
 	static JScrollPane tableSp ;
 	static JTable table;
@@ -28,9 +28,9 @@ public class MyTable extends JTable{
 	Color oddColor = new Color(245,190,185);
 	Color fontColor = new Color(159,122,116);
 	
-	public MyTable(){
+	public MyTable(JPanel backPanel){
 		
-//		this.backPanel = backPanel;
+		this.backPanel = backPanel;
 		setPanel();
 	}
 	
@@ -40,11 +40,11 @@ public class MyTable extends JTable{
 	private  void setPanel() {
 		tablePanel = new JPanel();
 		tablePanel.setLayout(null);
-		tablePanel.setBounds(350, 75,450 ,525);
+		tablePanel.setBounds(0,0,800 ,600);
 		tablePanel.removeAll();
 		tablePanel.setOpaque(false);
 		tablePanel.setVisible(true);
-//		backPanel.add(tablePanel);
+		backPanel.add(tablePanel);
 		
 	}
 	
@@ -74,7 +74,7 @@ public class MyTable extends JTable{
 
 		
 		tableSp = new JScrollPane(table);
-		tableSp.setBounds(55,35,350,410);
+		tableSp.setBounds(100,100,650,500);
 		
 		tableSp.setBorder(new LineBorder(Color.gray));
 		tableSp.getViewport().setOpaque(false);

@@ -37,13 +37,12 @@ public class SalesManagerPanel extends FatherPanel {
 		this.controller = controller;
 		this.salesController = salesController;
 		this.addButton();
-        this.testTable();
 	}
 	
 	public void removeThis(JFrame frame) {
 		frame.remove(this);
 	}
-	private void testTable() {
+/*	private void testTable() {
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("a;b;c;e");
 		info.add("s,r,t,h");
@@ -55,7 +54,7 @@ public class SalesManagerPanel extends FatherPanel {
 		testTable.find(1, 2);
 		testTable.del(3);
 		
-	}
+	}*/
 
 
 	public void addButton() {
