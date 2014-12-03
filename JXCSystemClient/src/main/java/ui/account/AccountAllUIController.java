@@ -14,6 +14,7 @@ import ui.UIController;
 import ui.setting.BackButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import vo.AccountVO;
 
 public class AccountAllUIController extends UIController{
 	private MyFrame frame;
@@ -42,6 +43,8 @@ public class AccountAllUIController extends UIController{
 	private IniCusPanel iniCusPanel;
 	private IniAccPanel iniAccPanel;
 	
+	private AccountDetailPanel accountDetailPanel;
+	
 	FatherPanel prePanel;
 	AccountAllUIController controller;
 	Listener backListener;
@@ -55,6 +58,7 @@ public class AccountAllUIController extends UIController{
 	
 	public void addMainPanel(){
 		new AccountUIController(this, frame);
+		frame.repaint();
 	}
 	
 	public void findAccount(){
@@ -123,8 +127,8 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
-	public void confirmAcc(){
-		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Account/确认账户信息.jpg", this);
+	public void confirmAcc(AccountVO acc,String ope){
+		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Account/确认账户信息.jpg", this,acc,ope);
 		frame.setPanel(confirmAccPanel);
 		frame.repaint();
 	}
@@ -159,6 +163,11 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
+	public void accountDetail(AccountVO foundAcc){
+		accountDetailPanel = new AccountDetailPanel(frame, "Image/Account/accDetail.jpg", this ,foundAcc);
+		frame.setPanel(accountDetailPanel);
+		frame.repaint();
+	}
 	
 //	
 	public void setBack_first(FatherPanel prePanel){
@@ -200,7 +209,7 @@ public class AccountAllUIController extends UIController{
 				System.out.println("lk");
 				frame.remove(prePanel);
 				AccountAllUIController.this.addMainPanel();
-				frame.repaint();
+			
 			}
 			
 		}

@@ -4,7 +4,8 @@ import javax.swing.JTextField;
 
 public class MyTextField extends JTextField{
 	
-	public MyTextField(int width,int height){
-		this.setLocation(width, height);
+	public MyTextField(int x,int y){
+		this.setLocation(x, y);
+		this.setHorizontalAlignment(CENTER);
 	}
 }

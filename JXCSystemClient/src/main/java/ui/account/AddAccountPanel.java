@@ -6,15 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
 import vo.AccountVO;
-
+/**
+ * 增加账户，在该类里会判断是否能够添加账户
+ * @author ZYC
+ * @see ConfirmAccPanel
+ */
 public class AddAccountPanel extends FatherPanel implements ActionListener{
 	AccountAllUIController uiController;
-	Color font = new Color(225,225,225);
 	String nameString;
 	double balance;
 	
@@ -43,8 +47,9 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 		name = new MyTextFieldBorder(275, 245);
 		price = new MyTextFieldBorder(275, 333);
 		
-		name.setForeground(font);
-		price.setForeground(font);
+		name.setForeground(new ColorFactory().greyFont);
+		price.setForeground(new ColorFactory().greyFont);
+		
 		this.add(name);
 		this.add(price);
 		
@@ -61,6 +66,11 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 			
 			name.setText("");
 			price.setText("");
+			
+			frame.remove(this);
+			
+			uiController.confirmAcc(newAcc,"add");//跳转到确认界面（允许添加账户时）
+			
 		}
 		
 	}

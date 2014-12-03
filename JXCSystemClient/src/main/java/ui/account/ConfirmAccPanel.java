@@ -1,19 +1,92 @@
 package ui.account;
 
-import ui.FatherPanel;
-import ui.setting.MyFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ConfirmAccPanel extends FatherPanel{
+import businesslogic.accountbl.Account;
+import ui.setting.ForwardButton;
+import ui.setting.MyButton;
+import ui.setting.MyFrame;
+import ui.setting.MyLabel;
+import ui.setting.resultPanels.ResultPanelController;
+import vo.AccountVO;
+
+public class ConfirmAccPanel extends AccountDetailPanel implements ActionListener{
+	
+	MyButton forwardButtonAdd,forwardButtonDel;
+	AccountVO acc;
+	String ope;
+	ResultPanelController resController;
 	AccountAllUIController uiController;
-	public ConfirmAccPanel(MyFrame frame,String url,
-			AccountAllUIController uiController){
-		super(frame,url,uiController);
+	/**
+	 * 
+	 * @param frame
+	 * @param url
+	 * @param uiController
+	 * @param foundAcc
+	 * @param ope   解析操作，有添加账户，删除账户两种类型的操作
+	 */
+	public ConfirmAccPanel(MyFrame frame, String url,
+			AccountAllUIController uiController, AccountVO acc,String ope) {
+		super(frame, url, uiController, acc);
+		this.acc = acc;
+		this.ope = ope;
 		this.uiController = uiController;
-		this.repaint();
+		resController = new ResultPanelController(uiController);
+		setOpe();
+	}
+
+	private void setOpe() {
+		if(ope.equals("add")){
+			setForwardAdd();
+		}else if(ope.equals("del")){
+			setForwardDel();
+		}
+	}
+
+	private void setForwardDel() {
+		ForwardButton forwardDel = new ForwardButton(607, 393);
+		forwardButtonDel = forwardDel.forward_white;
 		
-		uiController.setBack_first(this);
+		this.add(forwardButtonDel);
+		forwardButtonDel.addActionListener(this);
+	}
+
+	private void setForwardAdd() {
+		System.out.println("kld");
+		ForwardButton forward = new ForwardButton(607, 393);
+		forwardButtonAdd = forward.forward_white;
 		
+		this.add(forwardButtonAdd);
+		forwardButtonAdd.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == forwardButtonAdd){
+			addAcc();
+		}else if(e.getSource() == forwardButtonDel){
+			delAcc();
+		}
 		
 	}
+	/**
+	 * 向bl层传送数据accountVO,删除账户
+	 * @param 
+	 */	
+	private void delAcc() {
+	//	resController.delAcc();
+	}
+
+	/**
+	 * 向bl层传送数据accountVO,添加账户
+	 * @param 
+	 */
+	private void addAcc() {
+		System.out.println("kl");
+	//	resController.addAcc();
+	}
+	/**
+	 * 当添加或者删除账户成功后显示结果Label
+	 */
 	
 }
