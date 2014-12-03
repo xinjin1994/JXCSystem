@@ -19,18 +19,28 @@ public class UIController {
 	private SalesPersonPanel salesPerson;
 	
 	
+	/*public UIController(){
+		
+	}*/
+	
+	/*public UIController() {
+=======
+//	public UIController(){
+//		
+//	}
+//	*/
 	public UIController() {
 
 		this.frame = new MyFrame();
-//	    this.welcomePanel();
-	    this.AccountPanel();
+	    this.welcomePanel();
+//	    this.SalesManagerPanel();
 	}
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
-		this.AccountPanel();
+//		this.AccountPanel();
 
-//		this.SalesManagerPanel();
+		this.SalesManagerPanel();
 
 	}
 
@@ -51,7 +61,7 @@ public class UIController {
 	}
 
 	public void SalesManagerPanel() {
-		frame.remove(loginPanel);
+//		frame.remove(loginPanel);
 		new SalesUIController(this, frame);
 	}
 	
@@ -72,6 +82,12 @@ public class UIController {
 		frame.remove(loginPanel);
 		new ManagerUIController(this, frame);
 		frame.repaint();
+	}
+	
+	public void FinPersonPanel() {
+		financialPerson = new FinPersonPanel(frame,"",this);
+		frame.remove(loginPanel);
+		frame.setPanel(financialPerson);
 	}
 
 	public void CommodityPanel() {

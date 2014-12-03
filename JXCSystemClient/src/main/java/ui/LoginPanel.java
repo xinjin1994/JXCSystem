@@ -117,7 +117,7 @@ public class LoginPanel extends FatherPanel {
 		public void actionPerformed(ActionEvent e) {
 			UserblService userbl = new UserController();
 			int identity = userbl.login(userText, passwordText);
-			identity = 5;
+			identity = 3;
 			userText = user.getText();
 			passwordText = new String(password.getPassword());
 			switch (identity) {
@@ -133,7 +133,7 @@ public class LoginPanel extends FatherPanel {
 				controller.SalesManagerPanel();
 				break;
 			case 4:
-				controller.AccountPanel();
+				controller.FinPersonPanel();
 				break;
 			case 5:
 				controller.FinManagerPanel();
