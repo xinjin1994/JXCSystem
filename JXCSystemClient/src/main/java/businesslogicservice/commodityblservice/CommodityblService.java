@@ -11,20 +11,23 @@ import vo.WarnVO;
 public interface CommodityblService {
 
 	//添加商品
-	public int addCommodity(CommodityVO vo1,SortVO vo2);
+	public int addCommodity_up(CommodityVO vo1,SortVO vo2);
 
 	//添加商品
 //	public int addCommodity(String name, String type, int in_price,
 //			int out_price);
 	
 	//删除商品
-	public int delCommodity(CommodityVO vo);
+	public int delCommodity_up(CommodityVO vo);
 	
 	//删除商品
-	public int updateCommodity(CommodityVO vo1,CommodityVO vo2);
+	public int updateCommodity_up(CommodityVO vo1,CommodityVO vo2);
 
 	//模糊查找商品
-	public ArrayList<CommodityVO> searchCommodity(String word);
+	public ArrayList<CommodityVO> searchFuzzyCommodity_up(String word);
+	
+	//精确查找商品
+	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo);
 
 	//添加分类
 	public int addSort(SortVO vo1, SortVO vo2);
