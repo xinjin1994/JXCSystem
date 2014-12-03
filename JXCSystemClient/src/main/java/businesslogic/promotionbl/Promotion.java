@@ -29,7 +29,7 @@ public class Promotion implements PromotionblService{
 			String time1, String time2) {
 		// TODO Auto-generated method stub
 		//pro=new PromotionDataService_Stub(); 
-		DiscountPO dis=new DiscountPO(1,"t1","t2",1000,2000,50);
+		DiscountPO dis=new DiscountPO(1,"t1","t2",1000,2000);
 		try {
 			if(promotion.addDiscount(dis)){
 				systemlog.add("AddDiscount:");
@@ -47,7 +47,7 @@ public class Promotion implements PromotionblService{
 	public int delPromotion(String note) {
 		// TODO Auto-generated method stub
 		//PromotionDataService pro=new PromotionDataService_Stub(); 
-		DiscountPO dis= new DiscountPO(1,"t1","t2",1000,2000,50);
+		DiscountPO dis= new DiscountPO(1,"t1","t2",1000,2000);
 		try {
 			if(promotion.delDiscount(dis)){
 				systemlog.add("DelDiscount:");
@@ -64,7 +64,7 @@ public class Promotion implements PromotionblService{
 		// TODO Auto-generated method stub
 //		PromotionDataService pro=new PromotionDataService_Stub(); 
 		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, "10", 10, 10, 10);
-		ProGiftPO dis=new ProGiftPO(gift, time1, time2);
+		ProGiftPO dis=new ProGiftPO(gift, time1, time2, start_money, start_money, start_money);
 		try {
 			if(promotion.addGift(dis)){
 				systemlog.add("AddGift:");
