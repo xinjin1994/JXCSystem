@@ -44,7 +44,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener{
 		agent.setForeground(new ColorFactory().acc);
 		
 		for(int i = 0;i < accTransList.length;i++){
-			accTransList[i] = new MyTextFieldTrans(x, y, i, i)
+		//	accTransList[i] = new MyTextFieldTrans(x, y, i, i)
 		}
 	}
 	

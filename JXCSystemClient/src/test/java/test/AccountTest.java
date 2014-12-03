@@ -39,7 +39,7 @@ public class AccountTest extends Account {
 		Account account=new Account();
 		MockAccountData mock=new MockAccountData("mainAccount",0);
 		account.account=mock;
-		assertEquals("�ɹ�",account.checkAccount());
+		assertEquals("�ɹ�",account.checkAccount_up());
 	}
 
 }

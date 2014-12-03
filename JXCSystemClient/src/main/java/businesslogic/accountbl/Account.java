@@ -22,7 +22,7 @@ import dataservice.accountdataservice.AccountDataService;
 //2 账户名不存在
 //3 账户中仍存在余额，不能删除
 
-public class Account implements AccountblService, businesslogic.financialbl.AccountInfo,
+public class Account implements businesslogic.financialbl.AccountInfo,
 			businesslogic.initializationlbl.AccountInfo, businesslogic.invoicebl.AccountInfo {
 
 	public AccountDataService account=new AccountDataService_Stub("mainAccount",0);
@@ -31,7 +31,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 	public SalesInfo sales=new Sales();
 	public SystemlogInfo systemlog=new Systemlog();
 	
-	public AccountVO checkAccount() {
+	public AccountVO checkAccount_up() {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		try {
@@ -47,7 +47,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return null;
 	}
 
-	public int addAccount(AccountVO vo) {
+	public int addAccount_up(AccountVO vo) {
 		// TODO Auto-generated method stub
 		try {
 			
@@ -68,7 +68,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return -1;
 	}
 
-	public int delAccount(AccountVO vo) {
+	public int delAccount_up(AccountVO vo) {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		AccountPO acc;
@@ -95,7 +95,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return -1;
 	}
 
-	public int updateAccount(AccountVO vo1,AccountVO vo2) {
+	public int updateAccount_up(AccountVO vo1,AccountVO vo2) {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		AccountPO acc1;
@@ -126,7 +126,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return -1;
 	}
 
-	public ArrayList<AccountVO> searchAccount(String word) {
+	public ArrayList<AccountVO> searchFuzzyAccount_up(String word) {
 		// TODO Auto-generated method stub
 		ArrayList<AccountVO> vo=new ArrayList<AccountVO>();
 		try {	
@@ -149,7 +149,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return vo;
 	}
 
-	public int addReceipt(GetVO vo) {
+	public int addReceipt_up(GetVO vo) {
 		// TODO Auto-generated method stub
 		
 		ReceiptPO po= new ReceiptPO(vo);
@@ -160,7 +160,7 @@ public class Account implements AccountblService, businesslogic.financialbl.Acco
 		return 0;
 	}
 
-	public int addPayment(PayVO vo) {
+	public int addPayment_up(PayVO vo) {
 		// TODO Auto-generated method stub
 		
 		PaymentPO po= new PaymentPO(vo);

@@ -227,6 +227,14 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
+	public ArrayList<CustomerVO> searchCustomer(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public CustomerVO exactSearch(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 //	public String delCustomer(CustomerVO customerVO) {

@@ -10,46 +10,51 @@ import vo.PayVO;
 public class AccountController implements AccountblService{
 	public Account account=new Account();
 
-	public AccountVO checkAccount() {
+	public AccountVO checkAccount_up() {
 		// TODO Auto-generated method stub
-		AccountVO message=account.checkAccount();
+		AccountVO message=account.checkAccount_up();
 		return message;
 	}
 
-	public int addAccount(AccountVO vo) {
+	public int addAccount_up(AccountVO vo) {
 		// TODO Auto-generated method stub
-		int message=account.addAccount(vo);
+		int message=account.addAccount_up(vo);
 		return message;
 	}
 
-	public int delAccount(AccountVO vo) {
+	public int delAccount_up(AccountVO vo) {
 		// TODO Auto-generated method stub
-		int message=account.delAccount(vo);
+		int message=account.delAccount_up(vo);
 		return message;
 	}
 
-	public int updateAccount(AccountVO vo1,AccountVO vo2) {
+	public int updateAccount_up(AccountVO vo1,AccountVO vo2) {
 		// TODO Auto-generated method stub
-		int message=account.updateAccount(vo1,vo2);
+		int message=account.updateAccount_up(vo1,vo2);
 		return message;
 	}
 
-	public ArrayList<AccountVO> searchAccount(String word) {
+	public ArrayList<AccountVO> searchFuzzyAccount_up(String word) {
 		// TODO Auto-generated method stub
-		ArrayList<AccountVO> result=account.searchAccount(word);
+		ArrayList<AccountVO> result=account.searchFuzzyAccount_up(word);
 		return result;
 	}
 
-	public int addReceipt(GetVO vo) {
+	public int addReceipt_up(GetVO vo) {
 		// TODO Auto-generated method stub
-		int message=account.addReceipt(vo);
+		int message=account.addReceipt_up(vo);
 		return message;
 	}
 
-	public int addPayment(PayVO vo) {
+	public int addPayment_up(PayVO vo) {
 		// TODO Auto-generated method stub
-		int message=account.addPayment(vo);
+		int message=account.addPayment_up(vo);
 		return message;
+	}
+
+	public ArrayList<AccountVO> searchAccurateAccount_up(AccountVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

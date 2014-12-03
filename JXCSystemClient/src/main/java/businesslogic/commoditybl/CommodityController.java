@@ -15,7 +15,7 @@ public class CommodityController implements CommodityblService{
 
 	public Commodity commodity;
 	
-	public int addCommodity(CommodityVO vo1,SortVO vo2) {
+	public int addCommodity_up(CommodityVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
 		commodity=new Commodity();
 		
@@ -28,17 +28,17 @@ public class CommodityController implements CommodityblService{
 //		return commodity.addCommodity(name, type, in_price, out_price);
 //	}
 
-	public int delCommodity(CommodityVO vo) {
+	public int delCommodity_up(CommodityVO vo) {
 		// TODO Auto-generated method stub
 		return commodity.delCommodity(vo.name,vo.type);
 	}
 
-	public int updateCommodity(CommodityVO vo1,CommodityVO vo2) {
+	public int updateCommodity_up(CommodityVO vo1,CommodityVO vo2) {
 		// TODO Auto-generated method stub
 		return commodity.updateCommodity(vo1.name, vo1.type, (int)vo2.inValue, (int)vo2.outValue);
 	}
 
-	public ArrayList<CommodityVO> searchCommodity(String word) {
+	public ArrayList<CommodityVO> searchFuzzyCommodity_up(String word) {
 		// TODO Auto-generated method stub
 		ArrayList<CommodityPO> po=commodity.searchCommodity(word);
 		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
@@ -100,6 +100,11 @@ public class CommodityController implements CommodityblService{
 	public int warn(WarnVO vo) {
 		// TODO Auto-generated method stub
 		return commodity.warn(vo.name,vo.type,vo.number);
+	}
+
+	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
