@@ -2,29 +2,25 @@ package po;
 
 import java.io.Serializable;
 
-public class ProGiftPO implements Serializable{
+public class ProGiftPO extends PromotionPO implements Serializable{
 	CommodityPO gift;//Ҫ�������Ʒ
-	String time1;//��ʼ����ʱ��
-	String time2;//��������ʱ��
+	int number;
 	
-	public ProGiftPO(CommodityPO gift, String time1, String time2) {
-		super();
+	public ProGiftPO(CommodityPO gift, String start_time, String end_time,int number,
+			int start_money,int end_money) {
+		super(start_time,end_time,start_money,end_money);
 		this.gift = gift;
-		this.time1 = time1;
-		this.time2 = time2;
+		this.number=number;
 	}	
 	
 	public ProGiftPO copy(){
-		return new ProGiftPO(gift, time1, time2);
+		return new ProGiftPO(gift, start_time, end_time,number,start_money,end_money);
 	}
 
 	public CommodityPO getGift() {
 		return gift;
 	}
-	public String getTime1() {
-		return time1;
-	}
-	public String getTime2() {
-		return time2;
+	public int getNumber(){
+		return number;
 	}
 }

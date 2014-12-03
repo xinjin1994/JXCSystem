@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-public class InvoicePO implements Serializable{
+public class InvoicePO extends DocumentPO implements Serializable{
 //	String draft_condition;//�ݸ�
 //	String submit_condition;//�ύ״̬
 //	String approve_condition;//�����
@@ -10,7 +10,7 @@ public class InvoicePO implements Serializable{
 	int condition;   //0 代表草稿，1代表待审批。2代表通过。3代表失败
 	int invoice_type;        //1代表CommodityPO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
 					 //5代表Export_Return， 6代表PatchPO， 7代表ReceiptPO， 8代表PaymentPO
-	String note;
+	String invoice_note;
 	
 
 	public InvoicePO() {
@@ -61,13 +61,13 @@ public class InvoicePO implements Serializable{
 	public InvoicePO invoice_copy(InvoicePO po1,InvoicePO po2){
 		po1.condition=po2.condition;
 		po1.invoice_type=po2.invoice_type;
-		po1.note=po2.note;
+		po1.invoice_note=po2.invoice_note;
 		return po1;
 	}
 
-	public String getNote_Invoice() {
+	public String getInvoiceNote() {
 		// TODO Auto-generated method stub
-		return note;
+		return invoice_note;
 	}
 	
 	public int getInvoiceType(){
@@ -102,6 +102,10 @@ public class InvoicePO implements Serializable{
 		return po8.getNote();
 		}
 		return null;
+	}
+	
+	public int getCondition(){
+		return condition;
 	}
 
 	
