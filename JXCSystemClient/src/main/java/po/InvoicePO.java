@@ -21,8 +21,8 @@ public class InvoicePO extends DocumentPO implements Serializable{
 		
 		switch(invoice_type){
 		
-		case 1: CommodityPO po1=(CommodityPO) this;
-		CommodityPO po1_tem=po1.copy();
+		case 1: SendGiftPO po1=(SendGiftPO) this;
+		SendGiftPO po1_tem=po1.copy();
 		return invoice_copy((InvoicePO) po1_tem,(InvoicePO) po1);
 			
 		case 2: ImportPO po2=(ImportPO) this;
@@ -77,7 +77,7 @@ public class InvoicePO extends DocumentPO implements Serializable{
 	public String getNote(){
 		switch(invoice_type){
 		
-		case 1: CommodityPO po1=(CommodityPO) this;
+		case 1: SendGiftPO po1=(SendGiftPO) this;
 		return po1.getNote();
 			
 		case 2: ImportPO po2=(ImportPO) this;

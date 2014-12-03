@@ -12,5 +12,17 @@ public class SendGiftPO extends InvoicePO {
 		this.number=number;
 		this.note=note;
 	}
+	
+	public CommodityPO getCommodity(){
+		return commodity;
+	}
+	public int getNumber(){
+		return number;
+	}
+	
+	
+	public SendGiftPO copy(){
+		return new SendGiftPO(commodity.copy(),number,note);
+	}
 
 }
