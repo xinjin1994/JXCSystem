@@ -23,6 +23,10 @@ public class ResultPanelController extends UIController{
 	public void addAcc() {
 		
 	}
+	public void chaAcc() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

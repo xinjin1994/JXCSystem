@@ -1,12 +1,16 @@
 package ui;
 
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import ui.account.AccountUIController;
 import ui.setting.MyButton;
+import ui.setting.MyLabel;
 
 //财务经理
 public class AccountPanel extends FatherPanel{
@@ -17,7 +21,8 @@ public class AccountPanel extends FatherPanel{
 	
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage;
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage};
-	private MyButton detail, back;
+	private MyButton detail, back,refresh;
+	private JLabel remind;
 	
 	private AccountUIController accountUIController;
 	private String images_ori[] = new String[]{"Image/Account/button/accManage.png",
@@ -48,6 +53,10 @@ public class AccountPanel extends FatherPanel{
 			this.add(buttons[i]);
 			buttons[i].addMouseListener(listener);
 		}
+		
+		refresh = new MyButton("Image/refresh.png",25,514,"Image/refresh_stop.png","Image/refresh_stop.png");
+		this.add(refresh);
+		refresh.addMouseListener(listener);
 
 	}
 	
@@ -57,6 +66,14 @@ public class AccountPanel extends FatherPanel{
 		}
 
 		public void mousePressed(MouseEvent e) {
+			if (e.getSource() == refresh){
+				ImageIcon re = new ImageIcon("Image/remind.png");
+				remind = new JLabel(re);
+				remind.setBounds(32, 276,5,5);
+				AccountPanel.this.add(remind);
+				AccountPanel.this.repaint();
+				System.out.println("fff");
+			}//刷新数据，如果有新的审批单据返回情况，收支单据button上面会出现红点
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -77,10 +94,12 @@ public class AccountPanel extends FatherPanel{
 		}
 
 		public void mouseExited(MouseEvent e) {
+		
 		}
 		
 	}
 
+	
 	public void addRestButton() {
 		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
 				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");

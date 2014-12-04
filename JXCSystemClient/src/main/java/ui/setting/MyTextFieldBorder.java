@@ -12,6 +12,7 @@ public class MyTextFieldBorder extends MyTextField{
 		super(x, y);
 		
 		this.setOpaque(false);
+
 		Color borderColor = new Color(230, 230, 230);
 		this.setBorder(new LineBorder(borderColor));
 		this.setSize(319,37);

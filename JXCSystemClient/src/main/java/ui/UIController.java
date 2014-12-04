@@ -19,16 +19,11 @@ public class UIController {
 	private SalesPersonPanel salesPerson;
 	
 	
-	/*public UIController(){
+	public UIController(){
 		
-	}*/
+	}
 	
-	/*public UIController() {
-=======
-//	public UIController(){
-//		
-//	}
-//	*/
+
 	public UIController() {
 
 		this.frame = new MyFrame();
@@ -38,9 +33,9 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
-//		this.AccountPanel();
+		this.AccountPanel();
 
-		this.SalesManagerPanel();
+//		this.SalesManagerPanel();
 
 	}
 

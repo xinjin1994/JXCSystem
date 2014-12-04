@@ -15,6 +15,8 @@ import ui.setting.BackButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import vo.AccountVO;
+import vo.GetVO;
+import vo.PayVO;
 
 public class AccountAllUIController extends UIController{
 	private MyFrame frame;
@@ -97,14 +99,14 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
-	public void confirmReceipt(){
-		confirmReceiptPanel = new ConfirmReceiptPanel(frame, "Image/Account/创建收款单_确认信息.jpg", this);
+	public void confirmReceipt(GetVO newReceipt){
+		confirmReceiptPanel = new ConfirmReceiptPanel(frame, "Image/Account/创建收款单_确认信息.jpg", this,newReceipt);
 		frame.setPanel(confirmReceiptPanel);
 		frame.repaint();
 	}
 	
-	public void confirmPayment() {
-		confirmPaymentPanel = new ConfirmPaymentPanel(frame, "Image/Account/创建付款单_确认信息.jpg", this);
+	public void confirmPayment(PayVO newPayment) {
+		confirmPaymentPanel = new ConfirmPaymentPanel(frame, "Image/Account/创建付款单_确认信息.jpg", this,newPayment);
 		frame.setPanel(confirmPaymentPanel);
 		frame.repaint();
 	}
@@ -169,7 +171,10 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
-//	
+	/**
+	 * 以下三个是account模块中的返回按钮，都会返回到主界面
+	 * @param prePanel
+	 */
 	public void setBack_first(FatherPanel prePanel){
 		this.prePanel = prePanel;
 		BackButton back = new BackButton();
@@ -209,11 +214,8 @@ public class AccountAllUIController extends UIController{
 				System.out.println("lk");
 				frame.remove(prePanel);
 				AccountAllUIController.this.addMainPanel();
-			
 			}
-			
 		}
-
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
