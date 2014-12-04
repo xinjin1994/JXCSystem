@@ -16,7 +16,7 @@ public class FinancialController implements FinancialblService{
 	
 	public Financial financial=new Financial();
 
-	public ArrayList<SalesDetailVO> saleList(String time1, String time2, String good_name,
+	public ArrayList<SalesDetailVO> saleList_up(String time1, String time2, String good_name,
 			String good_type, String customer_name, String clerk, int warehouse) {
 		// TODO Auto-generated method stub
 		ArrayList<SaleListPO> array=financial.saleList(time1, time2, good_name, good_type, customer_name, clerk, warehouse);
@@ -30,7 +30,7 @@ public class FinancialController implements FinancialblService{
 		return res;
 	}
 
-	public ArrayList<AllBillVO> allBill(String time1, String time2, String note_type,
+	public ArrayList<AllBillVO> allBill_up(String time1, String time2, String note_type,
 			String customer_name, String clerk, int warehouse) {
 		// TODO Auto-generated method stub
 		ArrayList<AllBillPO> array=financial.allBill(time1, time2, note_type, customer_name, clerk, warehouse);
@@ -52,7 +52,7 @@ public class FinancialController implements FinancialblService{
 		return res;
 	}
 
-	public ConditionVO operatingCondition(String time1, String time2) {
+	public ConditionVO operatingCondition_up(String time1, String time2) {
 		// TODO Auto-generated method stub
 		OperatingConditionPO po=financial.operatingCondition(time1, time2);
 		ConditionVO vo=new ConditionVO();
