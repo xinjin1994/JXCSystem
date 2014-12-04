@@ -14,7 +14,7 @@ public class CommodityPO implements Serializable{
 	public int recent_in_price;//���һ�ν��
 	public int recent_out_price;//���һ���ۼ�
 	public int number;//��Ʒ����
-	boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
+	public boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
 	public int warn;
 	
 	

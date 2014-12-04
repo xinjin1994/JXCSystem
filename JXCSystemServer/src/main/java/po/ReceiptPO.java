@@ -3,7 +3,6 @@ package po;
 import java.io.Serializable;
 
 
-
 public class ReceiptPO extends InvoicePO implements Serializable{
 	String serialnum;//���ݱ��
 	String operator;//����Ա
@@ -31,6 +30,22 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 		return new ReceiptPO(serialnum, operator, name, account, ps, price);
 	}
 	
+//	public ReceiptPO(GetVO vo){
+//		this.serialnum=vo.id;
+//		this.operator=vo.operator;
+//		this.name=vo.cusName;
+//		account=new String[vo.transferList.length];
+//		ps=new String[vo.transferList.length];
+//		price=new int[vo.transferList.length];
+//		int i=0;
+//		for(i=0;i<vo.transferList.length;i++){
+//			account[i]=vo.transferList[i].bankAccount;
+//			ps[i]=vo.transferList[i].remark;
+//			price[i]=(int) vo.transferList[i].transferValue;
+//		}
+//		total=(int) vo.total;
+//	}
+	
 	public String getSerialnum() {
 		return serialnum;
 	}
@@ -53,8 +68,7 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 		return total;
 	}
 	
-	public int getNote(){
-		String[] str=serialnum.split("-");
-		return Integer.parseInt(str[1]);
+	public String getNote(){
+		return serialnum;
 	}
 }

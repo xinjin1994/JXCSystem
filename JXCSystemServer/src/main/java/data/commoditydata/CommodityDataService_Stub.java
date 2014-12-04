@@ -181,11 +181,11 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public CommodityPO findName(String name) {
 
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		return new CommodityPO(null, name, name, 0, 0, name, 0, 0, 0);
 	}
 
 	public CommodityPO findType(String type) {
-		return new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		return new CommodityPO(null, type, type, 0, 0, type, 0, 0, 0);
 	}
 
 	public boolean addGood(CommodityPO po1, SortPO po2) {
@@ -317,7 +317,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 
 	public ArrayList<CommodityPO> getAll() {
-		CommodityPO com=new CommodityPO(true,"name","type",10,10,10,20,20,100);
+		CommodityPO com=new CommodityPO(null, null, null, 0, 0, null, 0, 0, 0);
 		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
 		array.add(com);
 		return array;

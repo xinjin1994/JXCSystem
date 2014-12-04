@@ -4,42 +4,64 @@ import java.io.Serializable;
 
 public class OperatingConditionPO implements Serializable{
 
-	int income;//���ú�����
+	int sale_income;//���ú�����
+	int good_income;
+	int sale_outcome;
+	int good_outcome;
 	int discount;//����
-	int outcome;//֧��
-//	int profit;//����
+	int profit;//����
 	
-	public OperatingConditionPO(int income, int discount, int outcome) {
+	public OperatingConditionPO(int sale_income,int good_income, int sale_outcome,int good_outcome,
+			int discount) {
 		super();
-		this.income = income;
+		this.sale_income = sale_income;
+		this.good_income=good_income;
+		this.sale_outcome=sale_outcome;
+		this.good_outcome=good_outcome;
 		this.discount = discount;
-		this.outcome = outcome;
+		profit=sale_income+good_income-sale_outcome-good_outcome-discount;
 	}
 	
 	public OperatingConditionPO copy(){
-		return new OperatingConditionPO(income,discount,outcome);
+		return new OperatingConditionPO(sale_income, good_income, sale_outcome, good_outcome, discount);
 	}
 
-	public int getIncome() {
-		return income;
+	public int getSaleIncome(){
+		return sale_income;
 	}
-
-	public int getDiscount() {
+	public int getGoodIncome(){
+		return good_income;
+	}
+	public int getSaleOutcome(){
+		return sale_outcome;
+	}
+	public int getGoodOutcome(){
+		return good_outcome;
+	}
+	public int getDiscount(){
 		return discount;
-	}
-
-	public int getOutcome() {
-		return outcome;
 	}
 	
 	public int getProfit(){
-		return income-outcome;
+		return profit;
+	}
+	
+	
+	public int getIncome() {
+		return sale_income+good_income-discount;
+	}
+
+	public int getOutcome() {
+		return sale_outcome+good_outcome;
 	}
 	
 	public void add(OperatingConditionPO po){
-		income=po.income+income;
-		outcome=po.outcome+outcome;
+		sale_income=po.sale_income+sale_income;
+		good_income=po.good_income+good_income;
+		sale_outcome=po.sale_outcome+sale_outcome;
+		good_outcome=po.good_outcome+good_outcome;
 		discount=po.discount+discount;
+		profit=sale_income+good_income-sale_outcome-good_outcome-discount;
 	}
 	
 }

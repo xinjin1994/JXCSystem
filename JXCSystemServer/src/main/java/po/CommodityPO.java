@@ -2,20 +2,21 @@ package po;
 
 import java.io.Serializable;
 
-public class CommodityPO extends InvoicePO implements Serializable{
+public class CommodityPO implements Serializable{
+	String note;
 	String name;//��Ʒ��
 	String type;//�ͺ�
 	int in_price;//���
 	int out_price;//�ۼ�
-	int note;//���
-	int recent_in_price;//���һ�ν��
-	int recent_out_price;//���һ���ۼ�
+	public int recent_in_price;//���һ�ν��
+	public int recent_out_price;//���һ���ۼ�
 	public int number;//��Ʒ����
 	public boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
 	public int warn;
 	
+	
 	public CommodityPO(Boolean isGift,String name,String type,int in_price,int out_price,
-			int note,int recent_in_price,int recent_out_price,int number){
+			String note,int recent_in_price,int recent_out_price,int number){
 		this.name = name;
 		this.type = type;
 		this.in_price = in_price;
@@ -61,6 +62,10 @@ public class CommodityPO extends InvoicePO implements Serializable{
 		return po;
 	}
 	
+//	public CommodityVO toVO(){
+//		return new CommodityVO(note,name,type,number,in_price,out_price,recent_in_price,recent_out_price);
+//	}
+	
 	public boolean getGift(){
 		return false;
 	}
@@ -80,7 +85,7 @@ public class CommodityPO extends InvoicePO implements Serializable{
 		return out_price;
 	}
 
-	public int getNote() {
+	public String getNote() {
 		return note;
 	}
 

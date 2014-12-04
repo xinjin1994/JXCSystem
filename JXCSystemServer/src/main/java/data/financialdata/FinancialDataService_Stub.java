@@ -20,7 +20,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 
 	ArrayList<SaleListPO> saleListList=new ArrayList<SaleListPO>();
 	ArrayList<AllBillPO> allBillList=new ArrayList<AllBillPO>();
-	OperatingConditionPO operatingCondition=new OperatingConditionPO(0,0,0);
+	OperatingConditionPO operatingCondition=new OperatingConditionPO(0,0,0, 0, 0);
 	
 	
 	public void writeOperatingCondition(){
@@ -208,7 +208,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 	public boolean clear() {
 		saleListList=new ArrayList<SaleListPO>();
 		allBillList=new ArrayList<AllBillPO>();
-		operatingCondition=new OperatingConditionPO(0,0,0);
+		operatingCondition=new OperatingConditionPO(0,0,0,0,0);
 		return true;
 	}
 

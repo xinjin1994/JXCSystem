@@ -32,6 +32,22 @@ public class PaymentPO extends InvoicePO implements Serializable{
 		return new PaymentPO(serialnum, operator, name, account, item, ps, price);
 	}
 	
+//	public PaymentPO(PayVO vo){
+//		this.serialnum=vo.id;
+//		this.operator=vo.operator;
+//		this.name=vo.cusName;
+//		int i=0;
+//		account=new String[vo.itemList.length];
+//		ps=new String[vo.itemList.length];
+//		price=new int[vo.itemList.length];
+//		for(i=0;i<vo.itemList.length;i++){
+//			account[i]=vo.itemList[i].itemName;
+//			ps[i]=vo.itemList[i].remark;
+//			price[i]=(int) vo.itemList[i].money;
+//		}
+//	}
+	
+	
 	public String getSerialnum() {
 		return serialnum;
 	}

@@ -55,10 +55,13 @@ public class OperatingConditionPO implements Serializable{
 		return sale_outcome+good_outcome;
 	}
 	
-//	public void add(OperatingConditionPO po){
-//		sale_income=po.sale_income+sale_income;
-//		outcome=po.outcome+outcome;
-//		discount=po.discount+discount;
-//	}
+	public void add(OperatingConditionPO po){
+		sale_income=po.sale_income+sale_income;
+		good_income=po.good_income+good_income;
+		sale_outcome=po.sale_outcome+sale_outcome;
+		good_outcome=po.good_outcome+good_outcome;
+		discount=po.discount+discount;
+		profit=sale_income+good_income-sale_outcome-good_outcome-discount;
+	}
 	
 }

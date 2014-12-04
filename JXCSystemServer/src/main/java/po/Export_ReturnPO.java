@@ -1,99 +1,55 @@
 package po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Export_ReturnPO extends InvoicePO implements Serializable{
 	
-	String time;//ʱ��
-	String customerName;//�ͻ����
-	String good_name;//��Ʒ���
-	String good_type;//��Ʒ�ͺ�
-	String ps;//��ע
-	String  serialnum;//���ݱ��
+	CustomerPO customer;
+	String ps;//��
 	String clerk;//Ĭ��ҵ��Ա
 	String operator;//����Ա
 	int wareHouse;//�ֿ�
-	int number;//��������
-	int price;//���ۼ۸�
-	int discount;//ʹ�ô��ȯ�۸�
-	int start_money;//����ǰ���
-	int end_money;//���ú���
-	int discountMoney;//���ý��
-	int id;//��Ʒ���
-	int total_price;//�ܼ� 
+	ArrayList<ExportGoodPO> exportGoodList; 
+	int total_money_before;//这个是折让前的总价
+	int total_money_after;//这个是这让后的总价
+	int discount;//折扣金额
+	int voucher;//使用代金券金额
+	String old_note;
 	
 
-	public Export_ReturnPO(String time,int total_price,int start_money,int end_money,int discountMoney,
-			String customerName,String good_name,String good_type,String ps,String serialnum,
-			String clerk,String operator,int wareHouse,int number,int price,int discouns,int id) {
-		this.time = time;
-		this.total_price = total_price;
-		this.start_money = start_money;
-		this.end_money = end_money;
-		this.discountMoney = discountMoney;
-		this.customerName = customerName;
-		this.good_name = good_name;
-		this.good_type = good_type;
+	public Export_ReturnPO(CustomerPO customer, ArrayList<ExportGoodPO> po,String ps, String clerk,
+			String operator,int wareHouse, int total_money_before,int total_money_after,
+			int discount,int voucher,String old_note) {
+		this.customer = customer;
+		this.exportGoodList=po;
 		this.ps = ps;
-		this.serialnum = serialnum;
 		this.clerk = clerk;
 		this.operator = operator;
 		this.wareHouse = wareHouse;
-		this.number = number;
-		this.price = price;
-		this.discount = discouns;	
-		this.id = id;
+		this.total_money_before = total_money_before;
+		this.total_money_after=total_money_after;
+		this.discount=discount;
+		this.voucher=voucher;
+		this.old_note=old_note;
 	}
 	
 	
 	public Export_ReturnPO copy(){
-		return new Export_ReturnPO(time, total_price, start_money, end_money, discountMoney,
-				customerName, good_name, good_type, ps, serialnum, clerk, operator, wareHouse,
-				number, price, discount, id);
+		return new Export_ReturnPO(customer.copy(), exportGoodList, ps, clerk, operator, wareHouse,
+				total_money_before, total_money_after, discount, voucher,old_note);
 	}
 	
 	
-	public String getTimr(){
-		return time;
+	public CustomerPO getCustomer() {
+		return customer;
 	}
-	public int getTotal_price() {
-		return total_price;
-	}
-
-	public int getStart_money() {
-		return start_money;
-	}
-	
-	public int getEnd_money() {
-		return end_money;
-	}
-	
-	public int getDiscountMoney() {
-		return discountMoney;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public String getGood_name() {
-		return good_name;
-	}
-
-	public String getGood_type() {
-		return good_type;
+	public ArrayList<ExportGoodPO> getImportGoodList(){
+		return exportGoodList;
 	}
 
 	public String getPs() {
 		return ps;
-	}
-
-	public String getSerialnum() {
-		return serialnum;
 	}
 
 	public String getClerk() {
@@ -108,15 +64,23 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 		return wareHouse;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getTotalMoneyBefore() {
+		return total_money_before;
+	}	
+	public int getTotalMoneyAfter(){
+		return total_money_after;
 	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public int getDiscount() {
+	public int getDiscount(){
 		return discount;
+	}
+	public int getVoucher(){
+		return voucher;
+	}
+	
+	public String getOldNote(){
+		return old_note;
+	}
+	public void setOldNote(String old_note){
+		this.old_note=old_note;
 	}
 }
