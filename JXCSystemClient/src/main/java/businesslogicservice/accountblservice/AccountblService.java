@@ -6,6 +6,11 @@ import vo.AccountVO;
 import vo.GetVO;
 import vo.PayVO;
 
+//int错误类型：
+//-1 未知错误
+//1 账户名称重复
+//2 账户名不存在
+//3 账户中仍存在余额，不能删除
 
 public interface AccountblService {
 	

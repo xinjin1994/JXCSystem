@@ -11,6 +11,10 @@ import po.PaymentPO;
 import po.ReceiptPO;
 import vo.InvoiceVO;
 
+//int错误类型：
+//-1 未知错误
+//1  单据不存在
+
 public interface InvoiceblService {
 
 	//显示所有待审批单据

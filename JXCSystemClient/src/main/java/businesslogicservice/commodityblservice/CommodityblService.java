@@ -8,6 +8,18 @@ import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
 
+//int错误类型：
+//-1 未知错误
+//1  商品已存在
+//2  商品不存在
+//3  分类已存在
+//4  分类不存在
+//5  分类中存在商品，不能删除
+//6  商品数量不足，不能添加为赠品
+//7  赠品数量不足，不能删除
+//8  商品数量不能为负
+
+
 public interface CommodityblService {
 
 	//添加商品

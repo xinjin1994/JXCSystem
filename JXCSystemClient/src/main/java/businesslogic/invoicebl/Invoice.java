@@ -17,7 +17,6 @@ import dataservice.invoicedataservice.InvoiceDataService;
 
 //-1 未知错误
 //1  单据不存在
-//2  
 
 public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			businesslogic.accountbl.InvoiceInfo, businesslogic.salesbl.InvoiceInfo{
