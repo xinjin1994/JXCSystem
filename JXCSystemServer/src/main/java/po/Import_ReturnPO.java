@@ -23,6 +23,7 @@ public class Import_ReturnPO extends InvoicePO implements Serializable{
 		this.wareHouse = wareHouse;
 		this.total_money = total_money;
 		this.old_note=old_note;
+		this.doc_type=3;
 	}
 	
 	public Import_ReturnPO copy(){

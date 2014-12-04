@@ -8,9 +8,9 @@ public class DocumentPO implements Serializable{
 
 	String time;
 	String note;
-	int doc_type;    //1代表SendGiftPO，            2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
-					 //5代表Export_Return， 6代表PatchPO，     7代表ReceiptPO，               8代表PaymentPO
-					 //9代表WarnPO
+	int doc_type;    //1代表SendGiftPO，                     2代表ImportPO，                3代表Import_Return，         4代表ExportPO，
+					 //5代表Export_ReturnPO，   6代表PatchPO，                    7代表ReceiptPO，                       8代表PaymentPO
+					 //9代表WarnPO           10代表SystemlogPO
 	
 	public String getTime(){
 		return time;

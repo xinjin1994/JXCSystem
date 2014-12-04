@@ -4,24 +4,28 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SystemlogPO implements Serializable{
+public class SystemlogPO extends DocumentPO implements Serializable{
 
-	public String operation;//����
-	public String time;//ʱ��
+	public String operator;//����
+	public String old_note;
 	
-	public SystemlogPO(String operation, String time) {
-		this.operation = operation;
-		this.time = time;
+	public SystemlogPO(String operation, String note) {
+		this.operator = operation;
+		this.old_note=note;
+		this.doc_type=10;
 	}
 	
 	public SystemlogPO copy(){
-		return new SystemlogPO(operation, time);
+		SystemlogPO po=new SystemlogPO(operator,note);
+		po.setNote(note);
+		po.setTime(time);
+		return po;
 	}
 	
 	public String getOperation() {
-		return operation;
+		return operator;
 	}
-	public String getTime() {
+	public String getOldTime() {
 		return time;
 	}
 	

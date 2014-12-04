@@ -29,6 +29,7 @@ public class ExportPO extends InvoicePO implements Serializable{
 		this.total_money_after=total_money_after;
 		this.discount=discount;
 		this.voucher=voucher;
+		this.doc_type=4;
 	}
 	
 	

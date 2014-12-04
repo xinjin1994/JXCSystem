@@ -13,6 +13,7 @@ public class SendGiftPO extends InvoicePO implements Serializable{
 		this.commodity=commodity;
 		this.number=number;
 		this.note=note;
+		this.doc_type=1;
 	}
 	
 	public CommodityPO getCommodity(){

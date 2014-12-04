@@ -21,6 +21,7 @@ public class ImportPO extends InvoicePO implements Serializable{
 		this.operator = operator;
 		this.wareHouse = wareHouse;
 		this.total_money = total_money;
+		this.doc_type=2;
 	}
 	
 	public ImportPO copy(){

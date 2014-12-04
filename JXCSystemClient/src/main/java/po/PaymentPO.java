@@ -27,6 +27,7 @@ public class PaymentPO extends InvoicePO implements Serializable{
 		for(int pri:price){
 			this.total=this.total+pri;
 		}
+		this.doc_type=8;
 	}
 	
 	public PaymentPO copy(){

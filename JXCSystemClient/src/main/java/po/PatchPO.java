@@ -10,6 +10,7 @@ public class PatchPO extends InvoicePO implements Serializable{
 	public PatchPO(CommodityPO commodity, int number) {
 		this.commodity=commodity;
 		this.number = number;
+		this.doc_type=6;
 	}
 	
 	public PatchPO copy(){
