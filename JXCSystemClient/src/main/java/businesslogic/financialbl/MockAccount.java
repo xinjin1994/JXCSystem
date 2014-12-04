@@ -12,7 +12,7 @@ public class MockAccount implements AccountInfo{
 		String[] accountList={"account_name"};
 		int[] price={10};
 		String[] ps={"ps"};
-		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, ps, price);
+		ReceiptPO po= new ReceiptPO(null, null, null);
 		
 		ArrayList<ReceiptPO> rec=new ArrayList<ReceiptPO>();
 		rec.add(po);
@@ -24,7 +24,7 @@ public class MockAccount implements AccountInfo{
 		String[] accountList={"account_name"};
 		int[] price={10};
 		String[] ps={"ps"};
-		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", ps, price);	
+		PaymentPO po= new PaymentPO(null, null, null);	
 	
 		ArrayList<PaymentPO> pay=new ArrayList<PaymentPO>();
 		pay.add(po);

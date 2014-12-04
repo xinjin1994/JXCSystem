@@ -8,11 +8,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import po.AccountPO;
+import po.ItemPO;
 import po.PaymentPO;
 import po.ReceiptPO;
+import po.TransferPO;
 import dataservice.accountdataservice.AccountDataService;
 
 public class AccountDataService_Stub extends UnicastRemoteObject implements AccountDataService{
@@ -273,37 +277,37 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	}
 
 	public boolean addReceipt(ReceiptPO po) {
-		String[] acc=po.getAccount();
-		int [] price=po.getPrice();
+		ArrayList<TransferPO> transfer=po.getTransfer();
 		int i=0;
 		AccountPO lin;
 		
-		for(i=0;i<acc.length;i++){
-			lin=findAccount_true(acc[i]);
+		for(i=0;i<transfer.size();i++){
+			lin=findAccount_true(transfer.get(i).getAccount());
 			if(lin==null){
 				return false;
 			}
-			lin.money=lin.money+price[i];
+			lin.money=lin.money+transfer.get(i).getMoney();
 		}
-		receiptList.add(po.copy());
+		po=po.copy();
+		po.setTime(getNowTime());
+		
+		receiptList.add(po);
 		return true;
 	}
 
 	public boolean addPayment(PaymentPO po) {
-		String[] acc=po.getAccount();
-		int [] price=po.getPrice();
-		int i=0;
 		AccountPO lin;
 		
-		for(i=0;i<acc.length;i++){
-			lin=findAccount_true(acc[i]);
-			if(lin==null){
-				return false;
-			}
-			lin.money=lin.money-price[i];
+		lin=findAccount_true(po.getAccount().getName());
+		if(lin==null){
+			return false;		
 		}
+		lin.money=lin.money-po.getTotalMoney();
+			
+		po=po.copy();
+		po.setTime(getNowTime());
 		
-		paymentList.add(po.copy());
+		paymentList.add(po);
 		return true;
 	}
 
@@ -341,6 +345,13 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 			}
 		}
 		return null;
+	}
+	
+	public String getNowTime(){
+		 Calendar rightNow = Calendar.getInstance();
+		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		 String sysDatetime = fmt.format(rightNow.getTime());
+		 return sysDatetime; 
 	}
 
 

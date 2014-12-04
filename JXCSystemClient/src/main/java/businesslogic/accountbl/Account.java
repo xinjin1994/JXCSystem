@@ -4,8 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AccountPO;
+import po.CustomerPO;
 import po.PaymentPO;
 import po.ReceiptPO;
+import po.TransferPO;
 import vo.AccountVO;
 import vo.GetVO;
 import vo.PayVO;
@@ -152,10 +154,11 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public int addReceipt_up(GetVO vo) {
 		// TODO Auto-generated method stub
 		
-		ReceiptPO po= new ReceiptPO(vo);
+		ReceiptPO po= new ReceiptPO("operator", new CustomerPO(null, 0, false, null),
+				 new ArrayList<TransferPO>());
 		
 		invoice.add(po);
-		systemlog.add("addReceipt:"+po.getOperator()+","+po.getName()+","+po.getTotal());
+		systemlog.add("addReceipt:"+po.getOperator()+","+po.getTotalMoney());
 		
 		return 0;
 	}
@@ -163,10 +166,10 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public int addPayment_up(PayVO vo) {
 		// TODO Auto-generated method stub
 		
-		PaymentPO po= new PaymentPO(vo);
+		PaymentPO po= new PaymentPO(null, null, null);
 		
 		invoice.add(po);
-		systemlog.add("addPayment:"+po.getOperator()+","+po.getName()+","+po.getTotal());
+		systemlog.add("addPayment:"+po.getOperator()+","+po.getTotalMoney());
 		return 0;
 	}
 	
@@ -176,9 +179,9 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 		String[] accountList={account_name};
 		int[] price={10};
 		String[] ps1={"ps"};
-		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, ps1, price);
+		ReceiptPO po= new ReceiptPO(ps, null, null);
 		
-		systemlog.add("addPayment:"+po.getOperator()+","+po.getName()+","+po.getTotal());
+		systemlog.add("addPayment:"+po.getOperator()+","+po.getAccountName()+","+po.getTotalMoney());
 		
 		return  "ʧ��";
 	}
@@ -190,7 +193,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 		String[] accountList={account_name};
 		int[] price={10};	
 		String[] ps1={"ps"};
-		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item", ps1, price);
+		PaymentPO po= new PaymentPO(null, ps, null);
 		
 		try {
 			if(account.addPayment(po)){

@@ -32,7 +32,7 @@ public class FinancialTest {
 		String[] accountList={"account_name"};
 		int[] price={10};
 		String[] ps={"ps"};
-		ReceiptPO po= new ReceiptPO("serialnum", "operator", "name", accountList, ps, price);
+		ReceiptPO po= new ReceiptPO(null, null, null);
 		
 		assertEquals(true,financial.addAllBill(po));
 	}
@@ -46,8 +46,7 @@ public class FinancialTest {
 		String[] accountList={"account_name"};
 		int[] price={10};
 		String[] ps={"ps"};
-		PaymentPO po= new PaymentPO("serialnum","operator", "Customer_name", accountList, "item",
-				ps, price);
+		PaymentPO po= new PaymentPO(null, null, null);
 		
 		assertEquals(true,financial.addOperatingCondition(po));
 		

@@ -1,77 +1,89 @@
 package po;
 
 import java.io.Serializable;
-import vo.PayVO;
+import java.util.ArrayList;
 
 
 public class PaymentPO extends InvoicePO implements Serializable{	
-
-	String serialnum;//���ݱ��
-	String operator;//����Ա
-	String name;//�ͻ����
-	String[] account;//�����˻�
-	String item;//��Ŀ�嵥
-	String[] ps;//��ע
-	int[] price;//������
-	int total;//�����ܶ�
 	
-	public PaymentPO(String serialnum, String operator, String name, String[] account,
-			String item, String[] ps, int[] price) {
-		this.serialnum = serialnum;
+	AccountPO account;
+	String operator;
+	ArrayList<ItemPO> item=new ArrayList<ItemPO>();
+	int total_money;//�����ܶ�
+	
+	public PaymentPO(AccountPO account, String operator, ArrayList<ItemPO> item) {
 		this.operator = operator;
-		this.name=name;
 		this.account = account;
 		this.item = item;
-		this.ps = ps;
-		this.price = price;
-		for(int pri:price){
-			this.total=this.total+pri;
+		for(ItemPO pri:item){
+			this.total_money=this.total_money+pri.getMoney();
 		}
 		this.doc_type=8;
 	}
 	
 	public PaymentPO copy(){
-		return new PaymentPO(serialnum, operator, name, account, item, ps, price);
-	}
-	
-	public PaymentPO(PayVO vo){
-		this.serialnum=vo.id;
-		this.operator=vo.operator;
-		this.name=vo.cusName;
 		int i=0;
-		account=new String[vo.itemList.length];
-		ps=new String[vo.itemList.length];
-		price=new int[vo.itemList.length];
-		for(i=0;i<vo.itemList.length;i++){
-			account[i]=vo.itemList[i].itemName;
-			ps[i]=vo.itemList[i].remark;
-			price[i]=(int) vo.itemList[i].money;
+		ArrayList<ItemPO> array=new ArrayList<ItemPO>();
+		for(i=0;i<item.size();i++){
+			array.add(new ItemPO(item.get(i).getItemName(),item.get(i).getMoney(),item.get(i).getPs()));
 		}
+		PaymentPO po=new PaymentPO(account.copy(),operator,array);
+		po.setNote(this.getNote());
+		po.setTime(this.getTime());
+		return po;
 	}
 	
+//	public PaymentPO(PayVO vo){
+//		this.serialnum=vo.id;
+//		this.operator=vo.operator;
+//		this.name=vo.cusName;
+//		int i=0;
+//		account=new String[vo.itemList.length];
+//		ps=new String[vo.itemList.length];
+//		price=new int[vo.itemList.length];
+//		for(i=0;i<vo.itemList.length;i++){
+//			account[i]=vo.itemList[i].itemName;
+//			ps[i]=vo.itemList[i].remark;
+//			price[i]=(int) vo.itemList[i].money;
+//		}
+//	}
 	
-	public String getSerialnum() {
-		return serialnum;
-	}
 	public String getOperator() {
 		return operator;
 	}
-	public String getName(){
-		return name;
-	}
-	public String[] getAccount() {
+	public AccountPO getAccount(){
 		return account;
 	}
-	public String getItem() {
+
+	public ArrayList<ItemPO> getItem() {
 		return item;
 	}
-	public String[] getPs() {
-		return ps;
+	public ArrayList<String> getPs() {
+		int i=0;
+		ArrayList<String> array=new ArrayList<String>();
+		for(i=0;i<item.size();i++){
+			array.add(item.get(i).getPs());
+		}
+		return array;
 	}
-	public int[] getPrice() {
-		return price;
+	public ArrayList<Integer> getPrice() {
+		int i=0;
+		ArrayList<Integer> array=new ArrayList<Integer>();
+		for(i=0;i<item.size();i++){
+			array.add(item.get(i).getMoney());
+		}
+		return array;
 	}
-	public int getTotal(){
-		return total;
+	public ArrayList<String> getItemName(){
+		int i=0;
+		ArrayList<String> array=new ArrayList<String>();
+		for(i=0;i<item.size();i++){
+			array.add(item.get(i).getItemName());
+		}
+		return array;
+	}
+	
+	public int getTotalMoney(){
+		return total_money;
 	}
 }

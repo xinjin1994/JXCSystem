@@ -44,7 +44,7 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 	}
 
 	public int pass(String note) {
-		
+		int i=0;
 		InvoicePO tempInvoice = null;
 		try {
 			tempInvoice = invoice.getInvoice(note);
@@ -92,13 +92,15 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			return -1;
 			
 			case 7:ReceiptPO po7=(ReceiptPO) tempInvoice;
-			if(accountInfo.addAccount_Data(po7.getName(), po7.getTotal())!=null){
-				return 0;
+			for(i=0;i<po7.getTransfer().size();i++){
+				if(accountInfo.addAccount_Data(po7.getAccountName().get(i), po7.getPrice().get(i)) != null){
+					return -1;
+				}
 			}
-			return -1;
-			
+			return 0;
+		
 			case 8:PaymentPO po8=(PaymentPO) tempInvoice;
-			if(accountInfo.addAccount_Data(po8.getName(),-po8.getTotal())!=null){
+			if(accountInfo.addAccount_Data(po8.getAccount().getName(),-po8.getTotalMoney())!=null){
 				return 0;
 			}
 			return -1;
