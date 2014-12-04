@@ -5,17 +5,18 @@ import java.io.Serializable;
 import vo.CommodityVO;
 import vo.StockVO;
 
-public class CommodityPO extends InvoicePO implements Serializable{
+public class CommodityPO implements Serializable{
+	String note;
 	String name;//��Ʒ��
 	String type;//�ͺ�
 	int in_price;//���
 	int out_price;//�ۼ�
-	public String note;//���
 	public int recent_in_price;//���һ�ν��
 	public int recent_out_price;//���һ���ۼ�
 	public int number;//��Ʒ����
 	boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
 	public int warn;
+	
 	
 	public CommodityPO(Boolean isGift,String name,String type,int in_price,int out_price,
 			String note,int recent_in_price,int recent_out_price,int number){

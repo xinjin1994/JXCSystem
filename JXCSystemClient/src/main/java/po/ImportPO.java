@@ -1,66 +1,42 @@
 package po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ImportPO extends InvoicePO implements Serializable{
-	String time;//ʱ��
-	String customerName;//�ͻ���ƣ���Ӧ�̣�
-	String good_name;//��Ʒ���
-	String good_type;//��Ʒ�ͺ�
-	String ps;//��ע
-	String  serialnum;//���ݱ��
+	CustomerPO customer;
+	String ps;//��
 	String clerk;//Ĭ��ҵ��Ա
 	String operator;//����Ա
 	int wareHouse;//�ֿ�
-	int number;//��������
-	int price;//���ۼ۸�
-	int id;//��Ʒ���
-	int total_money;//�ܼ�
+	ArrayList<ImportGoodPO> importGoodList; 
+	int total_money;//这个是进货的总价
 	
-	public ImportPO(String time,String customerName, String good_name, String good_type,
-			String ps, String serialnum, String clerk, String operator,
-			int wareHouse, int number, int price, int id, int total_money) {
-		this.time = time;
-		this.customerName = customerName;
-		this.good_name = good_name;
-		this.good_type = good_type;
+	public ImportPO(CustomerPO customer, ArrayList<ImportGoodPO> po,String ps, String clerk,
+			String operator,int wareHouse, int total_money) {
+		this.customer = customer;
+		this.importGoodList=po;
 		this.ps = ps;
-		this.serialnum = serialnum;
 		this.clerk = clerk;
 		this.operator = operator;
 		this.wareHouse = wareHouse;
-		this.number = number;
-		this.price = price;
-		this.id = id;
 		this.total_money = total_money;
 	}
 	
 	public ImportPO copy(){
-		return new ImportPO(time, customerName, good_name, good_type, ps, serialnum, clerk,
-				operator, wareHouse, number, price, id, total_money);
+		return new ImportPO(customer.copy(), importGoodList, ps, clerk, operator, wareHouse, total_money);
 	}
 
-	public String getTime(){
-		return time;
+	
+	public CustomerPO getCustomer() {
+		return customer;
 	}
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public String getGood_name() {
-		return good_name;
-	}
-
-	public String getGood_type() {
-		return good_type;
+	public ArrayList<ImportGoodPO> getImportGoodList(){
+		return importGoodList;
 	}
 
 	public String getPs() {
 		return ps;
-	}
-
-	public String getSerialnum() {
-		return serialnum;
 	}
 
 	public String getClerk() {
@@ -75,19 +51,7 @@ public class ImportPO extends InvoicePO implements Serializable{
 		return wareHouse;
 	}
 
-	public int getNumber() {
-		return number;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public int getTotal_money() {
+	public int getTotalMoney() {
 		return total_money;
 	}	
 	

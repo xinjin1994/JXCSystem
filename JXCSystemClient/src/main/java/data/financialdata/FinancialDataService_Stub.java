@@ -18,7 +18,7 @@ public class FinancialDataService_Stub implements FinancialDataService{
 	}
 
 	public OperatingConditionPO getOperatingCondition() {
-		return new OperatingConditionPO(0,0,0);
+		return new OperatingConditionPO(0,0,0, 0, 0);
 	}
 
 	public boolean addSaleList(SaleListPO po) {

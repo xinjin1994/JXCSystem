@@ -1,7 +1,7 @@
 package businesslogic.invoicebl;
 
-import po.CommodityPO;
 import po.PatchPO;
+import po.SendGiftPO;
 
 public interface CommodityInfo {
 	
@@ -9,7 +9,7 @@ public interface CommodityInfo {
 	
 	public String delPatch(PatchPO po);
 	
-	public String addGood_Data(CommodityPO po);
+	public String addGood_Data(SendGiftPO po);
 	
 	public String addPatch_Data(PatchPO po);
 
