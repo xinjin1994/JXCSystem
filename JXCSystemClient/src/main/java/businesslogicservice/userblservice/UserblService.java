@@ -7,23 +7,24 @@ import vo.UserVO;
 public interface UserblService {
 	
 	//添加用户
-	public int addUser(String name, String password, int duty);
+	public int addUser_up(UserVO vo);
 
 	/**
 	 * 删除用户
 	 * @param name
 	 * @return
 	 */
-	public int delUser(String name);
+	public int delUser_up(UserVO vo);
 
 	/**
 	 * 显示所有用户
 	 * @return
 	 */
-	public ArrayList<UserVO> show();
+	public ArrayList<UserVO> show_up();
 
 	/**
 	 * 验证登陆账号密码
+	 * <0代表失败
 	 * 0代表管理员
 	 * 1代表库存人员
 	 * 2代表销售人员
@@ -32,5 +33,8 @@ public interface UserblService {
 	 * 5代表财务经理
 	 * 6代表总经理
 	 */
-	public int login(String name, String password);
+	public int login_up(String name, String password);
+	
+	public UserVO searchUser_up(String name);
+
 }

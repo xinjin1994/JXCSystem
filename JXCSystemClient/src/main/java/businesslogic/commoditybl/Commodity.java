@@ -415,7 +415,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 			
 			String word="patch:"+com.getName()+","+com.getType()+","+number;
-			systemlog.add(word);
+			systemlog.add_up(word);
 			PatchPO po=new PatchPO(com, number);
 			invoice.add(po);
 			return 0;

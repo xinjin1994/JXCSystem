@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import po.AllBillPO;
 import po.OperatingConditionPO;
 import po.SaleListPO;
+import vo.AllBillConditionVO;
 import vo.AllBillVO;
 import vo.ConditionGetVO;
 import vo.ConditionPayVO;
 import vo.ConditionVO;
+import vo.SaleListConditionVO;
 import vo.SalesDetailVO;
 import businesslogicservice.financialblservice.FinancialblService;
 
@@ -59,6 +61,36 @@ public class FinancialController implements FinancialblService{
 		vo.get=new ConditionGetVO(0, 0, 0, 0, 0, po.getIncome()-po.getDiscount());
 		vo.pay=new ConditionPayVO(0, 0, 0, po.getOutcome());
 		return vo;
+	}
+
+	public int saleListExcel_up(SaleListConditionVO saleList_condition) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int allBillExcel_up(AllBillConditionVO allBill_condition) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int operatingConditionExcel_up(String start_time, String end_time) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int redRush_up(AllBillVO allBill) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public boolean hasPower_up() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public int getClerk_up() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -18,11 +18,6 @@ public class UIController {
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	
-	
-	public UIController(){
-		
-	}
-	
 
 	public UIController() {
 

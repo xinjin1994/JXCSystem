@@ -122,12 +122,12 @@ public class CommodityController implements CommodityblService{
 		return 0;
 	}
 
-	public ArrayList<SortVO> getAllSort() {
+	public ArrayList<SortVO> getAllSort_up() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList<CommodityVO> getAllCommodity() {
+	public ArrayList<CommodityVO> getAllCommodity_up() {
 		// TODO Auto-generated method stub
 		return null;
 	}

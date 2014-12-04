@@ -2,13 +2,6 @@ package businesslogicservice.invoiceblservice;
 
 import java.util.ArrayList;
 
-import po.ExportPO;
-import po.Export_ReturnPO;
-import po.ImportPO;
-import po.Import_ReturnPO;
-import po.PatchPO;
-import po.PaymentPO;
-import po.ReceiptPO;
 import vo.InvoiceVO;
 
 //int错误类型：
@@ -18,13 +11,21 @@ import vo.InvoiceVO;
 public interface InvoiceblService {
 
 	//显示所有待审批单据
-	public ArrayList<InvoiceVO> show();
+	public ArrayList<InvoiceVO> show_up();
 	
 	//通过审批
-	public int pass(String note);
+	public int pass_up(InvoiceVO vo);
+	public int pass_up(ArrayList<InvoiceVO> vo);
 	
 	//未通过审批
-	public int refuse(String note);
+	public int refuse_up(String note);
+	public int refuseInvoice_up(String invoice_note);
+	
+	//根据编号查找单据信息，上面是根据单据本身编号查找，下面是根据Invoice编号查找
+	public InvoiceVO searchNote_up(String note);
+	public InvoiceVO searchInvoiceNote_up(String invoice_note);
+	
+	
 	
 	//添加单据
 //	public String add(PatchPO po);

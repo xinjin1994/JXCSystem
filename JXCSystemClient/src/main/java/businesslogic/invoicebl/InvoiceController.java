@@ -17,7 +17,7 @@ public class InvoiceController implements InvoiceblService{
 	
 	public Invoice invoice=new Invoice();
 
-	public ArrayList<InvoiceVO> show() {
+	public ArrayList<InvoiceVO> show_up() {
 		// TODO Auto-generated method stub
 		ArrayList<InvoicePO> po=invoice.show();
 		ArrayList<InvoiceVO> vo=new ArrayList<InvoiceVO>();
@@ -34,9 +34,34 @@ public class InvoiceController implements InvoiceblService{
 		return invoice.pass(note);
 	}
 
-	public int refuse(String note) {
+	public int refuse_up(String note) {
 		// TODO Auto-generated method stub
 		return invoice.refuse(note);
+	}
+
+	public int pass_up(InvoiceVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int pass_up(ArrayList<InvoiceVO> vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int refuseInvoice_up(String invoice_note) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public InvoiceVO searchNote_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public InvoiceVO searchInvoiceNote_up(String invoice_note) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //	public String add(PatchPO po) {

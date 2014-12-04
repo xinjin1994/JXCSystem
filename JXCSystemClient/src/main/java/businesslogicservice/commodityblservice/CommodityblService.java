@@ -68,8 +68,8 @@ public interface CommodityblService {
 	public int warn_up(WarnVO vo);
 	
 	//获得所有分类信息，用于添加与更新商品或分类时分类的选择
-	public ArrayList<SortVO> getAllSort();
+	public ArrayList<SortVO> getAllSort_up();
 	
 	//获得所有商品，用于报溢报损报警单中商品的选择
-	public ArrayList<CommodityVO> getAllCommodity();
+	public ArrayList<CommodityVO> getAllCommodity_up();
 }

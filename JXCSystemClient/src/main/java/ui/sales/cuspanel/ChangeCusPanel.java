@@ -59,7 +59,7 @@ public class ChangeCusPanel extends FatherPanel{
 				String name = cusName.getText();
 				String id = cusID.getText();
 				SalesblService salesBlService = new SalesController();
-				CustomerVO customerVO= salesBlService.exactSearch(name);
+				CustomerVO customerVO= salesBlService.searchExactCustomer_up(name);
 				frame.remove(ChangeCusPanel.this);
 				frame.setPanel(new MakeSureChangeInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,ChangeCusPanel.this));
 				frame.repaint();

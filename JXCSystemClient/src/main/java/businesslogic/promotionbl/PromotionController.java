@@ -3,6 +3,8 @@ package businesslogic.promotionbl;
 import java.util.ArrayList;
 
 import vo.DiscountVO;
+import vo.ProGiftVO;
+import vo.VoucherVO;
 import businesslogicservice.promotionblservice.PromotionblService;
 
 public class PromotionController implements PromotionblService{
@@ -25,14 +27,54 @@ public class PromotionController implements PromotionblService{
 		return promotion.makeGift(start_money, time1, time2);
 	}
 
-	public ArrayList<DiscountVO> search() {
+	public ArrayList<DiscountVO> search_up() {
 		// TODO Auto-generated method stub
 		return promotion.search();
 	}
 
-	public int makeOther(String word) {
+	public int makeOther_up(String word) {
 		// TODO Auto-generated method stub
 		return promotion.makeOther(word);
+	}
+
+	public int makeDiscount_up(DiscountVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int makeGift_up(ProGiftVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int makeVoucher_up(VoucherVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int delPromotion_up(int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public DiscountVO getDiscount_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ProGiftVO getProGift_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public VoucherVO getVoucher_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getOtherPromotion_up() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

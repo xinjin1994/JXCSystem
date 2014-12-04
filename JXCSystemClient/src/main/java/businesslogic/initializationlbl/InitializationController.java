@@ -9,6 +9,7 @@ import po.UserPO;
 import vo.AccountVO;
 import vo.CommodityVO;
 import vo.CustomerVO;
+import vo.SortVO;
 import vo.UserVO;
 import businesslogicservice.initializationblservice.InitializationblService;
 
@@ -63,9 +64,41 @@ public class InitializationController implements InitializationblService{
 //		return initialization.addAccount(name, money);
 //	}
 
-	public String showInformation() {
+	public String showInformation_up() {
 		// TODO Auto-generated method stub
 		return initialization.showInformation();
+	}
+
+	public int newSystem_up(ArrayList<CommodityVO> vo1, ArrayList<SortVO> vo2,
+			ArrayList<CustomerVO> vo3, ArrayList<AccountVO> vo4,
+			ArrayList<UserVO> vo5) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<CommodityVO> getOldCommodity_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<SortVO> getOldSort_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<CustomerVO> getOldCustomer_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<AccountVO> getOldAccount_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<UserVO> getOldUser_up() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -2,6 +2,6 @@ package businesslogic.financialbl;
 
 public interface SystemlogInfo {
 	
-	public int add(String word);
+	public int add_up(String word);
 
 }

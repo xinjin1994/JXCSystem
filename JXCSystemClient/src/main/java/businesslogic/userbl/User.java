@@ -10,7 +10,7 @@ import businesslogicservice.userblservice.UserblService;
 import data.userdata.UserDataService_Stub;
 import dataservice.userdataservice.UserDataService;
 
-public class User implements UserblService ,businesslogic.initializationlbl.UserInfo{
+public class User implements businesslogic.initializationlbl.UserInfo{
 	
 	public UserDataService us=new UserDataService_Stub("password", "duty", 10);
 	SystemlogInfo systemlog=new Systemlog();
@@ -28,7 +28,7 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		
 		try {
 			if (us.addUser(user)) {
-				systemlog.add("AddUser:");
+				systemlog.add_up("AddUser:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -44,7 +44,7 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		
 		try {
 			if (us.addUser(user)) {
-				systemlog.add("AddUser:");
+				systemlog.add_up("AddUser:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -58,7 +58,7 @@ public class User implements UserblService ,businesslogic.initializationlbl.User
 		// TODO Auto-generated method stub
 		try {
 			if(us.getUser("user")!=null){
-				systemlog.add("DelUser:");
+				systemlog.add_up("DelUser:");
 				return 0;
 			}
 		} catch (RemoteException e) {
