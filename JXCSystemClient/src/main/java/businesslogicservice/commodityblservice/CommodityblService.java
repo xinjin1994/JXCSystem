@@ -24,48 +24,52 @@ public interface CommodityblService {
 
 	//添加商品
 	public int addCommodity_up(CommodityVO vo1,SortVO vo2);
-
-	//添加商品
-//	public int addCommodity(String name, String type, int in_price,
-//			int out_price);
 	
 	//删除商品
 	public int delCommodity_up(CommodityVO vo);
 	
-	//删除商品
+	//更新商品信息
 	public int updateCommodity_up(CommodityVO vo1,CommodityVO vo2);
+	//将商品移至其他分类中
+	public int updateCommodity_up(CommodityVO vo1,SortVO vo2);
 
 	//模糊查找商品
 	public ArrayList<CommodityVO> searchFuzzyCommodity_up(String word);
-	
 	//精确查找商品
 	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo);
 
 	//添加分类
-	public int addSort(SortVO vo1, SortVO vo2);
+	public int addSort_up(SortVO vo1, SortVO vo2);
 	
 	//删除分类
-	public int delSort(SortVO vo);
+	public int delSort_up(SortVO vo);
 
-	//修改分类
-	public int updateSort(SortVO vo1, SortVO vo2);
+	//修改分类信息
+	public int updateSort_up_Inf(SortVO vo1, SortVO vo2);
+	//将分类移至另一分类下
+	public int updateSort_up_Mov(SortVO vo1,SortVO vo2);
+	
+	//查看库存，注意库存数量要有合计，就在数据层用个for算一下吧o(╯□╰)o
+	public ArrayList<CommodityVO> Examine_up(String time1, String time2);
 
-	//查看库存
-	public ArrayList<CommodityVO> Examine(String time1, String time2);
+	//库存盘点，目前已经在计划中，但还没有实现o(╯□╰)o
+	public ArrayList<StockVO> Iventory_up();
 
-	//库存盘点
-	public ArrayList<StockVO> Iventory();
-
-	//库存赠送单
-	public int addGift(CommodityVO vo);
-
-	//删除库存赠送
-	public int delGift(CommodityVO vo);
+//	//库存赠送单
+//	public int addGift(CommodityVO vo);
+//
+//	//删除库存赠送
+//	public int delGift(CommodityVO vo);
 
 	//库存报溢报损单
-	public int patch(PatchVO vo);
+	public int patch_up(PatchVO vo);
 
-	//设置库存警戒数量
-	public int warn(WarnVO vo);
-
+	//设置库存警戒数量，无须审批
+	public int warn_up(WarnVO vo);
+	
+	//获得所有分类信息，用于添加与更新商品或分类时分类的选择
+	public ArrayList<SortVO> getAllSort();
+	
+	//获得所有商品，用于报溢报损报警单中商品的选择
+	public ArrayList<CommodityVO> getAllCommodity();
 }

@@ -1,11 +1,14 @@
 package businesslogic.accountbl;
 
 import businesslogicservice.accountblservice.AccountblService;
+
 import java.util.ArrayList;
 
 import vo.AccountVO;
+import vo.CustomerVO;
 import vo.GetVO;
 import vo.PayVO;
+import vo.UserVO;
 
 public class AccountController implements AccountblService{
 	public Account account=new Account();
@@ -53,6 +56,46 @@ public class AccountController implements AccountblService{
 	}
 
 	public ArrayList<AccountVO> searchAccurateAccount_up(AccountVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getOperator_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getReceiptNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getPaymentNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int calTotalMoney_up(GetVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int calTotalMoney_up(PayVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public UserVO getNowUser_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<CustomerVO> getAllCustomer_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<AccountVO> getAllAccount_up() {
 		// TODO Auto-generated method stub
 		return null;
 	}

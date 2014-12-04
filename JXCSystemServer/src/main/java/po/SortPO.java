@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class SortPO implements Serializable{
 	public String sort;
 	public int level;
+	public String note;
 	
 	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
 	public ArrayList<SortPO> sortList;
@@ -127,6 +128,10 @@ public class SortPO implements Serializable{
 			}
 		}
 		return false;
+	}
+	
+	public String getNote(){
+		return note;
 	}
 	
 	

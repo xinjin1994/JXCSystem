@@ -3,8 +3,10 @@ package businesslogicservice.accountblservice;
 import java.util.ArrayList;
 
 import vo.AccountVO;
+import vo.CustomerVO;
 import vo.GetVO;
 import vo.PayVO;
+import vo.UserVO;
 
 //int错误类型：
 //-1 未知错误
@@ -36,5 +38,27 @@ public interface AccountblService {
 	public int addReceipt_up(GetVO vo);
 	//添加付款单
 	public int addPayment_up(PayVO vo);
+	
+	//获得当前操作员
+	public String getOperator_up();
+	
+	//获得收款单编号
+	public String getReceiptNote_up();
+	
+	//获得付款单编号
+	public String getPaymentNote_up();
+	
+	//计算收款总额
+	public int calTotalMoney_up(GetVO vo);
+	public int calTotalMoney_up(PayVO vo);
+	
+	//获得当前登陆用户
+	public UserVO getNowUser_up();
+	
+	//获得所有客户信息
+	public ArrayList<CustomerVO> getAllCustomer_up();
+	
+	//获得所有账户信息
+	public ArrayList<AccountVO> getAllAccount_up();
 	
 }

@@ -50,22 +50,22 @@ public class CommodityController implements CommodityblService{
 		return vo;
 	}
 
-	public int addSort(SortVO vo1,SortVO vo2) {
+	public int addSort_up(SortVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
 		return commodity.addSort(vo1.name,vo2.name);
 	}
 
-	public int delSort(SortVO vo) {
+	public int delSort_up(SortVO vo) {
 		// TODO Auto-generated method stub
 		return commodity.delSort(vo.name);
 	}
 
-	public int updateSort(SortVO vo1,SortVO vo2) {
+	public int updateSort_up(SortVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
 		return commodity.updateSort(vo1.name, vo2.name);
 	}
 
-	public ArrayList<CommodityVO> Examine(String time1, String time2) {
+	public ArrayList<CommodityVO> Examine_up(String time1, String time2) {
 		// TODO Auto-generated method stub
 		ArrayList<CommodityPO> po=commodity.Examine(time1, time2);
 		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
@@ -76,7 +76,7 @@ public class CommodityController implements CommodityblService{
 		return vo;
 	}
 
-	public ArrayList<StockVO> Iventory() {
+	public ArrayList<StockVO> Iventory_up() {
 		// TODO Auto-generated method stub
 //		return commodity.Iventory();
 		return null;
@@ -92,17 +92,42 @@ public class CommodityController implements CommodityblService{
 		return commodity.delGift(vo.name,vo.type,vo.num);
 	}
 
-	public int patch(PatchVO vo) {
+	public int patch_up(PatchVO vo) {
 		// TODO Auto-generated method stub
 		return commodity.patch(vo.name,vo.type,vo.number);
 	}
 
-	public int warn(WarnVO vo) {
+	public int warn_up(WarnVO vo) {
 		// TODO Auto-generated method stub
 		return commodity.warn(vo.name,vo.type,vo.number);
 	}
 
 	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int updateCommodity_up(CommodityVO vo1, SortVO vo2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateSort_up_Inf(SortVO vo1, SortVO vo2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int updateSort_up_Mov(SortVO vo1, SortVO vo2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<SortVO> getAllSort() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<CommodityVO> getAllCommodity() {
 		// TODO Auto-generated method stub
 		return null;
 	}
