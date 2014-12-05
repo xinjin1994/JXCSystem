@@ -35,6 +35,28 @@ public interface SalesblService {
 	//添加销售退货单
 	public int addExport_Return_up(ExportMenuVO exportMenuVO);
 	
+	//获得进货单编号
+	public String getImportNote_up();
+	
+	//获得进货退货单编号
+	public String getImport_ReturnNote_up();
+	
+	//获得销售单编号
+	public String getExportNote_up();
+	
+	//获得销售退货单编号
+	public String getExport_ReturnNote_up();
+	
+	//根据编号查找进货单
+	public ImportMenuVO searchImportNote_up();
+	//根据编号查找销售单
+	public ExportMenuVO searchExportNote_up();
+	
+	//根据进货编号查找进货可退货最大数量,输入进货时的编号，返回最大可退货数量
+	public int getImport_ReturnMaxNumber_up(String old_note);
+	//根据销售编号查找销售可退货最大数量，输入进货时的编号，返回最大可退货数量
+	public int getExport_ReturnMaxNumber_up(String old_note);
+	
 	//获得所有商品信息
 	public ArrayList<CommodityVO> getAllCommodity_up(); 
 	//获得单个商品信息
@@ -52,6 +74,8 @@ public interface SalesblService {
 	
 	//获得操作员权限
 	public int getClerk_up();
+	//获得操作员能修改的最大折扣，注意这里的折扣不包括促销产生的折扣
+	public int getClerkDiscount_up();
 	
 	//查看获得的折扣促销
 	public int getDiscount_up(int money,int level);
