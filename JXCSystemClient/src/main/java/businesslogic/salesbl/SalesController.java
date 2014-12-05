@@ -132,4 +132,49 @@ public class SalesController implements SalesblService{
 		return null;
 	}
 
+	public String getImportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getImport_ReturnNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getExportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getExport_ReturnNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchImportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchExportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getImport_ReturnMaxNumber_up(String old_note) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getExport_ReturnMaxNumber_up(String old_note) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getClerkDiscount_up() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
