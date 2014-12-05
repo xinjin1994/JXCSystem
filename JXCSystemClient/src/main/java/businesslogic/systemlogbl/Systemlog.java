@@ -13,8 +13,7 @@ import businesslogicservice.systemlogblservice.SystemlogblService;
 import data.systemlogdata.SystemlogDataService_Stub;
 import dataservice.systemlogdataservice.SystemlogDataService;
 
-public class Systemlog implements SystemlogblService,
-		businesslogic.commoditybl.SystemlogInfo,
+public class Systemlog implements businesslogic.commoditybl.SystemlogInfo,
 		businesslogic.accountbl.SystemlogInfo,
 		businesslogic.financialbl.SystemlogInfo,
 		businesslogic.initializationlbl.SystemlogInfo,
@@ -32,7 +31,7 @@ public class Systemlog implements SystemlogblService,
 		this.sys = sys;
 	}
 
-	public ArrayList<SystemlogVO> show() {
+	public ArrayList<SystemlogVO> show_up() {
 		// TODO Auto-generated method stub
 		// SystemlogDataService sys = new SystemlogDataService_Stub();
 		ArrayList<SystemlogVO> vo=new ArrayList<SystemlogVO>();
@@ -64,7 +63,7 @@ public class Systemlog implements SystemlogblService,
 		return vo;
 	}
 
-	public int add(String word) {
+	public int add_up(String word) {
 		// TODO Auto-generated method stub
 		
 		Date date = new Date(); 

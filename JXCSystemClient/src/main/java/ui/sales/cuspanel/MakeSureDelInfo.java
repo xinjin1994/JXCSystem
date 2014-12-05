@@ -50,7 +50,7 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
 				SalesblService salesBlService = new SalesController();
-				salesBlService.delCustomer(customerVO);
+				salesBlService.delCustomer_up(customerVO);
 				System.out.println("qianjing!");
 			} else if (e.getSource() == secondCusBack) {
 				System.out.println("fff");

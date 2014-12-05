@@ -9,14 +9,19 @@ public class SystemlogController implements SystemlogblService{
 	
 	public Systemlog systemlog=new Systemlog();
 
-	public ArrayList<SystemlogVO> show() {
+	public ArrayList<SystemlogVO> show_up() {
 		// TODO Auto-generated method stub
-		return systemlog.show();
+		return systemlog.show_up();
 	}
 
-	public int add(String word) {
+	public int add_up(String word) {
 		// TODO Auto-generated method stub
-		return systemlog.add(word);
+		return systemlog.add_up(word);
+	}
+
+	public int exportExcel_up() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

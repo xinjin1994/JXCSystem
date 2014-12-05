@@ -25,7 +25,7 @@ public class SalesTest {
 		MockAddCustomer mockAdd = new MockAddCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockAdd);
-		assertEquals("�ɹ�", sale.addCustomer(new CustomerVO("string", false, 10, "phone", "zip",
+		assertEquals("�ɹ�", sale.addCustomer_up(new CustomerVO("string", false, 10, "phone", "zip",
 				"mail", null, null, 10, 0, 0, "clerk")));
 	}
 
@@ -34,7 +34,7 @@ public class SalesTest {
 		MockDelCustomer mockDel = new MockDelCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockDel);
-		assertEquals("�ɹ�", sale.delCustomer(new CustomerVO("string", false, 10, "phone", "zip",
+		assertEquals("�ɹ�", sale.delCustomer_up(new CustomerVO("string", false, 10, "phone", "zip",
 				"mail", null, null, 10, 0, 0, "clerk")));
 	}
 
@@ -63,7 +63,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockAddIm);
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport(new ImportMenuVO(null, null, null, null, null, null, 0)));
+		assertEquals("�ɹ�", sale.addImport_up(new ImportMenuVO(null, null, null, null, null, null, 0)));
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class SalesTest {
 		sale.setSale(mockAddEx);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null)));
+		assertEquals("�ɹ�", sale.addExport_up(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null)));
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class SalesTest {
 		sale.setSale(mockAddExRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport_Return(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null)));
+		assertEquals("�ɹ�", sale.addExport_Return_up(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null)));
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class SalesTest {
 		sale.setSale(mockAddImRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport_Return(new ImportMenuVO(null, null, null, null, null, null, 0)));
+		assertEquals("�ɹ�", sale.addImport_Return_up(new ImportMenuVO(null, null, null, null, null, null, 0)));
 	}
 
 }

@@ -69,7 +69,7 @@ public class FindCusPanel extends FatherPanel {
 			} else if (e.getSource() == forward1) {
 				String name = cusName.getText();
 				String id = cusID.getText();
-				CustomerVO customerVO = salesBlService.exactSearch(name);
+				CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
 				frame.remove(FindCusPanel.this);
 				String classification = "进货商";
 				// String id,boolean classification,int level,String
@@ -95,7 +95,7 @@ public class FindCusPanel extends FatherPanel {
 				frame.repaint();
 			} else if (e.getSource() == forward2) {
 				String info = cusExactFind.getText();
-				ArrayList<CustomerVO> cusVOArray = salesBlService.searchCustomer(info);
+				ArrayList<CustomerVO> cusVOArray = salesBlService.searchFuzzyCustomer_up(info);
 				// 此次应该显示表格
 				frame.remove(FindCusPanel.this);
 				frame.repaint();

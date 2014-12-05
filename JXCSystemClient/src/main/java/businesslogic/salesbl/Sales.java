@@ -17,7 +17,7 @@ import businesslogicservice.salesblservice.SalesblService;
 import data.salesdata.SaleDataService_Stub;
 import dataservice.salesdataservice.SalesDataService;
 
-public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
+public class Sales implements businesslogic.accountbl.SalesInfo,
 			businesslogic.financialbl.SalesInfo{
 	
 	public SalesDataService sale=new SaleDataService_Stub();
@@ -31,7 +31,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		this.sale = sale;
 	}
 	
-	public int addCustomer(CustomerVO customerVO) {
+	public int addCustomer_up(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		CustomerPO customer = new CustomerPO("1","name",1, false,
 				"phone", "zip", "mail", 1000, 2000,
@@ -39,7 +39,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		
 		try {
 			if(sale.addCustomer(customer)){
-				systemlog.add("AddCustomer:");
+				systemlog.add_up("AddCustomer:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -49,7 +49,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return -1;
 	}
 
-	public int delCustomer(CustomerVO customerVO) {
+	public int delCustomer_up(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		CustomerPO customer = new CustomerPO("1","name",1, false,
 				"phone", "zip", "mail", 1000, 2000,
@@ -57,7 +57,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		
 		try {
 			if(sale.delCustomer(customer)){
-				systemlog.add("DelCustomer:");
+				systemlog.add_up("DelCustomer:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -78,7 +78,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		
 		try {
 			if(sale.updateCustomer(customer1,customer2)){
-				systemlog.add("UpdateCustomer:");
+				systemlog.add_up("UpdateCustomer:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -102,23 +102,23 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public int addImport(ImportMenuVO importMenuVO) {
+	public int addImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
 		ImportPO im = new ImportPO(null, null, null, null, null, 0, 0);
 		
 		if(invoice.add(im)!=null){
-			systemlog.add("AddImport:");
+			systemlog.add_up("AddImport:");
 			return 0;
 		}
 		return -1;
 	}
 
-	public int addImport_Return(ImportMenuVO importMenuVO) {
+	public int addImport_Return_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
 		Import_ReturnPO im_re = new Import_ReturnPO(null, null, null, null, null, 0, 0, null);
 		
 		if(invoice.add(im_re)!=null){
-			systemlog.add("AddImport_Return:");
+			systemlog.add_up("AddImport_Return:");
 			return 0;
 		}
 		return -1;
@@ -129,29 +129,29 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		Import_ReturnPO im_re = new Import_ReturnPO(null, null, note, note, note, number, number, note);
 	
 		if(invoice.add(im_re)!=null){
-			systemlog.add("AddImport_Return:");
+			systemlog.add_up("AddImport_Return:");
 			return 0;
 		}
 		return -1;
 	}
 
-	public int addExport(ExportMenuVO exportMenuVO) {
+	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
 		ExportPO ex = new ExportPO(null, null, null, null, null, 0, 0, 0, 0, 0);
 		
 		if(invoice.add(ex)!=null){
-			systemlog.add("AddExport:");
+			systemlog.add_up("AddExport:");
 			return 0;
 		}
 		return -1;
 	}
 
-	public int addExport_Return(ExportMenuVO exportMenuVO) {
+	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
 		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, null, null, null, 0, 0, 0, 0, 0, null);
 		
 		if(invoice.add(ex_re)!=null){
-			systemlog.add("AddExport_Return:");
+			systemlog.add_up("AddExport_Return:");
 			return 0;
 		}
 		return -1;
@@ -162,7 +162,7 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, note, note, note, number, number, number, number, number, note);
 	
 		if(invoice.add(ex_re)!=null){
-			systemlog.add("AddExport_Return:");
+			systemlog.add_up("AddExport_Return:");
 			return 0;
 		}
 		return -1;
@@ -218,11 +218,11 @@ public class Sales implements SalesblService, businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
-	public ArrayList<CustomerVO> searchCustomer(String name) {
+	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public CustomerVO exactSearch(String name) {
+	public CustomerVO searchExactCustomer_up(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

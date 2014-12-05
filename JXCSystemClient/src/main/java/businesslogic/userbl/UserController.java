@@ -19,14 +19,29 @@ public class UserController implements UserblService{
 		return user.delUser(name);
 	}
 
-	public ArrayList<UserVO> show() {
+	public ArrayList<UserVO> show_up() {
 		// TODO Auto-generated method stub
 		return user.show();
 	}
 
-	public int login(String name, String password) {
+	public int login_up(String name, String password) {
 		// TODO Auto-generated method stub
 		return user.login(name, password);
+	}
+
+	public int addUser_up(UserVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int delUser_up(UserVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public UserVO searchUser_up(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

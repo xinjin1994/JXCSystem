@@ -156,6 +156,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			uiController.confirmPayment(newPayment);
+
 		}
 	}
 }

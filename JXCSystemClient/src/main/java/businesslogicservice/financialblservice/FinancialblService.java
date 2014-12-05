@@ -2,8 +2,10 @@ package businesslogicservice.financialblservice;
 
 import java.util.ArrayList;
 
+import vo.AllBillConditionVO;
 import vo.AllBillVO;
 import vo.ConditionVO;
+import vo.SaleListConditionVO;
 import vo.SalesDetailVO;
 
 public interface FinancialblService {
@@ -20,11 +22,21 @@ public interface FinancialblService {
 	public ConditionVO operatingCondition_up(String start_time, String end_time);
 
 	//销售记录导出，未实现
-	public int saleListExcel_up();
+	public int saleListExcel_up(SaleListConditionVO saleList_condition);
 	
 	//经营历程导出，未实现
-	public int allBillExcel_up();
+	public int allBillExcel_up(AllBillConditionVO allBill_condition);
 	
 	//经营情况导出，未实现
 	public int operatingConditionExcel_up(String start_time,String end_time);
+	
+	//单据的红冲操作
+	public int redRush_up(AllBillVO allBill);
+	
+	//查看操作人员权限，true为有权限红冲
+	public boolean hasPower_up();
+	
+	//获得操作员身份
+	public int getClerk_up();
+	
 }

@@ -15,7 +15,7 @@ public class SystemlogAddTester {
 		MockAdd mock=new MockAdd();
 		Systemlog sys=new Systemlog();
 		sys.setSys(mock);
-		assertEquals("成功",sys.add("word"));
+		assertEquals("成功",sys.add_up("word"));
 	}
 
 }

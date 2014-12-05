@@ -60,7 +60,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			AccountPO acc = new AccountPO(vo.name, (int) vo.balance);
 
 			if (account.addAccount(acc)) {
-				systemlog.add("addAccount:"+acc.getName()+","+acc.getMoney());
+				systemlog.add_up("addAccount:"+acc.getName()+","+acc.getMoney());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -87,7 +87,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			}
 			
 			if (account.delAccount(acc)) {
-				systemlog.add("delAccount:"+acc.getName());
+				systemlog.add_up("delAccount:"+acc.getName());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -118,7 +118,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			acc2 = new AccountPO(vo2.name, acc1.getMoney());
 
 			if (account.updateAccount(acc1, acc2)) {
-				systemlog.add("updateAccount:"+acc1.getName()+","+acc2.getName());
+				systemlog.add_up("updateAccount:"+acc1.getName()+","+acc2.getName());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -158,7 +158,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 				 new ArrayList<TransferPO>());
 		
 		invoice.add(po);
-		systemlog.add("addReceipt:"+po.getOperator()+","+po.getTotalMoney());
+		systemlog.add_up("addReceipt:"+po.getOperator()+","+po.getTotalMoney());
 		
 		return 0;
 	}
@@ -169,7 +169,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 		PaymentPO po= new PaymentPO(null, null, null);
 		
 		invoice.add(po);
-		systemlog.add("addPayment:"+po.getOperator()+","+po.getTotalMoney());
+		systemlog.add_up("addPayment:"+po.getOperator()+","+po.getTotalMoney());
 		return 0;
 	}
 	
@@ -181,7 +181,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 		String[] ps1={"ps"};
 		ReceiptPO po= new ReceiptPO(ps, null, null);
 		
-		systemlog.add("addPayment:"+po.getOperator()+","+po.getAccountName()+","+po.getTotalMoney());
+		systemlog.add_up("addPayment:"+po.getOperator()+","+po.getAccountName()+","+po.getTotalMoney());
 		
 		return  "ʧ��";
 	}

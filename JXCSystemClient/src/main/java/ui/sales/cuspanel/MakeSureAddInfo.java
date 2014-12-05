@@ -48,7 +48,7 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 			if (e.getSource() == forward) {
 				System.out.println("qianjing!");
 				SalesblService salesBlService = new SalesController();
-				salesBlService.addCustomer(customerVO);
+				salesBlService.addCustomer_up(customerVO);
 			} else if (e.getSource() == secondCusBack) {
 				System.out.println("fff");
 				frame.remove(MakeSureAddInfo.this);

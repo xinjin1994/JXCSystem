@@ -14,7 +14,7 @@ public class SystemlogTest {
 		MockAdd mock=new MockAdd();
 		Systemlog sys=new Systemlog();
 		sys.setSys(mock);
-		assertEquals("成功",sys.show());
+		assertEquals("成功",sys.show_up());
 	}
 
 	@Test
@@ -22,7 +22,7 @@ public class SystemlogTest {
 		MockAdd mock=new MockAdd();
 		Systemlog sys=new Systemlog();
 		sys.setSys(mock);
-		assertEquals("成功",sys.add("word"));
+		assertEquals("成功",sys.add_up("word"));
 	}
 
 }

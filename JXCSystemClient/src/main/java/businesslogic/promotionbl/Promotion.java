@@ -12,7 +12,7 @@ import businesslogicservice.promotionblservice.PromotionblService;
 import data.promotiondata.PromotionDataService_Stub;
 import dataservice.promotiondataservice.PromotionDataService;
 
-public class Promotion implements PromotionblService{
+public class Promotion {
 	
 	public PromotionDataService promotion=new PromotionDataService_Stub(); 
 	public SystemlogInfo systemlog=new Systemlog();
@@ -32,7 +32,7 @@ public class Promotion implements PromotionblService{
 		DiscountPO dis=new DiscountPO(1,"t1","t2",1000,2000);
 		try {
 			if(promotion.addDiscount(dis)){
-				systemlog.add("AddDiscount:");
+				systemlog.add_up("AddDiscount:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -50,7 +50,7 @@ public class Promotion implements PromotionblService{
 		DiscountPO dis= new DiscountPO(1,"t1","t2",1000,2000);
 		try {
 			if(promotion.delDiscount(dis)){
-				systemlog.add("DelDiscount:");
+				systemlog.add_up("DelDiscount:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -67,7 +67,7 @@ public class Promotion implements PromotionblService{
 		ProGiftPO dis=new ProGiftPO(gift, time1, time2, start_money, start_money, start_money);
 		try {
 			if(promotion.addGift(dis)){
-				systemlog.add("AddGift:");
+				systemlog.add_up("AddGift:");
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -83,7 +83,7 @@ public class Promotion implements PromotionblService{
 		ArrayList<DiscountVO> vo=new ArrayList<DiscountVO>();
 		try {
 			if(promotion.getDiscount()!=null){
-				systemlog.add("Search:");
+				systemlog.add_up("Search:");
 				return vo;
 			}
 		} catch (RemoteException e) {
