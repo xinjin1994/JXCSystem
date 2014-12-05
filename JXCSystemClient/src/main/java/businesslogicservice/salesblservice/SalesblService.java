@@ -25,15 +25,39 @@ public interface SalesblService {
 	
 	//添加进货单
 	public int addImport_up(ImportMenuVO importMenuVO);
+	//添加草稿进货单
+	public int addDraftImport_up(ImportMenuVO impoerMenuVO);
+	//获得所有的草稿进货单
+	public ArrayList<ImportMenuVO> getAllDraftImport_up();
+	//根据编号查找草稿进货单
+	public ImportMenuVO searchDraftImport_up(String note);
 	
 	//添加进货退货单
 	public int addImport_Return_up(ImportMenuVO importMenuVO);
+	//添加草稿进货退货单
+	public int addDraftImport_Return_up(ImportMenuVO importMenuVO);
+	//获得所有的草稿进货退货单
+	public ArrayList<ImportMenuVO> getAllDraftImport_Return_up();
+	//根据编号查找草稿进货退货单
+	public ImportMenuVO searchDraftImport_Return_up(String note);
 	
 	//添加销售单
 	public int addExport_up(ExportMenuVO exportMenuVO);
+	//添加草稿销售单
+	public int addDraftExport_up(ExportMenuVO exportMenuVO);
+	//获得所有的草稿销售单
+	public ArrayList<ExportMenuVO> getAllDraftExport_up();
+	//根据编号查找草稿销售单
+	public ExportMenuVO searchDraftExport_up(String note);
 	
 	//添加销售退货单
 	public int addExport_Return_up(ExportMenuVO exportMenuVO);
+	//添加草稿销售退货单
+	public int addDraftExport_Return_up(ExportMenuVO exportMenuVO);
+	//获得所有的草稿销售退货单
+	public ArrayList<ExportMenuVO> getAllDraftExport_Return_up();
+	//根据编号查找草稿销售退货单
+	public ExportMenuVO searchDraftExport_Return_up(String note);
 	
 	//获得进货单编号
 	public String getImportNote_up();

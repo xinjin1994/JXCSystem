@@ -132,4 +132,19 @@ public class CommodityController implements CommodityblService{
 		return null;
 	}
 
+	public int patchDraft_up(PatchVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<PatchVO> getAllDraftPatch_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PatchVO searchDraftPatch_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

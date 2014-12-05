@@ -63,7 +63,14 @@ public interface CommodityblService {
 
 	//库存报溢报损单
 	public int patch_up(PatchVO vo);
-
+	//添加草稿报溢报损单
+	public int patchDraft_up(PatchVO vo);
+	//获得所有的草稿报溢报损单
+	public ArrayList<PatchVO> getAllDraftPatch_up();
+	//根据编号查找草稿报溢报损单
+	public PatchVO searchDraftPatch_up(String note);
+	
+	
 	//设置库存警戒数量，无须审批
 	public int warn_up(WarnVO vo);
 	

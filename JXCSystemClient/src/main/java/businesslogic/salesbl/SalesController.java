@@ -177,4 +177,64 @@ public class SalesController implements SalesblService{
 		return 0;
 	}
 
+	public int addDraftImport_up(ImportMenuVO impoerMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ImportMenuVO> getAllDraftImport_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchDraftImport_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftImport_Return_up(ImportMenuVO importMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ImportMenuVO> getAllDraftImport_Return_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchDraftImport_Return_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftExport_up(ExportMenuVO exportMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ExportMenuVO> getAllDraftExport_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchDraftExport_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftExport_Return_up(ExportMenuVO exportMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ExportMenuVO> getAllDraftExport_Return_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchDraftExport_Return_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
