@@ -3,6 +3,7 @@ package ui;
 import ui.account.AccountAllUIController;
 import ui.admin.AdminUIController;
 import ui.commodity.CommodityUIController;
+import ui.manager.ManagerAllUIController;
 import ui.manager.ManagerUIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
@@ -18,7 +19,9 @@ public class UIController {
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	
-
+	public UIController(){
+		
+	}
 	public UIController() {
 
 		this.frame = new MyFrame();
@@ -28,8 +31,8 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
-		this.AccountPanel();
-
+//		this.AccountPanel();
+		this.ManagerPanel();
 //		this.SalesManagerPanel();
 
 	}
@@ -69,8 +72,8 @@ public class UIController {
 	}
 
 	public void ManagerPanel() {
-		frame.remove(loginPanel);
-		new ManagerUIController(this, frame);
+	//	frame.remove(loginPanel);
+		new ManagerAllUIController(this, frame);
 		frame.repaint();
 	}
 	

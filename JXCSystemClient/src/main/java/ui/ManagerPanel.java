@@ -14,13 +14,13 @@ import ui.setting.MyButton;
  * @version 2014年11月28日下午4:21:03
  */
 public class ManagerPanel extends FatherPanel{
-	private int firstX = 1;
+	private int firstX = 0;
 	private int firstY = 110;
 	private int inter = 54;
 	
-	MyButton accManage,recManage,invoiceManage,proManage;
+	MyButton accManage,recManage,invoiceManage,proManage,details;
 	private MyButton [] buttons = new MyButton[]{ accManage, recManage,invoiceManage,proManage};
-	private MyButton detail, back;
+	private MyButton detail,back;
 	
 	private ManagerUIController managerUIController;
 	private String images_ori[] = new String[]{"Image/Manager/button/accManage.png","Image/Manager/button/recManage.png",
@@ -43,12 +43,15 @@ public class ManagerPanel extends FatherPanel{
 	public void addButton() {
 		FirstButtonListener listener = new FirstButtonListener();
 		for(int i = 0 ;i < buttons.length;i++){
-			buttons[i] = new MyButton(images_ori[0], firstX, firstY +i * inter,
-					images_stop[0], images_press_on[0]);
+			buttons[i] = new MyButton(images_ori[i], firstX, firstY +i * inter,
+					images_stop[i], images_press_on[i]);
 			this.add(buttons[i]);
 			buttons[i].addMouseListener(listener);
 		}
-
+		details = new MyButton("Image/details.png", 670, 537, "Image/Manager/details_m.png", "Image/Manager/details_m.png");
+		details.addMouseListener(listener);
+		this.add(details);
+	
 	}
 	
 	class FirstButtonListener implements MouseListener{
@@ -57,6 +60,7 @@ public class ManagerPanel extends FatherPanel{
 		}
 
 		public void mousePressed(MouseEvent e) {
+			if(e.getSource())
 		}
 
 		public void mouseReleased(MouseEvent e) {
