@@ -32,7 +32,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		this.acc = acc;
 		this.ope = ope;
 		this.uiController = uiController;
-		resController = new ResultPanelController(uiController);
+		resController = new ResultPanelController(uiController,frame);
 		setOpe();
 	}
 
@@ -87,6 +87,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 * 向bl层传送数据accountVO，修改账户
 	 */
 	private void chaAcc() {
+		frame.remove(this);
 		resController.chaAcc();
 	}
 
@@ -95,6 +96,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 * @param 
 	 */	
 	private void delAcc() {
+		frame.remove(this);
 		resController.delAcc();
 	}
 
@@ -103,6 +105,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 * @param 
 	 */
 	private void addAcc() {
+		frame.remove(this);
 		System.out.println("kl");
 		resController.addAcc();
 	}

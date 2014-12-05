@@ -16,6 +16,7 @@ import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
+import vo.PayVO;
 /**
  * 添加收款单panel
  * @author ZYC
@@ -29,7 +30,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	MyTextFieldTrans ps,agent,item;
 	MyTextFieldTrans money;
 	MyComboBox customer,account;
-	
+	PayVO newPayment;
 	public AddPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -154,7 +155,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
-			uiController.confirmPayment();
+			uiController.confirmPayment(newPayment);
 		}
 	}
 }
