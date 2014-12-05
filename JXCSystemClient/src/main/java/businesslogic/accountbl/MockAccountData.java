@@ -1,5 +1,6 @@
 package businesslogic.accountbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AccountPO;
@@ -82,6 +83,21 @@ public class MockAccountData implements AccountDataService{
 		arrayRec.clear();
 		arrayPay.clear();
 		return true;
+	}
+
+	public boolean addDraftReceipt(ReceiptPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ArrayList<ReceiptPO> getAllDraftReceipt() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PaymentPO> getAllDraftPayment() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

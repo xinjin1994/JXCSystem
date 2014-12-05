@@ -4,7 +4,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.PatchPO;
 import po.SortPO;
+import po.WarnPO;
 import dataservice.commoditydataservice.CommodityDataService;
 
 public class CommodityDataService_Stub implements CommodityDataService{
@@ -96,6 +98,43 @@ public class CommodityDataService_Stub implements CommodityDataService{
 	public ArrayList<SortPO> getAllSort() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean updateGood(CommodityPO po1, SortPO po2)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateSort_Mov(SortPO po1, SortPO po2)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addWarn(WarnPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getAllDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -1,5 +1,6 @@
 package businesslogic.userbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.UserPO;
@@ -35,6 +36,11 @@ public class MockDelUser implements UserDataService{
 	public boolean delUser(String string) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public UserPO login(UserPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
