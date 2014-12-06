@@ -32,7 +32,9 @@ public interface AccountblService {
 	public ArrayList<AccountVO> searchFuzzyAccount_up(String word);
 	
 	//精确查找账户
-	public ArrayList<AccountVO> searchAccurateAccount_up(AccountVO vo);
+//	public ArrayList<AccountVO> searchAccurateAccount_up(AccountVO vo);
+	
+	public AccountVO searchAccurateAccount_up(String name);
 
 	//添加收款单
 	public int addReceipt_up(GetVO vo);
@@ -49,8 +51,8 @@ public interface AccountblService {
 	public String getPaymentNote_up();
 	
 	//计算收款总额
-	public int calTotalMoney_up(GetVO vo);
-	public int calTotalMoney_up(PayVO vo);
+	public double calTotalMoney_up(GetVO vo);
+	public double calTotalMoney_up(PayVO vo);
 	
 	//获得当前登陆用户
 	public UserVO getNowUser_up();

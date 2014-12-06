@@ -6,6 +6,16 @@ import java.awt.event.MouseListener;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.account.accBasic.AccountDetailPanel;
+import ui.account.accBasic.AddAccountPanel;
+import ui.account.accBasic.ChangeAccountPanel;
+import ui.account.accBasic.ConfirmAccPanel;
+import ui.account.accBasic.DelAccountPanel;
+import ui.account.accBasic.FindAccountPanel;
+import ui.account.list.AddPaymentPanel;
+import ui.account.list.AddReceiptPanel;
+import ui.account.list.ConfirmPaymentPanel;
+import ui.account.list.ConfirmReceiptPanel;
 import ui.setting.BackButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
@@ -94,14 +104,19 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
-	public void confirmReceipt(GetVO newReceipt){
-		confirmReceiptPanel = new ConfirmReceiptPanel(frame, "Image/Account/创建收款单_确认信息.jpg", this,newReceipt);
+	//ConfirmReceiptPanel(MyFrame frame,String url,
+	//AccountAllUIController uiController,GetVO newReceipt,String person,double totalValue
+	public void confirmReceipt(GetVO newReceipt,String person,double totalValue,double balanceValue){
+		confirmReceiptPanel = new ConfirmReceiptPanel(frame, "Image/Account/创建收款单_确认信息.jpg", this,newReceipt,
+				person,totalValue,balanceValue);
 		frame.setPanel(confirmReceiptPanel);
 		frame.repaint();
 	}
 	
-	public void confirmPayment(PayVO newPayment) {
-		confirmPaymentPanel = new ConfirmPaymentPanel(frame, "Image/Account/创建付款单_确认信息.jpg", this,newPayment);
+//	AccountAllUIController uiController, PayVO newPayment,String person,double totalValue,double balanceValue){
+	public void confirmPayment(PayVO newPayment,String person,double totalValue,double balanceValue) {
+		confirmPaymentPanel = new ConfirmPaymentPanel(frame, "Image/Account/创建付款单_确认信息.jpg", this,newPayment,person
+				,totalValue,balanceValue);
 		frame.setPanel(confirmPaymentPanel);
 		frame.repaint();
 	}
