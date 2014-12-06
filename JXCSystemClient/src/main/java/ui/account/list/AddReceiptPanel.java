@@ -76,13 +76,13 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener{
 	 */
 	private void setTypeIn() {
 		ps = new MyTextFieldTrans(106, 369, 222, 170);
-		ps.setForeground(new ColorFactory().acc);
+		ps.setForeground(new ColorFactory().accColor);
 		
 		agent = new MyTextFieldTrans(406,369,150,54);
-		agent.setForeground(new ColorFactory().acc);
+		agent.setForeground(new ColorFactory().accColor);
 				
 		money = new MyTextFieldTrans(491, 248, 205, 43);
-		money.setForeground(new ColorFactory().acc);
+		money.setForeground(new ColorFactory().accColor);
 		
 		this.add(ps);
 		this.add(agent);
@@ -112,13 +112,13 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener{
 	 */
 	private void setIDOpe() {
 		idLabel = new MyLabel(106,165, 221,55);
-		idLabel.setForeground(new ColorFactory().acc);
+		idLabel.setForeground(new ColorFactory().accColor);
 		id = accountblService.getReceiptNote_up();
 		idLabel.setText(id);
 		this.add(idLabel);
 		
 		operator = new MyLabel(575, 370, 155, 55);
-		operator.setForeground(new ColorFactory().acc);
+		operator.setForeground(new ColorFactory().accColor);
 		operate = accountblService.getOperator_up();
 		operator.setText(operate);
 		this.add(operator);
@@ -149,7 +149,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener{
 	private void setTotal(){
 		total = new MyLabel(407, 496,318, 43);
 //		total.setText(money.getText());
-		total.setForeground(new ColorFactory().acc);
+		total.setForeground(new ColorFactory().accColor);
 		this.add(total);
 		this.repaint();
 	}

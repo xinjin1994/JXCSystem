@@ -15,16 +15,11 @@ import po.UserPO;
 import dataservice.userdataservice.UserDataService;
 
 public class UserDataService_Stub extends UnicastRemoteObject implements UserDataService{
-	String n;
-	String p;
-	int d;
 	
 	ArrayList<UserPO> userList=new ArrayList<UserPO>();
 	
-	public UserDataService_Stub(String n, String p, int d) throws RemoteException{
-		this.n = n;
-		this.p = p;
-		this.d = d;
+	public UserDataService_Stub() throws RemoteException{
+		this.readUserList();
 	}
 	
 	public void writeUserList(){
@@ -72,9 +67,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		
 	}
 	
-	public UserDataService_Stub() throws RemoteException {
-		
-	}
+	
 	
 	public boolean addUser(UserPO po) {
 		return true;
@@ -85,7 +78,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	}
 
 	public UserPO getUser(String name) {
-		return new UserPO(n, p, d);
+		return new UserPO(name, name, 0);
 	}
 
 	public ArrayList<UserPO> show() {
@@ -99,6 +92,11 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	public boolean delUser(String string) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public UserPO login(UserPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

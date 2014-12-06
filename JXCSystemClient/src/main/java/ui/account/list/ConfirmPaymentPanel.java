@@ -53,7 +53,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 		
 		MyLabel labels[] = new MyLabel[]{idLabel,operator,agent,item,total,ps};
 		for(int i = 0;i < labels.length;i++){
-			labels[i].setForeground(new ColorFactory().acc);
+			labels[i].setForeground(new ColorFactory().accColor);
 			this.add(labels[i]);
 		}
 		//PayVO(String id,String operator,String cusName,String bankAccount,ItemList itemList) {
@@ -71,7 +71,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 			if(i % 2 == 1){
 				transferList[i].setForeground(new ColorFactory().greyFont);
 			}else if(i % 2 == 0){
-				transferList[i].setForeground(new ColorFactory().acc);
+				transferList[i].setForeground(new ColorFactory().accColor);
 			}
 			this.add(transferList[i]);
 			transferList[0].setText(newPayment.bankAccount);

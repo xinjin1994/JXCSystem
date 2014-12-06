@@ -20,7 +20,7 @@ public class ManagerPanel extends FatherPanel{
 	
 	MyButton accManage,recManage,invoiceManage,proManage,details;
 	private MyButton [] buttons = new MyButton[]{ accManage, recManage,invoiceManage,proManage};
-	private MyButton detail,back;
+	private MyButton back;
 	
 	private ManagerUIController managerUIController;
 	private String images_ori[] = new String[]{"Image/Manager/button/accManage.png","Image/Manager/button/recManage.png",
@@ -60,7 +60,9 @@ public class ManagerPanel extends FatherPanel{
 		}
 
 		public void mousePressed(MouseEvent e) {
-			if(e.getSource())
+			if(e.getSource() == details){
+				
+			}
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -80,17 +82,17 @@ public class ManagerPanel extends FatherPanel{
 
 		public void mouseExited(MouseEvent e) {
 		}
+
 		
+//		public void addRestButton() {
+//		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
+//				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
+//		back = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
+//				"Image/Sales/Sales_image/返回_press_on.png");
+//		this.add(detail);
+//		this.add(back);
+//	}
+
+
 	}
-
-	public void addRestButton() {
-		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
-				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
-		back = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
-				"Image/Sales/Sales_image/返回_press_on.png");
-		this.add(detail);
-		this.add(back);
-	}
-
-
 }

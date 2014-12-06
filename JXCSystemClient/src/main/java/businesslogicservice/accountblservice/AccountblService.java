@@ -38,21 +38,43 @@ public interface AccountblService {
 
 	//添加收款单
 	public int addReceipt_up(GetVO vo);
+	//添加草稿收款单
+	public int addDraftReceipt_up(GetVO vo);
+	//获得所有的草稿收款单
+	public ArrayList<GetVO> getAllDraftReceipt_up();
+	//根据编号查找收款单
+	public GetVO searchReceipt_up(String note);
+	//根据编号查找草稿收款单
+	public GetVO searchDraftReceipt_up(String note);
+	
 	//添加付款单
 	public int addPayment_up(PayVO vo);
+	//添加草稿付款单
+	public int addDraftPayment_up(PayVO vo);
+	//获得所有的草稿付款单
+	public ArrayList<PayVO> getAllDraftPayment_up();
+	//根据编号查找付款单
+	public PayVO searchPayment_up(String note);
+	//根据编号查找草稿付款单
+	public PayVO searchDraftPayment_up(String note);
 	
 	//获得当前操作员
 	public String getOperator_up();
 	
 	//获得收款单编号
 	public String getReceiptNote_up();
-	
 	//获得付款单编号
 	public String getPaymentNote_up();
 	
+//<<<<<<< HEAD
 	//计算收款总额
 	public double calTotalMoney_up(GetVO vo);
 	public double calTotalMoney_up(PayVO vo);
+/*=======
+	//计算收付款总额
+	public int calTotalMoney_up(GetVO vo);
+	public int calTotalMoney_up(PayVO vo);
+>>>>>>> fdfb8769613779b5e4559f17a4e848d418dcd06d*/
 	
 	//获得当前登陆用户
 	public UserVO getNowUser_up();
@@ -62,5 +84,6 @@ public interface AccountblService {
 	
 	//获得所有账户信息
 	public ArrayList<AccountVO> getAllAccount_up();
+	
 	
 }

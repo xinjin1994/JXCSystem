@@ -4,7 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.PatchPO;
+import po.SendGiftPO;
 import po.SortPO;
+import po.WarnPO;
 import dataservice.commoditydataservice.CommodityDataService;
 
 public class CommodityDataService_Stub implements CommodityDataService{
@@ -94,6 +97,148 @@ public class CommodityDataService_Stub implements CommodityDataService{
 	}
 
 	public ArrayList<SortPO> getAllSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean updateGood(CommodityPO po1, SortPO po2)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateSort_Mov(SortPO po1, SortPO po2)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addWarn(WarnPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getAllDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public SendGiftPO findGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SendGiftPO findGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean delGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public PatchPO getDraftPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PatchPO> getAllDraftPatch() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean addSendGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public SendGiftPO findSendGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SendGiftPO findSendGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean delSendGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delSendGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public PatchPO getPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PatchPO> getAllPatch() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public CommodityPO findGift(CommodityPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean getGoodNote(SortPO po1) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getSortNote(SortPO po1) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getPatchNote() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

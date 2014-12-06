@@ -84,7 +84,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		MyTextFieldTrans typeInItem []= new MyTextFieldTrans[]{ps,agent,money,item};
 		for(int i = 0;i < typeInItem.length;i++){
 			this.add(typeInItem[i]);
-			typeInItem[i].setForeground(new ColorFactory().acc);
+			typeInItem[i].setForeground(new ColorFactory().accColor);
 		}
 //		money.getDocument().addDocumentListener(this);
 	}
@@ -95,13 +95,13 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	 */
 	private void setIDOpe() {
 		idLabel = new MyLabel(106,165, 221,55);
-		idLabel.setForeground(new ColorFactory().acc);
+		idLabel.setForeground(new ColorFactory().accColor);
 		id = accountblService.getPaymentNote_up();
 		idLabel.setText(id);
 		this.add(idLabel);
 		
 		operator = new MyLabel(575, 370, 155, 55);
-		operator.setForeground(new ColorFactory().acc);
+		operator.setForeground(new ColorFactory().accColor);
 		operate = accountblService.getOperator_up();
 		operator.setText(operate);
 		this.add(operator);
@@ -128,7 +128,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	private void setTotal(){
 		total = new MyLabel(407, 496,318, 43);
 //		total.setText(money.getText());
-		total.setForeground(new ColorFactory().acc);
+		total.setForeground(new ColorFactory().accColor);
 		this.add(total);
 		this.repaint();
 	}

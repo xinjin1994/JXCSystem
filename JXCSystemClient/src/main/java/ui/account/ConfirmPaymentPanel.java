@@ -3,12 +3,15 @@ package ui.account;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import ui.FatherPanel;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.GetVO;
 import vo.PayVO;
 /**
@@ -23,6 +26,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 	
 	PayVO newPayment;
 	MyButton forwardButton;
+	ResultPanelController resController;
 	public ConfirmPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController, PayVO newPayment){
 		super(frame,url,uiController);
@@ -30,6 +34,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 		this.repaint();
 		this.newPayment = newPayment;
 		
+		resController = new ResultPanelController(uiController, frame);
 		uiController.setBack_first(this);
 		
 		setLabel();
@@ -47,7 +52,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 		
 		
 		for(int i = 0;i < labels.length;i++){
-			labels[i].setForeground(new ColorFactory().acc);
+			labels[i].setForeground(new ColorFactory().accColor);
 			this.add(labels[i]);
 			labels[i].setText("我是空的，我要内容");
 		}
@@ -56,7 +61,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 			if(i % 2 == 1){
 				transferList[i].setForeground(new ColorFactory().greyFont);
 			}else if(i % 2 == 0){
-				transferList[i].setForeground(new ColorFactory().acc);
+				transferList[i].setForeground(new ColorFactory().accColor);
 			}
 			this.add(transferList[i]);
 			transferList[i].setText("我也是空的，我也要内容");
@@ -77,7 +82,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
-			uiController.addMainPanel();
+			resController.accSucceeded("成功添加付款单！");
 		}
 	}
 }

@@ -75,12 +75,12 @@ public class AccountController implements AccountblService{
 		return null;
 	}
 
-	public int calTotalMoney_up(GetVO vo) {
+	public double calTotalMoney_up(GetVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int calTotalMoney_up(PayVO vo) {
+	public double calTotalMoney_up(PayVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -96,6 +96,51 @@ public class AccountController implements AccountblService{
 	}
 
 	public ArrayList<AccountVO> getAllAccount_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftReceipt_up(GetVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<GetVO> getAllDraftReceipt_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public GetVO searchDraftReceipt_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftPayment_up(PayVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<PayVO> getAllDraftPayment_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PayVO searchDraftPayment_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public GetVO searchReceipt_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PayVO searchPayment_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public AccountVO searchAccurateAccount_up(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

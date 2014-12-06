@@ -91,7 +91,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void chaAcc() {
 		frame.remove(this);
-		resController.chaAcc();
+//		resController.chaAcc();
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 			//
 			break;
 		}
-		resController.delAcc();
+//		resController.delAcc();
 	}
 
 	/**

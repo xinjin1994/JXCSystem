@@ -22,6 +22,11 @@ public class UIController {
 	/*public UIController(){
 		
 	}*/
+//=======
+////	public UIController(){
+//		
+//	//}
+//>>>>>>> fdfb8769613779b5e4559f17a4e848d418dcd06d
 	public UIController() {
 
 		this.frame = new MyFrame();
@@ -33,7 +38,11 @@ public class UIController {
 		this.frame = new MyFrame();
 		this.AccountPanel();
 //		this.ManagerPanel();
+//<<<<<<< HEAD
 //		this.SalesManagerPanel();
+//=======
+	//	this.SalesManagerPanel();
+//>>>>>>> fdfb8769613779b5e4559f17a4e848d418dcd06d
 
 	}
 

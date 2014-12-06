@@ -1,5 +1,6 @@
 package data.invoicedata;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.InvoicePO;
@@ -25,7 +26,7 @@ public class InvoiceDataService_Stub implements InvoiceDataService{
 		return true;
 	}
 
-	public boolean delInvoice(InvoicePO po) {
+	public boolean passInvoice(InvoicePO po) {
 		return true;
 	}
 
@@ -35,6 +36,11 @@ public class InvoiceDataService_Stub implements InvoiceDataService{
 
 	public boolean clear() {
 		return true;
+	}
+
+	public boolean refuseInvoice(InvoicePO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

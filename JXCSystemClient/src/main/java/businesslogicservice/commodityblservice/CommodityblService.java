@@ -32,6 +32,9 @@ public interface CommodityblService {
 	public int updateCommodity_up(CommodityVO vo1,CommodityVO vo2);
 	//将商品移至其他分类中
 	public int updateCommodity_up(CommodityVO vo1,SortVO vo2);
+	
+	//获得商品分配的编号
+	public String getCommodityNote_up(SortVO vo1);
 
 	//模糊查找商品
 	public ArrayList<CommodityVO> searchFuzzyCommodity_up(String word);
@@ -48,6 +51,11 @@ public interface CommodityblService {
 	public int updateSort_up_Inf(SortVO vo1, SortVO vo2);
 	//将分类移至另一分类下
 	public int updateSort_up_Mov(SortVO vo1,SortVO vo2);
+	//根据编号查找Sort
+	public SortVO searchSort_up(String note);
+
+	//获得分配的分类编号，vo2==null代表根分类
+	public String getSortNote_up(SortVO vo1);
 	
 	//查看库存，注意库存数量要有合计，就在数据层用个for算一下吧o(╯□╰)o
 	public ArrayList<CommodityVO> Examine_up(String time1, String time2);
@@ -63,7 +71,18 @@ public interface CommodityblService {
 
 	//库存报溢报损单
 	public int patch_up(PatchVO vo);
-
+	//添加草稿报溢报损单
+	public int patchDraft_up(PatchVO vo);
+	//获得所有的草稿报溢报损单
+	public ArrayList<PatchVO> getAllDraftPatch_up();
+	//获得报溢报损单编号
+	public String getPatchNote();
+	//根据编号查找草稿报溢报损单
+	public PatchVO searchDraftPatch_up(String note);
+	//根据编号查找报溢报损单
+	public PatchVO searchPatch_up(String note);
+	
+	
 	//设置库存警戒数量，无须审批
 	public int warn_up(WarnVO vo);
 	

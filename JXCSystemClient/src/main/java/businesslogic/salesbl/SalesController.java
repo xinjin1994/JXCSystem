@@ -132,4 +132,124 @@ public class SalesController implements SalesblService{
 		return null;
 	}
 
+	public String getImportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getImport_ReturnNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getExportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getExport_ReturnNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchImportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchExportNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getImport_ReturnMaxNumber_up(String old_note) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getExport_ReturnMaxNumber_up(String old_note) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getClerkDiscount_up() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int addDraftImport_up(ImportMenuVO impoerMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ImportMenuVO> getAllDraftImport_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchDraftImport_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftImport_Return_up(ImportMenuVO importMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ImportMenuVO> getAllDraftImport_Return_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchDraftImport_Return_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftExport_up(ExportMenuVO exportMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ExportMenuVO> getAllDraftExport_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchDraftExport_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int addDraftExport_Return_up(ExportMenuVO exportMenuVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<ExportMenuVO> getAllDraftExport_Return_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchDraftExport_Return_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getCustomerNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchImportNote_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchExportNote_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

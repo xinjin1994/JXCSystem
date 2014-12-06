@@ -1,5 +1,6 @@
 package data.accountdata;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AccountPO;
@@ -61,6 +62,76 @@ public class AccountDataService_Stub implements AccountDataService{
 
 	public boolean clear() {
 		return true;
+	}
+
+	public boolean addDraftReceipt(ReceiptPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ArrayList<ReceiptPO> getAllDraftReceipt() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PaymentPO> getAllDraftPayment() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean addDraftPayment(PaymentPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ReceiptPO findReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PaymentPO findPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ReceiptPO findDraftReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ReceiptPO findDraftPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean addMoney(AccountPO po, double money) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delMoney(AccountPO po, double money) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getReceiptNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getPaymentNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -40,7 +40,8 @@ public class MakeSureFindInfo extends FatherPanel{
 	}
 	
 	public void setTable(){
-		table = new MyTable(this);
+		table = new MyTable();
+		this.add(table);
 		ArrayList <String> infoArray = new ArrayList<String>();
 		infoArray.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
 		table.setTable(infoArray);

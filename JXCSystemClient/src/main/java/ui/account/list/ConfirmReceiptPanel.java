@@ -75,7 +75,7 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 			if(i % 2 == 1){
 				transferList[i].setForeground(new ColorFactory().greyFont);
 			}else if(i % 2 == 0){
-				transferList[i].setForeground(new ColorFactory().acc);
+				transferList[i].setForeground(new ColorFactory().accColor);
 			}
 			this.add(transferList[i]);
 			//TransferListVO(String bankAccount,double transferValue,String remark){

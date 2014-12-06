@@ -63,7 +63,8 @@ public class TablePanel extends FatherPanel{
 	}
 	public void addTable(){
 		accountblService = new AccountController();	
-		table = new MyTable(this);
+		table = new MyTable();
+		this.add(table);
 		ArrayList <String> infoArray = new ArrayList<String>();
 		infoArray.add("账户名称;账户余额");
 		/*for(int i=0; i<fuzzyAccVO.size();i++){

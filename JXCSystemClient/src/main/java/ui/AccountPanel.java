@@ -1,16 +1,20 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import ui.account.AccountUIController;
+import ui.setting.ColorFactory;
 import ui.setting.MyButton;
 import ui.setting.MyLabel;
+import ui.setting.MyTable;
 
 //财务经理
 public class AccountPanel extends FatherPanel{
@@ -23,7 +27,8 @@ public class AccountPanel extends FatherPanel{
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage};
 	private MyButton detail, back,refresh;
 	private JLabel remind;
-	
+	private MyTable showTable; 
+	private ColorFactory colors = new ColorFactory();
 	private AccountUIController accountUIController;
 	private String images_ori[] = new String[]{"Image/Account/button/accManage.png",
 			"Image/Account/button/finManage.png","Image/Account/button/recManage.png",
@@ -59,6 +64,58 @@ public class AccountPanel extends FatherPanel{
 		refresh.addMouseListener(listener);
 
 	}
+	/**
+	 * 该方法用于显示table
+	 * @param info 要显示的数据
+	 */
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		this.add(showTable.tablePanel);
+		this.repaint();
+	}
+	/**
+	 * 该方法用于从下曾获得被审批的单据数据
+	 */
+	private void getInvoiceInfo() {
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("a;b;c;e");
+		info.add("s,r,t,h");
+		info.add("w;t;x;h");
+		info.add("gg");
+		setTable(info);
+	}
+	/**
+	 * 该方法用于获得当前期初的信息
+	 */
+	private void getInitialInfo() {
+		
+	}
+	/**
+	 * 查看表单最初的表格应该显示什么呢？？？不造啊T-T
+	 */
+	private void getReceiptInfo() {
+		
+	}
+	/**
+	 * 该方法用于获得收款单和付款单的信息，按时间排序
+	 */
+	private void getFinanceInfo() {
+		
+	}
+	/**
+	 * 该方法用于显示当前所有账户的信息，该方法要根据登陆人员的身份判断能否选择
+	 */
+	private void getAccountInfo() {
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("a;b;c;e");
+		info.add("s,r,t,h");
+		info.add("w;t;x;h");
+		info.add("gg");
+		setTable(info);
+	}
+
 	
 	class FirstButtonListener implements MouseListener{
 
@@ -73,10 +130,23 @@ public class AccountPanel extends FatherPanel{
 				AccountPanel.this.add(remind);
 				AccountPanel.this.repaint();
 				System.out.println("fff");
-			}//刷新数据，如果有新的审批单据返回情况，收支单据button上面会出现红点
+			}//刷新数据，如果有新的审批单据返回情况，收支单据button上面会出现红点,
+			 else if(e.getSource() == buttons[0]){
+				getAccountInfo();
+			}else if(e.getSource() == buttons[1]){
+				getFinanceInfo();
+			}else if(e.getSource() == buttons[2]){
+				getReceiptInfo();
+			}else if(e.getSource() == buttons[3]){
+				getInvoiceInfo();
+			}else if(e.getSource() == buttons[4]){
+				getInitialInfo();
+			}
 		}
 
+	
 		public void mouseReleased(MouseEvent e) {
+	
 		}
 
 		public void mouseEntered(MouseEvent e) {
