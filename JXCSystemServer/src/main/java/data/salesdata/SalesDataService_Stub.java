@@ -26,6 +26,10 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	ArrayList<ExportPO> exportList=new ArrayList<ExportPO>();
 	ArrayList<Import_ReturnPO> import_returnList=new ArrayList<Import_ReturnPO>();
 	ArrayList<Export_ReturnPO> export_returnList=new ArrayList<Export_ReturnPO>();
+	ArrayList<ImportPO> draftImportList=new ArrayList<ImportPO>();
+	ArrayList<ExportPO> draftExportList=new ArrayList<ExportPO>();
+	ArrayList<Import_ReturnPO> draftImport_returnList=new ArrayList<Import_ReturnPO>();
+	ArrayList<Export_ReturnPO> draftExport_returnList=new ArrayList<Export_ReturnPO>();
 	
 	public void writeCustomerList(){
 		
@@ -256,9 +260,202 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 		
 	}
 	
+	public void writeDraftImportList(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("draftImportList.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(draftImportList);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readDraftImportList(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("draftImportList.out");
+			ois=new ObjectInputStream(fis);
+			draftImportList=(ArrayList<ImportPO>) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	
+	public void writeDraftImport_ReturnList(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("draftImport_returnList.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(draftImport_returnList);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readDraftImport_ReturnList(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("draftImport_returnList.out");
+			ois=new ObjectInputStream(fis);
+			draftImport_returnList=(ArrayList<Import_ReturnPO>) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	
+	public void writeDraftExportList(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("draftExportList.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(draftExportList);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readDraftExportList(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("draftExportList.out");
+			ois=new ObjectInputStream(fis);
+			draftExportList=(ArrayList<ExportPO>) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	
+	public void writeDraftExport_ReturnList(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("draftExport_returnList.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(draftExport_returnList);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readDraftExport_ReturnList(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("draftExport_returnList.out");
+			ois=new ObjectInputStream(fis);
+			draftExport_returnList=(ArrayList<Export_ReturnPO>) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	
 	
 	public SalesDataService_Stub() throws RemoteException {
 		super();
+		this.readCustomerList();
+		this.readDraftImportList();
+		this.readDraftImport_ReturnList();
+		this.readDraftExportList();
+		this.readDraftExport_ReturnList();
+		this.readImportList();
+		this.readImport_ReturnList();
+		this.readExportList();
+		this.readExport_ReturnList();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -341,6 +538,112 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 
 	public boolean clear() {
 		return true;
+	}
+
+	public boolean addDraftImport(ImportPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addDraftImport_Return(Import_ReturnPO po)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addDraftExport(ExportPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addDraftExport_Return(Export_ReturnPO po)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftImport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftImport_Return(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftExport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftExport_Reutrn(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ArrayList<ImportPO> getAllDraftImport() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<Import_ReturnPO> getAllDraftImport_Return()
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<ExportPO> getAllDraftExport() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<Export_ReturnPO> getAllDraftExport_Return()
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportPO getImport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportPO getDraftImport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Import_ReturnPO getImport_Return(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Import_ReturnPO getDraftImport_Return(String note)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportPO getExport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportPO getDraftExport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Export_ReturnPO getExport_Return(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Export_ReturnPO getDraftExport_Return(String note)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

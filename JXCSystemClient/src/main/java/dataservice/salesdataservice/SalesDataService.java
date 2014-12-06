@@ -25,6 +25,10 @@ public interface SalesDataService extends Remote {
 	public boolean addDraftExport(ExportPO po) throws RemoteException;
 	public boolean addExport_Return(Export_ReturnPO po) throws RemoteException;
 	public boolean addDraftExport_Return(Export_ReturnPO po) throws RemoteException;
+	public boolean delDraftImport(String note) throws RemoteException;
+	public boolean delDraftImport_Return(String note) throws RemoteException;
+	public boolean delDraftExport(String note) throws RemoteException;
+	public boolean delDraftExport_Reutrn(String note) throws RemoteException; 
 	public ArrayList<ImportPO> getAllImport() throws RemoteException;
 	public ArrayList<ImportPO> getAllDraftImport() throws RemoteException;
 	public ArrayList<Import_ReturnPO> getAllImport_Return() throws RemoteException;

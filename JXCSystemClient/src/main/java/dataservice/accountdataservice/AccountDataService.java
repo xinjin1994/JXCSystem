@@ -26,7 +26,21 @@ public interface AccountDataService extends Remote {
 	public boolean addDraftReceipt(ReceiptPO po) throws RemoteException;
 
 	public boolean addPayment(PaymentPO po) throws RemoteException;
-
+	
+	public boolean addDraftPayment(PaymentPO po) throws RemoteException;
+	
+	public boolean delDraftReceipt(String note) throws RemoteException;
+	
+	public boolean delDraftPayment(String note) throws RemoteException;
+	
+	public ReceiptPO findReceipt(String note) throws RemoteException;
+	
+	public PaymentPO findPayment(String note) throws RemoteException;
+	
+	public ReceiptPO findDraftReceipt(String note) throws RemoteException;
+	
+	public ReceiptPO findDraftPayment(String note) throws RemoteException;
+	
 	public ArrayList<ReceiptPO> getAllReceipt() throws RemoteException;
 	
 	public ArrayList<ReceiptPO> getAllDraftReceipt() throws RemoteException;

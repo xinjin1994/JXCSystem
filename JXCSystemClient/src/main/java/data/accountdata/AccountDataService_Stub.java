@@ -79,4 +79,39 @@ public class AccountDataService_Stub implements AccountDataService{
 		return null;
 	}
 
+	public boolean addDraftPayment(PaymentPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ReceiptPO findReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PaymentPO findPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ReceiptPO findDraftReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ReceiptPO findDraftPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

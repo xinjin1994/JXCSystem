@@ -178,4 +178,24 @@ public class SaleDataService_Stub implements SalesDataService{
 		return null;
 	}
 
+	public boolean delDraftImport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftImport_Return(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftExport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftExport_Reutrn(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

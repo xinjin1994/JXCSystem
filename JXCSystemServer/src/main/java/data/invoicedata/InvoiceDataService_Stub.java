@@ -15,17 +15,14 @@ import po.PaymentPO;
 import dataservice.invoicedataservice.InvoiceDataService;
 
 public class InvoiceDataService_Stub extends UnicastRemoteObject implements InvoiceDataService{
-	String invoiceType;
-	String invoiceNum;
-	String condition;
+//	String invoiceType;
+//	String invoiceNum;
+//	String condition;
 	
 	ArrayList<InvoicePO> invoiceList=new ArrayList<InvoicePO>();
 	
-	public InvoiceDataService_Stub(String invoiceType,
-			String invoiceNum, String condition) throws RemoteException{
-		this.invoiceNum = invoiceNum;
-		this.invoiceType = invoiceType;
-		this.condition = condition;
+	public InvoiceDataService_Stub() throws RemoteException{
+		this.readInvoiceList();
 	}
 	
 	
@@ -126,6 +123,18 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 			}
 		}
 		return null;
+	}
+
+
+	public boolean passInvoice(InvoicePO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public boolean refuseInvoice(InvoicePO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

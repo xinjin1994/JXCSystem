@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import po.CommodityPO;
 import po.PatchPO;
 import po.PaymentPO;
+import po.SendGiftPO;
 import po.SortPO;
+import po.WarnPO;
 import dataservice.commoditydataservice.CommodityDataService;
 
 public class CommodityDataService_Stub extends UnicastRemoteObject implements CommodityDataService{
@@ -21,10 +23,15 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	ArrayList<SortPO> sortList=new ArrayList<SortPO>();
 	ArrayList<PatchPO> patchList=new ArrayList<PatchPO>();
 	ArrayList<CommodityPO> giftList=new ArrayList<CommodityPO>();
+	ArrayList<PatchPO> draftPatchList=new ArrayList<PatchPO>();
 //	ArrayList<CommodityPO> sto=new ArrayList<CommodityPO>();
 	
 	public CommodityDataService_Stub() throws RemoteException {
 		super();
+		this.readSortList();
+		this.readPatchList();
+		this.readGiftList();
+		this.readDraftPatchList();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -104,6 +111,51 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			fis=new FileInputStream("patchList.out");
 			ois=new ObjectInputStream(fis);
 			patchList=(ArrayList<PatchPO>) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void writeDraftPatchList(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("draftPatchList.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(draftPatchList);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readDraftPatchList(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("draftPatchList.out");
+			ois=new ObjectInputStream(fis);
+			draftPatchList=(ArrayList<PatchPO>) ois.readObject();
 			ois.close();
 			
 		} catch (ClassNotFoundException e) {
@@ -395,6 +447,118 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			}
 		}
 		return sort;
+	}
+
+	public boolean updateGood(CommodityPO po1, SortPO po2)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateSort_Mov(SortPO po1, SortPO po2)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public SendGiftPO findGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SendGiftPO findGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean delGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addWarn(WarnPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addDraftPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delDraftPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public PatchPO getDraftPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PatchPO> getAllDraftPatch() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean addPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public PatchPO getPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PatchPO> getAllPatch() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean addSendGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public SendGiftPO findSendGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SendGiftPO findSendGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean delSendGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delSendGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public CommodityPO findGift(CommodityPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
