@@ -6,15 +6,23 @@ import java.util.ArrayList;
 
 import po.DiscountPO;
 import po.ProGiftPO;
+import po.VoucherPO;
 
 public interface PromotionDataService extends Remote {
 	public boolean addDiscount(DiscountPO po) throws RemoteException;
 	public boolean addGift(ProGiftPO po) throws RemoteException;
+	public boolean addVoucher(VoucherPO po) throws RemoteException;
+//	public boolean addOther(String pro) throws RemoteException;
 	public boolean delDiscount(DiscountPO po) throws RemoteException;
 	public boolean delGift(ProGiftPO po) throws RemoteException;
+	public boolean delVoucher(VoucherPO po) throws RemoteException;
+//	public boolean delOther(String pro);
 	public DiscountPO getDiscount() throws RemoteException;
 	public ProGiftPO getGift() throws RemoteException;
+	public VoucherPO getVoucher() throws RemoteException;
 	public ArrayList<DiscountPO> showDiscount() throws RemoteException;
 	public ArrayList<ProGiftPO> showProGift() throws RemoteException;
+	public ArrayList<VoucherPO> showVoudcher() throws RemoteException;
+	public boolean clear() throws RemoteException;
 }
 	

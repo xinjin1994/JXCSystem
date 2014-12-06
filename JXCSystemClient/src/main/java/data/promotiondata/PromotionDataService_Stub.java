@@ -1,10 +1,12 @@
 package data.promotiondata;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
+import po.VoucherPO;
 import dataservice.promotiondataservice.PromotionDataService;
 
 public class PromotionDataService_Stub implements PromotionDataService{
@@ -65,6 +67,31 @@ public class PromotionDataService_Stub implements PromotionDataService{
 
 	public ArrayList<ProGiftPO> showProGift() {
 		return new ArrayList<ProGiftPO>();
+	}
+
+	public boolean addVoucher(VoucherPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delVoucher(VoucherPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public VoucherPO getVoucher() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<VoucherPO> showVoudcher() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean clear() throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

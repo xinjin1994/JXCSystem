@@ -63,7 +63,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	}
 
 	private void setForwardAdd() {
-		System.out.println("kld");
+//		System.out.println("kld");
 		ForwardButton forward = new ForwardButton(607, 393);
 		forwardButtonAdd = forward.forward_white;
 		
@@ -108,6 +108,8 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		frame.remove(this);
 		System.out.println("kl");
 		resController.accSucceeded("成功新增账户！");
+		
+
 	}
 	/**
 	 * 当添加或者删除账户成功后显示结果Label

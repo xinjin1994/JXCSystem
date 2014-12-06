@@ -57,7 +57,7 @@ public class Test {
 			LocateRegistry.createRegistry(8888);
 			Naming.bind("rmi://127.0.0.1:8888/InitializationDataService",initializationdataservice);
 			
-			invoicedataservice = new InvoiceDataService_Stub(null, null, null);		
+			invoicedataservice = new InvoiceDataService_Stub();		
 			LocateRegistry.createRegistry(8888);
 			Naming.bind("rmi://127.0.0.1:8888/InvoiceDataService",invoicedataservice);
 			

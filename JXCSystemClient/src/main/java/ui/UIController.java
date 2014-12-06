@@ -25,7 +25,7 @@ public class UIController {
 	public UIController() {
 
 		this.frame = new MyFrame();
-	    this.welcomePanel();
+//	    this.welcomePanel();
 //	    this.SalesManagerPanel();
 	}
 	

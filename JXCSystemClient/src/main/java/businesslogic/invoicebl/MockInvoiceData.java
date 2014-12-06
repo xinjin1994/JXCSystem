@@ -1,5 +1,6 @@
 package businesslogic.invoicebl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataservice.invoicedataservice.InvoiceDataService;
@@ -21,7 +22,7 @@ public class MockInvoiceData implements InvoiceDataService{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public boolean delInvoice(InvoicePO po) {
+	public boolean passInvoice(InvoicePO po) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -30,6 +31,10 @@ public class MockInvoiceData implements InvoiceDataService{
 		return null;
 	}
 	public boolean clear() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public boolean refuseInvoice(InvoicePO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}

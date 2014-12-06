@@ -126,7 +126,7 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 				return 1;
 			}
 			
-			if(invoice.delInvoice(tempInvoice)){
+			if(invoice.passInvoice(tempInvoice)){
 				return 0;
 			}
 			
