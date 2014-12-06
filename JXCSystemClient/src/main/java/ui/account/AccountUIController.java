@@ -38,7 +38,7 @@ public class AccountUIController {
 		this.accountPanel = new AccountPanel(frame, "Image/Account/account_背景.jpg",
 				uiController, this);
 		frame.setPanel(accountPanel);
-		
+		uiController.setAccountPanel(accountPanel);
 	}
 	public void toAccPanel() {
 		accountSecondPanel.removeAll();
@@ -70,7 +70,7 @@ public class AccountUIController {
 		String images_ori_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve.png",
 				"Image/Account/button/invoiceManage/disapp.png"};
 		String images_stop_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_stop.png",
-		"Image/Account/button/invoiceManage/disapp_stop.png"};
+		"Image/Account/button/invoiceManage/disapp_s jm   top.png"};
 		String images_press_on_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_press_on.png",
 				"Image/Account/button/invoiceManage/disapp_press_on.png"};
 		

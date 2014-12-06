@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -15,36 +16,45 @@ import javax.swing.table.DefaultTableModel;
  * 实现table初始化，内容添加，删除，显示，查找等操作
  */
 public class MyTable extends JTable{
-	JPanel backPanel;
-	static JPanel tablePanel;
+//	JPanel backPanel;
+	public static JPanel tablePanel;
 	static JScrollPane tableSp ;
 	static JTable table;
 	DefaultTableModel tableModel;
 	Vector columnNames, rowData;
 	static DefaultTableCellRenderer render;
-	
+	private Color evenColor,oddColor,fontColorEven,fontColorOdd;
 	Color headerColor = new Color(239,140,142);
-	Color evenColor = new Color(237,237,237);
-	Color oddColor = new Color(245,190,185);
-	Color fontColor = new Color(159,122,116);
+//	Color evenColor = new Color(237,237,237);
+//	Color oddColor = new Color(245,190,185);
+//	Color fontColor = new Color(159,122,116);
 	
-	public MyTable(JPanel backPanel){
+	public MyTable(){
 		
-		this.backPanel = backPanel;
+	//	this.backPanel = backPanel;
 		setPanel();
 	}
 	
+	
+	public void setColor(Color evenColor,Color oddColor,Color fontColorOdd,Color fontColorEven) {
+		this.evenColor = evenColor;
+		this.oddColor = oddColor;
+		this.fontColorEven = fontColorEven;
+		this.fontColorOdd = fontColorOdd;
+		
+	}
+
 	/*
 	 * 初始化panel
 	 */
 	private  void setPanel() {
 		tablePanel = new JPanel();
 		tablePanel.setLayout(null);
-		tablePanel.setBounds(0,0,800 ,600);
+		tablePanel.setBounds(353,76,437 ,428);
 		tablePanel.removeAll();
 		tablePanel.setOpaque(false);
 		tablePanel.setVisible(true);
-		backPanel.add(tablePanel);
+	//	backPanel.add(tablePanel);
 		
 	}
 	
@@ -57,6 +67,7 @@ public class MyTable extends JTable{
 		
 		tableModel = new DefaultTableModel(rowData,columnNames);
 		table = new JTable(tableModel);
+		setHeader();
 		//setHeader();
 		//table.setBounds(55, 35, 350, 410);
 		table.setShowGrid(false);//不显示边框
@@ -64,17 +75,20 @@ public class MyTable extends JTable{
 		
 		makeFace(table);
 		table.setOpaque(false);// 现将table设置为透明
+		
 //		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
 //		table.setRowHeight(25);//第一行行高
 //		table.setRowHeight(0,30);//其余行高
 	
+		
+		
 		render.setOpaque(false);// 将渲染器设置为透明
 		table.setDefaultRenderer(Object.class, render);
 
 		
 		tableSp = new JScrollPane(table);
-		tableSp.setBounds(100,100,650,500);
+		tableSp.setBounds(43,44,360,380);
 		
 		tableSp.setBorder(new LineBorder(Color.gray));
 		tableSp.getViewport().setOpaque(false);
@@ -83,6 +97,7 @@ public class MyTable extends JTable{
 		table.setFillsViewportHeight(true);
 		tablePanel.add(tableSp);
 		
+		tablePanel.repaint();
 //		tablePanel.add(table);
 		
 //		tablePanel.updateUI();
@@ -95,8 +110,8 @@ public class MyTable extends JTable{
 		tableHeader = table.getTableHeader();
 		tableHeader.setResizingAllowed(true);
 		tableHeader.setOpaque(false);
-		tableHeader.setBackground(headerColor);
-		tableHeader.setForeground(Color.white);
+		tableHeader.setBackground(new ColorFactory().accColor);
+		tableHeader.setForeground(fontColorEven);
 	}
 	/*
 	 * 解析初始传进的数据
@@ -130,7 +145,7 @@ public class MyTable extends JTable{
 	        public Component getTableCellRendererComponent(JTable table,
 	            Object value, boolean isSelected, boolean hasFocus,
 	            int row, int column) {
-//        	
+	        	setHorizontalAlignment(SwingConstants.CENTER);//设置居中
 //	        	if(row == 0){
 //	        		setBackground(headerColor);
 //	        		setForeground(Color.white);
@@ -143,12 +158,12 @@ public class MyTable extends JTable{
 	        	else{
 	        		if (row% 2 == 0){
 	        			setBackground(oddColor); //设置奇数行底色
-	        			setForeground(fontColor);
+	        			setForeground(fontColorOdd);
 	        			setSelectionBackground(oddColor);
 	        		}
 	        		else if (row % 2 == 1){
 	        			setBackground(evenColor); 
-	        			setForeground(fontColor);//设置偶数行底色
+	        			setForeground(fontColorEven);//设置偶数行底色
 	        			setSelectionBackground(evenColor);
 	        		}
 	        	}

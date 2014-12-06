@@ -11,6 +11,7 @@ import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 /**
  * 增加账户，在该类里会判断是否能够添加账户
@@ -25,6 +26,8 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 	AccountVO newAcc;
 	MyButton forwardButton;
 	MyTextFieldBorder name,price;
+	
+	ResultPanelController resController;
 	public AddAccountPanel(MyFrame frame, String string,
 			AccountAllUIController accountAllUIController) {
 		super(frame,string,accountAllUIController);
@@ -34,6 +37,8 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 		uiController.setBack_second(this,199,141);
 		setTextField();
 		setForward();
+		
+		resController = new ResultPanelController(frame, this);
 	}
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(607, 393);

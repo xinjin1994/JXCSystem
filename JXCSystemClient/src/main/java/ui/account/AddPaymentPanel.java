@@ -16,6 +16,7 @@ import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.PayVO;
 /**
  * 添加收款单panel
@@ -31,6 +32,8 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	MyTextFieldTrans money;
 	MyComboBox customer,account;
 	PayVO newPayment;
+	
+	ResultPanelController resController;
 	public AddPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -42,6 +45,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		setIDOpe();
 		setTypeIn();
 		setForward();
+		resController = new ResultPanelController(frame, this);
 	}
 	/**
 	 * account的comboBox
@@ -70,7 +74,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		MyTextFieldTrans typeInItem []= new MyTextFieldTrans[]{ps,agent,money,item};
 		for(int i = 0;i < typeInItem.length;i++){
 			this.add(typeInItem[i]);
-			typeInItem[i].setForeground(new ColorFactory().acc);
+			typeInItem[i].setForeground(new ColorFactory().accColor);
 		}
 		money.getDocument().addDocumentListener(this);
 	}
@@ -81,12 +85,12 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	 */
 	private void setIDOpe() {
 		idLabel = new MyLabel(106,165, 221,55);
-		idLabel.setForeground(new ColorFactory().acc);
+		idLabel.setForeground(new ColorFactory().accColor);
 		idLabel.setText("id");
 		this.add(idLabel);
 		
 		operator = new MyLabel(575, 370, 155, 55);
-		operator.setForeground(new ColorFactory().acc);
+		operator.setForeground(new ColorFactory().accColor);
 		operator.setText("我是操作员");
 		this.add(operator);
 	}
@@ -104,7 +108,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	private void setTotal(){
 		total = new MyLabel(407, 496,318, 43);
 		total.setText(money.getText());
-		total.setForeground(new ColorFactory().acc);
+		total.setForeground(new ColorFactory().accColor);
 		this.add(total);
 		this.repaint();
 	}
@@ -156,6 +160,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 
+	//		resController.failed("!!!!","Image/result/acc/finManage/payFailed.jpg");
 			uiController.confirmPayment(newPayment);
 
 		}

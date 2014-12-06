@@ -88,7 +88,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void chaAcc() {
 		frame.remove(this);
-		resController.chaAcc();
+		resController.accSucceeded("成功修改账户！");
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */	
 	private void delAcc() {
 		frame.remove(this);
-		resController.delAcc();
+		resController.accSucceeded("成功删除账户！");
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	private void addAcc() {
 		frame.remove(this);
 		System.out.println("kl");
-		resController.addAcc();
+		resController.accSucceeded("成功新增账户！");
 	}
 	/**
 	 * 当添加或者删除账户成功后显示结果Label

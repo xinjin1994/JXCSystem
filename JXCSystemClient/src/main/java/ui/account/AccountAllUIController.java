@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import ui.FatherPanel;
 import ui.UIController;
@@ -17,11 +18,13 @@ import ui.setting.MyFrame;
 import vo.AccountVO;
 import vo.GetVO;
 import vo.PayVO;
+import ui.AccountPanel;
 
 public class AccountAllUIController extends UIController{
 	private MyFrame frame;
 	private UIController uiController;
 	
+	static private AccountPanel accountPanel;
 	private FindAccountPanel findAccountPanel;
 	private AddAccountPanel addAccountPanel;
 	private DelAccountPanel delAccountPanel;
@@ -171,6 +174,13 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
+	public void setAccountPanel(AccountPanel mainPanel){
+		accountPanel = mainPanel;
+	}
+	public AccountPanel getAccountPanel(){
+		return accountPanel;
+	}
+	
 	/**
 	 * 以下三个是account模块中的返回按钮，都会返回到主界面
 	 * @param prePanel
@@ -213,7 +223,8 @@ public class AccountAllUIController extends UIController{
 			if(e.getSource() == backButton){
 				System.out.println("lk");
 				frame.remove(prePanel);
-				AccountAllUIController.this.addMainPanel();
+				frame.setPanel(AccountAllUIController.this.getAccountPanel());
+				frame.repaint();
 			}
 		}
 		public void mouseReleased(MouseEvent e) {
