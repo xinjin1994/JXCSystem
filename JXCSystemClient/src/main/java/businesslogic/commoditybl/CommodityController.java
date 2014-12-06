@@ -147,4 +147,29 @@ public class CommodityController implements CommodityblService{
 		return null;
 	}
 
+	public String getPatchNote() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getCommodityNote_up(SortVO vo1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SortVO searchSort_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getSortNote_up(SortVO vo1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PatchVO searchPatch_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

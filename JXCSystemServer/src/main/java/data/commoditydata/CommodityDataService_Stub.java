@@ -561,4 +561,19 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return null;
 	}
 
+	public boolean getGoodNote(SortPO po1) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getSortNote(SortPO po1) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getPatchNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -18,6 +18,9 @@ public interface SalesblService {
 	//修改客户
 	public int updateCustomer_up(CustomerVO vo1,CustomerVO vo2);
 	
+	//获得分配的客户编号
+	public String getCustomerNote_up();
+	
 	//模糊查找客户
 	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String word);
 	//精确查找客户
@@ -72,9 +75,9 @@ public interface SalesblService {
 	public String getExport_ReturnNote_up();
 	
 	//根据编号查找进货单
-	public ImportMenuVO searchImportNote_up();
+	public ImportMenuVO searchImportNote_up(String note);
 	//根据编号查找销售单
-	public ExportMenuVO searchExportNote_up();
+	public ExportMenuVO searchExportNote_up(String note);
 	
 	//根据进货编号查找进货可退货最大数量,输入进货时的编号，返回最大可退货数量
 	public int getImport_ReturnMaxNumber_up(String old_note);

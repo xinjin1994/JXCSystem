@@ -40,6 +40,8 @@ public interface AccountblService {
 	public int addDraftReceipt_up(GetVO vo);
 	//获得所有的草稿收款单
 	public ArrayList<GetVO> getAllDraftReceipt_up();
+	//根据编号查找收款单
+	public GetVO searchReceipt_up(String note);
 	//根据编号查找草稿收款单
 	public GetVO searchDraftReceipt_up(String note);
 	
@@ -49,6 +51,8 @@ public interface AccountblService {
 	public int addDraftPayment_up(PayVO vo);
 	//获得所有的草稿付款单
 	public ArrayList<PayVO> getAllDraftPayment_up();
+	//根据编号查找付款单
+	public PayVO searchPayment_up(String note);
 	//根据编号查找草稿付款单
 	public PayVO searchDraftPayment_up(String note);
 	
@@ -57,7 +61,6 @@ public interface AccountblService {
 	
 	//获得收款单编号
 	public String getReceiptNote_up();
-	
 	//获得付款单编号
 	public String getPaymentNote_up();
 	

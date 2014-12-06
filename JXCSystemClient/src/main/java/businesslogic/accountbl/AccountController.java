@@ -130,4 +130,14 @@ public class AccountController implements AccountblService{
 		return null;
 	}
 
+	public GetVO searchReceipt_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public PayVO searchPayment_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

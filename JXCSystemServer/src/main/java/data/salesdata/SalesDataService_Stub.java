@@ -646,4 +646,29 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 		return null;
 	}
 
+	public String getCustomerNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getImportNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getImport_ReturnNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getExportNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getExport_ReturnNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

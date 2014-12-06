@@ -18,11 +18,13 @@ public interface CommodityDataService extends Remote{
 	public boolean delGood(CommodityPO po) throws RemoteException;
 	public boolean updateGood(CommodityPO po1,CommodityPO po2) throws RemoteException;
 	public boolean updateGood(CommodityPO po1,SortPO po2) throws RemoteException;
+	public boolean getGoodNote(SortPO po1) throws RemoteException;
 
 	public boolean addSort(SortPO po1,SortPO po2) throws RemoteException;
 	public boolean delSort(SortPO po) throws RemoteException;
 	public boolean updateSort(SortPO po1,SortPO po2) throws RemoteException;
 	public boolean updateSort_Mov(SortPO po1,SortPO po2) throws RemoteException;
+	public boolean getSortNote(SortPO po1) throws RemoteException;
 	
 	public boolean addSendGift(SendGiftPO po) throws RemoteException;
 	public SendGiftPO findSendGift(SendGiftPO po) throws RemoteException;
@@ -44,6 +46,7 @@ public interface CommodityDataService extends Remote{
 	public boolean delPatch(String note) throws RemoteException;
 	public PatchPO getPatch(String note) throws RemoteException;
 	public ArrayList<PatchPO> getAllPatch() throws RemoteException;	
+	public String getPatchNote() throws RemoteException;
 	
 	public boolean addDraftPatch(PatchPO po) throws RemoteException;
 	public boolean delDraftPatch(String note) throws RemoteException;

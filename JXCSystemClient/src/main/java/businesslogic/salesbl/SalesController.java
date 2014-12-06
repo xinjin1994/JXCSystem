@@ -237,4 +237,19 @@ public class SalesController implements SalesblService{
 		return null;
 	}
 
+	public String getCustomerNote_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchImportNote_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ExportMenuVO searchExportNote_up(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
