@@ -135,4 +135,24 @@ public class MockAccountData implements AccountDataService{
 		return null;
 	}
 
+	public boolean addMoney(AccountPO po, double money) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delMoney(AccountPO po, double money) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String getReceiptNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getPaymentNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
