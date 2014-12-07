@@ -20,6 +20,12 @@ public interface FinancialblService {
 
 	//查看经营情况
 	public ConditionVO operatingCondition_up(String start_time, String end_time);
+	
+	//获得审批通过的单据
+	public AllBillVO getPassList();
+	
+	//获得审批未通过的单据
+	public AllBillVO getRefuseList();
 
 	//销售记录导出，未实现
 	public int saleListExcel_up(SaleListConditionVO saleList_condition);
