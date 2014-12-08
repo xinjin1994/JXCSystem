@@ -24,6 +24,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	ArrayList<PatchPO> patchList=new ArrayList<PatchPO>();
 	ArrayList<CommodityPO> giftList=new ArrayList<CommodityPO>();
 	ArrayList<PatchPO> draftPatchList=new ArrayList<PatchPO>();
+	ArrayList<SendGiftPO> sendGiftList=new ArrayList<SendGiftPO>();
 //	ArrayList<CommodityPO> sto=new ArrayList<CommodityPO>();
 	
 	public CommodityDataService_Stub() throws RemoteException {
@@ -32,6 +33,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		this.readPatchList();
 		this.readGiftList();
 		this.readDraftPatchList();
+		this.readSendGiftList();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -217,6 +219,51 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 	}
 	
+	public void writeSendGiftList(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("sendGiftList.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(sendGiftList);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readSendGiftList(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("sendGiftList.out");
+			ois=new ObjectInputStream(fis);
+			sendGiftList=(ArrayList<SendGiftPO>) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
 	/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑数据序列化以及构造方法↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 	
 	
@@ -259,7 +306,10 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public boolean updateGood(CommodityPO po1, CommodityPO po2) {
 		CommodityPO po=findGood_true(po1.getName(),po1.getType());
 		if(po!=null){
-			po.number=po2.number+po.number;
+			po.recent_in_price=po2.recent_in_price;
+			po.recent_out_price=po2.recent_out_price;
+			po.in_price=po2.in_price;
+			po.out_price=po2.out_price;
 			this.writeSortList();
 			return true;
 		}
@@ -401,6 +451,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public boolean clear() {
 		sortList=new ArrayList<SortPO>();
 		patchList=new ArrayList<PatchPO>();
+		giftList=new ArrayList<CommodityPO>();
+		sendGiftList=new ArrayList<SendGiftPO>();
+		draftPatchList=new ArrayList<PatchPO>();
 		return true;
 	}
 
@@ -459,35 +512,6 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return false;
 	}
 
-	public boolean addGift(SendGiftPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		int i=0;
-		for(i=0;i<giftList.size();i++){
-			
-		}
-		return false;
-	}
-
-	public SendGiftPO findGift(SendGiftPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public SendGiftPO findGift(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean delGift(SendGiftPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean delGift(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public boolean addWarn(WarnPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		CommodityPO po1=findGood_true(po.commodity.getName(),po.commodity.getType());
@@ -521,12 +545,23 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public PatchPO getDraftPatch(String note) throws RemoteException {
 		// TODO Auto-generated method stub
+		int i=0;
+		for(i=0;i<draftPatchList.size();i++){
+			if(draftPatchList.get(i).getNote().equals(note)){
+				return draftPatchList.get(i).copy();
+			}
+		}
 		return null;
 	}
 
 	public ArrayList<PatchPO> getAllDraftPatch() throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		int i=0;
+		ArrayList<PatchPO> array=new ArrayList<PatchPO>();
+		for(i=0;i<draftPatchList.size();i++){
+			array.add(draftPatchList.get(i));
+		}
+		return array;
 	}
 
 	public boolean addPatch(PatchPO po) throws RemoteException {
@@ -594,6 +629,12 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return null;
 	}
 	
+	public boolean addGoodNumber(CommodityPO po,int number) throws RemoteException {
+		// TODO Auto-generated method stub
+		CommodityPO po1=findGood_true(po.getName(),po.getType());
+		po1.number=po1.number+number;
+		return true;
+	}	
 	
 	public SortPO findSort_true(String name){
 		int i=0;
@@ -622,5 +663,27 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		}
 		return null;
 	}
+
+	public boolean passPatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refusePatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passSendGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseSendGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 
 }
