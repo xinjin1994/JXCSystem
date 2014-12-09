@@ -14,7 +14,9 @@ import javax.swing.JFrame;
 
 
 
+
 import ui.FatherPanel;
+import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
@@ -28,17 +30,41 @@ import ui.setting.MyTextFieldTrans;
  *
  */
 public class SalesListPanel extends FatherPanel implements ActionListener{
-	AccountAllUIController uiController;
-	MyButton forwardButton;
-	MyTextFieldBorder timeBegin,timeFinish,commodity,stock,customer,agent;
+	private AccountAllUIController accountController;
+	private ManagerAllUIController managerController;
+	
+	private MyButton forwardButton;
+	private MyTextFieldBorder timeBegin,timeFinish,commodity,stock,customer,agent;
+	
+	private MyFrame frame;
+	private String type = "account";
 	
 	public SalesListPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
-		this.uiController = uiController;
+		this.accountController = uiController;
+		this.frame = frame;
 		this.repaint();
 		
 		uiController.setBack_second(this,146,57);
+		init();
+		
+	}
+	
+	public SalesListPanel(MyFrame frame,String url,
+			ManagerAllUIController uiController,String type){
+		super(frame,url,uiController);
+		
+		this.type = type;
+		this.managerController = uiController;
+		this.frame = frame;
+		this.repaint();
+		
+		uiController.setBack_second(this,146,57);
+		init();
+	}
+	
+	private void init(){
 		setForward();
 		setTextField();
 		
@@ -70,8 +96,14 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
+			System.out.println("MA");
 			frame.remove(this);
-			uiController.addMainPanel();
+			if(type.equals("account")){
+				frame.setPanel(accountController.getMainPanel());
+			}else if(type.equals("manager")){
+				frame.setPanel(managerController.getMainPanel());
+			}
+			frame.repaint();
 		}
 	}
 }

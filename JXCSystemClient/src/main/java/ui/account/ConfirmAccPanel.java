@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import businesslogic.accountbl.Account;
+import ui.UIController;
+import ui.manager.ManagerAllUIController;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
@@ -14,10 +16,12 @@ import vo.AccountVO;
 public class ConfirmAccPanel extends AccountDetailPanel implements ActionListener{
 	
 	MyButton forwardButtonAdd,forwardButtonDel,forwardButtonCha;
+	
 	AccountVO acc;
 	String ope;
 	ResultPanelController resController;
-	AccountAllUIController uiController;
+
+	String type = "account";
 	/**
 	 * 
 	 * @param frame
@@ -31,7 +35,18 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		super(frame, url, uiController, acc);
 		this.acc = acc;
 		this.ope = ope;
-		this.uiController = uiController;
+		this.accountController = uiController;
+		resController = new ResultPanelController(uiController,frame);
+		setOpe();
+	}
+	
+	public ConfirmAccPanel(MyFrame frame, String url,
+			ManagerAllUIController uiController, AccountVO acc,String ope,String type) {
+		super(frame, url, uiController, acc);
+		this.acc = acc;
+		this.ope = ope;
+		this.type = type;
+		this.managerController = uiController;
 		resController = new ResultPanelController(uiController,frame);
 		setOpe();
 	}
@@ -51,7 +66,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		forwardButtonCha = forwardCha.forward_white;
 		
 		this.add(forwardButtonCha);
-		forwardButtonDel.addActionListener(this);
+		forwardButtonCha.addActionListener(this);
 	}
 
 	private void setForwardDel() {
@@ -88,7 +103,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void chaAcc() {
 		frame.remove(this);
-		resController.accSucceeded("成功修改账户！");
+		resController.successed("成功修改账户！", type);
 	}
 
 	/**
@@ -97,7 +112,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */	
 	private void delAcc() {
 		frame.remove(this);
-		resController.accSucceeded("成功删除账户！");
+		resController.successed("成功删除账户！", type);
 	}
 
 	/**
@@ -106,10 +121,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void addAcc() {
 		frame.remove(this);
-		System.out.println("kl");
-		resController.accSucceeded("成功新增账户！");
-		
-
+		resController.successed("成功添加账户！", type);
 	}
 	/**
 	 * 当添加或者删除账户成功后显示结果Label

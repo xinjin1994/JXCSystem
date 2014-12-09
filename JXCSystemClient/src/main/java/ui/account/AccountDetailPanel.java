@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.UIController;
+import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
@@ -17,18 +19,32 @@ import vo.AccountVO;
  *
  */
 public class AccountDetailPanel extends FatherPanel {
-	AccountAllUIController uiController;
-	private MyLabel name,balance;
-	private AccountVO fountAcc;
+	AccountAllUIController accountController;
+	ManagerAllUIController managerController;
+	protected MyLabel name,balance;
+	protected AccountVO fountAcc;
+	
 	
 	public AccountDetailPanel(MyFrame frame,String url,
 			AccountAllUIController uiController,AccountVO foundAcc){
 		super(frame,url,uiController);
-		this.uiController = uiController;
+		this.accountController = uiController;
 		this.fountAcc = foundAcc;
 		this.repaint();
 		
-		uiController.setBack_first(this);
+		accountController.setBack_first(this);
+		setLabel();
+		
+	}
+	
+	public AccountDetailPanel(MyFrame frame,String url,
+			ManagerAllUIController uiController,AccountVO foundAcc){
+		super(frame,url,uiController);
+		this.managerController = uiController;
+		this.fountAcc = foundAcc;
+		this.repaint();
+		
+		managerController.setBack_first(this);
 		setLabel();
 		
 	}

@@ -17,7 +17,7 @@ public class MyTextFieldBorder extends MyTextField{
 		this.setBorder(new LineBorder(borderColor));
 		this.setSize(319,37);
 		
-		this.setFont(new FontFactory().font20);
+		this.setFont(new FontFactory(20).font);
 		
 	}
 

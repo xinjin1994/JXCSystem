@@ -14,7 +14,7 @@ public class MyLabel extends JLabel{
 	public MyLabel(int x,int y,int width,int height) {
 		this.setBounds(x, y, width, height);
 		this.setOpaque(false);
-		this.setFont(new FontFactory().font20);
+		this.setFont(new FontFactory(20).font);
 		this.setHorizontalAlignment(CENTER);
 	}
 

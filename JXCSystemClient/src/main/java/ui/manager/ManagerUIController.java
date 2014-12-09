@@ -21,12 +21,12 @@ public class ManagerUIController {
 	private MyButton addAcc, delAcc, changeAcc, findAcc;
 	private MyButton salesList,allBills,operatingCondition;
 	private MyButton approButton,disapButton,backLogButton;
-	private MyButton com,highPri;
+	private MyButton chePro,decPro;
 	 
 	private MyButton []accButtons = new MyButton[]{addAcc, delAcc, changeAcc, findAcc};
 	private MyButton []recButtons = new MyButton[]{salesList,allBills,operatingCondition};
 	private MyButton []invoiceButtons = new MyButton[]{approButton,disapButton,backLogButton};
-	private MyButton []proButtons = new MyButton[]{com,highPri};
+	private MyButton []proButtons = new MyButton[]{chePro,decPro};
 	
 	private ManagerAllUIController uiController;
 	private MyFrame frame;
@@ -38,6 +38,8 @@ public class ManagerUIController {
 				uiController, this);
 		
 		frame.setPanel(managerPanel);
+		
+		uiController.setMainPanel(managerPanel);
 		
 	}
 	public void toAccPanel() {
@@ -89,7 +91,7 @@ public class ManagerUIController {
 		
 		String images_ori_rec[] = new String[]{"Image/Manager/button/recManage/salesList.png",
 				"Image/Manager/button/recManage/allBills.png","Image/Manager/button/recManage/opeCon.png"};
-		String images_stop_rec[] = new String[]{"Image/Manager/button/rccManage/salesList_stop.png",
+		String images_stop_rec[] = new String[]{"Image/Manager/button/recManage/salesList_stop.png",
 				"Image/Manager/button/recManage/allBills_stop.png","Image/Manager/button/recManage/opeCon_stop.png"};
 		String images_press_on_rec[] = new String[]{"Image/Manager/button/recManage/salesList_press_on.png",
 				"Image/Manager/button/recManage/allBills_press_on.png","Image/Manager/button/recManage/opeCon_press_on.png"};
@@ -98,8 +100,10 @@ public class ManagerUIController {
 			recButtons[i] = new MyButton(images_ori_rec[i], secondX, secondY+i*inter,
 					images_stop_rec[i], images_press_on_rec[i]);
 			managerSecondPanel.add(recButtons[i]);
+			recButtons[i].addMouseListener(recListener);
 		}
 		managerPanel.add(managerSecondPanel);
+		
 		managerPanel.repaint();
 		
 	}
@@ -107,12 +111,12 @@ public class ManagerUIController {
 		managerSecondPanel.removeAll();
 		ProButtonListener proListener = new ProButtonListener();
 		
-		String images_ori_pro[] = new String[]{"Image/Manager/button/proManage/cus.png",
-		        "Image/Manager/button/proManage/highPri.png"};
-		String images_stop_pro[] = new String[]{"Image/Manager/button/proManage/cus_stop.png",
-				"Image/Manager/button/proManage/highPri_stop.png"};
-		String images_press_on_pro[] = new String[]{"Imaege/Manager/button/proManage/cus_press_on.png",
-				"Image/Manager/button/proManager/highPri_press_on.png"};
+		String images_ori_pro[] = new String[]{"Image/Manager/button/proManage/chePro.png",
+		        "Image/Manager/button/proManage/decPro.png"};
+		String images_stop_pro[] = new String[]{"Image/Manager/button/proManage/chePro_stop.png",
+				"Image/Manager/button/proManage/decPro_stop.png"};
+		String images_press_on_pro[] = new String[]{"Imaege/Manager/button/proManage/chePro_press_on.png",
+				"Image/Manager/button/proManager/decPro_press_on.png"};
 		
 		for(int i = 0;i < proButtons.length;i++){
 			proButtons[i] = new MyButton(images_ori_pro[i], secondX, secondY+i*inter,
@@ -141,9 +145,13 @@ public class ManagerUIController {
 			
 		}
 
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
+		public void mousePressed(MouseEvent event) {
+			frame.remove(managerPanel);
+			if(event.getSource() == proButtons[0]){
+				
+			}else if (event.getSource() == proButtons[1]) {
+				uiController.setPro();
+			}
 		}
 
 		public void mouseReleased(MouseEvent arg0) {
@@ -167,7 +175,8 @@ public class ManagerUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
-			frame.remove(accountPanel);
+			frame.remove(managerPanel);
+			System.out.println("lka");
 			if(e.getSource() == recButtons[0]){
 				uiController.salesList();
 			}else if(e.getSource() == recButtons[1]){
@@ -195,13 +204,13 @@ public class ManagerUIController {
 		public void mousePressed(MouseEvent event) {
 			frame.remove(managerPanel);	
 			if(event.getSource() == accButtons[0]){
-		//		uiController.addAccount();
+				uiController.addAccount();
 			}else if(event.getSource() == accButtons[1]){
-		//		uiController.delAccount();
+				uiController.delAccount();
 			}else if(event.getSource() == accButtons[2]){
-		//		uiController.changeAccount();
+				uiController.changeAccount();
 			}else if(event.getSource() == accButtons[3]){
-		//		uiController.findAccount();
+				uiController.findAccount();
 			}
 		}
 		

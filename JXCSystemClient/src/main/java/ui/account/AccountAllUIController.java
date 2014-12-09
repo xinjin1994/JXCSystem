@@ -5,11 +5,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
+
+
 import ui.FatherPanel;
 import ui.UIController;
+import ui.manager.ManagerAllUIController;
 import ui.setting.BackButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.SetBack;
 import vo.AccountVO;
 import vo.GetVO;
 import vo.PayVO;
@@ -44,16 +48,20 @@ public class AccountAllUIController extends UIController{
 	private IniAccPanel iniAccPanel;
 	
 	private AccountDetailPanel accountDetailPanel;
+	private ManagerAllUIController managerController;
 	
 	FatherPanel prePanel;
 	AccountAllUIController controller;
-	Listener backListener;
 	
 	MyButton backButton;
 
 	public AccountAllUIController(UIController uiController,MyFrame frame) {
-		this.frame = new MyFrame();
+		this.frame = frame;
 		addMainPanel();
+	}
+	public AccountAllUIController(UIController uiController,MyFrame frame,ManagerAllUIController managerController){
+		this.frame = frame;
+		this.managerController = managerController;
 	}
 	
 	public void addMainPanel(){
@@ -169,75 +177,19 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
-	public void setAccountPanel(AccountPanel mainPanel){
-		accountPanel = mainPanel;
-	}
-	public AccountPanel getAccountPanel(){
-		return accountPanel;
-	}
 	
 	/**
-	 * 以下三个是account模块中的返回按钮，都会返回到主界面
+	 * 以下两个是account模块中的返回按钮，都会返回到主界面
 	 * @param prePanel
 	 */
+	
 	public void setBack_first(FatherPanel prePanel){
 		this.prePanel = prePanel;
-		BackButton back = new BackButton();
-		backButton = back.back_white;
-		setBack();
+		new SetBack(frame,this,prePanel).setBack_first();
 	}
-	
+
 	public void setBack_second(FatherPanel prePanel,int x,int y){
 		this.prePanel = prePanel;
-		BackButton back = new BackButton(x,y);
-		backButton = back.back_black;
-		setBack();
-	}
-	
-	public void setBack(){
-		Listener backListener = new Listener();
-		prePanel.add(backButton);
-		backButton.addMouseListener(backListener);
-	}
-	
-	   class Listener implements MouseListener{
-
-		public void mouseClicked(MouseEvent e) {
-			
-		}
-
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		public void mouseExited(MouseEvent e) {
-			
-		}
-
-		public void mousePressed(MouseEvent e) {
-			if(e.getSource() == backButton){
-				System.out.println("lk");
-				frame.remove(prePanel);
-				frame.setPanel(AccountAllUIController.this.getAccountPanel());
-				frame.repaint();
-			}
-		}
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		   
-
-//		public void actionPerformed(ActionEvent e) {
-//			if(e.getActionCommand().equals("back")){
-//				System.out.println("klk");
-//				frame.remove(prePanel);
-//				delAccountPanel = new DelAccountPanel(frame,"Image/Account/删除账户.jpg",AccountAllUIController.this);
-//				frame.setPanel(delAccountPanel);
-//				frame.repaint();
-//				
-//			}
-//		
-		
+		new SetBack(frame,this,prePanel).setBack_second(x, y);
 	}
 }

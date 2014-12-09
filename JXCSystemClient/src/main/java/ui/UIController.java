@@ -7,6 +7,7 @@ import ui.manager.ManagerAllUIController;
 import ui.manager.ManagerUIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
+import ui.setting.SetBack;
 
 public class UIController {
 
@@ -19,9 +20,12 @@ public class UIController {
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	
-//	public UIController(){
+	
+	static private FatherPanel tempMainPanel;
+	public FatherPanel prePanel;
+	public UIController(){
 		
-	//}
+	}
 	public UIController() {
 
 		this.frame = new MyFrame();
@@ -31,8 +35,8 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
-		this.AccountPanel();
-//		this.ManagerPanel();
+	//	this.AccountPanel();
+		this.ManagerPanel();
 	//	this.SalesManagerPanel();
 
 	}
@@ -101,6 +105,14 @@ public class UIController {
 		frame.setPanel(salesPerson);
 	}
 
+	
+	public void setMainPanel(FatherPanel mainPanel){
+		tempMainPanel = mainPanel;
+	}
+	
+	public FatherPanel getMainPanel(){
+		return tempMainPanel;
+	}
 
 
 

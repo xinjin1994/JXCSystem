@@ -38,7 +38,7 @@ public class AccountUIController {
 		this.accountPanel = new AccountPanel(frame, "Image/Account/account_背景.jpg",
 				uiController, this);
 		frame.setPanel(accountPanel);
-		uiController.setAccountPanel(accountPanel);
+		uiController.setMainPanel(accountPanel);
 	}
 	public void toAccPanel() {
 		accountSecondPanel.removeAll();
@@ -227,6 +227,7 @@ public class AccountUIController {
 		}
 
 		public void mouseReleased(MouseEvent e) {
+			
 		}
 		
 	}

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
@@ -16,17 +17,40 @@ import ui.setting.MyTextFieldBorder;
  * 
  */
 public class AllBillsPanel extends FatherPanel implements ActionListener{
-	AccountAllUIController uiController;
-	MyButton forwardButton;
-	MyTextFieldBorder timeBegin,timeFinish,commodity,billType,customer,agent;
+	private AccountAllUIController accountController;
+	private ManagerAllUIController managerController;
 	
+	private MyButton forwardButton;
+	private MyTextFieldBorder timeBegin,timeFinish,commodity,billType,customer,agent;
+	
+	private String type = "account";
+	private MyFrame frame;
 	public AllBillsPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
-		this.uiController = uiController;
+		this.accountController = uiController;
+		this.frame = frame;
 		this.repaint();
 		
 		uiController.setBack_second(this,141,57);
+		init();
+
+	}
+	
+	public AllBillsPanel(MyFrame frame,String url,
+			ManagerAllUIController uiController,String type){
+		super(frame,url,uiController);
+		this.managerController = uiController;
+		this.frame = frame;
+		this.type = type;
+		this.repaint();
+		
+		
+		uiController.setBack_second(this,141,57);
+		init();
+	}
+	
+	private void init(){
 		setTextField();
 		setForward();
 	}
@@ -59,7 +83,12 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
-			uiController.addMainPanel();
+			if(type.equals("account")){
+				frame.setPanel(accountController.getMainPanel());
+			}else if(type.equals("manager")){
+				frame.setPanel(managerController.getMainPanel());
+			}
+			frame.repaint();
 		}
 		
 	}

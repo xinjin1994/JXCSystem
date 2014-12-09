@@ -3,9 +3,12 @@ package ui.setting.resultPanels;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
+
 import ui.FatherPanel;
 import ui.UIController;
 import ui.account.AccountAllUIController;
+import ui.manager.ManagerAllUIController;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
@@ -23,13 +26,19 @@ public class ResultPanelController extends UIController implements ActionListene
 	MyLabel textLabel;
 	MyButton forwardButton;
 	AccountAllUIController accController ;
+	ManagerAllUIController manController;
+	
 	
 	FatherPanel backPanel;
 	/**
 	 * 
 	 * @param controller  其他界面的controller
 	 */
-	
+	/**
+	 * 
+	 * @param controller
+	 * @param frame
+	 */
 	public ResultPanelController(UIController controller,MyFrame frame) {
 		textLabel = new MyLabel(0, 263, 800, 55);
 		this.controller = controller;
@@ -43,16 +52,18 @@ public class ResultPanelController extends UIController implements ActionListene
 		this.backPanel = backPanel;
 	}
 	
-	public void accSucceeded(String text){
-		accController = (AccountAllUIController)controller;
-		resultPanel = new FatherPanel(frame, "Image/result/account_result.jpg", accController);
+
+	
+	public void successed(String text,String type){
+	//	accController = (AccountAllUIController)controller;
+		resultPanel = new FatherPanel(frame, "Image/result/"+"account"+"_result.jpg", accController);
 		setForward();
-		forwardButton.setActionCommand("accSucc");
+	
 		textLabel.setText(text);
 
 		setPanel();
 	}
-	
+
 	public void failed(String text,String url){
 		resultPanel = new FatherPanel(frame, url, this);
 		setForward();
@@ -75,15 +86,16 @@ public class ResultPanelController extends UIController implements ActionListene
 		forwardButton = forward.forward_black;
 		
 		resultPanel.add(forwardButton);
+		forwardButton.setActionCommand("succ");
 		forwardButton.addActionListener(this);	
 	}
 
 
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("accSucc")){
+		if(e.getActionCommand().equals("succ")){
 			frame.remove(resultPanel);
-			frame.setPanel(accController.getAccountPanel());		
+			frame.setPanel(controller.getMainPanel());		
 			frame.repaint();
 		}else if(e.getActionCommand().equals("failed")){
 			frame.remove(resultPanel);
@@ -92,6 +104,7 @@ public class ResultPanelController extends UIController implements ActionListene
 		}
 		
 	}
+
 	
 	
 }

@@ -7,8 +7,8 @@ import java.awt.Font;
  *
  */
 public class FontFactory {
-	Font font20;
-	public FontFactory(){
-		font20 = new Font("微软雅黑", Font.PLAIN, 20);
+	public Font font;
+	public FontFactory(int i){
+		font = new Font("微软雅黑", Font.PLAIN, i);
 	}
 }

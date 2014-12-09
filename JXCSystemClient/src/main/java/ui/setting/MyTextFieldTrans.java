@@ -11,7 +11,7 @@ public class MyTextFieldTrans extends MyTextField{
 		this.setSize(width, height);
 		this.setOpaque(false);
 		
-		this.setFont(new FontFactory().font20);
+		this.setFont(new FontFactory(20).font);
 		this.setBackground(null);
 		this.setBorder(null);
 		
