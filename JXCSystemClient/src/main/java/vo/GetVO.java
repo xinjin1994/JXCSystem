@@ -11,5 +11,11 @@ public class GetVO extends InvoiceVO{
 		this.cusName=cusName;
 		this.transferList=transferList;
 	}
+	
+	public GetVO(String note,String cusName,TransferListVO transferList){
+		super(note,7);
+		this.cusName=cusName;
+		this.transferList=transferList;
+	}
 
 }

@@ -8,5 +8,9 @@ public class InvoiceVO extends AllBillVO{
 		super(note,operator,time,bill_note);
 		this.invoice_note=invoice_note;
 	}
+	public InvoiceVO(String note,int bill_note){
+		super(note,bill_note);
+		this.invoice_note=null;
+	}
 	
 }

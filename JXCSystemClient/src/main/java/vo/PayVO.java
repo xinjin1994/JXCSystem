@@ -11,4 +11,11 @@ public class PayVO extends InvoiceVO{
 		this.bankAccount=bankAccount;
 		this.itemList=itemList;
 	}
+	
+	public PayVO(String note,String bankAccount,ItemList itemList){
+		super(note,8);
+		this.bankAccount=bankAccount;
+		this.itemList=itemList;
+	}
+	
 }

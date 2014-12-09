@@ -24,17 +24,21 @@ public class AllBillVO {
 	public String time;
 	
 	public int bill_note;       
+						//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
+						//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
 	
 	public AllBillVO(String note,String operator,String time,int bill_note){
 		this.bill_note=bill_note;
 		this.note=note;
 		this.operator=operator;
 		this.time=time;
-		
-		
 	}
-	//1代表SendGiftVO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
-	//5代表Export_Return， 6代表PatchPO， 7代表ReceiptPO， 8代表PaymentPO
+	
+	public AllBillVO(String note,int bill_note){
+		this.note=note;
+		this.bill_note=bill_note;
+	}
+
 	
 	
 	public AllBillVO(){

@@ -15,4 +15,11 @@ public class SendGiftVO extends InvoiceVO{
 		// TODO Auto-generated constructor stub
 	}
 	
+	public SendGiftVO(String note,String name,String type, int number){
+		super(note,1);
+		this.name=name;
+		this.type=type;
+		this.number=number;
+	}
+	
 }

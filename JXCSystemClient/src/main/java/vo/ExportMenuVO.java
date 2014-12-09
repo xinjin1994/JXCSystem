@@ -26,4 +26,19 @@ public class ExportMenuVO extends InvoiceVO{
 		this.afterValue=afterValue;
 		this.remark=remark;
 	}
+	
+	public ExportMenuVO(String note,String cusName,String salesMan,String warehouse,
+			String commodityList,double beforeValue,double discount,double voucherPrice,
+			double afterValue,String remark,int bill_note){
+		super(note,bill_note);
+		this.cusName=cusName;
+		this.salesMan=salesMan;
+		this.warehouse=warehouse;
+		this.commodityList=commodityList;
+		this.beforeValue=beforeValue;
+		this.discount=discount;
+		this.voucherPrice=voucherPrice;
+		this.afterValue=afterValue;
+		this.remark=remark;
+	}
 }

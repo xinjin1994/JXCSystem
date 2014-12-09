@@ -12,5 +12,12 @@ public class PatchVO extends InvoiceVO{
 		this.type=type;
 		this.number=number;
 	}
+	
+	public PatchVO(String name,String type,int number,String note){
+		super(note,6);
+		this.name=name;
+		this.type=type;
+		this.number=number;
+	}
 
 }
