@@ -1,19 +1,12 @@
 package vo;
 
-public class InvoiceVO {
+public class InvoiceVO extends AllBillVO{
 	
 	public String invoice_note;
-	public String note;
-	int type;
-	public String time;
 	
-	public InvoiceVO(String invoice_note,String note,int type,String time){
+	public InvoiceVO(String invoice_note,String note,int bill_note,String time,String operator){
+		super(note,operator,time,bill_note);
 		this.invoice_note=invoice_note;
-		this.note=note;
-		this.type=type;
-		this.time=time;
 	}
 	
-	
-
 }

@@ -1,19 +1,14 @@
 package vo;
 //付款单
-public class PayVO {
-	public String id;
-	public String operator;
+public class PayVO extends InvoiceVO{
 //	public String cusName;
 	public String bankAccount;
 	public ItemList itemList;
 //	public double total;
-	public PayVO(String id,String operator,String bankAccount,ItemList itemList) {
+	public PayVO(String id,String operator,String bankAccount,ItemList itemList,String time,String invoice_note) {
          //单据编号（XJFYD-yyyyMMdd-xxxxx）,操作员（当前登录用户），银行账户，条目清单
-		this.id=id;
-		this.operator=operator;
-//		this.cusName=cusName;
+		super(invoice_note,id,8,time,operator);
 		this.bankAccount=bankAccount;
 		this.itemList=itemList;
-//		this.total=total;
 	}
 }

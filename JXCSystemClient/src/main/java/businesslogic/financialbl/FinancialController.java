@@ -48,7 +48,7 @@ public class FinancialController implements FinancialblService{
 			vo.receiptList =array.get(i).getReceiptList();
 			vo.patch=array.get(i).getPatch();
 			vo.gift=array.get(i).getGift();
-			vo.note=array.get(i).getNote();
+			vo.bill_note=array.get(i).getNote();
 			res.add(vo);
 		}
 		return res;
