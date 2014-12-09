@@ -1,17 +1,21 @@
-package ui.account;
+package ui.account.accBasic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/AddAccountPanel.java
 import ui.FatherPanel;
 import ui.UIController;
 import ui.manager.ManagerAllUIController;
+=======
+import ui.account.AccountAllUIController;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/AddAccountPanel.java
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
-import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import vo.InitialCommodityVO;
 /**
@@ -26,12 +30,17 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 	private double balance;
 	
 	AccountVO newAcc;
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/AddAccountPanel.java
 	private MyButton forwardButton;
 	private MyTextFieldBorder name,price;
 	
 	ResultPanelController resController;
 	String type = "account";
 
+=======
+	MyButton forwardButton;
+	MyTextFieldBorder name,price;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/AddAccountPanel.java
 	public AddAccountPanel(MyFrame frame, String string,
 			AccountAllUIController accountAllUIController) {
 		super(frame,string,accountAllUIController);

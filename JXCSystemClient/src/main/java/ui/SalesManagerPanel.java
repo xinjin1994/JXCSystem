@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import ui.sales.SalesUIController;
+import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;

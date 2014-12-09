@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import ui.commodity.CommodityUIController;
+import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 
 //1 库存人员

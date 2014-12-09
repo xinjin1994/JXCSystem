@@ -1,17 +1,22 @@
-package ui.account;
+package ui.account.accBasic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ConfirmAccPanel.java
 import businesslogic.accountbl.Account;
 import ui.UIController;
 import ui.manager.ManagerAllUIController;
+=======
+import ui.account.AccountAllUIController;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ConfirmAccPanel.java
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
-import ui.setting.MyLabel;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 
 public class ConfirmAccPanel extends AccountDetailPanel implements ActionListener{
 	
@@ -20,8 +25,13 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	AccountVO acc;
 	String ope;
 	ResultPanelController resController;
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ConfirmAccPanel.java
 
 	String type = "account";
+=======
+	AccountAllUIController uiController;
+	AccountblService accountblService;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ConfirmAccPanel.java
 	/**
 	 * 
 	 * @param frame
@@ -33,6 +43,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	public ConfirmAccPanel(MyFrame frame, String url,
 			AccountAllUIController uiController, AccountVO acc,String ope) {
 		super(frame, url, uiController, acc);
+		accountblService = new AccountController();
 		this.acc = acc;
 		this.ope = ope;
 		this.accountController = uiController;
@@ -103,7 +114,11 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void chaAcc() {
 		frame.remove(this);
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ConfirmAccPanel.java
 		resController.successed("成功修改账户！", type);
+=======
+//		resController.chaAcc();
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ConfirmAccPanel.java
 	}
 
 	/**
@@ -112,7 +127,27 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */	
 	private void delAcc() {
 		frame.remove(this);
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ConfirmAccPanel.java
 		resController.successed("成功删除账户！", type);
+=======
+		switch(accountblService.delAccount_up(acc)){
+		case -1:
+			//
+			break;
+		case 0:
+			break;
+		case 1:
+			//
+			break;
+		case 2:
+			//
+			break;
+		case 3:
+			//
+			break;
+		}
+//		resController.delAcc();
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ConfirmAccPanel.java
 	}
 
 	/**
@@ -121,7 +156,28 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void addAcc() {
 		frame.remove(this);
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ConfirmAccPanel.java
 		resController.successed("成功添加账户！", type);
+=======
+		switch(accountblService.addAccount_up(acc)){
+		case -1:
+			//
+			break;
+		case 0:
+			break;
+		case 1:
+			//
+			break;
+		case 2:
+			//
+			break;
+		case 3:
+			//
+			break;
+		}
+//		System.out.println("kl");
+		resController.addAcc();
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ConfirmAccPanel.java
 	}
 	/**
 	 * 当添加或者删除账户成功后显示结果Label

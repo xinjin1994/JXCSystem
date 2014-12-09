@@ -48,7 +48,7 @@ public class FinancialController implements FinancialblService{
 			vo.receiptList =array.get(i).getReceiptList();
 			vo.patch=array.get(i).getPatch();
 			vo.gift=array.get(i).getGift();
-			vo.note=array.get(i).getNote();
+			vo.bill_note=array.get(i).getNote();
 			res.add(vo);
 		}
 		return res;
@@ -91,6 +91,16 @@ public class FinancialController implements FinancialblService{
 	public int getClerk_up() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public AllBillVO getPassList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public AllBillVO getRefuseList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,8 +1,9 @@
-package ui.account;
+package ui.account.accBasic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/DelAccountPanel.java
 import javax.swing.JFrame;
 
 
@@ -19,12 +20,18 @@ import javax.swing.JFrame;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.manager.ManagerAllUIController;
+=======
+import ui.account.AccountAllUIController;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/DelAccountPanel.java
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
 import vo.AccountVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 删除账户，该类不直接删除账户
  * @author ZYC
@@ -38,6 +45,7 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 	private MyButton forwardButton;
 	private String delAccString;
 	AccountVO delAcc;
+	AccountblService accountblService;
 	
 	private String type = "account";
 	public DelAccountPanel(MyFrame frame,String url,
@@ -57,7 +65,7 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 		this.managerController = uiController;
 		this.type = type;
 		this.repaint();
-		
+		accountblService = new AccountController();
 		uiController.setBack_second(this,199,141);
 
 		init();
@@ -84,7 +92,8 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			delAccString = name.getText();
-			delAcc = new AccountVO(delAccString,20);//这个是从下层传回来的要删除的account，通过查找账户
+			AccountVO delAcc = accountblService.searchAccurateAccount_up(delAccString);
+//			delAcc = new AccountVO(delAccString,20);//这个是从下层传回来的要删除的account，通过查找账户
 			frame.remove(DelAccountPanel.this);
 			if(type.endsWith("account")){
 				accountController.confirmAcc(delAcc, "del");

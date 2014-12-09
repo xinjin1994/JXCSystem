@@ -2,6 +2,8 @@ package ui;
 
 import javax.swing.JFrame;
 
+import ui.setting.FatherPanel;
+
 //财务人员
 public class FinPersonPanel extends FatherPanel{
 

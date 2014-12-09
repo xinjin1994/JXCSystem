@@ -1,24 +1,33 @@
-package ui.account;
+package ui.account.accBasic;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/FindAccountPanel.java
 import ui.FatherPanel;
 import ui.UIController;
 import ui.manager.ManagerAllUIController;
+=======
+import ui.account.AccountAllUIController;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/FindAccountPanel.java
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
 import ui.setting.MyTextFieldBorder;
 import vo.AccountVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 查找账户对话框
  * @author ZYC
  * 
  */
 public class FindAccountPanel extends FatherPanel implements ActionListener{
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/FindAccountPanel.java
 	ManagerAllUIController managerController;
 	AccountAllUIController accountController;
 	
@@ -27,13 +36,28 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	private String nameString,infoString;
 	
 	private String type = "account";
+=======
+
+	AccountAllUIController uiController;
+	MyButton exactForwardButton,fuzzyForwardButton;
+	MyTextFieldBorder name,info;
+	String nameString,infoString;
+	AccountblService accountblService;
+	MyTable table;
+	MyFrame frame;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/FindAccountPanel.java
 	
 	public FindAccountPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/FindAccountPanel.java
 		this.accountController =uiController;
+=======
+		this.uiController = uiController;
+		this.frame = frame;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/FindAccountPanel.java
 		this.repaint();
-		
+		accountblService = new AccountController();
 		uiController.setBack_second(this,150,130);
 		init();
 	}
@@ -92,9 +116,10 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exactForwardButton){
 			nameString = name.getText();
-			name.setText("");
-			
+			info.setText("");
+			AccountVO foundAccVO = accountblService.searchAccurateAccount_up(nameString);
 			frame.remove(FindAccountPanel.this);
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/FindAccountPanel.java
 			if(type.equals("account")){
 				accountController.accountDetail(getFoundAcc());
 			}else if(type.equals("manager")){
@@ -104,11 +129,27 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 			infoString = info.getText();
 			info.setText("");
 			//返回主界面列表显示所有可能account
+=======
+			
+			uiController.accountDetail(foundAccVO);
+		}else if(e.getSource() == fuzzyForwardButton){
+			infoString = info.getText();
+			info.setText("");
+			ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
+			TablePanel tablePanel = new TablePanel(frame,"Image/Sales/null.jpg",uiController,fuzzyAccVO,FindAccountPanel.this);
+			//TODO change the picture;
+			frame.remove(FindAccountPanel.this);
+			frame.setPanel(tablePanel);
+			frame.repaint();
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/FindAccountPanel.java
 		}
 		
 	}
-	private AccountVO getFoundAcc() {
+	
+	
+	/*private AccountVO getFoundAcc() {
 		AccountVO foundAcc = new AccountVO("ff", 123);//从bl层获得的Account
+		
 		return foundAcc;
-	}
+	}*/
 }

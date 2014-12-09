@@ -1,12 +1,17 @@
-package ui.account;
+package ui.account.accBasic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/AccountDetailPanel.java
 import ui.FatherPanel;
 import ui.UIController;
 import ui.manager.ManagerAllUIController;
+=======
+import ui.account.AccountAllUIController;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/AccountDetailPanel.java
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;

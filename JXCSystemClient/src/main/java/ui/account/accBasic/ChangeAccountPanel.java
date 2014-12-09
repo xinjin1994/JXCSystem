@@ -1,17 +1,24 @@
-package ui.account;
+package ui.account.accBasic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ChangeAccountPanel.java
 import ui.FatherPanel;
 import ui.UIController;
 import ui.manager.ManagerAllUIController;
+=======
+import ui.account.AccountAllUIController;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ChangeAccountPanel.java
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
 import vo.AccountVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 
  * @author ZYC
@@ -23,16 +30,21 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 
 	private MyButton forwardButton;
 	AccountVO acc;
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ChangeAccountPanel.java
 	private MyTextFieldBorder formerName,changeName;
 	
 	private String type = "account";
+=======
+	MyTextFieldBorder formerName,changeName;
+	AccountblService accountblService;
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ChangeAccountPanel.java
 	public ChangeAccountPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
 		this.accountController = uiController;
 		this.repaint();
-		
 		uiController.setBack_second(this,199,141);
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ChangeAccountPanel.java
 
 		init();
 	}
@@ -48,6 +60,9 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 	}
 	
 	private void init(){
+=======
+		accountblService =new AccountController();
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ChangeAccountPanel.java
 		setTextField();
 		setForward();
 	}
@@ -74,6 +89,7 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			
 			//这里根据原有account从下层传回余额
+<<<<<<< HEAD:JXCSystemClient/src/main/java/ui/account/ChangeAccountPanel.java
 			acc = new AccountVO(changeName.getText(),0);
 		//	acc.name = "kl";
 		//	acc.name = changeName.getText();
@@ -83,6 +99,16 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 			}else if(type.equals("manager")){
 				managerController.confirmAcc(acc, "change");
 			}
+=======
+			String oldName = formerName.getText();
+			AccountVO oldVO = accountblService.searchAccurateAccount_up(oldName);
+			double balance = oldVO.balance;
+			String newName = changeName.getText();
+			AccountVO newVO = new AccountVO(newName,balance);
+			accountblService.updateAccount_up(oldVO, newVO);
+//			AccountVO newVO = new AccountVO("hello",10);
+			uiController.confirmAcc(newVO, "change");
+>>>>>>> origin/master:JXCSystemClient/src/main/java/ui/account/accBasic/ChangeAccountPanel.java
 		}
 	}
 }

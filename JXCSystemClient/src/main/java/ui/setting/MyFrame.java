@@ -18,6 +18,8 @@ public class MyFrame extends JFrame{
 		this.add(panel);
 		this.setVisible(true);
 	}
+	
+	
 
 }
 

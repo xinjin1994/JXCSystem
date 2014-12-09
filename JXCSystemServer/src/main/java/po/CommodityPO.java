@@ -6,8 +6,8 @@ public class CommodityPO implements Serializable{
 	String note;
 	String name;//��Ʒ��
 	String type;//�ͺ�
-	int in_price;//���
-	int out_price;//�ۼ�
+	public int in_price;//���
+	public int out_price;//�ۼ�
 	public int recent_in_price;//���һ�ν��
 	public int recent_out_price;//���һ���ۼ�
 	public int number;//��Ʒ����

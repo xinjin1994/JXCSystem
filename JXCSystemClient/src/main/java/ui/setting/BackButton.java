@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import ui.FatherPanel;
-
 public class BackButton extends MyButton{
 	public MyButton back_white,back_black;
 	public BackButton() {

@@ -1,29 +1,34 @@
-package ui.account;
+package ui.account.list;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
-import ui.FatherPanel;
+import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
-import ui.setting.resultPanels.ResultPanelController;
+import vo.AccountVO;
+import vo.ItemList;
 import vo.PayVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
- * 添加收款单panel
+ * 添加付款单panel
  * @author ZYC
  *
  */
-public class AddPaymentPanel extends FatherPanel implements ActionListener,DocumentListener{
+public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	AccountAllUIController uiController;
 	
 	MyButton forwardButton;
@@ -32,30 +37,35 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	MyTextFieldTrans money;
 	MyComboBox customer,account;
 	PayVO newPayment;
-	
-	ResultPanelController resController;
+	String id,operate;
+	AccountblService accountblService;
 	public AddPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
 		this.uiController = uiController;
 		this.repaint();
-		
+		accountblService = new AccountController();
 		uiController.setBack_first(this);
 		setAccount();
 		setIDOpe();
 		setTypeIn();
 		setForward();
-		resController = new ResultPanelController(frame, this);
 	}
 	/**
 	 * account的comboBox
 	 * account从下层获得
 	 */
 	private void setAccount() {
-		String [] accounts = new String[]{"a","b"};//从下层获得
+		
+		ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
+		String []accounts = new String[accVOArray.size()];
+		for(int i=0;i<accVOArray.size();i++){
+			accounts[i] = accVOArray.get(i).name;
+		}
+//		String [] accounts = new String[]{"a","b"};//从下层获得
 		account = new MyComboBox(accounts, 491, 162, 205, 43);
 		this.add(account);
-		account.addActionListener(this);
+//		account.addActionListener(this);
 	}
 	
 	/**
@@ -76,7 +86,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 			this.add(typeInItem[i]);
 			typeInItem[i].setForeground(new ColorFactory().accColor);
 		}
-		money.getDocument().addDocumentListener(this);
+//		money.getDocument().addDocumentListener(this);
 	}
 	
 	/**
@@ -86,12 +96,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	private void setIDOpe() {
 		idLabel = new MyLabel(106,165, 221,55);
 		idLabel.setForeground(new ColorFactory().accColor);
-		idLabel.setText("id");
+		id = accountblService.getPaymentNote_up();
+		idLabel.setText(id);
 		this.add(idLabel);
 		
 		operator = new MyLabel(575, 370, 155, 55);
 		operator.setForeground(new ColorFactory().accColor);
-		operator.setText("我是操作员");
+		operate = accountblService.getOperator_up();
+		operator.setText(operate);
 		this.add(operator);
 	}
 	
@@ -102,12 +114,20 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);		
 	}
+	
+	private void setBalanceLabel(double balance2) {
+		balance = new MyLabel(491, 205,205, 41);
+		balance.setText(String.valueOf(balance2));
+		balance.setForeground(new ColorFactory().greyFont);
+		this.add(balance);
+		this.repaint();
+	}
 	/**
 	 * 总额
 	 */
 	private void setTotal(){
 		total = new MyLabel(407, 496,318, 43);
-		total.setText(money.getText());
+//		total.setText(money.getText());
 		total.setForeground(new ColorFactory().accColor);
 		this.add(total);
 		this.repaint();
@@ -126,7 +146,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	/**
 	 * 实现根据输入的名称寻找余额的动态监听
 	 */
-	public void insertUpdate(DocumentEvent e) {
+	/*public void insertUpdate(DocumentEvent e) {
 		Document doc = e.getDocument();
 		try {
 			String totalMoney = doc.getText(0, doc.getLength());
@@ -154,14 +174,27 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		this.add(total);
 		this.repaint();
 		
-	}
+	}*/
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
+			String accountName = account.getSelectedItem().toString();
+			double balanceValue = accountblService.searchAccurateAccount_up(accountName).balance;
+			setBalanceLabel(balanceValue);
+			//付款条目 备注 转账金额  业务员 ps,agent,item money
+			String payItem = item.getText();
+			String remark = ps.getText();
+			double turnValue = Double.parseDouble(money.getText());
+			String person = agent.getText();
+			//PayVO(String id,String operator,String cusName,String bankAccount,ItemList itemList) {
+		    //单据编号（XJFYD-yyyyMMdd-xxxxx）,操作员（当前登录用户），银行账户，条目清单
+			//ItemList(String itemName, double money, String remark)
+			ItemList itemList = new ItemList(payItem,turnValue,remark);
+			newPayment = new PayVO(id,operate,accountName,itemList);
+			total.setText(accountblService.calTotalMoney_up(newPayment)+"");
 			frame.remove(this);
-
-	//		resController.failed("!!!!","Image/result/acc/finManage/payFailed.jpg");
-			uiController.confirmPayment(newPayment);
+//			PayVO newPayment,String person,double totalValue,double balanceValue
+			uiController.confirmPayment(newPayment,person,accountblService.calTotalMoney_up(newPayment),balanceValue);
 
 		}
 	}

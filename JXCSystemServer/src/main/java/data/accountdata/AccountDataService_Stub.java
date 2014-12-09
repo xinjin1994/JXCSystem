@@ -28,7 +28,97 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	ArrayList<PaymentPO> paymentList=new ArrayList<PaymentPO>();
 	ArrayList<ReceiptPO> draftReceiptList=new ArrayList<ReceiptPO>();
 	ArrayList<PaymentPO> draftPaymentList=new ArrayList<PaymentPO>();
+	int skdNote=0;
+	int fkdNote=0;
 	
+	
+	public void writeSKDNote(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("skdNote.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(skdNote);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void readSKDNote(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("skdNote.out");
+			ois=new ObjectInputStream(fis);
+			skdNote=(Integer) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void writeFKDNote(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("fkdNote.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(fkdNote);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void readFKDNote(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("fkdNote.out");
+			ois=new ObjectInputStream(fis);
+			fkdNote=(Integer) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
 	
 	public void writeNowAccount(){
 		
@@ -49,7 +139,6 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void readNowAccount(){
 		
 		FileInputStream fis;
@@ -312,12 +401,17 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		this.readPaymentList();
 		this.readDraftReceiptList();
 		this.readDraftPaymentList();
+		this.readSKDNote();
+		this.readFKDNote();
 	}
+	
+	/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑数据序列化方法以及构造方法↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 
 	public boolean addAccount(AccountPO po) {
 		if(findAccount_true(po.getName())==null){
 			AccountPO po1=po.copy();
 			this.accountList.add(po1);
+			this.writeAccountList();
 			return true;
 		}
 		return false;
@@ -334,6 +428,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		if(po1!=null){
 			if(po1.getMoney()==po.getMoney()){
 				accountList.remove(po1);
+				this.writeAccountList();
 				return true;
 			}
 		}
@@ -345,6 +440,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		AccountPO poo=findAccount_true(po2.getName());
 		if(po!=null&&poo==null){
 			po.name=po2.getName();
+			this.writeAccountList();
 			return true;
 		}
 		return false;
@@ -371,37 +467,21 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	}
 
 	public boolean addReceipt(ReceiptPO po) {
-		ArrayList<TransferPO> transfer=po.getTransfer();
-		int i=0;
-		AccountPO lin;
 		
-		for(i=0;i<transfer.size();i++){
-			lin=findAccount_true(transfer.get(i).getAccount());
-			if(lin==null){
-				return false;
-			}
-			lin.money=lin.money+transfer.get(i).getMoney();
-		}
 		po=po.copy();
-		po.setTime(getNowTime());
+		po.setTime(AccountDataService_Stub.getNowTime());
 		
 		receiptList.add(po);
+		this.writeReceiptList();
 		return true;
 	}
 
 	public boolean addPayment(PaymentPO po) {
-		AccountPO lin;
-		
-		lin=findAccount_true(po.getAccount().getName());
-		if(lin==null){
-			return false;		
-		}
-		lin.money=lin.money-po.getTotalMoney();
-			
 		po=po.copy();
-		po.setTime(getNowTime());
+		po.setTime(AccountDataService_Stub.getNowTime());
 		
 		paymentList.add(po);
+		this.writePaymentList();
 		return true;
 	}
 
@@ -423,12 +503,168 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		return array;
 	}
 
+	public boolean addDraftReceipt(ReceiptPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		po=po.copy();
+		po.setTime(AccountDataService_Stub.getNowTime());
+		
+		draftReceiptList.add(po);
+		this.writeDraftReceiptList();
+		return true;
+	}
+
+	public boolean addDraftPayment(PaymentPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		po=po.copy();
+		po.setTime(AccountDataService_Stub.getNowTime());
+		
+		draftPaymentList.add(po);
+		this.writeDraftPaymentList();
+		return true;
+	}
+
+	public boolean delDraftReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		ReceiptPO po=findDraftReceipt_true(note);
+		draftReceiptList.remove(po);
+		this.writeDraftReceiptList();
+		return true;
+	}
+
+	public boolean delDraftPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		PaymentPO po=findDraftPayment_true(note);
+		draftPaymentList.remove(po);
+		this.writeDraftPaymentList();
+		return true;
+	}
+
+	public ReceiptPO findReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		int i=0;
+		for(i=0;i<receiptList.size();i++){
+			if(note.equals(receiptList.get(i))){
+				return receiptList.get(i).copy();
+			}
+		}
+		return null;
+	}
+
+	public PaymentPO findPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		int i=0;
+		for(i=0;i<paymentList.size();i++){
+			if(note.equals(paymentList.get(i))){
+				return paymentList.get(i).copy();
+			}
+		}
+		return null;
+	}
+
+	public ReceiptPO findDraftReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		ReceiptPO po=findDraftReceipt_true(note);
+		po=po.copy();
+		return po;
+	}
+
+	public PaymentPO findDraftPayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		PaymentPO po=findDraftPayment_true(note);
+		po=po.copy();
+		return po;
+	}
+
+	public ArrayList<ReceiptPO> getAllDraftReceipt() throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<ReceiptPO> array=new ArrayList<ReceiptPO>();
+		int i=0;
+		for(i=0;i<draftReceiptList.size();i++){
+			array.add(draftReceiptList.get(i).copy());
+		}
+		return array;
+	}
+
+	public ArrayList<PaymentPO> getAllDraftPayment() throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<PaymentPO> array=new ArrayList<PaymentPO>();
+		int i=0;
+		for(i=0;i<draftPaymentList.size();i++){
+			array.add(draftPaymentList.get(i).copy());
+		}
+		return array;
+	}
+
+	public boolean addMoney(AccountPO po, double money) throws RemoteException {
+		// TODO Auto-generated method stub
+		AccountPO po1=findAccount_true(po.name);
+		po1.money= po1.money+(int)money;
+		this.writeAccountList();
+		return true;
+	}
+
+	public boolean delMoney(AccountPO po, double money) throws RemoteException {
+		// TODO Auto-generated method stub
+		AccountPO po1=findAccount_true(po.name);
+		po1.money=po1.money-(int)money;
+		this.writeAccountList();
+		return true;
+	}
+
+	public String getReceiptNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		String a="SKD";
+		String b=AccountDataService_Stub.getNoteTime();
+		String c=Integer.toString(skdNote);
+		skdNote++;
+		this.writeSKDNote();
+		return a+"-"+b+"-"+c;
+	}
+
+	public String getPaymentNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		String a="FKD";
+		String b=AccountDataService_Stub.getNoteTime();
+		String c=Integer.toString(fkdNote);
+		fkdNote++;
+		this.writeFKDNote();
+		return a+"-"+b+"-"+c;
+	}
+	
 	public boolean clear() {
 		accountList=new ArrayList<AccountPO>();
 		receiptList=new ArrayList<ReceiptPO>();
 		paymentList=new ArrayList<PaymentPO>();
+		draftReceiptList=new ArrayList<ReceiptPO>();
+		draftPaymentList=new ArrayList<PaymentPO>();
 		nowAccount=new AccountPO(nowAccount.getName(),0);
 		return true;
+	}
+	
+	
+	
+	/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓数据层自用方法↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+	
+	public ReceiptPO findDraftReceipt_true(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		int i=0;
+		for(i=0;i<draftReceiptList.size();i++){
+			if(note.equals(draftReceiptList.get(i))){
+				return draftReceiptList.get(i);
+			}
+		}
+		return null;
+	}
+
+	public PaymentPO findDraftPayment_true(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		int i=0;
+		for(i=0;i<draftPaymentList.size();i++){
+			if(note.equals(draftPaymentList.get(i))){
+				return draftPaymentList.get(i);
+			}
+		}
+		return null;
 	}
 	
 	private AccountPO findAccount_true(String name){
@@ -441,82 +677,20 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		return null;
 	}
 	
-	public String getNowTime(){
+	public static String getNowTime(){
 		 Calendar rightNow = Calendar.getInstance();
 		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		 String sysDatetime = fmt.format(rightNow.getTime());
 		 return sysDatetime; 
 	}
-
-	public boolean addDraftReceipt(ReceiptPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public static String getNoteTime(){
+		 Calendar rightNow = Calendar.getInstance();
+		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+		 String sysDatetime = fmt.format(rightNow.getTime());
+		 return sysDatetime; 
 	}
-
-	public boolean addDraftPayment(PaymentPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean delDraftReceipt(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean delDraftPayment(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public ReceiptPO findReceipt(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public PaymentPO findPayment(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ReceiptPO findDraftReceipt(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ReceiptPO findDraftPayment(String note) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<ReceiptPO> getAllDraftReceipt() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<PaymentPO> getAllDraftPayment() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean addMoney(AccountPO po, double money) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean delMoney(AccountPO po, double money) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public String getReceiptNote() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getPaymentNote() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 }
