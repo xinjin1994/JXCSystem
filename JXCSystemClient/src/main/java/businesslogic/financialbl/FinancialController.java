@@ -93,4 +93,14 @@ public class FinancialController implements FinancialblService{
 		return 0;
 	}
 
+	public AllBillVO getPassList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public AllBillVO getRefuseList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
