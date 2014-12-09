@@ -19,8 +19,9 @@ public class AllBillVO {
 	public ReceiptPO receiptList;
 	public PatchPO patch;
 	public CommodityPO gift;
-	public int note;         //1代表CommodityPO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
-					  //5代表Export_Return， 6代表PatchPO， 7代表ReceiptPO， 8代表PaymentPO
+	public int note;        
+	//1代表CommodityPO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
+	//5代表Export_Return， 6代表PatchPO， 7代表ReceiptPO， 8代表PaymentPO
 	
 	
 	public AllBillVO(){

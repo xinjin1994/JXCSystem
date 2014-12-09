@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.naming.spi.DirStateFactory.Result;
 
-import ui.FatherPanel;
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;

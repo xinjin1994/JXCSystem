@@ -3,9 +3,9 @@ package ui.account.accBasic;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.FatherPanel;
 import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
