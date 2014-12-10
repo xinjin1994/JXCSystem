@@ -23,7 +23,7 @@ public class MockGetUser implements UserDataService{
 
 	public UserPO getUser(String name) {
 		// TODO Auto-generated method stub
-		return new UserPO(n, p, d);
+		return new UserPO(n, p, d,"note");
 	}
 
 	public ArrayList<UserPO> show() {
@@ -42,6 +42,11 @@ public class MockGetUser implements UserDataService{
 	}
 
 	public UserPO login(UserPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getNote() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

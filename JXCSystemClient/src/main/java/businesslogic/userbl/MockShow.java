@@ -12,7 +12,7 @@ public class MockShow implements UserDataService{
 	public ArrayList<UserPO> show() {
 		
 		ArrayList<UserPO> user=new ArrayList<UserPO>();
-		user.add(new UserPO("test","2222/2/2", 0));
+		user.add(new UserPO("test","2222/2/2", 0,"note"));
 		return user;
 		
 	}
@@ -43,6 +43,11 @@ public class MockShow implements UserDataService{
 	}
 
 	public UserPO login(UserPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getNote() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -7,6 +7,7 @@ public class UserVO {
 	public String name;//���
 	public String password;//����
 	public int duty;//ְ��
+	public String note;
 
 	public UserVO(String name,String password,int duty){
 		this.name=name;

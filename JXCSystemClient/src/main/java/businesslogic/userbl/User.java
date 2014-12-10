@@ -24,7 +24,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 	
 	public int addUser_Data(String name, String password, int duty) {
 		// TODO Auto-generated method stub
-		UserPO user = new UserPO(name, password, duty);
+		UserPO user = new UserPO(name, password, duty,"note");
 		
 		try {
 			if (us.addUser(user)) {
@@ -40,7 +40,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 	
 	public int addUser(String name, String password, int duty) {
 		// TODO Auto-generated method stub
-		UserPO user = new UserPO(name, password, duty);
+		UserPO user = new UserPO(name, password, duty,"note");
 		
 		try {
 			if (us.addUser(user)) {

@@ -6,6 +6,7 @@ public class UserPO implements Serializable{
 	String name;//���
 	String password;//����
 	int duty;//ְ��
+	String note;
 	
 	public UserPO(String n,String p,int d) {
 		name = n;
@@ -27,5 +28,9 @@ public class UserPO implements Serializable{
 
 	public int getDuty() {
 		return duty;
+	}
+	
+	public String getNote(){
+		return note;
 	}
 }

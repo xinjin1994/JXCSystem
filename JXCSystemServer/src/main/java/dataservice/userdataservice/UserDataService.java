@@ -18,5 +18,6 @@ public interface UserDataService extends Remote {
 	public UserPO getUser(String name) throws RemoteException;
 	public ArrayList<UserPO> show() throws RemoteException;
 	public UserPO login(UserPO po) throws RemoteException;
+	public String getNote() throws RemoteException;
 	public boolean clear() throws RemoteException;
 }
