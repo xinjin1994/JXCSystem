@@ -3,21 +3,20 @@ package ui.account;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import businesslogic.accountbl.Account;
-import ui.UIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
-import ui.setting.MyLabel;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 
 public class ConfirmAccPanel extends AccountDetailPanel implements ActionListener{
 	
 	MyButton forwardButtonAdd,forwardButtonDel,forwardButtonCha;
-	
-	AccountVO acc;
+	AccountblService accountblService;
+	AccountVO acc,newAcc;
 	String ope;
 	ResultPanelController resController;
 
@@ -36,10 +35,22 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		this.acc = acc;
 		this.ope = ope;
 		this.accountController = uiController;
+		accountblService = new AccountController();
 		resController = new ResultPanelController(uiController,frame);
 		setOpe();
 	}
 	
+	public ConfirmAccPanel(MyFrame frame, String url,
+			AccountAllUIController uiController, AccountVO acc,String ope,AccountVO newAcc) {
+		super(frame, url, uiController, acc);
+		this.acc = acc;
+		this.newAcc = newAcc;
+		this.ope = ope;
+		this.accountController = uiController;
+		accountblService = new AccountController();
+		resController = new ResultPanelController(uiController,frame);
+		setOpe();
+	}
 	public ConfirmAccPanel(MyFrame frame, String url,
 			ManagerAllUIController uiController, AccountVO acc,String ope,String type) {
 		super(frame, url, uiController, acc);
@@ -104,7 +115,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		}else if(e.getSource() == forwardButtonDel){
 			delAcc();
 		}else if(e.getSource() == forwardButtonCha){
-			chaAcc();
+			chaAcc(acc,newAcc);
 		}
 			
 	}
@@ -113,9 +124,33 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	/**
 	 * 向bl层传送数据accountVO，修改账户
 	 */
-	private void chaAcc() {
-		frame.remove(this);
-		resController.succeeded("成功修改账户！", type);
+	private void chaAcc(AccountVO acc,AccountVO newAcc) {
+		switch(accountblService.updateAccount_up(acc,newAcc)){
+		//-1 未知错误
+		//1 账户名称重复
+		//2 账户名不存在
+		//3 账户中仍存在余额，不能删除
+		case 0:
+			frame.remove(this);
+			resController.succeeded("成功修改账户！", type);
+			break;
+		case 1:
+			frame.remove(this);
+			resController.failed("账户名称重复！", type);
+			break;
+		case 2:
+			frame.remove(this);
+			resController.failed("账户名不存在！", type);
+			break;
+		case 3:
+			frame.remove(this);
+			resController.failed("账户名中仍存在余额，不能删除！", type);
+			break;
+		case -1:
+			frame.remove(this);
+			resController.failed("未知错误！", type);
+			break;
+		}
 	}
 
 	/**
@@ -123,8 +158,32 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 * @param 
 	 */	
 	private void delAcc() {
-		frame.remove(this);
-		resController.succeeded("成功删除账户！", type);
+		switch(accountblService.delAccount_up(acc)){
+		//-1 未知错误
+		//1 账户名称重复
+		//2 账户名不存在
+		//3 账户中仍存在余额，不能删除
+		case 0:
+			frame.remove(this);
+			resController.succeeded("成功删除账户！", type);
+			break;
+		case 1:
+			frame.remove(this);
+			resController.failed("账户名称重复！", type);
+			break;
+		case 2:
+			frame.remove(this);
+			resController.failed("账户名不存在！", type);
+			break;
+		case 3:
+			frame.remove(this);
+			resController.failed("账户名中仍存在余额，不能删除！", type);
+			break;
+		case -1:
+			frame.remove(this);
+			resController.failed("未知错误！", type);
+			break;
+		}
 	}
 
 	/**
@@ -132,8 +191,32 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 * @param 
 	 */
 	private void addAcc() {
-		frame.remove(this);
-		resController.succeeded("成功添加账户！", type);
+		switch(accountblService.addAccount_up(acc)){
+		//-1 未知错误
+		//1 账户名称重复
+		//2 账户名不存在
+		//3 账户中仍存在余额，不能删除
+		case 0:
+			frame.remove(this);
+			resController.succeeded("成功添加账户！", type);
+			break;
+		case 1:
+			frame.remove(this);
+			resController.failed("账户名称重复！", type);
+			break;
+		case 2:
+			frame.remove(this);
+			resController.failed("账户名不存在！", type);
+			break;
+		case 3:
+			frame.remove(this);
+			resController.failed("账户名中仍存在余额，不能删除！", type);
+			break;
+		case -1:
+			frame.remove(this);
+			resController.failed("未知错误！", type);
+			break;
+		}
 	}
 	/**
 	 * 当添加或者删除账户成功后显示结果Label

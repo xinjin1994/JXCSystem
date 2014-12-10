@@ -1,14 +1,8 @@
 package ui.account;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import ui.FatherPanel;
-import ui.UIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import vo.AccountVO;

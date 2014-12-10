@@ -1,23 +1,17 @@
 package ui.account;
 
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-
-
-
+import ui.AccountPanel;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.manager.ManagerAllUIController;
-import ui.setting.BackButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
 import ui.setting.SetBack;
 import vo.AccountVO;
 import vo.GetVO;
 import vo.PayVO;
-import ui.AccountPanel;
 
 public class AccountAllUIController extends UIController{
 	private MyFrame frame;
@@ -137,6 +131,12 @@ public class AccountAllUIController extends UIController{
 	
 	public void confirmAcc(AccountVO acc,String ope){
 		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Account/确认账户信息.jpg", this,acc,ope);
+		frame.setPanel(confirmAccPanel);
+		frame.repaint();
+	}
+	
+	public void confirmAcc(AccountVO acc,String ope,AccountVO newAcc){
+		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Account/确认账户信息.jpg", this,acc,ope,newAcc);
 		frame.setPanel(confirmAccPanel);
 		frame.repaint();
 	}
