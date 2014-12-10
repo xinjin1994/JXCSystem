@@ -82,7 +82,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
-			resController.accSucceeded("成功添加付款单！");
+			resController.succeeded("成功添加付款单！","account");
 		}
 	}
 }

@@ -52,11 +52,13 @@ public class ResultPanelController extends UIController implements ActionListene
 		this.backPanel = backPanel;
 	}
 	
+	
+	
 
 	
-	public void successed(String text,String type){
+	public void succeeded(String text,String type){
 	//	accController = (AccountAllUIController)controller;
-		resultPanel = new FatherPanel(frame, "Image/result/"+"account"+"_result.jpg", accController);
+		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", accController);
 		setForward();
 	
 		textLabel.setText(text);

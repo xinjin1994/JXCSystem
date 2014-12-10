@@ -64,7 +64,11 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	private void setForwardCha() {
 		ForwardButton forwardCha = new ForwardButton(607, 393);
 		forwardButtonCha = forwardCha.forward_white;
-		
+		if(type.equals("account")){
+			forwardButtonCha = forwardCha.forward_white;
+		}else {
+			forwardButtonCha = forwardCha.forward_black;
+		}
 		this.add(forwardButtonCha);
 		forwardButtonCha.addActionListener(this);
 	}
@@ -72,15 +76,23 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	private void setForwardDel() {
 		ForwardButton forwardDel = new ForwardButton(607, 393);
 		forwardButtonDel = forwardDel.forward_white;
-		
+		if(type.equals("account")){
+			forwardButtonDel = forwardDel.forward_white;
+		}else {
+			forwardButtonDel = forwardDel.forward_black;
+		}
 		this.add(forwardButtonDel);
 		forwardButtonDel.addActionListener(this);
 	}
 
 	private void setForwardAdd() {
 //		System.out.println("kld");
-		ForwardButton forward = new ForwardButton(607, 393);
-		forwardButtonAdd = forward.forward_white;
+		ForwardButton forwardAdd = new ForwardButton(607, 393);
+		if(type.equals("account")){
+			forwardButtonAdd = forwardAdd.forward_white;
+		}else {
+			forwardButtonAdd = forwardAdd.forward_black;
+		}
 		
 		this.add(forwardButtonAdd);
 		forwardButtonAdd.addActionListener(this);
@@ -103,7 +115,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void chaAcc() {
 		frame.remove(this);
-		resController.successed("成功修改账户！", type);
+		resController.succeeded("成功修改账户！", type);
 	}
 
 	/**
@@ -112,7 +124,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */	
 	private void delAcc() {
 		frame.remove(this);
-		resController.successed("成功删除账户！", type);
+		resController.succeeded("成功删除账户！", type);
 	}
 
 	/**
@@ -121,7 +133,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 */
 	private void addAcc() {
 		frame.remove(this);
-		resController.successed("成功添加账户！", type);
+		resController.succeeded("成功添加账户！", type);
 	}
 	/**
 	 * 当添加或者删除账户成功后显示结果Label
