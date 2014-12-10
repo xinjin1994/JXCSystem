@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 
 import ui.account.AccountUIController;
 import ui.setting.ColorFactory;
-import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;

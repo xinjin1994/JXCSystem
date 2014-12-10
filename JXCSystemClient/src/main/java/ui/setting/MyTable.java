@@ -31,7 +31,7 @@ public class MyTable extends JTable{
 	
 	public MyTable(){
 		
-//		this.backPanel = backPanel;
+	//	this.backPanel = backPanel;
 		setPanel();
 	}
 	

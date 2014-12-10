@@ -5,9 +5,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
+import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
-import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyStopButton;
