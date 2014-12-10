@@ -1,17 +1,18 @@
-package ui.account;
+package ui.account.list;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.FatherPanel;
+import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
-import ui.setting.resultPanels.ResultPanelController;
 import vo.GetVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 确认收款单panel
  * @author ZYC
@@ -25,17 +26,20 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 	
 	GetVO newReceipt;
 	MyButton forwardButton;
-	
-	ResultPanelController resController;
+	AccountblService accountblService;
+	String person;
+	double totalValue,balanceValue;
 	public ConfirmReceiptPanel(MyFrame frame,String url,
-			AccountAllUIController uiController,GetVO newReceipt){
+			AccountAllUIController uiController,GetVO newReceipt,String person,double totalValue,double balanceValue){
 		super(frame,url,uiController);
 		this.uiController = uiController;
+		this.balanceValue = balanceValue;
+		this.person = person;
+		this.totalValue = totalValue;
 		this.repaint();
 		this.newReceipt = newReceipt;
 		uiController.setBack_first(this);
-		
-		resController = new ResultPanelController(uiController, frame);
+		accountblService = new AccountController();
 		setLabel();
 		setForward();
 		
@@ -47,15 +51,25 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 		customer = new MyLabel(221,255,106,41);
 		total = new MyLabel(407, 496,318, 43);
 		ps = new MyLabel(106, 369, 222, 170);
+		idLabel.setText(newReceipt.id);
+		operator.setText(newReceipt.operator);
+		agent.setText(person);
+		customer.setText(newReceipt.cusName);
+		total.setText(totalValue+"");
+		this.add(idLabel);
+		this.add(operator);
+		this.add(agent);
+		this.add(customer);
+		this.add(total);
+		this.add(ps);
+//		MyLabel labels[] = new MyLabel[]{idLabel,operator,agent,customer,total,ps};
 		
-		MyLabel labels[] = new MyLabel[]{idLabel,operator,agent,customer,total,ps};
 		
-		
-		for(int i = 0;i < labels.length;i++){
-			labels[i].setForeground(new ColorFactory().accColor);
+		/*for(int i = 0;i < labels.length;i++){
+			labels[i].setForeground(new ColorFactory().acc);
 			this.add(labels[i]);
 			labels[i].setText("我是空的，我要内容");
-		}
+		}*/
 		for(int i = 0;i < transferList.length;i++){
 			transferList[i] = new MyLabel(491, 162+i*43, 205, 43);
 			if(i % 2 == 1){
@@ -64,8 +78,13 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 				transferList[i].setForeground(new ColorFactory().accColor);
 			}
 			this.add(transferList[i]);
-			transferList[i].setText("我也是空的，我也要内容");
+			//TransferListVO(String bankAccount,double transferValue,String remark){
+			//银行账户，转账金额，备注
 		}
+		transferList[0].setText(newReceipt.transferList.bankAccount);
+		transferList[1].setText(balanceValue+"");
+		transferList[2].setText(newReceipt.transferList.transferValue+"");
+		
 		
 	}
 	/**
@@ -81,8 +100,9 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
+			accountblService.addReceipt_up(newReceipt);
 			frame.remove(this);
-			resController.accSucceeded("成功添加收款单！");
+			uiController.addMainPanel();
 		}
 	}
 }

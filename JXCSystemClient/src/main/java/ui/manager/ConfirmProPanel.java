@@ -71,13 +71,13 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("discount")){
 			addDiscount();
-			resController.succeeded("成功添加一个折扣促销策略！", "manager");
+			resController.successed("成功添加一个折扣促销策略！", "manager");
 		}else if(e.getActionCommand().equals("voucher")) {
 			addVoucher();
-			resController.succeeded("成功添加一个优惠券促销策略！", "manager");
+			resController.successed("成功添加一个优惠券促销策略！", "manager");
 		}else if (e.getActionCommand().equals("gift")) {
 			addProGift();
-			resController.succeeded("成功添加一个赠品促销策略！", "manager");
+			resController.successed("成功添加一个赠品促销策略！", "manager");
 		}
 	}
 

@@ -1,19 +1,18 @@
-package ui.account;
+package ui.account.list;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.naming.spi.DirStateFactory.Result;
-
-import ui.FatherPanel;
+import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
-import ui.setting.resultPanels.ResultPanelController;
-import vo.GetVO;
 import vo.PayVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 确认付款
  * @author ZYC
@@ -23,18 +22,22 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 	AccountAllUIController uiController;
 	MyLabel idLabel,operator,agent,item,total,ps;
 	MyLabel transferList [] = new MyLabel[3] ;
-	
+	String person;
 	PayVO newPayment;
 	MyButton forwardButton;
-	ResultPanelController resController;
+	double totalValue,balanceValue;
+	AccountblService accountblService;
 	public ConfirmPaymentPanel(MyFrame frame,String url,
-			AccountAllUIController uiController, PayVO newPayment){
+			AccountAllUIController uiController, PayVO newPayment,String person,double totalValue,double balanceValue){
 		super(frame,url,uiController);
+		accountblService = new AccountController();
+		this.person = person;
+		this.balanceValue = balanceValue;
+		this.totalValue = totalValue;
 		this.uiController = uiController;
 		this.repaint();
 		this.newPayment = newPayment;
 		
-		resController = new ResultPanelController(uiController, frame);
 		uiController.setBack_first(this);
 		
 		setLabel();
@@ -49,13 +52,20 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 		ps = new MyLabel(104, 453, 220, 81);
 		
 		MyLabel labels[] = new MyLabel[]{idLabel,operator,agent,item,total,ps};
-		
-		
 		for(int i = 0;i < labels.length;i++){
 			labels[i].setForeground(new ColorFactory().accColor);
 			this.add(labels[i]);
-			labels[i].setText("我是空的，我要内容");
 		}
+		//PayVO(String id,String operator,String cusName,String bankAccount,ItemList itemList) {
+	    //单据编号（XJFYD-yyyyMMdd-xxxxx）,操作员（当前登录用户），银行账户，条目清单
+		//ItemList(String itemName, double money, String remark)		
+		labels[1].setText(newPayment.id);
+		labels[2].setText(newPayment.operator);
+		labels[3].setText(person);
+		labels[4].setText(newPayment.itemList.itemName);
+		labels[5].setText(totalValue+"");
+		labels[6].setText(newPayment.itemList.remark);
+		
 		for(int i = 0;i < transferList.length;i++){
 			transferList[i] = new MyLabel(491, 162+i*43, 205, 43);
 			if(i % 2 == 1){
@@ -64,7 +74,9 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 				transferList[i].setForeground(new ColorFactory().accColor);
 			}
 			this.add(transferList[i]);
-			transferList[i].setText("我也是空的，我也要内容");
+			transferList[0].setText(newPayment.bankAccount);
+			transferList[1].setText(balanceValue+"");
+			transferList[2].setText(newPayment.itemList.money+"");
 		}
 		
 	}
@@ -82,7 +94,8 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
-			resController.accSucceeded("成功添加付款单！");
+			accountblService.addPayment_up(newPayment);
+			uiController.addMainPanel();
 		}
 	}
 }
