@@ -110,7 +110,7 @@ public class MyTable extends JTable{
 		tableHeader = table.getTableHeader();
 		tableHeader.setResizingAllowed(true);
 		tableHeader.setOpaque(false);
-		tableHeader.setBackground(new ColorFactory().accColor);
+		tableHeader.setBackground(fontColorOdd);
 		tableHeader.setForeground(fontColorEven);
 	}
 	/*
@@ -157,11 +157,13 @@ public class MyTable extends JTable{
 	        	}
 	        	else{
 	        		if (row% 2 == 0){
+	        			
 	        			setBackground(oddColor); //设置奇数行底色
 	        			setForeground(fontColorOdd);
 	        			setSelectionBackground(oddColor);
 	        		}
 	        		else if (row % 2 == 1){
+	        			
 	        			setBackground(evenColor); 
 	        			setForeground(fontColorEven);//设置偶数行底色
 	        			setSelectionBackground(evenColor);

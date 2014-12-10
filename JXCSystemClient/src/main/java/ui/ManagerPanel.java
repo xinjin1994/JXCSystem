@@ -1,12 +1,18 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import ui.manager.ManagerUIController;
+import ui.setting.ColorFactory;
 import ui.setting.MyButton;
+import ui.setting.MyTable;
 
 /**
  * 6 总经理
@@ -18,9 +24,12 @@ public class ManagerPanel extends FatherPanel{
 	private int firstY = 110;
 	private int inter = 54;
 	
-	MyButton accManage,recManage,invoiceManage,proManage,details;
+	private MyButton accManage,recManage,invoiceManage,proManage,details,refresh;
 	private MyButton [] buttons = new MyButton[]{ accManage, recManage,invoiceManage,proManage};
 	private MyButton back;
+	
+	private JLabel remind;
+	private MyTable showTable;
 	
 	private ManagerUIController managerUIController;
 	private String images_ori[] = new String[]{"Image/Manager/button/accManage.png","Image/Manager/button/recManage.png",
@@ -30,6 +39,7 @@ public class ManagerPanel extends FatherPanel{
 	private String images_press_on[] = new String[]{"Image/Manager/button/accManage_press_on.png","Image/Manager/button/recManage_press_on.png",
 			"Image/Manager/button/invoiceManage_press_on.png",	"Image/Manager/button/proManage_press_on.png"};
 	
+	private ColorFactory color = new ColorFactory();
 	
 	public ManagerPanel(JFrame frame, String url, UIController controller,
 			ManagerUIController managerUIController) {
@@ -52,18 +62,70 @@ public class ManagerPanel extends FatherPanel{
 		details.addMouseListener(listener);
 		this.add(details);
 	
+		refresh = new MyButton("Image/refresh.png",25,514,"Image/refresh_stop.png","Image/refresh_stop.png");
+		this.add(refresh);
+		refresh.addMouseListener(listener);
 	}
 	
+	
+	private void getProInfo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void getInvoiceInfo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void getRecInfo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void getAccountInfo() {
+		// TODO Auto-generated method stub
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("a;b;c;e");
+		info.add("s,r,t,h");
+		info.add("w;t;x;h");
+		info.add("gg");
+		setTable(info);
+	}
+
+	private void setTable(ArrayList<String> info) {
+		showTable = new MyTable();
+		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+		showTable.setTable(info);
+		this.add(showTable.tablePanel);
+		this.repaint();
+	}
 	class FirstButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
 		}
 
 		public void mousePressed(MouseEvent e) {
-			if(e.getSource() == details){
+			if (e.getSource() == refresh){
+				remind = new JLabel(new ImageIcon("Image/remind.png"));
+				remind.setBounds(32, 276,5,5);
+				ManagerPanel.this.add(remind);
+				ManagerPanel.this.repaint();
+				System.out.println("fff");
+			}//刷新数据，如果有新的审批单据返回情况，收支单据button上面会出现红点,
+			else if(e.getSource() == details){
 				
+			}else if(e.getSource() == buttons[0]) {
+				getAccountInfo();
+			}else if(e.getSource() == buttons[1]) {
+				getRecInfo();
+			}else if(e.getSource() == buttons[2]) {
+				getInvoiceInfo();
+			}else if (e.getSource() == buttons[3]) {
+				getProInfo();
 			}
 		}
+
 
 		public void mouseReleased(MouseEvent e) {
 		}
@@ -82,17 +144,6 @@ public class ManagerPanel extends FatherPanel{
 
 		public void mouseExited(MouseEvent e) {
 		}
-
-		
-//		public void addRestButton() {
-//		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
-//				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
-//		back = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
-//				"Image/Sales/Sales_image/返回_press_on.png");
-//		this.add(detail);
-//		this.add(back);
-//	}
-
 
 	}
 }

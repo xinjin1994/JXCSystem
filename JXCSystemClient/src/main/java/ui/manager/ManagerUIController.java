@@ -115,8 +115,8 @@ public class ManagerUIController {
 		        "Image/Manager/button/proManage/decPro.png"};
 		String images_stop_pro[] = new String[]{"Image/Manager/button/proManage/chePro_stop.png",
 				"Image/Manager/button/proManage/decPro_stop.png"};
-		String images_press_on_pro[] = new String[]{"Imaege/Manager/button/proManage/chePro_press_on.png",
-				"Image/Manager/button/proManager/decPro_press_on.png"};
+		String images_press_on_pro[] = new String[]{"Image/Manager/button/proManage/chePro_press_on.png",
+				"Image/Manager/button/proManage/chePro_press_on.png"};
 		
 		for(int i = 0;i < proButtons.length;i++){
 			proButtons[i] = new MyButton(images_ori_pro[i], secondX, secondY+i*inter,
@@ -148,7 +148,7 @@ public class ManagerUIController {
 		public void mousePressed(MouseEvent event) {
 			frame.remove(managerPanel);
 			if(event.getSource() == proButtons[0]){
-				
+				uiController.checkPro();
 			}else if (event.getSource() == proButtons[1]) {
 				uiController.setPro();
 			}
