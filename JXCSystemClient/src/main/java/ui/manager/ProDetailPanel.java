@@ -33,16 +33,11 @@ public class ProDetailPanel extends FatherPanel{
 		this.timeBegin = gift.getStartTime();
 		this.timeEnd = gift.getEndTime();
 		
-		uiController.setBack_first(this);
+		this.repaint();
 		
 		init();
-		typeLabel = new MyLabel(355, 400, 46, 115);
 		typeLabel.setIcon(new ImageIcon("Image/Manager/promotion/gift_stop.png"));
-		this.add(typeLabel);
-		typeLabel.setVisible(true);
-		
 		setGiftLabels();
-		this.repaint();
 	}
 	
 
@@ -57,15 +52,11 @@ public class ProDetailPanel extends FatherPanel{
 		this.timeBegin = voucher.getStartTime();
 		this.timeEnd = voucher.getEndTime();
 		
+		this.repaint();
 		
 		init();
-		typeLabel = new MyLabel(355, 271, 46, 115);
 		typeLabel.setIcon(new ImageIcon("Image/Manager/promotion/cash_stop.png"));
-		this.add(typeLabel);
-		typeLabel.setVisible(true);
-		
 		setVoucherLabel();
-		this.repaint();
 	}
 	
 
@@ -80,58 +71,53 @@ public class ProDetailPanel extends FatherPanel{
 		this.timeBegin = discount.getStartTime();
 		this.timeEnd = discount.getEndTime();
 		
-		init();
-		typeLabel = new MyLabel(355, 141, 46, 115);
-		typeLabel.setIcon(new ImageIcon("Image/Manager/promotion/discount_stop.png"));
-		typeLabel.setVisible(true);
-		this.add(typeLabel);
-	
-		setDiscountLabels();
 		this.repaint();
+		
+		init();
+		typeLabel.setIcon(new ImageIcon("Image/Manager/promotion/discount_stop.png"));
+		setDiscountLabels();
 	}
 	
 	
 	protected void init() {
 		uiController.setBack_first(this);
+		typeLabel = new MyLabel(355, 271, 46, 115);
 		setTime();	
 		setLevel();
 	}
 	
+	
 	protected void setLevel() {
 		switch (level) {
 		case 1:
-			levelLabel = new MyLabel(92, 306,212, 44);
-			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level1.png"));
+			levelLabel = new MyLabel(87, 306,212, 44);
+			levelLabel.setIcon(new ImageIcon(""));
 			break;
 		case 2:
-			levelLabel = new MyLabel(92, 350,212, 44);
-			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level2.png"));
+			levelLabel = new MyLabel(87, 350,212, 44);
+			levelLabel.setIcon(new ImageIcon(""));
 			break;
 		case 3:
-			levelLabel = new MyLabel(92, 394,212, 44);
-			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level3.png"));
+			levelLabel = new MyLabel(87, 394,212, 44);
+			levelLabel.setIcon(new ImageIcon(""));
 			break;
 		case 4:
-			levelLabel = new MyLabel(92, 438,212, 44);
-			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level4.png"));
+			levelLabel = new MyLabel(87, 438,212, 44);
+			levelLabel.setIcon(new ImageIcon(""));
 			break;
 		case 5:
-			levelLabel = new MyLabel(92, 482,212, 44);
-			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level5.png"));
+			levelLabel = new MyLabel(87, 482,212, 44);
+			levelLabel.setIcon(new ImageIcon(""));
 			break;
 		default:
 			break;
 		}
-		levelLabel.setVisible(true);
-		this.add(levelLabel);
 	}
 
 	protected void setTime() {
 		timeBeginLabel = new MyLabel(87,224, 112, 42);
 		timeEndLabel = new MyLabel(200, 224, 112, 42);
 		
-		timeBeginLabel.setText(timeBegin);
-		timeEndLabel.setText(timeEnd);
 		
 		this.add(timeBeginLabel);
 		this.add(timeEndLabel);

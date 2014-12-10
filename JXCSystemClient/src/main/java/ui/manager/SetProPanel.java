@@ -50,7 +50,6 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		this.repaint();
 
-		uiController.setBack_first(this);
 		setTime();
 		setDiscountText();
 		setVoucherText();
@@ -158,7 +157,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 			levels[i] = new JRadioButton("",false);
 			levels[i].setBorderPainted(false);
 			levels[i].setContentAreaFilled(false);
-			levels[i].setBounds(116,305+42*i,223,44);
+			levels[i].setBounds(116,305+42*i,44,44);
 			
 			levels[i].setActionCommand("level"+(i+1));
 			levels[i].addActionListener(this);

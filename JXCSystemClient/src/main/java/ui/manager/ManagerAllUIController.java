@@ -128,13 +128,6 @@ public class ManagerAllUIController extends UIController{
 		frame.setPanel(setProPanel);
 		frame.repaint();
 	}
-	
-	public void checkPro() {
-		checkProPanel = new CheckProPanel(frame,"Image/Manager/promotion/promotionAll.jpg" , this);
-		frame.setPanel(checkProPanel);
-		frame.repaint();
-	}
-	
 	public void confirmProDis(DiscountVO discount){
 		confirmProPanel = new ConfirmProPanel(frame, "Image/Manager/promotion/proDoConfirm.jpg", this, discount);
 		frame.setPanel(confirmProPanel);
