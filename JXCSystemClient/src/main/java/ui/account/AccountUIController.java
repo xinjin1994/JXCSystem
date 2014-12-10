@@ -70,7 +70,7 @@ public class AccountUIController {
 		String images_ori_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve.png",
 				"Image/Account/button/invoiceManage/disapp.png"};
 		String images_stop_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_stop.png",
-		"Image/Account/button/invoiceManage/disapp_s jm   top.png"};
+		"Image/Account/button/invoiceManage/disapp_stop.png"};
 		String images_press_on_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_press_on.png",
 				"Image/Account/button/invoiceManage/disapp_press_on.png"};
 		
@@ -141,7 +141,7 @@ public class AccountUIController {
 		
 		
 		for(int i = 0;i < iniButtons.length;i++){
-			System.out.println(i);
+//			System.out.println(i);
 			iniButtons[i] = new MyButton(images_ori_ini[i], secondX, secondY+i*inter,
 					images_stop_ini[i], images_press_on_ini[i]);
 			accountSecondPanel.add(iniButtons[i]);
@@ -250,13 +250,13 @@ public class AccountUIController {
 			frame.remove(accountPanel);
 			if(e.getSource() == iniButtons[0]){
 				uiController.iniCom();
-				System.out.println("iniCom");
+//				System.out.println("iniCom");
 			}else if(e.getSource() == iniButtons[1]){
 				uiController.iniCus();
-				System.out.println("iniCus");
+//				System.out.println("iniCus");
 			}else if(e.getSource() == iniButtons[2]){
 				uiController.iniAcc();
-				System.out.println("iniAcc");
+//				System.out.println("iniAcc");
 			}else if(e.getSource() == iniButtons[3]){
 				
 			}
@@ -284,7 +284,7 @@ public class AccountUIController {
 
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == invoiceButtons[0]){
-				
+
 			}else if(e.getSource() == invoiceButtons[1]){
 				
 			}

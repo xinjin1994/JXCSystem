@@ -3,7 +3,7 @@ package ui.account;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.FatherPanel;
+import ui.setting.FatherPanel;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;

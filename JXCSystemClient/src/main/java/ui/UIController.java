@@ -20,12 +20,23 @@ public class UIController {
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	
+<<<<<<< HEAD
 	
 	static private FatherPanel tempMainPanel;
 	public FatherPanel prePanel;
 	public UIController(){
 		
 	}
+=======
+	/*public UIController(){
+		
+	}*/
+//=======
+////	public UIController(){
+//		
+//	//}
+//>>>>>>> fdfb8769613779b5e4559f17a4e848d418dcd06d
+>>>>>>> origin/master
 	public UIController() {
 
 		this.frame = new MyFrame();
@@ -35,9 +46,18 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
+<<<<<<< HEAD
 	//	this.AccountPanel();
 		this.ManagerPanel();
+=======
+		this.AccountPanel();
+//		this.ManagerPanel();
+//<<<<<<< HEAD
+//		this.SalesManagerPanel();
+//=======
+>>>>>>> origin/master
 	//	this.SalesManagerPanel();
+//>>>>>>> fdfb8769613779b5e4559f17a4e848d418dcd06d
 
 	}
 

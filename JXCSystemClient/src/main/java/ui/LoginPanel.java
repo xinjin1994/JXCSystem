@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import ui.setting.FatherPanel;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
 
