@@ -75,12 +75,12 @@ public class AccountController implements AccountblService{
 		return null;
 	}
 
-	public double calTotalMoney_up(GetVO vo) {
+	public int calTotalMoney_up(GetVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public double calTotalMoney_up(PayVO vo) {
+	public int calTotalMoney_up(PayVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -136,11 +136,6 @@ public class AccountController implements AccountblService{
 	}
 
 	public PayVO searchPayment_up(String note) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public AccountVO searchAccurateAccount_up(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

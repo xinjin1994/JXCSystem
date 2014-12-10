@@ -4,8 +4,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import ui.FatherPanel;
 import ui.UIController;
-import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
@@ -40,8 +40,7 @@ public class MakeSureFindInfo extends FatherPanel{
 	}
 	
 	public void setTable(){
-		table = new MyTable();
-		this.add(table);
+		table = new MyTable(this);
 		ArrayList <String> infoArray = new ArrayList<String>();
 		infoArray.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
 		table.setTable(infoArray);

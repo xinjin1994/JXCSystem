@@ -6,7 +6,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import ui.manager.ManagerUIController;
-import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 
 /**

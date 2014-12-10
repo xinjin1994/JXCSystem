@@ -1,5 +1,6 @@
 package ui.sales;
 
+import ui.FatherPanel;
 import ui.SalesManagerPanel;
 import ui.UIController;
 import ui.sales.cuspanel.AddCusPanel;
@@ -13,7 +14,6 @@ import ui.sales.impanel.ImPanel;
 import ui.sales.salespanel.SalesBackPanel;
 import ui.sales.salespanel.SalesInPanel;
 import ui.sales.salespanel.SalesPanel;
-import ui.setting.FatherPanel;
 import ui.setting.MyFrame;
 
 

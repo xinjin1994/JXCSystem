@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
+import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
-import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 import ui.setting.MyTextFieldFilled;
 import ui.setting.MyTextFieldTrans;

@@ -5,8 +5,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
-import ui.setting.FatherPanel;
-
 public class WelcomePanel extends FatherPanel {
 
 	ThreadDis thread;

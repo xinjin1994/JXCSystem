@@ -6,7 +6,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import ui.admin.AdminUIController;
-import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 
 //0 管理员

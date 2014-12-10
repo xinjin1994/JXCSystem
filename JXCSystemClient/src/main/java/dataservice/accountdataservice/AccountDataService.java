@@ -43,7 +43,7 @@ public interface AccountDataService extends Remote {
 	
 	public ReceiptPO findDraftReceipt(String note) throws RemoteException;
 	
-	public PaymentPO findDraftPayment(String note) throws RemoteException;
+	public ReceiptPO findDraftPayment(String note) throws RemoteException;
 	
 	public ArrayList<ReceiptPO> getAllReceipt() throws RemoteException;
 	

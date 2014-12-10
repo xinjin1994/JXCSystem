@@ -109,7 +109,7 @@ public class AccountDataService_Stub implements AccountDataService{
 		return null;
 	}
 
-	public PaymentPO findDraftPayment(String note) throws RemoteException {
+	public ReceiptPO findDraftPayment(String note) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

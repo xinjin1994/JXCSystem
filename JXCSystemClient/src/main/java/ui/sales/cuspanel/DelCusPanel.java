@@ -3,9 +3,9 @@ package ui.sales.cuspanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
-import ui.setting.FatherPanel;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
