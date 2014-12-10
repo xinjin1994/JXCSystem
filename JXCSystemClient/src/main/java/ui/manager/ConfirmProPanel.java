@@ -25,6 +25,8 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, DiscountVO discount) {
 		super(frame, url, controller, discount);
+		this.frame = frame;
+		this.uiController = controller;
 		addPro();
 		forwardButton.setActionCommand("discount");
 		
@@ -33,6 +35,8 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, VoucherVO voucher) {
 		super(frame, url, controller, voucher);
+		this.frame = frame;
+		this.uiController = controller;
 		addPro();
 		forwardButton.setActionCommand("voucher");
 		
@@ -41,6 +45,8 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, ProGiftVO gift) {
 		super(frame, url, controller, gift);
+		this.frame = frame;
+		this.uiController = controller;
 		addPro();
 		forwardButton.setActionCommand("gift");
 	}
@@ -71,12 +77,15 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("discount")){
 			addDiscount();
+			frame.remove(this);
 			resController.succeeded("成功添加一个折扣促销策略！", "manager");
 		}else if(e.getActionCommand().equals("voucher")) {
 			addVoucher();
+			frame.remove(this);
 			resController.succeeded("成功添加一个优惠券促销策略！", "manager");
 		}else if (e.getActionCommand().equals("gift")) {
 			addProGift();
+			frame.remove(this);
 			resController.succeeded("成功添加一个赠品促销策略！", "manager");
 		}
 	}
