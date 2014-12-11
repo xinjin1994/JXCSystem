@@ -64,6 +64,16 @@ public class InvoiceController implements InvoiceblService{
 		return null;
 	}
 
+	public ArrayList<InvoiceVO> show_pass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<InvoiceVO> show_refuse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 //	public String add(PatchPO po) {
 //		// TODO Auto-generated method stub
 //		return invoice.add(po);
