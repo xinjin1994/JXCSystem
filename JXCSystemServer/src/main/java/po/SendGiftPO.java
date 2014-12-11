@@ -25,7 +25,12 @@ public class SendGiftPO extends InvoicePO implements Serializable{
 	
 	
 	public SendGiftPO copy(){
-		return new SendGiftPO(commodity.copy(),number,note);
+		SendGiftPO po=new SendGiftPO(commodity.copy(),number,note);
+		po.setNote(this.getNote());
+		po.setTime(this.getTime());
+		po.setCondition(this.condition);
+		po.setInvoiceNote(this.getInvoiceNote());
+		return null;
 	}
 
 }

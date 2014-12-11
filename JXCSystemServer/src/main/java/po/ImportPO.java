@@ -25,7 +25,16 @@ public class ImportPO extends InvoicePO implements Serializable{
 	}
 	
 	public ImportPO copy(){
-		return new ImportPO(customer.copy(), importGoodList, ps, clerk, operator, wareHouse, total_money);
+		ArrayList<ImportGoodPO> array=new ArrayList<ImportGoodPO>();
+		for(int i=0;i<importGoodList.size();i++){
+			array.add(importGoodList.get(i).copy());
+		}
+		ImportPO po=new ImportPO(customer.copy(), array, ps, clerk, operator, wareHouse, total_money);
+		po.setNote(this.getNote());
+		po.setTime(this.getTime());
+		po.setCondition(this.condition);
+		po.setInvoiceNote(this.getInvoiceNote());
+		return po;
 	}
 
 	

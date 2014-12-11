@@ -28,5 +28,12 @@ public class WarnPO extends AllBillPO implements Serializable{
 	public int getWarnNumber(){
 		return warn_number;
 	}
+	
+	public WarnPO copy(){
+		WarnPO po=new WarnPO(commodity.copy(),warn_number);
+		po.setNote(this.getNote());
+		po.setTime(this.getTime());
+		return po;
+	}
 
 }

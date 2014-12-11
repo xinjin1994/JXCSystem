@@ -35,4 +35,8 @@ public class ImportGoodPO implements Serializable{
 		return ps;
 	}
 	
+	public ImportGoodPO copy(){
+		return new ImportGoodPO(commodity.copy(),number,price,money,ps);
+	}
+	
 }

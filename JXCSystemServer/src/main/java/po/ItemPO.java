@@ -25,4 +25,8 @@ public class ItemPO implements Serializable {
 		return ps;
 	}
 	
+	public ItemPO copy(){
+		return new ItemPO(item_name,money,ps);
+	}
+	
 }
