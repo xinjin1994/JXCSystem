@@ -47,12 +47,13 @@ public class FinancialController implements FinancialblService{
 		return res;
 	}
 
-	public ConditionVO operatingCondition_up(String time1, String time2) {
+	public ArrayList<ConditionVO> operatingCondition_up(String time1, String time2) {
 		// TODO Auto-generated method stub
 		OperatingConditionPO po=financial.operatingCondition(time1, time2);
-		ConditionVO vo=new ConditionVO();
-		vo.get=new ConditionGetVO(0, 0, 0, 0, 0, po.getIncome()-po.getDiscount());
-		vo.pay=new ConditionPayVO(0, 0, 0, po.getOutcome());
+		ConditionVO con=new ConditionVO(po.getIncome(),po.getGoodIncome(),po.getDiscount(),po.getOutcome(),po.getGoodOutcome());
+		
+		ArrayList<ConditionVO> vo=new ArrayList<ConditionVO>();
+		vo.add(con);
 		return vo;
 	}
 

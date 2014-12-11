@@ -6,10 +6,10 @@ public class DiscountVO {
 	
 	String time1;
 	String time2;
-	int start_money;
-	int end_money;
+	double start_money;
+	double end_money;
 //	int discount;
-	int discount_money;
+	double discount_money;
 	int level;
 	
 	public DiscountVO(DiscountPO po){
