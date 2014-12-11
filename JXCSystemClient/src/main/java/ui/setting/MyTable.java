@@ -49,6 +49,7 @@ public class MyTable extends JTable{
 	 */
 	private  void setPanel() {
 		tablePanel = new JPanel();
+		
 		tablePanel.setLayout(null);
 		tablePanel.setBounds(353,76,437 ,428);
 		tablePanel.removeAll();
@@ -104,7 +105,7 @@ public class MyTable extends JTable{
 	}
 	
 	/*
-	 * 设置表头，方法未用，可能以后会改==
+	 * 设置表头
 	 */
 	private void setHeader() {
 		tableHeader = table.getTableHeader();

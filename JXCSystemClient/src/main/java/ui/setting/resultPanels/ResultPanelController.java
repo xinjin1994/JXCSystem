@@ -35,7 +35,7 @@ public class ResultPanelController extends UIController implements ActionListene
 	 * @param controller  其他界面的controller
 	 */
 	/**
-	 * 
+	 * 返回主界面
 	 * @param controller
 	 * @param frame
 	 */
@@ -44,7 +44,11 @@ public class ResultPanelController extends UIController implements ActionListene
 		this.controller = controller;
 		this.frame = frame;
 	}
-	
+	/**
+	 * 返回到非主界面
+	 * @param frame
+	 * @param backPanel
+	 */
 	public ResultPanelController(MyFrame frame,FatherPanel backPanel) {
 		
 		textLabel = new MyLabel(0, 263, 800, 55);

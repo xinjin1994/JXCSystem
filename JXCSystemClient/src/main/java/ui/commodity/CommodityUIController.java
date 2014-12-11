@@ -25,13 +25,17 @@ public class CommodityUIController {
 	private MyButton []recButtons = new MyButton[]{gift,patch,warn};
 	private MyButton []invoiceButtons = new MyButton[]{approButton,disapButton};
 
-
+	private MyFrame frame;
+	private CommodityAllUIController uiController;
 	
-	public CommodityUIController(UIController uiController,MyFrame frame){
+	public CommodityUIController(CommodityAllUIController uiController,MyFrame frame){
+		this.uiController = uiController;
+		this.frame = frame;
 		this.commodityPanel = new CommodityPanel(frame, "Image/Commodity/commodity_背景.jpg",
 				uiController, this);
 		frame.setPanel(commodityPanel);
 		
+		uiController.setMainPanel(commodityPanel);
 	}
 	public void toComPanel() {
 		String images_ori_com[] = new String[]{"Image/Commodity/button/comManage/addCom.png",
