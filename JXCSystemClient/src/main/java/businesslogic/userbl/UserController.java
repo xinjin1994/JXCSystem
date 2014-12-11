@@ -44,4 +44,14 @@ public class UserController implements UserblService{
 		return null;
 	}
 
+	public String getUserNote() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public UserVO searchUser_Note(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

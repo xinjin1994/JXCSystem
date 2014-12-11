@@ -1,40 +1,48 @@
-package ui.account;
+package ui.account.accBasic;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
 import ui.setting.MyTextFieldBorder;
 import vo.AccountVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 查找账户对话框
  * @author ZYC
  * 
  */
 public class FindAccountPanel extends FatherPanel implements ActionListener{
+	private ColorFactory colors;
+	MyTable showTable;
 	ManagerAllUIController managerController;
 	AccountAllUIController accountController;
-	
+	AccountblService accountblService;
 	private MyButton exactForwardButton,fuzzyForwardButton;
 	private MyTextFieldBorder name,info;
 	private String nameString,infoString;
-	
+	private MyFrame frame;
 	private String type = "account";
 	
 	public FindAccountPanel(MyFrame frame,String url,
-			AccountAllUIController uiController){
-		super(frame,url,uiController);
-		this.accountController =uiController;
+			AccountAllUIController accountController){
+		super(frame,url,accountController);
+		colors = new ColorFactory();
+		this.frame = frame;
+		this.accountController =accountController;
 		this.repaint();
-		
-		uiController.setBack_second(this,150,130);
+		accountblService = new AccountController();
+		accountController.setBack_second(this,150,130);
 		init();
 	}
 	
@@ -89,6 +97,17 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		this.add(info);
 		
 	}
+	
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		frame.remove(this);
+		frame.add(showTable.tablePanel);
+		accountController.addMainPanel();
+		frame.repaint();
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exactForwardButton){
 			nameString = name.getText();
@@ -104,11 +123,20 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 			infoString = info.getText();
 			info.setText("");
 			//返回主界面列表显示所有可能account
+			ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
+			ArrayList <String> infoArray = new ArrayList<String>();
+			infoArray.add("账户名称;账户余额");
+			/*for(int i=0; i<fuzzyAccVO.size();i++){
+				String infoOfArray = fuzzyAccVO.get(i).name+";"+fuzzyAccVO.get(i).balance;
+				infoArray.add(infoOfArray);
+			}*/
+			setTable(infoArray);
 		}
 		
 	}
 	private AccountVO getFoundAcc() {
-		AccountVO foundAcc = new AccountVO("ff", 123);//从bl层获得的Account
+		AccountVO foundAcc = accountblService.searchAccurateAccount_up(nameString);
+		//从bl层获得的Account
 		return foundAcc;
 	}
 }

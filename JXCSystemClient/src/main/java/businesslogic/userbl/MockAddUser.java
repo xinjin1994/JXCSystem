@@ -42,4 +42,9 @@ public class MockAddUser implements UserDataService{
 		return null;
 	}
 
+	public String getNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

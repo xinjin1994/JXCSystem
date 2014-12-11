@@ -25,5 +25,9 @@ public class TransferPO implements Serializable {
 	public String getPs(){
 		return ps;
 	}
+	
+	public TransferPO copy(){
+		return new TransferPO(account,money,ps);
+	}
 
 }

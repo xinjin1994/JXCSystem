@@ -1,10 +1,11 @@
-package ui.account;
+package ui.account.accBasic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
@@ -90,7 +91,7 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 			balance = Double.parseDouble(priceString);
 			
 			newAcc = new AccountVO(nameString, balance);
-			System.out.println(newAcc.name);
+//			System.out.println(newAcc.name);
 			
 			name.setText("");
 			price.setText("");

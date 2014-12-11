@@ -1,10 +1,10 @@
-package ui.account;
+package ui.account.accBasic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
-import ui.UIController;
+import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
@@ -12,6 +12,8 @@ import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
 import vo.AccountVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 
  * @author ZYC
@@ -20,9 +22,9 @@ import vo.AccountVO;
 public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 	ManagerAllUIController managerController;
 	AccountAllUIController accountController;
-
+	AccountblService accountblService;
 	private MyButton forwardButton;
-	AccountVO acc;
+	AccountVO acc,newAcc;
 	private MyTextFieldBorder formerName,changeName;
 	
 	private String type = "account";
@@ -31,7 +33,7 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 		super(frame,url,uiController);
 		this.accountController = uiController;
 		this.repaint();
-		
+		accountblService = new AccountController();
 		uiController.setBack_second(this,199,141);
 
 		init();
@@ -74,12 +76,11 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			
 			//这里根据原有account从下层传回余额
-			acc = new AccountVO(changeName.getText(),0);
-		//	acc.name = "kl";
-		//	acc.name = changeName.getText();
-		//	acc.balance = 0;
+			acc = accountblService.searchAccurateAccount_up(formerName.getText());
+			newAcc = new AccountVO(changeName.getText(),acc.balance);
+			//acc = new AccountVO(changeName.getText(),0);
 			if(type.equals("account")){
-				accountController.confirmAcc(acc, "change");
+				accountController.confirmAcc(acc, "change",newAcc);
 			}else if(type.equals("manager")){
 				managerController.confirmAcc(acc, "change");
 			}

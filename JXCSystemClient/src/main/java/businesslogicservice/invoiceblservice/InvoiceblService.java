@@ -13,6 +13,11 @@ public interface InvoiceblService {
 	//显示所有待审批单据
 	public ArrayList<InvoiceVO> show_up();
 	
+	//显示所有审批通过单据
+	public ArrayList<InvoiceVO> show_pass();
+	//显示所有审批拒绝的单据
+	public ArrayList<InvoiceVO> show_refuse();
+	
 	//通过审批
 	public int pass_up(InvoiceVO vo);
 	public int pass_up(ArrayList<InvoiceVO> vo);

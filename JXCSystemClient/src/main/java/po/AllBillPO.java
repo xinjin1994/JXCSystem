@@ -2,125 +2,47 @@ package po;
 
 import java.io.Serializable;
 
+
+//这个是所有单据PO的父类
 public class AllBillPO implements Serializable{
+
+	String time;
+	String note;
+	int doc_type;    //1代表SendGiftPO，                     2代表ImportPO，                3代表Import_Return，         4代表ExportPO，
+					 //5代表Export_ReturnPO，   6代表PatchPO，                    7代表ReceiptPO，                       8代表PaymentPO
+					 //9代表WarnPO           10代表SystemlogPO
 	
-	ImportPO importList;
-	Import_ReturnPO import_ReturnList; 
-	ExportPO exportList;
-	Export_ReturnPO export_ReturnList;
-	PaymentPO paymentList;
-	ReceiptPO receiptList;
-	PatchPO patch;
-	CommodityPO gift;
-	int note;         //1代表CommodityPO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
-					  //5代表Export_Return， 6代表PatchPO， 7代表ReceiptPO， 8代表PaymentPO
-
-    public AllBillPO(ImportPO importList, Import_ReturnPO import_ReturnList,
-			ExportPO exportList, Export_ReturnPO export_ReturnList,
-			PaymentPO paymentList, ReceiptPO receiptList, PatchPO patch, CommodityPO gift) {
-		this.importList = importList;
-		this.import_ReturnList = import_ReturnList;
-		this.exportList = exportList;
-		this.export_ReturnList = export_ReturnList;
-		this.paymentList = paymentList;
-		this.receiptList = receiptList;
-		this.patch=patch;
-		this.gift=gift;
-		note=0;
+	public String getTime(){
+		return time;
 	}
-    
-    public AllBillPO(ImportPO importList){
-    	note=2;
-    	this.importList=importList;
-    }
-    
-    public AllBillPO(ExportPO exportList){
-    	note=4;
-    	this.exportList=exportList;
-    }
-    
-    public AllBillPO(Import_ReturnPO import_ReturnList){
-    	note=3;
-    	this.import_ReturnList=import_ReturnList;
-    }
-    
-    public AllBillPO(Export_ReturnPO export_ReturnList){
-    	note=5;
-    	this.export_ReturnList=export_ReturnList;
-    }
-    
-    public AllBillPO(ReceiptPO receiptList){
-    	note=7;
-    	this.receiptList=receiptList;
-    }
-    
-    public AllBillPO(PaymentPO paymentList){
-    	note=8;
-    	this.paymentList=paymentList;
-    }
-    public AllBillPO(PatchPO patch){
-    	note=6;
-    	this.patch=patch;
-    }
-    public AllBillPO(CommodityPO gift){
-    	note=1;
-    	this.gift=gift;
-    }
-    
-    public ImportPO getImportList() {
-		return importList;
+	public String getNote(){
+		return note;
 	}
-
-	public Import_ReturnPO getImport_ReturnList() {
-		return import_ReturnList;
-	}
-
-	public ExportPO getExportList() {
-		return exportList;
-	}
-
-	public Export_ReturnPO getExport_ReturnList() {
-		return export_ReturnList;
-	}
-
-	public PaymentPO getPaymentList() {
-		return paymentList;
-	}
-
-	public ReceiptPO getReceiptList() {
-		return receiptList;
+	public int getDocType(){
+		return doc_type;
 	}
 	
-	public PatchPO getPatch(){
-		return patch;
+	public void setTime(String time){
+		this.time=time;
 	}
-	
-	public CommodityPO getGift(){
-		return gift;
+	public void setNote(String note){
+		this.note=note;
 	}
 	
 	public AllBillPO copy(){
-		AllBillPO po=new AllBillPO(importList.copy(), import_ReturnList.copy(),exportList.copy(),
-				export_ReturnList.copy(),paymentList.copy(), receiptList.copy(), patch.copy(),
-				gift.copy());
-		po.note=note;
-		return po;
-	}
-
-	public int getNote() {
-		// TODO Auto-generated method stub
-		return note;
+		switch(doc_type){
+		case 1:return (AllBillPO) ((SendGiftPO) this).copy();
+		case 2:return (AllBillPO) ((ImportPO) this).copy();
+		case 3:return (AllBillPO) ((Import_ReturnPO) this).copy();
+		case 4:return (AllBillPO) ((ExportPO) this).copy();
+		case 5:return (AllBillPO) ((Export_ReturnPO) this).copy();
+		case 6:return (AllBillPO) ((PatchPO) this).copy();
+		case 7:return (AllBillPO) ((ReceiptPO) this).copy();
+		case 8:return (AllBillPO) ((PaymentPO) this).copy();
+		case 9:return (AllBillPO) ((WarnPO) this).copy();
+		case 10:return (AllBillPO) ((SystemlogPO) this).copy();
+		}
+		return null;
 	}
 	
-//	public String getTime(){
-//		
-//		switch(note){
-//		case 1:  
-//		
-//		
-//		
-//		}
-//	}
-	
-
 }

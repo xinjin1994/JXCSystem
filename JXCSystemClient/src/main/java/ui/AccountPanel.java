@@ -49,7 +49,6 @@ public class AccountPanel extends FatherPanel{
 
 		}
 
-
 	public void addButton() {
 		FirstButtonListener listener = new FirstButtonListener();
 		for(int i = 0 ;i < buttons.length;i++){

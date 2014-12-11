@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-public class WarnPO extends DocumentPO implements Serializable{
+public class WarnPO extends AllBillPO implements Serializable{
 	
 	public CommodityPO commodity;
 	public int warn_number;
@@ -27,6 +27,13 @@ public class WarnPO extends DocumentPO implements Serializable{
 	
 	public int getWarnNumber(){
 		return warn_number;
+	}
+	
+	public WarnPO copy(){
+		WarnPO po=new WarnPO(commodity.copy(),warn_number);
+		po.setNote(this.getNote());
+		po.setTime(this.getTime());
+		return po;
 	}
 
 }

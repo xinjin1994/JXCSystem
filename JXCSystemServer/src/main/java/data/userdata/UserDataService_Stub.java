@@ -17,6 +17,7 @@ import dataservice.userdataservice.UserDataService;
 public class UserDataService_Stub extends UnicastRemoteObject implements UserDataService{
 	
 	ArrayList<UserPO> userList=new ArrayList<UserPO>();
+	int user_note=0;
 	
 	public UserDataService_Stub() throws RemoteException{
 		this.readUserList();
@@ -67,6 +68,50 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		
 	}
 	
+	public void writeUserNote(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("user_note.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(user_note);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void readUserNote(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("user_note.out");
+			ois=new ObjectInputStream(fis);
+			user_note=(Integer) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
 	
 	
 	public boolean addUser(UserPO po) {
@@ -95,6 +140,11 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	}
 
 	public UserPO login(UserPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getNote() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -16,6 +16,7 @@ import po.PaymentPO;
 import po.SendGiftPO;
 import po.SortPO;
 import po.WarnPO;
+import data.accountdata.AccountDataService_Stub;
 import dataservice.commoditydataservice.CommodityDataService;
 
 public class CommodityDataService_Stub extends UnicastRemoteObject implements CommodityDataService{
@@ -25,6 +26,10 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	ArrayList<CommodityPO> giftList=new ArrayList<CommodityPO>();
 	ArrayList<PatchPO> draftPatchList=new ArrayList<PatchPO>();
 	ArrayList<SendGiftPO> sendGiftList=new ArrayList<SendGiftPO>();
+	int comNote=0;
+	int sortNote=0;
+	int sendNote=0;
+	
 //	ArrayList<CommodityPO> sto=new ArrayList<CommodityPO>();
 	
 	public CommodityDataService_Stub() throws RemoteException {
@@ -34,6 +39,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		this.readGiftList();
 		this.readDraftPatchList();
 		this.readSendGiftList();
+		this.readComNote();
+		this.readSortNote();
+		this.readSendNote();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -263,6 +271,143 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		} 
 		
 	}
+	
+	
+	public void writeComNote(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("comNote.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(comNote);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readComNote(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("comNote.out");
+			ois=new ObjectInputStream(fis);
+			comNote=(Integer) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void writeSortNote(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("sortNote.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(sortNote);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readSortNote(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("sortNote.out");
+			ois=new ObjectInputStream(fis);
+			sortNote=(Integer) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void writeSendNote(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("sendNote.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(sendNote);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readSendNote(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("sendNote.out");
+			ois=new ObjectInputStream(fis);
+			sendNote=(Integer) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
 	
 	/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑数据序列化以及构造方法↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 	
@@ -497,8 +642,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return sort;
 	}
 
-	public boolean updateSort_Mov(SortPO po1, SortPO po2)
-			throws RemoteException {
+	public boolean updateSort_Mov(SortPO po1, SortPO po2) throws RemoteException {
 		// TODO Auto-generated method stub
 		SortPO po3=po1.copy();
 		SortPO po4=findSort_true(po2.getName());
@@ -566,6 +710,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean addPatch(PatchPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		po.setTime(AccountDataService_Stub.getNowTime());
+		patchList.add(po.copy());
 		return false;
 	}
 

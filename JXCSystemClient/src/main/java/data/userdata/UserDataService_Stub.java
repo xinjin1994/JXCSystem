@@ -30,12 +30,12 @@ public class UserDataService_Stub implements UserDataService{
 	}
 
 	public UserPO getUser(String name) {
-		return new UserPO(n, p, d);
+		return new UserPO(n, p, d,"note");
 	}
 
 	public ArrayList<UserPO> show() {
 		ArrayList<UserPO> array=new ArrayList<UserPO>();
-		array.add(new UserPO("name","123",1));
+		array.add(new UserPO("name","123",1,"note"));
 		return array;
 	}
 
@@ -49,6 +49,11 @@ public class UserDataService_Stub implements UserDataService{
 	}
 
 	public UserPO login(UserPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getNote() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

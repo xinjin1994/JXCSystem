@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import ui.AccountPanel;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
 import ui.setting.SecondPanel;
 
 public class AccountUIController {
@@ -40,6 +41,7 @@ public class AccountUIController {
 		frame.setPanel(accountPanel);
 		uiController.setMainPanel(accountPanel);
 	}
+	
 	public void toAccPanel() {
 		accountSecondPanel.removeAll();
 		AccButtonListener accListener = new AccButtonListener();

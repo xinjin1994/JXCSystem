@@ -196,7 +196,13 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 	}
 
 	public boolean addAllBill(AllBillPO po) {
-		allBillList.add(po.copy());
+		switch(po.getDocType()){
+		
+			case 1:
+		
+		
+		}
+//		allBillList.add(po.copy());
 		return true;
 	}
 

@@ -35,5 +35,9 @@ public class ExportGoodPO implements Serializable{
 		return ps;
 	}
 	
+	public ExportGoodPO copy(){
+		return new ExportGoodPO(commodity.copy(),number,price,money,ps);
+	}
+	
 
 }

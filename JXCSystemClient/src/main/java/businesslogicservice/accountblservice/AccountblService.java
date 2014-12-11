@@ -13,6 +13,7 @@ import vo.UserVO;
 //1 账户名称重复
 //2 账户名不存在
 //3 账户中仍存在余额，不能删除
+//4 客户不存在
 
 public interface AccountblService {
 	
@@ -32,8 +33,8 @@ public interface AccountblService {
 	public ArrayList<AccountVO> searchFuzzyAccount_up(String word);
 	
 	//精确查找账户
-	public ArrayList<AccountVO> searchAccurateAccount_up(AccountVO vo);
-
+	public AccountVO searchAccurateAccount_up(String name);
+	
 	//添加收款单
 	public int addReceipt_up(GetVO vo);
 	//添加草稿收款单
@@ -65,8 +66,8 @@ public interface AccountblService {
 	public String getPaymentNote_up();
 	
 	//计算收付款总额
-	public int calTotalMoney_up(GetVO vo);
-	public int calTotalMoney_up(PayVO vo);
+	public double calTotalMoney_up(GetVO vo);
+	public double calTotalMoney_up(PayVO vo);
 	
 	//获得当前登陆用户
 	public UserVO getNowUser_up();
