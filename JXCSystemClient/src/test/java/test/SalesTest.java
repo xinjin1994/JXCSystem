@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import vo.CustomerVO;
-import vo.ExportMenuVO;
-import vo.ImportMenuVO;
+import vo.bill.ExportMenuVO;
+import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.MockAddCustomer;
 import businesslogic.salesbl.MockAddExport;
 import businesslogic.salesbl.MockAddExport_Return;

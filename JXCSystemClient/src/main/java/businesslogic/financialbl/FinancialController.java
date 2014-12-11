@@ -9,14 +9,15 @@ import po.Import_ReturnPO;
 import po.OperatingConditionPO;
 import po.SaleListPO;
 import po.SendGiftPO;
-import vo.AllBillConditionVO;
-import vo.AllBillVO;
+//import vo.AllBillConditionVO;
+//import vo.AllBillVO;
 import vo.ConditionVO;
-import vo.ExportMenuVO;
-import vo.ImportMenuVO;
+//import vo.ExportMenuVO;
+//import vo.ImportMenuVO;
 import vo.SaleListConditionVO;
 import vo.SalesDetailVO;
 import vo.SendGiftVO;
+import vo.bill.*;
 import businesslogicservice.financialblservice.FinancialblService;
 
 public class FinancialController implements FinancialblService{
@@ -48,7 +49,7 @@ public class FinancialController implements FinancialblService{
 			switch(array.get(i).getDocType()){
 			
 			case 1: SendGiftPO gift=(SendGiftPO) array.get(i);
-					vo=new SendGiftVO(gift.getNote(), gift.getTime(),null,gift.getCommodity().getName(),gift.getCommodity().getType(),gift.getNumber(),gift.getInvoiceNote()); 
+					vo= new SendGiftVO(gift.getNote(), gift.getTime(),null,gift.getCommodity().getName(),gift.getCommodity().getType(),gift.getNumber(),gift.getInvoiceNote()); 
 					break;
 			
 			case 2: ImportPO importpo=(ImportPO) array.get(i);

@@ -1,4 +1,6 @@
-package vo;
+package vo.promotion;
+
+import vo.CommodityVO;
 
 public class ProGiftVO {
 

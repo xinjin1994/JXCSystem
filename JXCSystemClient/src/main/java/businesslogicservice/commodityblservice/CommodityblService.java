@@ -3,10 +3,10 @@ package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
 
 import vo.CommodityVO;
-import vo.PatchVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
+import vo.bill.PatchVO;
 
 //int错误类型：
 //-1 未知错误
@@ -39,7 +39,7 @@ public interface CommodityblService {
 	//模糊查找商品
 	public ArrayList<CommodityVO> searchFuzzyCommodity_up(String word);
 	//精确查找商品
-	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo);
+	public CommodityVO searchAccurateCommodity_up(String name);
 
 	//添加分类
 	public int addSort_up(SortVO vo1, SortVO vo2);

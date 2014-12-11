@@ -2,11 +2,11 @@ package businesslogicservice.financialblservice;
 
 import java.util.ArrayList;
 
-import vo.AllBillConditionVO;
-import vo.AllBillVO;
 import vo.ConditionVO;
 import vo.SaleListConditionVO;
 import vo.SalesDetailVO;
+import vo.bill.AllBillConditionVO;
+import vo.bill.AllBillVO;
 
 public interface FinancialblService {
 	

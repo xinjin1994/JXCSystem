@@ -2,33 +2,22 @@ package ui.manager;
 
 import ui.FatherPanel;
 import ui.UIController;
-import ui.account.AccountAllUIController;
 import ui.account.AccountDetailPanel;
 import ui.account.accBasic.AddAccountPanel;
 import ui.account.accBasic.ChangeAccountPanel;
 import ui.account.accBasic.ConfirmAccPanel;
 import ui.account.accBasic.DelAccountPanel;
 import ui.account.accBasic.FindAccountPanel;
-import ui.account.ini.ConfirmIniComPanel;
-import ui.account.ini.ConfirmIniCusPanel;
-import ui.account.ini.IniAccPanel;
-import ui.account.ini.IniComPanel;
-import ui.account.ini.IniCusPanel;
 import ui.account.list.AllBillsPanel;
 import ui.account.list.OpeConPanel;
 import ui.account.list.SalesListPanel;
-import ui.account.payRe.AddPaymentPanel;
-import ui.account.payRe.AddReceiptPanel;
-import ui.account.payRe.ConfirmPaymentPanel;
-import ui.account.payRe.ConfirmReceiptPanel;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
-import ui.ManagerPanel;
 import vo.AccountVO;
-import vo.DiscountVO;
-import vo.ProGiftVO;
-import vo.VoucherVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
 
 public class ManagerAllUIController extends UIController{
 	private MyFrame frame;

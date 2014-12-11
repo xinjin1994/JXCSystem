@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
-import vo.DiscountVO;
+import vo.promotion.DiscountVO;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.promotionblservice.PromotionblService;
 import data.promotiondata.PromotionDataService_Stub;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import vo.CommodityVO;
 import vo.CustomerVO;
-import vo.ExportMenuVO;
-import vo.ImportMenuVO;
+import vo.bill.ExportMenuVO;
+import vo.bill.ImportMenuVO;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class SalesController implements SalesblService{

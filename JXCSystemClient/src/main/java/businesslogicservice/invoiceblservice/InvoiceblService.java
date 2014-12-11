@@ -2,7 +2,7 @@ package businesslogicservice.invoiceblservice;
 
 import java.util.ArrayList;
 
-import vo.InvoiceVO;
+import vo.bill.InvoiceVO;
 
 //int错误类型：
 //-1 未知错误

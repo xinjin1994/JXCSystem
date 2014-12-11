@@ -1,4 +1,4 @@
-package vo;
+package vo.promotion;
 
 import po.DiscountPO;
 
