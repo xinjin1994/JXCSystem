@@ -37,13 +37,13 @@ public class DiscountVO {
 	public String getEndTime(){
 		return time2;
 	}
-	public int getStartMoney(){
+	public double getStartMoney(){
 		return start_money;
 	}
-	public int getEndMoney(){
+	public double getEndMoney(){
 		return end_money;
 	}
-	public int getDiscontMoney(){
+	public double getDiscontMoney(){
 		return discount_money;
 	}
 	public int getLevel(){
