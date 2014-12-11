@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SystemlogPO extends DocumentPO implements Serializable{
+public class SystemlogPO extends AllBillPO implements Serializable{
 
 	public String operator;//����
 	public String old_note;
