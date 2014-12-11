@@ -13,7 +13,7 @@ import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.MyTextFieldBorder;
-import vo.AllBillVO;
+import vo.bill.AllBillVO;
 import businesslogic.financialbl.FinancialController;
 import businesslogicservice.financialblservice.FinancialblService;
 /**

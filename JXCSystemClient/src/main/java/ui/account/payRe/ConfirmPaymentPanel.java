@@ -11,7 +11,7 @@ import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.resultPanels.ResultPanelController;
-import vo.PayVO;
+import vo.bill.PayVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
 

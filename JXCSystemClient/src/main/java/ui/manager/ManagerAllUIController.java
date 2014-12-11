@@ -15,9 +15,9 @@ import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
 import vo.AccountVO;
-import vo.DiscountVO;
-import vo.ProGiftVO;
-import vo.VoucherVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
 
 public class ManagerAllUIController extends UIController{
 	private MyFrame frame;

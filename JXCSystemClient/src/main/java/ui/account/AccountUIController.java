@@ -11,7 +11,7 @@ import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SecondPanel;
-import vo.InvoiceVO;
+import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 

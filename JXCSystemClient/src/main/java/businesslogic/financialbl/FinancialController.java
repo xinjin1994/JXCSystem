@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import po.AllBillPO;
 import po.OperatingConditionPO;
 import po.SaleListPO;
-import vo.AllBillConditionVO;
-import vo.AllBillVO;
 import vo.ConditionGetVO;
 import vo.ConditionPayVO;
 import vo.ConditionVO;
 import vo.SaleListConditionVO;
 import vo.SalesDetailVO;
+import vo.bill.AllBillConditionVO;
+import vo.bill.AllBillVO;
 import businesslogicservice.financialblservice.FinancialblService;
 
 public class FinancialController implements FinancialblService{

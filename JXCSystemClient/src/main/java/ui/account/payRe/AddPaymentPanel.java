@@ -20,8 +20,8 @@ import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
-import vo.ItemList;
-import vo.PayVO;
+import vo.bill.ItemList;
+import vo.bill.PayVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
 /**

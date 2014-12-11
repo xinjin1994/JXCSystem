@@ -26,8 +26,8 @@ import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
 import vo.AccountVO;
-import vo.GetVO;
-import vo.PayVO;
+import vo.bill.GetVO;
+import vo.bill.PayVO;
 
 public class AccountAllUIController extends UIController{
 	private MyFrame frame;

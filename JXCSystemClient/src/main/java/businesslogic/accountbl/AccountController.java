@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import vo.AccountVO;
 import vo.CustomerVO;
-import vo.GetVO;
-import vo.PayVO;
 import vo.UserVO;
+import vo.bill.GetVO;
+import vo.bill.PayVO;
 
 public class AccountController implements AccountblService{
 	public Account account=new Account();

@@ -3,10 +3,10 @@ package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
 
 import vo.CommodityVO;
-import vo.PatchVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
+import vo.bill.PatchVO;
 
 //int错误类型：
 //-1 未知错误

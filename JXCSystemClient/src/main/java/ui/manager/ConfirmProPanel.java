@@ -7,9 +7,9 @@ import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.resultPanels.ResultPanelController;
-import vo.DiscountVO;
-import vo.ProGiftVO;
-import vo.VoucherVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
 import businesslogic.promotionbl.PromotionController;
 import businesslogicservice.promotionblservice.PromotionblService;
 

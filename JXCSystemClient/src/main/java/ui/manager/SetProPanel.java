@@ -18,9 +18,9 @@ import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldTrans;
 import vo.CommodityVO;
-import vo.DiscountVO;
-import vo.ProGiftVO;
-import vo.VoucherVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
 

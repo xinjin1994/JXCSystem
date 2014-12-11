@@ -2,9 +2,9 @@ package businesslogicservice.promotionblservice;
 
 import java.util.ArrayList;
 
-import vo.DiscountVO;
-import vo.ProGiftVO;
-import vo.VoucherVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
 
 //-1 未知错误
 //1  商品不存在

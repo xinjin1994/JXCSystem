@@ -2,9 +2,9 @@ package businesslogic.promotionbl;
 
 import java.util.ArrayList;
 
-import vo.DiscountVO;
-import vo.ProGiftVO;
-import vo.VoucherVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
 import businesslogicservice.promotionblservice.PromotionblService;
 
 public class PromotionController implements PromotionblService{

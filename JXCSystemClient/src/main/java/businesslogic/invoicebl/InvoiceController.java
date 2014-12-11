@@ -10,7 +10,7 @@ import po.InvoicePO;
 import po.PatchPO;
 import po.PaymentPO;
 import po.ReceiptPO;
-import vo.InvoiceVO;
+import vo.bill.InvoiceVO;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 
 public class InvoiceController implements InvoiceblService{

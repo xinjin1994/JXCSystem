@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import po.CommodityPO;
 import po.SortPO;
 import vo.CommodityVO;
-import vo.PatchVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
+import vo.bill.PatchVO;
 import businesslogicservice.commodityblservice.CommodityblService;
 
 public class CommodityController implements CommodityblService{

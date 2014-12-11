@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import vo.AccountVO;
 import vo.CustomerVO;
-import vo.GetVO;
-import vo.PayVO;
 import vo.UserVO;
+import vo.bill.GetVO;
+import vo.bill.PayVO;
 
 //int错误类型：
 //-1 未知错误
