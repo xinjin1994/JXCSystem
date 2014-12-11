@@ -28,13 +28,5 @@ public class SystemlogPO extends AllBillPO implements Serializable{
 	public String getOldTime() {
 		return time;
 	}
-	
-	public SystemlogPO copy(SystemlogPO po){
-		Date date = new Date(); 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String time = dateFormat.format( date ); //这一段要不要写在这里啊啊啊啊啊啊啊啊
-		
-		return new SystemlogPO(po.getOperation(),time);
-		
-	}
+
 }

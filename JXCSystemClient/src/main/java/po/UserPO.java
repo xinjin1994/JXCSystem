@@ -8,15 +8,14 @@ public class UserPO implements Serializable{
 	int duty;//ְ��
 	String note;
 	
-	public UserPO(String n,String p,int d,String note) {
+	public UserPO(String n,String p,int d) {
 		name = n;
 		password = p;
 		duty = d;
-		this.note=note;
 	}
 	
 	public UserPO copy(){
-		return new UserPO(name, password, duty,note);
+		return new UserPO(name, password, duty);
 	}
 	
 	public String getName() {

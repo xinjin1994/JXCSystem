@@ -2,15 +2,12 @@ package po;
 
 import java.io.Serializable;
 
-import vo.CommodityVO;
-import vo.StockVO;
-
 public class CommodityPO implements Serializable{
 	String note;
 	String name;//��Ʒ��
 	String type;//�ͺ�
-	int in_price;//���
-	int out_price;//�ۼ�
+	public int in_price;//���
+	public int out_price;//�ۼ�
 	public int recent_in_price;//���һ�ν��
 	public int recent_out_price;//���һ���ۼ�
 	public int number;//��Ʒ����
@@ -65,9 +62,9 @@ public class CommodityPO implements Serializable{
 		return po;
 	}
 	
-	public CommodityVO toVO(){
-		return new CommodityVO(note,name,type,number,in_price,out_price,recent_in_price,recent_out_price);
-	}
+//	public CommodityVO toVO(){
+//		return new CommodityVO(note,name,type,number,in_price,out_price,recent_in_price,recent_out_price);
+//	}
 	
 	public boolean getGift(){
 		return false;

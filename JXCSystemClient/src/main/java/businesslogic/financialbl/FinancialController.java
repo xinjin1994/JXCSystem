@@ -40,15 +40,8 @@ public class FinancialController implements FinancialblService{
 		int i=0;
 		for(i=0;i<array.size();i++){
 			AllBillVO vo=new AllBillVO();
-			vo.importList =array.get(i).getImportList();
-			vo.import_ReturnList = array.get(i).getImport_ReturnList();
-			vo.exportList = array.get(i).getExportList();
-			vo.export_ReturnList =array.get(i).getExport_ReturnList();
-			vo.paymentList =array.get(i).getPaymentList();
-			vo.receiptList =array.get(i).getReceiptList();
-			vo.patch=array.get(i).getPatch();
-			vo.gift=array.get(i).getGift();
-			vo.note=array.get(i).getNote();
+			array.get(i).g
+			
 			res.add(vo);
 		}
 		return res;

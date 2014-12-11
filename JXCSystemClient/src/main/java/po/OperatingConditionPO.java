@@ -19,7 +19,7 @@ public class OperatingConditionPO implements Serializable{
 		this.sale_outcome=sale_outcome;
 		this.good_outcome=good_outcome;
 		this.discount = discount;
-		profit=sale_income+good_income-sale_outcome-good_outcome;
+		profit=sale_income+good_income-sale_outcome-good_outcome-discount;
 	}
 	
 	public OperatingConditionPO copy(){

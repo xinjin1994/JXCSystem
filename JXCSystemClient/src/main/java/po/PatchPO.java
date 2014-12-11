@@ -14,7 +14,12 @@ public class PatchPO extends InvoicePO implements Serializable{
 	}
 	
 	public PatchPO copy(){
-		return new PatchPO(commodity.copy(), number);
+		PatchPO po=new PatchPO(commodity.copy(), number);
+		po.setNote(this.getNote());
+		po.setTime(this.getTime());
+		po.setCondition(this.condition);
+		po.setInvoiceNote(this.getInvoiceNote());
+		return po;
 	}
 
 	

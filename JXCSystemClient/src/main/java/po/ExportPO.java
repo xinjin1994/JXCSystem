@@ -34,8 +34,17 @@ public class ExportPO extends InvoicePO implements Serializable{
 	
 	
 	public ExportPO copy(){
-		return new ExportPO(customer.copy(), exportGoodList, ps, clerk, operator, wareHouse,
+		ArrayList<ExportGoodPO> array=new ArrayList<ExportGoodPO>();
+		for(int i=0;i<exportGoodList.size();i++){
+			array.add(exportGoodList.get(i).copy());
+		}
+		ExportPO po=new ExportPO(customer.copy(), array, ps, clerk, operator, wareHouse,
 				total_money_before, total_money_after, discount, voucher);
+		po.setNote(this.getNote());
+		po.setTime(this.getTime());
+		po.setCondition(this.condition);
+		po.setInvoiceNote(this.getInvoiceNote());
+		return po;
 	}
 	
 	

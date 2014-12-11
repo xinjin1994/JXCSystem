@@ -21,32 +21,18 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 	}
 	
 	public ReceiptPO copy(){
-		int i=0;
 		ArrayList<TransferPO> array=new ArrayList<TransferPO>();
-		for(i=0;i<transfer.size();i++){
-			array.add(new TransferPO(transfer.get(i).getAccount(),transfer.get(i).getMoney(),transfer.get(i).getPs()));
+		for(int i=0;i<transfer.size();i++){
+			array.add(transfer.get(i).copy());
 		}
 		ReceiptPO po=new ReceiptPO(operator,customer.copy(),array);
 		po.setNote(this.getNote());
 		po.setTime(this.getTime());
+		po.setCondition(this.condition);
+		po.setInvoiceNote(this.getInvoiceNote());
 		return po;
 	}
-	
-//	public ReceiptPO(GetVO vo){
-//		this.setNote(vo.id);
-//		this.operator=vo.operator;
-//		this.name=vo.cusName;
-//		account=new String[vo.transferList.length];
-//		ps=new String[vo.transferList.length];
-//		price=new int[vo.transferList.length];
-//		int i=0;
-//		for(i=0;i<vo.transferList.length;i++){
-//			account[i]=vo.transferList[i].bankAccount;
-//			ps[i]=vo.transferList[i].remark;
-//			price[i]=(int) vo.transferList[i].transferValue;
-//		}
-//		total_money=(int) vo.total;
-//	}
+
 	
 	public String getOperator() {
 		return operator;

@@ -29,4 +29,20 @@ public class AllBillPO implements Serializable{
 		this.note=note;
 	}
 	
+	public AllBillPO copy(){
+		switch(doc_type){
+		case 1:return (AllBillPO) ((SendGiftPO) this).copy();
+		case 2:return (AllBillPO) ((ImportPO) this).copy();
+		case 3:return (AllBillPO) ((Import_ReturnPO) this).copy();
+		case 4:return (AllBillPO) ((ExportPO) this).copy();
+		case 5:return (AllBillPO) ((Export_ReturnPO) this).copy();
+		case 6:return (AllBillPO) ((PatchPO) this).copy();
+		case 7:return (AllBillPO) ((ReceiptPO) this).copy();
+		case 8:return (AllBillPO) ((PaymentPO) this).copy();
+		case 9:return (AllBillPO) ((WarnPO) this).copy();
+		case 10:return (AllBillPO) ((SystemlogPO) this).copy();
+		}
+		return null;
+	}
+	
 }
