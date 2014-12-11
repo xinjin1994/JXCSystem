@@ -42,9 +42,11 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		ArrayList<CommodityPO> po=commodity.searchCommodity(word);
 		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
+		CommodityVO com;
 		int i=0;
 		for(i=0;i<po.size();i++){
-			vo.add(po.get(i).toVO());
+			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			vo.add(com);
 		}
 		
 		return vo;
@@ -69,9 +71,11 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		ArrayList<CommodityPO> po=commodity.Examine(time1, time2);
 		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
+		CommodityVO com;
 		int i=0;
 		for(i=0;i<po.size();i++){
-			vo.add(po.get(i).toVO());
+			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			vo.add(com);
 		}
 		return vo;
 	}

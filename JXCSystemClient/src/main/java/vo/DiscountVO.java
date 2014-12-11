@@ -11,6 +11,7 @@ public class DiscountVO {
 //	int discount;
 	public double discount_money;
 	public int level;
+
 	
 	public DiscountVO(DiscountPO po){
 		this.time1=po.getStartTime();
