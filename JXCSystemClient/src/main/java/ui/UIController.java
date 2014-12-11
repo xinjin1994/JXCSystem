@@ -36,10 +36,10 @@ public class UIController {
 	public UIController(int i){
 		this.frame = new MyFrame();
 
-//	this.AccountPanel();
-		this.AccountPanel();
+//	  	this.AccountPanel();
+//		this.AccountPanel();
 
-//	this.ManagerPanel();
+	this.ManagerPanel();
 	//	this.SalesManagerPanel();
 //		this.AdminPanel();
 

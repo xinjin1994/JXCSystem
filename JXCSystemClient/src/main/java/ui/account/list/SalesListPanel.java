@@ -122,7 +122,8 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 				setTable(sales);
 //				frame.setPanel(accountController.getMainPanel());
 			}else if(type.equals("manager")){
-				frame.setPanel(managerController.getMainPanel());
+//				frame.setPanel(managerController.getMainPanel());
+				setTable(sales);
 			}
 			frame.repaint();
 		}

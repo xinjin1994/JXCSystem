@@ -82,7 +82,7 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener{
 			if(type.equals("account")){
 				accountController.confirmAcc(acc, "change",newAcc);
 			}else if(type.equals("manager")){
-				managerController.confirmAcc(acc, "change");
+				managerController.confirmAcc(acc, "change",newAcc);
 			}
 		}
 	}

@@ -108,7 +108,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 			if (type.equals("account")) {
 //				frame.setPanel(accountController.getMainPanel());
 			} else if (type.equals("manager")) {
-				frame.setPanel(managerController.getMainPanel());
+//				frame.setPanel(managerController.getMainPanel());
 			}
 		}
 	}

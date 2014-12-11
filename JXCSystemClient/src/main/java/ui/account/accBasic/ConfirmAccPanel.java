@@ -65,6 +65,17 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		setOpe();
 	}
 
+	public ConfirmAccPanel(MyFrame frame, String url,
+			ManagerAllUIController uiController, AccountVO acc,String ope,String type,AccountVO newAcc) {
+		super(frame, url, uiController, acc);
+		this.acc = acc;
+		this.newAcc = newAcc;
+		this.ope = ope;
+		this.type = type;
+		this.managerController = uiController;
+		resController = new ResultPanelController(uiController,frame);
+		setOpe();
+	}
 	private void setOpe() {
 		if(ope.equals("add")){
 			setForwardAdd();

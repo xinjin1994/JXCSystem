@@ -93,13 +93,20 @@ public class ManagerAllUIController extends UIController{
 	
 
 	public void confirmAcc(AccountVO acc,String ope){
+		//	confirmAccPanel = new ConfirmAccPanel(frame, "Image/Account/确认账户信息.jpg", this,acc,ope);
 		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Manager/确认账户信息.jpg",this,acc,ope,"manager");
 		frame.setPanel(confirmAccPanel);
 		frame.repaint();
 	}
 	
+	public void confirmAcc(AccountVO acc,String ope,AccountVO newAcc){
+		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Account/确认账户信息.jpg", this,acc,ope,"manager",newAcc);
+		frame.setPanel(confirmAccPanel);
+		frame.repaint();
+	}
+	
 	public void accountDetail(AccountVO foundAcc){
-		System.out.println("OUY");
+//		System.out.println("OUY");
 		accountDetailPanel = new AccountDetailPanel(frame, "Image/Manager/accDetail.jpg", this ,foundAcc);
 		frame.setPanel(accountDetailPanel);
 		frame.repaint();
