@@ -10,6 +10,8 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.DiscountVO;
 import vo.ProGiftVO;
 import vo.VoucherVO;
+import businesslogic.promotionbl.PromotionController;
+import businesslogicservice.promotionblservice.PromotionblService;
 
 public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	
@@ -17,12 +19,17 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	private MyFrame frame;
 	private ManagerAllUIController uiController;
 	private MyButton forwardButton;
-	
+	private PromotionblService promotionblService;
+	private DiscountVO discount;
+	private  VoucherVO voucher;
+	private ProGiftVO gift;
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, DiscountVO discount) {
 		super(frame, url, controller, discount);
 		this.frame = frame;
 		this.uiController = controller;
+		this.discount = discount;
+		promotionblService = new PromotionController();
 		addPro();
 		forwardButton.setActionCommand("discount");
 		
@@ -31,6 +38,7 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, VoucherVO voucher) {
 		super(frame, url, controller, voucher);
+		this.voucher = voucher;
 		this.frame = frame;
 		this.uiController = controller;
 		addPro();
@@ -41,6 +49,7 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, ProGiftVO gift) {
 		super(frame, url, controller, gift);
+		this.gift = gift;
 		this.frame = frame;
 		this.uiController = controller;
 		addPro();
@@ -49,17 +58,17 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	/**
 	 * 下面三个方法用于向下层传新增的促销策略
 	 */
-	private void addProGift() {
-		System.out.println("gift");
+	private int addProGift() {
+		return (promotionblService.makeGift_up(gift));
 	}
 
 
-	private void addDiscount() {
-		System.out.println("discount");
+	private int addDiscount() {
+		return(promotionblService.makeDiscount_up(discount));
 	}
 
-	private void addVoucher() {
-		System.out.println("voucher");
+	private int addVoucher() {
+		return(promotionblService.makeVoucher_up(voucher));
 	}
 	
 	private void addPro() {
@@ -69,20 +78,68 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 		forwardButton.addActionListener(this);
 		resController = new ResultPanelController(controller, frame);
 	}
-
+	//-1 未知错误
+	//1  商品不存在
+	//2  库存中商品数量不足，不能完成赠品促销
+	//3  客户等级不存在
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("discount")){
-			addDiscount();
 			frame.remove(this);
-			resController.succeeded("成功添加一个折扣促销策略！", "manager");
+			switch(addDiscount()){
+			case 0:
+				resController.succeeded("成功添加一个折扣促销策略！", "manager");
+				break;
+			case 1:
+				resController.failed("商品不存在!", "manager");
+				break;
+			case 2:
+				resController.failed("库存中商品数量不足，不能完成赠品促销!", "manager");
+				break;
+			case 3:
+				resController.failed("客户等级不存在!", "manager");
+				break;
+			case -1:
+				resController.failed("未知错误!", "manager");
+				break;
+			}
 		}else if(e.getActionCommand().equals("voucher")) {
-			addVoucher();
 			frame.remove(this);
-			resController.succeeded("成功添加一个优惠券促销策略！", "manager");
+			switch(addVoucher()){
+			case 0:
+				resController.succeeded("成功添加一个优惠券促销策略！", "manager");
+				break;
+			case 1:
+				resController.failed("商品不存在!", "manager");
+				break;
+			case 2:
+				resController.failed("库存中商品数量不足，不能完成赠品促销!", "manager");
+				break;
+			case 3:
+				resController.failed("客户等级不存在!", "manager");
+				break;
+			case -1:
+				resController.failed("未知错误!", "manager");
+				break;
+			}
 		}else if (e.getActionCommand().equals("gift")) {
-			addProGift();
 			frame.remove(this);
-			resController.succeeded("成功添加一个赠品促销策略！", "manager");
+			switch(addProGift()){
+			case 0:
+				resController.succeeded("成功添加一个赠品促销策略！", "manager");
+				break;
+			case 1:
+				resController.failed("商品不存在!", "manager");
+				break;
+			case 2:
+				resController.failed("库存中商品数量不足，不能完成赠品促销!", "manager");
+				break;
+			case 3:
+				resController.failed("客户等级不存在!", "manager");
+				break;
+			case -1:
+				resController.failed("未知错误!", "manager");
+				break;
+			}
 		}
 	}
 

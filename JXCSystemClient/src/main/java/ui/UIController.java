@@ -6,7 +6,7 @@ import ui.commodity.CommodityAllUIController;
 import ui.commodity.CommodityUIController;
 import ui.manager.ManagerAllUIController;
 import ui.manager.ManagerUIController;
-import ui.sales.SalesAllUIController;
+//import ui.sales.SalesAllUIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
@@ -66,7 +66,7 @@ public class UIController {
 
 	public void SalesManagerPanel() {
 //		frame.remove(loginPanel);
-		new SalesAllUIController(this, frame);
+//		new SalesAllUIController(this, frame);
 	}
 	
 	public void AdminPanel() {

@@ -1,7 +1,5 @@
 package ui.manager;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -9,11 +7,9 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 
 import ui.FatherPanel;
-import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
 import ui.setting.ForwardButton;
@@ -21,9 +17,12 @@ import ui.setting.MyButton;
 import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldTrans;
+import vo.CommodityVO;
 import vo.DiscountVO;
 import vo.ProGiftVO;
 import vo.VoucherVO;
+import businesslogic.commoditybl.CommodityController;
+import businesslogicservice.commodityblservice.CommodityblService;
 
 public class SetProPanel extends FatherPanel implements ActionListener{
 	private ManagerAllUIController uiController;
@@ -34,7 +33,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private MyTextFieldTrans[] discount = new MyTextFieldTrans[3];
 	private MyComboBox commodity;
 	private MyTextFieldTrans number;
-	
+	private CommodityblService commodityblService;
 	private int level;
 	
 	private MyButton forwardButtons[] = new MyButton[3];
@@ -49,7 +48,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		this.uiController = controller;
 		this.frame = frame;
 		this.repaint();
-
+		commodityblService = new CommodityController();
 		uiController.setBack_first(this);
 		setTime();
 		setDiscountText();
@@ -95,18 +94,21 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		public void mousePressed(MouseEvent e) {
 			frame.remove(SetProPanel.this);
 			if(e.getSource() == forwardButtons[0]){
-				dis = new DiscountVO(time[0].getText(),time[1].getText(),Integer.parseInt(discount[0].getText()),
-						Integer.parseInt(discount[2].getText()),Integer.parseInt(discount[1].getText()),level);
+				dis = new DiscountVO(time[0].getText(),time[1].getText(),Double.parseDouble(discount[0].getText()),
+						Double.parseDouble(discount[2].getText()),Double.parseDouble(discount[1].getText()),level);
 				
 				uiController.confirmProDis(dis);
 			}else if(e.getSource() == forwardButtons[1]){
-				vou = new VoucherVO(time[0].getText(),time[1].getText(),Integer.parseInt(voucher[0].getText()),
-						Integer.parseInt(voucher[2].getText()),Integer.parseInt(voucher[1].getText()),level);
+				vou = new VoucherVO(time[0].getText(),time[1].getText(),Double.parseDouble(voucher[0].getText()),
+						Double.parseDouble(voucher[2].getText()),Double.parseDouble(voucher[1].getText()),level);
 			
 				uiController.confirmProVou(vou);
 			}else if(e.getSource() == forwardButtons[2]){
-				//因为这里构建ProGiftVO需要CommodityVO，所以我就不出事或gift了==
-				
+				//ProGiftVO(CommodityVO commodity,int number,String start_time,
+				//String end_time,double start_money,int level){
+				String selectedName = commodity.getSelectedItem().toString();
+				CommodityVO commodityVO = commodityblService.searchAccurateCommodity_up(selectedName);
+				gift = new ProGiftVO(commodityVO,Integer.parseInt(number.getText()),time[0].getText(),time[1].getText(),0,level);
 				uiController.confirmProGift(gift);
 			}
 		}
@@ -125,7 +127,12 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		
 	}
 	private void setGiftText() {
-		String [] rolesList = new String[]{"a","b"};
+//		String [] rolesList = new String[]{"a","b"};
+		ArrayList<CommodityVO> accVOArray = commodityblService.getAllCommodity_up();
+			String[] rolesList = new String[accVOArray.size()];
+			for (int i = 0; i < accVOArray.size(); i++) {
+				rolesList[i] = accVOArray.get(i).name;
+			}
 		commodity = new MyComboBox(rolesList,471, 423, 156, 32);
 		number = new MyTextFieldTrans(471,463, 156, 32);
 		

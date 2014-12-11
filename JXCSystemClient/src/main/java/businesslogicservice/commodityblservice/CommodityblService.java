@@ -39,7 +39,7 @@ public interface CommodityblService {
 	//模糊查找商品
 	public ArrayList<CommodityVO> searchFuzzyCommodity_up(String word);
 	//精确查找商品
-	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo);
+	public CommodityVO searchAccurateCommodity_up(String name);
 
 	//添加分类
 	public int addSort_up(SortVO vo1, SortVO vo2);
