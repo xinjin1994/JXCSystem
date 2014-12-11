@@ -2,6 +2,7 @@ package ui.account.list;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import ui.FatherPanel;
 import ui.account.AccountAllUIController;
@@ -84,6 +85,8 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 			String time1 = timeBegin.getText();
 			String time2 = timeBegin.getText();
 			ConditionVO conditionVO = financialblService.operatingCondition_up(time1, time2);
+			ArrayList<String> info = new ArrayList<String>();
+			
 			frame.remove(this);
 			if (type.equals("account")) {
 				frame.setPanel(accountController.getMainPanel());

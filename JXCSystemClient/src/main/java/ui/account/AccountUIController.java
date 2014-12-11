@@ -252,13 +252,13 @@ public class AccountUIController {
 			frame.remove(accountPanel);
 			if(e.getSource() == iniButtons[0]){
 				uiController.iniCom();
-				System.out.println("iniCom");
+//				System.out.println("iniCom");
 			}else if(e.getSource() == iniButtons[1]){
 				uiController.iniCus();
-				System.out.println("iniCus");
+//				System.out.println("iniCus");
 			}else if(e.getSource() == iniButtons[2]){
 				uiController.iniAcc();
-				System.out.println("iniAcc");
+//				System.out.println("iniAcc");
 			}else if(e.getSource() == iniButtons[3]){
 				
 			}
@@ -286,7 +286,7 @@ public class AccountUIController {
 
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == invoiceButtons[0]){
-				
+				System.out.println("hello");
 			}else if(e.getSource() == invoiceButtons[1]){
 				
 			}
