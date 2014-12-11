@@ -9,6 +9,10 @@ import ui.account.accBasic.ChangeAccountPanel;
 import ui.account.accBasic.ConfirmAccPanel;
 import ui.account.accBasic.DelAccountPanel;
 import ui.account.accBasic.FindAccountPanel;
+import ui.account.payRe.AddPaymentPanel;
+import ui.account.payRe.AddReceiptPanel;
+import ui.account.payRe.ConfirmPaymentPanel;
+import ui.account.payRe.ConfirmReceiptPanel;
 import ui.manager.ManagerAllUIController;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
@@ -104,14 +108,16 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
-	public void confirmReceipt(GetVO newReceipt){
-		confirmReceiptPanel = new ConfirmReceiptPanel(frame, "Image/Account/创建收款单_确认信息.jpg", this,newReceipt);
+	public void confirmReceipt(GetVO newReceipt,String person,String operater,double totalValue,double balanceValue){
+		confirmReceiptPanel = new ConfirmReceiptPanel(frame, "Image/Account/创建收款单_确认信息.jpg", this,
+				newReceipt,person,operater,totalValue,balanceValue);
 		frame.setPanel(confirmReceiptPanel);
 		frame.repaint();
 	}
 	
-	public void confirmPayment(PayVO newPayment) {
-		confirmPaymentPanel = new ConfirmPaymentPanel(frame, "Image/Account/创建付款单_确认信息.jpg", this,newPayment);
+	public void confirmPayment(PayVO newPayment,String person,String operate,double totalValue,double balanceValue) {
+		confirmPaymentPanel = new ConfirmPaymentPanel(frame, "Image/Account/创建付款单_确认信息.jpg", this,
+				newPayment,person,operate,totalValue,balanceValue);
 		frame.setPanel(confirmPaymentPanel);
 		frame.repaint();
 	}
