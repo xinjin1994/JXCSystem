@@ -1,10 +1,13 @@
 package businesslogicservice.promotionblservice;
 
-import java.util.ArrayList;
-
 import vo.DiscountVO;
 import vo.ProGiftVO;
 import vo.VoucherVO;
+
+//-1 未知错误
+//1  商品不存在
+//2  库存中商品数量不足，不能完成赠品促销
+//3  客户等级不存在
 
 public interface PromotionblService {
 	
