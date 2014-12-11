@@ -1,6 +1,7 @@
-package ui.account;
+package ui.account.ini;
 
 import ui.FatherPanel;
+import ui.account.AccountAllUIController;
 import ui.setting.MyFrame;
 
 public class ConfirmIniComPanel extends FatherPanel{

@@ -1,17 +1,19 @@
-package ui.account;
+package ui.account.ini;
 
 import ui.FatherPanel;
+import ui.account.AccountAllUIController;
 import ui.setting.MyFrame;
 
-public class IniAccPanel extends FatherPanel{
+public class IniComPanel extends FatherPanel{
 	AccountAllUIController uiController;
-	public IniAccPanel(MyFrame frame,String url,
+	public IniComPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
 		this.uiController = uiController;
 		this.repaint();
 		
 		uiController.setBack_first(this);
+		
 		
 	}
 }

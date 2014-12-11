@@ -13,6 +13,7 @@ import ui.setting.MyFrame;
 import ui.setting.MyStopButton;
 import ui.setting.MyTextFieldFilled;
 import ui.setting.MyTextFieldTrans;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.CustomerVO;
 
 public class AddCusPanel extends FatherPanel {
