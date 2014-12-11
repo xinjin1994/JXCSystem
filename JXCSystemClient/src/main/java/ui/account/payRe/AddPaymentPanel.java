@@ -1,4 +1,4 @@
-package ui.account;
+package ui.account.payRe;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +10,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import ui.FatherPanel;
+import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
@@ -19,6 +20,7 @@ import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+import vo.ItemList;
 import vo.PayVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
@@ -27,7 +29,7 @@ import businesslogicservice.accountblservice.AccountblService;
  * @author ZYC
  *
  */
-public class AddPaymentPanel extends FatherPanel implements ActionListener,DocumentListener{
+public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	AccountAllUIController uiController;
 	AccountblService accountblService;
 	MyButton forwardButton;
@@ -37,6 +39,8 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	MyComboBox customer,account;
 	PayVO newPayment;
 	String id,operate;
+	String accountName;
+	double balanceValue,totalValue;
 	ResultPanelController resController;
 	public AddPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
@@ -56,12 +60,12 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	 * account从下层获得
 	 */
 	private void setAccount() {
-//		String [] accounts = new String[]{"a","b"};//从下层获得
-		ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
+		String [] accounts = new String[]{"a","b"};//从下层获得
+		/*ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
 		String []accounts = new String[accVOArray.size()];
 		for(int i=0;i<accVOArray.size();i++){
 			accounts[i] = accVOArray.get(i).name;
-		}
+		}*/
 		account = new MyComboBox(accounts, 491, 162, 205, 43);
 		this.add(account);
 		account.addActionListener(this);
@@ -85,7 +89,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 			this.add(typeInItem[i]);
 			typeInItem[i].setForeground(new ColorFactory().accColor);
 		}
-		money.getDocument().addDocumentListener(this);
+//		money.getDocument().addDocumentListener(this);
 	}
 	
 	/**
@@ -113,6 +117,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);		
 	}
+	
+	private void setBalanceLabel(double balance2) {
+		balance = new MyLabel(491, 205,205, 41);
+		balance.setText(String.valueOf(balance2));
+		balance.setForeground(new ColorFactory().greyFont);
+		this.add(balance);
+		this.repaint();
+	}
 	/**
 	 * 总额
 	 */
@@ -123,7 +135,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		this.add(total);
 		this.repaint();
 	}
-	public void changedUpdate(DocumentEvent e) {
+	/*public void changedUpdate(DocumentEvent e) {
 		Document doc = e.getDocument();
 		try {
 			String totalMoney = doc.getText(0, doc.getLength());
@@ -132,12 +144,12 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 			e1.printStackTrace();
 		}
 		setTotal();
-	}
+	}*/
 	
 	/**
 	 * 实现根据输入的名称寻找余额的动态监听
 	 */
-	public void insertUpdate(DocumentEvent e) {
+/*	public void insertUpdate(DocumentEvent e) {
 		Document doc = e.getDocument();
 		try {
 			String totalMoney = doc.getText(0, doc.getLength());
@@ -165,15 +177,26 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 		this.add(total);
 		this.repaint();
 		
-	}
+	}*/
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
+			String payItem = item.getText();
+			String remark = ps.getText();
+			double turnValue = Double.parseDouble(money.getText());
+			String person = agent.getText();
+			//PayVO(String note,String bankAccount,ItemList itemList)
+			//ItemList(String itemName, double money, String remark)
+			ItemList itemList = new ItemList(payItem,turnValue,remark);
+			newPayment = new PayVO(id,accountName,itemList);
+			totalValue = accountblService.calTotalMoney_up(newPayment);
 			frame.remove(this);
-
-	//		resController.failed("!!!!","Image/result/acc/finManage/payFailed.jpg");
-			uiController.confirmPayment(newPayment);
-
+			uiController.confirmPayment(newPayment,person,operate,
+					totalValue,balanceValue);
+		}else if(e.getSource() == account){
+			accountName = account.getSelectedItem().toString();
+			balanceValue = accountblService.searchAccurateAccount_up(accountName).balance;
+			setBalanceLabel(balanceValue);
 		}
 	}
 }
