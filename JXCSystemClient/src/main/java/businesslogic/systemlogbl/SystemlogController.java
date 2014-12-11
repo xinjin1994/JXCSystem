@@ -11,12 +11,14 @@ public class SystemlogController implements SystemlogblService{
 
 	public ArrayList<SystemlogVO> show_up() {
 		// TODO Auto-generated method stub
-		return systemlog.show_up();
+		ArrayList<SystemlogVO> result=systemlog.show_up();
+		return result;
 	}
 
 	public int add_up(String word) {
 		// TODO Auto-generated method stub
-		return systemlog.add_up(word);
+		int message=systemlog.add_up(word);
+		return message;
 	}
 
 	public int exportExcel_up() {
