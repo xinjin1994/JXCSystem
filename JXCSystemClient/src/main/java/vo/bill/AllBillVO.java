@@ -1,13 +1,5 @@
 package vo.bill;
 
-import po.CommodityPO;
-import po.ExportPO;
-import po.Export_ReturnPO;
-import po.ImportPO;
-import po.Import_ReturnPO;
-import po.PatchPO;
-import po.PaymentPO;
-import po.ReceiptPO;
 
 public class AllBillVO {
 	
