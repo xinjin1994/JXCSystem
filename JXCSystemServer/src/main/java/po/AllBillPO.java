@@ -18,6 +18,9 @@ public class AllBillPO implements Serializable{
 	public String getNote(){
 		return note;
 	}
+	public int getDocType(){
+		return doc_type;
+	}
 	
 	public void setTime(String time){
 		this.time=time;
@@ -25,4 +28,5 @@ public class AllBillPO implements Serializable{
 	public void setNote(String note){
 		this.note=note;
 	}
+	
 }
