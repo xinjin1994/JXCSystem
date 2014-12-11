@@ -19,7 +19,7 @@ public interface FinancialblService {
 			String customer_name, String clerk, int warehouse);
 
 	//查看经营情况
-	public ConditionVO operatingCondition_up(String start_time, String end_time);
+	public ArrayList<ConditionVO> operatingCondition_up(String start_time, String end_time);
 
 	//销售记录导出，未实现
 	public int saleListExcel_up(SaleListConditionVO saleList_condition);

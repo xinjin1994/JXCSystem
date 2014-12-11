@@ -3,19 +3,25 @@ package ui.account;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import ui.AccountPanel;
+import ui.setting.ColorFactory;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SecondPanel;
+import vo.InvoiceVO;
+import businesslogic.invoicebl.InvoiceController;
+import businesslogicservice.invoiceblservice.InvoiceblService;
 
 public class AccountUIController {
 	private int secondX = 1;
 	private int secondY = 35;
 	private int inter = 54;
-	
-	
+	private String item,itemName;
+	private ColorFactory colors;
+	MyTable showTable;
 	private SecondPanel accountSecondPanel = new SecondPanel();;
 	private AccountPanel accountPanel;
 	private MyButton addAcc, delAcc, changeAcc, findAcc;
@@ -23,13 +29,13 @@ public class AccountUIController {
 	private MyButton salesList,allBills,operatingCondition;
 	private MyButton approButton,disapButton;
 	private MyButton addComInfo,addCusInfo,addAccInfo,check;
-	 
+	private InvoiceblService invoiceblService;
 	private MyButton []accButtons = new MyButton[]{addAcc, delAcc, changeAcc, findAcc};
 	private MyButton []finButtons = new MyButton[]{receipt,paymeent};
 	private MyButton []recButtons = new MyButton[]{salesList,allBills,operatingCondition};
 	private MyButton []invoiceButtons = new MyButton[]{approButton,disapButton};
 	private MyButton []iniButtons = new MyButton[]{addComInfo,addCusInfo,addAccInfo,check};
-	
+	ArrayList<InvoiceVO> billsArray ;
 	private AccountAllUIController uiController;
 	private MyFrame frame;
 	
@@ -38,6 +44,8 @@ public class AccountUIController {
 		this.frame = frame;
 		this.accountPanel = new AccountPanel(frame, "Image/Account/account_背景.jpg",
 				uiController, this);
+		invoiceblService = new InvoiceController();
+		colors = new ColorFactory();
 		frame.setPanel(accountPanel);
 		uiController.setMainPanel(accountPanel);
 	}
@@ -234,6 +242,14 @@ public class AccountUIController {
 		
 	}
 	
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		frame.add(showTable.tablePanel);
+//		uiController.addMainPanel();
+		frame.repaint();
+	}
 	class IniButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -252,13 +268,10 @@ public class AccountUIController {
 			frame.remove(accountPanel);
 			if(e.getSource() == iniButtons[0]){
 				uiController.iniCom();
-//				System.out.println("iniCom");
 			}else if(e.getSource() == iniButtons[1]){
 				uiController.iniCus();
-//				System.out.println("iniCus");
 			}else if(e.getSource() == iniButtons[2]){
 				uiController.iniAcc();
-//				System.out.println("iniAcc");
 			}else if(e.getSource() == iniButtons[3]){
 				
 			}
@@ -286,8 +299,44 @@ public class AccountUIController {
 
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == invoiceButtons[0]){
-				System.out.println("hello");
+				billsArray = invoiceblService.show_pass();
 			}else if(e.getSource() == invoiceButtons[1]){
+				billsArray = invoiceblService.show_refuse();
+				}
+			ArrayList<String> bills = new ArrayList<String>();
+			bills.add("单据编号;单据类型");
+			for(int i=0;i<billsArray.size();i++){
+				switch(billsArray.get(i).bill_note) {
+				//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
+				//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
+				case 1:
+					itemName = "商品赠送单";
+					break;
+				case 2:
+					itemName = "进货单";
+					break;
+				case 3:
+					itemName = "进货退货单";
+					break;
+				case 4:
+					itemName = "销售单";
+					break;
+				case 5:
+					itemName = "销售退货单";
+					break;
+				case 6:
+					itemName = "报溢报损单";
+					break;
+				case 7:
+					itemName = "收款单";
+					break;
+				case 8:
+					itemName = "付款单";
+					break;	
+				}
+				item = billsArray.get(i).note+itemName;
+				bills.add(item);
+				setTable(bills);
 				
 			}
 		}

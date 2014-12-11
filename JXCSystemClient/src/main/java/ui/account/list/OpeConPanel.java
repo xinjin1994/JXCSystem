@@ -11,6 +11,7 @@ import ui.setting.ColorFactory;
 import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
 import ui.setting.MyTextFieldBorder;
 import vo.ConditionVO;
 import businesslogic.financialbl.FinancialController;
@@ -28,6 +29,8 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 	private AccountAllUIController accountController;
 	private ManagerAllUIController managerController;
 	FinancialblService financialblService;
+	private ColorFactory colors;
+	MyTable showTable;
 	private MyTextFieldBorder timeBegin, timeFinish;
 	private MyButton forwardButton;
 	private MyFrame frame;
@@ -38,6 +41,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 		this.frame = frame;
 		this.accountController = uiController;
 		this.repaint();
+		colors = new ColorFactory();
 		financialblService = new FinancialController();
 		uiController.setBack_second(this, 149, 137);
 
@@ -79,21 +83,33 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 		this.add(timeFinish);
 
 	}
+	
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		frame.remove(this);
+		frame.add(showTable.tablePanel);
+		accountController.addMainPanel();
+		frame.repaint();
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
 			String time1 = timeBegin.getText();
 			String time2 = timeBegin.getText();
-			ConditionVO conditionVO = financialblService.operatingCondition_up(time1, time2);
+			ArrayList<ConditionVO> conditionVO= financialblService.operatingCondition_up(time1, time2);
 			ArrayList<String> info = new ArrayList<String>();
-			
-			frame.remove(this);
+			info.add("利润");
+			for(int i=0;i<conditionVO.size();i++){
+				info.add(conditionVO.get(i).getProfit()+"");
+			}
+			setTable(info);
 			if (type.equals("account")) {
-				frame.setPanel(accountController.getMainPanel());
+//				frame.setPanel(accountController.getMainPanel());
 			} else if (type.equals("manager")) {
 				frame.setPanel(managerController.getMainPanel());
 			}
-			frame.repaint();
 		}
 	}
 }
