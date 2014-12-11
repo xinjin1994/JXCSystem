@@ -14,27 +14,32 @@ public class PromotionController implements PromotionblService{
 	public int makeDiscount(int start_money, int discount, int end_money,
 			String time1, String time2) {
 		// TODO Auto-generated method stub
-		return promotion.makeDiscount(start_money, discount, end_money, time1, time2);
+		int message=promotion.makeDiscount(start_money, discount, end_money, time1, time2);
+		return message;
 	}
 
 	public int delPromotion(String note) {
 		// TODO Auto-generated method stub
-		return promotion.delPromotion(note);
+		int message=promotion.delPromotion(note);
+		return message;
 	}
 
 	public int makeGift(int start_money, String time1, String time2) {
 		// TODO Auto-generated method stub
-		return promotion.makeGift(start_money, time1, time2);
+		int message=promotion.makeGift(start_money, time1, time2);
+		return message;
 	}
 
 	public ArrayList<DiscountVO> search_up() {
 		// TODO Auto-generated method stub
-		return promotion.search();
+		ArrayList<DiscountVO> result=promotion.search();
+		return result;
 	}
 
 	public int makeOther_up(String word) {
 		// TODO Auto-generated method stub
-		return promotion.makeOther(word);
+		int message=promotion.makeOther(word);
+		return message;
 	}
 
 	public int makeDiscount_up(DiscountVO vo) {
