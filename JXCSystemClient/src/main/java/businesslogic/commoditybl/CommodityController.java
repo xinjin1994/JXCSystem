@@ -106,10 +106,10 @@ public class CommodityController implements CommodityblService{
 		return commodity.warn(vo.name,vo.type,vo.number);
 	}
 
-	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	public int updateCommodity_up(CommodityVO vo1, SortVO vo2) {
 		// TODO Auto-generated method stub
@@ -175,5 +175,11 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public CommodityVO searchAccurateCommodity_up(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

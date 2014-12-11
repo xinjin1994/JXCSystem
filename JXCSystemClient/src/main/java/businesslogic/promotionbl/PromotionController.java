@@ -57,17 +57,17 @@ public class PromotionController implements PromotionblService{
 		return 0;
 	}
 
-	public DiscountVO getDiscount_up() {
+	public ArrayList<DiscountVO> getDiscount_up() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ProGiftVO getProGift_up() {
+	public ArrayList<ProGiftVO> getProGift_up() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public VoucherVO getVoucher_up() {
+	public ArrayList<VoucherVO> getVoucher_up() {
 		// TODO Auto-generated method stub
 		return null;
 	}

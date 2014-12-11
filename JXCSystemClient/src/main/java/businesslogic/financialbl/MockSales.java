@@ -25,7 +25,7 @@ public class MockSales implements SalesInfo{
 
 	public ArrayList<Import_ReturnPO> getAllImport_Return() {
 		// TODO Auto-generated method stub
-		Import_ReturnPO po = new Import_ReturnPO(null, null, null, null, null, 0, 0, null);
+		Import_ReturnPO po = new Import_ReturnPO(null, null, null, null, null, null, 0, null);
 		
 		ArrayList<Import_ReturnPO> imp_ret=new ArrayList<Import_ReturnPO>();
 		imp_ret.add(po);
@@ -43,7 +43,7 @@ public class MockSales implements SalesInfo{
 
 	public ArrayList<Export_ReturnPO> getAllExport_Return() {
 		// TODO Auto-generated method stub
-		Export_ReturnPO po = new Export_ReturnPO(null, null, null, null, null, 0, 0, 0, 0, 0, null);
+		Export_ReturnPO po = new Export_ReturnPO(null, null, null, null, null, null, 0, 0, 0, 0, null);
 		
 		ArrayList<Export_ReturnPO> exp_ret=new ArrayList<Export_ReturnPO>();
 		exp_ret.add(po);
