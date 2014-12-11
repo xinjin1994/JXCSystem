@@ -11,7 +11,7 @@ public class CommodityUIController {
 	private int secondY = 35;
 	private int inter = 54;
 	
-	private SecondPanel commoditySecondPanel;
+	private SecondPanel commoditySecondPanel = new SecondPanel();
 	private CommodityPanel commodityPanel;
 	private MyButton addCom, delCom, changeCom, findCom;
 	private MyButton addSort,delSort,changeSort;
@@ -48,7 +48,6 @@ public class CommodityUIController {
 				"Image/Commodity/button/comManage/delCom_press_on.png","Image/Commodity/button/comManage/changeCom_press_on.png",
 				"Image/Commodity/button/comManage/findCom_press_on.png"};
 		
-		commoditySecondPanel = new SecondPanel();
 		for(int i = 0;i < comButtons.length;i++){
 			comButtons[i] = new MyButton(images_ori_com[i], secondX, secondY+i*inter,
 					images_stop_com[i], images_press_on_com[i]);
