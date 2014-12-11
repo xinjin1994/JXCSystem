@@ -53,7 +53,7 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 				return 1;
 			}
 			
-			switch(tempInvoice.getInvoiceType()){
+			switch(tempInvoice.getDocType()){
 			
 			case 1: SendGiftPO po1=(SendGiftPO) tempInvoice;
 			if(commodityInfo.addGood_Data(po1)!=null){

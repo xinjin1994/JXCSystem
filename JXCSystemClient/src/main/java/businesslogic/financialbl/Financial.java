@@ -116,9 +116,9 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public boolean addAllBill(ReceiptPO po) {
 //		financial= new FinancialDataService_Stub();
-		AllBillPO po1=new AllBillPO(po);
+		
 		try {
-			return financial.addAllBill(po1);
+			return financial.addAllBill(po.copy());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -128,9 +128,8 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public boolean addAllBill(PaymentPO po) {
 //		financial= new FinancialDataService_Stub();
-		AllBillPO po1=new AllBillPO(po);
 		try {
-			return financial.addAllBill(po1);
+			return financial.addAllBill(po.copy());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

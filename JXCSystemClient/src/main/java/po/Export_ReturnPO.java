@@ -9,18 +9,18 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 	String ps;//��
 	String clerk;//Ĭ��ҵ��Ա
 	String operator;//����Ա
-	int wareHouse;//�ֿ�
+	String wareHouse;//�ֿ�
 	ArrayList<ExportGoodPO> exportGoodList; 
-	int total_money_before;//这个是折让前的总价
-	int total_money_after;//这个是这让后的总价
-	int discount;//折扣金额
-	int voucher;//使用代金券金额
+	double total_money_before;//这个是折让前的总价
+	double total_money_after;//这个是这让后的总价
+	double discount;//折扣金额
+	double voucher;//使用代金券金额
 	String old_note;
 	
 
 	public Export_ReturnPO(CustomerPO customer, ArrayList<ExportGoodPO> po,String ps, String clerk,
-			String operator,int wareHouse, int total_money_before,int total_money_after,
-			int discount,int voucher,String old_note) {
+			String operator,String wareHouse, double total_money_before,double total_money_after,
+			double discount,double voucher,String old_note) {
 		this.customer = customer;
 		this.exportGoodList=po;
 		this.ps = ps;
@@ -70,20 +70,20 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 		return operator;
 	}
 
-	public int getWareHouse() {
+	public String getWareHouse() {
 		return wareHouse;
 	}
 
-	public int getTotalMoneyBefore() {
+	public double getTotalMoneyBefore() {
 		return total_money_before;
 	}	
-	public int getTotalMoneyAfter(){
+	public double getTotalMoneyAfter(){
 		return total_money_after;
 	}
-	public int getDiscount(){
+	public double getDiscount(){
 		return discount;
 	}
-	public int getVoucher(){
+	public double getVoucher(){
 		return voucher;
 	}
 	

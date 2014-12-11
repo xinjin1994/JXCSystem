@@ -23,7 +23,7 @@ public class InvoiceController implements InvoiceblService{
 		ArrayList<InvoiceVO> vo=new ArrayList<InvoiceVO>();
 		int i=0;
 		for(i=0;i<po.size();i++){
-			InvoiceVO lin=new InvoiceVO(po.get(i).getInvoiceNote(),po.get(i).getNote(),po.get(i).getInvoiceType(),"");
+			InvoiceVO lin=new InvoiceVO(po.get(i).getInvoiceNote(),po.get(i).getNote(),po.get(i).getDocType(),"");
 			vo.add(lin);
 		}
 		return vo;

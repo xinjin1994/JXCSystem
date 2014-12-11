@@ -16,7 +16,7 @@ public class MockSales implements SalesInfo{
 
 	public ArrayList<ImportPO> getAllImport() {
 		// TODO Auto-generated method stub
-		ImportPO po = new ImportPO(null, null, null, null, null, 0, 0);
+		ImportPO po = new ImportPO(null, null, null, null, null, null, 0);
 		
 		ArrayList<ImportPO> imp=new ArrayList<ImportPO>();
 		imp.add(po);
@@ -34,7 +34,7 @@ public class MockSales implements SalesInfo{
 
 	public ArrayList<ExportPO> getAllExport() {
 		// TODO Auto-generated method stub
-		ExportPO po = new ExportPO(null, null, null, null, null, 0, 0, 0, 0, 0);
+		ExportPO po = new ExportPO(null, null, null, null, null, null, 0, 0, 0, 0);
 		
 		ArrayList<ExportPO> exp=new ArrayList<ExportPO>();
 		exp.add(po);
