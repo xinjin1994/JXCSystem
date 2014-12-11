@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-public class InvoicePO extends DocumentPO implements Serializable{
+public class InvoicePO extends AllBillPO implements Serializable{
 //	String draft_condition;//�ݸ�
 //	String submit_condition;//�ύ״̬
 //	String approve_condition;//�����

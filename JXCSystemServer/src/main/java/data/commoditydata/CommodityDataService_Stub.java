@@ -16,6 +16,7 @@ import po.PaymentPO;
 import po.SendGiftPO;
 import po.SortPO;
 import po.WarnPO;
+import data.accountdata.AccountDataService_Stub;
 import dataservice.commoditydataservice.CommodityDataService;
 
 public class CommodityDataService_Stub extends UnicastRemoteObject implements CommodityDataService{
@@ -709,6 +710,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean addPatch(PatchPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		po.setTime(AccountDataService_Stub.getNowTime());
 		patchList.add(po.copy());
 		return false;
 	}
