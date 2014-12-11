@@ -11,22 +11,26 @@ public class UserController implements UserblService{
 
 	public int addUser(String name, String password, int duty) {
 		// TODO Auto-generated method stub
-		return user.addUser(name, password, duty);
+		int message=user.addUser(name, password, duty);
+		return message;
 	}
 
 	public int delUser(String name) {
 		// TODO Auto-generated method stub
-		return user.delUser(name);
+		int message=user.delUser(name);
+		return message;
 	}
 
 	public ArrayList<UserVO> show_up() {
 		// TODO Auto-generated method stub
-		return user.show();
+		ArrayList<UserVO> result=user.show();
+		return result;
 	}
 
 	public int login_up(String name, String password) {
 		// TODO Auto-generated method stub
-		return user.login(name, password);
+		int message=user.login(name, password);
+		return message;
 	}
 
 	public int addUser_up(UserVO vo) {
