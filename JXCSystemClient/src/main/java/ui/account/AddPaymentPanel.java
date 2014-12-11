@@ -2,6 +2,7 @@ package ui.account;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -17,7 +18,10 @@ import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
+import vo.AccountVO;
 import vo.PayVO;
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 /**
  * 添加收款单panel
  * @author ZYC
@@ -25,21 +29,21 @@ import vo.PayVO;
  */
 public class AddPaymentPanel extends FatherPanel implements ActionListener,DocumentListener{
 	AccountAllUIController uiController;
-	
+	AccountblService accountblService;
 	MyButton forwardButton;
 	MyLabel idLabel,balance,operator,total;
 	MyTextFieldTrans ps,agent,item;
 	MyTextFieldTrans money;
 	MyComboBox customer,account;
 	PayVO newPayment;
-	
+	String id,operate;
 	ResultPanelController resController;
 	public AddPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
 		this.uiController = uiController;
 		this.repaint();
-		
+		accountblService = new AccountController();
 		uiController.setBack_first(this);
 		setAccount();
 		setIDOpe();
@@ -52,7 +56,12 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	 * account从下层获得
 	 */
 	private void setAccount() {
-		String [] accounts = new String[]{"a","b"};//从下层获得
+//		String [] accounts = new String[]{"a","b"};//从下层获得
+		ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
+		String []accounts = new String[accVOArray.size()];
+		for(int i=0;i<accVOArray.size();i++){
+			accounts[i] = accVOArray.get(i).name;
+		}
 		account = new MyComboBox(accounts, 491, 162, 205, 43);
 		this.add(account);
 		account.addActionListener(this);
@@ -86,12 +95,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener,Docum
 	private void setIDOpe() {
 		idLabel = new MyLabel(106,165, 221,55);
 		idLabel.setForeground(new ColorFactory().accColor);
-		idLabel.setText("id");
+		id = accountblService.getPaymentNote_up();
+		idLabel.setText(id);
 		this.add(idLabel);
 		
 		operator = new MyLabel(575, 370, 155, 55);
 		operator.setForeground(new ColorFactory().accColor);
-		operator.setText("我是操作员");
+		operate = accountblService.getOperator_up();
+		operator.setText(operate);
 		this.add(operator);
 	}
 	
