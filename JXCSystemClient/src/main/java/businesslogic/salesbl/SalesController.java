@@ -14,67 +14,83 @@ public class SalesController implements SalesblService{
 
 	public int addCustomer_up(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.addCustomer_up(customerVO);
+		int message=sale.addCustomer_up(customerVO);
+		
+		return message;
 	}
 
 	public int delCustomer_up(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.delCustomer_up(customerVO);
+		int message=sale.delCustomer_up(customerVO);
+		
+		return message;
 	}
 
 	public int updateCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.updateCustomer(customerVO);
+		int message=sale.updateCustomer(customerVO);
+		return message;
 	}
 
 	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		return sale.searchCustomer(customerVO);
+		ArrayList<CustomerVO> result=sale.searchCustomer(customerVO);
+		return result;
 	}
 
 	public int addImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addImport_up(importMenuVO);
+		int message=sale.addImport_up(importMenuVO);
+		return message;
 	}
 
 	public int addImport_Return_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addImport_Return_up(importMenuVO);
+		int message= sale.addImport_Return_up(importMenuVO);
+		
+		return message;
 	}
 
 	public int addImport_Return(String note, int number) {
 		// TODO Auto-generated method stub
-		return sale.addImport_Return(note, number);
+		int message=sale.addImport_Return(note, number);
+		return message;
 	}
 
 	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addExport_up(exportMenuVO);
+		int message=sale.addExport_up(exportMenuVO);
+		return message;
 	}
 
 	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		return sale.addExport_Return_up(exportMenuVO);
+		int message=sale.addExport_Return_up(exportMenuVO);
+		return message;
 	}
 
 	public int addExport_Return(String note, int number) {
 		// TODO Auto-generated method stub
-		return sale.addExport_Return(note, number);
+		int message=sale.addExport_Return(note, number);
+		return message;
 	}
 
 	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CustomerVO> result=sale.searchFuzzyCustomer_up(name);
+		return result;
 	}
 
 	public CustomerVO searchExactCustomer_up(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		CustomerVO result=sale.searchExactCustomer_up(name);
+		return result;
 	}
 
-	public int updateCustomer_up(CustomerVO vo1, CustomerVO vo2) {
+	public int updateCustomer_up(CustomerVO vo1, CustomerVO vo2) {       //这里的参数个数有问题
 		// TODO Auto-generated method stub
-		return 0;
+		int message=sale.updateCustomer(vo1);                            //这里的对应方法名有问题
+		return message;
 	}
 
 	public ArrayList<CommodityVO> getAllCommodity_up() {
