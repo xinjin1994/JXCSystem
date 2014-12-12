@@ -43,4 +43,9 @@ public class InvoiceDataService_Stub implements InvoiceDataService{
 		return false;
 	}
 
+	public String getInvNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
