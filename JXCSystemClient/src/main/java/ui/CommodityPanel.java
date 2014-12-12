@@ -10,24 +10,24 @@ import ui.setting.MyButton;
 
 //1 库存人员
 public class CommodityPanel extends FatherPanel{
-	private int firstX = 1;
+	private int firstX = 0;
 	private int firstY = 110;
 	private int inter = 54;
 	
-	MyButton comManage,sortManage,stockManage,recManage,invoiceManage;
-	private MyButton [] buttons = new MyButton[]{comManage,sortManage,stockManage,recManage,invoiceManage};
+	MyButton comManage,sortManage,stockManage,invoiceManage;
+	private MyButton [] buttons = new MyButton[]{comManage,sortManage,stockManage,invoiceManage};
 	private MyButton detail, back;
 	
 	private CommodityUIController commodityUIController;
 	private String images_ori[] = new String[]{"Image/Commodity/button/comManage.png",
 			"Image/Commodity/button/sortManage.png","Image/Commodity/button/stockManage.png",
-			"Image/Commodity/button/recManage.png","Image/Commodity/button/invoiceManage.png"};
+			"Image/Commodity/button/invoiceManage.png"};
 	private String images_stop[] = new String[]{"Image/Commodity/button/comManage_stop.png",
 			"Image/Commodity/button/sortManage_stop.png","Image/Commodity/button/stockManage_stop.png",
-			"Image/Commodity/button/recManage_stop.png","Image/Commodity/button/invoiceManage_stop.png"};
+			"Image/Commodity/button/invoiceManage_stop.png"};
 	private String images_press_on[] = new String[]{"Image/Commodity/button/comManage_press_on.png",
 			"Image/Commodity/button/sortManage_press_on.png","Image/Commodity/button/stockManage_press_on.png",
-			"Image/Commodity/button/recManage_press_on.png","Image/Commodity/button/invoiceManage_press_on.png"};
+			"Image/Commodity/button/invoiceManage_press_on.png"};
 	
 	
 	public CommodityPanel(JFrame frame, String url, UIController controller,
@@ -42,8 +42,8 @@ public class CommodityPanel extends FatherPanel{
 	public void addButton() {
 		FirstButtonListener listener = new FirstButtonListener();
 		for(int i = 0 ;i < buttons.length;i++){
-			buttons[i] = new MyButton(images_ori[0], firstX, firstY +i * inter,
-					images_stop[0], images_press_on[0]);
+			buttons[i] = new MyButton(images_ori[i], firstX, firstY +i * inter,
+					images_stop[i], images_press_on[i]);
 			this.add(buttons[i]);
 			buttons[i].addMouseListener(listener);
 		}
@@ -69,10 +69,9 @@ public class CommodityPanel extends FatherPanel{
 			}else if(e.getSource() == buttons[2]) {
 				commodityUIController.toStockPanel();
 			}else if (e.getSource() == buttons[3]) {
-				commodityUIController.toRecPanel();
-			}else if (e.getSource() == buttons[4]) {
 				commodityUIController.toInvoicePanel();
 			}
+			
 		}
 
 		public void mouseExited(MouseEvent e) {

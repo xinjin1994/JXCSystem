@@ -20,7 +20,7 @@ public class CheckProPanel extends FatherPanel{
 
 	ManagerAllUIController uiController;
 	MyFrame frame;
-	MyLabel labels[][] = new MyLabel[5][8];
+	MyLabel labels[][] = new MyLabel[5][9];
 	
 	public CheckProPanel(MyFrame frame, String url, ManagerAllUIController controller) {
 		super(frame, url, controller);
@@ -46,21 +46,21 @@ public class CheckProPanel extends FatherPanel{
 		setLabels(698, 144, labels[4]);
 		
 		for(int i = 0;i < 5;i++){
-			for(int j = 0;j < 8;j++){
+			for(int j = 0;j < 9;j++){
 				labels[i][j].setText("0");
-				labels[i][j].setFont(new FontFactory(14).font);
+				labels[i][j].setFont(new FontFactory(12).font);
 				labels[i][j].setForeground(Color.white);
 				this.add(labels[i][j]);
 				
 			}
 		}
-		for(int i = 0;i < 8;i++){
+		for(int i = 0;i < 9;i++){
 			labels[0][i].setForeground(new ColorFactory().greyFont);
 		}
-		for(int i = 0;i < 8;i++){
+		for(int i = 0;i < 9;i++){
 			labels[1][i].setForeground(new ColorFactory().greyFont);
 		}
-		for(int i = 0;i < 8;i++){
+		for(int i = 0;i < 9;i++){
 			
 		}
 		
@@ -74,8 +74,9 @@ public class CheckProPanel extends FatherPanel{
 		la[3] = new MyLabel(x, y+55, 21, 14);
 		la[4] = new MyLabel(x+42,y+55, 21, 14);
 		la[5] = new MyLabel(x+14, y+93, 40, 14);
-		la[6] = new MyLabel(x+14, y+115, 40, 14);
-		la[7] = new MyLabel(x+14, y+150, 40, 14);
+		la[6] = new MyLabel(x+42, y+111, 36, 14);
+		la[7] = new MyLabel(x+14, y+133, 40, 14);
+		la[8] = new MyLabel(x+14, y+155, 40, 14);
 	}
 	
 }

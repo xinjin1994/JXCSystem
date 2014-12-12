@@ -20,6 +20,7 @@ import ui.setting.ForwardButton;
 import ui.setting.MyButton;
 import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
 import vo.DiscountVO;
 import vo.ProGiftVO;
@@ -33,7 +34,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private MyTextFieldTrans[] voucher = new MyTextFieldTrans[3];
 	private MyTextFieldTrans[] discount = new MyTextFieldTrans[3];
 	private MyComboBox commodity;
-	private MyTextFieldTrans number;
+	private MyTextFieldTrans number,price;
 	
 	private int level;
 	
@@ -126,11 +127,17 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	}
 	private void setGiftText() {
 		String [] rolesList = new String[]{"a","b"};
-		commodity = new MyComboBox(rolesList,471, 423, 156, 32);
-		number = new MyTextFieldTrans(471,463, 156, 32);
+		commodity = new MyComboBox(rolesList,471, 443, 156, 27);
+		number = new MyTextFieldTrans(471,476, 156, 27);
+		price = new MyTextFieldTrans(509, 408,130 ,27);
 		
+		price.setFont(new FontFactory(18).font);
 		number.setFont(new FontFactory(18).font);
+		
+		price.setForeground(new ColorFactory().greyFont);
 		number.setForeground(new ColorFactory().greyFont);
+		
+		this.add(price);
 		this.add(commodity);
 		this.add(number);
 	}

@@ -139,8 +139,9 @@ public class ProDetailPanel extends FatherPanel{
 	}
 	
 	private void setGiftLabels() {
-		MyLabel commodity = new MyLabel(471, 423, 156, 32);
-		MyLabel number = new MyLabel(471, 463, 156, 32);
+		MyLabel commodity = new MyLabel(471, 443, 156, 27);
+		MyLabel number = new MyLabel(471, 476, 156, 27);
+		MyLabel price = new MyLabel(509, 408,130 ,27);
 		
 		commodity.setText(gift.commodity.name);
 		number.setText(String.valueOf(gift.number));
