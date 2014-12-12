@@ -6,15 +6,16 @@ public class PatchPO extends InvoicePO implements Serializable{
 	
 	CommodityPO commodity;
 	int number;//����
+	String operator;
 	
-	public PatchPO(CommodityPO commodity, int number) {
+	public PatchPO(CommodityPO commodity, int number, String operator) {
 		this.commodity=commodity;
 		this.number = number;
 		this.doc_type=6;
 	}
 	
 	public PatchPO copy(){
-		PatchPO po=new PatchPO(commodity.copy(), number);
+		PatchPO po=new PatchPO(commodity.copy(), number,operator);
 		po.setNote(this.getNote());
 		po.setTime(this.getTime());
 		po.setCondition(this.condition);
@@ -29,6 +30,10 @@ public class PatchPO extends InvoicePO implements Serializable{
 	
 	public int getNumber() {
 		return number;
+	}
+	
+	public String getOperator(){
+		return operator;
 	}
 	
 }
