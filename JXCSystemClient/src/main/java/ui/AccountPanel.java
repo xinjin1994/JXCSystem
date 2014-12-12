@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import javax.swing.JLabel;
 import ui.account.AccountUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyButton;
-import ui.setting.MyLabel;
 import ui.setting.MyTable;
 
 //财务经理

@@ -17,6 +17,7 @@ import ui.setting.MyLabel;
 import ui.setting.MyTextFieldFilled;
 import ui.setting.MyTextFieldTrans;
 import vo.CommodityVO;
+import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
@@ -42,8 +43,8 @@ public class ImInPanel extends FatherPanel {
 		salesblService = new SalesController();
 		this.addTextField();
 		this.addButton();
-		this.addCombox();
-		this.addID();
+//		this.addCombox();
+//		this.addID();
 	}
 	
 	public void addCombox(){

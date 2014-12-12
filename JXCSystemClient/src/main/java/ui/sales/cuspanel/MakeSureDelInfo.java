@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
-import ui.sales.cuspanel.MakeSureAddInfo.Listener;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldFilled;
@@ -18,11 +18,15 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 	private CustomerVO customerVO;
 	private DelCusPanel delCusPanel;
 	private MyFrame frame;
+	private UIController controller;
+	private SalesUIController salesUIController;
 	
 	public MakeSureDelInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,CustomerVO customerVO,DelCusPanel delCusPanel){
 		super(frame,url,controller,salesUIController,customerVO);
 		this.customerVO = customerVO;
 		this.delCusPanel = delCusPanel;
+		this.controller = controller;
+		this.salesUIController = salesUIController;
 		this.frame = frame;
 	}
 
@@ -49,9 +53,15 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
-				SalesblService salesBlService = new SalesController();
-				salesBlService.delCustomer_up(customerVO);
-				System.out.println("qianjing!");
+//				System.out.println("qianjing!");
+				SalesblService salesblService = new SalesController();
+				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureDelInfo.this);
+				switch(salesblService.delCustomer_up(customerVO)){
+				case 0:
+					salesResult.succeeded("删除成功！", "sales");
+					break;
+				}
+				
 			} else if (e.getSource() == secondCusBack) {
 				System.out.println("fff");
 				frame.remove(MakeSureDelInfo.this);

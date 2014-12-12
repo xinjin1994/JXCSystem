@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
-import ui.sales.cuspanel.MakeSureDelInfo.Listener;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldFilled;
@@ -18,11 +18,14 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 	private CustomerVO customerVOBefore,customerVOAfter;
 	private ChangeCusPanel changeCusPanel;
 	private MyFrame frame;
-	
+	private UIController controller;
+	private SalesUIController salesUIController;
 	
 	public MakeSureChangeInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,CustomerVO customerVO,ChangeCusPanel changeCusPanel){
 		super(frame,url,controller,salesUIController,customerVO);
 		this.customerVOBefore = customerVO;
+		this.controller = controller;
+		this.salesUIController = salesUIController;
 		this.changeCusPanel = changeCusPanel;
 		this.frame = frame;
 	}
@@ -62,7 +65,12 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
 				System.out.println("qianjing!");
 				SalesblService salesBlService = new SalesController();
-//				salesBlService.updateCustomer(customerVOBefore,customerVOAfter);
+				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureChangeInfo.this);
+				switch(salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter)){
+				case 0:
+					salesResult.succeeded("修改成功！","sales");
+					break;
+				}
 			} else if (e.getSource() == secondCusBack) {
 				System.out.println("fff");
 				frame.remove(MakeSureChangeInfo.this);

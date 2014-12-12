@@ -27,11 +27,11 @@ public class MakeSureCusInfo extends AddCusPanel{
 		person.setText(customerVO.person);
 		shouldGet.setText(customerVO.shouldGet+"");
 		shouldPay.setText(customerVO.shouldPay+"");
-		
+		//false代表供应商，true代表销售商
 		if(customerVO.classification == true){
-			supplierButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供应商_press_on_03.png"));
+			sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供应商_press_on_03.png"));
 		}else{
-			sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/销售商_press_on_05.png"));
+			supplierButton.setIcon(new ImageIcon("Image/Sales/对话框/images/销售商_press_on_05.png"));
 		}
 		switch(customerVO.level){
 			case 1:
