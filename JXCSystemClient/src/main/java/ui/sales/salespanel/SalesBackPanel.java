@@ -16,7 +16,7 @@ public class SalesBackPanel extends ImInPanel{
 
 	public SalesBackPanel(JFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame, url, controller,salesUIController);
-		this.remove(remark);
+	//	this.remove(remark);
 	}
 	
 	public void addButton() {

@@ -40,10 +40,10 @@ public class ImInPanel extends FatherPanel {
 		this.salesUIController = salesUIController;
 		buttonListener = new ButtonListener();
 		salesblService = new SalesController();
-		this.addTextField();
-		this.addButton();
-		this.addCombox();
-		this.addID();
+//		this.addTextField();
+//		this.addButton();
+//		this.addCombox();
+//		this.addID();
 	}
 	
 	public void addCombox(){

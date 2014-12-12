@@ -18,8 +18,8 @@ public class SalesInPanel extends ImInPanel{
 	MyTextFieldFilled newRemark;
 	public SalesInPanel(JFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame, url, controller,salesUIController);
-		this.remove(remark);
-		this.addRestText();
+//		this.remove(remark);
+//		this.addRestText();
 	}
 	
 	public void addButton() {
