@@ -3,12 +3,11 @@ package ui.sales.salespanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
-
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.sales.impanel.ImInPanel;
 import ui.setting.MyButton;
+import ui.setting.MyFrame;
 import ui.setting.MyTextFieldFilled;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
@@ -16,7 +15,7 @@ import businesslogicservice.salesblservice.SalesblService;
 public class SalesInPanel extends ImInPanel{
 
 	MyTextFieldFilled newRemark;
-	public SalesInPanel(JFrame frame, String url, UIController controller, SalesUIController salesUIController){
+	public SalesInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame, url, controller,salesUIController);
 		this.remove(remark);
 		this.addRestText();
