@@ -28,7 +28,7 @@ public class ImInPanel extends FatherPanel {
 	protected MyComboBox goodsName, goodsType;
 	protected MyTextFieldFilled person, operator;
 	protected MyButton back, forward;
-	protected MyLabel goodsID, id;
+	protected MyLabel goodsID, id,failLabel;
 	protected SalesblService salesblService;
 	protected CommodityVO commodityVO;
 	protected int num;
@@ -45,6 +45,7 @@ public class ImInPanel extends FatherPanel {
 		this.controller = controller;
 		buttonListener = new ButtonListener();
 		salesblService = new SalesController();
+		this.addLabel();
 		this.addTextField();
 		this.addButton();
 		this.addCombox();
@@ -160,34 +161,41 @@ public class ImInPanel extends FatherPanel {
 		}
 
 		public void focusLost(FocusEvent e) {
+			try{
 			num = Integer.parseInt(goodsNum.getText());
 			getTotalPrice();
+			}catch(Exception e2){
+				failLabel.setText("请正确输入信息!");
+			}
 		}
 
 	}
-
+	public void addLabel() {
+		failLabel = new MyLabel(488, 530, 200, 35);
+		this.add(failLabel);
+	}
+	
 	class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(ImInPanel.this);
 			} else if (e.getSource() == forward) {
-				// ImportMenuVO(String note,String supplier,String
-				// warehouse,String commodityList,int bill_note)
-				// CommodityListVO(String id, String name, String type, int num,
-				// double price, double total, String remark)
+			
+				if(id.getText().equals("")||remark.getText().equals("")||supplier.getText().equals("")||
+						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
+					failLabel.setText("请正确输入信息！");
+				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());
 				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
 						warehouse.getText(), commodityListVO, 2);
-				// (MyFrame frame,String url,UIController
-				// controller,ImportMenuVO importMenuVO,
-				// CommodityListVO commodityListVO,String personLabel,String
-				// operatorLabel,ImInPanel imInPanel)
+	
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg", controller,
 						importMenuVO, commodityListVO, person.getText(), operator.getText(), ImInPanel.this,salesUIController);
 				frame.remove(ImInPanel.this);
 				frame.setPanel(makeSureIm);
+				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {
 				setType();

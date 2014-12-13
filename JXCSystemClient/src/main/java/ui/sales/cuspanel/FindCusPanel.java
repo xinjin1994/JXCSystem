@@ -8,6 +8,7 @@ import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import vo.CustomerVO;
@@ -24,6 +25,7 @@ public class FindCusPanel extends FatherPanel {
 	protected MyTextFieldBorder cusName, cusID, cusExactFind;
 	protected CustomerVO customerVO;
 	SalesblService salesBlService;
+	protected MyLabel failLabel;
 
 	public FindCusPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame, url, controller);
@@ -60,6 +62,11 @@ public class FindCusPanel extends FatherPanel {
 		forward1.addMouseListener(buttonListener);
 		forward2.addMouseListener(buttonListener);
 	}
+	
+	public void addLabel() {
+		failLabel = new MyLabel(254, 500, 200, 35);
+		this.add(failLabel);
+	}
 
 	class ButtonListener implements MouseListener {
 
@@ -67,6 +74,9 @@ public class FindCusPanel extends FatherPanel {
 			if (e.getSource() == secondCusBack) {
 				salesUIController.backPanel(FindCusPanel.this);
 			} else if (e.getSource() == forward1) {
+				if(cusName.getText().equals("")||cusID.getText().equals("")){
+					failLabel.setText("请正确输入信息！");
+				}else{
 				String name = cusName.getText();
 				String id = cusID.getText();
 				CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
@@ -88,11 +98,11 @@ public class FindCusPanel extends FatherPanel {
 						+ customerVO.shouldGet + ";" + customerVO.shouldPay + ";" + customerVO.person;*/
 				String cusInTable = "1;2;3;4;5;6;7;8;9;10";
 				frame.setPanel(new MakeSureFindInfo(frame,"Image/Sales/对话框/null.jpg",controller,FindCusPanel.this,cusInTable,salesUIController));
+				}
 				frame.repaint();
 				// 此次应该显示表格
 				// frame.setPanel(new
 				// MakeSureFindInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,FindCusPanel.this));
-				frame.repaint();
 			} else if (e.getSource() == forward2) {
 				String info = cusExactFind.getText();
 				ArrayList<CustomerVO> cusVOArray = salesBlService.searchFuzzyCustomer_up(info);
