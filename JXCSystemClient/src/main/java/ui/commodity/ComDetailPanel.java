@@ -1,12 +1,8 @@
 package ui.commodity;
 
 import java.awt.Color;
-import java.awt.color.CMMException;
-
-import javax.swing.JFrame;
 
 import ui.FatherPanel;
-import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
 import ui.setting.MyFrame;

@@ -38,6 +38,10 @@ public class SalesBackPanel extends SalesInPanel{
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesBackPanel.this);
 			} else if (e.getSource() == forward) {
+				if(id.getText().equals("")||newRemark.getText().equals("")||supplier.getText().equals("")||
+						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
+					failLabel.setText("请正确输入信息！");
+				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, num*price, newRemark.getText());
 				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
@@ -46,6 +50,7 @@ public class SalesBackPanel extends SalesInPanel{
 						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesBackPanel.this,salesUIController);
 				frame.remove(SalesBackPanel.this);
 				frame.setPanel(makeSureIm);
+				}
 				frame.repaint();
 			}
 		}

@@ -7,6 +7,7 @@ import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import vo.CustomerVO;
@@ -21,6 +22,7 @@ public class ChangeCusPanel extends FatherPanel{
 	private SalesUIController salesUIController;
 	protected MyTextFieldBorder cusName,cusID;
 	protected CustomerVO customerVO;
+	protected MyLabel failLabel;
 	
 	public ChangeCusPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame,url,controller);
@@ -30,6 +32,7 @@ public class ChangeCusPanel extends FatherPanel{
 		buttonListener = new ButtonListener();
 		this.addSecondTextField();
 		this.addRestButton();
+		addLabel();
 	}
 	
 	public void addSecondTextField(){
@@ -50,20 +53,28 @@ public class ChangeCusPanel extends FatherPanel{
 		forward.addMouseListener(buttonListener);
 	}
 	
+	public void addLabel() {
+		failLabel = new MyLabel(254, 412, 200, 35);
+		this.add(failLabel);
+	}
+	
 	class ButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == secondCusBack){
 				salesUIController.backPanel(ChangeCusPanel.this);
 			}else if(e.getSource() == forward){
+				if(cusName.getText().equals("")||cusID.getText().equals("")){
+					failLabel.setText("请正确输入信息！");
+				}else{
 				String name = cusName.getText();
 				String id = cusID.getText();
 				SalesblService salesBlService = new SalesController();
 				CustomerVO customerVO= salesBlService.searchExactCustomer_up(name);
 				frame.remove(ChangeCusPanel.this);
 				frame.setPanel(new MakeSureChangeInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,ChangeCusPanel.this));
+				}
 				frame.repaint();
-				
 			}
 			
 		}

@@ -40,6 +40,11 @@ public class UIController {
 //		this.AccountPanel();
 
 		this.SalesManagerPanel();
+	  	this.AccountPanel();
+//		this.AccountPanel();
+
+//	this.ManagerPanel();
+//		this.SalesManagerPanel();
 
 //		this.AdminPanel();
 

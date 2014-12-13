@@ -8,6 +8,7 @@ import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
@@ -27,6 +28,7 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 	private MyButton forwardButton;
 	private String delAccString;
 	AccountVO delAcc;
+	private MyLabel failLabel;
 	
 	private String type = "account";
 	public DelAccountPanel(MyFrame frame,String url,
@@ -36,6 +38,7 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 		this.repaint();
 		accountblService = new AccountController();
 		uiController.setBack_second(this,199,141);
+		addLabel();
 		init();
 		
 	}
@@ -63,6 +66,10 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 		forwardButton.addActionListener(this);
 	}
 	
+	public void addLabel() {
+		failLabel = new MyLabel(275, 320, 200, 35);
+		this.add(failLabel);
+	}
 	private void setTextField() {
 		name = new MyTextFieldBorder(275, 245);
 		name.setForeground(new ColorFactory().greyFont);
@@ -73,6 +80,9 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			delAccString = name.getText();
+			if(delAccString.equals("")){
+				failLabel.setText("请正确输入信息!");
+			}else{
 			delAcc = accountblService.searchAccurateAccount_up(delAccString);
 //			delAcc = new AccountVO(delAccString,20);//这个是从下层传回来的要删除的account，通过查找账户
 			frame.remove(DelAccountPanel.this);
@@ -83,6 +93,8 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 			}
 			
 			name.setText("");
+			}
+			frame.repaint();
 		}
 	}
 }

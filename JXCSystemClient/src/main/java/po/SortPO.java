@@ -7,6 +7,8 @@ public class SortPO implements Serializable{
 	public String name;
 	public String note;
 	
+	public String father;
+	
 //	SortPO fatherSort;
 	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
 	public ArrayList<SortPO> sortList;

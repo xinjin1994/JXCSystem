@@ -690,6 +690,73 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		 String sysDatetime = fmt.format(rightNow.getTime());
 		 return sysDatetime; 
 	}
+
+	public boolean passReceipt(ReceiptPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		for(int i=0;i<receiptList.size();i++){
+			if(receiptList.get(i).getNote().equals(po.getNote())){
+				receiptList.get(i).transfer=new ArrayList<TransferPO>();
+				receiptList.get(i).customer=po.getCustomer().copy();
+				for(int z=0;z<po.getTransfer().size();z++){
+					TransferPO tra=po.getTransfer().get(z).copy();
+					receiptList.get(i).transfer.add(tra);
+				}
+				
+				ArrayList<TransferPO> trans=receiptList.get(i).getTransfer();
+				for(int j=0;j<trans.size();j++){
+					AccountPO acc=findAccount_true(trans.get(j).getAccount());
+					addMoney(acc,trans.get(j).getMoney());
+				}
+				receiptList.get(i).setCondition(2);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean passPayment(PaymentPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		for(int i=0;i<paymentList.size();i++){
+			if(paymentList.get(i).getNote().equals(po.getNote())){
+				
+				paymentList.get(i).item=new ArrayList<ItemPO>();
+				for(int z=0;z<po.getItem().size();z++){
+					ItemPO tra=po.getItem().get(z).copy();
+					paymentList.get(i).item.add(tra);
+				}
+				
+				ArrayList<ItemPO> trans=paymentList.get(i).getItem();
+				for(int j=0;j<trans.size();j++){
+					delMoney(paymentList.get(i).getAccount(),trans.get(j).getMoney());
+				}
+				paymentList.get(i).setCondition(2);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean refuseReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		for(int i=0;i<receiptList.size();i++){
+			if(receiptList.get(i).getNote().equals(note)){
+				receiptList.get(i).setCondition(3);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean refusePayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		for(int i=0;i<paymentList.size();i++){
+			if(paymentList.get(i).getNote().equals(note)){
+				paymentList.get(i).setCondition(3);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 
 

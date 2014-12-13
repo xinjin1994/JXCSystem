@@ -36,7 +36,7 @@ public interface UserblService {
 	public int login_up(String name, String password);
 	
 	public String getUserNote();
-	public UserVO searchUser_Note(String note);
+//	public UserVO searchUser_Note(String note);
 	
 	
 	public UserVO searchUser_up(String name);

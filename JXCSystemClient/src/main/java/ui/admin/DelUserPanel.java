@@ -3,16 +3,15 @@ package ui.admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import ui.FatherPanel;
-import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import vo.UserVO;
+import businesslogic.userbl.UserController;
+import businesslogicservice.userblservice.UserblService;
 
 public class DelUserPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
@@ -22,6 +21,9 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 	private MyTextFieldBorder idTextField;
 	
 	private UserVO user;
+	
+	private UserblService userblService;
+	
 	public DelUserPanel(MyFrame frame, String url, AdminAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
@@ -31,6 +33,8 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 		
 		addTextField();
 		setForward();
+		
+		userblService = new UserController();
 		
 		this.repaint();
 	}
@@ -53,8 +57,9 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 			 * user是从下层搜索到的
 			 * 
 			 */
-//			user = new UserVO("21", "2", "2", 1);
-			adminAllUIController.confirmUserPanel(user,"删除");
+//			user = userblService.searchUser_up(idTextField.getText());
+			user = new UserVO("21", "2", "2", 1);
+			adminAllUIController.confirmUserDel(user,"删除");
 			frame.repaint();
 		}
 	}

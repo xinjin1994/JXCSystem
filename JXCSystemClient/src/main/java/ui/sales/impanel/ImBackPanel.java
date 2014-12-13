@@ -35,6 +35,10 @@ public class ImBackPanel extends ImInPanel {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(ImBackPanel.this);
 			} else if (e.getSource() == forward) {
+				if(id.getText().equals("")||remark.getText().equals("")||supplier.getText().equals("")||
+						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
+					failLabel.setText("请正确输入信息！");
+				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());
 				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
@@ -43,6 +47,7 @@ public class ImBackPanel extends ImInPanel {
 						importMenuVO, commodityListVO, person.getText(), operator.getText(), ImBackPanel.this,salesUIController);
 				frame.remove(ImBackPanel.this);
 				frame.setPanel(makeSureIm);
+				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {
 				setType();
@@ -53,22 +58,18 @@ public class ImBackPanel extends ImInPanel {
 		}
 
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 		

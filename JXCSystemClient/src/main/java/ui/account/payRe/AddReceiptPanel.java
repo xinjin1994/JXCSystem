@@ -28,7 +28,7 @@ import businesslogicservice.accountblservice.AccountblService;
 public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	AccountAllUIController uiController;
 	MyButton forwardButton;
-	MyLabel idLabel, balance, operator, total;
+	MyLabel idLabel, balance, operator, total,failLabel;
 	MyTextFieldTrans ps, agent;
 	MyTextFieldTrans money;
 	MyComboBox customer, account;
@@ -42,6 +42,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		this.repaint();
 		accountblService = new AccountController();
 		uiController.setBack_first(this);
+		addLabel();
 		setForward();
 		setIDOpe();
 		setCustomer();
@@ -107,14 +108,14 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		idLabel = new MyLabel(106, 165, 221, 55);
 		idLabel.setForeground(new ColorFactory().accColor);
 		// idLabel.setText("id");
-		id = accountblService.getReceiptNote_up();
+//		id = accountblService.getReceiptNote_up();
 		idLabel.setText(id);
 		this.add(idLabel);
 
 		operator = new MyLabel(575, 370, 155, 55);
 		operator.setForeground(new ColorFactory().accColor);
 		// operator.setText("我是操作员");
-		operate = accountblService.getOperator_up();
+//		operate = accountblService.getOperator_up();
 		operator.setText(operate);
 		this.add(operator);
 	}
@@ -149,39 +150,25 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		this.repaint();
 	}
 
-	/*
-	 * public void changedUpdate(DocumentEvent e) { Document doc =
-	 * e.getDocument(); try { String totalMoney = doc.getText(0,
-	 * doc.getLength()); } catch (BadLocationException e1) { // TODO
-	 * Auto-generated catch block e1.printStackTrace(); } setTotal(); }
-	 */
-
 	/**
 	 * 实现根据输入的名称寻找余额的动态监听
 	 */
-	/*
-	 * public void insertUpdate(DocumentEvent e) { Document doc =
-	 * e.getDocument(); try { String totalMoney = doc.getText(0,
-	 * doc.getLength()); } catch (BadLocationException e1) { // TODO
-	 * Auto-generated catch block e1.printStackTrace(); } total = new
-	 * MyLabel(407, 496,318, 43); total.setText(money.getText());
-	 * this.add(total); this.repaint();
-	 * 
-	 * 
-	 * } public void removeUpdate(DocumentEvent e) { Document doc =
-	 * e.getDocument(); try { String totalMoney = doc.getText(0,
-	 * doc.getLength()); } catch (BadLocationException e1) { // TODO
-	 * Auto-generated catch block e1.printStackTrace(); } total = new
-	 * MyLabel(407, 496,318, 43); total.setText(money.getText());
-	 * this.add(total); this.repaint();
-	 * 
-	 * }
-	 */
+
+	public void addLabel() {
+		failLabel = new MyLabel(407, 550, 200, 35);
+		this.add(failLabel);
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
+			
 			remark = ps.getText();// 备注
 			person = agent.getText();// 业务员
+			
+			if(remark.equals("")||person.equals("")||money.getText().equals("")){
+				failLabel.setText("请正确输入信息！");
+			}else{
+				try{
 			turnMoney = Double.parseDouble(money.getText());// 转账金额
 			String accName = account.getSelectedItem().toString();// 银行账户
 			String cusName = customer.getSelectedItem().toString();// 客户姓名
@@ -194,18 +181,19 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 //			double balance = 20;
 			setBalanceLabel(balance);
 			TransferListVO transferListVO = new TransferListVO(accName, turnMoney, remark);
-			// GetVO(String id, String cusName, String operator, TransferListVO
-			// transferList) {
-			// 单据编号（SKD-yyyyMMdd-xxxxx），客户（同时包含供应商和销售商），操作员（当前登录用户），转账列表
 			newReceipt = new GetVO(id, cusName,transferListVO);
 			total.setText(accountblService.calTotalMoney_up(newReceipt) + "");
 //			setTotal();
 
 			frame.remove(this);
-
 			uiController.confirmReceipt(newReceipt,person,operate,accountblService.calTotalMoney_up(newReceipt),balance);
+				}catch(Exception e2){
+					failLabel.setText("请正确输入信息！");
+				}
 			//这边将新生成的收款单信息传给确认收款单界面
-		} else if (e.getSource() == account) {
+				} 
+			
+		}else if (e.getSource() == account) {
 			String accName = account.getSelectedItem().toString();
 			// int balance = 10;//根据accName到下层寻找的余额
 			double balance = accountblService.searchAccurateAccount_up(accName).balance;// 余额

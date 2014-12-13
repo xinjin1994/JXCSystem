@@ -26,6 +26,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	ArrayList<CommodityPO> giftList=new ArrayList<CommodityPO>();
 	ArrayList<PatchPO> draftPatchList=new ArrayList<PatchPO>();
 	ArrayList<SendGiftPO> sendGiftList=new ArrayList<SendGiftPO>();
+	
 	int comNote=0;
 	int sortNote=0;
 	int sendNote=0;
@@ -688,10 +689,21 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean updateSort_Mov(SortPO po1, SortPO po2) throws RemoteException {
 		// TODO Auto-generated method stub
-		SortPO po3=po1.copy();
+		String father;
+		SortPO po3=findSort_true(po1.getName());
 		SortPO po4=findSort_true(po2.getName());
+		String[] str3=po3.getNote().split("-");
+		String[] str4=po4.getNote().split("-");
+		
+		if(po4.father!=null){
+			father=str4[2];
+		}else{
+			father=str4[1];
+		}
 		if(po4!=null){
-			delSort(po1);
+			SortPO po5=findSort_true(po1.father);
+			po5.sortList.remove(po3);
+			po3.note=str3[0]+father+str3[2];
 			addSort(po3,po4);
 			this.writeSortList();
 			return true;

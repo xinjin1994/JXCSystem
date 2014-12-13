@@ -8,7 +8,7 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 	String operator;//����Ա
 	CustomerPO customer;
 	ArrayList<TransferPO> transfer;
-	int total_money;//ת���ܶ�
+	double total_money;//ת���ܶ�
 	
 	public ReceiptPO(String operator, CustomerPO customer,ArrayList<TransferPO> transfer) {
 		this.transfer=transfer;
@@ -43,7 +43,7 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 	public ArrayList<TransferPO> getTransfer() {
 		return transfer;
 	}
-	public int getTotalMoney(){
+	public double getTotalMoney(){
 		return total_money;
 	}
 	public ArrayList<String> getAccountName(){
@@ -54,8 +54,8 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 		}
 		return array;
 	}
-	public ArrayList<Integer> getPrice(){
-		ArrayList<Integer> array=new ArrayList<Integer>();
+	public ArrayList<Double> getPrice(){
+		ArrayList<Double> array=new ArrayList<Double>();
 		int i=0;
 		for(i=0;i<transfer.size();i++){
 			array.add(transfer.get(i).getMoney());

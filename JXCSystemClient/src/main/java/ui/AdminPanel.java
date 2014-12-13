@@ -1,13 +1,13 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 
 import ui.admin.AdminAllUIController;
 import ui.setting.ColorFactory;
@@ -17,6 +17,8 @@ import ui.setting.MyTable;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import vo.UserVO;
+import businesslogic.userbl.UserController;
+import businesslogicservice.userblservice.UserblService;
 
 //0 管理员
 public class AdminPanel extends FatherPanel{
@@ -31,30 +33,41 @@ public class AdminPanel extends FatherPanel{
 	private ImageIcon imageIcon;
 	private MyTextFieldBorder searchTextField;
 	private MyFrame frame;
+	private MyLabel label;
 	
 	private MyTable showTable;
 	private MyLabel[] infoLabels = new MyLabel[3];
 	
+	private UserblService userblService;
 	private ColorFactory colors = new ColorFactory();
 	public AdminPanel(MyFrame frame, String url, UIController controller,
 			AdminAllUIController adminAllUIController) {
 		super(frame, url, controller);
 		this.adminAllUIController= adminAllUIController;
 		this.frame = frame;
+		userblService = new UserController();
+		setLabel();
 		setButtons();
 		setSearchText();
 		setTable();
 		this.repaint();
 	}
+	
+	public void setLabel(){
+		label = new MyLabel(100,305+72*3,212,35);
+		this.add(label);
+	}
 	/**
 	 * 这个table在已进入admin界面就会出现，内容是现有的所有员工的信息
 	 */
 	private void setTable() {
+		ArrayList<UserVO> user = new ArrayList<UserVO>();
 		ArrayList <String> info = new ArrayList<String>();
-		info.add("a;b;c;e");
-		info.add("s,r,t,h");
-		info.add("w;t;x;h");
-		info.add("gg");
+		info.add("ID;用户名;职位");
+		for(int i=0;i<user.size();i++){
+			String userItem = user.get(i).id+";"+user.get(i).name+";"+user.get(i).duty;
+			info.add(userItem);
+		}
 		
 		showTable = new MyTable();
 		showTable.setColor(colors.adminTableColor,colors.adminBkColor, colors.adminColor,Color.white);
@@ -65,6 +78,19 @@ public class AdminPanel extends FatherPanel{
 		searchTextField = new MyTextFieldBorder(15, 99);
 		searchTextField.setForeground(colors.greyFont);
 		this.add(searchTextField);
+		searchTextField.addFocusListener(new SearchListener());
+	}
+	
+	class SearchListener implements FocusListener{
+
+		public void focusGained(FocusEvent e) {
+			label.setText("");
+		}
+
+		public void focusLost(FocusEvent e) {
+			
+		}
+		
 	}
 	private void setButtons() {
 		userButtons[0] = new MyButton(image_ori[0],288,99,image_stop[0],image_stop[0]);
@@ -77,17 +103,58 @@ public class AdminPanel extends FatherPanel{
 			userButtons[i].addMouseListener(listener);
 		}
 	}
-
+	/**
+	 * 验证登陆账号密码
+	 * <0代表失败
+	 * 0代表管理员
+	 * 1代表库存人员
+	 * 2代表销售人员
+	 * 3代表销售经理
+	 * 4代表财务人员
+	 * 5代表财务经理
+	 * 6代表总经理
+	 */
 	public void setInfoLabel(UserVO user){
+		String userDuty = "";
 		for(int i = 0;i < infoLabels.length;i++){
 			infoLabels[i] = new MyLabel(100, 305+72*i, 212, 35);
 			this.add(infoLabels[i]);
 			infoLabels[i].setForeground(new ColorFactory().greyFont);
 		//	infoLabels[i].setText(""+i);
 		}
-		infoLabels[0].setText("1");
-		infoLabels[1].setText("2");
-		infoLabels[2].setText("3");
+		if(user.duty <0){
+			label.setText("管理员不存在！");
+		}else{
+		switch(user.duty){
+		case 0:
+			userDuty = "管理员";
+			break;
+		case 1:
+			userDuty = "库存人员";
+			break;
+		case 2:
+			userDuty = "销售人员";
+			break;
+		case 3:
+			userDuty = "销售经理";
+			break;
+		case 4:
+			userDuty = "财务人员";
+			break;
+		case 5:
+			userDuty = "财务经理";
+			break;
+		case 6:
+			userDuty = "总经理";
+			break;
+		default:
+			userDuty = "";
+			break;
+		}
+		infoLabels[0].setText(user.id);
+		infoLabels[1].setText(user.name);
+		infoLabels[2].setText(userDuty);
+		}
 		this.repaint();
 	}
 
@@ -96,7 +163,9 @@ public class AdminPanel extends FatherPanel{
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == userButtons[0]){
 				String findInfoS = searchTextField.getText();
-		//		setInfoLabel(userVo);
+				UserVO user = userblService.searchUser_up(findInfoS);
+//				UserVO user = new UserVO("a","v","c",-1);
+				setInfoLabel(user);
 				//根据此信息寻找，级如果在下方详细信息中显示,将参数UserVo传给setInfoLabel方法
 			}else if(e.getSource() == userButtons[1]){
 				frame.remove(AdminPanel.this);
@@ -121,7 +190,6 @@ public class AdminPanel extends FatherPanel{
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			
 		}
 

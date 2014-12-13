@@ -54,9 +54,13 @@ public class SalesInPanel extends ImInPanel{
 		return price;
 	}
 	public void getTotalPrice() {
-		totalPriceText = this.getPrice() * num-Double.parseDouble(discount.getText())-Double.parseDouble(voucher.getText());
-		goodsTotal.setText(totalPriceText + "");
-		this.add(goodsTotal);
+		try{
+			totalPriceText = this.getPrice() * num-Double.parseDouble(discount.getText())-Double.parseDouble(voucher.getText());
+			goodsTotal.setText(totalPriceText + "");
+			this.add(goodsTotal);
+		}catch(Exception e2){
+			failLabel.setText("请正确输入信息！");
+		}
 	}
 	class MouListener implements MouseListener{
 
@@ -64,18 +68,21 @@ public class SalesInPanel extends ImInPanel{
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesInPanel.this);
 			} else if (e.getSource() == forward) {
+				
+				if(id.getText().equals("")||newRemark.getText().equals("")||supplier.getText().equals("")||
+						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
+					failLabel.setText("请正确输入信息！");
+				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, num*price, newRemark.getText());
-//				CommodityListVO(String id, String name, String type, int num, double price(折让前总价), double total, String remark)
-//				public ExportMenuVO(String note,String cusName,String salesMan,String warehouse,
-//						CommodityListVO commodityList,double discount,double voucherPrice,
-//						double afterValue,int bill_note){
+
 				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
 						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
 						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesInPanel.this,salesUIController);
 				frame.remove(SalesInPanel.this);
 				frame.setPanel(makeSureIm);
+				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {
 				setType();

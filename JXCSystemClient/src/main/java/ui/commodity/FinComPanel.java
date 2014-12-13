@@ -3,15 +3,11 @@ package ui.commodity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import ui.FatherPanel;
-import ui.UIController;
-import ui.setting.ColorFactory;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.CommodityVO;
 

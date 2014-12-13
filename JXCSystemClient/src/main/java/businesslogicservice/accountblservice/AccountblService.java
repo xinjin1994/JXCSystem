@@ -69,8 +69,8 @@ public interface AccountblService {
 	public double calTotalMoney_up(GetVO vo);
 	public double calTotalMoney_up(PayVO vo);
 	
-	//获得当前登陆用户
-	public UserVO getNowUser_up();
+//	//获得当前登陆用户
+//	public UserVO getNowUser_up();
 	
 	//获得所有客户信息
 	public ArrayList<CustomerVO> getAllCustomer_up();

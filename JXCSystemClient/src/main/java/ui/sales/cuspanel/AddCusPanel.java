@@ -28,7 +28,7 @@ public class AddCusPanel extends FatherPanel {
 	protected MyButton secondCusBack, forward;
 	protected MyStopButton level1,level2,level3,level4,level5;
 	protected MyTextFieldFilled salesManField;
-	protected MyLabel idField;
+	protected MyLabel idField,failLabel;
 	private ButtonListener buttonListener;
 	private MyFrame frame;
 	private UIController controller;
@@ -56,6 +56,9 @@ public class AddCusPanel extends FatherPanel {
 		idField = new MyLabel(105, 173, 222, 36);
 		this.add(idField);
 		idField.setText(salesblService.getCustomerNote_up());
+		
+		failLabel = new MyLabel(418,550,204,35);
+		this.add(failLabel);
 	}
 	public void addTextField() {
 		cusName = new MyTextFieldTrans(infoX1, infoY, infoWidth1, infoHeight);
@@ -166,8 +169,9 @@ public class AddCusPanel extends FatherPanel {
 			}else if (e.getSource() == forward) {
 				//CustomerVO(String id,boolean classification,int level,String cusName,String tel,String address,String zipCode,String ezipCode,double mostOwe,double shouldGet,double shouldPay,String person){
 				//编号、分类（供应商、销售商）、级别（五级，一级普通用户，五级VIP客户）、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员
-				//false代表供应商，true代表销售商
+		//false代表供应商，true代表销售商
 //				String ID = idField.getText();
+				try{
 				String name = cusName.getText();
 				String tel = cusTel.getText();
 				String add = cusAdd.getText();
@@ -180,6 +184,10 @@ public class AddCusPanel extends FatherPanel {
 				CustomerVO customerVO = new CustomerVO(id,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
 				frame.remove(AddCusPanel.this);
 				frame.setPanel(new MakeSureAddInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,AddCusPanel.this));
+				}catch(Exception e2){
+					failLabel.setText("请正确输入信息！");
+				}
+				
 				frame.repaint();
 			} 
 		}

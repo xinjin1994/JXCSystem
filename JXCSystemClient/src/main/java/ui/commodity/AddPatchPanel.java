@@ -3,20 +3,15 @@ package ui.commodity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import ui.FatherPanel;
-import ui.UIController;
 import ui.setting.ColorFactory;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
-import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
-import ui.setting.MyTextFieldBorder;
-import ui.setting.MyTextFieldTrans;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
+import ui.setting.ComboBox.MyComboBox;
+import ui.setting.TextField.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
-import vo.SortVO;
 import vo.bill.PatchVO;
 
 public class AddPatchPanel extends FatherPanel implements ActionListener{

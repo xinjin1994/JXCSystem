@@ -199,7 +199,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return null;
 	}
 
-	public int addSort(String name1,String name2) {
+	public int addSort(SortPO sort1,SortPO sort2) {
 		SortPO po1=null;
 //		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
 //		sto = new CommodityDataService_Stub();
@@ -211,9 +211,9 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			ArrayList<SortPO> sort=sto.getAllSort();
 			
 			for(i=0;i<sort.size();i++){
-				if(sort.get(i).getName().equals(name1)){
+				if(sort.get(i).getName().equals(sort1.getName())){
 					po1=sort.get(i);
-				}else if(sort.get(i).getName().equals(name2)){
+				}else if(sort.get(i).getName().equals(sort2.getName())){
 					po2=sort.get(i);
 				}
 			}
@@ -225,7 +225,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 4;
 			}
 			
-			if (sto.addSort(po1,po2)) {
+			if (sto.addSort(sort1,sort2)) {
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -398,7 +398,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return -1;
 	}
 
-	public int patch(String name, String type, int number) {
+	public int patch(String name, String type, int number,String note) {
 //		CommodityPO com1 = new CommodityPO(true,"name","type",10,10,10,20,20,100);
 		CommodityPO com =null;
 		

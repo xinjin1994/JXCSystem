@@ -3,13 +3,8 @@ package ui.commodity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.FatherPanel;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
-import ui.setting.MyTextFieldTrans;
-import ui.setting.resultPanels.ResultPanelController;
-import vo.AccountVO;
+import ui.setting.TextField.MyTextFieldTrans;
 import vo.CommodityVO;
 
 public class ChaComDPanel extends AddComPanel implements ActionListener{

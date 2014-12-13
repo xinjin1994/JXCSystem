@@ -33,7 +33,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	AccountAllUIController uiController;
 	AccountblService accountblService;
 	MyButton forwardButton;
-	MyLabel idLabel,balance,operator,total;
+	MyLabel idLabel,balance,operator,total,failLabel;
 	MyTextFieldTrans ps,agent,item;
 	MyTextFieldTrans money;
 	MyComboBox customer,account;
@@ -49,6 +49,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		this.repaint();
 		accountblService = new AccountController();
 		uiController.setBack_first(this);
+		addLabel();
 		setAccount();
 		setIDOpe();
 		setTypeIn();
@@ -99,13 +100,13 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	private void setIDOpe() {
 		idLabel = new MyLabel(106,165, 221,55);
 		idLabel.setForeground(new ColorFactory().accColor);
-		id = accountblService.getPaymentNote_up();
+//		id = accountblService.getPaymentNote_up();
 		idLabel.setText(id);
 		this.add(idLabel);
 		
 		operator = new MyLabel(575, 370, 155, 55);
 		operator.setForeground(new ColorFactory().accColor);
-		operate = accountblService.getOperator_up();
+//		operate = accountblService.getOperator_up();
 		operator.setText(operate);
 		this.add(operator);
 	}
@@ -135,56 +136,26 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		this.add(total);
 		this.repaint();
 	}
-	/*public void changedUpdate(DocumentEvent e) {
-		Document doc = e.getDocument();
-		try {
-			String totalMoney = doc.getText(0, doc.getLength());
-		} catch (BadLocationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		setTotal();
-	}*/
 	
 	/**
 	 * 实现根据输入的名称寻找余额的动态监听
 	 */
-/*	public void insertUpdate(DocumentEvent e) {
-		Document doc = e.getDocument();
-		try {
-			String totalMoney = doc.getText(0, doc.getLength());
-		} catch (BadLocationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		total = new MyLabel(407, 496,318, 43);
-		total.setText(money.getText());
-		this.add(total);
-		this.repaint();
-		
-		
+	
+	public void addLabel() {
+		failLabel = new MyLabel(407, 550, 200, 35);
+		this.add(failLabel);
 	}
-	public void removeUpdate(DocumentEvent e) {
-		Document doc = e.getDocument();
-		try {
-			String totalMoney = doc.getText(0, doc.getLength());
-		} catch (BadLocationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		total = new MyLabel(407, 496,318, 43);
-		total.setText(money.getText());
-		this.add(total);
-		this.repaint();
-		
-	}*/
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			String payItem = item.getText();
 			String remark = ps.getText();
-			double turnValue = Double.parseDouble(money.getText());
 			String person = agent.getText();
+			if(payItem.equals("")||remark.equals("")||money.getText().equals("")||person.equals("")){
+				failLabel.setText("请正确输入信息！");
+			}else{
+				try{
+			double turnValue = Double.parseDouble(money.getText());
 			//PayVO(String note,String bankAccount,ItemList itemList)
 			//ItemList(String itemName, double money, String remark)
 			ItemList itemList = new ItemList(payItem,turnValue,remark);
@@ -193,6 +164,10 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			uiController.confirmPayment(newPayment,person,operate,
 					totalValue,balanceValue);
+				}catch(Exception e2){
+					failLabel.setText("请正确输入信息！");
+				}
+			}
 		}else if(e.getSource() == account){
 			accountName = account.getSelectedItem().toString();
 			balanceValue = accountblService.searchAccurateAccount_up(accountName).balance;
