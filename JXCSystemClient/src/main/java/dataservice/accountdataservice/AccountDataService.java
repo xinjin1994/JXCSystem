@@ -56,6 +56,14 @@ public interface AccountDataService extends Remote {
 	public String getReceiptNote() throws RemoteException;
 	
 	public String getPaymentNote() throws RemoteException;
+	
+	public boolean passReceipt(ReceiptPO po) throws RemoteException;
+	
+	public boolean passPayment(PaymentPO po) throws RemoteException;
+	
+	public boolean refuseReceipt(String note) throws RemoteException;
+	
+	public boolean refusePayment(String note) throws RemoteException;
 
 	public boolean clear() throws RemoteException;
 }

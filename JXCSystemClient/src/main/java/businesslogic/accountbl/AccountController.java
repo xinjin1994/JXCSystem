@@ -3,11 +3,12 @@ package businesslogic.accountbl;
 import java.util.ArrayList;
 
 import po.AccountPO;
+import po.ReceiptPO;
 import vo.AccountVO;
 import vo.CustomerVO;
-import vo.UserVO;
 import vo.bill.GetVO;
 import vo.bill.PayVO;
+import vo.bill.TransferListVO;
 import businesslogicservice.accountblservice.AccountblService;
 
 public class AccountController implements AccountblService{
@@ -86,19 +87,26 @@ public class AccountController implements AccountblService{
 		return vo.itemList.money;
 	}
 
-	public UserVO getNowUser_up() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public UserVO getNowUser_up() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	public ArrayList<CustomerVO> getAllCustomer_up() {
 		// TODO Auto-generated method stub
-		return null;
+		return account.getAllCustomer();
 	}
 
 	public ArrayList<AccountVO> getAllAccount_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<AccountVO> array=new ArrayList<AccountVO>();
+		ArrayList<AccountPO> po=account.getAllAccount();
+		AccountVO vo;
+		for(int i=0;i<po.size();i++){
+			vo=new AccountVO(po.get(i).getName(),po.get(i).getMoney());
+			array.add(vo);
+		}
+		return array;
 	}
 
 	public int addDraftReceipt_up(GetVO vo) {
@@ -133,6 +141,14 @@ public class AccountController implements AccountblService{
 
 	public GetVO searchReceipt_up(String note) {
 		// TODO Auto-generated method stub
+		ArrayList<ReceiptPO> po=account.getAllReceipt();
+		GetVO vo;
+		for(int i=0;i<po.size();i++){
+			if(po.get(i).getNote().equals(note)){
+				TransferListVO trans=new TransferListVO(po.get(i).getTransfer().get(0).getAccount(),po.get(i).getTransfer().get(0).getMoney(),po.get(i).getTransfer().get(0).getPs());
+				vo=new GetVO(po.get(i).getNote(), po.get(i).getCustomer().getName(), po.get(i).getOperator(), trans,po.get(i).getTime(),po.get(i).getInvoiceNote());
+			}
+		}
 		return null;
 	}
 
@@ -143,7 +159,7 @@ public class AccountController implements AccountblService{
 
 	public AccountVO searchAccurateAccount_up(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		return account.searchAccurateAccount_up(name);
 	}
 
 }

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class ReceiptPO extends InvoicePO implements Serializable{
 	String operator;//����Ա
-	CustomerPO customer;
-	ArrayList<TransferPO> transfer;
+	public CustomerPO customer;
+	public ArrayList<TransferPO> transfer;
 	int total_money;//ת���ܶ�
 	
 	public ReceiptPO(String operator, CustomerPO customer,ArrayList<TransferPO> transfer) {

@@ -9,6 +9,7 @@ import po.PaymentPO;
 import po.ReceiptPO;
 import po.TransferPO;
 import vo.AccountVO;
+import vo.CustomerVO;
 import vo.bill.GetVO;
 import vo.bill.PayVO;
 import businesslogic.invoicebl.Invoice;
@@ -54,7 +55,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 				return 1;
 			}
 		
-			AccountPO acc = new AccountPO(vo.name, (int) vo.balance);
+			AccountPO acc = new AccountPO(vo.name, vo.balance);
 
 			if (account.addAccount(acc)) {
 				systemlog.add_up("addAccount:"+acc.getName()+","+acc.getMoney());
@@ -125,99 +126,73 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 		return -1;
 	}
 
-	public ArrayList<AccountVO> searchFuzzyAccount_up(String word) {
+	public ArrayList<AccountPO> searchFuzzyAccount_up(String word) {
 		// TODO Auto-generated method stub
-		ArrayList<AccountVO> vo=new ArrayList<AccountVO>();
 		try {	
 			ArrayList<AccountPO> po=account.getAllAccount();
-	
-
-
-		
+			ArrayList<AccountPO> array=new ArrayList<AccountPO>();
 			AccountPO lin=account.findAccount(word);
-			if(lin!=null){
-				vo.add(new AccountVO(lin));
-			}
+			array.add(lin);
 			
-			return vo;
+			return po;
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return vo;
+		return new ArrayList<AccountPO>();
 	}
 	
-	public ArrayList<AccountVO> searchAccurateAccount_up(String name){
+	public AccountPO searchAccurateAccount_up(String name){
 		
-		ArrayList<AccountVO> array=new ArrayList<AccountVO>();
 		try {
 			AccountPO po=account.findAccount(name);
-			AccountVO vo=new AccountVO(po.name,po.money);
-			array.add(vo);
-			return array;
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return array;
+		return null;
 	}
 
-	public int addReceipt_up(GetVO vo) {
+	public int addReceipt_up(ReceiptPO po) {
 		// TODO Auto-generated method stub
-		
-		ReceiptPO po= new ReceiptPO("operator", new CustomerPO(null, 0, false, null),
-				 new ArrayList<TransferPO>());
-		
-		invoice.add(po);
-		systemlog.add_up("addReceipt:"+po.getOperator()+","+po.getTotalMoney());
-		
+	
+		try {
+			invoice.add(po);
+			account.addReceipt(po);
+			systemlog.add_up("addReceipt:"+po.getOperator()+","+po.getTotalMoney()+","+po.getNote());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
-	public int addPayment_up(PayVO vo) {
+	public int addPayment_up(PaymentPO po) {
 		// TODO Auto-generated method stub
-		
-		PaymentPO po= new PaymentPO(null, null, null);
-		
+		try{
 		invoice.add(po);
+		account.addPayment(po);
 		systemlog.add_up("addPayment:"+po.getOperator()+","+po.getTotalMoney());
+		} catch(RemoteException e){
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	
-	public String addReceipt_Data(String customer_name, String clerk,
-			String account_name, int money, int all_money, String ps) {
-		// TODO Auto-generated method stub
-		String[] accountList={account_name};
-		int[] price={10};
-		String[] ps1={"ps"};
-		ReceiptPO po= new ReceiptPO(ps, null, null);
-		
-		systemlog.add_up("addPayment:"+po.getOperator()+","+po.getAccountName()+","+po.getTotalMoney());
-		
-		return  "ʧ��";
-	}
-
-	public String addPayment_Data(String customer_name, String clerk,
-			String account_name, int money, int all_money, String ps) {
-		// TODO Auto-generated method stub
-//		account=new AccountDataService_Stub("accountName",10);
-		String[] accountList={account_name};
-		int[] price={10};	
-		String[] ps1={"ps"};
-		PaymentPO po= new PaymentPO(null, ps, null);
-		
-		try {
-			if(account.addPayment(po)){
-				return "�ɹ�";
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return  "ʧ��";
-	}
+//	public String addReceipt_Data(String customer_name, String clerk,
+//			String account_name, int money, int all_money, String ps) {
+//		// TODO Auto-generated method stub
+//		return  "ʧ��";
+//	}
+//
+//	public String addPayment_Data(String customer_name, String clerk,
+//			String account_name, int money, int all_money, String ps) {
+//		// TODO Auto-generated method stub
+//		return  "ʧ��";
+//	}
 	
 	public ArrayList<ReceiptPO> getAllReceipt(){
 //		account=new AccountDataService_Stub("accountName",10);
@@ -227,7 +202,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new ArrayList<ReceiptPO>();
 	}
 	
 	public ArrayList<PaymentPO> getAllPayment(){
@@ -238,13 +213,13 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new ArrayList<PaymentPO>();
 	}
 
 	public String addReceipt_Data(ReceiptPO po) {
 		// TODO Auto-generated method stub
 		try {
-			account.addReceipt(po);
+			account.passReceipt(po);
 			return "成功";
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -265,30 +240,45 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 		return "失败";
 	}
 	
-	public String addAccount(String name, int money) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public String addAccount(String name, int money) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	public String addAccount_Data(String name, int money) {
-		// TODO Auto-generated method stub
+//	public String addAccount_Data(String name, int money) {
+//		// TODO Auto-generated method stub
+//		try {
+//			AccountPO po1=account.findAccount(name);
+//			AccountPO po2=po1.copy();
+//			po2.money=po1.money+money;
+//			if(account.updateAccount(po1, po2)){
+//				return " ";
+//			}
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+	
+	public ArrayList<AccountPO> getAllAccount(){
 		try {
-			AccountPO po1=account.findAccount(name);
-			AccountPO po2=po1.copy();
-			po2.money=po1.money+money;
-			if(account.updateAccount(po1, po2)){
-				return " ";
-			}
+			return account.getAllAccount();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new ArrayList<AccountPO>();
 	}
 
 	public String getOperator() {
 		// TODO Auto-generated method stub
-		return ;
+		return User.operator;
+	}
+
+	public ArrayList<CustomerVO> getAllCustomer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //	public String delReceipt_Data(ReceiptPO po) {

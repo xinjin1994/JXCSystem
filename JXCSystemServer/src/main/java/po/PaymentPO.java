@@ -8,7 +8,7 @@ public class PaymentPO extends InvoicePO implements Serializable{
 	
 	AccountPO account;
 	String operator;
-	ArrayList<ItemPO> item=new ArrayList<ItemPO>();
+	public ArrayList<ItemPO> item=new ArrayList<ItemPO>();
 	int total_money;//�����ܶ�
 	
 	public PaymentPO(AccountPO account, String operator, ArrayList<ItemPO> item) {
