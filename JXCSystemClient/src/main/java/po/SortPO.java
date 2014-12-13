@@ -4,35 +4,55 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SortPO implements Serializable{
-	public String sort;
-	public int level;
+	public String name;
 	public String note;
 	
+//	SortPO fatherSort;
 	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
 	public ArrayList<SortPO> sortList;
 	
-	public boolean hasCommodity(){
-		if(sortList!=null){
-			return false;
+	public boolean hasSort(){
+		if(sortList!=null&&sortList.size()>0){
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
-	public SortPO(String sort, int level) {
-		this.sort = sort;
-		this.level = level;
+	public boolean hasCommodity(){
+		if(commodityList!=null&&commodityList.size()>0){
+			return true;
+		}
+		return false;
+	}
+	
+	public SortPO(String sort) {
+		this.name = sort;
 	}
 	
 	public SortPO copy(){
-		return new SortPO(sort, level);
+		SortPO po=new SortPO(name);
+		po.note=note;
+		ArrayList<CommodityPO> array;
+		if(commodityList!=null){
+			array=new ArrayList<CommodityPO>();
+			for(int i=0;i<commodityList.size();i++){
+				array.add(commodityList.get(i).copy());
+			}
+			po.commodityList=array;
+		}
+		ArrayList<SortPO> array2;
+		if(sortList!=null){
+			array2=new ArrayList<SortPO>();
+			for(int i=0;i<sortList.size();i++){
+				array2.add(sortList.get(i).copy());
+			}
+			po.sortList=array2;
+		}
+		return po;
 	}
 	
 	public String getName() {
-		return sort;
-	}
-
-	public int getLevel() {
-		return level;
+		return name;
 	}
 	
 	public boolean addCommodity(CommodityPO po){
@@ -49,7 +69,7 @@ public class SortPO implements Serializable{
 	}
 	
 	public boolean addSort(SortPO po){
-		if(hasCommodity()){
+		if(hasSort()){
 			return false;
 		}else{
 			SortPO po1=findSort_true(po.getName());
@@ -63,7 +83,7 @@ public class SortPO implements Serializable{
 	}
 	
 	public boolean delSort(SortPO po){
-		if(hasCommodity()){
+		if(hasSort()){
 			return false;
 		}else{
 			SortPO po1=findSort_true(po.getName());
@@ -78,7 +98,7 @@ public class SortPO implements Serializable{
 	
 	public SortPO findSort_true(String name){
 		int i=0;
-		if(hasCommodity()){
+		if(hasSort()){
 			return null;
 		}else{
 			for(i=0;i<sortList.size();i++){
@@ -92,7 +112,7 @@ public class SortPO implements Serializable{
 	
 	public CommodityPO findCommodity_true(String name,String type){
 		int i=0;
-		if(hasCommodity()){
+		if(hasSort()){
 			for(i=0;i<commodityList.size();i++){
 				if(commodityList.get(i).getName().equals(name)&&
 						commodityList.get(i).getType().equals(type)){
@@ -112,7 +132,7 @@ public class SortPO implements Serializable{
 	
 	public boolean delCommodity(CommodityPO po){
 		int i=0;
-		if(hasCommodity()){
+		if(hasSort()){
 			for(i=0;i<commodityList.size();i++){
 				if(commodityList.get(i).getName().equals(po.name)&&
 						commodityList.get(i).getType().equals(po.type)){

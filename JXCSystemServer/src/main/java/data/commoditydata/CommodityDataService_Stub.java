@@ -472,7 +472,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean addGood(CommodityPO po1, SortPO po2) {
 		SortPO sort=findSort_true(po2.getName());
-		if(sort!=null&&sort.hasCommodity()){
+		if(sort!=null&&sort.hasSort()){
 			sort.addCommodity(po1);
 			System.out.println("Add Success!");
 			this.writeSortList();
@@ -525,7 +525,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		if(po!=null){
 			return false;
 		}else if(po2!=null){
-			if(po2.hasCommodity()){
+			if(po2.hasSort()){
 				return false;
 			}
 			
@@ -565,11 +565,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public boolean updateSort(SortPO po1, SortPO po2) {
 		SortPO po=findSort_true(po1.getName());
 		if(po!=null){
-			if(po2.sort!=null){
-			po1.sort=po2.sort;
-			}
-			if(po2.level!=0){
-				po1.level=po2.getLevel();	
+			if(po2.name!=null){
+			po1.name=po2.name;
 			}
 			this.writeSortList();
 			return true;
@@ -656,7 +653,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(i=0;i<sortList.size();i++){
 			sort.add(sortList.get(i).copy());
 			
-			if(!sortList.get(i).hasCommodity()){
+			if(!sortList.get(i).hasSort()){
 				ArrayList<SortPO> lin=getSort(sortList.get(i));
 				for(j=0;j<lin.size();j++){
 					sort.add(lin.get(j).copy());
@@ -672,11 +669,11 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		ArrayList<SortPO> sort=new ArrayList<SortPO>();
 		int i=0,j=0;
 	
-		if(!po.hasCommodity()){
+		if(!po.hasSort()){
 			for(i=0;i<po.sortList.size();i++){
 				sort.add(po.sortList.get(i));
 			
-				if(!po.sortList.get(i).hasCommodity()){
+				if(!po.sortList.get(i).hasSort()){
 					ArrayList<SortPO> lin=getSort(po.sortList.get(i));
 					for(j=0;j<lin.size();j++){
 						sort.add(lin.get(j));
@@ -898,7 +895,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			if(sortList.get(i).getName().equals(name)){
 				return sortList.get(i);
 			}
-			if(!sortList.get(i).hasCommodity()){
+			if(!sortList.get(i).hasSort()){
 				SortPO po=sortList.get(i).findSort_true(name);
 				if(po!=null){
 					return po;

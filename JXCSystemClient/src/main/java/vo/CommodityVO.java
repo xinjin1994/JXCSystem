@@ -10,6 +10,8 @@ public class CommodityVO {
 	public double outValue;
 	public double latestInValue;
 	public double latestOutValue;
+	
+	public SortVO fatherSort;
 
 	public CommodityVO(String id, String name, String type, int num, double inValue, double outValue,
 			double latestInValue, double latestOutValue) {

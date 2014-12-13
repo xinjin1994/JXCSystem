@@ -257,7 +257,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 4;
 			}
 			
-			if(com.hasCommodity()){
+			if(com.hasSort()){
 				return 5;
 			}
 			
