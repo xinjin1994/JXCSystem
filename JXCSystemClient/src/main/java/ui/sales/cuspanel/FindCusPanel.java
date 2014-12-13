@@ -87,7 +87,7 @@ public class FindCusPanel extends FatherPanel {
 						+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
 						+ customerVO.shouldGet + ";" + customerVO.shouldPay + ";" + customerVO.person;*/
 				String cusInTable = "1;2;3;4;5;6;7;8;9;10";
-				frame.setPanel(new MakeSureFindInfo(frame,"Image/Sales/对话框/null.jpg",controller,FindCusPanel.this,cusInTable));
+				frame.setPanel(new MakeSureFindInfo(frame,"Image/Sales/对话框/null.jpg",controller,FindCusPanel.this,cusInTable,salesUIController));
 				frame.repaint();
 				// 此次应该显示表格
 				// frame.setPanel(new
@@ -96,8 +96,19 @@ public class FindCusPanel extends FatherPanel {
 			} else if (e.getSource() == forward2) {
 				String info = cusExactFind.getText();
 				ArrayList<CustomerVO> cusVOArray = salesBlService.searchFuzzyCustomer_up(info);
+				ArrayList<String> cusStr = new ArrayList<String>();
+				cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
+				for(int i=0;i<cusVOArray.size();i++){
+					CustomerVO customerVO = cusVOArray.get(i);
+					String item = customerVO.id + customerVO.classification + ";" + customerVO.level + ";"
+							+ customerVO.cusName + ";" + customerVO.tel + ";" + customerVO.address + ";"
+							+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
+							+ customerVO.shouldGet + ";" + customerVO.shouldPay + ";" + customerVO.person;
+					cusStr.add(item);
+				}
 				// 此次应该显示表格
 				frame.remove(FindCusPanel.this);
+				frame.setPanel(new MakeSureFindInfo(frame,"Image/Sales/对话框/null.jpg",controller,FindCusPanel.this,cusStr,salesUIController));
 				frame.repaint();
 			}
 

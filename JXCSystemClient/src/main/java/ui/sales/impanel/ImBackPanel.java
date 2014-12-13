@@ -3,17 +3,18 @@ package ui.sales.impanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
-
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyButton;
+import ui.setting.MyFrame;
+import vo.bill.CommodityListVO;
+import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class ImBackPanel extends ImInPanel {
 
-	public ImBackPanel(JFrame frame, String url, UIController controller, SalesUIController salesUIController) {
+	public ImBackPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame, url, controller, salesUIController);
 	}
 
@@ -34,8 +35,20 @@ public class ImBackPanel extends ImInPanel {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(ImBackPanel.this);
 			} else if (e.getSource() == forward) {
-				SalesblService salesBlService = new SalesController();
-				// TODO
+				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+						goodsTypeSelected, num, price, totalPriceText, remark.getText());
+				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+						warehouse.getText(), commodityListVO, 2);
+				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg", controller,
+						importMenuVO, commodityListVO, person.getText(), operator.getText(), ImBackPanel.this,salesUIController);
+				frame.remove(ImBackPanel.this);
+				frame.setPanel(makeSureIm);
+				frame.repaint();
+			} else if (e.getSource() == goodsName) {
+				setType();
+			} else if (e.getSource() == goodsType) {
+				setGoodsID();
+				getPrice();
 			}
 		}
 

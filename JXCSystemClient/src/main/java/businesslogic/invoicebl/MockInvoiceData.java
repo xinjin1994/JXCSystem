@@ -38,5 +38,9 @@ public class MockInvoiceData implements InvoiceDataService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	public String getInvNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

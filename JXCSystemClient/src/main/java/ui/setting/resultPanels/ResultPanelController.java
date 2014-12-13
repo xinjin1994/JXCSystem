@@ -62,7 +62,7 @@ public class ResultPanelController extends UIController implements ActionListene
 	
 	public void succeeded(String text,String type){
 	//	accController = (AccountAllUIController)controller;
-		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", accController);
+		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", controller);
 		setForward();
 	
 		textLabel.setText(text);
@@ -70,8 +70,8 @@ public class ResultPanelController extends UIController implements ActionListene
 		setPanel();
 	}
 
-	public void failed(String text,String url){
-		resultPanel = new FatherPanel(frame, url, this);
+	public void failed(String text,String type){
+		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", this);
 		setForward();
 		
 		forwardButton.setActionCommand("failed");

@@ -87,7 +87,7 @@ public interface SalesblService {
 	//获得所有商品信息
 	public ArrayList<CommodityVO> getAllCommodity_up(); 
 	//获得单个商品信息
-	public CommodityVO getCommodity_up(CommodityVO vo);
+	public CommodityVO getCommodity_up(String name,String type);
 	
 	//获得所有客户信息
 	public ArrayList<CustomerVO> getAllCustomer_up();

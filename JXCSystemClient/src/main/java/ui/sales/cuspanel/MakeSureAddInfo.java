@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
@@ -17,11 +18,15 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 	private CustomerVO customerVO;
 	private AddCusPanel addCusPanel;
 	private MyFrame frame;
+	private SalesUIController salesUIController;
+	private UIController controller;
 	
 	public MakeSureAddInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,CustomerVO customerVO,AddCusPanel addCusPanel){
 		super(frame,url,controller,salesUIController,customerVO);
 		this.customerVO = customerVO;
 		this.addCusPanel = addCusPanel;
+		this.salesUIController = salesUIController;
+		this.controller = controller;
 		this.frame = frame;
 	}
 
@@ -46,12 +51,17 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
-				System.out.println("qianjing!");
-				SalesblService salesBlService = new SalesController();
-				salesBlService.addCustomer_up(customerVO);
+		// SalesResult(MyFrame frame,UIController controller,SalesUIController salesUIController,FatherPanel backPanel){
+				SalesblService salesblService = new SalesController();
+				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureAddInfo.this);
+//			    switch(salesblService.addCustomer_up(customerVO)){
+//			    	case 0:
+//						salesResult.succeeded("成功！", "sales");
+//						break;
 				
+//			    }
+//				salesResult.failed("失败", "account");
 			} else if (e.getSource() == secondCusBack) {
-				System.out.println("fff");
 				frame.remove(MakeSureAddInfo.this);
 				frame.setPanel(addCusPanel);
 				frame.repaint();

@@ -75,11 +75,11 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 		return null;
 	}
 
-	public OperatingConditionPO operatingCondition(String time1, String time2) {
+	public ArrayList<OperatingConditionPO> operatingCondition(String time1, String time2) {
 		// TODO Auto-generated method stub
 //		financial= new FinancialDataService_Stub();
 		try {
-			OperatingConditionPO po=financial.getOperatingCondition();
+			ArrayList<OperatingConditionPO> po=financial.getOperatingCondition();
 			if(po!=null){
 				return po;
 			}

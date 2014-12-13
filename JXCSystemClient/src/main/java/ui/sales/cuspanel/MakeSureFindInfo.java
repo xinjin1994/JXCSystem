@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.sales.SalesUIController;
+import ui.setting.ColorFactory;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
@@ -17,17 +19,33 @@ public class MakeSureFindInfo extends FatherPanel{
 	private MyFrame frame;
 	private MyTable table;
 	private String info;
+	private MyTable showTable; 
+	private ColorFactory colors = new ColorFactory();
+	ArrayList<String> infoArray = new ArrayList<String>();
+	private SalesUIController salesUIController;
 	
-	public MakeSureFindInfo(MyFrame frame,String url,UIController controller,FindCusPanel findCusPanel,String info){
+	public MakeSureFindInfo(MyFrame frame,String url,UIController controller,FindCusPanel findCusPanel,String info,
+			SalesUIController salesUIController){
 		super(frame,url,controller);
 		this.findCusPanel = findCusPanel;
 		this.info = info;
 		this.frame = frame;
 		this.addButton();
-		this.setTable();
-		this.add(table);
+		this.salesUIController = salesUIController;
+		infoArray.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
+		infoArray.add(info);
+		this.setTable(infoArray);
 	}
-
+	public MakeSureFindInfo(MyFrame frame,String url,UIController controller,FindCusPanel findCusPanel,ArrayList<String> info,
+			SalesUIController salesUIController){
+		super(frame,url,controller);
+		this.findCusPanel = findCusPanel;
+		this.frame = frame;
+		this.addButton();
+		this.salesUIController = salesUIController;
+		this.setTable(info);
+	}
+	
 	public void addButton() {
 //		back = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
 //				"Image/Sales/Sales_image/返回_press_on.png");
@@ -39,13 +57,17 @@ public class MakeSureFindInfo extends FatherPanel{
 		forward.addMouseListener(new ButtonListener());
 	}
 	
-	public void setTable(){
-		table = new MyTable(this);
-		ArrayList <String> infoArray = new ArrayList<String>();
-		infoArray.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
-		table.setTable(infoArray);
-		table.add(info);
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		frame.remove(this);
+		frame.add(showTable.tablePanel);
+		salesUIController.backPanel(this);
+		frame.repaint();
+//		this.add(showTable.tablePanel);
 	}
+	
 	class ButtonListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent e) {

@@ -10,42 +10,53 @@ import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.MyStopButton;
 import ui.setting.MyTextFieldFilled;
 import ui.setting.MyTextFieldTrans;
-import ui.setting.resultPanels.ResultPanelController;
 import vo.CustomerVO;
+import businesslogic.salesbl.SalesController;
+import businesslogicservice.salesblservice.SalesblService;
 
 public class AddCusPanel extends FatherPanel {
 
 	protected MyTextFieldTrans cusName, cusTel, cusAdd, cusEBox, cusCode, cusShouldPay;
 	private int infoX1 = 488, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,
 			infoHeight = 31;
-	private int maxLevel = 6;
 	private int levelX = 105, levelY = 328, levelInter = 42;
 	protected MyStopButton supplierButton, sellerButton;
 	protected MyButton secondCusBack, forward;
 	protected MyStopButton level1,level2,level3,level4,level5;
-	protected MyTextFieldFilled idField,salesManField;
-	SalesUIController salesUIController;
+	protected MyTextFieldFilled salesManField;
+	protected MyLabel idField;
 	private ButtonListener buttonListener;
 	private MyFrame frame;
 	private UIController controller;
 	protected int level = 0;
+	protected String id;
 	protected boolean classification = true;
-
+	SalesUIController salesUIController;
+	SalesblService salesblService;
+	
 	public AddCusPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame,url,controller);
+		buttonListener = new ButtonListener();
+		salesblService = new SalesController();
 		this.frame = frame;
 		this.controller = controller;
-		buttonListener = new ButtonListener();
 		this.salesUIController = salesUIController;
 		this.addIdButton();
 		this.addLevelButton();
 		this.addTextField();
 		this.addRestButton();
+		setID();
 	}
 
+	public void setID(){
+		idField = new MyLabel(105, 173, 222, 36);
+		this.add(idField);
+		idField.setText(salesblService.getCustomerNote_up());
+	}
 	public void addTextField() {
 		cusName = new MyTextFieldTrans(infoX1, infoY, infoWidth1, infoHeight);
 		cusTel = new MyTextFieldTrans(infoX2, infoY + infoInter, infoWidth2, infoHeight);
@@ -53,7 +64,6 @@ public class AddCusPanel extends FatherPanel {
 		cusEBox = new MyTextFieldTrans(infoX2, infoY + 3 * infoInter, infoWidth2, infoHeight);
 		cusCode = new MyTextFieldTrans(infoX1, infoY + 4 * infoInter, infoWidth1, infoHeight);
 		cusShouldPay = new MyTextFieldTrans(infoX2, infoY + 5 * infoInter, infoWidth2, infoHeight);
-		idField = new MyTextFieldFilled(105, 173, 222, 36);
 		salesManField = new MyTextFieldFilled(418, 485, 204, 36);
 		this.add(cusName);
 		this.add(cusTel);
@@ -62,7 +72,6 @@ public class AddCusPanel extends FatherPanel {
 		this.add(cusCode);
 		this.add(cusShouldPay);
 		this.add(salesManField);
-		this.add(idField);
 	}
 
 	public void addIdButton() {
@@ -158,7 +167,7 @@ public class AddCusPanel extends FatherPanel {
 				//CustomerVO(String id,boolean classification,int level,String cusName,String tel,String address,String zipCode,String ezipCode,double mostOwe,double shouldGet,double shouldPay,String person){
 				//编号、分类（供应商、销售商）、级别（五级，一级普通用户，五级VIP客户）、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员
 				//false代表供应商，true代表销售商
-				String ID = idField.getText();
+//				String ID = idField.getText();
 				String name = cusName.getText();
 				String tel = cusTel.getText();
 				String add = cusAdd.getText();
@@ -168,7 +177,7 @@ public class AddCusPanel extends FatherPanel {
 				double shouldGet = 0;
 				double shouldPay = 0;
 				String person = salesManField.getText();
-				CustomerVO customerVO = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
+				CustomerVO customerVO = new CustomerVO(id,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
 				frame.remove(AddCusPanel.this);
 				frame.setPanel(new MakeSureAddInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,AddCusPanel.this));
 				frame.repaint();

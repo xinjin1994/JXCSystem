@@ -268,4 +268,9 @@ public class SalesController implements SalesblService{
 		return null;
 	}
 
+	public CommodityVO getCommodity_up(String name, String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

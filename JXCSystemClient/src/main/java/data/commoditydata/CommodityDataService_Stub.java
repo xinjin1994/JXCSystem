@@ -228,17 +228,22 @@ public class CommodityDataService_Stub implements CommodityDataService{
 		return null;
 	}
 
-	public boolean getGoodNote(SortPO po1) throws RemoteException {
+	public String getGoodNote(SortPO po1) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
-	public boolean getSortNote(SortPO po1) throws RemoteException {
+	public String getSortNote(SortPO po1) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	public String getPatchNote() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getSendGiftNote() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
