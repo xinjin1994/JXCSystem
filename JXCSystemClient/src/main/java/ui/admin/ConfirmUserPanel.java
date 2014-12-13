@@ -3,11 +3,7 @@ package ui.admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import ui.FatherPanel;
-import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
@@ -15,15 +11,18 @@ import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
+import businesslogic.userbl.UserController;
+import businesslogicservice.userblservice.UserblService;
 
 public class ConfirmUserPanel extends FatherPanel implements ActionListener{
-	private MyButton forwardButton;
-	private ResultPanelController resController;
-	private AdminAllUIController adminAllUIController;
-	private UserVO user;
-	private String type;
+	protected MyButton forwardButton;
+	protected ResultPanelController resController;
+	protected AdminAllUIController adminAllUIController;
+	protected UserVO user;
+	protected String type;
+	protected UserblService userblService;
 	
-	private MyLabel[] infoLabels = new MyLabel[3]; 
+	protected MyLabel[] infoLabels = new MyLabel[3]; 
 	
 	public ConfirmUserPanel(MyFrame frame, String url, AdminAllUIController controller,
 			UserVO user,String type) {
@@ -32,8 +31,11 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 		this.type = type;
 		this.user = user;
 		this.adminAllUIController = controller;
+		
 		setForward();
 		setInfoLabel();
+		
+		userblService = new UserController();
 	}
 	
 	private void setForward() {
@@ -60,15 +62,46 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 			infoLabels[i].setForeground(new ColorFactory().greyFont);
 		//	infoLabels[i].setText(""+i);
 		}
-		infoLabels[0].setText("1");
-		infoLabels[1].setText("2");
-		infoLabels[2].setText("3");
+		infoLabels[0].setText(user.id);
+		infoLabels[1].setText(user.name);
+		String userDuty = "";
+		switch(user.duty){
+		case 0:
+			userDuty = "管理员";
+			break;
+		case 1:
+			userDuty = "库存人员";
+			break;
+		case 2:
+			userDuty = "销售人员";
+			break;
+		case 3:
+			userDuty = "销售经理";
+			break;
+		case 4:
+			userDuty = "财务人员";
+			break;
+		case 5:
+			userDuty = "财务经理";
+			break;
+		case 6:
+			userDuty = "总经理";
+			break;
+		default:
+			userDuty = "";
+			break;
+		}
+		infoLabels[2].setText(userDuty);
 		this.repaint();
 	}
 	
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == forwardButton){
-			adminAllUIController.setResult(type);
+			switch(userblService.addUser_up(user)){
+			case 0:
+				adminAllUIController.setResult(type);
+				break;
+			}
 		}
 	}
 	

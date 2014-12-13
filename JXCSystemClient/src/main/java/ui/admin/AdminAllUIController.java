@@ -1,17 +1,9 @@
 package ui.admin;
 
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-
-import businesslogic.initializationlbl.UserInfo;
+import ui.AdminPanel;
 import ui.FatherPanel;
 import ui.UIController;
-import ui.AdminPanel;
-import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
-import ui.setting.MyLabel;
 import ui.setting.SetBack;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
@@ -52,12 +44,18 @@ public class AdminAllUIController extends UIController{
 
 	
 	public void confirmUserPanel(UserVO user,String type){
-		confirmUserPanel = new ConfirmUserPanel(frame,"Image/User/confirmUser.jpg", this, user,type);
+		confirmUserPanel = new ConfirmUserPanel(frame,"Image/User/ConfirmUser.jpg", this, user,type);
 		confirmUserPanel.setLocation(0, 217);
 		adminPanel.add(confirmUserPanel);
 		adminPanel.repaint();
 	}
 	
+	public void confirmUserDel(UserVO user,String type){
+		confirmUserPanel = new ConfirmUserDel(frame,"Image/User/ConfirmUser.jpg", this, user,type);
+		confirmUserPanel.setLocation(0, 217);
+		adminPanel.add(confirmUserPanel);
+		adminPanel.repaint();
+	}
 	/**
 	 * 以下两个是admin模块中的返回按钮，都会返回到主界面
 	 * @param prePanel
