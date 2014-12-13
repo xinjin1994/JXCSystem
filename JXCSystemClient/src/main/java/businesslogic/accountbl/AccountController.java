@@ -1,21 +1,22 @@
 package businesslogic.accountbl;
 
-import businesslogicservice.accountblservice.AccountblService;
-
 import java.util.ArrayList;
 
+import po.AccountPO;
 import vo.AccountVO;
 import vo.CustomerVO;
 import vo.UserVO;
 import vo.bill.GetVO;
 import vo.bill.PayVO;
+import businesslogicservice.accountblservice.AccountblService;
 
 public class AccountController implements AccountblService{
 	public Account account=new Account();
 
 	public AccountVO checkAccount_up() {
 		// TODO Auto-generated method stub
-		AccountVO message=account.checkAccount_up();
+		AccountPO po=account.checkAccount_up();
+		AccountVO message=new AccountVO(po.name, po.money);
 		return message;
 	}
 
@@ -62,27 +63,27 @@ public class AccountController implements AccountblService{
 
 	public String getOperator_up() {
 		// TODO Auto-generated method stub
-		return null;
+		return account.getOperator();
 	}
 
 	public String getReceiptNote_up() {
 		// TODO Auto-generated method stub
-		return null;
+		return account.getReceiptNote();
 	}
 
 	public String getPaymentNote_up() {
 		// TODO Auto-generated method stub
-		return null;
+		return account.getPaymentNote();
 	}
 
 	public double calTotalMoney_up(GetVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return vo.transferList.transferValue;
 	}
 
 	public double calTotalMoney_up(PayVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return vo.itemList.money;
 	}
 
 	public UserVO getNowUser_up() {

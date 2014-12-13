@@ -14,6 +14,8 @@ public class CommodityPO implements Serializable{
 	public boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
 	public int warn;
 	
+	public String father;
+	
 	
 	public CommodityPO(Boolean isGift,String name,String type,double in_price,double out_price,
 			String note,double recent_in_price,double recent_out_price,int number){

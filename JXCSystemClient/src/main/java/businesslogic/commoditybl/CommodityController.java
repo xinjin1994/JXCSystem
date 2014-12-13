@@ -42,7 +42,7 @@ public class CommodityController implements CommodityblService{
 		int i=0;
 		for(i=0;i<po.size();i++){
 			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
-			
+			com.fatherSort="father";
 			vo.add(com);
 		}
 		
@@ -51,7 +51,11 @@ public class CommodityController implements CommodityblService{
 
 	public int addSort_up(SortVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
-		return commodity.addSort(vo1.name,vo2.name);
+		SortPO po1=new SortPO(vo1.name);
+		po1.note=vo1.note;
+		SortPO po2=new SortPO(vo2.name);
+		po2.note=vo2.note;
+		return commodity.addSort(po1,po2);
 	}
 
 	public int delSort_up(SortVO vo) {
@@ -72,6 +76,7 @@ public class CommodityController implements CommodityblService{
 		int i=0;
 		for(i=0;i<po.size();i++){
 			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			com.fatherSort="father";
 			vo.add(com);
 		}
 		return vo;
@@ -95,7 +100,8 @@ public class CommodityController implements CommodityblService{
 
 	public int patch_up(PatchVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.patch(vo.name,vo.type,vo.number);
+		
+		return commodity.patch(vo.name,vo.type,vo.number,vo.note);
 	}
 
 	public int warn_up(WarnVO vo) {
@@ -174,6 +180,16 @@ public class CommodityController implements CommodityblService{
 	}
 
 	public CommodityVO searchAccurateCommodity_up(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<SortVO> getComSort_up() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<SortVO> getSortSort_up() {
 		// TODO Auto-generated method stub
 		return null;
 	}

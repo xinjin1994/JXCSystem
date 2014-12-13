@@ -33,15 +33,12 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public SalesInfo sales=new Sales();
 	public SystemlogInfo systemlog=new Systemlog();
 	
-	public AccountVO checkAccount_up() {
+	public AccountPO checkAccount_up() {
 		// TODO Auto-generated method stub
 //		account = new AccountDataService_Stub("accountName",10);
 		try {
 			AccountPO po=account.getAccount();
-			if (account.getAccount() != null) {
-				AccountVO vo=new AccountVO(po);
-				return vo;
-			}
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,6 +146,22 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			e.printStackTrace();
 		}
 		return vo;
+	}
+	
+	public ArrayList<AccountVO> searchAccurateAccount_up(String name){
+		
+		ArrayList<AccountVO> array=new ArrayList<AccountVO>();
+		try {
+			AccountPO po=account.findAccount(name);
+			AccountVO vo=new AccountVO(po.name,po.money);
+			array.add(vo);
+			return array;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return array;
 	}
 
 	public int addReceipt_up(GetVO vo) {
@@ -271,6 +284,11 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public String getOperator() {
+		// TODO Auto-generated method stub
+		return ;
 	}
 
 //	public String delReceipt_Data(ReceiptPO po) {
