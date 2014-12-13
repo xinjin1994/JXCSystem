@@ -7,7 +7,7 @@ public class SortVO {
 	public String name;
 	public String note;
 	
-	SortVO fatherSort;
+	String fatherSort;
 	ArrayList<CommodityVO> commodity=new ArrayList<CommodityVO>();
 	ArrayList<SortVO> sortList=new ArrayList<SortVO>();
 	
@@ -28,13 +28,13 @@ public class SortVO {
 	}
 	
 	public boolean addSort(SortVO sonSort){
-		sonSort.fatherSort=this;
+		sonSort.fatherSort=name;
 		sortList.add(sonSort);
 		return true;
 	}
 	
 	public boolean addCommodity(CommodityVO sonCommodity){
-		sonCommodity.fatherSort=this;
+		sonCommodity.fatherSort=name;
 		commodity.add(sonCommodity);
 		return true;
 	}
