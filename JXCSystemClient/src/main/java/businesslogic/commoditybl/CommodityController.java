@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import po.CommodityPO;
 import po.SortPO;
 import vo.CommodityVO;
-import vo.PatchVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
+import vo.bill.PatchVO;
 import businesslogicservice.commodityblservice.CommodityblService;
 
 public class CommodityController implements CommodityblService{
@@ -42,9 +42,11 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		ArrayList<CommodityPO> po=commodity.searchCommodity(word);
 		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
+		CommodityVO com;
 		int i=0;
 		for(i=0;i<po.size();i++){
-			vo.add(po.get(i).toVO());
+			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			vo.add(com);
 		}
 		
 		return vo;
@@ -69,9 +71,11 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		ArrayList<CommodityPO> po=commodity.Examine(time1, time2);
 		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
+		CommodityVO com;
 		int i=0;
 		for(i=0;i<po.size();i++){
-			vo.add(po.get(i).toVO());
+			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			vo.add(com);
 		}
 		return vo;
 	}
@@ -102,10 +106,10 @@ public class CommodityController implements CommodityblService{
 		return commodity.warn(vo.name,vo.type,vo.number);
 	}
 
-	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	public int updateCommodity_up(CommodityVO vo1, SortVO vo2) {
 		// TODO Auto-generated method stub
@@ -171,5 +175,11 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public CommodityVO searchAccurateCommodity_up(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

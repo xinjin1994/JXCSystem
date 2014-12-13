@@ -10,4 +10,7 @@ public class MyTextField extends JTextField{
 		this.setLocation(x, y);
 		this.setHorizontalAlignment(CENTER);
 	}
+//	public MyTextField(String text){
+//		super(text);
+//	}
 }

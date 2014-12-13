@@ -1,7 +1,11 @@
 package ui.commodity;
 
+import ui.FatherPanel;
 import ui.UIController;
 import ui.setting.MyFrame;
+import ui.setting.SetBack;
+import vo.CommodityVO;
+import vo.SortVO;
 
 public class CommodityAllUIController extends UIController{
 	private UIController uiController;
@@ -10,6 +14,7 @@ public class CommodityAllUIController extends UIController{
 	private AddComPanel addComPanel;
 	private DelComPanel delComPanel;
 	private FinComPanel finComPanel;
+	private ChaComDPanel chaComDPanel;
 	private ChaComPanel chaComPanel;
 	private ComDetailPanel comDetailPanel;
 	private ConfirmComPanel confirmComPanel;
@@ -17,18 +22,15 @@ public class CommodityAllUIController extends UIController{
 	private AddSortPanel addSortPanel;
 	private DelSortPanel delSortPanel;
 	private ChaSortPanel chaSortPanel;
-	private ComfirmSortPanel confirmSortPanel;
-	
-	private AddGiftPanel addGiftPanel;
-	private ConfirmGiftPanel confirmGiftPanel;
-	private GiftDetailPanel giftDetailPAnel;
-	
-	private AddPatchPanel addPatchPanel;
-	private ConfirmPatchPanel confitmPatchPanel;
-	private PatchDetailPanel patchDetailPanel;
-	
-	private ExmainStockPanel exmainStockPanel;
-	private InventoryPanel inventoryPanel;
+	private ConfirmSortPanel confirmSortPanel;
+	private ChaSortDPanel chaSortDPanel; 
+
+//	private AddPatchPanel addPatchPanel;
+//	private ConfirmPatchPanel confitmPatchPanel;
+//	private PatchDetailPanel patchDetailPanel;
+//	
+//	private ExmainStockPanel exmainStockPanel;
+//	private InventoryPanel inventoryPanel;
 	
 	
 	
@@ -47,46 +49,80 @@ public class CommodityAllUIController extends UIController{
 
 
 	public void addCom() {
-		// TODO Auto-generated method stub
-		
+		addComPanel = new AddComPanel(frame, "Image/Commodity/comManage/addCom.jpg", this);
+		frame.setPanel(addComPanel);
+		frame.repaint();
 	}
 
 
 	public void findCom() {
-		// TODO Auto-generated method stub
-		
+		finComPanel = new FinComPanel(frame, "Image/Commodity/comManage/finCom.jpg", this);
+		frame.setPanel(finComPanel);
+		frame.repaint();
 	}
-
+	
+	public void changeComD(CommodityVO com){
+		chaComDPanel = new ChaComDPanel(frame, "Image/Commodity/comManage/chaComD.jpg", this,com);
+		frame.setPanel(chaComDPanel);
+		frame.repaint();
+	}
 
 	public void changeCom() {
-		// TODO Auto-generated method stub
-		
+		chaComPanel = new ChaComPanel(frame, "Image/Commodity/comManage/chaCom.jpg", this);
+		frame.setPanel(chaComPanel);
+		frame.repaint();
 	}
-
 
 	public void delCom() {
-		// TODO Auto-generated method stub
-		
+		delComPanel = new DelComPanel(frame, "Image/Commodity/comManage/delCom.jpg", this);
+		frame.setPanel(delComPanel);
+		frame.repaint();
+	}
+	
+	public void comDetail(CommodityVO com){
+		comDetailPanel = new ComDetailPanel(frame,"Image/Commodity/comManage/comDetail.jpg",this,com);
+		frame.setPanel(comDetailPanel);
+		frame.repaint();
 	}
 
-
+	public void confirmCom(CommodityVO com,String type){
+		confirmComPanel = new ConfirmComPanel(frame, "Image/Commodity/comManage/confirmCom.jpg", this,com,type);
+		frame.setPanel(confirmComPanel);
+		frame.repaint();
+	}
+	
+	
 	public void changeSort() {
-		// TODO Auto-generated method stub
-		
+		chaSortPanel = new ChaSortPanel(frame, "Image/Commodity/sortManage/chaSort.jpg", this);
+		frame.setPanel(chaSortPanel);
+		frame.repaint();
 	}
 
 
 	public void delSort() {
-		// TODO Auto-generated method stub
-		
+		delSortPanel = new DelSortPanel(frame,"Image/Commodity/sortManage/delSort.jpg", this);
+		frame.setPanel(delSortPanel);
+		frame.repaint();
 	}
 
 
 	public void addSort() {
-		// TODO Auto-generated method stub
-		
+		addSortPanel = new AddSortPanel(frame, "Image/Commodity/sortManage/addSort.jpg",this);
+		frame.setPanel(addSortPanel);
+		frame.repaint();
+	}
+	
+	public void confirmSort(SortVO sort,String type){
+		confirmSortPanel = new ConfirmSortPanel(frame,"Image/Commodity/sortManage/confirmSort.jpg",this,sort,type);
+		frame.setPanel(confirmSortPanel);
+		frame.repaint();
 	}
 
+	public void chaSortD(SortVO sort){
+		chaSortDPanel = new ChaSortDPanel(frame, "Image/Commodity/sortManage/chaSortD.jpg", this,sort);
+		frame.setPanel(chaSortDPanel);
+		frame.repaint();
+	}
 
 	public void examineStock() {
 		// TODO Auto-generated method stub
@@ -110,6 +146,19 @@ public class CommodityAllUIController extends UIController{
 		// TODO Auto-generated method stub
 		
 	}
+	/**
+	 * 以下两个是commodity模块中的返回按钮，都会返回到主界面
+	 * @param prePanel
+	 */
 	
+	public void setBack_first(FatherPanel prePanel){
+		this.prePanel = prePanel;
+		new SetBack(frame,this,prePanel).setBack_first();
+	}
+
+	public void setBack_second(FatherPanel prePanel,int x,int y){
+		this.prePanel = prePanel;
+		new SetBack(frame,this,prePanel).setBack_second(x, y);
+	}
 	
 }

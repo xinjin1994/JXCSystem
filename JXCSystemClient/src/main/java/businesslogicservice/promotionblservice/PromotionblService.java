@@ -2,9 +2,14 @@ package businesslogicservice.promotionblservice;
 
 import java.util.ArrayList;
 
-import vo.DiscountVO;
-import vo.ProGiftVO;
-import vo.VoucherVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
+
+//-1 未知错误
+//1  商品不存在
+//2  库存中商品数量不足，不能完成赠品促销
+//3  客户等级不存在
 
 public interface PromotionblService {
 	
@@ -21,11 +26,11 @@ public interface PromotionblService {
 	public int delPromotion_up(int i);
 	
 	//显示当前折扣促销策略
-	public DiscountVO getDiscount_up();
+	public ArrayList<DiscountVO> getDiscount_up();
 	//显示当前赠品促销策略
-	public ProGiftVO getProGift_up();
+	public ArrayList<ProGiftVO> getProGift_up();
 	//显示当前代金券促销策略
-	public VoucherVO getVoucher_up();
+	public ArrayList<VoucherVO> getVoucher_up();
 	//显示当前其他促销策略
 	public String getOtherPromotion_up();
 

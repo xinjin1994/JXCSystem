@@ -123,7 +123,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	}
 
 	public UserPO getUser(String name) {
-		return new UserPO(name, name, 0);
+		return new UserPO(name, name, 0, name);
 	}
 
 	public ArrayList<UserPO> show() {

@@ -2,27 +2,33 @@ package ui.manager;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import ui.ManagerPanel;
-import ui.UIController;
-import ui.account.AccountAllUIController;
+import ui.setting.ColorFactory;
 import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
 import ui.setting.SecondPanel;
+import vo.bill.InvoiceVO;
+import businesslogic.invoicebl.InvoiceController;
+import businesslogicservice.invoiceblservice.InvoiceblService;
 
 public class ManagerUIController {
 	private int secondX = 1;
 	private int secondY = 35;
 	private int inter = 54;
-	
+	private InvoiceblService invoiceblService;
 	private SecondPanel managerSecondPanel = new SecondPanel();
 	private ManagerPanel managerPanel;
-	
+	private String item,itemName;
+	private ColorFactory colors;
+	MyTable showTable;
 	private MyButton addAcc, delAcc, changeAcc, findAcc;
 	private MyButton salesList,allBills,operatingCondition;
 	private MyButton approButton,disapButton,backLogButton;
 	private MyButton chePro,decPro;
-	 
+	ArrayList<InvoiceVO> billsArray ;
 	private MyButton []accButtons = new MyButton[]{addAcc, delAcc, changeAcc, findAcc};
 	private MyButton []recButtons = new MyButton[]{salesList,allBills,operatingCondition};
 	private MyButton []invoiceButtons = new MyButton[]{approButton,disapButton,backLogButton};
@@ -34,6 +40,8 @@ public class ManagerUIController {
 	public ManagerUIController(ManagerAllUIController uiController,MyFrame frame){
 		this.uiController = uiController;
 		this.frame = frame;
+		invoiceblService = new InvoiceController();
+		colors = new ColorFactory();
 		this.managerPanel = new ManagerPanel(frame, "Image/Manager/manager.jpg",
 				uiController, this);
 		
@@ -219,6 +227,15 @@ public class ManagerUIController {
 		public void mouseReleased(MouseEvent event) {
 		}
 	}
+	
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		frame.add(showTable.tablePanel);
+//		uiController.addMainPanel();
+		frame.repaint();
+	}
 	class InvoiceButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -235,8 +252,46 @@ public class ManagerUIController {
 
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == invoiceButtons[0]){
-				
+				billsArray = invoiceblService.show_pass();
 			}else if(e.getSource() == invoiceButtons[1]){
+				billsArray = invoiceblService.show_refuse();
+				}else if(e.getSource() == invoiceButtons[2]){
+					billsArray = invoiceblService.show_up();
+				}
+			ArrayList<String> bills = new ArrayList<String>();
+			bills.add("单据编号;单据类型");
+			for(int i=0;i<billsArray.size();i++){
+				switch(billsArray.get(i).bill_note) {
+				//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
+				//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
+				case 1:
+					itemName = "商品赠送单";
+					break;
+				case 2:
+					itemName = "进货单";
+					break;
+				case 3:
+					itemName = "进货退货单";
+					break;
+				case 4:
+					itemName = "销售单";
+					break;
+				case 5:
+					itemName = "销售退货单";
+					break;
+				case 6:
+					itemName = "报溢报损单";
+					break;
+				case 7:
+					itemName = "收款单";
+					break;
+				case 8:
+					itemName = "付款单";
+					break;	
+				}
+				item = billsArray.get(i).note+itemName;
+				bills.add(item);
+				setTable(bills);
 				
 			}
 		}

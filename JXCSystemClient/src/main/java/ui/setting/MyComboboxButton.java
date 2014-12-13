@@ -6,7 +6,7 @@ import java.util.Vector;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 
-import vo.InitialCommodityVO;
+import vo.initial.InitialCommodityVO;
 
 public class MyComboboxButton extends JComboBox{
 	public MyComboboxButton(){

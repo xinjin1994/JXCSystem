@@ -14,7 +14,7 @@ import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
-import vo.InitialCommodityVO;
+import vo.initial.InitialCommodityVO;
 /**
  * 增加账户，在该类里会判断是否能够添加账户
  * @author ZYC
@@ -30,7 +30,7 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 	private MyButton forwardButton;
 	private MyTextFieldBorder name,price;
 	
-	ResultPanelController resController;
+	private ResultPanelController resController;
 	String type = "account";
 
 	public AddAccountPanel(MyFrame frame, String string,

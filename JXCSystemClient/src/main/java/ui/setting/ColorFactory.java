@@ -15,6 +15,8 @@ public class ColorFactory {
 	public Color adminColor;
 	public Color adminBkColor;
 	public Color adminTableColor;
+	
+	public Color comColor;
 	public ColorFactory(){
 		
 		greyFont = new Color(225,225,225);
@@ -29,6 +31,8 @@ public class ColorFactory {
 		adminTableColor = new Color(231,212,147);
 		adminColor = new Color(215,184,102);
 		adminBkColor = new Color(232,229,216);
+		
+		comColor = new Color(104,184,157);
 		
 	}
 }

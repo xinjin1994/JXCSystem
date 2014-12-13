@@ -14,8 +14,8 @@ import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTextFieldTrans;
 import vo.AccountVO;
-import vo.GetVO;
-import vo.TransferListVO;
+import vo.bill.GetVO;
+import vo.bill.TransferListVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
 

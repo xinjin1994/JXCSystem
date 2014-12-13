@@ -9,8 +9,8 @@ import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
 import vo.CustomerVO;
-import vo.ExportMenuVO;
-import vo.ImportMenuVO;
+import vo.bill.ExportMenuVO;
+import vo.bill.ImportMenuVO;
 import businesslogic.invoicebl.Invoice;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.salesblservice.SalesblService;
@@ -104,7 +104,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		ImportPO im = new ImportPO(null, null, null, null, null, 0, 0);
+		ImportPO im = new ImportPO(null, null, null, null, null, null, 0);
 		
 		if(invoice.add(im)!=null){
 			systemlog.add_up("AddImport:");
@@ -115,7 +115,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addImport_Return_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		Import_ReturnPO im_re = new Import_ReturnPO(null, null, null, null, null, 0, 0, null);
+		Import_ReturnPO im_re = new Import_ReturnPO(null, null, null, null, null, null, 0, null);
 		
 		if(invoice.add(im_re)!=null){
 			systemlog.add_up("AddImport_Return:");
@@ -126,7 +126,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addImport_Return(String note, int number) {
 		// TODO Auto-generated method stub
-		Import_ReturnPO im_re = new Import_ReturnPO(null, null, note, note, note, number, number, note);
+		Import_ReturnPO im_re = new Import_ReturnPO(null, null, note, note, note, note, number, note);
 	
 		if(invoice.add(im_re)!=null){
 			systemlog.add_up("AddImport_Return:");
@@ -137,7 +137,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		ExportPO ex = new ExportPO(null, null, null, null, null, 0, 0, 0, 0, 0);
+		ExportPO ex = new ExportPO(null, null, null, null, null, null, 0, 0, 0, 0);
 		
 		if(invoice.add(ex)!=null){
 			systemlog.add_up("AddExport:");
@@ -148,7 +148,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, null, null, null, 0, 0, 0, 0, 0, null);
+		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, null, null, null, null, 0, 0, 0, 0, null);
 		
 		if(invoice.add(ex_re)!=null){
 			systemlog.add_up("AddExport_Return:");
@@ -159,7 +159,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addExport_Return(String note, int number) {
 		// TODO Auto-generated method stub
-		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, note, note, note, number, number, number, number, number, note);
+		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, note, note, note, note, number, number, number, number, note);
 	
 		if(invoice.add(ex_re)!=null){
 			systemlog.add_up("AddExport_Return:");

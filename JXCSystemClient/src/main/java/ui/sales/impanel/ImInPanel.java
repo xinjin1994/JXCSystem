@@ -17,7 +17,7 @@ import ui.setting.MyLabel;
 import ui.setting.MyTextFieldFilled;
 import ui.setting.MyTextFieldTrans;
 import vo.CommodityVO;
-import vo.ImportMenuVO;
+import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 public class ImInPanel extends FatherPanel {

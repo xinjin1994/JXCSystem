@@ -122,7 +122,6 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		}else if(e.getSource() == fuzzyForwardButton){
 			infoString = info.getText();
 			info.setText("");
-			//返回主界面列表显示所有可能account
 			ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
 			ArrayList <String> infoArray = new ArrayList<String>();
 			infoArray.add("账户名称;账户余额");
@@ -130,7 +129,9 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 				String infoOfArray = fuzzyAccVO.get(i).name+";"+fuzzyAccVO.get(i).balance;
 				infoArray.add(infoOfArray);
 			}*/
-			setTable(infoArray);
+				setTable(infoArray);
+			
+			//返回主界面列表显示所有可能account
 		}
 		
 	}

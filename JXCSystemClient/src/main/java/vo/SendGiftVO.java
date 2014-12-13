@@ -1,5 +1,7 @@
 package vo;
 
+import vo.bill.InvoiceVO;
+
 public class SendGiftVO extends InvoiceVO{
 	
 

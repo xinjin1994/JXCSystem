@@ -11,7 +11,7 @@ import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.resultPanels.ResultPanelController;
-import vo.GetVO;
+import vo.bill.GetVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
 /**
@@ -45,6 +45,7 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 		this.balanceValue = balanceValue;
 		resController = new ResultPanelController(uiController, frame);
 		setLabel();
+		
 		setForward();
 		
 	}
