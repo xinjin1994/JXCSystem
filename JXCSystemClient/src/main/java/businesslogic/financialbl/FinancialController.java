@@ -81,14 +81,18 @@ public class FinancialController implements FinancialblService{
 					break;
 			
 			case 4: ExportPO exportpo=(ExportPO) array.get(i);
+					CommodityPO com2=exportpo.getImportGoodList().get(0).getCommodity();
+					CommodityListVO comList2=new CommodityListVO(com2.getNote(), com2.getName(), com2.getType(), exportpo.getImportGoodList().get(0).getNumber(), exportpo.getImportGoodList().get(0).getPrice(), exportpo.getImportGoodList().get(0).getMoney(), exportpo.getImportGoodList().get(0).getPs());
 					vo=new ExportMenuVO(exportpo.getNote(),exportpo.getCustomer().getName(),exportpo.getClerk(),exportpo.getOperator(),exportpo.getWareHouse(),
-							exportpo.getImportGoodList().get(0).getCommodity().getName(),exportpo.getTotalMoneyBefore(),exportpo.getDiscount(),exportpo.getVoucher(),
+							comList2,exportpo.getTotalMoneyBefore(),exportpo.getDiscount(),exportpo.getVoucher(),
 							exportpo.getTotalMoneyAfter(),exportpo.getImportGoodList().get(0).getPs(),exportpo.getTime(),4,exportpo.getInvoiceNote());
 					break;
 			
 			case 5: Export_ReturnPO exp_retpo=(Export_ReturnPO) array.get(i);
+					CommodityPO com3=exp_retpo.getImportGoodList().get(0).getCommodity();
+					CommodityListVO comList3=new CommodityListVO(com3.getNote(), com3.getName(), com3.getType(), exp_retpo.getImportGoodList().get(0).getNumber(), exp_retpo.getImportGoodList().get(0).getPrice(), exp_retpo.getImportGoodList().get(0).getMoney(), exp_retpo.getImportGoodList().get(0).getPs());
 					vo=new ExportMenuVO(exp_retpo.getNote(),exp_retpo.getCustomer().getName(),exp_retpo.getClerk(),exp_retpo.getOperator(),exp_retpo.getWareHouse(),
-							exp_retpo.getImportGoodList().get(0).getCommodity().getName(),exp_retpo.getTotalMoneyBefore(),exp_retpo.getDiscount(),exp_retpo.getVoucher(),
+							comList3,exp_retpo.getTotalMoneyBefore(),exp_retpo.getDiscount(),exp_retpo.getVoucher(),
 							exp_retpo.getTotalMoneyAfter(),exp_retpo.getImportGoodList().get(0).getPs(),exp_retpo.getTime(),5,exp_retpo.getInvoiceNote());
 					break;
 			
@@ -107,6 +111,8 @@ public class FinancialController implements FinancialblService{
 					break;
 					
 			case 9: continue;
+			
+			case 10: continue;
 			
 			}
 			
@@ -138,7 +144,7 @@ public class FinancialController implements FinancialblService{
 		return 0;
 	}
 
-	public int operatingConditionExcel_up(String start_time, String end_time) {
+	public int operatingConditionExcel_up(ArrayList<ConditionVO> operating_condition) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -150,12 +156,15 @@ public class FinancialController implements FinancialblService{
 
 	public boolean hasPower_up() {
 		// TODO Auto-generated method stub
+		if(User.Operator==4||User.Operator==5){
+			return true;
+		}
 		return false;
 	}
 
-	public int getClerk_up() {
+	public int getOperator_up() {
 		// TODO Auto-generated method stub
-		return 0;
+		return User.operator;
 	}
 
 }

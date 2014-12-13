@@ -37,4 +37,8 @@ public class PatchPO extends InvoicePO implements Serializable{
 		return operator;
 	}
 	
+	public void setNumber(int number){
+		this.number=number;
+	}
+	
 }

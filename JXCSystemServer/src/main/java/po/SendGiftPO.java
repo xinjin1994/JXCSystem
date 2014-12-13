@@ -32,5 +32,9 @@ public class SendGiftPO extends InvoicePO implements Serializable{
 		po.setInvoiceNote(this.getInvoiceNote());
 		return null;
 	}
+	
+	public void setNumber(int number){
+		this.number=number;
+	}
 
 }

@@ -5,12 +5,16 @@ import po.SendGiftPO;
 
 public interface CommodityInfo {
 	
-	public String addPatch(PatchPO po);
+	public String passPatch(PatchPO po);
 	
-	public String delPatch(PatchPO po);
+	public String refusePatch(String note);
 	
-	public String addGood_Data(SendGiftPO po);
+	public String passSendGift(SendGiftPO po);
 	
-	public String addPatch_Data(PatchPO po);
+	public String refuseSendGift(String note);
+	
+//	public String addGood_Data(SendGiftPO po);
+	
+//	public String addPatch_Data(PatchPO po);
 
 }

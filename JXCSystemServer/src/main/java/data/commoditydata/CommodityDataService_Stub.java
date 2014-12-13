@@ -26,6 +26,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	ArrayList<CommodityPO> giftList=new ArrayList<CommodityPO>();
 	ArrayList<PatchPO> draftPatchList=new ArrayList<PatchPO>();
 	ArrayList<SendGiftPO> sendGiftList=new ArrayList<SendGiftPO>();
+	SortPO tempSort=new SortPO("未分类商品");
 	
 	int comNote=0;
 	int sortNote=0;
@@ -45,7 +46,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		this.readSortNote();
 		this.readSendNote();
 		this.readPatchNote();
-		// TODO Auto-generated constructor stub
+		this.readTempSort();
 	}
 
 	public void writeSortList(){
@@ -457,6 +458,52 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 	
 	
+	public void writeTempSort(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("tempSort.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(tempSort);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void readTempSort(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("tempSort.out");
+			ois=new ObjectInputStream(fis);
+			tempSort=(SortPO) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	
 	/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑数据序列化以及构造方法↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 	
 	
@@ -575,15 +622,17 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return false;
 	}
 
-	public boolean addGift(CommodityPO po) {
+	public boolean addGift(CommodityPO po,int number) {
 		
 		CommodityPO po1=findGood_true(po.getName(),po.getType());
 		
 		if(po1!=null){
 			if(!po1.isGift){
 				if(po1.number>=po.number){
-					po1.number=po1.number-po.number;
+					po1.number=po1.number-number;
+					po=po1.copy();
 					po.isGift=true;
+					po.number=number;
 					giftList.add(po.copy());
 					this.writeSortList();
 					this.writeGiftList();
@@ -802,8 +851,17 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean addSendGift(SendGiftPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		sendGiftList.add(po.copy());
-		return true;
+		po.setCondition(1);
+		for(int i=0;i<giftList.size();i++){
+			if(giftList.get(i).getName().equals(po.getCommodity().getName())&&giftList.get(i).getType().equals(po.getCommodity().getType())){
+				if(giftList.get(i).getNumber()>=po.getNumber()){
+					giftList.get(i).number=giftList.get(i).number=po.getNumber();
+					sendGiftList.add(po.copy());
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public SendGiftPO findSendGift(SendGiftPO po) throws RemoteException {
@@ -856,6 +914,16 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<CommodityPO> getAllGift() throws RemoteException {
+		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
+		
+		for(int i=0;i<giftList.size();i++){
+			array.add(giftList.get(i).copy());
+		}
+		
+		return array;
 	}
 
 	public String getGoodNote(SortPO po1) throws RemoteException {
@@ -929,12 +997,13 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return null;
 	}
 
-	public boolean passPatch(String note) throws RemoteException {
+	public boolean passPatch(PatchPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		for(int i=0;i<patchList.size();i++){
-			if(patchList.get(i).getNote().equals(note)){
-				if(addGoodNumber(patchList.get(i).getCommodity(),patchList.get(i).getNumber())){
+			if(patchList.get(i).getNote().equals(po.getNote())){
+				if(addGoodNumber(patchList.get(i).getCommodity(),po.getNumber())){
 					patchList.get(i).setCondition(2);
+					patchList.get(i).setNumber(po.getNumber());
 					return true;
 				}
 			}
@@ -953,13 +1022,23 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return false;
 	}
 
-	public boolean passSendGift(String note) throws RemoteException {
+	public boolean passSendGift(SendGiftPO po) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<sendGiftList.size();i++){
-			if(sendGiftList.get(i).getNote().equals(note)){
-				sendGiftList.get(i).setCondition(2);
-				return true;
+		int i=0;
+		for(i=0;i<sendGiftList.size();i++){
+			if(sendGiftList.get(i).getNote().equals(po.getNote())){
+				if(po.getNumber()>(sendGiftList.get(i).getNumber()+findGift(po.getCommodity()).getNumber())){
+					return false;
+				}
 				
+				for(i=0;i<giftList.size();i++){
+					if(giftList.get(i).getName().equals(po.getCommodity().getName())&&giftList.get(i).getType().equals(po.getCommodity().getType())){
+						giftList.get(i).number=giftList.get(i).number-po.getNumber();
+					}
+				}
+				sendGiftList.get(i).setCondition(2);
+				sendGiftList.get(i).setNumber(po.getNumber());
+				return true;
 			}
 		}
 		return false;
@@ -976,6 +1055,11 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			}
 		}
 		return false;
+	}
+
+	public SortPO getTempSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		return tempSort.copy();
 	}
 
 

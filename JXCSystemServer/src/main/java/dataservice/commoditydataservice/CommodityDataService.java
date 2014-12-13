@@ -24,6 +24,8 @@ public interface CommodityDataService extends Remote{
 	public boolean updateSort_Mov(SortPO po1,SortPO po2) throws RemoteException;
 	public String getSortNote(SortPO po1) throws RemoteException;
 	
+	public SortPO getTempSort() throws RemoteException;
+	
 	public boolean addSendGift(SendGiftPO po) throws RemoteException;
 	public SendGiftPO findSendGift(SendGiftPO po) throws RemoteException;
 	public SendGiftPO findSendGift(String note) throws RemoteException;
@@ -31,11 +33,11 @@ public interface CommodityDataService extends Remote{
 	public boolean delSendGift(String note) throws RemoteException;
 	public String getSendGiftNote() throws RemoteException;
 	
-	public boolean addGift(CommodityPO po) throws RemoteException;
+	public boolean addGift(CommodityPO po,int number) throws RemoteException;
 	public CommodityPO findGift(CommodityPO po) throws RemoteException;
 	public CommodityPO findGift(String name,String type) throws RemoteException;
 	public boolean delGift(CommodityPO po) throws RemoteException;
-//	public boolean delGift(String note) throws RemoteException;
+	public ArrayList<CommodityPO> getAllGift() throws RemoteException;
 	
 	public ArrayList<CommodityPO> getAll() throws RemoteException;
 	public ArrayList<SortPO> getAllSort() throws RemoteException;
@@ -47,9 +49,9 @@ public interface CommodityDataService extends Remote{
 	public ArrayList<PatchPO> getAllPatch() throws RemoteException;
 	public String getPatchNote() throws RemoteException;
 	
-	public boolean passPatch(String note) throws RemoteException;
+	public boolean passPatch(PatchPO po) throws RemoteException;
 	public boolean refusePatch(String note) throws RemoteException;
-	public boolean passSendGift(String note) throws RemoteException;
+	public boolean passSendGift(SendGiftPO po) throws RemoteException;
 	public boolean refuseSendGift(String note) throws RemoteException;
 	
 	public boolean addDraftPatch(PatchPO po) throws RemoteException;

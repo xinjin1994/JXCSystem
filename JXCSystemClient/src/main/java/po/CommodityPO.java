@@ -44,7 +44,7 @@ public class CommodityPO implements Serializable{
 		this.warn=0;
 	}
 	
-	public CommodityPO(String name,String type,int in_price,int out_price){
+	public CommodityPO(String name,String type,double in_price,double out_price){
 		this.name = name;
 		this.type = type;
 		this.in_price = in_price;

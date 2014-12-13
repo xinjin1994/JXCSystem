@@ -7,7 +7,9 @@ import po.CommodityPO;
 import po.PatchPO;
 import po.SendGiftPO;
 import po.SortPO;
+import po.WarnPO;
 import vo.StockVO;
+import businesslogic.userbl.User;
 import data.commoditydata.CommodityDataService_Stub;
 import dataservice.commoditydataservice.CommodityDataService;
 
@@ -21,6 +23,9 @@ import dataservice.commoditydataservice.CommodityDataService;
 //6  商品数量不足，不能添加为赠品
 //7  赠品数量不足，不能删除
 //8  商品数量不能为负
+//9  分类中存在分类，无法添加商品
+//10 分类中存在商品，无法添加分类
+//11 分类中存在分类，无法删除分类
 
 public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			businesslogic.initializationlbl.CommodityInfo, businesslogic.invoicebl.CommodityInfo,
@@ -30,67 +35,9 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public SystemlogInfo systemlog;
 	public CommodityDataService sto=new CommodityDataService_Stub();
 
-	public int addCommodity(String name, String type) {
-		int i=0;
-		CommodityPO com;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
-		
-		try {
-			
-//			com=sto.findGood(name,type);
-//			
-//			if(com!=null){
-//				return 1;
-//			}			
-			
-			ArrayList<CommodityPO> po=sto.getAll();
-			
-			for(i=0;i<po.size();i++){
-				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
-					return 1;
-				}
-			}
-			
-			com=new CommodityPO(false,name,type,0,0,"0",0,0,0);
-			
-			if (sto.addGood(com,null)) {
-				return 0;
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return -1;
-	}
-	
-	public int addCommodity(String name, String type, int number) throws RemoteException {
-		int i=0;
-		CommodityPO com;
-		
-		ArrayList<CommodityPO> po=sto.getAll();
-		
-		for(i=0;i<po.size();i++){
-			if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
-				sto.addGood(po.get(i), null);
-				return 0;
-			}
-		}
-		
-		com=new CommodityPO(false,name,type,0,0,"0",0,0,number);
-		
-		if (sto.addGood(com,null)) {
-			return 0;
-		}
-		return -1;
-	}
-
 	public int addCommodity(CommodityPO po1,SortPO po2) {
 		// TODO Auto-generated method stub
 		int i=0;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		
 		try {
 			
@@ -101,6 +48,18 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 					return 1;
 				}
 			}
+			
+			SortPO sort=findSort(po2.name);
+			
+			if(sort==null){
+				return 4;
+			}
+			
+			if(sort.hasSort()){
+				return 9;
+			}
+			
+			po1.father=po2.getName();
 			
 			if (sto.addGood(po1,po2)) {
 				return 0;
@@ -114,10 +73,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	}
 
 	public int delCommodity(String name, String type) {
-		CommodityPO com;
 		int i=0;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		
 		try {
 			
@@ -125,6 +81,11 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			
 			for(i=0;i<po.size();i++){
 				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
+					
+					if(po.get(i).getNumber()!=0){
+						return 7;
+					}
+					
 					
 					if(sto.delGood(po.get(i))){
 						return 0;
@@ -143,39 +104,68 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return 2;
 	}
 
-	public int updateCommodity(String name, String type, double in_price, double out_price) {
-		CommodityPO com=null;
-//		CommodityPO com2 = new CommodityPO(false, "name", "type", 10, 10, "10", 10, 10, 10);
-		int i=0;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
-		
+//	public int updateCommodity(String name, String type, double in_price, double out_price) {
+//		CommodityPO com=null;
+//		int i=0;
+//		
+//		try {
+//			
+//			ArrayList<CommodityPO> po=sto.getAll();
+//			
+//			for(i=0;i<po.size();i++){
+//				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
+//					com=new CommodityPO(false,name,type,in_price,out_price,po.get(i).getNote(),po.get(i).recent_in_price,po.get(i).recent_out_price,po.get(i).number);
+//					if(sto.updateGood(com, com)){
+//						return 0;
+//					}
+//					return -1;
+//				}
+//			}
+//			
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return 2;
+//	}
+	
+	public int updateCommodity(CommodityPO po1,CommodityPO po2){
 		try {
-			
-			ArrayList<CommodityPO> po=sto.getAll();
-			
-			for(i=0;i<po.size();i++){
-				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
-					com=new CommodityPO(false,name,type,in_price,out_price,po.get(i).getNote(),po.get(i).recent_in_price,po.get(i).recent_out_price,po.get(i).number);
-					if(sto.updateGood(com, com)){
-						return 0;
-					}
-					return -1;
-				}
+			CommodityPO com1=sto.findGood(po1.getName(), po1.getType());
+			if(com1==null){
+				return 2;
 			}
-			
+			sto.updateGood(com1, po2);
+			return 0;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return 2;
+		return -1;
+	}
+	
+	public int updateCommodity(CommodityPO po1,SortPO po2){
+		try {
+			CommodityPO com1=sto.findGood(po1.getName(), po1.getType());
+			if(com1==null){
+				return 2;
+			}
+			SortPO sort2=findSort(po2.getName());
+			if(sort2==null){
+				return 4;
+			}
+			
+			sto.updateGood(com1, sort2);
+			return 0;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	public ArrayList<CommodityPO> searchCommodity(String word) {
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
-		
 		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
 		int i=0;
 		
@@ -198,11 +188,19 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		return null;
 	}
+	
+	public String getCommodityNote(SortPO po){
+		try {
+			return sto.getGoodNote(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "COM";
+	}
 
 	public int addSort(SortPO sort1,SortPO sort2) {
 		SortPO po1=null;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		SortPO po2=null;
 		int i=0;
 		
@@ -225,6 +223,12 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 4;
 			}
 			
+			if(po2.hasCommodity()){
+				return 10;
+			}
+			
+			sort1.father=sort2.getName();
+			
 			if (sto.addSort(sort1,sort2)) {
 				return 0;
 			}
@@ -238,8 +242,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 
 	public int delSort(String name) {
 		SortPO com=null;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		int i=0;
 		
 		try {
@@ -256,10 +258,13 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 4;
 			}
 			
-			if(com.hasSort()){
+			if(com.hasCommodity()){
 				return 5;
 			}
 			
+			if(com.hasSort()){
+				return 11;
+			}
 			
 			if (sto.delSort(com)) {
 				return 0;
@@ -276,8 +281,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		SortPO com1 =null;
 		SortPO com2 =null;
 		int i=0;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		
 		try {
 			
@@ -308,6 +311,43 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		}
 		
 		return -1;
+	}
+	
+	public int updateSort_Mov(SortPO po1,SortPO po2){
+		try {	
+			SortPO sort1=findSort(po1.getName());
+			SortPO sort2=findSort(po2.getName());
+		
+			if(sort1==null||sort2==null){
+				return 4;
+			}
+			sto.updateSort_Mov(sort1, sort2);
+			return 0;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public ArrayList<SortPO> getAllSort(){
+		try {
+			return sto.getAllSort();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<SortPO>();
+	}
+	
+	public String getSortNote(SortPO po){
+		try {
+			return sto.getSortNote(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "SORT";
 	}
 
 	public ArrayList<CommodityPO> Examine(String time1, String time2) {
@@ -345,8 +385,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 
 	public int addGift(String name, String type,int number) {
 		CommodityPO com =null;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		
 		try {
 			
@@ -360,7 +398,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 6;
 			}
 			
-			if (sto.addGift(com)) {
+			if (sto.addGift(com,number)) {
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -371,8 +409,8 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return -1;
 	}
 
-	public int delGift(String name, String type,int number) {
-		CommodityPO com = new CommodityPO(true,"name","type",10,10,"10",20,20,100);
+	public int delGift(String name, String type) {
+		CommodityPO com ;
 //		sto = new CommodityDataService_Stub();
 		
 		try {
@@ -381,10 +419,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			
 			if(com==null){
 				return 2;
-			}
-			
-			if(com.number<number){
-				return 7;
 			}
 			
 			if (sto.delGift(com)) {
@@ -398,8 +432,17 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return -1;
 	}
 
+	public ArrayList<CommodityPO> getAllGift(){
+		try {
+			return sto.getAllGift();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<CommodityPO>();
+	}
+	
 	public int patch(String name, String type, int number,String note) {
-//		CommodityPO com1 = new CommodityPO(true,"name","type",10,10,10,20,20,100);
 		CommodityPO com =null;
 		
 		try {
@@ -415,8 +458,10 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			
 			String word="patch:"+com.getName()+","+com.getType()+","+number;
 			systemlog.add_up(word);
-			PatchPO po=new PatchPO(com, number,"");
+			PatchPO po=new PatchPO(com, number,User.operator);
+			po.setCondition(1);
 			invoice.add(po);
+			sto.addPatch(po);
 			return 0;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -424,10 +469,21 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		}
 		return -1;
 	}
+	
+	public PatchPO searchPatch(String note){
+		try {
+			PatchPO po=sto.getPatch(note);
+			return po;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public int warn(String name, String type, int number) {
-		CommodityPO com1 = new CommodityPO(true,"name","type",10,10,"10",20,20,100);
-		CommodityPO com2 = new CommodityPO(true,"name","type",10,10,"10",20,20,100);
+		CommodityPO com1 = null;
+		CommodityPO com2 = null;
 //		sto = new CommodityDataService_Stub();
 		
 		try {
@@ -437,6 +493,9 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			if(com1==null){
 				return 2;
 			}
+			
+			WarnPO po=new WarnPO(com1,number);
+			invoice.add(po);
 			
 			com2=com1.copy();
 			com2.warn=number;
@@ -453,7 +512,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	}
 	
 	public ArrayList<CommodityPO> getAllCommodity(){
-//		sto = new CommodityDataService_Stub();
 		
 		try {
 			return sto.getAll();
@@ -465,23 +523,20 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 	}
 
-	public String addPatch(PatchPO po) {
+	public String passPatch(PatchPO po1) {
 		// TODO Auto-generated method stub
-//		sto.updateGood(po1, po2);
 		CommodityPO com1 =null;
-		CommodityPO com2 =null;
 		
 		try {
+			PatchPO po=sto.getPatch(po1.getNote());
 			com1=sto.findGood(po.getCommodity().getName(),po.getCommodity().getType());
-	
+			
 			if(com1==null){
-				return "失败";
+				com1=new CommodityPO(po.getCommodity().getName(),po.getCommodity().getType());
+				addCommodity(com1,sto.getTempSort());		
 			}
 			
-			com2=com1.copy();
-			com2.number=com2.number+po.getNumber();
-			
-			if (sto.updateGood(com1, com2)) {
+			if (sto.passPatch(po1)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -491,24 +546,11 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return "成功";
 	}
 
-	public String delPatch(PatchPO po) {
+	public String refusePatch(String note) {
 		// TODO Auto-generated method stub
-		CommodityPO com1 =null;
-		CommodityPO com2 =null;
 		
 		try {
-			com1=sto.findGood(po.getCommodity().getName(),po.getCommodity().getType());
-	
-			if(com1==null){
-				return "失败";
-			}
-			
-			com2=com1.copy();
-			com2.number=com2.number-po.getNumber();
-			
-			if (sto.updateGood(com1, com2)) {
-				return "成功";
-			}
+			sto.refusePatch(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -528,72 +570,151 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return null;
 		
 	}
-
-	public String addCommodity(String name, String type, double in_price, double out_price) {
-		// TODO Auto-generated method stub
-		CommodityPO com=null;
-//		CommodityPO com2 = new CommodityPO(false, "name", "type", 10, 10, "10", 10, 10, 10);
-		int i=0;
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
-		
+	
+	public SortPO findSort(String name){
+		ArrayList<SortPO> sort;
 		try {
-			
-			ArrayList<CommodityPO> po=sto.getAll();
-			
-			for(i=0;i<po.size();i++){
-				if(po.get(i).getName().equals(name)&&po.get(i).getType().equals(type)){
-					com=new CommodityPO(false,name,type,in_price,out_price,po.get(i).getNote(),po.get(i).recent_in_price,po.get(i).recent_out_price,po.get(i).number);
-					if(sto.updateGood(com, com)){
-						return "0";
-					}
-					return "-1";
+			sort = sto.getAllSort();
+		
+			int i=0;
+			for(i=0;i<sort.size();i++){
+				if(sort.get(i).getName().equals(name)){
+					return sort.get(i);
 				}
 			}
-			
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return "2";
-	}
-
-	
-	
-	
-	
-	
-	//////////////////////////////////////////////////////////////
-	public String addGood_Data(SendGiftPO po) {
-		// TODO Auto-generated method stub
-		try {
-			sto.addGift(new CommodityPO(null, null, null, 0, 0, null, 0, 0, 0));
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return " ";
-	}
-
-	public String addPatch_Data(PatchPO po) {
-		// TODO Auto-generated method stub
-
-		try {
-			CommodityPO po1=sto.findGood(po.getCommodity().getName(),po.getCommodity().getType());
-			
-			if(po1==null){
-				return null;
-			}
-			
-			sto.addGood(po1, null);
-			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+	
+	public String passSendGift(SendGiftPO po) {
+		// TODO Auto-generated method stub
+		try {
+			
+			SendGiftPO send=sto.findSendGift(po.getNote());
+			
+			if(po.getNumber()>send.getNumber()){
+				CommodityPO com=sto.findGift(po.getCommodity());	
+				if(com==null){
+					return "失败";
+				}else if(po.getNumber()>(com.getNumber()+send.getNumber())){
+					return "失败";
+				}
+			}
+			
+			if(sto.passSendGift(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String refuseSendGift(String note) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.findSendGift(note)==null){
+				return "失败";
+			}
+			sto.refuseSendGift(note);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "成功";
+	}
+	
+	public String getPatchNote(){
+		try {
+			return sto.getPatchNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Patch";
+	}
+	
+	public String getSendGiftNote(){
+		try {
+			return sto.getSendGiftNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "SENDGIFT";
+	}
+	
+	public int patchDraft(PatchPO po){
+		try {	
+			
+			po.setCondition(0);
+			sto.addDraftPatch(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public PatchPO searchDraftPatch(String note){
+		ArrayList<PatchPO> po;
+		try {
+			
+			po = sto.getAllDraftPatch();
+			for(int i=0;i<po.size();i++){
+				if(po.get(i).getNote().equals(note)){
+					return po.get(i);
+				}
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<PatchPO> getAllDraftPatch(){
+		try {
+			return sto.getAllDraftPatch();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<PatchPO>();
+	}
+	
+	public ArrayList<SortPO> getComSort(){
+		ArrayList<SortPO> array=new ArrayList<SortPO>();
+		ArrayList<SortPO> po=getAllSort();
+		
+		for(int i=0;i<po.size();i++){
+			if(!po.get(i).hasSort()){
+				array.add(po.get(i));
+			}
+		}
+		return array;
+	}
+	
+	public ArrayList<SortPO> getSortSort(){
+		ArrayList<SortPO> array=new ArrayList<SortPO>();
+		ArrayList<SortPO> po=getAllSort();
+		
+		for(int i=0;i<po.size();i++){
+			if(!po.get(i).hasCommodity()){
+				array.add(po.get(i));
+			}
+		}
+		return array;
+	}
+	
+	//////////////////////////////////////////////////////////////
+
+
+
 
 
 }
