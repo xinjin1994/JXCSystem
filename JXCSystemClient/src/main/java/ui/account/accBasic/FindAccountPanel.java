@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import ui.FatherPanel;
-import ui.UIController;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.MyTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
@@ -33,6 +33,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	private String nameString,infoString;
 	private MyFrame frame;
 	private String type = "account";
+	private MyLabel failLabel;
 	
 	public FindAccountPanel(MyFrame frame,String url,
 			AccountAllUIController accountController){
@@ -44,6 +45,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		accountblService = new AccountController();
 		accountController.setBack_second(this,150,130);
 		init();
+		addLabel();
 	}
 	
 	public FindAccountPanel(MyFrame frame,String url,
@@ -108,9 +110,17 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		frame.repaint();
 	}
 	
+	public void addLabel() {
+		failLabel = new MyLabel(245, 440, 200, 35);
+		this.add(failLabel);
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exactForwardButton){
 			nameString = name.getText();
+			if(nameString.equals("")){
+				failLabel.setText("请正确输入信息！");
+			}else{
 			name.setText("");
 			
 			frame.remove(FindAccountPanel.this);
@@ -118,9 +128,13 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 				accountController.accountDetail(getFoundAcc());
 			}else if(type.equals("manager")){
 				managerController.accountDetail(getFoundAcc());
+				}
 			}
 		}else if(e.getSource() == fuzzyForwardButton){
 			infoString = info.getText();
+			if(infoString.equals("")){
+				failLabel.setText("请正确输入信息！");
+			}else{
 			info.setText("");
 			ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
 			ArrayList <String> infoArray = new ArrayList<String>();
@@ -130,7 +144,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 				infoArray.add(infoOfArray);
 			}*/
 				setTable(infoArray);
-			
+			}
 			//返回主界面列表显示所有可能account
 		}
 		

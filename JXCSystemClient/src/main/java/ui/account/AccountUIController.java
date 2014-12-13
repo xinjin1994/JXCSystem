@@ -80,7 +80,7 @@ public class AccountUIController {
 		String images_ori_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve.png",
 				"Image/Account/button/invoiceManage/disapp.png"};
 		String images_stop_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_stop.png",
-		"Image/Account/button/invoiceManage/disapp_s jm   top.png"};
+		"Image/Account/button/invoiceManage/disapp_stop.png"};
 		String images_press_on_invoice[] = new String[]{"Image/Account/button/invoiceManage/approve_press_on.png",
 				"Image/Account/button/invoiceManage/disapp_press_on.png"};
 		

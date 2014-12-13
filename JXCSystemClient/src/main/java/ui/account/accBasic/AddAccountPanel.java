@@ -4,17 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
-import ui.UIController;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
-import vo.initial.InitialCommodityVO;
 /**
  * 增加账户，在该类里会判断是否能够添加账户
  * @author ZYC
@@ -25,6 +24,7 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 	ManagerAllUIController managerController;
 	private String nameString;
 	private double balance;
+	private MyLabel failLabel;
 	
 	AccountVO newAcc;
 	private MyButton forwardButton;
@@ -41,7 +41,7 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		accountController.setBack_second(this,199,141);
 		resController = new ResultPanelController(frame, this);
-		
+		addLabel();
 		init();
 	}
 	
@@ -84,23 +84,36 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 		
 	
 	}
+	
+	public void addLabel() {
+		failLabel = new MyLabel(275, 420, 200, 35);
+		this.add(failLabel);
+	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			nameString = name.getText();
-			String priceString = this.price.getText();
+			String priceString = price.getText();
+			
+			if(nameString.equals("")||priceString.equals("")){
+//				System.out.println("ge");
+				failLabel.setText("请正确输入信息！");
+			}else{
+				try{
 			balance = Double.parseDouble(priceString);
 			
 			newAcc = new AccountVO(nameString, balance);
-//			System.out.println(newAcc.name);
 			
 			name.setText("");
 			price.setText("");
-			
 			frame.remove(this);
 			if(type.equals("account")){
 				accountController.confirmAcc(newAcc,"add");//跳转到确认界面（允许添加账户时）
 			}else if(type.equals("manager")){
 				managerController.confirmAcc(newAcc, "add");
+			}
+				}catch(Exception e2){
+					failLabel.setText("请正确输入信息！");
+				}
 			}
 		}
 		

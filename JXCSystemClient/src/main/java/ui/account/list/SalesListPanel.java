@@ -2,6 +2,7 @@ package ui.account.list;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import ui.FatherPanel;
@@ -9,6 +10,7 @@ import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.MyTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
@@ -32,6 +34,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 	private FinancialblService financialblService;
 	private MyFrame frame;
 	private String type = "account";
+	private MyLabel failLabel;
 	
 	public SalesListPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
@@ -43,6 +46,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 		this.repaint();
 		
 		uiController.setBack_second(this,146,57);
+		addLabel();
 		init();
 		
 	}
@@ -99,15 +103,37 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 		accountController.addMainPanel();
 		frame.repaint();
 	}
+	
+	public void addLabel() {
+		failLabel = new MyLabel(293, 550, 200, 35);
+		this.add(failLabel);
+	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
-			frame.remove(this);
+			
 			String time1 = timeBegin.getText();
 			String time2 = timeFinish.getText();
 			String good_name = commodity.getText();
-			int warehouse = Integer.parseInt(stock.getText());
 			String customer_name = customer.getText();
 			String clerk = agent.getText();
+			SimpleDateFormat dateFormat = null;
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			dateFormat.setLenient(false);
+			boolean isLegal = true;
+			try{
+				dateFormat.parse(time1);
+				isLegal = true;
+			}catch(Exception e2){
+				isLegal = false;
+			}
+			
+			if(time1.equals("")||time2.equals("")||good_name.equals("")||customer_name.equals("")
+					||clerk.equals("")||isLegal == false){
+				failLabel.setText("请正确输入信息！");
+			}else{
+			try{
+			int warehouse = Integer.parseInt(stock.getText());
+			frame.remove(this);
 			ArrayList<SalesDetailVO> salesArray = financialblService.saleList_up(time1,
 					time2, good_name, "", customer_name, clerk, warehouse);
 			ArrayList<String> sales = new ArrayList<String>();
@@ -124,6 +150,10 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 			}else if(type.equals("manager")){
 //				frame.setPanel(managerController.getMainPanel());
 				setTable(sales);
+				}
+			}catch(Exception e2){
+				failLabel.setText("请正确输入信息！");
+			}
 			}
 			frame.repaint();
 		}

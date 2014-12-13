@@ -2,6 +2,7 @@ package ui.account.list;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import ui.FatherPanel;
@@ -9,6 +10,7 @@ import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.MyTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
@@ -35,6 +37,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 	private MyButton forwardButton;
 	private MyFrame frame;
 	private String type = "account";
+	private MyLabel failLabel;
 
 	public OpeConPanel(MyFrame frame, String url, AccountAllUIController uiController) {
 		super(frame, url, uiController);
@@ -44,7 +47,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 		colors = new ColorFactory();
 		financialblService = new FinancialController();
 		uiController.setBack_second(this, 149, 137);
-
+		addLabel();
 		init();
 	}
 
@@ -93,11 +96,31 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 		accountController.addMainPanel();
 		frame.repaint();
 	}
+	public void addLabel() {
+		failLabel = new MyLabel(293, 410, 200, 35);
+		this.add(failLabel);
+	}
+	
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
 			String time1 = timeBegin.getText();
 			String time2 = timeBegin.getText();
+			
+			SimpleDateFormat dateFormat = null;
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			dateFormat.setLenient(false);
+			boolean isLegal = true;
+			try{
+				dateFormat.parse(time1);
+				isLegal = true;
+			}catch(Exception e2){
+				isLegal = false;
+			}
+			
+			if(time1.equals("")||time2.equals("")||isLegal == false){
+				failLabel.setText("请正确输入信息！");
+			}else{
 			ArrayList<ConditionVO> conditionVO= financialblService.operatingCondition_up(time1, time2);
 			ArrayList<String> info = new ArrayList<String>();
 			info.add("利润");
@@ -109,6 +132,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 //				frame.setPanel(accountController.getMainPanel());
 			} else if (type.equals("manager")) {
 //				frame.setPanel(managerController.getMainPanel());
+				}
 			}
 		}
 	}
