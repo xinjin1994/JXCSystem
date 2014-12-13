@@ -19,15 +19,10 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		CommodityPO com=new CommodityPO(false,vo1.name,vo1.type,vo1.inValue,vo1.outValue,
 				vo1.id,vo1.latestInValue,vo1.latestOutValue,vo1.num);
-		
-		return commodity.addCommodity(com,new SortPO(null));
+		SortPO sort=new SortPO(vo2.name);
+		sort.note=vo2.note;
+		return commodity.addCommodity(com,sort);
 	}
-
-//	public String addCommodity(String name, String type, int in_price,
-//			int out_price) {
-//		// TODO Auto-generated method stub
-//		return commodity.addCommodity(name, type, in_price, out_price);
-//	}
 
 	public int delCommodity_up(CommodityVO vo) {
 		// TODO Auto-generated method stub
@@ -36,7 +31,7 @@ public class CommodityController implements CommodityblService{
 
 	public int updateCommodity_up(CommodityVO vo1,CommodityVO vo2) {
 		// TODO Auto-generated method stub
-		return commodity.updateCommodity(vo1.name, vo1.type, (int)vo2.inValue, (int)vo2.outValue);
+		return commodity.updateCommodity(vo1.name, vo1.type, vo2.inValue, vo2.outValue);
 	}
 
 	public ArrayList<CommodityVO> searchFuzzyCommodity_up(String word) {
@@ -47,6 +42,7 @@ public class CommodityController implements CommodityblService{
 		int i=0;
 		for(i=0;i<po.size();i++){
 			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			
 			vo.add(com);
 		}
 		

@@ -88,6 +88,10 @@ public interface CommodityblService {
 	
 	//获得所有分类信息，用于添加与更新商品或分类时分类的选择
 	public ArrayList<SortVO> getAllSort_up();
+	//获得所有可以添加商品的分类
+	public ArrayList<SortVO> getComSort_up();
+	//获得所有可以添加分类的分类
+	public ArrayList<SortVO> getSortSort_up();
 	
 	//获得所有商品，用于报溢报损报警单中商品的选择
 	public ArrayList<CommodityVO> getAllCommodity_up();

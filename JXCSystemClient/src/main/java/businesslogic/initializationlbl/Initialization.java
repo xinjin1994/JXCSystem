@@ -46,10 +46,9 @@ public class Initialization {
 		return 0;
 	}
 
-	public String addCommodity(String name, String type, int in_price,
-			int out_price) {
+	public String addCommodity(String name, String type, double d,double e) {
 		// TODO Auto-generated method stub
-		return commodityInfo.addCommodity(name, type, in_price, out_price);
+		return commodityInfo.addCommodity(name, type, d, e);
 	}
 
 	public String addCustomer(String name, String phone, int level, int money) {

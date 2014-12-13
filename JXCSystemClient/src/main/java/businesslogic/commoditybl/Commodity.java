@@ -143,8 +143,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return 2;
 	}
 
-	public int updateCommodity(String name, String type, int in_price,
-			int out_price) {
+	public int updateCommodity(String name, String type, double in_price, double out_price) {
 		CommodityPO com=null;
 //		CommodityPO com2 = new CommodityPO(false, "name", "type", 10, 10, "10", 10, 10, 10);
 		int i=0;
@@ -530,8 +529,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 	}
 
-	public String addCommodity(String name, String type, int in_price,
-			int out_price) {
+	public String addCommodity(String name, String type, double in_price, double out_price) {
 		// TODO Auto-generated method stub
 		CommodityPO com=null;
 //		CommodityPO com2 = new CommodityPO(false, "name", "type", 10, 10, "10", 10, 10, 10);
