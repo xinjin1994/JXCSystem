@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import ui.commodity.CommodityUIController;
-import ui.setting.MyButton;
+import ui.setting.Button.MyButton;
 
 //1 库存人员
 public class CommodityPanel extends FatherPanel{

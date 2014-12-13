@@ -1,5 +1,6 @@
 package ui.manager;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,18 +13,19 @@ import javax.swing.JRadioButton;
 import ui.FatherPanel;
 import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
-import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
-import ui.setting.MyLabel;
-import ui.setting.MyTextFieldTrans;
+
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
+import ui.setting.ComboBox.MyComboBox;
+import ui.setting.TextField.MyTextFieldTrans;
 import vo.CommodityVO;
 import vo.promotion.DiscountVO;
 import vo.promotion.ProGiftVO;
 import vo.promotion.VoucherVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
+
 
 public class SetProPanel extends FatherPanel implements ActionListener{
 	private ManagerAllUIController uiController;

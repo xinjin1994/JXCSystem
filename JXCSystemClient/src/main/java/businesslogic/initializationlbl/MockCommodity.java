@@ -2,8 +2,8 @@ package businesslogic.initializationlbl;
 
 public class MockCommodity implements CommodityInfo{
 	
-	public String addCommodity(String name, String type, int in_price,int out_price) {
-		return "³É¹¦";
+	public String addCommodity(String name, String type, double in_price,double out_price) {
+		return "ï¿½É¹ï¿½";
 	}
 
 //	public String delCommodity(String name, String type) {

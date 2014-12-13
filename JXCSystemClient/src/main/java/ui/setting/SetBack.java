@@ -5,6 +5,8 @@ import java.awt.event.MouseListener;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.setting.Button.BackButton;
+import ui.setting.Button.MyButton;
 
 public class SetBack {
 	FatherPanel prePanel;

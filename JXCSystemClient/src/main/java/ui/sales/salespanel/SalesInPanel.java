@@ -6,11 +6,12 @@ import java.awt.event.MouseListener;
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.sales.impanel.ImInPanel;
-import ui.setting.MyButton;
+import ui.sales.impanel.MakeSureIm;
 import ui.setting.MyFrame;
-import ui.setting.MyTextFieldFilled;
-import businesslogic.salesbl.SalesController;
-import businesslogicservice.salesblservice.SalesblService;
+import ui.setting.Button.MyButton;
+import ui.setting.TextField.MyTextFieldFilled;
+import vo.bill.CommodityListVO;
+import vo.bill.ExportMenuVO;
 
 public class SalesInPanel extends ImInPanel{
 
@@ -34,7 +35,28 @@ public class SalesInPanel extends ImInPanel{
 	
 	public void addRestText(){
 		newRemark = new MyTextFieldFilled(104,420,104,118);
+		discount = new MyTextFieldFilled(235, 421, 91, 37);
+		voucher = new MyTextFieldFilled(235, 500, 91, 27);
 		this.add(newRemark);
+		this.add(discount);
+		this.add(voucher);
+	}
+	
+	public double getPrice() {
+		goodsTypeSelected = goodsType.getSelectedItem().toString();
+		// commodityVO = salesblService.getCommodity_up(goodsNameSelected,
+		// goodsTypeSelected);
+//		 goodsPrice.setText(commodityVO.outValue+"");
+		goodsPrice.setText("30");
+		this.add(goodsPrice);
+		// price = commodityVO.outValue;
+		price = 30;
+		return price;
+	}
+	public void getTotalPrice() {
+		totalPriceText = this.getPrice() * num-Double.parseDouble(discount.getText())-Double.parseDouble(voucher.getText());
+		goodsTotal.setText(totalPriceText + "");
+		this.add(goodsTotal);
 	}
 	class MouListener implements MouseListener{
 
@@ -42,28 +64,38 @@ public class SalesInPanel extends ImInPanel{
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesInPanel.this);
 			} else if (e.getSource() == forward) {
-				SalesblService salesBlService = new SalesController();
-				// TODO
+				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+						goodsTypeSelected, num, price, num*price, newRemark.getText());
+//				CommodityListVO(String id, String name, String type, int num, double price(折让前总价), double total, String remark)
+//				public ExportMenuVO(String note,String cusName,String salesMan,String warehouse,
+//						CommodityListVO commodityList,double discount,double voucherPrice,
+//						double afterValue,int bill_note){
+				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
+						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
+				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
+						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesInPanel.this,salesUIController);
+				frame.remove(SalesInPanel.this);
+				frame.setPanel(makeSureIm);
+				frame.repaint();
+			} else if (e.getSource() == goodsName) {
+				setType();
+			} else if (e.getSource() == goodsType) {
+				setGoodsID();
+				getPrice();
 			}
-		}
+			}
+		
 
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 		

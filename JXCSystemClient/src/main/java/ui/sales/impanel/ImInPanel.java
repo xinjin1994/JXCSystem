@@ -6,18 +6,15 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
-import ui.setting.MyButton;
-import ui.setting.MyComboBox;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
-import ui.setting.MyTextFieldFilled;
-import ui.setting.MyTextFieldTrans;
+import ui.setting.Button.MyButton;
+import ui.setting.ComboBox.MyComboBox;
+import ui.setting.TextField.MyTextFieldFilled;
+import ui.setting.TextField.MyTextFieldTrans;
 import vo.CommodityVO;
 import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
@@ -119,10 +116,10 @@ public class ImInPanel extends FatherPanel {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
 		// commodityVO = salesblService.getCommodity_up(goodsNameSelected,
 		// goodsTypeSelected);
-		// goodsPrice.setText(commodityVO.outValue+"");
+//		 goodsPrice.setText(commodityVO.inValue+"");
 		goodsPrice.setText("20");
 		this.add(goodsPrice);
-		// price = commodityVO.outValue;
+		// price = commodityVO.inValue;
 		price = 20;
 		return price;
 	}

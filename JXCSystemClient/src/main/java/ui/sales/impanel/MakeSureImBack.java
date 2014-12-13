@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.Button.MyButton;
 import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
 

@@ -3,9 +3,9 @@ package ui.manager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.promotion.DiscountVO;
 import vo.promotion.ProGiftVO;

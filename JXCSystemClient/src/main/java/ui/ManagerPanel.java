@@ -11,8 +11,8 @@ import javax.swing.JLabel;
 
 import ui.manager.ManagerUIController;
 import ui.setting.ColorFactory;
-import ui.setting.MyButton;
 import ui.setting.MyTable;
+import ui.setting.Button.MyButton;
 
 /**
  * 6 总经理

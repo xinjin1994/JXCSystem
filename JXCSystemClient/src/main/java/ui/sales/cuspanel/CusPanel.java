@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import ui.sales.SalesUIController;
 import ui.sales.SalesSecondPanel;
-import ui.setting.MyButton;
+import ui.setting.Button.MyButton;
 
 public class CusPanel extends SalesSecondPanel{
 	private MyButton addCus, delCus, changeCusInfo, seeCusInfo;

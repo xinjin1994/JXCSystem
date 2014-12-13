@@ -9,10 +9,10 @@ import ui.FatherPanel;
 import ui.UIController;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
 /**
  * 控制所有结果panel的新建及跳转
  * @author ZYC

@@ -5,8 +5,8 @@ import javax.swing.ImageIcon;
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
-import ui.setting.MyTextFieldFilled;
-import ui.setting.MyTextFieldTrans;
+import ui.setting.TextField.MyTextFieldFilled;
+import ui.setting.TextField.MyTextFieldTrans;
 import vo.CustomerVO;
 
 public class MakeSureCusInfo extends AddCusPanel{

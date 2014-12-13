@@ -5,9 +5,9 @@ import java.awt.event.MouseListener;
 
 import ui.CommodityPanel;
 import ui.UIController;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.SecondPanel;
+import ui.setting.Button.MyButton;
 
 public class CommodityUIController {
 	private int secondX = 1;

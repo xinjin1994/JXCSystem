@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import ui.sales.SalesSecondPanel;
 import ui.sales.SalesUIController;
-import ui.setting.MyButton;
+import ui.setting.Button.MyButton;
 
 public class ImPanel extends SalesSecondPanel{
 	
