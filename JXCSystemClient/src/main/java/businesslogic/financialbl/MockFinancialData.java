@@ -27,11 +27,11 @@ public class MockFinancialData implements FinancialDataService{
 		return new ArrayList<AllBillPO>();
 	}
 
-	public OperatingConditionPO getOperatingCondition() {
+	public ArrayList<OperatingConditionPO> getOperatingCondition() {
 		// TODO Auto-generated method stub
 		OperatingConditionPO[] ope=new OperatingConditionPO[1];
 		ope[0]=arrayOpe.get(0);
-		return new OperatingConditionPO(0,0,0, 0, 0);
+		return new ArrayList<OperatingConditionPO>();
 	}
 
 	public boolean addSaleList(SaleListPO po) {

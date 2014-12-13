@@ -1,21 +1,42 @@
 package vo;
 
+import java.util.ArrayList;
+
 public class SortVO {
 	
 	public String name;
-	public int level;
+	public String note;
 	
-	public SortVO(String name,int level){
+	SortVO fatherSort;
+	ArrayList<CommodityVO> commodity=new ArrayList<CommodityVO>();
+	ArrayList<SortVO> sortList=new ArrayList<SortVO>();
+	
+	public SortVO(String name){
 		this.name=name;
-		this.level=level;
 	}
 	
 	public String getName(){
 		return name;
 	}
 	
-	public int getLevel(){
-		return level;
+	public String getNote(){
+		return note;
+	}
+	
+	public void setNote(String note){
+		this.note=note;
+	}
+	
+	public boolean addSort(SortVO sonSort){
+		sonSort.fatherSort=this;
+		sortList.add(sonSort);
+		return true;
+	}
+	
+	public boolean addCommodity(CommodityVO sonCommodity){
+		sonCommodity.fatherSort=this;
+		commodity.add(sonCommodity);
+		return true;
 	}
 
 }

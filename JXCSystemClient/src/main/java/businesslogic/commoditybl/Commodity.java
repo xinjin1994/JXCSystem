@@ -257,7 +257,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 4;
 			}
 			
-			if(com.hasCommodity()){
+			if(com.hasSort()){
 				return 5;
 			}
 			
@@ -416,7 +416,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			
 			String word="patch:"+com.getName()+","+com.getType()+","+number;
 			systemlog.add_up(word);
-			PatchPO po=new PatchPO(com, number);
+			PatchPO po=new PatchPO(com, number,"");
 			invoice.add(po);
 			return 0;
 		} catch (RemoteException e) {

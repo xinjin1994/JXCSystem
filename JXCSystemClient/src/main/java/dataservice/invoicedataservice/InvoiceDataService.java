@@ -12,5 +12,6 @@ public interface InvoiceDataService extends Remote {
 	public boolean passInvoice(InvoicePO po) throws RemoteException;
 	public boolean refuseInvoice(InvoicePO po) throws RemoteException;
 	public ArrayList<InvoicePO> getAllInvoice() throws RemoteException;
+	public String getInvNote() throws RemoteException;
 	public boolean clear() throws RemoteException;
 }

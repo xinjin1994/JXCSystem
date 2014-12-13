@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import po.InvoicePO;
 import po.PaymentPO;
+import data.accountdata.AccountDataService_Stub;
 import dataservice.invoicedataservice.InvoiceDataService;
 
 public class InvoiceDataService_Stub extends UnicastRemoteObject implements InvoiceDataService{
@@ -20,9 +21,11 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 //	String condition;
 	
 	ArrayList<InvoicePO> invoiceList=new ArrayList<InvoicePO>();
+	int invNote=0;
 	
 	public InvoiceDataService_Stub() throws RemoteException{
 		this.readInvoiceList();
+		this.readInvNote();
 	}
 	
 	
@@ -71,6 +74,50 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		
 	}
 	
+	public void writeInvNote(){
+		
+		FileOutputStream fos;
+		ObjectOutputStream oos;
+		try {
+			fos = new FileOutputStream("invNote.out");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(invNote);	
+			oos.close();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
+	public void readInvNote(){
+		
+		FileInputStream fis;
+		ObjectInputStream ois;
+		
+		try{
+			
+			fis=new FileInputStream("invNote.out");
+			ois=new ObjectInputStream(fis);
+			invNote=(Integer) ois.readObject();
+			ois.close();
+			
+		} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		} catch (FileNotFoundException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
+	
 	
 
 	public InvoicePO getInvoice(String note) {
@@ -93,10 +140,11 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	}
 
 	public boolean delInvoice(InvoicePO po) {
-		InvoicePO po1=findInvoice_true(po.getInvoiceNote());
-		if(po1!=null){
-			invoiceList.remove(po1);
-			return true;
+		for(int i=0;i<invoiceList.size();i++){
+			if(invoiceList.get(i).getInvoiceNote().equals(po.getInvoiceNote())){
+				invoiceList.remove(i);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -105,7 +153,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		ArrayList<InvoicePO> po=new ArrayList<InvoicePO>();
 		int i=0;
 		for(i=0;i<invoiceList.size();i++){
-			po.add(invoiceList.get(i));
+			po.add(invoiceList.get(i).copy());
 		}
 		return po;
 	}
@@ -128,13 +176,33 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 
 	public boolean passInvoice(InvoicePO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		for(int i=0;i<invoiceList.size();i++){
+			if(invoiceList.get(i).getInvoiceNote().equals(po.getInvoiceNote())){
+				invoiceList.get(i).setCondition(2);
+				return true;
+			}
+		}
 		return false;
 	}
 
 
 	public boolean refuseInvoice(InvoicePO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		for(int i=0;i<invoiceList.size();i++){
+			if(invoiceList.get(i).getInvoiceNote().equals(po.getInvoiceNote())){
+				invoiceList.get(i).setCondition(3);
+				return true;
+			}
+		}
 		return false;
+	}
+	
+	public String getInvNote() throws RemoteException {
+		String part1="INV";
+		String part2=AccountDataService_Stub.getNoteTime();
+		String part3=Integer.toString(invNote);
+		invNote++;
+		return part1+"-"+part2+"-"+part3;
 	}
 
 }
