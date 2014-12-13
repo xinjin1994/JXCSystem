@@ -13,88 +13,109 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 
 import vo.SortVO;
 
 public class MySortTree {
-	public MySortTree() {
+	DefaultTreeModel treeModel;
+	JTree tree;
+	JScrollPane scrollPane;
+	ArrayList<SortID> allSortsIds = new ArrayList<SortID>();
+	SortID temp;
+	public MySortTree(ArrayList<SortVO> allSorts) {
 		JFrame f = new JFrame("TreeDemo");
 		Container contentPane = f.getContentPane();
 
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("资源管理器");
-		DefaultMutableTreeNode node1 = new DefaultMutableTreeNode("我q的公文包");
-		DefaultMutableTreeNode node2 = new DefaultMutableTreeNode("我的电脑");
-		DefaultMutableTreeNode node3 = new DefaultMutableTreeNode("收藏夹");
-		DefaultMutableTreeNode node4 = new DefaultMutableTreeNode("Readme");
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("商品");
 
-		DefaultTreeModel treeModel = new DefaultTreeModel(root);
+		treeModel = new DefaultTreeModel(root);
+		
+		ArrayList<SortID> fatherSorts = new ArrayList<SortID>();
+		
+		for(SortVO sort:allSorts){
+			System.out.println(sort.getNote());
+			String tempIDs[] = sort.getNote().split("-");
+			System.out.println(tempIDs[0]);
+			if(tempIDs.length == 2){
+				SortID temp = new SortID("",tempIDs[1],sort.name,sort.commodity);
+				fatherSorts.add(temp);
+			}else if(tempIDs.length == 3){
+				SortID temp = new SortID(tempIDs[1], tempIDs[2], sort.name,sort.commodity);
+				allSortsIds.add(temp);
+			}
+		}
+		for(SortID tempSorts:fatherSorts){
+			DefaultMutableTreeNode node = new DefaultMutableTreeNode(tempSorts.name);
+			treeModel.insertNodeInto(node, root, root.getChildCount());
+			tempSorts.setNode(node);
+			setSort(tempSorts);
+		}
 
-		/*
-		 * DefaultTreeModel类所提供的insertNodeInto()方法加入节点到父节点的数量.
-		 * 利用DefaultMutableTreeNode类所提供的getChildCount()方法取得目前子节点的数量.
-		 */
-		treeModel.insertNodeInto(node1, root, root.getChildCount());
-		treeModel.insertNodeInto(node2, root, root.getChildCount());
-		treeModel.insertNodeInto(node3, root, root.getChildCount());
-		treeModel.insertNodeInto(node4, root, root.getChildCount());
-
-		DefaultMutableTreeNode leafnode = new DefaultMutableTreeNode("公司文件");
-
-		// DefaultTreeModel类所提供的insertNodeInto()方法加入节点到父节点的数量.
-		treeModel.insertNodeInto(leafnode, node1, node1.getChildCount());
-		leafnode = new DefaultMutableTreeNode("个人信件");
-		treeModel.insertNodeInto(leafnode, node1, node1.getChildCount());
-		leafnode = new DefaultMutableTreeNode("私人文件");
-		treeModel.insertNodeInto(leafnode, node1, node1.getChildCount());
-
-		leafnode = new DefaultMutableTreeNode("本机磁盘(C:)");
-		treeModel.insertNodeInto(leafnode, node2, node2.getChildCount());
-		leafnode = new DefaultMutableTreeNode("本机磁盘(D:)");
-		treeModel.insertNodeInto(leafnode, node2, node2.getChildCount());
-		leafnode = new DefaultMutableTreeNode("本机磁盘(E:)");
-		treeModel.insertNodeInto(leafnode, node2, node2.getChildCount());
-
-		DefaultMutableTreeNode node31 = new DefaultMutableTreeNode("网站列表");
-		treeModel.insertNodeInto(node31, node3, node3.getChildCount());
-		leafnode = new DefaultMutableTreeNode("奇摩站");
-		treeModel.insertNodeInto(leafnode, node3, node3.getChildCount());
-		leafnode = new DefaultMutableTreeNode("职棒消息");
-		treeModel.insertNodeInto(leafnode, node3, node3.getChildCount());
-		leafnode = new DefaultMutableTreeNode("网络书店");
-		treeModel.insertNodeInto(leafnode, node3, node3.getChildCount());
-//		try {
-//			LookAndFeel alloyLnF = new LookAndFeel();
-//			UIManager.setLookAndFeel(alloyLnF);
-//		} catch (UnsupportedLookAndFeelException ex) {
-//			// You may handle the exception here
-//		}
-		// this line needs to be implemented in order to make JWS work properly
-		UIManager.getLookAndFeelDefaults().put("ClassLoader",
-				getClass().getClassLoader());
+//		UIManager.getLookAndFeelDefaults().put("ClassLoader",
+//				getClass().getClassLoader());
 
 		// 以TreeModel建立JTree。
-		JTree tree = new JTree(treeModel);
+		tree = new JTree(treeModel);
 		/* 改变JTree的外观* */
 		tree.putClientProperty("JTree.lineStyle", "Horizontal");
 		/* 改变JTree的外观* */
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(tree);
+//		contentPane.add(scrollPane);
+//		f.pack();
+//		f.setVisible(true);
+//
+//		f.addWindowListener(new WindowAdapter() {
+//			public void windowClosing(WindowEvent e) {
+//				System.exit(0);
+//			}
+//		});
+	}
 
-		contentPane.add(scrollPane);
-		f.pack();
-		f.setVisible(true);
-
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+	
+	
+	private void setSort(SortID fatSort) {
+		if(fatSort.commodities!=null){
+			addCommodities(fatSort);
+		}else{
+			DefaultMutableTreeNode fatherNode = fatSort.treeNode;
+			String node = fatSort.node;
+			for(SortID tempSortSon:allSortsIds){
+				
+				if(tempSortSon.fatherNode.equals(node)){
+					DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(tempSortSon.name);
+					tempSortSon.setNode(sonNode);
+					treeModel.insertNodeInto(sonNode,fatherNode, fatherNode.getChildCount());
+					temp = tempSortSon;
+					setSort(temp);
+				}
 			}
-		});
+		}
 
-	}
-	public static void main(String args[]) {
 
-		new MySortTree();
+//		for(SortID tempSortFather:fatherSorts){
+//			
+//			DefaultMutableTreeNode treeNode = tempSortFather.treeNode;
+//			
+//			for(SortID tempSortSon:allSortsIds){
+//				if(tempSortSon.fatherNode.equals(node)){
+//					DefaultMutableTreeNode nodeSon = new DefaultMutableTreeNode();
+//					treeModel .insertNodeInto(, , index);
+//				}
+//			}
+//		}
+//		
+		
 	}
+
+	private void addCommodities(SortID tempSort) {
+		System.out.println("123");
+	}
+//	public static void main(String args[]) {
+//
+//		new MySortTree();
+//	}
 }
 
 

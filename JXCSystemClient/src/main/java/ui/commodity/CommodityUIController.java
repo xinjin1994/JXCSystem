@@ -20,8 +20,8 @@ public class CommodityUIController {
 	 
 	private MyButton []comButtons = new MyButton[4];
 	private MyButton []sortButtons = new MyButton[3];
-	private MyButton []stockButtons = new MyButton[4];
-	private MyButton []invoiceButtons = new MyButton[1];
+	private MyButton []stockButtons = new MyButton[3];
+	private MyButton []invoiceButtons = new MyButton[2];
 
 	private MyFrame frame;
 	private CommodityAllUIController uiController;
@@ -62,9 +62,12 @@ public class CommodityUIController {
 		commoditySecondPanel.removeAll();
 		InvoiceListener listener = new InvoiceListener();
 		
-		String images_ori_invoice[] = new String[]{"Image/Commodity/button/invoiceManage/pending.png"};
-		String images_stop_invoice[] = new String[]{"Image/Commodity/button/invoiceManage/pending_stop.png"};
-		String images_press_on_invoice[] = new String[]{"Image/Commodity/button/invoiceManage/pending_press_on.png"};
+		String images_ori_invoice[] = new String[]{"Image/Commodity/button/invoiceManage/pending.png",
+				"Image/Commodity/button/invoiceManage/disapp.png"};
+		String images_stop_invoice[] = new String[]{"Image/Commodity/button/invoiceManage/pending_stop.png",
+				"Image/Commodity/button/invoiceManage/disapp_stop.png"};
+		String images_press_on_invoice[] = new String[]{"Image/Commodity/button/invoiceManage/pending_press_on.png",
+				"Image/Commodity/button/invoiceManage/disapp_press_on.png"};
 		
 		for(int i = 0;i < invoiceButtons.length;i++){
 			invoiceButtons[i] = new MyButton(images_ori_invoice[i], secondX, secondY+i*inter,
@@ -102,12 +105,12 @@ public class CommodityUIController {
 		StockListener listener = new StockListener();
 		
 		String images_ori_stock[] = new String[]{"Image/Commodity/button/stockManage/examine.png",
-				"Image/Commodity/button/stockManage/inventory.png",	"Image/Commodity/button/stockManage/patch.png","Image/Commodity/button/stockManage/warn.png"};
+				"Image/Commodity/button/stockManage/inventory.png",	"Image/Commodity/button/stockManage/patch.png"};
 		String images_stop_stock[] = new String[]{"Image/Commodity/button/stockManage/examine_stop.png",
-				"Image/Commodity/button/stockManage/inventory_stop.png","Image/Commodity/button/stockManage/patch_stop.png","Image/Commodity/button/stockManage/warn_stop.png"};
+				"Image/Commodity/button/stockManage/inventory_stop.png","Image/Commodity/button/stockManage/patch_stop.png"};
 		String images_press_on_stock[] = new String[]{"Image/Commodity/button/stockManage/examine_press_on.png",
 				"Image/Commodity/button/stockManage/inventory_press_on.png",
-				"Image/Commodity/button/stockManage/patch_press_on.png","Image/Commodity/button/stockManage/warn_press_on.png"};
+				"Image/Commodity/button/stockManage/patch_press_on.png"};
 		
 		for(int i = 0;i < stockButtons.length;i++){
 			stockButtons[i] = new MyButton(images_ori_stock[i], secondX, secondY+i*inter,
@@ -193,7 +196,11 @@ public class CommodityUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
-			
+			if(e.getSource() == invoiceButtons[0]){
+				
+			}else if(e.getSource() == invoiceButtons[1]){
+				
+			}
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -222,10 +229,7 @@ public class CommodityUIController {
 			}else if(e.getSource() == stockButtons[2]){
 				frame.remove(commodityPanel);
 				uiController.patch();
-			}else if(e.getSource() == stockButtons[3]){
-				
 			}
-			
 			
 		}
 

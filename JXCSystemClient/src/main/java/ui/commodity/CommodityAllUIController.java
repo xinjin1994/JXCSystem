@@ -6,6 +6,7 @@ import ui.setting.MyFrame;
 import ui.setting.SetBack;
 import vo.CommodityVO;
 import vo.SortVO;
+import vo.bill.PatchVO;
 
 public class CommodityAllUIController extends UIController{
 	private UIController uiController;
@@ -25,12 +26,12 @@ public class CommodityAllUIController extends UIController{
 	private ConfirmSortPanel confirmSortPanel;
 	private ChaSortDPanel chaSortDPanel; 
 
-//	private AddPatchPanel addPatchPanel;
-//	private ConfirmPatchPanel confitmPatchPanel;
-//	private PatchDetailPanel patchDetailPanel;
+	private AddPatchPanel addPatchPanel;
+	private ConfirmPatchPanel confitmPatchPanel;
+	private PatchDetailPanel patchDetailPanel;
 //	
-//	private ExmainStockPanel exmainStockPanel;
-//	private InventoryPanel inventoryPanel;
+	private ExamineStockPanel examainStockPanel;
+	private InventoryPanel inventoryPanel;
 	
 	
 	
@@ -125,14 +126,16 @@ public class CommodityAllUIController extends UIController{
 	}
 
 	public void examineStock() {
-		// TODO Auto-generated method stub
-		
+		examainStockPanel = new ExamineStockPanel(frame, "Image/Commodity/stockManage/examineStock.jpg", this);		
+		frame.setPanel(examainStockPanel);
+		frame.repaint();
 	}
 
 
 	public void inventory() {
-		// TODO Auto-generated method stub
-		
+		inventoryPanel = new InventoryPanel(frame, "Image/Commodity/stockManage/inventory.jpg", this);
+		frame.setPanel(inventoryPanel);
+		frame.repaint();
 	}
 
 
@@ -143,8 +146,20 @@ public class CommodityAllUIController extends UIController{
 
 
 	public void patch() {
-		// TODO Auto-generated method stub
-		
+		addPatchPanel = new AddPatchPanel(frame,"Image/Commodity/stockManage/patch.jpg", this);
+		frame.setPanel(addPatchPanel);
+		frame.repaint();
+	}
+	
+	public void confirmPatch(PatchVO newPatch) {
+		confitmPatchPanel = new ConfirmPatchPanel(frame,"Image/Commodity/stockManage/confirmPatch.jpg",this,newPatch);
+		frame.setPanel(confitmPatchPanel);
+		frame.repaint();
+	}
+	public void patchDetail(PatchVO patch){
+		patchDetailPanel = new PatchDetailPanel(frame,"Image/Commodity/stockManage/confirmPatch.jpg",this,patch);
+		frame.setPanel(patchDetailPanel);
+		frame.repaint();
 	}
 	/**
 	 * 以下两个是commodity模块中的返回按钮，都会返回到主界面
@@ -160,5 +175,4 @@ public class CommodityAllUIController extends UIController{
 		this.prePanel = prePanel;
 		new SetBack(frame,this,prePanel).setBack_second(x, y);
 	}
-	
 }

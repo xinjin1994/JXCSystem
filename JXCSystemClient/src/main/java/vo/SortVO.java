@@ -7,13 +7,15 @@ public class SortVO {
 	public String name;
 	public String note;
 	
-	String fatherSort;
-	ArrayList<CommodityVO> commodity=new ArrayList<CommodityVO>();
+	public String fatherSort;
+	public ArrayList<CommodityVO> commodity=new ArrayList<CommodityVO>();
 	ArrayList<SortVO> sortList=new ArrayList<SortVO>();
 	
 	public SortVO(String name){
 		this.name=name;
+		commodity = null;
 	}
+	
 	
 	public String getName(){
 		return name;
