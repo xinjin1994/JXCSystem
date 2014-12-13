@@ -6,17 +6,17 @@ public class CommodityPO implements Serializable{
 	String note;
 	String name;//��Ʒ��
 	String type;//�ͺ�
-	public int in_price;//���
-	public int out_price;//�ۼ�
-	public int recent_in_price;//���һ�ν��
-	public int recent_out_price;//���һ���ۼ�
+	public double in_price;//���
+	public double out_price;//�ۼ�
+	public double recent_in_price;//���һ�ν��
+	public double recent_out_price;//���һ���ۼ�
 	public int number;//��Ʒ����
 	public boolean isGift;//�ж��Ƿ�Ϊ��Ʒ
 	public int warn;
 	
 	
-	public CommodityPO(Boolean isGift,String name,String type,int in_price,int out_price,
-			String note,int recent_in_price,int recent_out_price,int number){
+	public CommodityPO(Boolean isGift,String name,String type,double in_price,double out_price,
+			String note,double recent_in_price,double recent_out_price,int number){
 		this.name = name;
 		this.type = type;
 		this.in_price = in_price;
@@ -77,11 +77,11 @@ public class CommodityPO implements Serializable{
 		return type;
 	}
 
-	public int getIn_price() {
+	public double getIn_price() {
 		return in_price;
 	}
 
-	public int getOut_price() {
+	public double getOut_price() {
 		return out_price;
 	}
 
@@ -89,11 +89,11 @@ public class CommodityPO implements Serializable{
 		return note;
 	}
 
-	public int getRecent_in_price() {
+	public double getRecent_in_price() {
 		return recent_in_price;
 	}
 
-	public int getRecent_out_price() {
+	public double getRecent_out_price() {
 		return recent_out_price;
 	}
 	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class SortVO {
 	
 	public String name;
+	public String note;
 	
 	SortVO fatherSort;
 	ArrayList<CommodityVO> commodity=new ArrayList<CommodityVO>();
@@ -16,6 +17,14 @@ public class SortVO {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public String getNote(){
+		return note;
+	}
+	
+	public void setNote(String note){
+		this.note=note;
 	}
 	
 	public boolean addSort(SortVO sonSort){
