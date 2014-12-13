@@ -105,7 +105,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 	private void exactFind() {
 		nameString = name.getText();
 		typeIDString = typeID.getText();
-		com = new CommodityVO("" ,nameString, typeIDString, 11, 11, 11, 12, 12, 12, "g");
+//		com = new CommodityVO("" ,nameString, typeIDString, 11, 11, 11, 12, 12, 12, "g");
 		commodityAllUIController.comDetail(com);
 	}
 	

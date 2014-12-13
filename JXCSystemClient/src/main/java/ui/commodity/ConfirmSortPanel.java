@@ -46,10 +46,9 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		fatherSort = new MyLabel(255, 442, 271, 42);
 		MyLabel labels[] = new MyLabel[]{sortId,name,fatherSort};
 		
-		System.out.println(sort.fatherSort);
-		labels[0].setText(sort.id);
-		labels[1].setText(sort.name);
-		labels[2].setText(sort.fatherSort);
+//		labels[0].setText(sort.id);
+//		labels[1].setText(sort.name);
+//		labels[2].setText(sort.fatherSort);
 		
 		for(int i = 0;i < labels.length;i++){
 			this.add(labels[i]);

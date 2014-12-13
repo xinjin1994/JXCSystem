@@ -76,7 +76,7 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			getChaCom();
-			finCom = new CommodityVO("" ,nameString, typeString, 11, 11, 11, 12, 12, 12, "g");
+		///	finCom = new CommodityVO("" ,nameString, typeString, 11, 11, 11, 12, 12, 12, "g");
 			commodityAllUIController.changeComD(finCom);
 		}
 	}

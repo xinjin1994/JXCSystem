@@ -73,7 +73,7 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			getDelCom();
-			comDel = new CommodityVO("" ,nameString, typeString, 11, 11, 11, 12, 12, 12, "g");
+	//		comDel = new CommodityVO("" ,nameString, typeString, 11, 11, 11, 12, 12, 12, "g");
 			commodityAllUIController.confirmCom(comDel, "del");
 		}
 	}

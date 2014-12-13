@@ -38,13 +38,8 @@ public class UIController {
 		this.CommodityPanel();
 //	  	this.AccountPanel();
 //		this.AccountPanel();
-<<<<<<< HEAD
-//	this.ManagerPanel();
-=======
 
-//	this.ManagerPanel();
 		this.SalesManagerPanel();
->>>>>>> f5d519254604da7b54671317ca992f2b96927356
 
 //		this.AdminPanel();
 

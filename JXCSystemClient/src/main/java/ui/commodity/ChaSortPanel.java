@@ -19,7 +19,7 @@ public class ChaSortPanel extends DelSortPanel{
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			getSort();
-			sort = new SortVO(nameString, "dd", "12");
+		//	sort = new SortVO(nameString, "dd", "12");
 			commodityAllUIController.chaSortD(sort);
 		}
 	}

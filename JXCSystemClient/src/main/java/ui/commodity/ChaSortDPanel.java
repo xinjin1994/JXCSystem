@@ -80,7 +80,7 @@ public class ChaSortDPanel extends FatherPanel implements ActionListener{
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			setNewSort();
-			newSort = new SortVO(nameString,sortString,idString);
+	//		newSort = new SortVO(nameString,sortString,idString);
 			commodityAllUIController.confirmSort(newSort,"cha");
 		}else if(e.getSource() == fatherSortBox){
 			sortString = fatherSortBox.getSelectedItem().toString();

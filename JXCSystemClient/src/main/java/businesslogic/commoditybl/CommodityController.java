@@ -13,13 +13,14 @@ import businesslogicservice.commodityblservice.CommodityblService;
 
 public class CommodityController implements CommodityblService{
 
-	public Commodity commodity;
+	public Commodity commodity=new Commodity();
 	
 	public int addCommodity_up(CommodityVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
-		commodity=new Commodity();
+		CommodityPO com=new CommodityPO(false,vo1.name,vo1.type,vo1.inValue,vo1.outValue,
+				vo1.id,vo1.latestInValue,vo1.latestOutValue,vo1.num);
 		
-		return commodity.addCommodity(new CommodityPO(false, null, null, 0, 0, "0", 0, 0, 0),new SortPO(null, 0));
+		return commodity.addCommodity(com,new SortPO(null));
 	}
 
 //	public String addCommodity(String name, String type, int in_price,

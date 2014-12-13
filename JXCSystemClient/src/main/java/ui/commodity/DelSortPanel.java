@@ -58,7 +58,7 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			getSort();
-			sort = new SortVO(nameString, "dd", "12");
+//			sort = new SortVO(nameString, "dd", "12");
 			commodityAllUIController.confirmSort(sort,"del");
 		}
 	}

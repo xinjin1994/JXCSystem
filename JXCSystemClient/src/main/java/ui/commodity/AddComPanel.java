@@ -158,8 +158,8 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 		inValue = Double.parseDouble(inPrice.getText());
 		outValue = Double.parseDouble(outPrice.getText());
 		warnNum = Integer.parseInt(warnNumber.getText());
-		newCom = new CommodityVO(idString, nameString, typeString, num, inValue,
-				outValue, latestInValue, latestOutValue, warnNum, sortString);
+//		newCom = new CommodityVO(idString, nameString, typeString, num, inValue,
+//				outValue, latestInValue, latestOutValue, warnNum, sortString);
 		
 	}
 

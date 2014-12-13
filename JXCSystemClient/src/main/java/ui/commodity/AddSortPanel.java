@@ -26,7 +26,7 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 	private String idString,nameString,sortString;
 	
 	private MyButton forwardButton;
-	private SortVO newSort;
+	private SortVO newSort,fatherSort;
 	
 	public AddSortPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
@@ -70,7 +70,7 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			setNewSort();
-			newSort = new SortVO(nameString,sortString,idString);
+		//	newSort = new SortVO(nameString,sortString,idString);
 			commodityAllUIController.confirmSort(newSort,"add");
 		}else if(e.getSource() == fatherSortBox){
 			sortString = fatherSortBox.getSelectedItem().toString();

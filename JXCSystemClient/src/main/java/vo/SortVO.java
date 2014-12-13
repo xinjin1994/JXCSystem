@@ -5,21 +5,7 @@ import java.util.ArrayList;
 public class SortVO {
 	
 	public String name;
-<<<<<<< HEAD
-	//public int level;
-	public String fatherSort;
-	public String id;
-	
-	public SortVO(String name,String fatherSort,String id){
-		this.name=name;
-		this.fatherSort = fatherSort;
-	//	this.level=level;
-		this.id = id;
-	}
-	
-	public String getID(){
-		return id;
-=======
+	public String note;
 	
 	SortVO fatherSort;
 	ArrayList<CommodityVO> commodity=new ArrayList<CommodityVO>();
@@ -27,18 +13,20 @@ public class SortVO {
 	
 	public SortVO(String name){
 		this.name=name;
->>>>>>> 3194f728791ad4884a6ad08b5012b214c97480c2
 	}
 	
 	public String getName(){
 		return name;
 	}
 	
-<<<<<<< HEAD
-//	public int getLevel(){
-//		return level;
-//	}
-=======
+	public String getNote(){
+		return note;
+	}
+	
+	public void setNote(String note){
+		this.note=note;
+	}
+	
 	public boolean addSort(SortVO sonSort){
 		sonSort.fatherSort=this;
 		sortList.add(sonSort);
@@ -50,6 +38,5 @@ public class SortVO {
 		commodity.add(sonCommodity);
 		return true;
 	}
->>>>>>> 3194f728791ad4884a6ad08b5012b214c97480c2
 
 }
