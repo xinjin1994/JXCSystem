@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import ui.sales.SalesUIController;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
+import ui.setting.Button.MyButton;
 
 /**
  * 3销售经理

@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
 import ui.UIController;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
 
 public class SalesResult implements ActionListener{
 	UIController controller;

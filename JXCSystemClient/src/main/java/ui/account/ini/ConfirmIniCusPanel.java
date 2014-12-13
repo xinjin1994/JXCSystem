@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
 import ui.account.AccountAllUIController;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
 
 public class ConfirmIniCusPanel extends FatherPanel implements ActionListener{
 	AccountAllUIController uiController;

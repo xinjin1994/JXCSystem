@@ -6,12 +6,15 @@ import java.awt.event.MouseListener;
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.sales.impanel.ImInPanel;
-import ui.setting.MyButton;
+import ui.sales.impanel.MakeSureIm;
 import ui.setting.MyFrame;
+import ui.setting.Button.MyButton;
+import vo.bill.CommodityListVO;
+import vo.bill.ExportMenuVO;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
-public class SalesBackPanel extends ImInPanel{
+public class SalesBackPanel extends SalesInPanel{
 
 	public SalesBackPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame, url, controller,salesUIController);
@@ -35,28 +38,31 @@ public class SalesBackPanel extends ImInPanel{
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesBackPanel.this);
 			} else if (e.getSource() == forward) {
-				SalesblService salesBlService = new SalesController();
-				// TODO
+				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+						goodsTypeSelected, num, price, num*price, newRemark.getText());
+				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
+						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,5);
+				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
+						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesBackPanel.this,salesUIController);
+				frame.remove(SalesBackPanel.this);
+				frame.setPanel(makeSureIm);
+				frame.repaint();
 			}
 		}
 
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 		

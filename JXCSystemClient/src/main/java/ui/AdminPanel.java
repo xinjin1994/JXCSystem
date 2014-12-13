@@ -11,11 +11,11 @@ import javax.swing.JFrame;
 
 import ui.admin.AdminAllUIController;
 import ui.setting.ColorFactory;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;
-import ui.setting.MyTextFieldBorder;
+import ui.setting.Button.MyButton;
+import ui.setting.TextField.MyTextFieldBorder;
 import vo.UserVO;
 
 //0 管理员

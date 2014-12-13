@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.setting.ColorFactory;
-import ui.setting.ForwardButton;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
-import ui.setting.MyTextFieldBorder;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
+import ui.setting.TextField.MyTextFieldBorder;
 import vo.UserVO;
 
 public class DelUserPanel extends FatherPanel implements ActionListener{

@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 
 import ui.account.AccountUIController;
 import ui.setting.ColorFactory;
-import ui.setting.MyButton;
 import ui.setting.MyTable;
+import ui.setting.Button.MyButton;
 
 //财务经理
 public class AccountPanel extends FatherPanel{

@@ -5,8 +5,8 @@ import java.awt.event.MouseListener;
 
 import ui.UIController;
 import ui.sales.SalesUIController;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
+import ui.setting.Button.MyButton;
 import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.SalesController;
@@ -38,7 +38,7 @@ public class ImBackPanel extends ImInPanel {
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());
 				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
-						warehouse.getText(), commodityListVO, 2);
+						warehouse.getText(), commodityListVO, 3);
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg", controller,
 						importMenuVO, commodityListVO, person.getText(), operator.getText(), ImBackPanel.this,salesUIController);
 				frame.remove(ImBackPanel.this);

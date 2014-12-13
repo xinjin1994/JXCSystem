@@ -8,9 +8,9 @@ import ui.FatherPanel;
 import ui.UIController;
 import ui.sales.SalesUIController;
 import ui.setting.ColorFactory;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
+import ui.setting.Button.MyButton;
 
 public class MakeSureFindInfo extends FatherPanel{
 

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import ui.AccountPanel;
 import ui.setting.ColorFactory;
-import ui.setting.MyButton;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SecondPanel;
+import ui.setting.Button.MyButton;
 import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
