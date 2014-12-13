@@ -7,15 +7,11 @@ import po.AccountPO;
 import po.CustomerPO;
 import po.PaymentPO;
 import po.ReceiptPO;
-import po.TransferPO;
 import vo.AccountVO;
-import vo.CustomerVO;
-import vo.bill.GetVO;
-import vo.bill.PayVO;
 import businesslogic.invoicebl.Invoice;
 import businesslogic.salesbl.Sales;
 import businesslogic.systemlogbl.Systemlog;
-import businesslogicservice.accountblservice.AccountblService;
+import businesslogic.userbl.User;
 import data.accountdata.AccountDataService_Stub;
 import dataservice.accountdataservice.AccountDataService;
 
@@ -276,9 +272,101 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 		return User.operator;
 	}
 
-	public ArrayList<CustomerVO> getAllCustomer() {
+	public ArrayList<CustomerPO> getAllCustomer() {
 		// TODO Auto-generated method stub
+		return sales.getAllCustomer();
+	}
+
+	public String getReceiptNote() {
+		// TODO Auto-generated method stub
+		try {
+			return account.getReceiptNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
+	}
+
+	public String getPaymentNote() {
+		// TODO Auto-generated method stub
+		try {
+			return account.getPaymentNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int addDraftReceipt(ReceiptPO po) {
+		// TODO Auto-generated method stub
+	
+		try {
+			po.setCondition(0);
+			account.addDraftReceipt(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public ArrayList<ReceiptPO> getAllDraftReceipt() {
+		// TODO Auto-generated method stub
+		try {
+			return account.getAllDraftReceipt();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<ReceiptPO>();
+	}
+
+	public ReceiptPO searchDraftReceipt(String note) {
+		// TODO Auto-generated method stub
+		try {
+			return account.findDraftReceipt(note);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public PaymentPO searchDraftPayment(String note) {
+		// TODO Auto-generated method stub
+		try {
+			return account.findPayment(note);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<PaymentPO> getAllDraftPayment() {
+		// TODO Auto-generated method stub
+		try {
+			return account.getAllDraftPayment();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<PaymentPO>();
+	}
+
+	public int addDraftPayment(PaymentPO po) {
+		// TODO Auto-generated method stub
+
+		try {
+			po.setCondition(0);
+			account.addDraftPayment(po);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 //	public String delReceipt_Data(ReceiptPO po) {

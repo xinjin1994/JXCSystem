@@ -9,7 +9,7 @@ public class PaymentPO extends InvoicePO implements Serializable{
 	AccountPO account;
 	String operator;
 	ArrayList<ItemPO> item=new ArrayList<ItemPO>();
-	int total_money;//�����ܶ�
+	double total_money;//�����ܶ�
 	
 	public PaymentPO(AccountPO account, String operator, ArrayList<ItemPO> item) {
 		this.operator = operator;
@@ -53,9 +53,9 @@ public class PaymentPO extends InvoicePO implements Serializable{
 		}
 		return array;
 	}
-	public ArrayList<Integer> getPrice() {
+	public ArrayList<Double> getPrice() {
 		int i=0;
-		ArrayList<Integer> array=new ArrayList<Integer>();
+		ArrayList<Double> array=new ArrayList<Double>();
 		for(i=0;i<item.size();i++){
 			array.add(item.get(i).getMoney());
 		}
@@ -70,7 +70,7 @@ public class PaymentPO extends InvoicePO implements Serializable{
 		return array;
 	}
 	
-	public int getTotalMoney(){
+	public double getTotalMoney(){
 		return total_money;
 	}
 }
