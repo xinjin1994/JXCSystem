@@ -52,7 +52,7 @@ public class ComDetailPanel extends FatherPanel{
 		setLabels_help(labels[7], 20, color.greyFont, String.valueOf(com.inValue));
 		
 		labels[8] = new MyLabel(534, 327, 166, 41);
-		setLabels_help(labels[8], 20, color.accColor, String.valueOf(com.outValue));
+ 		setLabels_help(labels[8], 20, color.accColor, String.valueOf(com.outValue));
 	
 		labels[9] = new MyLabel(405, 449, 225, 89);
 		setLabels_help(labels[9], 24, color.accColor, String.valueOf(com.warnNumber));

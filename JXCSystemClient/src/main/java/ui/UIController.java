@@ -35,12 +35,12 @@ public class UIController {
 	public UIController(int i){
 		this.frame = new MyFrame();
 
-		this.CommodityPanel();
+//		this.CommodityPanel();
 //	  	this.AccountPanel();
 //		this.AccountPanel();
 
 		this.SalesManagerPanel();
-	  	this.AccountPanel();
+//	  	this.AccountPanel();
 //		this.AccountPanel();
 
 //	this.ManagerPanel();
