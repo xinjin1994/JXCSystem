@@ -3,7 +3,7 @@ package po;
 import java.io.Serializable;
 
 public class OperatingConditionPO implements Serializable{
-
+	String old_note;
 	int sale_income;//���ú�����
 	int good_income;
 	int sale_outcome;
@@ -11,9 +11,9 @@ public class OperatingConditionPO implements Serializable{
 	int discount;//����
 	int profit;//����
 	
-	public OperatingConditionPO(int sale_income,int good_income, int sale_outcome,int good_outcome,
+	public OperatingConditionPO(String note,int sale_income,int good_income, int sale_outcome,int good_outcome,
 			int discount) {
-		super();
+		this.old_note=note;
 		this.sale_income = sale_income;
 		this.good_income=good_income;
 		this.sale_outcome=sale_outcome;
@@ -23,7 +23,7 @@ public class OperatingConditionPO implements Serializable{
 	}
 	
 	public OperatingConditionPO copy(){
-		return new OperatingConditionPO(sale_income, good_income, sale_outcome, good_outcome, discount);
+		return new OperatingConditionPO(old_note,sale_income, good_income, sale_outcome, good_outcome, discount);
 	}
 
 	public int getSaleIncome(){
@@ -44,6 +44,9 @@ public class OperatingConditionPO implements Serializable{
 	
 	public int getProfit(){
 		return profit;
+	}
+	public String getOldNote(){
+		return old_note;
 	}
 	
 	

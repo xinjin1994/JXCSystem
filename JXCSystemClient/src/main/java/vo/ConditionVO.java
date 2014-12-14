@@ -1,7 +1,7 @@
 package vo;
 
 public class ConditionVO {
-	
+	String note;
 	public double sales_income;
 	public double com_income;
 	public double discount;
@@ -9,7 +9,8 @@ public class ConditionVO {
 	public double com_outcome;
 	public double profit;
 	
-	public ConditionVO(double sales_income,double com_income,double discount,double sales_outcome, double com_outcome){
+	public ConditionVO(String note,double sales_income,double com_income,double discount,double sales_outcome, double com_outcome){
+		this.note=note;
 		this.sales_income=sales_income;
 		this.com_income=com_income;
 		this.discount=discount;
