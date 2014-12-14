@@ -4,6 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.ExportPO;
+import po.Export_ReturnPO;
+import po.ImportPO;
+import po.Import_ReturnPO;
 import po.PatchPO;
 import po.SendGiftPO;
 import po.SortPO;
@@ -268,6 +272,26 @@ public class MockCommodityData implements CommodityDataService{
 
 	public boolean addGoodNumber(CommodityPO po, int number)
 			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passImport(ImportPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passImport_Return(Import_ReturnPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passExport(ExportPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passExport_Return(Export_ReturnPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
 	}
