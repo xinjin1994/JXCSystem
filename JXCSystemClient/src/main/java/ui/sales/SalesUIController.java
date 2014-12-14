@@ -1,7 +1,7 @@
 package ui.sales;
 
 import ui.FatherPanel;
-import ui.SalesManagerPanel;
+import ui.SalesStaffPanel;
 import ui.UIController;
 import ui.sales.cuspanel.AddCusPanel;
 import ui.sales.cuspanel.ChangeCusPanel;
@@ -26,8 +26,9 @@ public class SalesUIController {
 
 	
 	
-	private SalesManagerPanel salesManagerPanel;
+	private SalesStaffPanel salesManagerPanel;
 	private MyFrame frame;
+	private SalesAllUIController uiController;
 	private FindCusPanel seeCusInfoPanel;
 	private AddCusPanel addCusPanel;
 	private DelCusPanel delCusPanel;
@@ -39,14 +40,13 @@ public class SalesUIController {
 	private ImBackPanel imBackPanel;
 	private SalesInPanel salesInPanel;
 	private SalesBackPanel salesBackPanel;
-	private UIController uiController;
 	
-	public SalesUIController(UIController uiController, MyFrame frame) {
+	public SalesUIController(SalesAllUIController uiController, MyFrame frame) {
 		this.frame = frame;
 		this.uiController = uiController;
-		this.salesManagerPanel =  new SalesManagerPanel(frame, "Image/Sales/sales.jpg", uiController, this);
+		this.salesManagerPanel = new SalesStaffPanel(frame, "Image/Sales/sales.jpg", uiController, this);
 		this.setSalesPanel();
-		this.setAllPanel();
+	//	this.setAllPanel();
 		frame.setPanel(salesManagerPanel);
 		
 		frame.repaint();

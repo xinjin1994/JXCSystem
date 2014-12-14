@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import ui.sales.SalesAllUIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
@@ -18,7 +19,7 @@ import ui.setting.Button.MyButton;
  * @author lsy
  * @version 2014年11月29日下午2:54:20
  */
-public class SalesManagerPanel extends FatherPanel {
+public class SalesStaffPanel extends FatherPanel {
 
 	private static final long serialVersionUID = -4472929361380810275L;
 	private int firstX = 2;
@@ -31,7 +32,7 @@ public class SalesManagerPanel extends FatherPanel {
 	private MyButton detail, firstBack;
 	private UIController controller;
 
-	public SalesManagerPanel(MyFrame frame, String url, UIController controller, SalesUIController salesController) {
+	public SalesStaffPanel(MyFrame frame, String url, SalesAllUIController controller, SalesUIController salesController) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.controller = controller;
@@ -87,7 +88,7 @@ public class SalesManagerPanel extends FatherPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == firstBack){
-				frame.remove(SalesManagerPanel.this);
+				frame.remove(SalesStaffPanel.this);
 				controller.backLoginPanel();
 				frame.repaint();
 				
