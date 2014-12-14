@@ -17,9 +17,9 @@ public interface PromotionDataService extends Remote {
 	public boolean delGift(ProGiftPO po) throws RemoteException;
 	public boolean delVoucher(VoucherPO po) throws RemoteException;
 //	public boolean delOther(String pro);
-	public DiscountPO getDiscount() throws RemoteException;
-	public ProGiftPO getGift() throws RemoteException;
-	public VoucherPO getVoucher() throws RemoteException;
+	public DiscountPO getDiscount(int level) throws RemoteException;
+	public ProGiftPO getGift(int level) throws RemoteException;
+	public VoucherPO getVoucher(int level) throws RemoteException;
 	public ArrayList<DiscountPO> showDiscount() throws RemoteException;
 	public ArrayList<ProGiftPO> showProGift() throws RemoteException;
 	public ArrayList<VoucherPO> showVoudcher() throws RemoteException;
