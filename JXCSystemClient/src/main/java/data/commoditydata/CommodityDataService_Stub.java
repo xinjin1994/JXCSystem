@@ -248,4 +248,45 @@ public class CommodityDataService_Stub implements CommodityDataService{
 		return null;
 	}
 
+	public SortPO getTempSort() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean addGift(CommodityPO po, int number) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public ArrayList<CommodityPO> getAllGift() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean passPatch(PatchPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refusePatch(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passSendGift(SendGiftPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseSendGift(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addGoodNumber(CommodityPO po, int number)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

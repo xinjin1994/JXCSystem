@@ -4,6 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.ExportPO;
+import po.Export_ReturnPO;
+import po.ImportPO;
+import po.Import_ReturnPO;
 import po.PatchPO;
 import po.SendGiftPO;
 import po.SortPO;
@@ -707,6 +711,26 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 		}
 		return array;
+	}
+
+	public String passImport(ImportPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passImport_Return(Import_ReturnPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passExport(ExportPO po) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passExport_Return(Export_ReturnPO po) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	//////////////////////////////////////////////////////////////

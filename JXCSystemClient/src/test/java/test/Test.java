@@ -17,7 +17,7 @@ public class Test {
 			CommodityDataService commoditydata= (CommodityDataService) Naming.lookup("rmi://127.0.0.1:8888/CommodityDataService");
 			
 			CommodityPO po1=new CommodityPO("name", "type");
-			SortPO po2=new SortPO("name",100);
+			SortPO po2=new SortPO("name");
 			commoditydata.addGood(po1, po2);
 			
 		} catch (MalformedURLException e) {

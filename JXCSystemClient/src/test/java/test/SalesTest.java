@@ -26,7 +26,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockAdd);
 		assertEquals("�ɹ�", sale.addCustomer_up(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, 0, "clerk")));
+				"mail", null, null, 10, 0, "clerk")));
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockDel);
 		assertEquals("�ɹ�", sale.delCustomer_up(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, 0, "clerk")));
+				"mail", null, null, 10, 0, "clerk")));
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockUpdate);
 		assertEquals("�ɹ�", sale.updateCustomer(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, 0, "clerk")));
+				"mail", null, null, 10, 0, "clerk")));
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockFind);
 		assertEquals("�ɹ�", sale.searchCustomer(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, 0, "clerk")));
+				"mail", null, null, 10, 0, "clerk")));
 	}
 
 	@Test
