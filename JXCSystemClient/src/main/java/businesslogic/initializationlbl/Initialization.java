@@ -28,7 +28,7 @@ public class Initialization {
 			addCommodity(po1.get(i).getName(),po1.get(i).getType(),po1.get(i).getIn_price(),po1.get(i).getOut_price());
 		}
 		for(i=0;i<po2.size();i++){
-			addCustomer(po2.get(i).getName(),po2.get(i).getPhone(),po2.get(i).getLevel(),po2.get(i).getMoney());
+			addCustomer(po2.get(i).getName(),po2.get(i).getPhone(),po2.get(i).getLevel(),(int) po2.get(i).getMoney());
 		}
 		for(i=0;i<po3.size();i++){
 			addAccount(po3.get(i).getName(),po3.get(i).getMoney());

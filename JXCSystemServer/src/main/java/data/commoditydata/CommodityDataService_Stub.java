@@ -1158,6 +1158,15 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		return tempSort.copy();
 	}
 
+	public ArrayList<SendGiftPO> getAllSendGift() throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<SendGiftPO> array=new ArrayList<SendGiftPO>();
+		for(int i=0;i<sendGiftList.size();i++){
+			array.add(sendGiftList.get(i).copy());
+		}
+		return array;
+	}
+
 
 
 }

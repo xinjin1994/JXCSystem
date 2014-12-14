@@ -313,4 +313,9 @@ public class CommodityDataService_Stub implements CommodityDataService{
 		return false;
 	}
 
+	public ArrayList<SendGiftPO> getAllSendGift() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

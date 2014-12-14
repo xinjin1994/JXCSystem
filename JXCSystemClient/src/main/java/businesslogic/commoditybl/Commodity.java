@@ -363,22 +363,80 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	}
 
 	public ArrayList<ExamineVO> Examine(String time1, String time2) {
-		ArrayList<ImportPO> imp=sales
+		
+		ArrayList<ExamineVO> array=new ArrayList<ExamineVO>();
+		
 		try {
-			if(sto.getAll()!=null){
-				return null;
+		ArrayList<ImportPO> imp=sales.getAllImport();
+		ArrayList<Import_ReturnPO> imp_ret=sales.getAllImport_Return();
+		ArrayList<ExportPO> exp=sales.getAllExport();
+		ArrayList<Export_ReturnPO> exp_ret=sales.getAllExport_Return();
+		ArrayList<PatchPO> patch=sto.getAllPatch();
+		ArrayList<SendGiftPO> gift=sto.getAllSendGift();
+		
+		ExamineVO vo;
+		
+		int i=0;
+		
+		for(i=0;i<imp.size();i++){
+			if(imp.get(i).getTime().compareTo(time1)>=0&&imp.get(i).getTime().compareTo(time2)<=0&&(imp.get(i).getCondition()==2)){
+				vo=new ExamineVO(imp.get(i).getImportGoodList().get(0).getCommodity().getName(),imp.get(i).getImportGoodList().get(0).getCommodity().getType(),imp.get(i).getImportGoodList().get(0).getNumber(),0,0,0,
+						0,0,imp.get(i).getTotalMoney(),imp.get(i).getTime());
+				array.add(vo);
 			}
+		}
+		
+		for(i=0;i<imp_ret.size();i++){
+			if(imp_ret.get(i).getTime().compareTo(time1)>=0&&imp_ret.get(i).getTime().compareTo(time2)<=0&&(imp_ret.get(i).getCondition()==2)){
+				vo=new ExamineVO(imp_ret.get(i).getImportGoodList().get(0).getCommodity().getName(),imp_ret.get(i).getImportGoodList().get(0).getCommodity().getType(),0,imp_ret.get(i).getImportGoodList().get(0).getNumber(),0,0,
+						0,0,imp_ret.get(i).getTotalMoney(),imp_ret.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<exp.size();i++){
+			if(exp.get(i).getTime().compareTo(time1)>=0&&exp.get(i).getTime().compareTo(time2)<=0&&(exp.get(i).getCondition()==2)){
+				vo=new ExamineVO(exp.get(i).getImportGoodList().get(0).getCommodity().getName(),exp.get(i).getImportGoodList().get(0).getCommodity().getType(),0,0,exp.get(i).getImportGoodList().get(0).getNumber(),0,
+						0,0,exp.get(i).getTotalMoneyBefore(),exp.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<exp_ret.size();i++){
+			if(exp_ret.get(i).getTime().compareTo(time1)>=0&&exp_ret.get(i).getTime().compareTo(time2)<=0&&(exp_ret.get(i).getCondition()==2)){
+				vo=new ExamineVO(exp_ret.get(i).getImportGoodList().get(0).getCommodity().getName(),exp_ret.get(i).getImportGoodList().get(0).getCommodity().getType(),0,0,0,exp_ret.get(i).getImportGoodList().get(0).getNumber(),
+						0,0,exp_ret.get(i).getTotalMoneyBefore(),exp_ret.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<patch.size();i++){
+			if(patch.get(i).getTime().compareTo(time1)>=0&&patch.get(i).getTime().compareTo(time2)<=0&&(patch.get(i).getCondition()==2)){
+				vo=new ExamineVO(patch.get(i).getCommodity().getName(),patch.get(i).getCommodity().getType(),0,0,0,0,
+						patch.get(i).getNumber(),0,patch.get(i).getNumber()*patch.get(i).getCommodity().getMean(),patch.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<gift.size();i++){
+			if(gift.get(i).getTime().compareTo(time1)>=0&&gift.get(i).getTime().compareTo(time2)<=0&&(gift.get(i).getCondition()==2)){
+				vo=new ExamineVO(gift.get(i).getCommodity().getName(),gift.get(i).getCommodity().getType(),0,0,0,0,
+						0,patch.get(i).getNumber(),gift.get(i).getNumber()*gift.get(i).getCommodity().getMean(),gift.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return null;
+		return array;
 	}
 
 	public ArrayList<StockVO> Iventory() {
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		
 		try {
 			if(sto.getAll()!=null){

@@ -36,6 +36,7 @@ public interface CommodityDataService extends Remote{
 	public boolean delSendGift(SendGiftPO po) throws RemoteException;
 	public boolean delSendGift(String note) throws RemoteException;
 	public String getSendGiftNote() throws RemoteException;
+	public ArrayList<SendGiftPO> getAllSendGift() throws RemoteException;
 	
 	public boolean addGift(CommodityPO po,int number) throws RemoteException;
 	public CommodityPO findGift(CommodityPO po) throws RemoteException;

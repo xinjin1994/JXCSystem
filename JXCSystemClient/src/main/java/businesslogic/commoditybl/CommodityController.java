@@ -6,6 +6,7 @@ import po.CommodityPO;
 import po.PatchPO;
 import po.SortPO;
 import vo.CommodityVO;
+import vo.ExamineVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
@@ -70,17 +71,21 @@ public class CommodityController implements CommodityblService{
 		return commodity.updateSort(vo1.name, vo2.name);
 	}
 
-	public ArrayList<CommodityVO> Examine_up(String time1, String time2) {
+	public ArrayList<ExamineVO> Examine_up(String time1, String time2) {
 		// TODO Auto-generated method stub
-		ArrayList<CommodityPO> po=commodity.Examine(time1, time2);
-		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
-		CommodityVO com;
+		ArrayList<ExamineVO> vo=commodity.Examine(time1, time2);
+		ExamineVO lin;
 		int i=0;
-		for(i=0;i<po.size();i++){
-			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
-			com.fatherSort=po.get(i).father;
-			vo.add(com);
+		for(i=0;i<vo.size();i++){
+			for(int j=1;j<vo.size();j++){
+				if(vo.get(j).time.compareTo(vo.get(j-1).time)<0){
+					lin=vo.get(j);
+					vo.set(j, vo.get(j-1));
+					vo.set(j-1, lin);
+				}	
+			}
 		}
+		
 		return vo;
 	}
 

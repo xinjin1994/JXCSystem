@@ -3,6 +3,7 @@ package businesslogicservice.commodityblservice;
 import java.util.ArrayList;
 
 import vo.CommodityVO;
+import vo.ExamineVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
@@ -58,7 +59,7 @@ public interface CommodityblService {
 	public String getSortNote_up(SortVO vo1);
 	
 	//查看库存，注意库存数量要有合计，就在数据层用个for算一下吧o(╯□╰)o
-	public ArrayList<CommodityVO> Examine_up(String time1, String time2);
+	public ArrayList<ExamineVO> Examine_up(String time1, String time2);
 
 	//库存盘点，目前已经在计划中，但还没有实现o(╯□╰)o
 	public ArrayList<StockVO> Iventory_up();
