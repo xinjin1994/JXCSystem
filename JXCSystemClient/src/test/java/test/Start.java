@@ -65,7 +65,7 @@ public class Start {
 		UserController userController=new UserController();
 		userController.user=new User();
 		
-		commodityController.commodity.setInfo(invoiceController.invoice, systemlogController.systemlog);
+		commodityController.commodity.setInfo(invoiceController.invoice, systemlogController.systemlog,salesController.sale);
 		accountController.account.setInfo(financialController.financial, invoiceController.invoice, salesController.sale, systemlogController.systemlog);
 		financialController.financial.setInfo(accountController.account, commodityController.commodity, salesController.sale, systemlogController.systemlog);
 		invoiceController.invoice.setInfo(accountController.account, salesController.sale, commodityController.commodity);

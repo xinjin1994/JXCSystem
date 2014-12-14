@@ -12,6 +12,7 @@ import po.PatchPO;
 import po.SendGiftPO;
 import po.SortPO;
 import po.WarnPO;
+import vo.ExamineVO;
 import vo.StockVO;
 import businesslogic.userbl.User;
 import data.commoditydata.CommodityDataService_Stub;
@@ -36,12 +37,14 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	
 	public InvoiceInfo invoice;
 	public SystemlogInfo systemlog;
+	public SalesInfo sales;
 	public CommodityDataService sto=new CommodityDataService_Stub();
 	
 	
-	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog){
+	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog,SalesInfo sales){
 		this.invoice=invoice;
 		this.systemlog=systemlog;
+		this.sales=sales;
 	}
 
 	public int addCommodity(CommodityPO po1,SortPO po2) {
@@ -359,10 +362,8 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return "SORT";
 	}
 
-	public ArrayList<CommodityPO> Examine(String time1, String time2) {
-//		CommodityDataService sto =new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
-		
+	public ArrayList<ExamineVO> Examine(String time1, String time2) {
+		ArrayList<ImportPO> imp=sales
 		try {
 			if(sto.getAll()!=null){
 				return null;
