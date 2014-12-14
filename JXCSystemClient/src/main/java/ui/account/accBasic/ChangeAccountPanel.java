@@ -12,6 +12,7 @@ import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
@@ -31,14 +32,16 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 	private MyTextFieldBorder formerName, changeName;
 
 	private String type = "account";
-
+	private String failedAddress;
+	private ResultPanelController resController;
 	public ChangeAccountPanel(MyFrame frame, String url, AccountAllUIController uiController) {
 		super(frame, url, uiController);
 		this.accountController = uiController;
 		this.repaint();
 		accountblService = new AccountController();
 		uiController.setBack_second(this, 199, 141);
-		addLabel();
+		resController = new ResultPanelController(frame, this);
+		this.failedAddress = "acc/accManage/chaAcc";
 		init();
 	}
 
@@ -47,7 +50,10 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 		this.managerController = uiController;
 		this.repaint();
 		this.type = type;
+		accountblService = new AccountController();
 		uiController.setBack_second(this, 199, 141);
+		resController = new ResultPanelController(frame, this);
+		this.failedAddress = "manager/accManage/chaAcc";
 		init();
 	}
 
@@ -67,10 +73,7 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 		this.add(changeName);
 	}
 
-	public void addLabel() {
-		failLabel = new MyLabel(275, 420, 200, 35);
-		this.add(failLabel);
-	}
+	
 
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(606, 394);
@@ -83,7 +86,8 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
 			if (formerName.getText().equals("") || changeName.getText().equals("")) {
-				failLabel.setText("请正确输入信息！");
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
 			} else {
 				frame.remove(this);
 
@@ -92,8 +96,10 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 				newAcc = new AccountVO(changeName.getText(), acc.balance);
 				// acc = new AccountVO(changeName.getText(),0);
 				if (type.equals("account")) {
+					accountController.setTempPanel(this);
 					accountController.confirmAcc(acc, "change", newAcc);
 				} else if (type.equals("manager")) {
+					managerController.setTempPanel(this);
 					managerController.confirmAcc(acc, "change", newAcc);
 				}
 			}

@@ -12,6 +12,7 @@ import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
@@ -30,15 +31,20 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 	AccountVO delAcc;
 	private MyLabel failLabel;
 	
+	private ResultPanelController resController;
 	private String type = "account";
+	private String failedAddress;
 	public DelAccountPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
 		this.accountController = uiController;
 		this.repaint();
 		accountblService = new AccountController();
+		resController = new ResultPanelController(frame, this);
+		
 		uiController.setBack_second(this,199,141);
-		addLabel();
+		
+		failedAddress = "acc/accManage/delAcc";
 		init();
 		
 	}
@@ -49,13 +55,15 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 		this.managerController = uiController;
 		this.type = type;
 		this.repaint();
-		
+		accountblService = new AccountController();
+		resController = new ResultPanelController(frame, this);
 		uiController.setBack_second(this,199,141);
-
+		failedAddress = "acc/accManage/addAcc";
 		init();
 	}
 	
 	private void init(){
+		
 		setTextField();
 		setForward();
 	}
@@ -76,26 +84,32 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 		this.add(name);
 		
 	}
+
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			delAccString = name.getText();
 			if(delAccString.equals("")){
-				failLabel.setText("请正确输入信息!");
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
 			}else{
-			delAcc = accountblService.searchAccurateAccount_up(delAccString);
-//			delAcc = new AccountVO(delAccString,20);//这个是从下层传回来的要删除的account，通过查找账户
-			frame.remove(DelAccountPanel.this);
-			if(type.endsWith("account")){
-				accountController.confirmAcc(delAcc, "del");
-			}else if(type.equals("manager")){
-				managerController.confirmAcc(delAcc, "del");
-			}
-			
-			name.setText("");
+				delAcc = accountblService.searchAccurateAccount_up(delAccString);
+				//			delAcc = new AccountVO(delAccString,20);//这个是从下层传回来的要删除的account，通过查找账户
+				frame.remove(DelAccountPanel.this);
+				if(type.endsWith("account")){
+					accountController.setTempPanel(this);
+					accountController.confirmAcc(delAcc, "del");
+				}else if(type.equals("manager")){
+					managerController.setTempPanel(this);
+					managerController.confirmAcc(delAcc, "del");
+				}
+
+//				name.setText("");
 			}
 			frame.repaint();
 		}
 	}
+
 }
  

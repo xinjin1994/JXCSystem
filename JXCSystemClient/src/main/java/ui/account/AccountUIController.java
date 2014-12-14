@@ -47,6 +47,7 @@ public class AccountUIController {
 		invoiceblService = new InvoiceController();
 		colors = new ColorFactory();
 		frame.setPanel(accountPanel);
+		
 		uiController.setMainPanel(accountPanel);
 	}
 	
@@ -173,6 +174,7 @@ public class AccountUIController {
 		}
 
 		public void mousePressed(MouseEvent event) {
+			uiController.setMainPanel(accountPanel);
 			frame.remove(accountPanel);	
 			if(event.getSource() == accButtons[0]){
 				uiController.addAccount();
@@ -199,6 +201,7 @@ public class AccountUIController {
 			
 		}
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(accountPanel);
 			frame.remove(accountPanel);
 			if(e.getSource() == finButtons[0]){
 				uiController.addReceipt();
@@ -226,6 +229,7 @@ public class AccountUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(accountPanel);
 			frame.remove(accountPanel);
 			if(e.getSource() == recButtons[0]){
 				uiController.salesList();
@@ -265,7 +269,9 @@ public class AccountUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(accountPanel);
 			frame.remove(accountPanel);
+		
 			if(e.getSource() == iniButtons[0]){
 				uiController.iniCom();
 			}else if(e.getSource() == iniButtons[1]){

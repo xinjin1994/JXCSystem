@@ -7,6 +7,7 @@ import ui.account.AccountAllUIController;
 import ui.account.AccountDetailPanel;
 import ui.manager.ManagerAllUIController;
 import ui.setting.MyFrame;
+import ui.setting.SetBack;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
@@ -20,10 +21,8 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	AccountblService accountblService;
 	AccountVO acc,newAcc;
 	String ope;
-	ResultPanelController resController;
-	AccountAllUIController accountController;
+	ResultPanelController resControllerS,resControllerF;
 	String type = "account";
-	ManagerAllUIController managerController;
 	/**
 	 * 
 	 * @param frame
@@ -35,23 +34,28 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	public ConfirmAccPanel(MyFrame frame, String url,
 			AccountAllUIController uiController, AccountVO acc,String ope) {
 		super(frame, url, uiController, acc);
+	
 		this.acc = acc;
 		this.ope = ope;
-		this.accountController = uiController;
+		SetBackAcc();
 		accountblService = new AccountController();
-		resController = new ResultPanelController(uiController,frame);
+		resControllerS = new ResultPanelController(frame,uiController.getMainPanel());
+		System.out.println(uiController.getMainPanel());
+		resControllerF = new ResultPanelController(frame, uiController.getPanel());
 		setOpe();
 	}
 	
 	public ConfirmAccPanel(MyFrame frame, String url,
 			AccountAllUIController uiController, AccountVO acc,String ope,AccountVO newAcc) {
-		super(frame, url, uiController, acc);
+		super(frame, url, uiController, newAcc);
 		this.acc = acc;
 		this.newAcc = newAcc;
 		this.ope = ope;
-		this.accountController = uiController;
+		System.out.println(newAcc.name);
+		SetBackAcc();
 		accountblService = new AccountController();
-		resController = new ResultPanelController(uiController,frame);
+		resControllerS = new ResultPanelController(frame, uiController.getMainPanel());
+		resControllerF = new ResultPanelController(frame, uiController.getPanel());
 		setOpe();
 	}
 	public ConfirmAccPanel(MyFrame frame, String url,
@@ -60,21 +64,31 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		this.acc = acc;
 		this.ope = ope;
 		this.type = type;
-		this.managerController = uiController;
-		resController = new ResultPanelController(uiController,frame);
+		SetBackMan();
+		accountblService = new AccountController();
+		resControllerS = new ResultPanelController(frame, uiController.getMainPanel());
+		resControllerF = new ResultPanelController(frame, uiController.getPanel());
 		setOpe();
 	}
 
 	public ConfirmAccPanel(MyFrame frame, String url,
 			ManagerAllUIController uiController, AccountVO acc,String ope,String type,AccountVO newAcc) {
-		super(frame, url, uiController, acc);
+		super(frame, url, uiController, newAcc);
 		this.acc = acc;
 		this.newAcc = newAcc;
 		this.ope = ope;
 		this.type = type;
-		this.managerController = uiController;
-		resController = new ResultPanelController(uiController,frame);
+		SetBackMan();
+		accountblService = new AccountController();
+		resControllerS = new ResultPanelController(frame, uiController.getMainPanel());
+		resControllerF = new ResultPanelController(frame, uiController.getPanel());
 		setOpe();
+	}
+	protected void SetBackAcc(){
+		accountController.setBack_third(ConfirmAccPanel.this);
+	}
+	protected void SetBackMan() {
+		managerController.setBack_third(this);
 	}
 	private void setOpe() {
 		if(ope.equals("add")){
@@ -111,7 +125,6 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	}
 
 	private void setForwardAdd() {
-//		System.out.println("kld");
 		ForwardButton forwardAdd = new ForwardButton(607, 393);
 		if(type.equals("account")){
 			forwardButtonAdd = forwardAdd.forward_white;
@@ -146,23 +159,19 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		//3 账户中仍存在余额，不能删除
 		case 0:
 			frame.remove(this);
-			resController.succeeded("成功修改账户！", type);
+			resControllerS.succeeded("成功修改账户！", type);
 			break;
 		case 1:
 			frame.remove(this);
-			resController.failed("账户名称重复！", type);
+			resControllerF.failedConfirm("账户名称重复！", type);
 			break;
 		case 2:
 			frame.remove(this);
-			resController.failed("账户名不存在！", type);
-			break;
-		case 3:
-			frame.remove(this);
-			resController.failed("账户名中仍存在余额，不能删除！", type);
+			resControllerF.failedConfirm("账户名不存在！", type);
 			break;
 		case -1:
 			frame.remove(this);
-			resController.failed("未知错误！", type);
+			resControllerF.failedConfirm("未知错误！", type);
 			break;
 		}
 	}
@@ -179,23 +188,19 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		//3 账户中仍存在余额，不能删除
 		case 0:
 			frame.remove(this);
-			resController.succeeded("成功删除账户！", type);
-			break;
-		case 1:
-			frame.remove(this);
-			resController.failed("账户名称重复！", type);
+			resControllerS.succeeded("成功删除账户！", type);
 			break;
 		case 2:
 			frame.remove(this);
-			resController.failed("账户名不存在！", type);
+			resControllerF.failedConfirm("账户名不存在！", type);
 			break;
 		case 3:
 			frame.remove(this);
-			resController.failed("账户名中仍存在余额，不能删除！", type);
+			resControllerF.failedConfirm("账户名中仍存在余额，不能删除！", type);
 			break;
 		case -1:
 			frame.remove(this);
-			resController.failed("未知错误！", type);
+			resControllerF.failedConfirm("未知错误！", type);
 			break;
 		}
 	}
@@ -212,23 +217,15 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		//3 账户中仍存在余额，不能删除
 		case 0:
 			frame.remove(this);
-			resController.succeeded("成功添加账户！", type);
+			resControllerS.succeeded("成功添加账户！", type);
 			break;
 		case 1:
 			frame.remove(this);
-			resController.failed("账户名称重复！", type);
-			break;
-		case 2:
-			frame.remove(this);
-			resController.failed("账户名不存在！", type);
-			break;
-		case 3:
-			frame.remove(this);
-			resController.failed("账户名中仍存在余额，不能删除！", type);
+			resControllerF.failedConfirm("账户名称重复！", type);
 			break;
 		case -1:
 			frame.remove(this);
-			resController.failed("未知错误！", type);
+			resControllerF.failedConfirm("未知错误！", type);
 			break;
 		}
 	}

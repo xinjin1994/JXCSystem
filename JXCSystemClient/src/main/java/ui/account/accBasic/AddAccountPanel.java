@@ -3,6 +3,8 @@ package ui.account.accBasic;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import businesslogic.accountbl.AccountController;
+import businesslogicservice.accountblservice.AccountblService;
 import ui.FatherPanel;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
@@ -24,15 +26,16 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 	ManagerAllUIController managerController;
 	private String nameString;
 	private double balance;
-	private MyLabel failLabel;
+//	private MyLabel failLabel;
 	
 	AccountVO newAcc;
 	private MyButton forwardButton;
 	private MyTextFieldBorder name,price;
-	
+	private AccountblService accountblService;
 	private ResultPanelController resController;
 	String type = "account";
 
+	private String failedAddress;
 	public AddAccountPanel(MyFrame frame, String string,
 			AccountAllUIController accountAllUIController) {
 		super(frame,string,accountAllUIController);
@@ -41,7 +44,9 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		accountController.setBack_second(this,199,141);
 		resController = new ResultPanelController(frame, this);
-		addLabel();
+		accountblService = new AccountController();
+		this.failedAddress = "acc/accManage/addAcc";
+//		addLabel();
 		init();
 	}
 	
@@ -56,6 +61,8 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 		this.type = type;;
 		managerController.setBack_second(this, 199, 141);
 		resController = new ResultPanelController(frame, this);
+		accountblService = new AccountController();
+		this.failedAddress = "manager/accManage/addAcc";
 		init();
 		
 	}
@@ -81,42 +88,51 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 		
 		this.add(name);
 		this.add(price);
-		
-	
 	}
 	
-	public void addLabel() {
-		failLabel = new MyLabel(275, 420, 200, 35);
-		this.add(failLabel);
-	}
+	
+//	public void addLabel() {
+//		failLabel = new MyLabel(275, 420, 200, 35);
+//		this.add(failLabel);
+//	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			nameString = name.getText();
 			String priceString = price.getText();
 			
 			if(nameString.equals("")||priceString.equals("")){
-//				System.out.println("ge");
-				failLabel.setText("请正确输入信息！");
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
+			//	failLabel.setText("请正确输入信息！");
 			}else{
 				try{
-			balance = Double.parseDouble(priceString);
-			
-			newAcc = new AccountVO(nameString, balance);
-			
-			name.setText("");
-			price.setText("");
-			frame.remove(this);
-			if(type.equals("account")){
-				accountController.confirmAcc(newAcc,"add");//跳转到确认界面（允许添加账户时）
-			}else if(type.equals("manager")){
-				managerController.confirmAcc(newAcc, "add");
-			}
+					balance = Double.parseDouble(priceString);
+
+					newAcc = new AccountVO(nameString, balance);
+					
+//					name.setText("");
+//					price.setText("");
+					frame.remove(this);
+					if(type.equals("account")){
+						accountController.setTempPanel(this);
+						accountController.confirmAcc(newAcc,"add");//跳转到确认界面（允许添加账户时）
+
+					}else if(type.equals("manager")){
+						managerController.setTempPanel(this);
+						managerController.confirmAcc(newAcc, "add");
+					}
+					
 				}catch(Exception e2){
-					failLabel.setText("请正确输入信息！");
+					frame.remove(this);
+					resController.failed("存在输入错误！", "acc/accManage/addAcc");
 				}
 			}
 		}
 		
 	}
+
+
+
+
 
 }

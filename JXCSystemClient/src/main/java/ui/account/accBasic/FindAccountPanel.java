@@ -14,6 +14,7 @@ import ui.setting.MyTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
@@ -23,7 +24,7 @@ import businesslogicservice.accountblservice.AccountblService;
  * 
  */
 public class FindAccountPanel extends FatherPanel implements ActionListener{
-	private ColorFactory colors;
+	private ColorFactory colors = new ColorFactory();;
 	MyTable showTable;
 	ManagerAllUIController managerController;
 	AccountAllUIController accountController;
@@ -33,19 +34,21 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	private String nameString,infoString;
 	private MyFrame frame;
 	private String type = "account";
-	private MyLabel failLabel;
+	private String failedAddress;
 	
+	private ResultPanelController resController;
 	public FindAccountPanel(MyFrame frame,String url,
 			AccountAllUIController accountController){
 		super(frame,url,accountController);
-		colors = new ColorFactory();
+		
 		this.frame = frame;
 		this.accountController =accountController;
 		this.repaint();
 		accountblService = new AccountController();
+		resController = new ResultPanelController(frame, this);
 		accountController.setBack_second(this,150,130);
 		init();
-		addLabel();
+		this.failedAddress = "acc/accManage/finAcc";
 	}
 	
 	public FindAccountPanel(MyFrame frame,String url,
@@ -54,7 +57,9 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		this.managerController =uiController;
 		this.repaint();
 		this.type = type;
-		
+		accountblService = new AccountController();
+		resController = new ResultPanelController(frame, this);
+		this.failedAddress = "manager/accManage/delAcc";
 		uiController.setBack_second(this,150,130);
 		init();
 	}
@@ -110,16 +115,14 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		frame.repaint();
 	}
 	
-	public void addLabel() {
-		failLabel = new MyLabel(245, 440, 200, 35);
-		this.add(failLabel);
-	}
+	
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exactForwardButton){
 			nameString = name.getText();
 			if(nameString.equals("")){
-				failLabel.setText("请正确输入信息！");
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
 			}else{
 			name.setText("");
 			
@@ -133,7 +136,8 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		}else if(e.getSource() == fuzzyForwardButton){
 			infoString = info.getText();
 			if(infoString.equals("")){
-				failLabel.setText("请正确输入信息！");
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
 			}else{
 			info.setText("");
 			ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
