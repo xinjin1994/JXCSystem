@@ -133,7 +133,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 		return null;
 	}
 
-	public int addImport_up(ImportMenuVO importMenuVO) {
+	public int addImport_up(ImportPO po) {
 		// TODO Auto-generated method stub
 		ImportPO im = new ImportPO(null, null, null, null, null, null, 0);
 
@@ -144,7 +144,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 		return -1;
 	}
 
-	public int addImport_Return_up(ImportMenuVO importMenuVO) {
+	public int addImport_Return_up(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
 		Import_ReturnPO im_re = new Import_ReturnPO(null, null, null, null,
 				null, null, 0, null);
