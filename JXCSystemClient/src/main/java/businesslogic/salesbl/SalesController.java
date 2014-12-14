@@ -46,7 +46,7 @@ public class SalesController implements SalesblService{
 
 	public int updateCustomer_up(CustomerVO vo1, CustomerVO vo2) {       //这里的参数个数有问题
 		// TODO Auto-generated method stub
-		int message=sale.updateCustomer(vo1);                            //这里的对应方法名有问题
+		int message=sale.updateCustomer(vo1,vo2);                            //这里的对应方法名有问题
 		return message;
 	}
 

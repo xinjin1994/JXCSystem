@@ -8,6 +8,8 @@ import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
+import po.PaymentPO;
+import po.ReceiptPO;
 import vo.CustomerVO;
 import vo.bill.ExportMenuVO;
 import vo.bill.ImportMenuVO;
@@ -21,8 +23,8 @@ import dataservice.salesdataservice.SalesDataService;
 //3 客户的应收应付不为0
 //-1 未知错误
 
-public class Sales implements businesslogic.accountbl.SalesInfo,
-		businesslogic.financialbl.SalesInfo {
+public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.invoicebl.SalesInfo,
+		businesslogic.financialbl.SalesInfo,businesslogic.commoditybl.SalesInfo {
 
 	public SalesDataService sale = new SaleDataService_Stub();
 	public InvoiceInfo invoice = new Invoice();
@@ -91,16 +93,19 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	
 	
 	
-	public int updateCustomer(CustomerVO customerVO) {
+	public int updateCustomer(CustomerVO vo1,CustomerVO vo2) {
 		// TODO Auto-generated method stub
-		CustomerPO customer1 = new CustomerPO("1", "name", 1, false, "phone",
-				"zip", "mail", 1000, 2000, "clerk", "address");
-		CustomerPO customer2 = new CustomerPO("2", "name", 2, false, "phone",
-				"zip", "mail", 2000, 4000, "clerk", "address");
-
+		CustomerPO customer1;
+		CustomerPO customer2;
 		try {
+			customer1=sale.findCustomer(vo1.cusName);
+			customer2=sale.findCustomer(vo2.cusName);
+			
+			if(customer2==null){
+				return 2;
+			}
 			if (sale.updateCustomer(customer1, customer2)) {
-				systemlog.add_up("UpdateCustomer:");
+				systemlog.add_up("UpdateCustomer:"+customer2.getName());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -109,6 +114,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		}
 		return -1;
 	}
+	
+	
+	
+	
 
 	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
@@ -264,6 +273,58 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String passImport(ImportPO importPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passImport_Return(Import_ReturnPO import_ReturnPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passExport(ExportPO exportPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passExport_Return(Export_ReturnPO export_ReturnPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseImport(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseImport_Return(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseExport(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseExport_Return(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passReceipt(ReceiptPO receiptPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passPayment(PaymentPO paymentPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 	// public String delCustomer(CustomerVO customerVO) {
 	// // TODO Auto-generated method stub
