@@ -9,6 +9,10 @@ public interface AccountInfo {
 
 	public String addPayment_Data(PaymentPO po);
 	
+	public String refuseReceipt_Data(String note);
+	
+	public String refusePayment_Data(String note);
+	
 //	public String addAccount_Data(String name,int money);
 	
 //	public String delReceipt_Data(ReceiptPO po);

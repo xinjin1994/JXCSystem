@@ -8,21 +8,21 @@ import po.Import_ReturnPO;
 
 public interface SalesInfo {
 	
-	public String addImport(ImportPO importPO);
+	public String passImport(ImportPO importPO);
 	
-	public String addImport_Return(Import_ReturnPO import_ReturnPO);
+	public String passImport_Return(Import_ReturnPO import_ReturnPO);
 	
-	public String addExport(ExportPO exportPO);
+	public String passExport(ExportPO exportPO);
 
-	public String addExport_Return(Export_ReturnPO export_ReturnPO);
+	public String passExport_Return(Export_ReturnPO export_ReturnPO);
 	
-	public String delImport(ImportPO importPO);
+	public String refuseImport(String note);
 	
-	public String delImport_Return(Import_ReturnPO import_ReturnPO);
+	public String refuseImport_Return(String note);
 	
-	public String delExport(ExportPO exportPO);
+	public String refuseExport(String note);
 
-	public String delExport_Return(Export_ReturnPO export_ReturnPO);
+	public String refuseExport_Return(String note);
 	
 
 }

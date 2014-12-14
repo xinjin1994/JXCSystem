@@ -56,9 +56,9 @@ public class Initialization {
 		return salesInfo.addCustomer(name, level, phone, money);
 	}
 
-	public String addAccount(String name, int money) {
+	public String addAccount(String name, double d) {
 		
-		return accountInfo.addAccount(name,money);
+		return accountInfo.addAccount(name,d);
 	}
 	
 	public String addUser(String name,String password,int duty){

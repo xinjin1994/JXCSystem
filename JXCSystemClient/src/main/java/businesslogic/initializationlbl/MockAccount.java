@@ -4,7 +4,12 @@ package businesslogic.initializationlbl;
 public class MockAccount implements AccountInfo{
 	
 	public String addAccount(String name,int money) {
-		return "³É¹¦";
+		return "ï¿½É¹ï¿½";
+	}
+
+	public String addAccount(String name, double money) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
