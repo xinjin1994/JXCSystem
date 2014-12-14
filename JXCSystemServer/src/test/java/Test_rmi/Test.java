@@ -46,36 +46,36 @@ public class Test {
 			Naming.bind("rmi://127.0.0.1:8888/CommodityDataService",commoditydataservice);
 			
 			accountdataservice = new AccountDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/AccountDataService",accountdataservice);
+			LocateRegistry.createRegistry(8889);
+			Naming.bind("rmi://127.0.0.1:8889/AccountDataService",accountdataservice);
 			
 			financialdataservice = new FinancialDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/FinancialDataService",financialdataservice);
+			LocateRegistry.createRegistry(8890);
+			Naming.bind("rmi://127.0.0.1:8890/FinancialDataService",financialdataservice);
 			
 			initializationdataservice = new InitializationDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/InitializationDataService",initializationdataservice);
+			LocateRegistry.createRegistry(8891);
+			Naming.bind("rmi://127.0.0.1:8891/InitializationDataService",initializationdataservice);
 			
 			invoicedataservice = new InvoiceDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/InvoiceDataService",invoicedataservice);
+			LocateRegistry.createRegistry(8892);
+			Naming.bind("rmi://127.0.0.1:8892/InvoiceDataService",invoicedataservice);
 			
 			promotiondataservice = new PromotionDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/PromotionDataService",promotiondataservice);
+			LocateRegistry.createRegistry(8893);
+			Naming.bind("rmi://127.0.0.1:8893/PromotionDataService",promotiondataservice);
 			
 			salesdataservice = new SalesDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/SalesDataService",salesdataservice);
+			LocateRegistry.createRegistry(8894);
+			Naming.bind("rmi://127.0.0.1:8894/SalesDataService",salesdataservice);
 			
 			systemlogdataservice = new SystemlogDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/SystemlogDataService",systemlogdataservice);
+			LocateRegistry.createRegistry(8895);
+			Naming.bind("rmi://127.0.0.1:8895/SystemlogDataService",systemlogdataservice);
 			
 			userdataservice = new UserDataService_Stub();		
-			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/UserDataService",userdataservice);
+			LocateRegistry.createRegistry(8896);
+			Naming.bind("rmi://127.0.0.1:8896/UserDataService",userdataservice);
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

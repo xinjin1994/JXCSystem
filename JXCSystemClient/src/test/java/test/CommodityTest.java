@@ -17,7 +17,7 @@ public class CommodityTest {
 		Commodity commodity=new Commodity();
 		MockCommodityData mock=new MockCommodityData();
 		commodity.sto=mock;
-		assertEquals("�ɹ�","成功");
+		assertEquals("�ɹ�",commodity.addCommodity(null, null));
 	}
 
 	@Test

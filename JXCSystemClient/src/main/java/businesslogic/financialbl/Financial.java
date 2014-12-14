@@ -25,10 +25,18 @@ import dataservice.financialdataservice.FinancialDataService;
 public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public FinancialDataService financial=new FinancialDataService_Stub();
-	public AccountInfo account=new Account();
-	public CommodityInfo commodity=new Commodity();
-	public SalesInfo sales=new Sales();
-	public SystemlogInfo systemlog=new Systemlog();
+	public AccountInfo account;
+	public CommodityInfo commodity;
+	public SalesInfo sales;
+	public SystemlogInfo systemlog;
+	
+	
+	public void setInfo(AccountInfo account,CommodityInfo commodity, SalesInfo sales, SystemlogInfo systemlog){
+		this.account=account;
+		this.commodity=commodity;
+		this.sales=sales;
+		this.systemlog=systemlog;
+	}
 	
 
 	public ArrayList<SaleListPO> saleList(String time1, String time2, String good_name,

@@ -24,9 +24,15 @@ import dataservice.invoicedataservice.InvoiceDataService;
 public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			businesslogic.accountbl.InvoiceInfo, businesslogic.salesbl.InvoiceInfo{
 
-	public AccountInfo accountInfo=new Account();
-	public SalesInfo salesInfo=new Sales();
-	public CommodityInfo commodityInfo=new Commodity();
+	public AccountInfo accountInfo;
+	public SalesInfo salesInfo;
+	public CommodityInfo commodityInfo;
+	
+	public void setInfo(AccountInfo account,SalesInfo sales, CommodityInfo commodity){
+		this.accountInfo=account;
+		this.salesInfo=sales;
+		this.commodityInfo=commodity;
+	}
 	
 	public InvoiceDataService invoice= new InvoiceDataService_Stub("1","2","3");
 	

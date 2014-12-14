@@ -37,6 +37,12 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public InvoiceInfo invoice;
 	public SystemlogInfo systemlog;
 	public CommodityDataService sto=new CommodityDataService_Stub();
+	
+	
+	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog){
+		this.invoice=invoice;
+		this.systemlog=systemlog;
+	}
 
 	public int addCommodity(CommodityPO po1,SortPO po2) {
 		// TODO Auto-generated method stub
@@ -715,22 +721,54 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 
 	public String passImport(ImportPO po) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			if(sto.passImport(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
 	}
 
 	public String passImport_Return(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			if(sto.passImport_Return(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
 	}
 
 	public String passExport(ExportPO po) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			if(sto.passExport(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
 	}
 
 	public String passExport_Return(Export_ReturnPO po) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			if(sto.passExport_Return(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
 	}
 	
 	//////////////////////////////////////////////////////////////

@@ -8,9 +8,8 @@ import po.CustomerPO;
 import po.PaymentPO;
 import po.ReceiptPO;
 import vo.AccountVO;
+import businesslogic.financialbl.Financial;
 import businesslogic.invoicebl.Invoice;
-import businesslogic.salesbl.Sales;
-import businesslogic.systemlogbl.Systemlog;
 import businesslogic.userbl.User;
 import data.accountdata.AccountDataService_Stub;
 import dataservice.accountdataservice.AccountDataService;
@@ -26,13 +25,24 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 
 	public AccountDataService account=new AccountDataService_Stub("mainAccount",0);
 	public FinancialInfo financial;
-	public InvoiceInfo invoice=new Invoice();
-	public SalesInfo sales=new Sales();
-	public SystemlogInfo systemlog=new Systemlog();
+	public InvoiceInfo invoice;
+	public SalesInfo sales;
+	public SystemlogInfo systemlog;
+	
+	
+	public void setInfo(FinancialInfo financial,InvoiceInfo invoice,SalesInfo sales,SystemlogInfo systemlog){
+		this.financial=financial;
+		this.invoice=invoice;
+		this.sales=sales;
+		this.systemlog=systemlog;
+	}
 	
 	public AccountPO checkAccount_up() {
 		// TODO Auto-generated method stub
-//		account = new AccountDataService_Stub("accountName",10);
+		
+		
+		
+		
 		try {
 			AccountPO po=account.getAccount();
 			return po;
