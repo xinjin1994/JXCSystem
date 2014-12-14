@@ -7,13 +7,13 @@ public class SaleListPO implements Serializable{
 	CommodityPO commodity;
 	CustomerPO customer;
 	String clerk;//ҵ��Ա
-	int wareHouse;//�ֿ�
+	String wareHouse;//�ֿ�
 	int price;//销售单价
 	int number;//销售数量
 	int totalmoney;//销售总价
 	
 	public SaleListPO(String time,CommodityPO commodity, CustomerPO customer, String clerk,
-			int wareHouse, int price, int number, int totalmoney) {
+			String wareHouse, int price, int number, int totalmoney) {
 		this.time = time;
 		this.commodity=commodity;
 		this.clerk = clerk;
@@ -30,7 +30,7 @@ public class SaleListPO implements Serializable{
 	public String getClerk() {
 		return clerk;
 	}
-	public int getWareHouse() {
+	public String getWareHouse() {
 		return wareHouse;
 	}
 	public CommodityPO getCommodity() {
