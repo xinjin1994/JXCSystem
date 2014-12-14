@@ -310,7 +310,6 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void readComNote(){
 		
 		FileInputStream fis;
@@ -716,15 +715,15 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		int i=0,j=0;
 		for(i=0;i<sortList.size();i++){
 			sort.add(sortList.get(i).copy());
-			
-			if(!sortList.get(i).hasSort()){
-				ArrayList<SortPO> lin=getSort(sortList.get(i));
-				for(j=0;j<lin.size();j++){
-					sort.add(lin.get(j).copy());
-				}
-			}
-				
 		}
+		sort.add(getTempSort().copy());
+			
+//			if(!sortList.get(i).hasSort()){
+//				ArrayList<SortPO> lin=getSort(sortList.get(i));
+//				for(j=0;j<lin.size();j++){
+//					sort.add(lin.get(j).copy());
+//				}
+//			}
 		
 		return sort;
 	}

@@ -9,7 +9,7 @@ public class SortVO {
 	
 	public String fatherSort;
 	public ArrayList<CommodityVO> commodity=new ArrayList<CommodityVO>();
-	ArrayList<SortVO> sortList=new ArrayList<SortVO>();
+	public ArrayList<SortVO> sortList=new ArrayList<SortVO>();
 	
 	public SortVO(String name){
 		this.name=name;

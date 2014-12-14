@@ -140,9 +140,31 @@ public class CommodityController implements CommodityblService{
 		ArrayList<SortVO> array=new ArrayList<SortVO>();
 		SortVO vo=null;
 		for(int i=0;i<sort.size();i++){
-			vo=new SortVO(sort.get(i).name);
+			array.add(getMulSort(sort.get(i)));
 		}
-		return null;
+		return array;
+	}
+	
+	public SortVO getMulSort(SortPO po){
+		SortVO vo=new SortVO(po.getName());
+		vo.fatherSort=po.father;
+		vo.note=po.getNote();
+		int i=0;
+		
+		if(po.commodityList!=null){
+			for(i=0;i<po.commodityList.size();i++){
+				CommodityVO com=new CommodityVO(po.commodityList.get(i).getNote(), po.commodityList.get(i).getName(), po.commodityList.get(i).getType(), po.commodityList.get(i).getNumber(), po.commodityList.get(i).getIn_price(), po.commodityList.get(i).getOut_price(),
+						po.commodityList.get(i).getRecent_in_price(), po.commodityList.get(i).getRecent_out_price(),po.commodityList.get(i).warn);
+				com.fatherSort=po.commodityList.get(i).father;
+				vo.commodity.add(com);
+			}
+		}
+		
+		for(i=0;i<po.sortList.size();i++){
+			SortVO so=getMulSort(po.sortList.get(i));
+			vo.sortList.add(so);
+		}
+		return vo;
 	}
 
 	public ArrayList<CommodityVO> getAllCommodity_up() {
@@ -230,12 +252,30 @@ public class CommodityController implements CommodityblService{
 
 	public ArrayList<SortVO> getComSort_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<SortVO> array=new ArrayList<SortVO>();
+		ArrayList<SortPO> po=commodity.getComSort();
+		SortVO so;
+		for(int i=0;i<po.size();i++){
+			so=new SortVO(po.get(i).getName());
+			so.fatherSort=po.get(i).father;
+			so.note=po.get(i).getNote();
+			array.add(so);
+		}
+		return array;
 	}
 
 	public ArrayList<SortVO> getSortSort_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<SortVO> array=new ArrayList<SortVO>();
+		ArrayList<SortPO> po=commodity.getSortSort();
+		SortVO so;
+		for(int i=0;i<po.size();i++){
+			so=new SortVO(po.get(i).getName());
+			so.fatherSort=po.get(i).father;
+			so.note=po.get(i).getNote();
+			array.add(so);
+		}
+		return array;
 	}
 
 

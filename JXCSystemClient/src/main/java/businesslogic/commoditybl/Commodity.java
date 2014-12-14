@@ -698,10 +698,15 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public ArrayList<SortPO> getComSort(){
 		ArrayList<SortPO> array=new ArrayList<SortPO>();
 		ArrayList<SortPO> po=getAllSort();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		
 		for(int i=0;i<po.size();i++){
-			if(!po.get(i).hasSort()){
-				array.add(po.get(i));
+			lin=getComSon(po.get(i));
+			for(int j=0;j<lin.size();j++){
+				SortPO so=new SortPO(lin.get(j).getName());
+				so.note=lin.get(j).getNote();
+				so.father=lin.get(j).father;
+				array.add(so);
 			}
 		}
 		return array;
@@ -710,13 +715,69 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public ArrayList<SortPO> getSortSort(){
 		ArrayList<SortPO> array=new ArrayList<SortPO>();
 		ArrayList<SortPO> po=getAllSort();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		po.remove(po.size()-1);
 		
 		for(int i=0;i<po.size();i++){
-			if(!po.get(i).hasCommodity()){
-				array.add(po.get(i));
+			lin=getSortSon(po.get(i));
+			for(int j=0;j<lin.size();j++){
+				SortPO so=new SortPO(lin.get(j).getName());
+				so.note=lin.get(j).getNote();
+				so.father=lin.get(j).father;
+				array.add(so);
 			}
 		}
 		return array;
+	}
+	
+	public ArrayList<SortPO> getSortSon(SortPO po){
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		SortPO so;
+		
+		if(!po.hasCommodity()){
+			so=new SortPO(po.getName());
+			so.note=po.getNote();
+			so.father=po.father;
+			sort.add(so);
+			for(int i=0;i<po.sortList.size();i++){
+				lin=getSortSon(po);
+				for(int j=0;j<lin.size();j++){
+					so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					sort.add(so);
+				}
+			}
+		}
+		return sort;
+	}
+	
+	public ArrayList<SortPO> getComSon(SortPO po){
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		SortPO so;
+		
+		if(!po.hasSort()){
+			so=new SortPO(po.getName());
+			so.note=po.getNote();
+			so.father=po.father;
+			sort.add(so);
+		}
+		
+		if(po.hasSort()){
+			for(int i=0;i<po.sortList.size();i++){
+				lin=getComSon(po.sortList.get(i));
+				for(int j=0;j<lin.size();j++){
+					so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					sort.add(so);
+				}
+			}
+		}
+		return sort;
+		
 	}
 
 	public String passImport(ImportPO po) {

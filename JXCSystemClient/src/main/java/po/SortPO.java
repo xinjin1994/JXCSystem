@@ -10,8 +10,8 @@ public class SortPO implements Serializable{
 	public String father;
 	
 //	SortPO fatherSort;
-	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
-	public ArrayList<SortPO> sortList;
+	public ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
+	public ArrayList<SortPO> sortList=new ArrayList<SortPO>();
 	
 	public boolean hasSort(){
 		if(sortList!=null&&sortList.size()>0){
