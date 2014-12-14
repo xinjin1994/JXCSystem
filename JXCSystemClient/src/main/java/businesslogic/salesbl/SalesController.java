@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import po.CommodityPO;
 import po.CustomerPO;
+import po.ExportGoodPO;
+import po.ExportPO;
 import po.ImportGoodPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
@@ -140,7 +142,14 @@ public class SalesController implements SalesblService {
 
 	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		int message = sale.addExport_up(exportMenuVO);
+		
+		CommodityPO commodityPO=new CommodityPO(null, null);
+		ExportGoodPO exportGoodPO=new ExportGoodPO(null, 0, 0, 0, null);
+		ArrayList<ExportGoodPO> exportGood=new ArrayList<ExportGoodPO>();
+		exportGood.add(exportGoodPO);
+		CustomerPO customerPO=new CustomerPO(null, 0, false, null);
+		ExportPO ex=new ExportPO(null, null, null, null, null, null, 0, 0, 0, 0);
+		int message = sale.addExport_up(ex);
 		return message;
 	}
 

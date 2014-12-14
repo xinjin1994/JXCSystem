@@ -168,7 +168,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 		return -1;
 	}
 
-	public int addExport_up(ExportMenuVO exportMenuVO) {
+	public int addExport_up(ExportPO po) {
 		// TODO Auto-generated method stub
 		ExportPO ex = new ExportPO(null, null, null, null, null, null, 0, 0, 0,
 				0);
