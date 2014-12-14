@@ -16,7 +16,9 @@ import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.salesblservice.SalesblService;
 import data.salesdata.SaleDataService_Stub;
 import dataservice.salesdataservice.SalesDataService;
-
+//1 客户名称重复
+//2 客户名称不存在
+//-1 未知错误
 public class Sales implements businesslogic.accountbl.SalesInfo,
 			businesslogic.financialbl.SalesInfo{
 	
@@ -33,11 +35,17 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	
 	public int addCustomer_up(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
-		CustomerPO customer = new CustomerPO("1","name",1, false,
-				"phone", "zip", "mail", 1000, 2000,
-				"clerk", "address");
+		
 		
 		try {
+			if(sale.findCustomer(customerVO.cusName)!=null){
+				return 1;
+			}
+			
+			CustomerPO customer = new CustomerPO(customerVO.id,customerVO.cusName,customerVO.level, customerVO.classification,
+				customerVO.tel, customerVO.zipCode, customerVO.ezipCode, customerVO.shouldGet, customerVO.mostOwe,
+				customerVO.person, customerVO.address);
+			
 			if(sale.addCustomer(customer)){
 				systemlog.add_up("AddCustomer:");
 				return 0;
@@ -218,11 +226,15 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		}
 		return null;
 	}
-	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String name) {
+	public ArrayList<CustomerPO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public CustomerVO searchExactCustomer_up(String name) {
+	public CustomerPO searchExactCustomer_up(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public ArrayList<CustomerPO> getAllCustomer() {
 		// TODO Auto-generated method stub
 		return null;
 	}
