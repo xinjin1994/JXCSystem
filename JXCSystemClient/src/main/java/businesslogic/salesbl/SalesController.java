@@ -6,6 +6,7 @@ import po.CommodityPO;
 import po.CustomerPO;
 import po.ExportGoodPO;
 import po.ExportPO;
+import po.Export_ReturnPO;
 import po.ImportGoodPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
@@ -151,11 +152,20 @@ public class SalesController implements SalesblService {
 		ExportPO ex=new ExportPO(null, null, null, null, null, null, 0, 0, 0, 0);
 		int message = sale.addExport_up(ex);
 		return message;
+		
 	}
 
 	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		int message = sale.addExport_Return_up(exportMenuVO);
+		CommodityPO commodityPO=new CommodityPO(null, null);
+		ExportGoodPO exportGoodPO=new ExportGoodPO(null, 0, 0, 0, null);
+		ArrayList<ExportGoodPO> exportGood=new ArrayList<ExportGoodPO>();
+		exportGood.add(exportGoodPO);
+		CustomerPO customerPO=new CustomerPO(null, 0, false, null);
+		Export_ReturnPO ex=new Export_ReturnPO(null, null, null, null, null, null, 0, 0, 0, 0, null);
+	
+		
+		int message = sale.addExport_Return_up(ex);
 		return message;
 	}
 
@@ -164,6 +174,12 @@ public class SalesController implements SalesblService {
 	// int message=sale.addExport_Return(note, number);
 	// return message;
 	// }
+	
+	
+	
+	
+	
+	
 
 	public ArrayList<CommodityVO> getAllCommodity_up() {
 		// TODO Auto-generated method stub

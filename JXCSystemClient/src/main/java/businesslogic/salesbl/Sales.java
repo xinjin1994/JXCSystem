@@ -180,7 +180,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 		return -1;
 	}
 
-	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
+	public int addExport_Return_up(Export_ReturnPO po) {
 		// TODO Auto-generated method stub
 		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, null, null,
 				null, null, 0, 0, 0, 0, null);
