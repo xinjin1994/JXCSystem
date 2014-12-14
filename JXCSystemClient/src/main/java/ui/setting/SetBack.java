@@ -10,7 +10,7 @@ import ui.setting.Button.MyButton;
 
 public class SetBack {
 	FatherPanel prePanel;
-	MyButton backButton;
+	MyButton backButton,backButtonConfirm;
 	MyFrame frame;
 	UIController controller;
 	
@@ -31,6 +31,14 @@ public class SetBack {
 		BackButton back = new BackButton(x,y);
 		backButton = back.back_black;
 		setBack();
+	}
+	
+	public void setBack_third() {
+		BackButton back = new BackButton();
+		backButtonConfirm = back.back_white;
+		Listener backListener = new Listener();
+		prePanel.add(backButtonConfirm);
+		backButtonConfirm.addMouseListener(backListener);
 	}
 	
 	public void setBack(){
@@ -59,6 +67,10 @@ public class SetBack {
 				frame.remove(prePanel);
 				frame.setPanel(controller.getMainPanel());
 				frame.repaint();
+			}else if(e.getSource() == backButtonConfirm){
+				frame.remove(prePanel);
+				frame.setPanel(controller.getPanel());
+				frame.repaint();
 			}
 		}
 		public void mouseReleased(MouseEvent e) {
@@ -79,4 +91,6 @@ public class SetBack {
 //		
 		
 	}
+
+
 }

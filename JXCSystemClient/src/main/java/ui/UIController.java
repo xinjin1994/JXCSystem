@@ -20,7 +20,7 @@ public class UIController {
 	private SalesPersonPanel salesPerson;
 	
 	
-	static private FatherPanel tempMainPanel;
+	static private FatherPanel tempMainPanel,tempPanel;
 	public FatherPanel prePanel;
 //	public UIController(){
 //		
@@ -35,12 +35,12 @@ public class UIController {
 	public UIController(int i){
 		this.frame = new MyFrame();
 
-		this.CommodityPanel();
+//		this.CommodityPanel();
 //	  	this.AccountPanel();
 //		this.AccountPanel();
 
 		this.SalesManagerPanel();
-	  	this.AccountPanel();
+	//  	this.AccountPanel();
 //		this.AccountPanel();
 
 //	this.ManagerPanel();
@@ -116,11 +116,18 @@ public class UIController {
 
 	
 	public void setMainPanel(FatherPanel mainPanel){
-		tempMainPanel = mainPanel;
+		this.tempMainPanel = mainPanel;
 	}
 	
 	public FatherPanel getMainPanel(){
 		return tempMainPanel;
+	}
+	
+	public void setTempPanel(FatherPanel tempPanel){
+		this.tempPanel = tempPanel;
+	}
+	public FatherPanel getPanel(){
+		return tempPanel;
 	}
 
 

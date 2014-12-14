@@ -5,7 +5,9 @@ import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
+import ui.setting.SetBack;
 import vo.AccountVO;
+import vo.initial.InitialCommodityVO;
 /**
  * 账户具体信息
  * @see accountVO
@@ -13,8 +15,8 @@ import vo.AccountVO;
  *
  */
 public class AccountDetailPanel extends FatherPanel {
-	AccountAllUIController accountController;
-	ManagerAllUIController managerController;
+	protected AccountAllUIController accountController;
+	protected ManagerAllUIController managerController;
 	protected MyLabel name,balance;
 	protected AccountVO fountAcc;
 	
@@ -25,8 +27,8 @@ public class AccountDetailPanel extends FatherPanel {
 		this.accountController = uiController;
 		this.fountAcc = foundAcc;
 		this.repaint();
+		SetBackAcc();
 		
-		accountController.setBack_first(this);
 		setLabel();
 		
 	}
@@ -37,8 +39,8 @@ public class AccountDetailPanel extends FatherPanel {
 		this.managerController = uiController;
 		this.fountAcc = foundAcc;
 		this.repaint();
+		SetBackMan();
 		
-		managerController.setBack_first(this);
 		setLabel();
 		
 	}
@@ -58,5 +60,11 @@ public class AccountDetailPanel extends FatherPanel {
 		name.setText(fountAcc.name);
 		balance.setText(String.valueOf(fountAcc.balance));
 	}
-
+	
+	protected void SetBackAcc(){
+		accountController.setBack_first(this);
+	}
+	protected void SetBackMan(){
+		managerController.setBack_first(this);
+	}
 }

@@ -30,22 +30,9 @@ public class ResultPanelController extends UIController implements ActionListene
 	
 	
 	FatherPanel backPanel;
+	
 	/**
-	 * 
-	 * @param controller  其他界面的controller
-	 */
-	/**
-	 * 返回主界面
-	 * @param controller
-	 * @param frame
-	 */
-	public ResultPanelController(UIController controller,MyFrame frame) {
-		textLabel = new MyLabel(0, 263, 800, 55);
-		this.controller = controller;
-		this.frame = frame;
-	}
-	/**
-	 * 返回到非主界面
+	 * 返回到backPanel主界面
 	 * @param frame
 	 * @param backPanel
 	 */
@@ -55,13 +42,7 @@ public class ResultPanelController extends UIController implements ActionListene
 		this.frame = frame;
 		this.backPanel = backPanel;
 	}
-	
-	
-	
-
-	
 	public void succeeded(String text,String type){
-	//	accController = (AccountAllUIController)controller;
 		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", controller);
 		setForward();
 	
@@ -71,12 +52,19 @@ public class ResultPanelController extends UIController implements ActionListene
 	}
 
 	public void failed(String text,String type){
-		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", this);
+		resultPanel = new FatherPanel(frame, "Image/result/"+type+"Failed.jpg", this);
 		setForward();
 		
-		forwardButton.setActionCommand("failed");
 		textLabel.setText(text);
 		setPanel();
+	}
+	public void failedConfirm(String text, String type) {
+		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_failed.jpg", this);
+		setForward();
+	
+		textLabel.setText(text);
+		setPanel();
+		
 	}
 	
 	private void setPanel() {
@@ -92,25 +80,14 @@ public class ResultPanelController extends UIController implements ActionListene
 		forwardButton = forward.forward_black;
 		
 		resultPanel.add(forwardButton);
-		forwardButton.setActionCommand("succ");
 		forwardButton.addActionListener(this);	
 	}
 
-
-
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("succ")){
-			frame.remove(resultPanel);
-			frame.setPanel(controller.getMainPanel());		
-			frame.repaint();
-		}else if(e.getActionCommand().equals("failed")){
+		if(e.getSource() == forwardButton){
 			frame.remove(resultPanel);
 			frame.setPanel(backPanel);
 			frame.repaint();
 		}
-		
 	}
-
-	
-	
 }
