@@ -227,7 +227,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public String addPayment_Data(PaymentPO po) {
 		// TODO Auto-generated method stub
 		try {
-			account.addPayment(po);
+			account.passPayment(po);
 			return "成功";
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -367,6 +367,37 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	public String refuseReceipt_Data(String note) {
+		// TODO Auto-generated method stub
+		try {
+			if(account.refuseReceipt(note)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String refusePayment_Data(String note) {
+		// TODO Auto-generated method stub
+		try {
+			if(account.refusePayment(note)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String addAccount(String name, double money) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //	public String delReceipt_Data(ReceiptPO po) {

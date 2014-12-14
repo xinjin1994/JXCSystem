@@ -12,6 +12,9 @@ import po.PatchPO;
 import po.PaymentPO;
 import po.ReceiptPO;
 import po.SendGiftPO;
+import businesslogic.accountbl.Account;
+import businesslogic.commoditybl.Commodity;
+import businesslogic.salesbl.Sales;
 import data.invoicedata.InvoiceDataService_Stub;
 import dataservice.invoicedataservice.InvoiceDataService;
 
@@ -21,15 +24,14 @@ import dataservice.invoicedataservice.InvoiceDataService;
 public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			businesslogic.accountbl.InvoiceInfo, businesslogic.salesbl.InvoiceInfo{
 
-	public AccountInfo accountInfo;
-	public SalesInfo salesInfo;
-	public CommodityInfo commodityInfo;
+	public AccountInfo accountInfo=new Account();
+	public SalesInfo salesInfo=new Sales();
+	public CommodityInfo commodityInfo=new Commodity();
 	
-	public InvoiceDataService invoice;
+	public InvoiceDataService invoice= new InvoiceDataService_Stub("1","2","3");
 	
 	public ArrayList<InvoicePO> show() {
 		// TODO Auto-generated method stub
-		InvoiceDataService invoice= new InvoiceDataService_Stub("1","2","3");
 		try {
 			
 			ArrayList<InvoicePO> po=invoice.getAllInvoice();
@@ -42,12 +44,23 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 		}
 		return new ArrayList<InvoicePO>();
 	}
+	
+	public InvoicePO findInvoice(String note){
+		try {
+			return invoice.getInvoice(note);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-	public int pass(String note) {
+	public int pass(InvoicePO po) {
 		int i=0;
 		InvoicePO tempInvoice = null;
 		try {
-			tempInvoice = invoice.getInvoice(note);
+			tempInvoice = invoice.getInvoice(po.getNote());
+			invoice.passInvoice(po);
 			
 			if(tempInvoice==null){
 				return 1;
@@ -55,52 +68,58 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			
 			switch(tempInvoice.getDocType()){
 			
-			case 1: SendGiftPO po1=(SendGiftPO) tempInvoice;
+			case 1: SendGiftPO po1=(SendGiftPO) po;
 			if(commodityInfo.passSendGift(po1)!=null){
 				return 0;
 			}
 			return -1;
 				
-			case 2: ImportPO po2=(ImportPO) tempInvoice;
+			case 2: ImportPO po2=(ImportPO) po;
 			if(salesInfo.passImport(po2)!=null){
+				commodityInfo.passImport(po2);
 				return 0;
 			}
 			return -1;
 			
-			case 3: Import_ReturnPO po3=(Import_ReturnPO) tempInvoice;
+			case 3: Import_ReturnPO po3=(Import_ReturnPO) po;
 			if(salesInfo.passImport_Return(po3)!=null){
+				commodityInfo.passImport_Return(po3);
 				return 0;
 			}
 			return -1;
 			
-			case 4:ExportPO po4=(ExportPO) tempInvoice;
+			case 4:ExportPO po4=(ExportPO) po;
 			if(salesInfo.passExport(po4)!=null){
+				commodityInfo.passExport(po4);
 				return 0;
 			}
 			return -1;
 			
-			case 5:Export_ReturnPO po5=(Export_ReturnPO) tempInvoice;
+			case 5:Export_ReturnPO po5=(Export_ReturnPO) po;
 			if(salesInfo.passExport_Return(po5)!=null){
+				commodityInfo.passExport_Return(po5);
 				return 0;
 			}
 			return -1;
 			
-			case 6:PatchPO po6=(PatchPO) tempInvoice;
+			case 6:PatchPO po6=(PatchPO) po;
 			if(commodityInfo.passPatch(po6)!=null){
 				return 0;
 			}
 			return -1;
 			
-			case 7:ReceiptPO po7=(ReceiptPO) tempInvoice;
+			case 7:ReceiptPO po7=(ReceiptPO) po;
 			for(i=0;i<po7.getTransfer().size();i++){
+				salesInfo.passReceipt(po7);
 				if(accountInfo.addReceipt_Data(po7)==null){
 					return -1;
 				}
 			}
 			return 0;
 		
-			case 8:PaymentPO po8=(PaymentPO) tempInvoice;
+			case 8:PaymentPO po8=(PaymentPO) po;
 			if(accountInfo.addPayment_Data(po8)!=null){
+				salesInfo.passPayment(po8);
 				return 0;
 			}
 			return -1;

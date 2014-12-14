@@ -28,8 +28,7 @@ import dataservice.commoditydataservice.CommodityDataService;
 //11 分类中存在分类，无法删除分类
 
 public class Commodity implements businesslogic.financialbl.CommodityInfo,
-			businesslogic.initializationlbl.CommodityInfo, businesslogic.invoicebl.CommodityInfo,
-			businesslogic.salesbl.CommodityInfo{
+				businesslogic.invoicebl.CommodityInfo, businesslogic.salesbl.CommodityInfo{
 	
 	public InvoiceInfo invoice;
 	public SystemlogInfo systemlog;
@@ -495,7 +494,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 			
 			WarnPO po=new WarnPO(com1,number);
-			invoice.add(po);
 			
 			com2=com1.copy();
 			com2.warn=number;

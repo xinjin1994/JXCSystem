@@ -4,6 +4,8 @@ import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
+import po.PaymentPO;
+import po.ReceiptPO;
 
 
 public interface SalesInfo {
@@ -23,6 +25,10 @@ public interface SalesInfo {
 	public String refuseExport(String note);
 
 	public String refuseExport_Return(String note);
+	
+	public String passReceipt(ReceiptPO receiptPO);
+	
+	public String passPayment(PaymentPO paymentPO);
 	
 
 }

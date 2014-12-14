@@ -10,6 +10,7 @@ import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
 import vo.bill.PatchVO;
+import businesslogic.userbl.User;
 import businesslogicservice.commodityblservice.CommodityblService;
 
 public class CommodityController implements CommodityblService{
@@ -43,7 +44,7 @@ public class CommodityController implements CommodityblService{
 		CommodityVO com;
 		int i=0;
 		for(i=0;i<po.size();i++){
-			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
 			com.fatherSort=po.get(i).father;
 			vo.add(com);
 		}
@@ -76,7 +77,7 @@ public class CommodityController implements CommodityblService{
 		CommodityVO com;
 		int i=0;
 		for(i=0;i<po.size();i++){
-			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
 			com.fatherSort=po.get(i).father;
 			vo.add(com);
 		}
@@ -139,7 +140,7 @@ public class CommodityController implements CommodityblService{
 		ArrayList<SortVO> array=new ArrayList<SortVO>();
 		SortVO vo=null;
 		for(int i=0;i<sort.size();i++){
-			vo=new SortVO();
+			vo=new SortVO(sort.get(i).name);
 		}
 		return null;
 	}
@@ -150,7 +151,7 @@ public class CommodityController implements CommodityblService{
 		ArrayList<CommodityVO> array=new ArrayList<CommodityVO>();
 		CommodityVO vo=null;
 		for(int i=0;i<po.size();i++){
-			vo=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			vo=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
 			vo.fatherSort=po.get(i).father;
 			array.add(vo);
 		}
@@ -222,7 +223,7 @@ public class CommodityController implements CommodityblService{
 	public CommodityVO searchAccurateCommodity_up(String name,String type) {
 		// TODO Auto-generated method stub
 		CommodityPO po=commodity.findCommodity(name, type);
-		CommodityVO vo=new CommodityVO(po.getNote(), po.getName(), po.getType(), po.getNumber(), po.getIn_price(), po.getOut_price(), po.getRecent_in_price(), po.getRecent_out_price());
+		CommodityVO vo=new CommodityVO(po.getNote(), po.getName(), po.getType(), po.getNumber(), po.getIn_price(), po.getOut_price(), po.getRecent_in_price(), po.getRecent_out_price(),po.warn);
 		vo.fatherSort=po.father;
 		return vo;
 	}

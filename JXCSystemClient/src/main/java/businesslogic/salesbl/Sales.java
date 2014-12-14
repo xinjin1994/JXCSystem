@@ -17,7 +17,7 @@ import businesslogicservice.salesblservice.SalesblService;
 import data.salesdata.SaleDataService_Stub;
 import dataservice.salesdataservice.SalesDataService;
 
-public class Sales implements businesslogic.accountbl.SalesInfo,
+public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.invoicebl.SalesInfo,
 			businesslogic.financialbl.SalesInfo{
 	
 	public SalesDataService sale=new SaleDataService_Stub();
