@@ -1,5 +1,7 @@
 package vo;
 
+
+//这个是库存查看的VO
 public class ExamineVO {
 	
 	public String name;//商品名称
