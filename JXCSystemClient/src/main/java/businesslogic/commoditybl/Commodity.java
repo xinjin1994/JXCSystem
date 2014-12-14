@@ -4,6 +4,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.ExportPO;
+import po.Export_ReturnPO;
+import po.ImportPO;
+import po.Import_ReturnPO;
 import po.PatchPO;
 import po.SendGiftPO;
 import po.SortPO;
@@ -28,12 +32,17 @@ import dataservice.commoditydataservice.CommodityDataService;
 //11 分类中存在分类，无法删除分类
 
 public class Commodity implements businesslogic.financialbl.CommodityInfo,
-			businesslogic.initializationlbl.CommodityInfo, businesslogic.invoicebl.CommodityInfo,
-			businesslogic.salesbl.CommodityInfo{
+				businesslogic.invoicebl.CommodityInfo, businesslogic.salesbl.CommodityInfo{
 	
 	public InvoiceInfo invoice;
 	public SystemlogInfo systemlog;
 	public CommodityDataService sto=new CommodityDataService_Stub();
+	
+	
+	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog){
+		this.invoice=invoice;
+		this.systemlog=systemlog;
+	}
 
 	public int addCommodity(CommodityPO po1,SortPO po2) {
 		// TODO Auto-generated method stub
@@ -495,7 +504,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 			
 			WarnPO po=new WarnPO(com1,number);
-			invoice.add(po);
 			
 			com2=com1.copy();
 			com2.warn=number;
@@ -709,6 +717,58 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 		}
 		return array;
+	}
+
+	public String passImport(ImportPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passImport(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String passImport_Return(Import_ReturnPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passImport_Return(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String passExport(ExportPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passExport(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String passExport_Return(Export_ReturnPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passExport_Return(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
 	}
 	
 	//////////////////////////////////////////////////////////////

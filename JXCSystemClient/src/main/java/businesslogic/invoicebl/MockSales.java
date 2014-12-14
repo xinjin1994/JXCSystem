@@ -4,6 +4,8 @@ import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
+import po.PaymentPO;
+import po.ReceiptPO;
 
 
 public class MockSales implements SalesInfo{
@@ -67,6 +69,14 @@ public class MockSales implements SalesInfo{
 		return null;
 	}
 	public String refuseExport_Return(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String passReceipt(ReceiptPO receiptPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String passPayment(PaymentPO paymentPO) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -15,10 +15,8 @@ public class SalesController implements SalesblService{
 	
 	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub
-		ArrayList<CustomerVO> result=new ArrayList<CustomerVO>();
-		
-		ArrayList<CustomerPO> po=sale.searchFuzzyCustomer_up(name);
-		
+		ArrayList<CustomerVO> result=new ArrayList<CustomerVO>();	
+		ArrayList<CustomerPO> po=sale.searchFuzzyCustomer_up(name);	
 		for(int i=0;i<po.size();i++){
 			CustomerVO vo=new CustomerVO(po.get(i).getId(), po.get(i).getType(), po.get(i).getLevel(), po.get(i).getName(), po.get(i).getPhone(), po.get(i).getAddress(), po.get(i).getZip(), po.get(i).getMail(), po.get(i).getAmount(), po.get(i).getMoney(), po.get(i).getClerk());
 			result.add(vo);
@@ -29,32 +27,26 @@ public class SalesController implements SalesblService{
 	public CustomerVO searchExactCustomer_up(String name) {
 		// TODO Auto-generated method stub
 		CustomerPO po=sale.searchExactCustomer_up(name);
-		CustomerVO result=new CustomerVO(po.getId(), po.getType(), po.getLevel(), po.getName(), po.getPhone(), po.getAddress(), po.getZip(), po.getMail(), po.getAmount(), po.getMoney(), po.getClerk());
-				
+		CustomerVO result=new CustomerVO(po.getId(), po.getType(), po.getLevel(), po.getName(), po.getPhone(), po.getAddress(), po.getZip(), po.getMail(), po.getAmount(), po.getMoney(), po.getClerk());			
 		return result;
 	}
 	
-	
-	
-	
-	
-	
-	
 
 	public int addCustomer_up(CustomerVO customerVO) {
-		// TODO Auto-generated method stub
-		
-		
-		
-		int message=sale.addCustomer_up(customerVO);
-		
+		// TODO Auto-generated method stub		
+		int message=sale.addCustomer_up(customerVO);	
 		return message;
 	}
 
 	public int delCustomer_up(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		int message=sale.delCustomer_up(customerVO);
-		
+		return message;
+	}
+
+	public int updateCustomer_up(CustomerVO vo1, CustomerVO vo2) {       //这里的参数个数有问题
+		// TODO Auto-generated method stub
+		int message=sale.updateCustomer(vo1);                            //这里的对应方法名有问题
 		return message;
 	}
 
@@ -109,11 +101,6 @@ public class SalesController implements SalesblService{
 
 	
 
-	public int updateCustomer_up(CustomerVO vo1, CustomerVO vo2) {       //这里的参数个数有问题
-		// TODO Auto-generated method stub
-		int message=sale.updateCustomer(vo1);                            //这里的对应方法名有问题
-		return message;
-	}
 
 	public ArrayList<CommodityVO> getAllCommodity_up() {
 		// TODO Auto-generated method stub

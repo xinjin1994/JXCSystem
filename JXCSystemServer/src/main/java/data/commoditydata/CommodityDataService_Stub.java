@@ -11,8 +11,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.ExportPO;
+import po.Export_ReturnPO;
+import po.ImportPO;
+import po.Import_ReturnPO;
 import po.PatchPO;
-import po.PaymentPO;
 import po.SendGiftPO;
 import po.SortPO;
 import po.WarnPO;
@@ -37,6 +40,17 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	
 	public CommodityDataService_Stub() throws RemoteException {
 		super();
+		this.writeSortList();
+		this.writePatchList();
+		this.writeGiftList();
+		this.writeDraftPatchList();
+		this.writeSendGiftList();
+		this.writeComNote();
+		this.writeSortNote();
+		this.writeSendNote();
+		this.writePatchNote();
+		this.writeTempSort();
+		
 		this.readSortList();
 		this.readPatchList();
 		this.readGiftList();
@@ -1055,6 +1069,89 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			}
 		}
 		return false;
+	}
+	
+	public boolean passImport(ImportPO po){
+		CommodityPO com=findGood_true(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		
+		if(com==null){
+			return false;
+		}
+		
+		CommodityPO gift=findGift(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		com.recent_in_price=po.getImportGoodList().get(0).getPrice();
+		int number=com.getNumber();
+		if(gift!=null){
+			number=number+gift.getNumber();
+		}
+		com.number=com.number+po.getImportGoodList().get(0).getNumber();
+		if(number+po.getImportGoodList().get(0).getNumber()!=0){
+			com.mean=((number*com.mean)+po.getTotalMoney())/(number+po.getImportGoodList().get(0).getNumber());
+		}
+		
+		for(int i=0;i<giftList.size();i++){
+			if(giftList.get(i).getName().equals(com.getName())&&giftList.get(i).getType().equals(com.getType())){
+				gift.recent_in_price=com.recent_in_price;
+				gift.mean=com.mean;
+			}
+		}
+		return true;
+	}
+	
+	public boolean passImport_Return(Import_ReturnPO po){
+		CommodityPO com=findGood_true(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		
+		if(com==null){
+			return false;
+		}
+		
+		CommodityPO gift=findGift(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		int number=com.getNumber();
+		if(gift!=null){
+			number=number+gift.getNumber();
+		}
+		com.number=com.number-po.getImportGoodList().get(0).getNumber();
+		if(number-po.getImportGoodList().get(0).getNumber()!=0){
+			com.mean=((number*com.mean)-po.getTotalMoney())/(number-po.getImportGoodList().get(0).getNumber());
+		}
+		for(int i=0;i<giftList.size();i++){
+			if(giftList.get(i).getName().equals(com.getName())&&giftList.get(i).getType().equals(com.getType())){
+				gift.mean=com.mean;
+			}
+		}
+		return true;
+	}
+	
+	public boolean passExport(ExportPO po){
+		CommodityPO com=findGood_true(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		
+		if(com==null){
+			return false;
+		}
+		
+		CommodityPO gift=findGift(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		com.recent_out_price=po.getImportGoodList().get(0).getPrice();
+		com.number=com.number-po.getImportGoodList().get(0).getNumber();
+		
+		for(int i=0;i<giftList.size();i++){
+			if(giftList.get(i).getName().equals(com.getName())&&giftList.get(i).getType().equals(com.getType())){
+				gift.recent_out_price=com.recent_in_price;
+			}
+		}
+		return true;
+	}
+	
+	public boolean passExport_Return(Export_ReturnPO po){
+	CommodityPO com=findGood_true(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		
+		if(com==null){
+			return false;
+		}
+		
+		com.number=com.number-po.getImportGoodList().get(0).getNumber();
+		
+		
+		return true;
 	}
 
 	public SortPO getTempSort() throws RemoteException {

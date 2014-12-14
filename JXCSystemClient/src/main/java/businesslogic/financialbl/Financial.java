@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.AllBillPO;
+import po.CommodityPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
@@ -24,10 +25,18 @@ import dataservice.financialdataservice.FinancialDataService;
 public class Financial implements businesslogic.accountbl.FinancialInfo{
 	
 	public FinancialDataService financial=new FinancialDataService_Stub();
-	public AccountInfo account=new Account();
-	public CommodityInfo commodity=new Commodity();
-	public SalesInfo sales=new Sales();
-	public SystemlogInfo systemlog=new Systemlog();
+	public AccountInfo account;
+	public CommodityInfo commodity;
+	public SalesInfo sales;
+	public SystemlogInfo systemlog;
+	
+	
+	public void setInfo(AccountInfo account,CommodityInfo commodity, SalesInfo sales, SystemlogInfo systemlog){
+		this.account=account;
+		this.commodity=commodity;
+		this.sales=sales;
+		this.systemlog=systemlog;
+	}
 	
 
 	public ArrayList<SaleListPO> saleList(String time1, String time2, String good_name,
@@ -299,9 +308,22 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	}
 	
 	public boolean addOperatingCondition(PatchPO po){
-		OperatingConditionPO po1=new OperatingConditionPO(po.getNote(),po.getTime(),0,,0, 0, 0);
-		try {
-			return financial.addOperatingCondition(po1);
+		ArrayList<CommodityPO> com=commodity.getAllCommodity();
+	
+
+		try {	
+			for(int i=0;i<com.size();i++){
+				if(com.get(i).getName().equals(po.getCommodity().getName())&&com.get(i).getType().equals(po.getCommodity().getType())){
+					OperatingConditionPO po1;
+					if(po.getNumber()>0){
+						po1=new OperatingConditionPO(po.getNote(),po.getTime(),0,com.get(i).getMean()*po.getNumber(),0, 0, 0);
+					}else{
+						po1=new OperatingConditionPO(po.getNote(),po.getTime(),0,0,0,-com.get(i).getMean()*po.getNumber(), 0);
+					}
+					return financial.addOperatingCondition(po1);
+				}
+			}
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -310,7 +332,20 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 	}
 	
 	public boolean addOperatingCondition(SendGiftPO po){
-		OperatingCondtionPO po1=new OperatingConditionPO(po.getNote(),po.getTime(),0,0,0,,0);
+		ArrayList<CommodityPO> com=commodity.getAllCommodity();
+		try {	
+			for(int i=0;i<com.size();i++){
+				if(com.get(i).getName().equals(po.getCommodity().getName())&&com.get(i).getType().equals(po.getCommodity().getType())){
+					OperatingConditionPO po1=new OperatingConditionPO(po.getNote(),po.getTime(),0,0,0, com.get(i).getMean()*po.getNumber(), 0);
+					return financial.addOperatingCondition(po1);
+				}
+			}
+
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

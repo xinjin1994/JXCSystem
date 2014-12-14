@@ -11,10 +11,10 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 	String operator;//����Ա
 	String wareHouse;//�ֿ�
 	ArrayList<ExportGoodPO> exportGoodList; 
-	double total_money_before;//这个是折让前的总价
-	double total_money_after;//这个是这让后的总价
-	double discount;//折扣金额
-	double voucher;//使用代金券金额
+	public double total_money_before;//这个是折让前的总价
+	public double total_money_after;//这个是这让后的总价
+	public double discount;//折扣金额
+	public double voucher;//使用代金券金额
 	String old_note;
 	
 
