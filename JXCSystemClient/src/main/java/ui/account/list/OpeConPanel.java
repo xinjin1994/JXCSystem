@@ -1,5 +1,6 @@
 package ui.account.list;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -32,8 +33,9 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 	private AccountAllUIController accountController;
 	private ManagerAllUIController managerController;
 	FinancialblService financialblService;
-	private ColorFactory colors;
-	MyTable showTable;
+	private ColorFactory color = new ColorFactory();
+	private MyTable showTable = new MyTable();
+	
 	private MyTextFieldBorder timeBegin, timeFinish;
 	private MyButton forwardButton;
 	private MyFrame frame;
@@ -48,7 +50,6 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 		this.accountController = uiController;
 		this.failedAddress = "acc/recManage/opeCon";
 		this.repaint();
-		colors = new ColorFactory();
 		financialblService = new FinancialController();
 		uiController.setBack_second(this, 149, 137);
 		init();
@@ -57,10 +58,13 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 	public OpeConPanel(MyFrame frame, String url, ManagerAllUIController uiController, String type) {
 		super(frame, url, uiController);
 		this.frame = frame;
+		resController = new ResultPanelController(frame, this);
 		this.managerController = uiController;
 		this.type = type;
+		this.failedAddress = "manager/recManage/opeCon";
 		this.repaint();
-
+		
+		financialblService = new FinancialController();
 		uiController.setBack_second(this, 149, 137);
 		init();
 	}
@@ -89,22 +93,18 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 		this.add(timeFinish);
 
 	}
-	
+
 	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
 		frame.remove(this);
 		frame.add(showTable.tablePanel);
-		accountController.addMainPanel();
-		frame.repaint();
 	}
-	
+
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
 			String time1 = timeBegin.getText();
-			String time2 = timeBegin.getText();
+			String time2 = timeFinish.getText();
 
 			SimpleDateFormat dateFormat = null;
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -131,17 +131,23 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 				for(int i=0;i<conditionVO.size();i++){
 					info.add(conditionVO.get(i).getProfit()+"");
 				}
-				if(info.size() == 1){
-					frame.remove(this);
-					resController.failed("不存在符合该条件的单据！", failedAddress);
-				}else{
-					setTable(info);
-				}
-				if (type.equals("account")) {
-					//				frame.setPanel(accountController.getMainPanel());
-				} else if (type.equals("manager")) {
-					//				frame.setPanel(managerController.getMainPanel());
-				}
+//				if(info.size() == 1){
+//					frame.remove(this);
+//					resController.failed("不存在符合该条件的单据！", failedAddress);
+//				}else{
+
+					if (type.equals("account")) {
+						showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
+						setTable(info);
+						frame.setPanel(accountController.getMainPanel());
+						frame.repaint();
+					} else if (type.equals("manager")) {
+						showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+						setTable(info);
+						frame.setPanel(managerController.getMainPanel());
+						frame.repaint();
+					}
+//				}
 			}
 		}
 	}

@@ -1,5 +1,6 @@
 package ui.account.list;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -28,9 +29,10 @@ import businesslogicservice.financialblservice.FinancialblService;
 public class SalesListPanel extends FatherPanel implements ActionListener{
 	private AccountAllUIController accountController;
 	private ManagerAllUIController managerController;
-	private MyTable showTable;
+	
 	private MyButton forwardButton;
-	private ColorFactory colors;
+	private MyTable showTable = new MyTable();
+	private ColorFactory color = new ColorFactory();
 	private MyTextFieldBorder timeBegin,timeFinish,commodity,stock,customer,agent;
 	private FinancialblService financialblService;
 	private MyFrame frame;
@@ -44,7 +46,6 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 		resController = new ResultPanelController(frame, this);
 		this.failedAddress = "acc/recManage/salesList";
 		this.accountController = uiController;
-		colors = new ColorFactory();
 		financialblService = new FinancialController();
 		this.frame = frame;
 		this.repaint();
@@ -59,7 +60,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 		super(frame,url,uiController);
 		resController = new ResultPanelController(frame, this);
 		this.failedAddress = "manager/recManage/salesList";
-		
+		financialblService = new FinancialController();
 		this.type = type;
 		this.managerController = uiController;
 		this.frame = frame;
@@ -100,13 +101,9 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 
 	}
 	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
 		frame.remove(this);
 		frame.add(showTable.tablePanel);
-		accountController.addMainPanel();
-		frame.repaint();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -138,35 +135,43 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 			}
 
 			else{
+				ArrayList<String> sales = new ArrayList<String>();
 				try{
 					int warehouse = Integer.parseInt(stock.getText());
 					frame.remove(this);
 					ArrayList<SalesDetailVO> salesArray = financialblService.saleList_up(time1,
-							time2, good_name, "", customer_name, clerk, warehouse);
-					ArrayList<String> sales = new ArrayList<String>();
+							time2, good_name, "", customer_name, clerk, String.valueOf(warehouse));
+				
 					sales.add("时间;商品名称;型号;数量;单价;总额");
 					for(int i=0;i<salesArray.size();i++){
 						String salesItem = salesArray.get(i).time+";"+salesArray.get(i).commodityName+";"+salesArray.get(i).type
 								+";"+salesArray.get(i).num+";"+salesArray.get(i).unitPrice+";"+salesArray.get(i).total;
 						sales.add(salesItem);
 					}
-					if(sales.size() ==1){
-						frame.remove(this);
-						resController.failed("不存在符合该条件的单据！", failedAddress);
-					}else{
-						if(type.equals("account")){
-
-							setTable(sales);
-							//				frame.setPanel(accountController.getMainPanel());
-						}else if(type.equals("manager")){
-							//				frame.setPanel(managerController.getMainPanel());
-							setTable(sales);
-						}
-					}
 				}catch(Exception e2){
 					frame.remove(this);
 					resController.failed("存在输入错误！", failedAddress);
 				}
+//					if(sales.size() ==1){
+//						frame.remove(this);
+//						resController.failed("不存在符合该条件的单据！", failedAddress);
+//					}else{
+						if(type.equals("account")){
+							showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
+							setTable(sales);
+							frame.setPanel(accountController.getMainPanel());
+							frame.repaint();
+							//				frame.setPanel(accountController.getMainPanel());
+						}else if(type.equals("manager")){
+							//				frame.setPanel(managerController.getMainPanel());
+							showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+							setTable(sales);
+							frame.setPanel(managerController.getMainPanel());
+							frame.repaint();
+						}
+						
+//					}
+				
 			}
 			frame.repaint();
 		}

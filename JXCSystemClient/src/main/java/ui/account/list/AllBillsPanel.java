@@ -1,5 +1,6 @@
 package ui.account.list;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -26,11 +27,12 @@ import businesslogicservice.financialblservice.FinancialblService;
  * 
  */
 public class AllBillsPanel extends FatherPanel implements ActionListener{
+	private static final ArrayList<String> sales = null;
 	private AccountAllUIController accountController;
 	private ManagerAllUIController managerController;
 	FinancialblService financialblService;
-	private ColorFactory colors;
-	MyTable showTable;
+	private ColorFactory color = new ColorFactory();
+	MyTable showTable = new MyTable();
 	private MyButton forwardButton;
 	private MyTextFieldBorder timeBegin,timeFinish,stock,billType,customer,agent;
 	private String itemName,item;
@@ -42,7 +44,6 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 	public AllBillsPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
-		colors = new ColorFactory();
 		financialblService = new FinancialController();
 		resController = new ResultPanelController(frame, this);
 		this.accountController = uiController;
@@ -64,7 +65,6 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 		this.type = type;
 		this.failedAddress = "manager/recManage/allBills";
 		this.repaint();
-		
 		
 		uiController.setBack_second(this,141,57);
 		init();
@@ -100,13 +100,9 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 		}
 	}
 	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
 		frame.remove(this);
 		frame.add(showTable.tablePanel);
-		accountController.addMainPanel();
-		frame.repaint();
 	}
 	
 	
@@ -138,11 +134,12 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
 			else{
+				ArrayList<String> bills = new ArrayList<String>();
 				try{
 					int warehouse = Integer.parseInt(stock.getText());
 					ArrayList<AllBillVO> billsArray = financialblService.allBill_up(time1, time2, note_type, 
-							customer_name, clerk, warehouse);
-					ArrayList<String> bills = new ArrayList<String>();
+							customer_name, clerk, String.valueOf(warehouse));
+				
 					bills.add("单据编号;单据类型");
 					for(int i=0;i<billsArray.size();i++){
 						switch(billsArray.get(i).bill_note) {
@@ -175,23 +172,29 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 						}
 						item = billsArray.get(i).note+itemName;
 						bills.add(item);
-					}
-					if(bills.size() == 1){
+					}}catch(Exception e2){
 						frame.remove(this);
-						resController.failed("不存在符合该条件的单据！", failedAddress);
-					}else{
-						setTable(bills);
+						resController.failed("存在输入错误！", failedAddress);
+					}
+//					if(bills.size() == 1){
+//						frame.remove(this);
+//						resController.failed("不存在符合该条件的单据！", failedAddress);
+//					}else{
+						
 						frame.remove(this);
 						if(type.equals("account")){
-							//				frame.setPanel(accountController.getMainPanel());
+							showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
+							setTable(bills);
+							frame.setPanel(accountController.getMainPanel());
+							frame.repaint();
 						}else if(type.equals("manager")){
-							//				frame.setPanel(managerController.getMainPanel());
+							showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+							setTable(bills);
+							frame.setPanel(managerController.getMainPanel());
+							frame.repaint();
 						}
-					}
-				}catch(Exception e2){
-					frame.remove(this);
-					resController.failed("存在输入错误！", failedAddress);
-				}
+//					}
+				
 			}
 			frame.repaint();
 		}
