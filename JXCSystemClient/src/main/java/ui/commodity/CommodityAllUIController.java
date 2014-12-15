@@ -12,6 +12,7 @@ import ui.commodity.sort.ChaSortDPanel;
 import ui.commodity.sort.ChaSortPanel;
 import ui.commodity.sort.ConfirmSortPanel;
 import ui.commodity.sort.DelSortPanel;
+import ui.commodity.storage.ExamineStockPanel;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
 import vo.CommodityVO;
