@@ -6,15 +6,12 @@ public class SystemlogVO {
 	
 	public String time;
 	public String operation;
+	public String word;
 	
-	public SystemlogVO(SystemlogPO po){
-		this.time=po.getTime();
-		this.operation=po.getOperation();
-	}
-	
-	public SystemlogVO(String time,String operation){
+	public SystemlogVO(String time,String operation,String word){
 		this.time=time;
 		this.operation=operation;
+		this.word=word;
 	}
 	
 }
