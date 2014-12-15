@@ -42,7 +42,7 @@ public interface CommodityblService {
 	//精确查找商品
 	public CommodityVO searchAccurateCommodity_up(String name,String type);
 
-	//添加分类
+	//添加分类  vo2是父类
 	public int addSort_up(SortVO vo1, SortVO vo2);
 	
 	//删除分类

@@ -133,7 +133,17 @@ public class CommodityAllUIController extends UIController{
 		frame.setPanel(confirmSortPanel);
 		frame.repaint();
 	}
+	public void confirmSort(SortVO sort,String type, String fatherSort){
+		confirmSortPanel = new ConfirmSortPanel(frame,"Image/Commodity/sortManage/confirmSort.jpg",this,sort,type,fatherSort);
+		frame.setPanel(confirmSortPanel);
+		frame.repaint();
+	}
 
+	public void confirmSort(SortVO sort,String type,SortVO oldSort){
+		confirmSortPanel = new ConfirmSortPanel(frame,"Image/Commodity/sortManage/confirmSort.jpg",this,sort,type,oldSort);
+		frame.setPanel(confirmSortPanel);
+		frame.repaint();
+	}
 	public void chaSortD(SortVO sort){
 		chaSortDPanel = new ChaSortDPanel(frame, "Image/Commodity/sortManage/chaSortD.jpg", this,sort);
 		frame.setPanel(chaSortDPanel);

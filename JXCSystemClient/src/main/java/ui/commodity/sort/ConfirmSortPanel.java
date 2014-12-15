@@ -13,19 +13,22 @@ import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.SortVO;
+import businesslogic.commoditybl.CommodityController;
+import businesslogicservice.commodityblservice.CommodityblService;
 
 public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
+	private MyButton forwardButton;
+	private MyLabel sortId,name,fatherSort;
+	
 	private CommodityAllUIController commodityAllUIController;
 	private ResultPanelController resControllerS,resControllerF;
+	private SortVO sort,oldSort;
 	
-	private MyButton forwardButton;
-	private SortVO sort;
 	private String type;
+	private String failedAddress,sortBelong;
 	
-	private MyLabel sortId,name,fatherSort;
-	private String failedAddress;
-	
+	private CommodityblService commodityblService;
 	public ConfirmSortPanel(MyFrame frame, String url, CommodityAllUIController controller,SortVO sort,String type) {
 		super(frame, url, controller);
 		this.frame = frame;
@@ -37,6 +40,46 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		
 		this.sort = sort;
 		this.type = type;
+		
+		commodityblService = new CommodityController();
+		commodityAllUIController.setBack_third(this);
+		setLabels();
+		setForward();
+	}
+	public ConfirmSortPanel(MyFrame frame, String url, CommodityAllUIController controller,
+			SortVO sort,String type,String sortBelong) {
+		super(frame, url, controller);
+		this.frame = frame;
+		this.commodityAllUIController = controller;
+		
+		resControllerF = new ResultPanelController(frame,this);
+		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
+		this.failedAddress = "commodity2";
+		
+		this.sortBelong = sortBelong;
+		this.sort = sort;
+		this.type = type;
+		
+		commodityblService = new CommodityController();
+		commodityAllUIController.setBack_third(this);
+		setLabels();
+		setForward();
+	}
+	public ConfirmSortPanel(MyFrame frame, String url, CommodityAllUIController controller,
+			SortVO sort,String type,SortVO oldSort) {
+		super(frame, url, controller);
+		this.frame = frame;
+		this.commodityAllUIController = controller;
+		
+		resControllerF = new ResultPanelController(frame,this);
+		resControllerS = new ResultPanelController(frame,this);
+		this.failedAddress = "commodity2";
+		
+		this.oldSort= oldSort;
+		this.sort = sort;
+		this.type = type;
+		
+		commodityblService = new CommodityController();
 		commodityAllUIController.setBack_third(this);
 		setLabels();
 		setForward();
@@ -47,9 +90,9 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		fatherSort = new MyLabel(255, 442, 271, 42);
 		MyLabel labels[] = new MyLabel[]{sortId,name,fatherSort};
 		
-//		labels[0].setText(sort.id);
-//		labels[1].setText(sort.name);
-//		labels[2].setText(sort.fatherSort);
+		labels[0].setText(sort.note);
+		labels[1].setText(sort.name);
+		labels[2].setText(sort.fatherSort);
 		
 		for(int i = 0;i < labels.length;i++){
 			this.add(labels[i]);
@@ -68,30 +111,57 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			if(type.equals("add")){
 				addSort();
-				resControllerS.succeeded("成功添加分类！", "commodity");
 			}else if(type.equals("del")){
 				delSort();
-				resControllerS.succeeded("成功删除分类！", "commodity");
 			}else if(type.equals("cha")){
 				chaSort();
-				resControllerS.succeeded("成功修改分类信息！", "commodity");
 			}
 				
 			
 		}
 	}
 
-
+	//int错误类型：
+	//-1 未知错误
+	//1  商品已存在
+	//2  商品不存在
+	//3  分类已存在
+	//4  分类不存在
+	//5  分类中存在商品，不能删除
+	//6  商品数量不足，不能添加为赠品
+	//7  赠品数量不足，不能删除
+	//8  商品数量不能为负
 	private void chaSort() {
-		// TODO Auto-generated method stub
-		
+//		resControllerS.succeeded("成功修改分类信息！", "commodity");
+		switch(commodityblService.updateSort_up_Inf(oldSort, sort)){
+		case 0:
+			resControllerS.succeeded("成功修改分类信息！", "commodity");
+			break;
+		default:
+			resControllerF.failedConfirm("未知错误！",failedAddress);
+		}
 	}
 	private void delSort() {
-		// TODO Auto-generated method stub
-		
+		switch(commodityblService.delSort_up(sort)){
+		case 0:
+			resControllerS.succeeded("成功删除分类！", "commodity");
+			break;
+		case 4:
+			resControllerF.failedConfirm("分类不存在！", failedAddress);
+			break;
+		default:
+			resControllerF.failedConfirm("未知错误！", failedAddress);
+		}
 	}
 	private void addSort() {
-		// TODO Auto-generated method stub
-		
+		SortVO fatherSortVO = new SortVO(sortBelong);
+		switch(commodityblService.addSort_up(sort, fatherSortVO)){
+		case 0:
+			resControllerS.succeeded("成功添加分类！", "commodity");
+		case 3:
+			resControllerF.failedConfirm("分类不存在！",failedAddress);
+		default:
+			resControllerF.failedConfirm("未知错误！", failedAddress);
+		}
 	}
 }
