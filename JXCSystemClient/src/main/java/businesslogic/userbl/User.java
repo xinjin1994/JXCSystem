@@ -59,6 +59,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 					return 0;
 				}
 			}
+			return 2;
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
