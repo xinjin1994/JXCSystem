@@ -14,17 +14,22 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 	private MyFrame frame;
 	private CommodityAllUIController commodityAllUIController;
 	private MyButton forwardButton;
-	private ResultPanelController resController;
+	private ResultPanelController resControllerS,resControllerF;
 	private String type;
 	
+	private String failedAddress;
 	public ConfirmComPanel(MyFrame frame, String url, CommodityAllUIController controller,CommodityVO com,String type) {
 		super(frame, url, controller,com);
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		this.type = type;
-		
+		this.failedAddress = "commodity1";
 		commodityAllUIController.setBack_first(this);
-		resController = new ResultPanelController(commodityAllUIController, frame);
+
+		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
+		resControllerF = new ResultPanelController(frame, this);
+		//!!!!!!
+		//这个是错误，调用resControllerF.failedConfirm("错误信息", failedAddress);
 		setForward();
 	}
 
@@ -40,11 +45,11 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			if(type.equals("add")){
-				resController.succeeded("成功添加商品！", "commodity");
+				resControllerS.succeeded("成功添加商品！", "commodity");
 			}else if(type.equals("del")){
-				resController.succeeded("成功删除商品！", "commodity");
+				resControllerS.succeeded("成功删除商品！", "commodity");
 			}else if (type.equals("cha")) {
-				resController.succeeded("成功修改商品信息！", "commodity");
+				resControllerS.succeeded("成功修改商品信息！", "commodity");
 			}
 		}
 	}

@@ -37,7 +37,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private MyComboBox commodity;
 	private MyTextFieldTrans number,price;
 	
-	private CommodityblService commodityblService;
+//	private CommodityblService commodityblService;
 	private int level;
 	
 	private MyButton forwardButtons[] = new MyButton[3];
@@ -52,7 +52,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		this.uiController = controller;
 		this.frame = frame;
 		this.repaint();
-		commodityblService = new CommodityController();
+//		commodityblService = new CommodityController();
 		uiController.setBack_first(this);
 		setTime();
 		setDiscountText();
@@ -73,7 +73,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		
 	}
 	private void discount(){
-		
+		if()
 	}
 	private void voucher(){
 		
@@ -96,16 +96,20 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setTempPanel(SetProPanel.this);
 			frame.remove(SetProPanel.this);
 			if(e.getSource() == forwardButtons[0]){
 				dis = new DiscountVO(time[0].getText(),time[1].getText(),Double.parseDouble(discount[0].getText()),
 						Double.parseDouble(discount[2].getText()),Double.parseDouble(discount[1].getText()),level);
 				
+				discount();
 				uiController.confirmProDis(dis);
+				
 			}else if(e.getSource() == forwardButtons[1]){
 				vou = new VoucherVO(time[0].getText(),time[1].getText(),Double.parseDouble(voucher[0].getText()),
 						Double.parseDouble(voucher[2].getText()),Double.parseDouble(voucher[1].getText()),level);
 			
+				
 				uiController.confirmProVou(vou);
 			}else if(e.getSource() == forwardButtons[2]){
 				//ProGiftVO(CommodityVO commodity,int number,String start_time,
@@ -113,6 +117,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 				String selectedName = commodity.getSelectedItem().toString();
 				CommodityVO commodityVO = commodityblService.searchAccurateCommodity_up(selectedName);
 				gift = new ProGiftVO(commodityVO,Integer.parseInt(number.getText()),time[0].getText(),time[1].getText(),0,level);
+				
 				uiController.confirmProGift(gift);
 			}
 		}
@@ -133,8 +138,8 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private void setGiftText() {
 //		String [] rolesList = new String[]{"a","b"};
 //		commodity = new MyComboBox(rolesList,471, 443, 156, 27);
-//		number = new MyTextFieldTrans(471,476, 156, 27);
-//		price = new MyTextFieldTrans(509, 408,130 ,27);
+		number = new MyTextFieldTrans(471,476, 156, 27);
+		price = new MyTextFieldTrans(509, 408,130 ,27);
 //		String [] rolesList = new String[]{"a","b"};
 		ArrayList<CommodityVO> accVOArray = commodityblService.getAllCommodity_up();
 			String[] rolesList = new String[accVOArray.size()];

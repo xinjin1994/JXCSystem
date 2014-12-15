@@ -24,12 +24,14 @@ public class ChaSortDPanel extends FatherPanel implements ActionListener{
 	private MyTextFieldTrans id,name;
 	private MyComboBox fatherSortBox;
 	private String idString,nameString,sortString;
+	private String failedAddress;
 	
 	public ChaSortDPanel(MyFrame frame, String url, CommodityAllUIController controller,SortVO sort) {
 		super(frame, url, controller);
 		this.chaSort = sort;
 		this.frame = frame;
 		this.commodityAllUIController = controller;
+		this.failedAddress = "com/chaSortD";
 		resController = new ResultPanelController(frame, this);
 		commodityAllUIController.setBack_first(this);
 		
@@ -74,6 +76,7 @@ public class ChaSortDPanel extends FatherPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
 			setNewSort();
 	//		newSort = new SortVO(nameString,sortString,idString);

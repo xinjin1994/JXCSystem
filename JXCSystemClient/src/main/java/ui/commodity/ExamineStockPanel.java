@@ -22,11 +22,15 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 	private String timeBeginString,timeEndString;
 	
 	private ColorFactory color = new ColorFactory();
+	private String failedAddress;
 	
 	public ExamineStockPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.commodityAllUIController = controller;
+		
+		this.failedAddress = "com/examine";
+		
 		resController = new ResultPanelController(frame, this);
 		commodityAllUIController.setBack_second(this, 202, 133);
 		setTextField();
@@ -55,6 +59,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		commodityAllUIController.setTempPanel(this);
 		frame.remove(this);
 		frame.setPanel(commodityAllUIController.getMainPanel());
 		frame.repaint();

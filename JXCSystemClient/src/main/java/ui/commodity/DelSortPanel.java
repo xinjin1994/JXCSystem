@@ -22,15 +22,22 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 	protected SortVO sort;
 	protected String nameString;
 	
+	protected String failedAddress;
+	
 	public DelSortPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		resController = new ResultPanelController(frame, this);
 		
+		setFailedAddress();
 		commodityAllUIController.setBack_second(this,181, 151);
 		setTextField();
 		setForward();
+	}
+
+	private void setFailedAddress() {
+		this.failedAddress = "com/delSort";
 	}
 
 	protected void setForward() {
@@ -53,6 +60,7 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
 			getSort();
 //			sort = new SortVO(nameString, "dd", "12");

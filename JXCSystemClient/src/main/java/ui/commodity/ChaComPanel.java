@@ -25,7 +25,7 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 	
 	private CommodityVO finCom;
 	private CommodityblService commodityblService;
-	
+	private String failedAddress;
 	
 	public ChaComPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
@@ -35,6 +35,8 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 		
 		commodityAllUIController.setBack_second(this, 183, 151);
 		resController = new ResultPanelController(frame, this);
+		this.failedAddress = "com/chaCom";
+		
 		commodityblService = new CommodityController();
 		
 		init();
@@ -71,6 +73,7 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
 			getChaCom();
 		///	finCom = new CommodityVO("" ,nameString, typeString, 11, 11, 11, 12, 12, 12, "g");

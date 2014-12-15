@@ -6,7 +6,6 @@ import po.CommodityPO;
 import po.PatchPO;
 import po.SortPO;
 import vo.CommodityVO;
-import vo.ExamineVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;

@@ -22,10 +22,13 @@ public class ComDetailPanel extends FatherPanel{
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		this.com = com;
-		commodityAllUIController.setBack_first(this);
+		
 		setLabels();
 	}
 
+	protected void initReturn () {
+		commodityAllUIController.setBack_first(this);
+	}
 	private void setLabels() {
 		labels[0] = new MyLabel(106, 165, 221, 55);
 		setLabels_help(labels[0],24,color.accColor,com.id);

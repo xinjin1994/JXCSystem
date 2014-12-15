@@ -13,6 +13,9 @@ public class ChaComDPanel extends AddComPanel implements ActionListener{
 		super(frame, url, uiController,chaCom);
 	}
 
+	protected void setFailedAddress(){
+		this.failedAddress = "chaComD";
+	}
 	protected void setLabels() {
 		super.setLabels();
 		id.setText(chaCom.id);
@@ -43,7 +46,7 @@ public class ChaComDPanel extends AddComPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == forwardButton){
-			System.out.println("12233");
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(ChaComDPanel.this);
 			setNewCom();
 			commodityAllUIController.confirmCom(newCom,"cha");

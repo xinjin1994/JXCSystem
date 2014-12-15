@@ -54,7 +54,7 @@ public class ResultPanelController extends UIController implements ActionListene
 	public void failed(String text,String type){
 		resultPanel = new FatherPanel(frame, "Image/result/"+type+"Failed.jpg", this);
 		setForward();
-		
+		System.out.println("12");
 		textLabel.setText(text);
 		setPanel();
 	}
@@ -70,7 +70,6 @@ public class ResultPanelController extends UIController implements ActionListene
 	private void setPanel() {
 		resultPanel.add(textLabel);
 		resultPanel.add(forwardButton);
-		
 		frame.setPanel(resultPanel);
 		frame.repaint();
 	}
@@ -78,7 +77,6 @@ public class ResultPanelController extends UIController implements ActionListene
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(382, 327);
 		forwardButton = forward.forward_black;
-		
 		resultPanel.add(forwardButton);
 		forwardButton.addActionListener(this);	
 	}
@@ -86,6 +84,7 @@ public class ResultPanelController extends UIController implements ActionListene
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(resultPanel);
+			
 			frame.setPanel(backPanel);
 			frame.repaint();
 		}

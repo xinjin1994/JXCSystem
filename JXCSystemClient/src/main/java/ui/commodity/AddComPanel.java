@@ -39,18 +39,25 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 	
 	protected CommodityVO chaCom;
 	protected String idString = "";
+	protected String failedAddress;
+	
+	
 	public AddComPanel( MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		this.repaint();
-		
+		setFailedAddress();
 		commodityAllUIController.setBack_first(this);
 		resController = new ResultPanelController(frame, this);
 		init();
 
 	}
 	
+	protected void setFailedAddress() {
+		this.failedAddress = "com/addCom";
+	}
+
 	public AddComPanel( MyFrame frame, String url, CommodityAllUIController controller,CommodityVO com) {
 		super(frame, url, controller);
 		this.frame = frame;
@@ -159,6 +166,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == forwardButton){
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
 			setNewCom();
 			commodityAllUIController.confirmCom(newCom,"add");

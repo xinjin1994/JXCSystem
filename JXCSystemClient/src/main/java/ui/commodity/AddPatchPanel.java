@@ -29,11 +29,15 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 	private PatchVO newPatch;
 	private int num;
 	private ColorFactory color = new ColorFactory();
+	
+	private String failedAddress;
 	public AddPatchPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.commodityAllUIController = controller;
+		this.failedAddress = "com/addPatch";
 		resController = new ResultPanelController(frame, this);
+	
 		commodityAllUIController.setBack_first(this);
 		setTextField();
 		setComboBox();
@@ -86,6 +90,7 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		}else if(e.getSource() == type){
 			typeString = type.getSelectedItem().toString();
 		}else if(e.getSource() == forwardButton){
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
 			setNewPatch();
 			commodityAllUIController.confirmPatch(newPatch);

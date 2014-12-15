@@ -16,22 +16,27 @@ import vo.SortVO;
 public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
 	private CommodityAllUIController commodityAllUIController;
-	private ResultPanelController resController;
+	private ResultPanelController resControllerS,resControllerF;
+	
 	private MyButton forwardButton;
 	private SortVO sort;
 	private String type;
 	
 	private MyLabel sortId,name,fatherSort;
+	private String failedAddress;
 	
 	public ConfirmSortPanel(MyFrame frame, String url, CommodityAllUIController controller,SortVO sort,String type) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.commodityAllUIController = controller;
-		resController = new ResultPanelController(commodityAllUIController, frame);
-
+		
+		resControllerF = new ResultPanelController(frame,this);
+		resControllerS = new ResultPanelController(frame,this);
+		this.failedAddress = "commodity2";
+		
 		this.sort = sort;
 		this.type = type;
-		commodityAllUIController.setBack_first(this);
+		commodityAllUIController.setBack_third(this);
 		setLabels();
 		setForward();
 	}
@@ -62,13 +67,13 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			if(type.equals("add")){
 				addSort();
-				resController.succeeded("成功添加分类！", "commodity");
+				resControllerS.succeeded("成功添加分类！", "commodity");
 			}else if(type.equals("del")){
 				delSort();
-				resController.succeeded("成功删除分类！", "commodity");
+				resControllerS.succeeded("成功删除分类！", "commodity");
 			}else if(type.equals("cha")){
 				chaSort();
-				resController.succeeded("成功修改分类信息！", "commodity");
+				resControllerS.succeeded("成功修改分类信息！", "commodity");
 			}
 				
 			

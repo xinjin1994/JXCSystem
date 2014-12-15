@@ -135,6 +135,7 @@ public class CommodityUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(commodityPanel);
 			frame.remove(commodityPanel);
 			if(e.getSource() == comButtons[0]){
 				uiController.addCom();
@@ -165,6 +166,7 @@ public class CommodityUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(commodityPanel);
 			frame.remove(commodityPanel);
 			if(e.getSource() == sortButtons[0]){
 				uiController.addSort();
@@ -196,6 +198,7 @@ public class CommodityUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(commodityPanel);
 			if(e.getSource() == invoiceButtons[0]){
 				
 			}else if(e.getSource() == invoiceButtons[1]){
@@ -220,6 +223,7 @@ public class CommodityUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(commodityPanel);
 			if(e.getSource() == stockButtons[0]){
 				frame.remove(commodityPanel);
 				uiController.examineStock();

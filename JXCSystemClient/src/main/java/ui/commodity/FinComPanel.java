@@ -21,6 +21,9 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 	
 	private CommodityVO com;
 	private ResultPanelController resController;
+	
+	private String failedAddress;
+	
 	public FinComPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		
@@ -30,6 +33,8 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 		this.repaint();
 	
 		resController = new ResultPanelController(frame, this);
+		this.failedAddress = "com/finCom";
+		
 		commodityAllUIController.setBack_second(this,178 ,115 );
 		init();
 	}
@@ -76,11 +81,14 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exactForwardButton){
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
 			exactFind();
 		
 			commodityAllUIController.comDetail(com);
+			
 		}else if(e.getSource() == fuzzyForwardButton){
+			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
 			fuzzyFind();
 			

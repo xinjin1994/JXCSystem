@@ -22,10 +22,14 @@ public class PatchDetailPanel extends FatherPanel{
 		this.frame = frame;
 		this.commodityAllUIController = commodityAllUIController;
 		this.patch = patch;
-		commodityAllUIController.setBack_first(this);
+		back();
 		setLabels();
 	}
 
+	protected void back(){
+		commodityAllUIController.setBack_first(this);
+	}
+	
 	protected void setLabels() {
 		labels[0] = new MyLabel(94, 188, 269, 42);
 		labels[1] = new MyLabel(94, 308, 269, 42);

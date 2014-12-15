@@ -27,6 +27,7 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 	private CommodityblService commodityblService;
 	
 	private String nameString,typeString;
+
 	public DelComPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.commodityAllUIController = controller;

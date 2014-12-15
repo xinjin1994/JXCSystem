@@ -175,4 +175,8 @@ public class CommodityAllUIController extends UIController{
 		this.prePanel = prePanel;
 		new SetBack(frame,this,prePanel).setBack_second(x, y);
 	}
+	public void setBack_third(FatherPanel prePanel){
+		this.prePanel = prePanel;
+		new SetBack(frame, this, prePanel).setBack_third();
+	}
 }

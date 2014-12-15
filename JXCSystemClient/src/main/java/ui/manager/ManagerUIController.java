@@ -10,9 +10,15 @@ import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SecondPanel;
 import ui.setting.Button.MyButton;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.InvoiceVO;
+import vo.promotion.DiscountVO;
+import vo.promotion.ProGiftVO;
+import vo.promotion.VoucherVO;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogic.promotionbl.PromotionController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
+import businesslogicservice.promotionblservice.PromotionblService;
 
 public class ManagerUIController {
 	private int secondX = 1;
@@ -34,14 +40,17 @@ public class ManagerUIController {
 	private MyButton []invoiceButtons = new MyButton[]{approButton,disapButton,backLogButton};
 	private MyButton []proButtons = new MyButton[]{chePro,decPro};
 	
+	private PromotionblService promotionblService;
 	private ManagerAllUIController uiController;
 	private MyFrame frame;
-	
+	private ResultPanelController resController ;
 	public ManagerUIController(ManagerAllUIController uiController,MyFrame frame){
 		this.uiController = uiController;
 		this.frame = frame;
 		invoiceblService = new InvoiceController();
 		colors = new ColorFactory();
+		resController = new ResultPanelController(frame, managerPanel);
+		promotionblService = new PromotionController();
 		this.managerPanel = new ManagerPanel(frame, "Image/Manager/manager.jpg",
 				uiController, this);
 		
@@ -157,10 +166,24 @@ public class ManagerUIController {
 			uiController.setMainPanel(managerPanel);
 			frame.remove(managerPanel);
 			if(event.getSource() == proButtons[0]){
-				uiController.checkPro();
+				if(examine()){
+					uiController.checkPro();
+				}
 			}else if (event.getSource() == proButtons[1]) {
 				uiController.setPro();
 			}
+		}
+
+		private boolean examine() {
+			ArrayList<DiscountVO> discount = promotionblService.getDiscount_up();
+			ArrayList<VoucherVO> voucher = promotionblService.getVoucher_up();
+			ArrayList<ProGiftVO> gift = promotionblService.getProGift_up();
+			if( (discount == null) && (voucher == null) && (gift == null)){
+				frame.remove(managerPanel);
+				resController.failed("当下无销售策略！", "manager");
+				return false;
+			}	
+			return true;
 		}
 
 		public void mouseReleased(MouseEvent arg0) {
@@ -254,49 +277,60 @@ public class ManagerUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			
 			uiController.setMainPanel(managerPanel);
+			
+			String type = "审批通过";
 			if(e.getSource() == invoiceButtons[0]){
 				billsArray = invoiceblService.show_pass();
 			}else if(e.getSource() == invoiceButtons[1]){
 				billsArray = invoiceblService.show_refuse();
-				}else if(e.getSource() == invoiceButtons[2]){
-					billsArray = invoiceblService.show_up();
+				type = "审批拒绝";
+			}else if(e.getSource() == invoiceButtons[2]){
+				billsArray = invoiceblService.show_up();
+				type = "待审批";	
+			}
+			
+			try {
+				ArrayList<String> bills = new ArrayList<String>();
+				bills.add("单据编号;单据类型");
+				for(int i=0;i<billsArray.size();i++){
+					switch(billsArray.get(i).bill_note) {
+					//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
+					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
+					case 1:
+						itemName = "商品赠送单";
+						break;
+					case 2:
+						itemName = "进货单";
+						break;
+					case 3:
+						itemName = "进货退货单";
+						break;
+					case 4:
+						itemName = "销售单";
+						break;
+					case 5:
+						itemName = "销售退货单";
+						break;
+					case 6:
+						itemName = "报溢报损单";
+						break;
+					case 7:
+						itemName = "收款单";
+						break;
+					case 8:
+						itemName = "付款单";
+						break;	
+					}
+					item = billsArray.get(i).note+itemName;
+					bills.add(item);
+					setTable(bills);
+					
 				}
-			ArrayList<String> bills = new ArrayList<String>();
-			bills.add("单据编号;单据类型");
-			for(int i=0;i<billsArray.size();i++){
-				switch(billsArray.get(i).bill_note) {
-				//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
-				//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
-				case 1:
-					itemName = "商品赠送单";
-					break;
-				case 2:
-					itemName = "进货单";
-					break;
-				case 3:
-					itemName = "进货退货单";
-					break;
-				case 4:
-					itemName = "销售单";
-					break;
-				case 5:
-					itemName = "销售退货单";
-					break;
-				case 6:
-					itemName = "报溢报损单";
-					break;
-				case 7:
-					itemName = "收款单";
-					break;
-				case 8:
-					itemName = "付款单";
-					break;	
-				}
-				item = billsArray.get(i).note+itemName;
-				bills.add(item);
-				setTable(bills);
-				
+			} catch (Exception e2) {
+				frame.remove(managerPanel);
+				resController.failed("无新审批"+type+"单据！", "manager");
 			}
 		}
 

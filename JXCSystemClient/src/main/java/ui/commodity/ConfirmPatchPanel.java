@@ -11,15 +11,22 @@ import vo.bill.PatchVO;
 
 public class ConfirmPatchPanel extends PatchDetailPanel implements ActionListener{
 	private MyButton forwardButton;
-	private ResultPanelController resController;
+	
+	private ResultPanelController resControllerS,resControllerF;
+	private String failedAddress;
 	public ConfirmPatchPanel(MyFrame frame, String string,
 			CommodityAllUIController commodityAllUIController,PatchVO newPatch) {
 		
 		super(frame, string, commodityAllUIController, newPatch);
 		setForward();
-		resController = new ResultPanelController(commodityAllUIController, frame);
+		resControllerS = new ResultPanelController(frame,this);
+		resControllerF = new ResultPanelController(frame, commodityAllUIController.getMainPanel());
+		this.failedAddress = "commodity3";
 	}
 
+	protected void back() {
+		commodityAllUIController.setBack_third(this);
+	}
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(724, 426);
 		forwardButton = forward.forward_black;
@@ -30,7 +37,7 @@ public class ConfirmPatchPanel extends PatchDetailPanel implements ActionListene
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
-			resController.succeeded("成功添加报溢报损单！", "commodity");
+			resControllerS.succeeded("成功添加报溢报损单！", "commodity");
 		} 
 	}
 }
