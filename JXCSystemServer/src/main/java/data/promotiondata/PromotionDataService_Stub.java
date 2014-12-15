@@ -339,10 +339,10 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		return voucherList.add(po.copy());
 	}
 	
-	public boolean delDiscount(DiscountPO po) {
+	public boolean delDiscount(int level) {
 		int note=0;
 		for(int i=0;i<discountList.size();i++){
-			if(po.getLevel()==discountList.get(i).getLevel()){
+			if(level==discountList.get(i).getLevel()){
 				note=i;
 			}
 		}
@@ -350,10 +350,10 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		return true;
 	}
 
-	public boolean delGift(ProGiftPO po) {
+	public boolean delGift(int level) {
 		int note=0;
 		for(int i=0;i<proGiftList.size();i++){
-			if(po.getLevel()==proGiftList.get(i).getLevel()){
+			if(level==proGiftList.get(i).getLevel()){
 				note=i;
 			}
 		}
@@ -361,11 +361,11 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		return true;
 	}
 	
-	public boolean delVoucher(VoucherPO po) throws RemoteException {
+	public boolean delVoucher(int level) throws RemoteException {
 		// TODO Auto-generated method stub
 		int note=0;
 		for(int i=0;i<voucherList.size();i++){
-			if(po.getLevel()==voucherList.get(i).getLevel()){
+			if(level==voucherList.get(i).getLevel()){
 				note=i;
 			}
 		}
@@ -417,7 +417,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		return array;
 	}
 
-	public ArrayList<VoucherPO> showVoudcher() throws RemoteException {
+	public ArrayList<VoucherPO> showVoucher() throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<VoucherPO> array=new ArrayList<VoucherPO>();
 		for(int i=0;i<voucherList.size();i++){

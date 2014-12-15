@@ -7,7 +7,7 @@ public class ProGiftPO extends PromotionPO implements Serializable{
 	int number;
 	
 	public ProGiftPO(CommodityPO gift, String start_time, String end_time,int number,
-			int start_money,int end_money,int level) {
+			double start_money,double end_money,int level) {
 		super(start_time,end_time,level,start_money,end_money);
 		this.gift = gift;
 		this.number=number;

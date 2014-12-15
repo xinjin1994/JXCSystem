@@ -84,7 +84,7 @@ public class PromotionDataService_Stub implements PromotionDataService{
 		return null;
 	}
 
-	public ArrayList<VoucherPO> showVoudcher() throws RemoteException {
+	public ArrayList<VoucherPO> showVoucher() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -107,6 +107,21 @@ public class PromotionDataService_Stub implements PromotionDataService{
 	public VoucherPO getVoucher(int level) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean delDiscount(int level) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delGift(int level) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delVoucher(int level) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

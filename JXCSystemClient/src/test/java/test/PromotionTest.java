@@ -33,7 +33,7 @@ public class PromotionTest {
 		MockDelDiscount mockDis=new MockDelDiscount();
 		Promotion pro=new Promotion();
         pro.setPro(mockDis);
-		assertEquals("成功",pro.delPromotion("t1"));
+		assertEquals("成功",pro.delDiscount("t1"));
 	}
 
 	@Test
@@ -41,7 +41,7 @@ public class PromotionTest {
 		Promotion promotion=new Promotion();
 		MockGetDiscount mock=new MockGetDiscount();
 		promotion.setPro(mock);
-		assertEquals("成功",promotion.search());
+		assertEquals("成功",promotion.getAllDiscount());
 	}
 
 }
