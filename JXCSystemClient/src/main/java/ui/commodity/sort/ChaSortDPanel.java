@@ -3,6 +3,7 @@ package ui.commodity.sort;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import ui.FatherPanel;
 import ui.commodity.CommodityAllUIController;
@@ -13,6 +14,8 @@ import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.SortVO;
+import businesslogic.commoditybl.CommodityController;
+import businesslogicservice.commodityblservice.CommodityblService;
 
 public class ChaSortDPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
@@ -27,12 +30,14 @@ public class ChaSortDPanel extends FatherPanel implements ActionListener{
 	private String idString,nameString,sortString;
 	private String failedAddress;
 	
+	private CommodityblService commodityblService;
 	public ChaSortDPanel(MyFrame frame, String url, CommodityAllUIController controller,SortVO sort) {
 		//sort 是原来的sort
 		super(frame, url, controller);
 		this.chaSort = sort;
 		this.frame = frame;
 		this.commodityAllUIController = controller;
+		commodityblService = new CommodityController();
 		this.failedAddress = "com/chaSortD";
 		resController = new ResultPanelController(frame, this);
 		commodityAllUIController.setBack_first(this);
@@ -50,13 +55,13 @@ public class ChaSortDPanel extends FatherPanel implements ActionListener{
 	}
 
 	private void setFatherSort() {
-		/*ArrayList<SortVO> arraySort = commodityblService.getSortSort_up();
+		ArrayList<SortVO> arraySort = commodityblService.getSortSort_up();
 		String roleList[] = new String[arraySort.size()+1];
 		roleList[0] = "";
 		for(int i=0;i<arraySort.size();i++){
 			roleList[i+1] = arraySort.get(i).getName();
-		}*/
-		String roleList []= new String[]{"a","b"};
+		}
+//		String roleList []= new String[]{"a","b"};
 		fatherSortBox = new MyComboBox(roleList,255,442,271,42);
 		fatherSortBox.setSelectedItem(chaSort.fatherSort);
 		this.add(fatherSortBox);

@@ -89,7 +89,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 	}
 
 	protected void setID(){
-//		idString = commodityblService.getCommodityNote_up(sortVO);
+		idString = commodityblService.getCommodityNote_up(sortVO);
 		id.setText(idString);
 	}
 /**
@@ -122,13 +122,13 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 
 
 	protected void setSort() {
-//		ArrayList<SortVO> sortArray = commodityblService.getComSort_up();
-		String []sortList = new String[]{"a","b"};//所有可以添加商品的分类
-		/*String []sortList = new String[sortArray.size()];
+		ArrayList<SortVO> sortArray = commodityblService.getComSort_up();
+//		String []sortList = new String[]{"a","b"};//所有可以添加商品的分类
+		String []sortList = new String[sortArray.size()];
 		for(int i =0;i<sortArray.size();i++){
 			String sortItem = sortArray.get(i).name;
 			sortList[i] = sortItem;
-		}*/
+		}
 		sortBox = new MyComboBox(sortList, 534, 245, 166, 41);
 		sortBox.setForeground(color.accColor);
 		sortBox.addActionListener(this);

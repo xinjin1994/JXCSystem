@@ -105,7 +105,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			resController.failedConfirm("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 		}else{
-//		ArrayList<ExamineVO> examineVO = commodityblService.Examine_up(time1, time2);
+		ArrayList<ExamineVO> examineVO = commodityblService.Examine_up(time1, time2);
 		ArrayList<String> examStr = new ArrayList<String>();
 		int num = 0;
 		int import_num = 0, import_return = 0,export_num = 0, export_return = 0,patch_num = 0, sendGift = 0;
@@ -113,7 +113,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 		double total = 0;
 		examStr.add("商品名称;商品型号;进货数量;进货退货数量;销售数量;销售退货数量;"
 				+ "报溢报损数量;赠品数量;总价值;商品进出库时间;合计");
-	/*	for(int i=0;i<examineVO.size();i++){
+		for(int i=0;i<examineVO.size();i++){
 			num = examineVO.get(i).import_num - examineVO.get(i).export_num-examineVO.get(i).import_return_num
 					+examineVO.get(i).export_return_num-examineVO.get(i).sendgift_num+examineVO.get(i).patch_num;
 			String examItem = examineVO.get(i).name+";"+examineVO.get(i).type+";"+examineVO.get(i).import_num+";"+examineVO.get(i).import_return_num
@@ -128,7 +128,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 			total = total+examineVO.get(i).total_money;
 			totalNum = totalNum + num;
 			examStr.add(examItem);
-		}*/
+		}
 		examStr.add("总计;;"+import_num+";"+import_return+";"+export_num+";"+export_return+";"+patch_num+";"+sendGift+";"+total+";"+";"+totalNum);
 		setTable(examStr);
 		}

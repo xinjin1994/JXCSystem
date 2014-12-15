@@ -24,10 +24,10 @@ public class ChaSortPanel extends DelSortPanel{
 		}else{
 			try{
 			frame.remove(this);
-			sort = new SortVO(nameString);
+			/*sort = new SortVO(nameString);
 			sort.note = "2";
-			sort.fatherSort = "b";
-//			sort = commodityblService.searchSort_up(nameString);
+			sort.fatherSort = "b";*/
+			sort = commodityblService.searchSort_up(nameString);
 			}catch(Exception e){
 				resController.failedConfirm("您要修改的分类不存在！", failedAddress);
 			}

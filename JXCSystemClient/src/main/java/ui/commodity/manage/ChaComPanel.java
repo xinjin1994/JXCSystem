@@ -16,47 +16,39 @@ import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
 
-public class DelComPanel extends FatherPanel implements ActionListener{
+public class ChaComPanel extends FatherPanel implements ActionListener{
 
 	private CommodityAllUIController commodityAllUIController;
 	private MyFrame frame;
-	private MyButton forwardButton;
-	private CommodityVO comDel;
-	
-	private MyTextFieldBorder name,typeID;
-	
 	private ResultPanelController resController;
+	private MyButton forwardButton;
+	private MyTextFieldBorder name,typeID;
+	private String nameString,typeString;
+	
+	private CommodityVO finCom;
 	private CommodityblService commodityblService;
+	private String failedAddress;
 	
-	private String nameString,typeString,failedAddress;
-	
-
-	public DelComPanel(MyFrame frame, String url, CommodityAllUIController controller) {
+	public ChaComPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
-		this.commodityAllUIController = controller;
 		this.frame = frame;
+		this.commodityAllUIController = controller;
 		this.repaint();
-		commodityblService = new CommodityController();
+	
 		commodityAllUIController.setBack_second(this, 183, 151);
 		resController = new ResultPanelController(frame, this);
+		this.failedAddress = "com/chaCom";
+		
 		commodityblService = new CommodityController();
-		setFailedAddress();
+		
 		init();
 	}
-	
-	protected void setFailedAddress() {
-		failedAddress = "com/delCom";
-	}
+
 	private void init() {
 		setTextField();
 		setForward();
 	}
-	private void setForward() {
-		ForwardButton forward = new ForwardButton(591, 403);
-		forwardButton = forward.forward_white;
-		this.add(forwardButton);
-		forwardButton.addActionListener(this);
-	}
+
 	private void setTextField() {
 		name = new MyTextFieldBorder(259, 254);
 		typeID = new MyTextFieldBorder(259, 344);
@@ -67,27 +59,40 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 		name.setForeground(new ColorFactory().accColor);
 		typeID.setForeground(new ColorFactory().accColor);
 	}
-	/**
-	 * 根据商品名称，型号搜索com
-	 */
-	private void getDelCom() {
+
+	private void getChaCom() {
 		nameString = name.getText();
 		typeString = typeID.getText();
 		if(nameString.equals("")||typeString.equals("")){
 			resController.failedConfirm("请重新确认输入信息！", failedAddress);
 		}else{
-		/*	comDel = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
-			comDel.fatherSort = "g";
-			SortVO sort = new SortVO("g");*/
-			comDel = commodityblService.searchAccurateCommodity_up(nameString, typeString);
-			SortVO sort = new SortVO(comDel.fatherSort);
-			commodityAllUIController.confirmCom(comDel, "del",sort);
+			try{
+			finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
+			String fatherSort = finCom.fatherSort;
+			SortVO sortVO = new SortVO(fatherSort);
+//			finCom = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
+//			finCom.fatherSort = "b";
+//			System.out.println(finCom.name);
+			frame.remove(this);
+			commodityAllUIController.changeComD(finCom);
+			}catch(Exception e){
+				resController.failedConfirm("您要修改的商品不存在！", failedAddress);
+			}
 		}
 	}
+
+	private void setForward() {
+		ForwardButton forward = new ForwardButton(591, 403);
+		forwardButton = forward.forward_white;
+		
+		this.add(forwardButton);
+		forwardButton.addActionListener(this);
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
-			frame.remove(this);
-			getDelCom();
+			commodityAllUIController.setTempPanel(this);
+			getChaCom();
 		}
 	}
 

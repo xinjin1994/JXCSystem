@@ -126,16 +126,16 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 			//double latestInValue, double latestOutValue,int warn) {
 		// 编号、名称、型号、库存数量、进价、零售价、最近进价、最近零售价
 			try{
-//				ArrayList<CommodityVO> comArray = commodityblService.searchFuzzyCommodity_up(infoString);
+				ArrayList<CommodityVO> comArray = commodityblService.searchFuzzyCommodity_up(infoString);
 				ArrayList<String> comArr = new ArrayList<String>();
 				comArr.add("编号;名称;型号;库存数量;进价;零售价;最近进价;最近售价;警戒数量;分类");
-//				for(int i=0;i<comArray.size();i++){
-//					String item = comArray.get(i).id+";"+comArray.get(i).name+";"+comArray.get(i).type+
-//							";"+comArray.get(i).num+";"+comArray.get(i).inValue+";"+comArray.get(i).outValue+
-//							";"+comArray.get(i).latestInValue+";"+comArray.get(i).latestOutValue+";"+
-//							comArray.get(i).warn+";"+comArray.get(i).fatherSort;
-//					comArr.add(item);
-//				}
+				for(int i=0;i<comArray.size();i++){
+					String item = comArray.get(i).id+";"+comArray.get(i).name+";"+comArray.get(i).type+
+							";"+comArray.get(i).num+";"+comArray.get(i).inValue+";"+comArray.get(i).outValue+
+							";"+comArray.get(i).latestInValue+";"+comArray.get(i).latestOutValue+";"+
+							comArray.get(i).warn+";"+comArray.get(i).fatherSort;
+					comArr.add(item);
+				}
 				setTable(comArr);
 		
 			}catch(Exception e){
@@ -154,9 +154,9 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 			resController.failedConfirm("请重新确认输入信息", failedAddress);
 		}else{
 			try{
-//			com = commodityblService.searchAccurateCommodity_up(nameString, typeIDString);
-		com = new CommodityVO("id" ,nameString, typeIDString, 11, 11, 11, 12, 12, 12);
-		com.fatherSort = "b";
+			com = commodityblService.searchAccurateCommodity_up(nameString, typeIDString);
+//		com = new CommodityVO("id" ,nameString, typeIDString, 11, 11, 11, 12, 12, 12);
+//		com.fatherSort = "b";
 			commodityAllUIController.comDetail(com);
 			}catch(Exception e){
 				resController.failedConfirm("你要查看的商品不存在！", failedAddress);

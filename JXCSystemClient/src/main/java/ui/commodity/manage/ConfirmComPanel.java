@@ -3,7 +3,6 @@ package ui.commodity.manage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.commodity.ComDetailPanel;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.MyFrame;
 import ui.setting.Button.ForwardButton;

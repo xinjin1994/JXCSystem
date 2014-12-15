@@ -45,13 +45,13 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 		
 	}
 	private void setFatherSort() {
-		/*ArrayList<SortVO> arraySort = commodityblService.getSortSort_up();
+		ArrayList<SortVO> arraySort = commodityblService.getSortSort_up();
 		String roleList[] = new String[arraySort.size()+1];
 		roleList[0] = "";
 		for(int i=0;i<arraySort.size();i++){
 			roleList[i+1] = arraySort.get(i).getName();
-		}*/
-		String roleList []= new String[]{"","a","b"};
+		}
+//		String roleList []= new String[]{"","a","b"};
 		fatherSortBox = new MyComboBox(roleList,253 , 423, 319, 37);
 		fatherSortBox.addActionListener(this);
 		this.add(fatherSortBox);
