@@ -2,18 +2,26 @@ package ui.commodity;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import ui.CommodityPanel;
-import ui.UIController;
+import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
 import ui.setting.SecondPanel;
 import ui.setting.Button.MyButton;
+import ui.setting.resultPanels.ResultPanelController;
+import vo.bill.InvoiceVO;
+import businesslogic.invoicebl.InvoiceController;
+import businesslogicservice.invoiceblservice.InvoiceblService;
 
 public class CommodityUIController {
 	private int secondX = 1;
 	private int secondY = 35;
 	private int inter = 54;
-	
+	private String item,itemName;
+	private ColorFactory colors = new ColorFactory();
+	MyTable showTable;
 	private SecondPanel commoditySecondPanel = new SecondPanel();
 	private CommodityPanel commodityPanel;
 	
@@ -24,15 +32,18 @@ public class CommodityUIController {
 	private MyButton []invoiceButtons = new MyButton[2];
 
 	private MyFrame frame;
+	private ResultPanelController resController;
 	private CommodityAllUIController uiController;
-	
+	private InvoiceblService invoiceblService;	
+	ArrayList<InvoiceVO> billsArray = new ArrayList<InvoiceVO>() ;
 	public CommodityUIController(CommodityAllUIController uiController,MyFrame frame){
 		this.uiController = uiController;
 		this.frame = frame;
 		this.commodityPanel = new CommodityPanel(frame, "Image/Commodity/commodity.jpg",
 				uiController, this);
 		frame.setPanel(commodityPanel);
-		
+		resController = new ResultPanelController(frame,commodityPanel);
+		invoiceblService = new InvoiceController();
 		uiController.setMainPanel(commodityPanel);
 	}
 	public void toComPanel() {
@@ -183,6 +194,16 @@ public class CommodityUIController {
 		}
 		
 	}
+	
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		frame.remove(commodityPanel);
+		frame.add(showTable.tablePanel);
+		uiController.addMainPanel();
+		frame.repaint();
+	}
 	class InvoiceListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -199,10 +220,53 @@ public class CommodityUIController {
 
 		public void mousePressed(MouseEvent e) {
 			uiController.setMainPanel(commodityPanel);
+			String type = "待处理";
 			if(e.getSource() == invoiceButtons[0]){
-				
+				billsArray = invoiceblService.show_up();
 			}else if(e.getSource() == invoiceButtons[1]){
-				
+				billsArray = invoiceblService.show_refuse();
+				type = "拒绝";
+			}
+
+			try {
+				ArrayList<String> bills = new ArrayList<String>();
+				bills.add("单据编号;单据类型");
+			/*	for(int i=0;i<billsArray.size();i++){
+					switch(billsArray.get(i).bill_note) {
+					//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
+					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
+					case 1:
+						itemName = "商品赠送单";
+						break;
+					case 2:
+						itemName = "进货单";
+						break;
+					case 3:
+						itemName = "进货退货单";
+						break;
+					case 4:
+						itemName = "销售单";
+						break;
+					case 5:
+						itemName = "销售退货单";
+						break;
+					case 6:
+						itemName = "报溢报损单";
+						break;
+					case 7:
+						itemName = "收款单";
+						break;
+					case 8:
+						itemName = "付款单";
+						break;	
+					}
+					item = billsArray.get(i).note+itemName;
+					bills.add(item);
+				}*/
+				setTable(bills);
+			} catch (Exception e2) {
+				frame.remove(commodityPanel);
+				resController.failed("无新"+type+"单据！", "account");
 			}
 		}
 

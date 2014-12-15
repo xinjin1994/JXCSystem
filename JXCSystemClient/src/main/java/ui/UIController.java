@@ -37,7 +37,6 @@ public class UIController {
 
 		this.CommodityPanel();
 //	  	this.AccountPanel();
-//		this.AccountPanel();
 
 //		this.SalesManagerPanel();
 

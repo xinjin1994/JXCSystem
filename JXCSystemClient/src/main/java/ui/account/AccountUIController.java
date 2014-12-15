@@ -252,8 +252,9 @@ public class AccountUIController {
 		showTable = new MyTable();
 		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
+		frame.remove(accountPanel);
 		frame.add(showTable.tablePanel);
-//		uiController.addMainPanel();
+		uiController.addMainPanel();
 		frame.repaint();
 	}
 	class IniButtonListener implements MouseListener{
@@ -318,7 +319,7 @@ public class AccountUIController {
 				ArrayList<String> bills = new ArrayList<String>();
 				bills.add("单据编号;单据类型");
 
-				for(int i=0;i<billsArray.size();i++){
+				/*for(int i=0;i<billsArray.size();i++){
 					switch(billsArray.get(i).bill_note) {
 					//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
 					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
@@ -349,9 +350,8 @@ public class AccountUIController {
 					}
 					item = billsArray.get(i).note+itemName;
 					bills.add(item);
-					setTable(bills);
-
-				}
+				}*/
+				setTable(bills);
 			} catch (Exception e2) {
 				frame.remove(accountPanel);
 				resController.failed("无新审批"+type+"单据！", "account");
