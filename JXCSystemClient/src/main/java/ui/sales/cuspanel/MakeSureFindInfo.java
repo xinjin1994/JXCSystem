@@ -32,7 +32,7 @@ public class MakeSureFindInfo extends FatherPanel{
 		this.frame = frame;
 		this.addButton();
 		this.salesUIController = salesUIController;
-		infoArray.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
+		infoArray.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
 		infoArray.add(info);
 		this.setTable(infoArray);
 	}

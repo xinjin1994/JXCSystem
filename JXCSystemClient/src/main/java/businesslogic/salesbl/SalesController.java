@@ -143,28 +143,29 @@ public class SalesController implements SalesblService {
 
 	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		
-		CommodityPO commodityPO=new CommodityPO(null, null);
-		ExportGoodPO exportGoodPO=new ExportGoodPO(null, 0, 0, 0, null);
-		ArrayList<ExportGoodPO> exportGood=new ArrayList<ExportGoodPO>();
+
+		CommodityPO commodityPO = new CommodityPO(null, null);
+		ExportGoodPO exportGoodPO = new ExportGoodPO(null, 0, 0, 0, null);
+		ArrayList<ExportGoodPO> exportGood = new ArrayList<ExportGoodPO>();
 		exportGood.add(exportGoodPO);
-		CustomerPO customerPO=new CustomerPO(null, 0, false, null);
-		ExportPO ex=new ExportPO(null, null, null, null, null, null, 0, 0, 0, 0);
+		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
+		ExportPO ex = new ExportPO(null, null, null, null, null, null, 0, 0, 0,
+				0);
 		int message = sale.addExport_up(ex);
 		return message;
-		
+
 	}
 
 	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO=new CommodityPO(null, null);
-		ExportGoodPO exportGoodPO=new ExportGoodPO(null, 0, 0, 0, null);
-		ArrayList<ExportGoodPO> exportGood=new ArrayList<ExportGoodPO>();
+		CommodityPO commodityPO = new CommodityPO(null, null);
+		ExportGoodPO exportGoodPO = new ExportGoodPO(null, 0, 0, 0, null);
+		ArrayList<ExportGoodPO> exportGood = new ArrayList<ExportGoodPO>();
 		exportGood.add(exportGoodPO);
-		CustomerPO customerPO=new CustomerPO(null, 0, false, null);
-		Export_ReturnPO ex=new Export_ReturnPO(null, null, null, null, null, null, 0, 0, 0, 0, null);
-	
-		
+		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
+		Export_ReturnPO ex = new Export_ReturnPO(null, null, null, null, null,
+				null, 0, 0, 0, 0, null);
+
 		int message = sale.addExport_Return_up(ex);
 		return message;
 	}
@@ -174,46 +175,76 @@ public class SalesController implements SalesblService {
 	// int message=sale.addExport_Return(note, number);
 	// return message;
 	// }
-	
-	
-	
-	
-	
-	
 
 	public ArrayList<CommodityVO> getAllCommodity_up() {
 		// TODO Auto-generated method stub
-
-		return null;
+		ArrayList<CommodityVO> commodityVO = new ArrayList<CommodityVO>();
+		CommodityPO po = sale.getAllCommodity();
+		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
+				po.getType(), po.getNumber(), po.getIn_price(),
+				po.getOut_price(), po.getRecent_in_price(),
+				po.getRecent_out_price(), po.warn);
+		commodityVO.add(vo);
+		return commodityVO;
 	}
 
-	public CommodityVO getCommodity_up(CommodityVO vo) {
+	public CommodityVO getCommodity_up(CommodityVO vo) {//这里有问题~
 		// TODO Auto-generated method stub
-		return null;
+		CommodityPO po = sale.getCommodity(vo.name,vo.id);
+		
+		CommodityVO commodity = new CommodityVO(po.getNote(), po.getName(),
+				po.getType(), po.getNumber(), po.getIn_price(),
+				po.getOut_price(), po.getRecent_in_price(),
+				po.getRecent_out_price(), po.warn);
+
+		return commodity;
 	}
+	
+	
 
 	public ArrayList<CustomerVO> getAllCustomer_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CustomerVO> customerVO =new ArrayList<CustomerVO>();
+		ArrayList<CustomerPO> po=sale.getAllCustomer();
+		for(int i=0;i<po.size();i++){
+			customerVO.set(i,new CustomerVO(null, false, i, null, null, null, null, null, i, i, null));
+		}	
+		return customerVO;
 	}
 
 	public CustomerVO getCustomer_up(CustomerVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		CustomerPO po=sale.getCustomer(vo.cusName,vo.id);
+		CustomerVO customer=new CustomerVO(null, false, 0, null, null, null, null, null, 0, 0, null);
+		
+		return customer;
 	}
 
 	public ArrayList<CustomerVO> getAllImportCustomer_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CustomerVO> customerVO=new ArrayList<CustomerVO>();
+		ArrayList<CustomerPO> po=sale.getAllImportCustomer();
+		for(int i=0;i<po.size();i++){
+			customerVO.set(i,new CustomerVO(null, false, i, null, null, null, null, null, i, i, null));
+		}		
+		return customerVO;
 	}
 
 	public ArrayList<CustomerVO> getAllExportCustomer_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CustomerVO> customerVO=new ArrayList<CustomerVO>();
+		ArrayList<CustomerPO> po=sale.getAllExportCustomer();
+		for(int i=0;i<po.size();i++){
+			customerVO.set(i, new CustomerVO(null, false, i, null, null, null, null, null, i, i, null));
+		}		
+		return customerVO;
 	}
 
 	public int getClerk_up() {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return 0;
 	}
 

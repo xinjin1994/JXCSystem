@@ -14,6 +14,7 @@ import java.util.Date;
 
 import po.PaymentPO;
 import po.SystemlogPO;
+import data.accountdata.AccountDataService_Stub;
 import dataservice.systemlogdataservice.SystemlogDataService;
 
 public class SystemlogDataService_Stub extends UnicastRemoteObject implements SystemlogDataService{
@@ -72,18 +73,22 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 	}
 
 	public ArrayList<SystemlogPO> get() {
-		return systemlogList;
+		ArrayList<SystemlogPO> po=new ArrayList<SystemlogPO>();
+		for(int i=0;i<po.size();i++){
+			po.add(systemlogList.get(i).copy());
+		}
+		return po;
 	}
 
-	public boolean add(SystemlogPO po) {	
-		
+	public boolean add(SystemlogPO po) {
 		SystemlogPO po2=po.copy();
-	
+		po2.setTime(AccountDataService_Stub.getNoteTime());
 		systemlogList.add(po2);
 		return true;
 	}
 
 	public boolean clear() {
+		systemlogList=new ArrayList<SystemlogPO>();
 		return true;
 	}
 

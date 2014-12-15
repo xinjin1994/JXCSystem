@@ -1,9 +1,10 @@
-package ui.commodity;
+package ui.commodity.manage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.commodity.CommodityAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
@@ -65,18 +66,18 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 		if(nameString.equals("")||typeString.equals("")){
 			resController.failedConfirm("请重新确认输入信息！", failedAddress);
 		}else{
-//			try{
-			/*finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
+			try{
+			finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
 			String fatherSort = finCom.fatherSort;
-			SortVO sortVO = new SortVO(fatherSort);*/
-			finCom = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
-			finCom.fatherSort = "b";
-			System.out.println(finCom.name);
+			SortVO sortVO = new SortVO(fatherSort);
+//			finCom = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
+//			finCom.fatherSort = "b";
+//			System.out.println(finCom.name);
 			frame.remove(this);
 			commodityAllUIController.changeComD(finCom);
-//			}catch(Exception e){
-//				resController.failedConfirm("您要修改的商品不存在！", failedAddress);
-//			}
+			}catch(Exception e){
+				resController.failedConfirm("您要修改的商品不存在！", failedAddress);
+			}
 		}
 	}
 

@@ -2,6 +2,21 @@ package ui.commodity;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.commodity.manage.AddComPanel;
+import ui.commodity.manage.ChaComDPanel;
+import ui.commodity.manage.ChaComPanel;
+import ui.commodity.manage.ComDetailPanel;
+import ui.commodity.manage.ConfirmComPanel;
+import ui.commodity.manage.DelComPanel;
+import ui.commodity.manage.FinComPanel;
+import ui.commodity.sort.AddSortPanel;
+import ui.commodity.sort.ChaSortDPanel;
+import ui.commodity.sort.ChaSortPanel;
+import ui.commodity.sort.ConfirmSortPanel;
+import ui.commodity.sort.DelSortPanel;
+import ui.commodity.storage.AddPatchPanel;
+import ui.commodity.storage.ExamineStockPanel;
+import ui.commodity.storage.PatchDetailPanel;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
 import vo.CommodityVO;
@@ -43,7 +58,7 @@ public class CommodityAllUIController extends UIController{
 	}
 
 
-	private void addMainPanel() {
+	public void addMainPanel() {
 		new CommodityUIController(this, frame);
 		frame.repaint();
 	}
@@ -86,12 +101,17 @@ public class CommodityAllUIController extends UIController{
 		frame.repaint();
 	}
 
-	public void confirmCom(CommodityVO com,String type){
-		confirmComPanel = new ConfirmComPanel(frame, "Image/Commodity/comManage/confirmCom.jpg", this,com,type);
+	public void confirmCom(CommodityVO com,String type,SortVO sort){
+		confirmComPanel = new ConfirmComPanel(frame, "Image/Commodity/comManage/confirmCom.jpg", this,com,type,sort);
 		frame.setPanel(confirmComPanel);
 		frame.repaint();
 	}
 	
+	public void confirmCom(CommodityVO com,String type,SortVO sort,CommodityVO oldVO){
+		confirmComPanel = new ConfirmComPanel(frame, "Image/Commodity/comManage/confirmCom.jpg", this,com,type,sort,oldVO);
+		frame.setPanel(confirmComPanel);
+		frame.repaint();
+	}
 	
 	public void changeSort() {
 		chaSortPanel = new ChaSortPanel(frame, "Image/Commodity/sortManage/chaSort.jpg", this);
@@ -118,7 +138,17 @@ public class CommodityAllUIController extends UIController{
 		frame.setPanel(confirmSortPanel);
 		frame.repaint();
 	}
+	public void confirmSort(SortVO sort,String type, String fatherSort){
+		confirmSortPanel = new ConfirmSortPanel(frame,"Image/Commodity/sortManage/confirmSort.jpg",this,sort,type,fatherSort);
+		frame.setPanel(confirmSortPanel);
+		frame.repaint();
+	}
 
+	public void confirmSort(SortVO sort,String type,SortVO oldSort){
+		confirmSortPanel = new ConfirmSortPanel(frame,"Image/Commodity/sortManage/confirmSort.jpg",this,sort,type,oldSort);
+		frame.setPanel(confirmSortPanel);
+		frame.repaint();
+	}
 	public void chaSortD(SortVO sort){
 		chaSortDPanel = new ChaSortDPanel(frame, "Image/Commodity/sortManage/chaSortD.jpg", this,sort);
 		frame.setPanel(chaSortDPanel);

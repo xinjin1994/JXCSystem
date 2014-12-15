@@ -62,7 +62,7 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 				double shouldGet = 0;
 				double shouldPay = 0;
 				String person = salesManField.getText();
-				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
+				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,person);
 				System.out.println("qianjing!");
 				SalesblService salesBlService = new SalesController();
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureChangeInfo.this);

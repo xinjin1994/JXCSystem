@@ -3,6 +3,7 @@ package businesslogic.salesbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.CommodityPO;
 import po.CustomerPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
@@ -13,6 +14,7 @@ import po.ReceiptPO;
 import vo.CustomerVO;
 import vo.bill.ExportMenuVO;
 import vo.bill.ImportMenuVO;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.invoicebl.Invoice;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.salesblservice.SalesblService;
@@ -29,6 +31,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 	public SalesDataService sale = new SaleDataService_Stub();
 	public InvoiceInfo invoice = new Invoice();
 	SystemlogInfo systemlog = new Systemlog();
+	CommodityInfo commodity=new Commodity();
 
 	public SalesDataService getSale() {
 		return sale;
@@ -258,6 +261,41 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 		}
 		return null;
 	}
+	
+	public CommodityPO getAllCommodity(){
+		
+		
+		
+		
+		return null;	
+	}
+	
+	public CommodityPO getCommodity(String name,String id){
+		
+		
+		
+		return null;	
+	}
+	
+	public ArrayList<CustomerPO> 	getAllImportCustomer(){
+	
+				
+				
+		return null;
+	}
+	
+	public ArrayList<CustomerPO> getAllExportCustomer(){
+	
+		
+		
+		
+		return null;	
+	}
+	
+	
+	
+	
+	
 
 	public ArrayList<CustomerPO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub
@@ -271,9 +309,16 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 
 	public ArrayList<CustomerPO> getAllCustomer() {
 		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
-
+	
+	public CustomerPO getCustomer(String name,String id){
+		
+		
+		return null;
+	}
 	public String passImport(ImportPO importPO) {
 		// TODO Auto-generated method stub
 		return null;

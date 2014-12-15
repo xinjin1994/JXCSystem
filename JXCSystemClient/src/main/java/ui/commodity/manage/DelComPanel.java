@@ -1,9 +1,10 @@
-package ui.commodity;
+package ui.commodity.manage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.commodity.CommodityAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTextFieldBorder;
@@ -11,6 +12,7 @@ import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.CommodityVO;
+import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
 
@@ -26,18 +28,24 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 	private ResultPanelController resController;
 	private CommodityblService commodityblService;
 	
-	private String nameString,typeString;
+	private String nameString,typeString,failedAddress;
+	
 
 	public DelComPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.commodityAllUIController = controller;
 		this.frame = frame;
 		this.repaint();
-		
+		commodityblService = new CommodityController();
 		commodityAllUIController.setBack_second(this, 183, 151);
 		resController = new ResultPanelController(frame, this);
 		commodityblService = new CommodityController();
+		setFailedAddress();
 		init();
+	}
+	
+	protected void setFailedAddress() {
+		failedAddress = "com/delCom";
 	}
 	private void init() {
 		setTextField();
@@ -65,13 +73,21 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 	private void getDelCom() {
 		nameString = name.getText();
 		typeString = typeID.getText();
+		if(nameString.equals("")||typeString.equals("")){
+			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+		}else{
+		/*	comDel = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
+			comDel.fatherSort = "g";
+			SortVO sort = new SortVO("g");*/
+			comDel = commodityblService.searchAccurateCommodity_up(nameString, typeString);
+			SortVO sort = new SortVO(comDel.fatherSort);
+			commodityAllUIController.confirmCom(comDel, "del",sort);
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
 			getDelCom();
-	//		comDel = new CommodityVO("" ,nameString, typeString, 11, 11, 11, 12, 12, 12, "g");
-			commodityAllUIController.confirmCom(comDel, "del");
 		}
 	}
 

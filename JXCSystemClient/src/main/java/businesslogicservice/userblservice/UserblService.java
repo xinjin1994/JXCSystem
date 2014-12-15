@@ -39,6 +39,7 @@ public interface UserblService {
 //	public UserVO searchUser_Note(String note);
 	
 	
-	public UserVO searchUser_up(String name);
+	public ArrayList<UserVO> searchUser_up(String name);
+//	public UserVO searchUser_Note(String note);
 
 }

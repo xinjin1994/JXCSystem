@@ -6,16 +6,22 @@ import java.util.ArrayList;
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
+import po.VoucherPO;
+import vo.CommodityVO;
 import vo.promotion.DiscountVO;
-import businesslogic.systemlogbl.Systemlog;
-import businesslogicservice.promotionblservice.PromotionblService;
 import data.promotiondata.PromotionDataService_Stub;
 import dataservice.promotiondataservice.PromotionDataService;
 
 public class Promotion {
 	
 	public PromotionDataService promotion=new PromotionDataService_Stub(); 
-	public SystemlogInfo systemlog=new Systemlog();
+	public SystemlogInfo systemlog;
+	public CommodityInfo commodity;
+	
+	public void setInfo(SystemlogInfo systemlog,CommodityInfo commodity){
+		this.systemlog=systemlog;
+		this.commodity=commodity;
+	}
 	
 	
 	public PromotionDataService getPro() {
@@ -24,13 +30,21 @@ public class Promotion {
 	public void setPro(PromotionDataService pro) {
 		this.promotion = pro;
 	}
+	
 
-	public int makeDiscount(int start_money, int discount, int end_money,
-			String time1, String time2) {
+	public int makeDiscount(double start_money, double discount, double end_money,
+			String time1, String time2,int level) {
 		// TODO Auto-generated method stub
 		//pro=new PromotionDataService_Stub(); 
-		DiscountPO dis=new DiscountPO(1,"t1","t2",1000,2000,1);
+		DiscountPO dis=new DiscountPO(discount,time1,time2,start_money,end_money,level);
 		try {
+			
+			DiscountPO lin=promotion.getDiscount(level);
+			
+			if(lin!=null){
+				return -1;
+			}
+			
 			if(promotion.addDiscount(dis)){
 				systemlog.add_up("AddDiscount:");
 				return 0;
@@ -43,28 +57,13 @@ public class Promotion {
 		return -1;
 		
 	}
-
-	public int delPromotion(String note) {
+	
+	public int makeGift(String name,String type,int number,String start_time,String end_time,double start_money,int level) {
 		// TODO Auto-generated method stub
-		//PromotionDataService pro=new PromotionDataService_Stub(); 
-		DiscountPO dis= new DiscountPO(1,"t1","t2",1000,2000,1);
-		try {
-			if(promotion.delDiscount(dis)){
-				systemlog.add_up("DelDiscount:");
-				return 0;
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return -1;
-	}
-
-	public int makeGift(int start_money, String time1, String time2) {
-		// TODO Auto-generated method stub
-//		PromotionDataService pro=new PromotionDataService_Stub(); 
-		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, "10", 10, 10, 10);
-		ProGiftPO dis=new ProGiftPO(gift, time1, time2, start_money, start_money, start_money,1);
+		CommodityPO gift=commodity.findCommodity(name, type);
+		ProGiftPO dis=new ProGiftPO(gift, start_time, end_time,number,start_money,9999,level);
+		ProGiftPO lin=new ProGiftPO(gift, start_time, end_time, number,
+				  start_money, 9999.9, level);
 		try {
 			if(promotion.addGift(dis)){
 				systemlog.add_up("AddGift:");
@@ -76,26 +75,152 @@ public class Promotion {
 		}
 		return -1;
 	}
-
-	public ArrayList<DiscountVO> search() {
+	
+	public int makeVoucher(double start_money, double voucher, double end_money,
+			String time1, String time2,int level) {
 		// TODO Auto-generated method stub
-//		PromotionDataService pro=new PromotionDataService_Stub(); 
-		ArrayList<DiscountVO> vo=new ArrayList<DiscountVO>();
+		VoucherPO dis=new VoucherPO(time1,time2,start_money,end_money,voucher,level);
 		try {
-			if(promotion.getDiscount(1)!=null){
-				systemlog.add_up("Search:");
-				return vo;
+			
+			VoucherPO lin=promotion.getVoucher(level);
+			
+			if(lin!=null){
+				return -1;
+			}
+			
+			if(promotion.addVoucher(dis)){
+				systemlog.add_up("AddDiscount:");
+				return 0;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return vo;
+	
+		return -1;
+	}
+	
+	public int delDiscount(int level) {
+		// TODO Auto-generated method stub
+		try {
+			
+			if(promotion.getDiscount(level)==null){
+				return -1;
+			}
+			
+			if(promotion.delDiscount(level)){
+				systemlog.add_up("DelDiscount:");
+				return 0;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int delProGift(int level) {
+		// TODO Auto-generated method stub
+		try {
+			
+			if(promotion.getGift(level)==null){
+				return -1;
+			}
+			
+			if(promotion.delGift(level)){
+				systemlog.add_up("DelProGift:");
+				return 0;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int delVoucher(int level) {
+		// TODO Auto-generated method stub
+		try {
+			
+			if(promotion.getVoucher(level)==null){
+				return -1;
+			}
+			
+			if(promotion.delVoucher(level)){
+				systemlog.add_up("DelVoucher:");
+				return 0;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public DiscountPO getDiscount(int level){
+		try {
+			return promotion.getDiscount(level);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ProGiftPO getProGift(int level){
+		try {
+			return promotion.getGift(level);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public VoucherPO getVoucher(int level){
+		try {
+			return promotion.getVoucher(level);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public int makeOther(String word) {
+	public ArrayList<DiscountPO> getAllDiscount() {
 		// TODO Auto-generated method stub
-		return 0;
+		ArrayList<DiscountPO> po=new ArrayList<DiscountPO>();
+		try {
+			po = promotion.showDiscount();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return po;
+	}
+	
+	public ArrayList<ProGiftPO> getAllProGift() {
+		// TODO Auto-generated method stub
+		ArrayList<ProGiftPO> po=new ArrayList<ProGiftPO>();
+		try {
+			po = promotion.showProGift();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return po;
+	}
+	
+	public ArrayList<VoucherPO> getAllVoucher() {
+		// TODO Auto-generated method stub
+		ArrayList<VoucherPO> po=new ArrayList<VoucherPO>();
+		try {
+			po = promotion.showVoucher();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return po;
 	}
 
 }

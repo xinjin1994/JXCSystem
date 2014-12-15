@@ -1,8 +1,9 @@
-package ui.commodity;
+package ui.commodity.manage;
 
 import java.awt.Color;
 
 import ui.FatherPanel;
+import ui.commodity.CommodityAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
 import ui.setting.MyFrame;

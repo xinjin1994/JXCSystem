@@ -33,7 +33,8 @@ import dataservice.commoditydataservice.CommodityDataService;
 //11 分类中存在分类，无法删除分类
 
 public class Commodity implements businesslogic.financialbl.CommodityInfo,
-				businesslogic.invoicebl.CommodityInfo, businesslogic.salesbl.CommodityInfo{
+				businesslogic.invoicebl.CommodityInfo, businesslogic.salesbl.CommodityInfo,
+				businesslogic.promotionbl.CommodityInfo{
 	
 	public InvoiceInfo invoice;
 	public SystemlogInfo systemlog;
