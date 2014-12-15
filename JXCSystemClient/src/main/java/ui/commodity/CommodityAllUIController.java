@@ -2,6 +2,11 @@ package ui.commodity;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.commodity.manage.AddComPanel;
+import ui.commodity.manage.ChaComDPanel;
+import ui.commodity.manage.ConfirmComPanel;
+import ui.commodity.manage.DelComPanel;
+import ui.commodity.manage.FinComPanel;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
 import vo.CommodityVO;
@@ -43,7 +48,7 @@ public class CommodityAllUIController extends UIController{
 	}
 
 
-	private void addMainPanel() {
+	public void addMainPanel() {
 		new CommodityUIController(this, frame);
 		frame.repaint();
 	}
@@ -86,12 +91,17 @@ public class CommodityAllUIController extends UIController{
 		frame.repaint();
 	}
 
-	public void confirmCom(CommodityVO com,String type){
-		confirmComPanel = new ConfirmComPanel(frame, "Image/Commodity/comManage/confirmCom.jpg", this,com,type);
+	public void confirmCom(CommodityVO com,String type,SortVO sort){
+		confirmComPanel = new ConfirmComPanel(frame, "Image/Commodity/comManage/confirmCom.jpg", this,com,type,sort);
 		frame.setPanel(confirmComPanel);
 		frame.repaint();
 	}
 	
+	public void confirmCom(CommodityVO com,String type,SortVO sort,CommodityVO oldVO){
+		confirmComPanel = new ConfirmComPanel(frame, "Image/Commodity/comManage/confirmCom.jpg", this,com,type,sort,oldVO);
+		frame.setPanel(confirmComPanel);
+		frame.repaint();
+	}
 	
 	public void changeSort() {
 		chaSortPanel = new ChaSortPanel(frame, "Image/Commodity/sortManage/chaSort.jpg", this);

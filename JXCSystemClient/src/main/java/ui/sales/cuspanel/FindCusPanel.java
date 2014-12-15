@@ -113,7 +113,7 @@ public class FindCusPanel extends FatherPanel {
 					String item = customerVO.id + customerVO.classification + ";" + customerVO.level + ";"
 							+ customerVO.cusName + ";" + customerVO.tel + ";" + customerVO.address + ";"
 							+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
-							+ customerVO.shouldGet + ";" + customerVO.shouldPay + ";" + customerVO.person;
+							+ customerVO.shouldGet + ";" + ";" + customerVO.person;
 					cusStr.add(item);
 				}
 				// 此次应该显示表格

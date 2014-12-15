@@ -49,7 +49,7 @@ public class ComDetailPanel extends FatherPanel{
 		setLabels_help(labels[5], 20, color.greyFont, com.type);
 		
 		labels[6] = new MyLabel(534, 245, 166, 41);
-		setLabels_help(labels[6], 20, color.accColor, com.sort);
+		setLabels_help(labels[6], 20, color.accColor, com.fatherSort);
 		
 		labels[7] = new MyLabel(534, 286, 166, 41);
 		setLabels_help(labels[7], 20, color.greyFont, String.valueOf(com.inValue));
@@ -58,7 +58,7 @@ public class ComDetailPanel extends FatherPanel{
 		setLabels_help(labels[8], 20, color.accColor, String.valueOf(com.outValue));
 	
 		labels[9] = new MyLabel(405, 449, 225, 89);
-		setLabels_help(labels[9], 24, color.accColor, String.valueOf(com.warnNumber));
+		setLabels_help(labels[9], 24, color.accColor, String.valueOf(com.warn));
 	}
 	
 	private void setLabels_help(MyLabel label,int fontSize,Color fontColor,String text){
