@@ -270,13 +270,32 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 		return null;	
 	}
 	
-	
 	public CommodityPO getCommodity(String name,String id){
 		
 		
 		
 		return null;	
 	}
+	
+	public ArrayList<CustomerPO> 	getAllImportCustomer(){
+	
+				
+				
+		return null;
+	}
+	
+	public ArrayList<CustomerPO> getAllExportCustomer(){
+	
+		
+		
+		
+		return null;	
+	}
+	
+	
+	
+	
+	
 
 	public ArrayList<CustomerPO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub
@@ -290,9 +309,16 @@ public class Sales implements businesslogic.accountbl.SalesInfo,businesslogic.in
 
 	public ArrayList<CustomerPO> getAllCustomer() {
 		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
-
+	
+	public CustomerPO getCustomer(String name,String id){
+		
+		
+		return null;
+	}
 	public String passImport(ImportPO importPO) {
 		// TODO Auto-generated method stub
 		return null;

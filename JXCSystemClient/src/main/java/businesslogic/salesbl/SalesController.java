@@ -204,24 +204,40 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<CustomerVO> getAllCustomer_up() {
 		// TODO Auto-generated method stub
-		
-		
-		return null;
+		ArrayList<CustomerVO> customerVO =new ArrayList<CustomerVO>();
+		ArrayList<CustomerPO> po=sale.getAllCustomer();
+		for(int i=0;i<po.size();i++){
+			customerVO.set(i,new CustomerVO(null, false, i, null, null, null, null, null, i, i, null));
+		}	
+		return customerVO;
 	}
 
 	public CustomerVO getCustomer_up(CustomerVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		CustomerPO po=sale.getCustomer(vo.cusName,vo.id);
+		CustomerVO customer=new CustomerVO(null, false, 0, null, null, null, null, null, 0, 0, null);
+		
+		return customer;
 	}
 
 	public ArrayList<CustomerVO> getAllImportCustomer_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CustomerVO> customerVO=new ArrayList<CustomerVO>();
+		ArrayList<CustomerPO> po=sale.getAllImportCustomer();
+		for(int i=0;i<po.size();i++){
+			customerVO.set(i,new CustomerVO(null, false, i, null, null, null, null, null, i, i, null));
+		}		
+		return customerVO;
 	}
 
 	public ArrayList<CustomerVO> getAllExportCustomer_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CustomerVO> customerVO=new ArrayList<CustomerVO>();
+		ArrayList<CustomerPO> po=sale.getAllExportCustomer();
+		for(int i=0;i<po.size();i++){
+			customerVO.set(i, new CustomerVO(null, false, i, null, null, null, null, null, i, i, null));
+		}		
+		return customerVO;
 	}
 
 	public int getClerk_up() {
