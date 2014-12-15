@@ -42,6 +42,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	String accountName;
 	double balanceValue,totalValue;
 	ResultPanelController resController;
+	String failedAddress = "acc/finManage/pay";
 	public AddPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -149,10 +150,13 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			String payItem = item.getText();
+		
 			String remark = ps.getText();
 			String person = agent.getText();
-			if(payItem.equals("")||remark.equals("")||money.getText().equals("")||person.equals("")){
-				failLabel.setText("请正确输入信息！");
+			if(payItem.equals("")||money.getText().equals("")||person.equals("")){
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
+				
 			}else{
 				try{
 			double turnValue = Double.parseDouble(money.getText());
@@ -161,12 +165,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 			ItemList itemList = new ItemList(payItem,turnValue,remark);
 			newPayment = new PayVO(id,accountName,itemList);
 			totalValue = accountblService.calTotalMoney_up(newPayment);
+			
+			uiController.setTempPanel(this);
 			frame.remove(this);
 			uiController.confirmPayment(newPayment,person,operate,
 					totalValue,balanceValue);
 				}catch(Exception e2){
-					failLabel.setText("请正确输入信息！");
-				}
+					frame.remove(this);
+					resController.failed("存在输入错误！",failedAddress);				}
 			}
 		}else if(e.getSource() == account){
 			accountName = account.getSelectedItem().toString();

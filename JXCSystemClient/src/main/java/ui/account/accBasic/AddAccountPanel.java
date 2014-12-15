@@ -124,7 +124,7 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 					
 				}catch(Exception e2){
 					frame.remove(this);
-					resController.failed("存在输入错误！", "acc/accManage/addAcc");
+					resController.failed("存在输入错误！",failedAddress);
 				}
 			}
 		}

@@ -11,6 +11,7 @@ import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SecondPanel;
 import ui.setting.Button.MyButton;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
@@ -35,9 +36,10 @@ public class AccountUIController {
 	private MyButton []recButtons = new MyButton[]{salesList,allBills,operatingCondition};
 	private MyButton []invoiceButtons = new MyButton[]{approButton,disapButton};
 	private MyButton []iniButtons = new MyButton[]{addComInfo,addCusInfo,addAccInfo,check};
-	ArrayList<InvoiceVO> billsArray ;
+	ArrayList<InvoiceVO> billsArray = new ArrayList<InvoiceVO>() ;
 	private AccountAllUIController uiController;
 	private MyFrame frame;
+	private ResultPanelController resController;
 	
 	public AccountUIController(AccountAllUIController uiController,MyFrame frame){
 		this.uiController = uiController;
@@ -47,7 +49,7 @@ public class AccountUIController {
 		invoiceblService = new InvoiceController();
 		colors = new ColorFactory();
 		frame.setPanel(accountPanel);
-		
+		resController = new ResultPanelController(frame,accountPanel);
 		uiController.setMainPanel(accountPanel);
 	}
 	
@@ -304,47 +306,57 @@ public class AccountUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			String type = "通过";
 			if(e.getSource() == invoiceButtons[0]){
 				billsArray = invoiceblService.show_pass();
 			}else if(e.getSource() == invoiceButtons[1]){
 				billsArray = invoiceblService.show_refuse();
-				}
-			ArrayList<String> bills = new ArrayList<String>();
-			bills.add("单据编号;单据类型");
-			for(int i=0;i<billsArray.size();i++){
-				switch(billsArray.get(i).bill_note) {
-				//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
-				//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
-				case 1:
-					itemName = "商品赠送单";
-					break;
-				case 2:
-					itemName = "进货单";
-					break;
-				case 3:
-					itemName = "进货退货单";
-					break;
-				case 4:
-					itemName = "销售单";
-					break;
-				case 5:
-					itemName = "销售退货单";
-					break;
-				case 6:
-					itemName = "报溢报损单";
-					break;
-				case 7:
-					itemName = "收款单";
-					break;
-				case 8:
-					itemName = "付款单";
-					break;	
-				}
-				item = billsArray.get(i).note+itemName;
-				bills.add(item);
-				setTable(bills);
-				
+				type = "拒绝";
 			}
+
+			try {
+				ArrayList<String> bills = new ArrayList<String>();
+				bills.add("单据编号;单据类型");
+
+				for(int i=0;i<billsArray.size();i++){
+					switch(billsArray.get(i).bill_note) {
+					//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
+					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
+					case 1:
+						itemName = "商品赠送单";
+						break;
+					case 2:
+						itemName = "进货单";
+						break;
+					case 3:
+						itemName = "进货退货单";
+						break;
+					case 4:
+						itemName = "销售单";
+						break;
+					case 5:
+						itemName = "销售退货单";
+						break;
+					case 6:
+						itemName = "报溢报损单";
+						break;
+					case 7:
+						itemName = "收款单";
+						break;
+					case 8:
+						itemName = "付款单";
+						break;	
+					}
+					item = billsArray.get(i).note+itemName;
+					bills.add(item);
+					setTable(bills);
+
+				}
+			} catch (Exception e2) {
+				frame.remove(accountPanel);
+				resController.failed("无新审批"+type+"单据！", "account");
+			}
+
 		}
 
 		public void mouseReleased(MouseEvent e) {

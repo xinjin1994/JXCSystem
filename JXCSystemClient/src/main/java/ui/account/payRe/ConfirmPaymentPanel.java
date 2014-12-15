@@ -29,7 +29,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 	double totalValue, balanceValue;
 	PayVO newPayment;
 	MyButton forwardButton;
-	ResultPanelController resController;
+	ResultPanelController resControllerS,resControllerF;
 	AccountblService accountblService;
 
 	public ConfirmPaymentPanel(MyFrame frame, String url, AccountAllUIController uiController, PayVO newPayment,
@@ -43,9 +43,12 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 		this.totalValue = totalValue;
 		this.balanceValue = balanceValue;
 		accountblService = new AccountController();
-		resController = new ResultPanelController(uiController, frame);
-		uiController.setBack_first(this);
-
+		
+		
+		resControllerS = new ResultPanelController(frame,uiController.getMainPanel());
+		resControllerF = new ResultPanelController(frame,uiController.getPanel() );
+		uiController.setBack_third(this);
+		
 		setLabel();
 		setForward();
 	}
@@ -80,7 +83,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 			this.add(transferList[i]);
 		}
 		transferList[0].setText(newPayment.bankAccount);
-		transferList[1].setText(balanceValue + "");
+		transferList[1].setText(balanceValue + "123");
 		transferList[2].setText(newPayment.itemList.money + "");
 
 	}
@@ -100,10 +103,10 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 			frame.remove(this);
 			switch (accountblService.addPayment_up(newPayment)) {
 			case 0:
-				resController.succeeded("成功添加付款单！", "account");
+				resControllerS.succeeded("成功添加付款单！", "account");
 				break;
 			case 4:
-				resController.failed("客户不存在！", "account");
+				resControllerF.failed("客户不存在！", "account");
 				break;
 			}
 		}

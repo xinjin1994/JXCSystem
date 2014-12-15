@@ -54,6 +54,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	public FindAccountPanel(MyFrame frame,String url,
 			ManagerAllUIController uiController,String type){
 		super(frame,url,uiController);
+		this.frame = frame;
 		this.managerController =uiController;
 		this.repaint();
 		this.type = type;
@@ -124,13 +125,17 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 			}else{
-			name.setText("");
-			
-			frame.remove(FindAccountPanel.this);
-			if(type.equals("account")){
-				accountController.accountDetail(getFoundAcc());
-			}else if(type.equals("manager")){
-				managerController.accountDetail(getFoundAcc());
+				if(getFoundAcc() != null){
+					name.setText("");
+					frame.remove(FindAccountPanel.this);
+					if(type.equals("account")){
+						accountController.accountDetail(getFoundAcc());
+					}else if(type.equals("manager")){
+						managerController.accountDetail(getFoundAcc());
+					}
+				}else {
+					frame.remove(this);
+					resController.failed("不存在该账户！", failedAddress);
 				}
 			}
 		}else if(e.getSource() == fuzzyForwardButton){
@@ -139,19 +144,24 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 			}else{
-			info.setText("");
-			ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
-			ArrayList <String> infoArray = new ArrayList<String>();
-			infoArray.add("账户名称;账户余额");
-			/*for(int i=0; i<fuzzyAccVO.size();i++){
+				info.setText("");
+				ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
+				ArrayList <String> infoArray = new ArrayList<String>();
+				infoArray.add("账户名称;账户余额");
+				/*for(int i=0; i<fuzzyAccVO.size();i++){
 				String infoOfArray = fuzzyAccVO.get(i).name+";"+fuzzyAccVO.get(i).balance;
 				infoArray.add(infoOfArray);
 			}*/
-				setTable(infoArray);
+				if(infoArray.size() != 1){
+					setTable(infoArray);
+				}else {
+					frame.remove(this);
+					resController.failed("不存在相关账户信息！", failedAddress);
+				}
 			}
 			//返回主界面列表显示所有可能account
 		}
-		
+
 	}
 	private AccountVO getFoundAcc() {
 		AccountVO foundAcc = accountblService.searchAccurateAccount_up(nameString);
