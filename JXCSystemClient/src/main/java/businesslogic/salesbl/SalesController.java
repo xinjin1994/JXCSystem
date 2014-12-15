@@ -242,6 +242,9 @@ public class SalesController implements SalesblService {
 
 	public int getClerk_up() {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return 0;
 	}
 

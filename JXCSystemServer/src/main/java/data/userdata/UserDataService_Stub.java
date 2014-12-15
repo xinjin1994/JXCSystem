@@ -170,6 +170,10 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 
 	public UserPO login(UserPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		if(po.getName().equals("admin")&&po.getPassword().equals("admin")){
+			return new UserPO("admin","",0,"admin");
+		}
+		
 		for(int i=0;i<userList.size();i++){
 			if(userList.get(i).getName().equals(po.getName())&&userList.get(i).getPassword().equals(po.getPassword())){
 				return new UserPO(userList.get(i).getName(),"",userList.get(i).getDuty(),userList.get(i).getNote());

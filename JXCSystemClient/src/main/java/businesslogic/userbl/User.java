@@ -15,6 +15,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 	public UserDataService us=new UserDataService_Stub("password", "duty", 10);
 	SystemlogInfo systemlog=new Systemlog();
 	public static String operator;
+	public static int duty;
 	
 //	public UserDataService getUser() {
 //		return us;
@@ -87,6 +88,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			UserPO lin=us.login(po);
 			if(lin!=null){
 				User.operator=lin.getName();
+				User.duty=lin.getDuty();
 			}
 			
 			return lin.getDuty();
