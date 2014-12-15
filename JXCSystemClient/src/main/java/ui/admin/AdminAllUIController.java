@@ -21,7 +21,7 @@ public class AdminAllUIController extends UIController{
 	public AdminAllUIController(UIController uiController,MyFrame frame) {
 		this.frame = frame;
 		this.uiController = uiController;
-		resController = new ResultPanelController(this, frame);
+		resController = new ResultPanelController(frame, adminPanel);
 		addMainPanel();
 	}
 	private void addMainPanel() {
@@ -31,11 +31,15 @@ public class AdminAllUIController extends UIController{
 		setMainPanel(adminPanel);
 	}
 	public void addUser(){
+		this.setMainPanel(adminPanel);
+		
 		addUserPanel = new AddUserPanel(frame, "Image/User/addUser.jpg", this);
 		frame.setPanel(addUserPanel);
 		frame.repaint();
 	}
 	public void delUser() {
+		this.setMainPanel(adminPanel);
+		
 		delUserPanel = new DelUserPanel(frame, "Image/User/delUser.jpg", this);
 		frame.setPanel(delUserPanel);
 		frame.repaint();
@@ -74,10 +78,10 @@ public class AdminAllUIController extends UIController{
 	 * 返回主界面
 	 * @param type
 	 */
-	public void setResult(String type) {
-	//	setMainPanel(adminPanel);
-		adminPanel.remove(confirmUserPanel);
-		frame.remove(adminPanel);
-		resController.succeeded("成功"+type+"用户！", "admin");
-	}
+//	public void setResult(String type) {
+//	//	setMainPanel(adminPanel);
+//		adminPanel.remove(confirmUserPanel);
+//		frame.remove(adminPanel);
+//		resController.succeeded("成功"+type+"用户！", "user");
+//	}
 }

@@ -12,6 +12,7 @@ import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
 
 public class AddUserPanel extends FatherPanel implements ActionListener{
@@ -27,11 +28,15 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 	
 	private int dutyGet;
 	
+	private ResultPanelController resController;
+	private String failedAddress;
 	public AddUserPanel(MyFrame frame, String url, AdminAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.uiController = controller;
+		this.failedAddress = "admin/addUser";
 		
+		resController = new ResultPanelController(frame, this);
 		controller.setBack_second(this,188,70);
 	
 		addTextField();
@@ -81,11 +86,21 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 			}catch(Exception e){
 				isLegal = false;
 			}
-			if(!textInfos[3].getText().equals(textInfos[4].getText())){
-				label.setText("请重新确认密码！");
-			}else if(textInfos[0].getText().equals("")||textInfos[1].getText().equals("")||textInfos[2].getText().equals("")||
-					textInfos[3].getText().equals("")||textInfos[4].getText().equals("")||isLegal == false||dutyGet<0||dutyGet>6){
-				label.setText("请重新确认输入信息");
+			
+			if(textInfos[0].getText().equals("")||textInfos[1].getText().equals("")||textInfos[2].getText().equals("")||
+					textInfos[3].getText().equals("")||textInfos[4].getText().equals("")){
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
+			}
+			else if(!textInfos[3].getText().equals(textInfos[4].getText())){
+				frame.remove(this);
+				resController.failed("两次密码输入不同！请重新确认密码！", failedAddress);
+				textInfos[3].setText("");
+				textInfos[4].setText("");
+			}
+			else if(isLegal == false||dutyGet<0||dutyGet>6){
+				frame.remove(this);
+				resController.failed("输入存在错误！请重新确认您的输入信息！", failedAddress);
 			}else {
 			frame.remove(this);
 			frame.setPanel(uiController.getMainPanel());

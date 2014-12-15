@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import ui.commodity.CommodityUIController;
 import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
+import ui.setting.Button.RemindButton;
 
 //1 库存人员
 public class CommodityPanel extends FatherPanel{
@@ -34,29 +35,21 @@ public class CommodityPanel extends FatherPanel{
 			"Image/Commodity/button/invoiceManage_press_on.png"};
 	
 	private FirstButtonListener listener = new FirstButtonListener();
+
+	private RemindButton remind;
+	
 	public CommodityPanel(JFrame frame, String url, UIController controller,
 			CommodityUIController commodityUIController) {
 		super(frame, url, controller);
 		this.commodityUIController= commodityUIController;
-		this.setRemind();
+		remind = new RemindButton(this);
 		this.addButton();
 
 		}
 
 
-	private void setRemind() {
-		remindLabel = new JLabel();
-		ImageIcon imageIcon = new ImageIcon("Image/remind_ori.png");
-		remindLabel.setBounds(120, 555, imageIcon.getIconWidth(),imageIcon.getIconHeight());
-		remindLabel.setIcon(imageIcon);
-		remindLabel.setVisible(true);
-		this.add(remindLabel);
-		
-	}
-
-
 	private void addButton() {
-		
+		remind.setLable();
 		for(int i = 0 ;i < buttons.length;i++){
 			buttons[i] = new MyButton(images_ori[i], firstX, firstY +i * inter,
 					images_stop[i], images_press_on[i]);
@@ -105,7 +98,7 @@ public class CommodityPanel extends FatherPanel{
 			
 			}else if(e.getSource() == refresh){
 				setWarn();
-				newBills();
+				remind.setButton();
 			}else if(e.getSource() == warn){
 				CommodityPanel.this.remove(warn);
 				CommodityPanel.this.repaint();

@@ -248,14 +248,6 @@ public class AccountUIController {
 		
 	}
 	
-	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
-		showTable.setTable(info);
-		frame.add(showTable.tablePanel);
-//		uiController.addMainPanel();
-		frame.repaint();
-	}
 	class IniButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -349,9 +341,9 @@ public class AccountUIController {
 					}
 					item = billsArray.get(i).note+itemName;
 					bills.add(item);
-					setTable(bills);
 
 				}
+				accountPanel.setTable(bills);
 			} catch (Exception e2) {
 				frame.remove(accountPanel);
 				resController.failed("无新审批"+type+"单据！", "account");

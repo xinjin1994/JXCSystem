@@ -23,7 +23,7 @@ public class ConfirmUserDel extends ConfirmUserPanel {
 		if (event.getSource() == forwardButton) {
 			switch (userblService.delUser_up(user)) {
 			case 0:
-				adminAllUIController.setResult(type);
+//				adminAllUIController.setResult(type);
 				break;
 			}
 		}

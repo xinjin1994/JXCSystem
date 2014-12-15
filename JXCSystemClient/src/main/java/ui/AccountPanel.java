@@ -13,6 +13,7 @@ import businesslogicservice.invoiceblservice.InvoiceblService;
 import ui.account.AccountUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyTable;
+import ui.setting.ThirdPanel;
 import ui.setting.Button.ApproveButton;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
@@ -25,6 +26,7 @@ public class AccountPanel extends FatherPanel{
 	private int firstY = 110;
 	private int inter = 54;
 	
+	public ThirdPanel accountThirdPanel;
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage;
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage};
 	private MyButton refresh;
@@ -49,6 +51,8 @@ public class AccountPanel extends FatherPanel{
 	public AccountPanel(JFrame frame, String url, UIController controller,
 			AccountUIController accountUIController) {
 		super(frame, url, controller);
+		accountThirdPanel = new ThirdPanel();
+		this.add(accountThirdPanel);
 		this.accountUIController= accountUIController;
 		refuse = new RefuseButton(this);
 		approve = new ApproveButton(this);
@@ -76,11 +80,13 @@ public class AccountPanel extends FatherPanel{
 	 * 该方法用于显示table
 	 * @param info 要显示的数据
 	 */
-	private void setTable(ArrayList<String> info){
+	public void setTable(ArrayList<String> info){
+		accountThirdPanel.removeAll();
 		showTable = new MyTable();
 		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
-		this.add(showTable.tablePanel);
+		accountThirdPanel.add(showTable.tablePanel);
+		accountThirdPanel.repaint();
 		this.repaint();
 	}
 	/**

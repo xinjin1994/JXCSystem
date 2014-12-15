@@ -31,6 +31,8 @@ public class MyTable extends JTable{
 //	Color oddColor = new Color(245,190,185);
 //	Color fontColor = new Color(159,122,116);
 	
+	private ArrayList<Object> vo = new ArrayList<Object>();
+	
 	public MyTable(){
 		
 	//	this.backPanel = backPanel;
@@ -53,7 +55,7 @@ public class MyTable extends JTable{
 		tablePanel = new JPanel();
 		
 		tablePanel.setLayout(null);
-		tablePanel.setBounds(353,76,437 ,428);
+		tablePanel.setBounds(0,0,437 ,428);
 		tablePanel.removeAll();
 		tablePanel.setOpaque(false);
 		tablePanel.setVisible(true);
@@ -219,7 +221,14 @@ public class MyTable extends JTable{
 		table.setRowSelectionInterval(loc1,loc2);
 		table.setSelectionBackground(selectColor);
 		table.setSelectionForeground(new Color(30,30,30));
-		}
+	}
+	
+	public void setInfo(ArrayList<Object> vo){
+		this.vo = vo;
+	}
+	public ArrayList<Object> getInfo(){
+		return vo;
+	}
 
 	
 }

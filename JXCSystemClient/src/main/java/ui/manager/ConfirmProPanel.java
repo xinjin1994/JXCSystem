@@ -15,22 +15,25 @@ import businesslogicservice.promotionblservice.PromotionblService;
 
 public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	
-	ResultPanelController resController;
-	private MyFrame frame;
-	private ManagerAllUIController uiController;
+	private ResultPanelController resControllerF,resControllerS;
+	
+//	private MyFrame frame;
+//	private ManagerAllUIController uiController;
 	private MyButton forwardButton;
 	private PromotionblService promotionblService;
-	private DiscountVO discount;
-	private VoucherVO voucher;
-	private ProGiftVO gift;
+//	private DiscountVO discount;
+//	private VoucherVO voucher;
+//	private ProGiftVO gift;
+	
+	private String failedAddress;
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, DiscountVO discount) {
 		super(frame, url, controller, discount);
-		this.frame = frame;
-		this.uiController = controller;
-		this.discount = discount;
-		promotionblService = new PromotionController();
-		addPro();
+//		this.frame = frame;
+//		this.uiController = controller;
+//		this.discount = discount;
+		
+		
 		forwardButton.setActionCommand("discount");
 		
 	}
@@ -38,10 +41,10 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, VoucherVO voucher) {
 		super(frame, url, controller, voucher);
-		this.voucher = voucher;
-		this.frame = frame;
-		this.uiController = controller;
-		addPro();
+//		this.voucher = voucher;
+//		this.frame = frame;
+//		this.uiController = controller;
+//		addPro();
 		forwardButton.setActionCommand("voucher");
 		
 	}
@@ -49,11 +52,24 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, ProGiftVO gift) {
 		super(frame, url, controller, gift);
-		this.gift = gift;
-		this.frame = frame;
-		this.uiController = controller;
-		addPro();
+	
+//		this.gift = gift;
+//		this.frame = frame;
+//		this.uiController = controller;
+//		addPro();
 		forwardButton.setActionCommand("gift");
+	}
+	protected void back() {
+		uiController.setBack_third(this);
+	}
+	protected void init(){
+		super.init();
+		resControllerF = new ResultPanelController(frame, uiController.getPanel());
+		resControllerS = new ResultPanelController(frame, uiController.getMainPanel());
+		this.failedAddress = "manager2";
+		
+		promotionblService = new PromotionController();
+		addPro();
 	}
 	/**
 	 * 下面三个方法用于向下层传新增的促销策略
@@ -76,7 +92,6 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 		forwardButton = forwardDel.forward_black;		
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);
-		resController = new ResultPanelController(controller, frame);
 	}
 	//-1 未知错误
 	//1  商品不存在
@@ -87,57 +102,57 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 			frame.remove(this);
 			switch(addDiscount()){
 			case 0:
-				resController.succeeded("成功添加一个折扣促销策略！", "manager");
+				resControllerS.succeeded("成功添加一个折扣促销策略！", "manager");
 				break;
 			case 1:
-				resController.failed("商品不存在!", "manager");
+				resControllerF.failedConfirm("商品不存在!", failedAddress);
 				break;
 			case 2:
-				resController.failed("库存中商品数量不足，不能完成赠品促销!", "manager");
+				resControllerF.failedConfirm("库存中商品数量不足，不能完成赠品促销!", failedAddress);
 				break;
 			case 3:
-				resController.failed("客户等级不存在!", "manager");
+				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
 			case -1:
-				resController.failed("未知错误!", "manager");
+				resControllerF.failedConfirm("未知错误!", failedAddress);
 				break;
 			}
 		}else if(e.getActionCommand().equals("voucher")) {
 			frame.remove(this);
 			switch(addVoucher()){
 			case 0:
-				resController.succeeded("成功添加一个优惠券促销策略！", "manager");
+				resControllerS.succeeded("成功添加一个优惠券促销策略！", "manager");
 				break;
 			case 1:
-				resController.failed("商品不存在!", "manager");
+				resControllerF.failedConfirm("商品不存在!", failedAddress);
 				break;
 			case 2:
-				resController.failed("库存中商品数量不足，不能完成赠品促销!", "manager");
+				resControllerF.failedConfirm("库存中商品数量不足，不能完成赠品促销!", failedAddress);
 				break;
 			case 3:
-				resController.failed("客户等级不存在!", "manager");
+				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
 			case -1:
-				resController.failed("未知错误!", "manager");
+				resControllerF.failedConfirm("未知错误!", failedAddress);
 				break;
 			}
 		}else if (e.getActionCommand().equals("gift")) {
 			frame.remove(this);
 			switch(addProGift()){
 			case 0:
-				resController.succeeded("成功添加一个赠品促销策略！", "manager");
+				resControllerS.succeeded("成功添加一个赠品促销策略！", "manager");
 				break;
 			case 1:
-				resController.failed("商品不存在!", "manager");
+				resControllerF.failedConfirm("商品不存在!", failedAddress);
 				break;
 			case 2:
-				resController.failed("库存中商品数量不足，不能完成赠品促销!", "manager");
+				resControllerF.failedConfirm("库存中商品数量不足，不能完成赠品促销!", failedAddress);
 				break;
 			case 3:
-				resController.failed("客户等级不存在!", "manager");
+				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
 			case -1:
-				resController.failed("未知错误!", "manager");
+				resControllerF.failedConfirm("未知错误!", failedAddress);
 				break;
 			}
 		}

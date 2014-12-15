@@ -14,8 +14,10 @@ import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;
+import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
@@ -24,6 +26,7 @@ import businesslogicservice.userblservice.UserblService;
 public class AdminPanel extends FatherPanel{
 	
 	private AdminAllUIController adminAllUIController;
+	public ThirdPanel adminThirdPanel;
 	
 	private MyButton []userButtons = new MyButton[3];
 	private String[]  image_ori = new String[]{"Image/User/search.png",
@@ -38,14 +41,21 @@ public class AdminPanel extends FatherPanel{
 	private MyTable showTable;
 	private MyLabel[] infoLabels = new MyLabel[3];
 	
+	private ResultPanelController resController;
+	
 	private UserblService userblService;
 	private ColorFactory colors = new ColorFactory();
+	
 	public AdminPanel(MyFrame frame, String url, UIController controller,
 			AdminAllUIController adminAllUIController) {
 		super(frame, url, controller);
+		adminThirdPanel = new ThirdPanel();
 		this.adminAllUIController= adminAllUIController;
 		this.frame = frame;
+		this.add(adminThirdPanel);
 		userblService = new UserController();
+		
+		resController = new ResultPanelController(frame, this);
 		setLabel();
 		setButtons();
 		setSearchText();
@@ -69,10 +79,14 @@ public class AdminPanel extends FatherPanel{
 			info.add(userItem);
 		}
 		
+		adminThirdPanel.removeAll();
 		showTable = new MyTable();
 		showTable.setColor(colors.adminTableColor,colors.adminBkColor, colors.adminColor,Color.white);
 		showTable.setTable(info);
-		this.add(showTable.tablePanel);
+		
+		adminThirdPanel.add(showTable.tablePanel);
+		adminThirdPanel.repaint();
+		this.repaint();
 	}
 	private void setSearchText() {
 		searchTextField = new MyTextFieldBorder(15, 99);
@@ -82,7 +96,7 @@ public class AdminPanel extends FatherPanel{
 	}
 	
 	class SearchListener implements FocusListener{
-
+		
 		public void focusGained(FocusEvent e) {
 			label.setText("");
 		}
@@ -123,7 +137,9 @@ public class AdminPanel extends FatherPanel{
 		//	infoLabels[i].setText(""+i);
 		}
 		if(user.duty <0){
-			label.setText("管理员不存在！");
+			frame.remove(this);
+			resController.failedConfirm("用户不存在！", "user");
+			frame.repaint();
 		}else{
 		switch(user.duty){
 		case 0:
@@ -168,10 +184,12 @@ public class AdminPanel extends FatherPanel{
 				setInfoLabel(user);
 				//根据此信息寻找，级如果在下方详细信息中显示,将参数UserVo传给setInfoLabel方法
 			}else if(e.getSource() == userButtons[1]){
+//				adminAllUIController.setMainPanel(AdminPanel.this);
 				frame.remove(AdminPanel.this);
 				adminAllUIController.addUser();
 				
 			}else if(e.getSource() == userButtons[2]){
+//				adminAllUIController.setMainPanel(AdminPanel.this);
 				frame.remove(AdminPanel.this);
 				adminAllUIController.delUser();
 			}

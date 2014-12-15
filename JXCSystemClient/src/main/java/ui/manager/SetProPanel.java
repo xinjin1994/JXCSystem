@@ -11,14 +11,15 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import ui.FatherPanel;
+import ui.setting.CheckTimeFormat;
 import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
 import ui.setting.MyFrame;
-
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.CommodityVO;
 import vo.promotion.DiscountVO;
 import vo.promotion.ProGiftVO;
@@ -37,7 +38,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private MyComboBox commodity;
 	private MyTextFieldTrans number,price;
 	
-//	private CommodityblService commodityblService;
+	private CommodityblService commodityblService;
 	private int level;
 	
 	private MyButton forwardButtons[] = new MyButton[3];
@@ -47,12 +48,17 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private ProGiftVO gift;
 	private VoucherVO vou;
 	
+	private ResultPanelController resController;
+	private String commodityInfo;
+	private String failedAddress;
 	public SetProPanel(MyFrame frame, String url, ManagerAllUIController controller) {
 		super(frame, url, controller);
 		this.uiController = controller;
 		this.frame = frame;
 		this.repaint();
-//		commodityblService = new CommodityController();
+		this.failedAddress = "manager/proManage/pro";
+		resController = new ResultPanelController(frame, this);
+		commodityblService = new CommodityController();
 		uiController.setBack_first(this);
 		setTime();
 		setDiscountText();
@@ -73,13 +79,76 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		
 	}
 	private void discount(){
-		if()
+		String timeBegin = time[0].getText();
+		String timeEnd = time[1].getText();
+		String beginMoney = discount[0].getText();
+		String discountMoney = discount[1].getText();
+		String upperLimit = discount[2].getText();
+				
+		if( (timeBegin == "") || (timeEnd == "") || (beginMoney == "")
+				||(discountMoney == "")||(upperLimit == "")){
+			frame.remove(this);
+			resController.failed("存在输入为空！", failedAddress);
+		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
+			frame.remove(this);
+			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+		}else{
+			dis = new DiscountVO(timeBegin,timeEnd,Double.parseDouble(beginMoney),
+						Double.parseDouble(upperLimit),Double.parseDouble(discountMoney),level);
+			
+			uiController.setTempPanel(SetProPanel.this);
+			frame.remove(SetProPanel.this);
+			uiController.confirmProDis(dis);
+		}
+		
 	}
 	private void voucher(){
+		String timeBegin = time[0].getText();
+		String timeEnd = time[1].getText();
+		String beginMoney = voucher[0].getText();
+		String voucherMoney = voucher[1].getText();
+		String upperLimit = voucher[2].getText();
+				
+		if( (timeBegin == "") || (timeEnd == "") || (beginMoney == "")
+				||(voucherMoney == "")||(upperLimit == "")){
+			frame.remove(this);
+			resController.failed("存在输入为空！", failedAddress);
+		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
+			frame.remove(this);
+			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+		}else{
+			vou = new VoucherVO(timeBegin,timeEnd,Double.parseDouble(beginMoney),
+					Double.parseDouble(upperLimit),Double.parseDouble(voucherMoney),level);
 		
+			uiController.setTempPanel(SetProPanel.this);
+			frame.remove(SetProPanel.this);
+			uiController.confirmProVou(vou);
+			
+		}
 	}
 	private void proGift(){
-		
+		String timeBegin = time[0].getText();
+		String timeEnd = time[1].getText();
+		String beginMoney = price.getText();
+		String num = number.getText();
+				
+		if( (timeBegin == "") || (timeEnd == "") || (beginMoney == "") 
+				||(num == "") || (commodityInfo == "")){
+			frame.remove(this);
+			resController.failed("存在输入为空！", failedAddress);
+		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
+			frame.remove(this);
+			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+		}else{
+
+			String info[] = commodityInfo.split("+");
+			CommodityVO commodityVO = commodityblService.searchAccurateCommodity_up(info[0],info[1]);
+			gift = new ProGiftVO(commodityVO,Integer.parseInt(num),timeBegin,timeEnd,Integer.parseInt(beginMoney),level);
+
+			uiController.setTempPanel(SetProPanel.this);
+			frame.remove(SetProPanel.this);
+			uiController.confirmProGift(gift);
+		}
 	}
 	class ForwardMouseListener implements MouseListener{
 
@@ -96,29 +165,15 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		}
 
 		public void mousePressed(MouseEvent e) {
-			uiController.setTempPanel(SetProPanel.this);
-			frame.remove(SetProPanel.this);
-			if(e.getSource() == forwardButtons[0]){
-				dis = new DiscountVO(time[0].getText(),time[1].getText(),Double.parseDouble(discount[0].getText()),
-						Double.parseDouble(discount[2].getText()),Double.parseDouble(discount[1].getText()),level);
-				
-				discount();
-				uiController.confirmProDis(dis);
-				
-			}else if(e.getSource() == forwardButtons[1]){
-				vou = new VoucherVO(time[0].getText(),time[1].getText(),Double.parseDouble(voucher[0].getText()),
-						Double.parseDouble(voucher[2].getText()),Double.parseDouble(voucher[1].getText()),level);
 			
+			if(e.getSource() == forwardButtons[0]){
+				discount();
+
+			}else if(e.getSource() == forwardButtons[1]){
+				voucher();
 				
-				uiController.confirmProVou(vou);
 			}else if(e.getSource() == forwardButtons[2]){
-				//ProGiftVO(CommodityVO commodity,int number,String start_time,
-				//String end_time,double start_money,int level){
-				String selectedName = commodity.getSelectedItem().toString();
-				CommodityVO commodityVO = commodityblService.searchAccurateCommodity_up(selectedName);
-				gift = new ProGiftVO(commodityVO,Integer.parseInt(number.getText()),time[0].getText(),time[1].getText(),0,level);
-				
-				uiController.confirmProGift(gift);
+				proGift();
 			}
 		}
 
@@ -144,7 +199,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		ArrayList<CommodityVO> accVOArray = commodityblService.getAllCommodity_up();
 			String[] rolesList = new String[accVOArray.size()];
 			for (int i = 0; i < accVOArray.size(); i++) {
-				rolesList[i] = accVOArray.get(i).name;
+				rolesList[i] = accVOArray.get(i).name +"+"+accVOArray.get(i).type;
 			}
 		commodity = new MyComboBox(rolesList,471, 423, 156, 32);
 		number = new MyTextFieldTrans(471,463, 156, 32);
@@ -157,6 +212,9 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		
 		this.add(price);
 		this.add(commodity);
+		
+		commodity.addActionListener(this);
+		
 		this.add(number);
 	}
 	private void setVoucherText() {
@@ -208,6 +266,8 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 			level = 4;
 		}else if (e.getActionCommand().equals("level5")) {
 			level = 5;
+		}else if (e.getSource() == commodity) {
+			commodityInfo = commodity.getSelectedItem().toString();
 		}
 	}
 

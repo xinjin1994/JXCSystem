@@ -9,6 +9,7 @@ import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SecondPanel;
+import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.InvoiceVO;
@@ -25,7 +26,10 @@ public class ManagerUIController {
 	private int secondY = 35;
 	private int inter = 54;
 	private InvoiceblService invoiceblService;
+	
 	private SecondPanel managerSecondPanel = new SecondPanel();
+	public ThirdPanel managerThirdPanel = new ThirdPanel();
+	
 	private ManagerPanel managerPanel;
 	private String item,itemName;
 	private ColorFactory colors;
@@ -49,13 +53,14 @@ public class ManagerUIController {
 		this.frame = frame;
 		invoiceblService = new InvoiceController();
 		colors = new ColorFactory();
-		resController = new ResultPanelController(frame, managerPanel);
+		
 		promotionblService = new PromotionController();
 		this.managerPanel = new ManagerPanel(frame, "Image/Manager/manager.jpg",
 				uiController, this);
 		
+		managerPanel.add(managerThirdPanel);
 		frame.setPanel(managerPanel);
-		
+		resController = new ResultPanelController(frame, managerPanel);
 		uiController.setMainPanel(managerPanel);
 		
 	}
@@ -145,6 +150,7 @@ public class ManagerUIController {
 		managerPanel.repaint();
 		
 	}
+		
 	class ProButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent arg0) {
@@ -254,14 +260,8 @@ public class ManagerUIController {
 		}
 	}
 	
-	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
-		showTable.setTable(info);
-		frame.add(showTable.tablePanel);
-//		uiController.addMainPanel();
-		frame.repaint();
-	}
+
+	
 	class InvoiceButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -287,6 +287,7 @@ public class ManagerUIController {
 				billsArray = invoiceblService.show_refuse();
 				type = "审批拒绝";
 			}else if(e.getSource() == invoiceButtons[2]){
+				System.out.println("0000");
 				billsArray = invoiceblService.show_up();
 				type = "待审批";	
 			}
@@ -294,7 +295,9 @@ public class ManagerUIController {
 			try {
 				ArrayList<String> bills = new ArrayList<String>();
 				bills.add("单据编号;单据类型");
+				System.out.println("101");
 				for(int i=0;i<billsArray.size();i++){
+					System.out.println("10");
 					switch(billsArray.get(i).bill_note) {
 					//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
 					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
@@ -325,12 +328,14 @@ public class ManagerUIController {
 					}
 					item = billsArray.get(i).note+itemName;
 					bills.add(item);
-					setTable(bills);
-					
 				}
+				managerPanel.setTable(bills);
 			} catch (Exception e2) {
 				frame.remove(managerPanel);
 				resController.failed("无新审批"+type+"单据！", "manager");
+			}
+			if(e.getSource() == invoiceButtons[2]){
+				new InvoiceBills(managerPanel);
 			}
 		}
 

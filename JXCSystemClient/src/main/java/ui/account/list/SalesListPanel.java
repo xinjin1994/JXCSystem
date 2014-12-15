@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import ui.FatherPanel;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
+import ui.setting.CheckTimeFormat;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;
+import ui.setting.SetTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
@@ -100,10 +102,16 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 		}
 
 	}
-	private void setTable(ArrayList<String> info){
+	private void setTableA(ArrayList<String> info){
+		showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
 		showTable.setTable(info);
-		frame.remove(this);
-		frame.add(showTable.tablePanel);
+		new SetTable(showTable, frame, accountController);
+	}
+
+	private void setTableM(ArrayList<String> info){
+		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+		showTable.setTable(info);
+		new SetTable(showTable, frame, managerController);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -114,22 +122,22 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 			String good_name = commodity.getText();
 			String customer_name = customer.getText();
 			String clerk = agent.getText();
-			SimpleDateFormat dateFormat = null;
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			dateFormat.setLenient(false);
-			boolean isLegal = true;
-			try{
-				dateFormat.parse(time1);
-				isLegal = true;
-			}catch(Exception e2){
-				isLegal = false;
-			}
+//			SimpleDateFormat dateFormat = null;
+//			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			dateFormat.setLenient(false);
+//			boolean isLegal = true;
+//			try{
+//				dateFormat.parse(time1);
+//				isLegal = true;
+//			}catch(Exception e2){
+//				isLegal = false;
+//			}
 
 			if(time1.equals("")||time2.equals("")||good_name.equals("")||customer_name.equals("")
 					||clerk.equals("")){
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
-			}else if(isLegal == false){
+			}else if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 				frame.remove(this);
 				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
@@ -152,26 +160,20 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 					frame.remove(this);
 					resController.failed("存在输入错误！", failedAddress);
 				}
-//					if(sales.size() ==1){
-//						frame.remove(this);
-//						resController.failed("不存在符合该条件的单据！", failedAddress);
-//					}else{
-						if(type.equals("account")){
-							showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
-							setTable(sales);
-							frame.setPanel(accountController.getMainPanel());
-							frame.repaint();
-							//				frame.setPanel(accountController.getMainPanel());
-						}else if(type.equals("manager")){
-							//				frame.setPanel(managerController.getMainPanel());
-							showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
-							setTable(sales);
-							frame.setPanel(managerController.getMainPanel());
-							frame.repaint();
-						}
-						
-//					}
-				
+//				if(sales.size() ==1){
+//					frame.remove(this);
+//					resController.failed("不存在符合该条件的单据！", failedAddress);
+//				}else{
+					if(type.equals("account")){
+						setTableA(sales);
+						//				frame.setPanel(accountController.getMainPanel());
+					}else if(type.equals("manager")){
+						//				frame.setPanel(managerController.getMainPanel());
+						setTableM(sales);
+					}
+
+//				}
+
 			}
 			frame.repaint();
 		}

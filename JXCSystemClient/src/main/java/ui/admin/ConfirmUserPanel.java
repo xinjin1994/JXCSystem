@@ -22,22 +22,26 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	protected String type;
 	protected UserblService userblService;
 	
+	protected MyFrame frame;
 	protected MyLabel[] infoLabels = new MyLabel[3]; 
 	
 	public ConfirmUserPanel(MyFrame frame, String url, AdminAllUIController controller,
 			UserVO user,String type) {
 		super(frame, url, controller);
 		
+		this.frame = frame;
 		this.type = type;
 		this.user = user;
 		this.adminAllUIController = controller;
+		
+	///	resController = new ResultPanelController(frame, adminAllUIController.getMainPanel());
 		
 		setForward();
 		setInfoLabel();
 		
 		userblService = new UserController();
 	}
-	
+
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(270, 300);
 		forwardButton = forward.forward_white;
@@ -94,15 +98,47 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 		infoLabels[2].setText(userDuty);
 		this.repaint();
 	}
+	private void check(int i){
+		System.out.println(i);
+		switch (i) {
+		case -1:
+			frame.remove(adminAllUIController.getMainPanel());
+			resController.failedConfirm("操作过程存在错误！","user" );
+			break;
+		case 0:
+			frame.remove(adminAllUIController.getMainPanel());
+			resController.succeeded("成功"+type+"用户！", "user");
+			break;
+		case 1:
+			frame.remove(adminAllUIController.getMainPanel());
+			resController.failedConfirm("用户已存在！", "user");
+			break;
+		case 2:
+			frame.remove(adminAllUIController.getMainPanel());
+			resController.failedConfirm("用户不存在！", "user");
+			break;
+		default:
+			break;
+		}
+	}
 	
 	public void actionPerformed(ActionEvent event) {
+		
+		FatherPanel temp= adminAllUIController.getMainPanel();
+		resController = new ResultPanelController(frame, temp);
+		temp.remove(this);
+		adminAllUIController.setMainPanel(temp);
+		
 		if(event.getSource() == forwardButton){
-			switch(userblService.addUser_up(user)){
-			case 0:
-				adminAllUIController.setResult(type);
-				break;
+			if(type.equals("添加")){
+				check(userblService.addUser_up(user));
 			}
+			else if (type.equals("删除")) {
+				check(userblService.delUser_up(user));
+			}
+			frame.repaint();
 		}
+			
 	}
 	
 }

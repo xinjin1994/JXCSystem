@@ -29,7 +29,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		
-		this.failedAddress = "com/examine";
+		this.failedAddress = "stock/examine";
 		
 		resController = new ResultPanelController(frame, this);
 		commodityAllUIController.setBack_second(this, 202, 133);

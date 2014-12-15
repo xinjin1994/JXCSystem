@@ -12,16 +12,16 @@ import vo.promotion.ProGiftVO;
 import vo.promotion.VoucherVO;
 
 public class ProDetailPanel extends FatherPanel{
-	private ManagerAllUIController uiController;
-	private MyFrame frame;
-	private ProGiftVO gift;
-	private VoucherVO voucher;
-	private DiscountVO discount;
+	protected ManagerAllUIController uiController;
+	protected MyFrame frame;
+	protected ProGiftVO gift;
+	protected VoucherVO voucher;
+	protected DiscountVO discount;
 	
-	private MyLabel typeLabel,levelLabel,timeBeginLabel,timeEndLabel;
-	private int level;
+	protected MyLabel typeLabel,levelLabel,timeBeginLabel,timeEndLabel;
+	protected int level;
 	
-	private String timeBegin,timeEnd;
+	protected String timeBegin,timeEnd;
 	
 	public ProDetailPanel(MyFrame frame, String url, ManagerAllUIController controller,ProGiftVO gift) {
 		super(frame, url, controller);
@@ -32,8 +32,8 @@ public class ProDetailPanel extends FatherPanel{
 		
 		this.timeBegin = gift.getStartTime();
 		this.timeEnd = gift.getEndTime();
+		back();
 		
-		uiController.setBack_first(this);
 		
 		init();
 		typeLabel = new MyLabel(355, 400, 46, 115);
@@ -45,6 +45,9 @@ public class ProDetailPanel extends FatherPanel{
 		this.repaint();
 	}
 	
+	protected void back() {
+		uiController.setBack_first(this);
+	}
 
 
 	public ProDetailPanel(MyFrame frame, String url, ManagerAllUIController controller,VoucherVO voucher) {
@@ -56,7 +59,7 @@ public class ProDetailPanel extends FatherPanel{
 		
 		this.timeBegin = voucher.getStartTime();
 		this.timeEnd = voucher.getEndTime();
-		
+		back();
 		
 		init();
 		typeLabel = new MyLabel(355, 271, 46, 115);
@@ -72,6 +75,7 @@ public class ProDetailPanel extends FatherPanel{
 
 	public ProDetailPanel(MyFrame frame, String url, ManagerAllUIController controller,DiscountVO discount) {
 		super(frame, url, controller);
+		back();
 		this.frame = frame;
 		this.uiController = controller;
 		this.discount = discount;
@@ -92,7 +96,6 @@ public class ProDetailPanel extends FatherPanel{
 	
 	
 	protected void init() {
-		uiController.setBack_first(this);
 		setTime();	
 		setLevel();
 	}
@@ -138,7 +141,7 @@ public class ProDetailPanel extends FatherPanel{
 		
 	}
 	
-	private void setGiftLabels() {
+	protected void setGiftLabels() {
 		MyLabel commodity = new MyLabel(471, 443, 156, 27);
 		MyLabel number = new MyLabel(471, 476, 156, 27);
 		MyLabel price = new MyLabel(509, 408,130 ,27);
@@ -150,7 +153,7 @@ public class ProDetailPanel extends FatherPanel{
 		this.add(number);
 	}
 	
-	private void setVoucherLabel() {
+	protected void setVoucherLabel() {
 		MyLabel start_money = new MyLabel(551,277,76,27);
 		MyLabel money = new MyLabel(551,313, 76, 27);
 		MyLabel end_money = new MyLabel(551,347,76,27);
@@ -165,7 +168,7 @@ public class ProDetailPanel extends FatherPanel{
 		
 	}
 	
-	private void setDiscountLabels() {
+	protected void setDiscountLabels() {
 		MyLabel start_money = new MyLabel(551,147,120,28);
 		MyLabel money = new MyLabel(551,181, 120, 28);
 		MyLabel end_money = new MyLabel(551,220,120,28);

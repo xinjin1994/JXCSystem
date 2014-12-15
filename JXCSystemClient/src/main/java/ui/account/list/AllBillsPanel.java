@@ -6,13 +6,18 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import ui.AccountPanel;
 import ui.FatherPanel;
+import ui.ManagerPanel;
+import ui.UIController;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
+import ui.setting.CheckTimeFormat;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;
+import ui.setting.SetTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
@@ -99,10 +104,16 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 			this.add(typeIn[i]);
 		}
 	}
-	private void setTable(ArrayList<String> info){
+	private void setTableM(ArrayList<String> info){
+		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
 		showTable.setTable(info);
-		frame.remove(this);
-		frame.add(showTable.tablePanel);
+		new SetTable(showTable, frame, managerController);
+	}
+	
+	private void setTableA(ArrayList<String> info){
+		showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
+		showTable.setTable(info);
+		new SetTable(showTable, frame, accountController);
 	}
 	
 	
@@ -114,22 +125,22 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 			String customer_name = customer.getText();
 			String clerk = agent.getText();
 
-			SimpleDateFormat dateFormat = null;
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			dateFormat.setLenient(false);
-			boolean isLegal = true;
-			try{
-				dateFormat.parse(time1);
-				isLegal = true;
-			}catch(Exception e2){
-				isLegal = false;
-			}
+//			SimpleDateFormat dateFormat = null;
+//			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			dateFormat.setLenient(false);
+//			boolean isLegal = true;
+//			try{
+//				dateFormat.parse(time1);
+//				isLegal = true;
+//			}catch(Exception e2){
+//				isLegal = false;
+			//			}
 
 			if(time1.equals("")||time2.equals("")||note_type.equals("")||customer_name.equals("")
 					||clerk.equals("")){
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
-			}else if(isLegal == false){
+			}else if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 				frame.remove(this);
 				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
@@ -139,7 +150,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 					int warehouse = Integer.parseInt(stock.getText());
 					ArrayList<AllBillVO> billsArray = financialblService.allBill_up(time1, time2, note_type, 
 							customer_name, clerk, String.valueOf(warehouse));
-				
+
 					bills.add("单据编号;单据类型");
 					for(int i=0;i<billsArray.size();i++){
 						switch(billsArray.get(i).bill_note) {
@@ -176,28 +187,22 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 						frame.remove(this);
 						resController.failed("存在输入错误！", failedAddress);
 					}
-//					if(bills.size() == 1){
-//						frame.remove(this);
-//						resController.failed("不存在符合该条件的单据！", failedAddress);
-//					}else{
-						
-						frame.remove(this);
-						if(type.equals("account")){
-							showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
-							setTable(bills);
-							frame.setPanel(accountController.getMainPanel());
-							frame.repaint();
-						}else if(type.equals("manager")){
-							showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
-							setTable(bills);
-							frame.setPanel(managerController.getMainPanel());
-							frame.repaint();
-						}
-//					}
-				
-			}
-			frame.repaint();
-		}
+				if(bills.size() == 1){
+					frame.remove(this);
+					resController.failed("不存在符合该条件的单据！", failedAddress);
+				}else{
 
+					frame.remove(this);
+					if(type.equals("account")){
+						setTableA(bills);
+					}else if(type.equals("manager")){
+						setTableM(bills);
+					}
+				}
+				frame.repaint();
+			}
+
+		}
 	}
 }
+
