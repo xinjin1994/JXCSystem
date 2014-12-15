@@ -154,6 +154,7 @@ public class ManagerUIController {
 		}
 
 		public void mousePressed(MouseEvent event) {
+			uiController.setMainPanel(managerPanel);
 			frame.remove(managerPanel);
 			if(event.getSource() == proButtons[0]){
 				uiController.checkPro();
@@ -183,6 +184,7 @@ public class ManagerUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(managerPanel);
 			frame.remove(managerPanel);
 			System.out.println("lka");
 			if(e.getSource() == recButtons[0]){
@@ -210,6 +212,7 @@ public class ManagerUIController {
 		}
 
 		public void mousePressed(MouseEvent event) {
+			uiController.setMainPanel(managerPanel);
 			frame.remove(managerPanel);	
 			if(event.getSource() == accButtons[0]){
 				uiController.addAccount();
@@ -251,6 +254,7 @@ public class ManagerUIController {
 		}
 
 		public void mousePressed(MouseEvent e) {
+			uiController.setMainPanel(managerPanel);
 			if(e.getSource() == invoiceButtons[0]){
 				billsArray = invoiceblService.show_pass();
 			}else if(e.getSource() == invoiceButtons[1]){

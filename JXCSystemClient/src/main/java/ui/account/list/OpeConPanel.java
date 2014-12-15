@@ -1,5 +1,6 @@
 package ui.account.list;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import ui.setting.MyTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.ConditionVO;
 import businesslogic.financialbl.FinancialController;
 import businesslogicservice.financialblservice.FinancialblService;
@@ -31,33 +33,38 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 	private AccountAllUIController accountController;
 	private ManagerAllUIController managerController;
 	FinancialblService financialblService;
-	private ColorFactory colors;
-	MyTable showTable;
+	private ColorFactory color = new ColorFactory();
+	private MyTable showTable = new MyTable();
+	
 	private MyTextFieldBorder timeBegin, timeFinish;
 	private MyButton forwardButton;
 	private MyFrame frame;
 	private String type = "account";
-	private MyLabel failLabel;
 
+	private String failedAddress;
+	private ResultPanelController resController;
 	public OpeConPanel(MyFrame frame, String url, AccountAllUIController uiController) {
 		super(frame, url, uiController);
 		this.frame = frame;
+		resController = new ResultPanelController(frame, this);
 		this.accountController = uiController;
+		this.failedAddress = "acc/recManage/opeCon";
 		this.repaint();
-		colors = new ColorFactory();
 		financialblService = new FinancialController();
 		uiController.setBack_second(this, 149, 137);
-		addLabel();
 		init();
 	}
 
 	public OpeConPanel(MyFrame frame, String url, ManagerAllUIController uiController, String type) {
 		super(frame, url, uiController);
 		this.frame = frame;
+		resController = new ResultPanelController(frame, this);
 		this.managerController = uiController;
 		this.type = type;
+		this.failedAddress = "manager/recManage/opeCon";
 		this.repaint();
-
+		
+		financialblService = new FinancialController();
 		uiController.setBack_second(this, 149, 137);
 		init();
 	}
@@ -86,27 +93,19 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 		this.add(timeFinish);
 
 	}
-	
+
 	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
 		frame.remove(this);
 		frame.add(showTable.tablePanel);
-		accountController.addMainPanel();
-		frame.repaint();
 	}
-	public void addLabel() {
-		failLabel = new MyLabel(293, 410, 200, 35);
-		this.add(failLabel);
-	}
-	
+
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
 			String time1 = timeBegin.getText();
-			String time2 = timeBegin.getText();
-			
+			String time2 = timeFinish.getText();
+
 			SimpleDateFormat dateFormat = null;
 			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			dateFormat.setLenient(false);
@@ -117,22 +116,38 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 			}catch(Exception e2){
 				isLegal = false;
 			}
-			
-			if(time1.equals("")||time2.equals("")||isLegal == false){
-				failLabel.setText("请正确输入信息！");
-			}else{
-			ArrayList<ConditionVO> conditionVO= financialblService.operatingCondition_up(time1, time2);
-			ArrayList<String> info = new ArrayList<String>();
-			info.add("利润");
-			for(int i=0;i<conditionVO.size();i++){
-				info.add(conditionVO.get(i).getProfit()+"");
+
+			if(time1.equals("")||time2.equals("")){
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
+			}else if(isLegal == false){
+				frame.remove(this);
+				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
-			setTable(info);
-			if (type.equals("account")) {
-//				frame.setPanel(accountController.getMainPanel());
-			} else if (type.equals("manager")) {
-//				frame.setPanel(managerController.getMainPanel());
+			else{
+				ArrayList<ConditionVO> conditionVO= financialblService.operatingCondition_up(time1, time2);
+				ArrayList<String> info = new ArrayList<String>();
+				info.add("单据编号;銷售收入;商品类收入;折扣;销售成本;商品类支出;利润");
+				for(int i=0;i<conditionVO.size();i++){
+					info.add(conditionVO.get(i).getProfit()+"");
 				}
+//				if(info.size() == 1){
+//					frame.remove(this);
+//					resController.failed("不存在符合该条件的单据！", failedAddress);
+//				}else{
+
+					if (type.equals("account")) {
+						showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
+						setTable(info);
+						frame.setPanel(accountController.getMainPanel());
+						frame.repaint();
+					} else if (type.equals("manager")) {
+						showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+						setTable(info);
+						frame.setPanel(managerController.getMainPanel());
+						frame.repaint();
+					}
+//				}
 			}
 		}
 	}

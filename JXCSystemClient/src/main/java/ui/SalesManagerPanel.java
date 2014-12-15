@@ -3,14 +3,11 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import ui.sales.SalesAllUIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
-import ui.setting.MyTable;
 import ui.setting.Button.MyButton;
 
 /**
@@ -19,7 +16,7 @@ import ui.setting.Button.MyButton;
  * @author lsy
  * @version 2014年11月29日下午2:54:20
  */
-public class SalesStaffPanel extends FatherPanel {
+public class SalesManagerPanel extends FatherPanel {
 
 	private static final long serialVersionUID = -4472929361380810275L;
 	private int firstX = 2;
@@ -32,7 +29,7 @@ public class SalesStaffPanel extends FatherPanel {
 	private MyButton detail, firstBack;
 	private UIController controller;
 
-	public SalesStaffPanel(MyFrame frame, String url, SalesAllUIController controller, SalesUIController salesController) {
+	public SalesManagerPanel(MyFrame frame, String url, UIController controller, SalesUIController salesController) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.controller = controller;
@@ -88,7 +85,7 @@ public class SalesStaffPanel extends FatherPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == firstBack){
-				frame.remove(SalesStaffPanel.this);
+				frame.remove(SalesManagerPanel.this);
 				controller.backLoginPanel();
 				frame.repaint();
 				

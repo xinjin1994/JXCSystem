@@ -89,7 +89,7 @@ public class ManagerAllUIController extends UIController{
 	}
 	
 	public void confirmAcc(AccountVO acc,String ope,AccountVO newAcc){
-		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Account/确认账户信息.jpg", this,acc,ope,"manager",newAcc);
+		confirmAccPanel = new ConfirmAccPanel(frame, "Image/Manager/确认账户信息.jpg", this,acc,ope,"manager",newAcc);
 		frame.setPanel(confirmAccPanel);
 		frame.repaint();
 	}
@@ -160,7 +160,7 @@ public class ManagerAllUIController extends UIController{
 
 	public void setBack_third(FatherPanel prePanel) {
 		this.prePanel = prePanel;
-		new SetBack(frame,this,prePanel).setBack_first();
+		new SetBack(frame,this,prePanel).setBack_third();
 		
 	}
 

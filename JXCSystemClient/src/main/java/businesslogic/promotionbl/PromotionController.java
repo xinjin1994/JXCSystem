@@ -30,18 +30,6 @@ public class PromotionController implements PromotionblService{
 		return message;
 	}
 
-	public ArrayList<DiscountVO> search_up() {
-		// TODO Auto-generated method stub
-		ArrayList<DiscountVO> result=promotion.search();
-		return result;
-	}
-
-	public int makeOther_up(String word) {
-		// TODO Auto-generated method stub
-		int message=promotion.makeOther(word);
-		return message;
-	}
-
 	public int makeDiscount_up(DiscountVO vo) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -53,11 +41,6 @@ public class PromotionController implements PromotionblService{
 	}
 
 	public int makeVoucher_up(VoucherVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int delPromotion_up(int i) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -77,9 +60,19 @@ public class PromotionController implements PromotionblService{
 		return null;
 	}
 
-	public String getOtherPromotion_up() {
+	public int delGift_up(int level) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
+	}
+
+	public int delDiscount_up(int level) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int delVoucher_up(int level) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

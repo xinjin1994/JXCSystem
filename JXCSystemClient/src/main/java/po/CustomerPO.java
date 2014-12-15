@@ -11,13 +11,13 @@ public class CustomerPO implements Serializable{
 	String phone;//��ϵ��ʽ
 	String zip;//�ʱ�
 	String mail;//����
-	int money;//Ӧ�ն��
-	int amount;//Ӧ��Ӧ��
+	double money;//Ӧ�ն��
+	double amount;//Ӧ��Ӧ��
 	String clerk;//ҵ��Ա
 	String address;//��ַ
 	
 	public CustomerPO(String id2, String name, int level, boolean b,
-			String phone, String zip, String mail, int money, double mostOwe,
+			String phone, String zip, String mail, double money, double mostOwe,
 			String clerk, String address) {
 		this.id = id2;
 		this.name = name;
@@ -27,7 +27,7 @@ public class CustomerPO implements Serializable{
 		this.zip = zip;
 		this.mail = mail;
 		this.money = money;
-		this.amount = (int)mostOwe;
+		this.amount = mostOwe;
 		this.clerk = clerk;
 		this.address = address;
 	}
@@ -73,11 +73,11 @@ public class CustomerPO implements Serializable{
 		return mail;
 	}
 
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 

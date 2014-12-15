@@ -14,6 +14,7 @@ import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
 import po.VoucherPO;
+import data.accountdata.AccountDataService_Stub;
 import dataservice.promotiondataservice.PromotionDataService;
 
 public class PromotionDataService_Stub extends UnicastRemoteObject implements PromotionDataService{
@@ -21,7 +22,6 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	ProGiftPO nowProGift;
 	DiscountPO nowDiscount;
 	VoucherPO nowVoucher;
-	
 	
 	ArrayList<ProGiftPO> proGiftList=new ArrayList<ProGiftPO>();
 	ArrayList<DiscountPO> discountList=new ArrayList<DiscountPO>();
@@ -307,61 +307,131 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	}
 
 	public boolean addDiscount(DiscountPO po) {
-		return true;
+		
+		for(int i=0;i<discountList.size();i++){
+			if(po.getEndTime().compareTo(AccountDataService_Stub.getNoteTime())>=0&&(po.getLevel()==discountList.get(i).getLevel())){
+				return false;
+			}
+		}
+		return discountList.add(po.copy());
 	}
 
 	public boolean addGift(ProGiftPO po) {
-		return true;
+		
+		for(int i=0;i<proGiftList.size();i++){
+			if(po.getEndTime().compareTo(AccountDataService_Stub.getNoteTime())>=0&&(po.getLevel()==proGiftList.get(i).getLevel())){
+				return false;
+			}
+		}
+		
+		return proGiftList.add(po.copy());
 	}
-
+	
+	public boolean addVoucher(VoucherPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+		for(int i=0;i<voucherList.size();i++){
+			if(po.getEndTime().compareTo(AccountDataService_Stub.getNoteTime())>=0&&(po.getLevel()==voucherList.get(i).getLevel())){
+				return false;
+			}
+		}
+		
+		return voucherList.add(po.copy());
+	}
+	
 	public boolean delDiscount(DiscountPO po) {
+		int note=0;
+		for(int i=0;i<discountList.size();i++){
+			if(po.getLevel()==discountList.get(i).getLevel()){
+				note=i;
+			}
+		}
+		discountList.remove(note);
 		return true;
 	}
 
 	public boolean delGift(ProGiftPO po) {
+		int note=0;
+		for(int i=0;i<proGiftList.size();i++){
+			if(po.getLevel()==proGiftList.get(i).getLevel()){
+				note=i;
+			}
+		}
+		proGiftList.remove(note);
+		return true;
+	}
+	
+	public boolean delVoucher(VoucherPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		int note=0;
+		for(int i=0;i<voucherList.size();i++){
+			if(po.getLevel()==voucherList.get(i).getLevel()){
+				note=i;
+			}
+		}
+		voucherList.remove(note);
 		return true;
 	}
 
-	public DiscountPO getDiscount() {
-		return new DiscountPO(1,"t1","t2",1000,2000);
+	public DiscountPO getDiscount(int level) throws RemoteException {
+		for(int i=0;i<discountList.size();i++){
+			if(level==discountList.get(i).getLevel()){
+				return discountList.get(i);
+			}
+		}
+		return null;
 	}
 
-	public ProGiftPO getGift() {
-		CommodityPO gift=new CommodityPO(null, null, null, 0, 0, null, 0, 0, 0);
-		return new ProGiftPO(gift, null, null, 0, 0, 0);
+	public ProGiftPO getGift(int level) throws RemoteException {
+		for(int i=0;i<proGiftList.size();i++){
+			if(level==proGiftList.get(i).getLevel()){
+				return proGiftList.get(i);
+			}
+		}
+		return null;
 	}
-
+	
+	public VoucherPO getVoucher(int level) throws RemoteException {
+		// TODO Auto-generated method stub
+		for(int i=0;i<voucherList.size();i++){
+			if(level==voucherList.get(i).getLevel()){
+				return voucherList.get(i);
+			}
+		}
+		return null;
+	}
+	
 	public ArrayList<DiscountPO> showDiscount() {
-		return discountList;
+		ArrayList<DiscountPO> array=new ArrayList<DiscountPO>();
+		for(int i=0;i<discountList.size();i++){
+			array.add(discountList.get(i));
+		}
+		return array;
 	}
 
 	public ArrayList<ProGiftPO> showProGift() {
-		return proGiftList;
-	}
-
-	public boolean addVoucher(VoucherPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean delVoucher(VoucherPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public VoucherPO getVoucher() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ProGiftPO> array=new ArrayList<ProGiftPO>();
+		for(int i=0;i<proGiftList.size();i++){
+			array.add(proGiftList.get(i));
+		}
+		return array;
 	}
 
 	public ArrayList<VoucherPO> showVoudcher() throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<VoucherPO> array=new ArrayList<VoucherPO>();
+		for(int i=0;i<voucherList.size();i++){
+			array.add(voucherList.get(i));
+		}
+		return array;
 	}
 
 	public boolean clear() throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		discountList=new ArrayList<DiscountPO>();
+		proGiftList=new ArrayList<ProGiftPO>();
+		voucherList=new ArrayList<VoucherPO>();
+		return true;
 	}
 
 }

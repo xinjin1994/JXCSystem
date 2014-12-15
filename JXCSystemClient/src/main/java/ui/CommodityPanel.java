@@ -66,9 +66,6 @@ public class CommodityPanel extends FatherPanel{
 		refresh = new MyButton("Image/refresh.png",70,555,"Image/refresh_stop.png","Image/refresh_stop.png");
 		this.add(refresh);
 		refresh.addMouseListener(listener);
-		
-		
-
 	}
 	/**
 	 * 库存报警时该按钮亮,点击后按钮消失

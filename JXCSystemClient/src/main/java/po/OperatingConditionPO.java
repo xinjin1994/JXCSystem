@@ -3,17 +3,17 @@ package po;
 import java.io.Serializable;
 
 public class OperatingConditionPO implements Serializable{
-
-	int sale_income;//���ú�����
-	int good_income;
-	int sale_outcome;
-	int good_outcome;
-	int discount;//����
-	int profit;//����
+	String old_note;
+	String time;
+	double sale_income;//���ú�����
+	double good_income;
+	double sale_outcome;
+	double good_outcome;
+	double discount;//����
+	double profit;//����
 	
-	public OperatingConditionPO(int sale_income,int good_income, int sale_outcome,int good_outcome,
-			int discount) {
-		super();
+	public OperatingConditionPO(String note,String time,double sale_income,double good_income, double sale_outcome,double good_outcome,double discount) {
+		this.old_note=note;
 		this.sale_income = sale_income;
 		this.good_income=good_income;
 		this.sale_outcome=sale_outcome;
@@ -23,35 +23,41 @@ public class OperatingConditionPO implements Serializable{
 	}
 	
 	public OperatingConditionPO copy(){
-		return new OperatingConditionPO(sale_income, good_income, sale_outcome, good_outcome, discount);
+		return new OperatingConditionPO(old_note,time,sale_income, good_income, sale_outcome, good_outcome, discount);
 	}
 
-	public int getSaleIncome(){
+	public double getSaleIncome(){
 		return sale_income;
 	}
-	public int getGoodIncome(){
+	public double getGoodIncome(){
 		return good_income;
 	}
-	public int getSaleOutcome(){
+	public double getSaleOutcome(){
 		return sale_outcome;
 	}
-	public int getGoodOutcome(){
+	public double getGoodOutcome(){
 		return good_outcome;
 	}
-	public int getDiscount(){
+	public double getDiscount(){
 		return discount;
 	}
 	
-	public int getProfit(){
+	public double getProfit(){
 		return profit;
+	}
+	public String getOldNote(){
+		return old_note;
+	}
+	public String getTime(){
+		return time;
 	}
 	
 	
-	public int getIncome() {
+	public double getIncome() {
 		return sale_income+good_income-discount;
 	}
 
-	public int getOutcome() {
+	public double getOutcome() {
 		return sale_outcome+good_outcome;
 	}
 	

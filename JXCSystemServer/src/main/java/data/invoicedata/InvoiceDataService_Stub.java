@@ -24,6 +24,9 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	int invNote=0;
 	
 	public InvoiceDataService_Stub() throws RemoteException{
+		this.writeInvoiceList();
+		this.writeInvNote();
+		
 		this.readInvoiceList();
 		this.readInvNote();
 	}
@@ -178,7 +181,10 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		// TODO Auto-generated method stub
 		for(int i=0;i<invoiceList.size();i++){
 			if(invoiceList.get(i).getInvoiceNote().equals(po.getInvoiceNote())){
-				invoiceList.get(i).setCondition(2);
+				po.setCondition(2);
+				invoiceList.remove(i);
+				invoiceList.add(po);
+//				invoiceList.get(i).setCondition(2);
 				return true;
 			}
 		}

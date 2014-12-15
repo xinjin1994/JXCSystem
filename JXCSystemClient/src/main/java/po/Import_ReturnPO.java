@@ -10,18 +10,18 @@ public class Import_ReturnPO extends InvoicePO implements Serializable{
 	String operator;//����Ա
 	String wareHouse;//�ֿ�
 	ArrayList<ImportGoodPO> importGoodList; 
-	int total_money;//这个是进货的总价
+	public double total_money;//这个是进货的总价
 	String old_note;
 	
 	public Import_ReturnPO(CustomerPO customer, ArrayList<ImportGoodPO> po,String ps, String clerk,
-			String operator,String wareHouse, int total_money,String old_note) {
+			String operator,String wareHouse, double total_money,String old_note) {
 		this.customer = customer;
 		this.importGoodList=po;
 		this.ps = ps;
 		this.clerk = clerk;
 		this.operator = operator;
 		this.wareHouse = wareHouse;
-		this.total_money = total_money;
+		this.total_money = po.get(0).getMoney();
 		this.old_note=old_note;
 		this.doc_type=3;
 	}
@@ -63,7 +63,7 @@ public class Import_ReturnPO extends InvoicePO implements Serializable{
 		return wareHouse;
 	}
 
-	public int getTotalMoney() {
+	public double getTotalMoney() {
 		return total_money;
 	}	
 	public String getOldNote(){

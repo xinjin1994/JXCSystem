@@ -1,5 +1,6 @@
 package ui.setting;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -70,13 +72,13 @@ public class MyTable extends JTable{
 		table = new JTable(tableModel);
 		setHeader();
 		//setHeader();
-		//table.setBounds(55, 35, 350, 410);
+	//	table.setBounds(43, 44, 360, 380);
 		table.setShowGrid(false);//不显示边框
 		table.setEnabled(false);
 		
 		makeFace(table);
 		table.setOpaque(false);// 现将table设置为透明
-		
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
 //		table.setRowHeight(25);//第一行行高
@@ -91,10 +93,12 @@ public class MyTable extends JTable{
 		tableSp = new JScrollPane(table);
 		tableSp.setBounds(43,44,360,380);
 		
-		tableSp.setBorder(new LineBorder(Color.gray));
+	//	tableSp.setBorder(new LineBorder(Color.gray));
 		tableSp.getViewport().setOpaque(false);
 		tableSp.setOpaque(false);
 		tableSp.setViewportView(table);
+		//tableSp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+	//	tableSp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		table.setFillsViewportHeight(true);
 		tablePanel.add(tableSp);
 		

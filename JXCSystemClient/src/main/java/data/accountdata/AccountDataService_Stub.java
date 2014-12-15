@@ -134,4 +134,24 @@ public class AccountDataService_Stub implements AccountDataService{
 		return null;
 	}
 
+	public boolean passReceipt(ReceiptPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passPayment(PaymentPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseReceipt(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refusePayment(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

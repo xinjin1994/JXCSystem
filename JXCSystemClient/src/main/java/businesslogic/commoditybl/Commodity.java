@@ -4,10 +4,15 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.ExportPO;
+import po.Export_ReturnPO;
+import po.ImportPO;
+import po.Import_ReturnPO;
 import po.PatchPO;
 import po.SendGiftPO;
 import po.SortPO;
 import po.WarnPO;
+import vo.ExamineVO;
 import vo.StockVO;
 import businesslogic.userbl.User;
 import data.commoditydata.CommodityDataService_Stub;
@@ -28,12 +33,19 @@ import dataservice.commoditydataservice.CommodityDataService;
 //11 分类中存在分类，无法删除分类
 
 public class Commodity implements businesslogic.financialbl.CommodityInfo,
-			businesslogic.initializationlbl.CommodityInfo, businesslogic.invoicebl.CommodityInfo,
-			businesslogic.salesbl.CommodityInfo{
+				businesslogic.invoicebl.CommodityInfo, businesslogic.salesbl.CommodityInfo{
 	
 	public InvoiceInfo invoice;
 	public SystemlogInfo systemlog;
+	public SalesInfo sales;
 	public CommodityDataService sto=new CommodityDataService_Stub();
+	
+	
+	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog,SalesInfo sales){
+		this.invoice=invoice;
+		this.systemlog=systemlog;
+		this.sales=sales;
+	}
 
 	public int addCommodity(CommodityPO po1,SortPO po2) {
 		// TODO Auto-generated method stub
@@ -350,25 +362,81 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return "SORT";
 	}
 
-	public ArrayList<CommodityPO> Examine(String time1, String time2) {
-//		CommodityDataService sto =new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
+	public ArrayList<ExamineVO> Examine(String time1, String time2) {
+		
+		ArrayList<ExamineVO> array=new ArrayList<ExamineVO>();
 		
 		try {
-			if(sto.getAll()!=null){
-				return null;
+		ArrayList<ImportPO> imp=sales.getAllImport();
+		ArrayList<Import_ReturnPO> imp_ret=sales.getAllImport_Return();
+		ArrayList<ExportPO> exp=sales.getAllExport();
+		ArrayList<Export_ReturnPO> exp_ret=sales.getAllExport_Return();
+		ArrayList<PatchPO> patch=sto.getAllPatch();
+		ArrayList<SendGiftPO> gift=sto.getAllSendGift();
+		
+		ExamineVO vo;
+		
+		int i=0;
+		
+		for(i=0;i<imp.size();i++){
+			if(imp.get(i).getTime().compareTo(time1)>=0&&imp.get(i).getTime().compareTo(time2)<=0&&(imp.get(i).getCondition()==2)){
+				vo=new ExamineVO(imp.get(i).getImportGoodList().get(0).getCommodity().getName(),imp.get(i).getImportGoodList().get(0).getCommodity().getType(),imp.get(i).getImportGoodList().get(0).getNumber(),0,0,0,
+						0,0,imp.get(i).getTotalMoney(),imp.get(i).getTime());
+				array.add(vo);
 			}
+		}
+		
+		for(i=0;i<imp_ret.size();i++){
+			if(imp_ret.get(i).getTime().compareTo(time1)>=0&&imp_ret.get(i).getTime().compareTo(time2)<=0&&(imp_ret.get(i).getCondition()==2)){
+				vo=new ExamineVO(imp_ret.get(i).getImportGoodList().get(0).getCommodity().getName(),imp_ret.get(i).getImportGoodList().get(0).getCommodity().getType(),0,imp_ret.get(i).getImportGoodList().get(0).getNumber(),0,0,
+						0,0,imp_ret.get(i).getTotalMoney(),imp_ret.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<exp.size();i++){
+			if(exp.get(i).getTime().compareTo(time1)>=0&&exp.get(i).getTime().compareTo(time2)<=0&&(exp.get(i).getCondition()==2)){
+				vo=new ExamineVO(exp.get(i).getImportGoodList().get(0).getCommodity().getName(),exp.get(i).getImportGoodList().get(0).getCommodity().getType(),0,0,exp.get(i).getImportGoodList().get(0).getNumber(),0,
+						0,0,exp.get(i).getTotalMoneyBefore(),exp.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<exp_ret.size();i++){
+			if(exp_ret.get(i).getTime().compareTo(time1)>=0&&exp_ret.get(i).getTime().compareTo(time2)<=0&&(exp_ret.get(i).getCondition()==2)){
+				vo=new ExamineVO(exp_ret.get(i).getImportGoodList().get(0).getCommodity().getName(),exp_ret.get(i).getImportGoodList().get(0).getCommodity().getType(),0,0,0,exp_ret.get(i).getImportGoodList().get(0).getNumber(),
+						0,0,exp_ret.get(i).getTotalMoneyBefore(),exp_ret.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<patch.size();i++){
+			if(patch.get(i).getTime().compareTo(time1)>=0&&patch.get(i).getTime().compareTo(time2)<=0&&(patch.get(i).getCondition()==2)){
+				vo=new ExamineVO(patch.get(i).getCommodity().getName(),patch.get(i).getCommodity().getType(),0,0,0,0,
+						patch.get(i).getNumber(),0,patch.get(i).getNumber()*patch.get(i).getCommodity().getMean(),patch.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		for(i=0;i<gift.size();i++){
+			if(gift.get(i).getTime().compareTo(time1)>=0&&gift.get(i).getTime().compareTo(time2)<=0&&(gift.get(i).getCondition()==2)){
+				vo=new ExamineVO(gift.get(i).getCommodity().getName(),gift.get(i).getCommodity().getType(),0,0,0,0,
+						0,patch.get(i).getNumber(),gift.get(i).getNumber()*gift.get(i).getCommodity().getMean(),gift.get(i).getTime());
+				array.add(vo);
+			}
+		}
+		
+		
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return null;
+		return array;
 	}
 
 	public ArrayList<StockVO> Iventory() {
-//		CommodityDataService sto = new CommodityDataService_Stub(true, "n", "t", 10, 10, 10,10, 10, 10);
-//		sto = new CommodityDataService_Stub();
 		
 		try {
 			if(sto.getAll()!=null){
@@ -495,7 +563,6 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 			
 			WarnPO po=new WarnPO(com1,number);
-			invoice.add(po);
 			
 			com2=com1.copy();
 			com2.warn=number;
@@ -690,10 +757,15 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public ArrayList<SortPO> getComSort(){
 		ArrayList<SortPO> array=new ArrayList<SortPO>();
 		ArrayList<SortPO> po=getAllSort();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		
 		for(int i=0;i<po.size();i++){
-			if(!po.get(i).hasSort()){
-				array.add(po.get(i));
+			lin=getComSon(po.get(i));
+			for(int j=0;j<lin.size();j++){
+				SortPO so=new SortPO(lin.get(j).getName());
+				so.note=lin.get(j).getNote();
+				so.father=lin.get(j).father;
+				array.add(so);
 			}
 		}
 		return array;
@@ -702,13 +774,121 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public ArrayList<SortPO> getSortSort(){
 		ArrayList<SortPO> array=new ArrayList<SortPO>();
 		ArrayList<SortPO> po=getAllSort();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		po.remove(po.size()-1);
 		
 		for(int i=0;i<po.size();i++){
-			if(!po.get(i).hasCommodity()){
-				array.add(po.get(i));
+			lin=getSortSon(po.get(i));
+			for(int j=0;j<lin.size();j++){
+				SortPO so=new SortPO(lin.get(j).getName());
+				so.note=lin.get(j).getNote();
+				so.father=lin.get(j).father;
+				array.add(so);
 			}
 		}
 		return array;
+	}
+	
+	public ArrayList<SortPO> getSortSon(SortPO po){
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		SortPO so;
+		
+		if(!po.hasCommodity()){
+			so=new SortPO(po.getName());
+			so.note=po.getNote();
+			so.father=po.father;
+			sort.add(so);
+			for(int i=0;i<po.sortList.size();i++){
+				lin=getSortSon(po);
+				for(int j=0;j<lin.size();j++){
+					so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					sort.add(so);
+				}
+			}
+		}
+		return sort;
+	}
+	
+	public ArrayList<SortPO> getComSon(SortPO po){
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		SortPO so;
+		
+		if(!po.hasSort()){
+			so=new SortPO(po.getName());
+			so.note=po.getNote();
+			so.father=po.father;
+			sort.add(so);
+		}
+		
+		if(po.hasSort()){
+			for(int i=0;i<po.sortList.size();i++){
+				lin=getComSon(po.sortList.get(i));
+				for(int j=0;j<lin.size();j++){
+					so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					sort.add(so);
+				}
+			}
+		}
+		return sort;
+		
+	}
+
+	public String passImport(ImportPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passImport(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String passImport_Return(Import_ReturnPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passImport_Return(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String passExport(ExportPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passExport(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
+	}
+
+	public String passExport_Return(Export_ReturnPO po) {
+		// TODO Auto-generated method stub
+		try {
+			if(sto.passExport_Return(po)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "失败";
 	}
 	
 	//////////////////////////////////////////////////////////////

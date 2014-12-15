@@ -5,6 +5,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.ExportPO;
+import po.Export_ReturnPO;
+import po.ImportPO;
+import po.Import_ReturnPO;
 import po.PatchPO;
 import po.SendGiftPO;
 import po.SortPO;
@@ -32,6 +36,7 @@ public interface CommodityDataService extends Remote{
 	public boolean delSendGift(SendGiftPO po) throws RemoteException;
 	public boolean delSendGift(String note) throws RemoteException;
 	public String getSendGiftNote() throws RemoteException;
+	public ArrayList<SendGiftPO> getAllSendGift() throws RemoteException;
 	
 	public boolean addGift(CommodityPO po,int number) throws RemoteException;
 	public CommodityPO findGift(CommodityPO po) throws RemoteException;
@@ -53,6 +58,10 @@ public interface CommodityDataService extends Remote{
 	public boolean refusePatch(String note) throws RemoteException;
 	public boolean passSendGift(SendGiftPO po) throws RemoteException;
 	public boolean refuseSendGift(String note) throws RemoteException;
+	public boolean passImport(ImportPO po) throws RemoteException;
+	public boolean passImport_Return(Import_ReturnPO po) throws RemoteException;
+	public boolean passExport(ExportPO po) throws RemoteException;
+	public boolean passExport_Return(Export_ReturnPO po) throws RemoteException;
 	
 	public boolean addDraftPatch(PatchPO po) throws RemoteException;
 	public boolean delDraftPatch(String note) throws RemoteException;

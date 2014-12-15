@@ -8,7 +8,7 @@ public class ReceiptPO extends InvoicePO implements Serializable{
 	String operator;//����Ա
 	CustomerPO customer;
 	ArrayList<TransferPO> transfer;
-	double total_money;//ת���ܶ�
+	public double total_money;//ת���ܶ�
 	
 	public ReceiptPO(String operator, CustomerPO customer,ArrayList<TransferPO> transfer) {
 		this.transfer=transfer;

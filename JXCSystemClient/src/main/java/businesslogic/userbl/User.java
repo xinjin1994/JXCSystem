@@ -14,6 +14,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 	
 	public UserDataService us=new UserDataService_Stub("password", "duty", 10);
 	SystemlogInfo systemlog=new Systemlog();
+	public static String operator;
 	
 	public UserDataService getUser() {
 		return us;

@@ -94,7 +94,7 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 		
 		try{
 			
-			fis=new FileInputStream("nowInitializationList.out");
+			fis=new FileInputStream("nowInitialization.out");
 			ois=new ObjectInputStream(fis);
 			nowInitialization=(InitializationPO) ois.readObject();
 			ois.close();
@@ -113,6 +113,9 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 	}
 	
 	public InitializationDataService_Stub() throws RemoteException {
+		writeInitializationList();
+		writeNowInitialization();
+		
 		readInitializationList();
 		readNowInitialization();
 	}

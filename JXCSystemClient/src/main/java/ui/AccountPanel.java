@@ -8,10 +8,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import businesslogic.invoicebl.InvoiceController;
+import businesslogicservice.invoiceblservice.InvoiceblService;
 import ui.account.AccountUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyTable;
+import ui.setting.Button.ApproveButton;
 import ui.setting.Button.MyButton;
+import ui.setting.Button.RefreshButton;
+import ui.setting.Button.RefuseButton;
 
 //财务经理
 public class AccountPanel extends FatherPanel{
@@ -22,11 +27,11 @@ public class AccountPanel extends FatherPanel{
 	
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage;
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage};
-	private MyButton detail, back,refresh;
-	private JLabel remind;
+	private MyButton refresh;
 	private MyTable showTable; 
 	private ColorFactory colors = new ColorFactory();
 	private AccountUIController accountUIController;
+	
 	private String images_ori[] = new String[]{"Image/Account/button/accManage.png",
 			"Image/Account/button/finManage.png","Image/Account/button/recManage.png",
 			"Image/Account/button/invoiceManage.png","Image/Account/button/iniManage.png"};
@@ -37,16 +42,23 @@ public class AccountPanel extends FatherPanel{
 			"Image/Account/button/finManage_press_on.png","Image/Account/button/recManage_press_on.png",
 			"Image/Account/button/invoiceManage_press_on.png",	"Image/Account/button/iniManage_press_on.png"};
 	
+	private RefuseButton refuse;
+	private ApproveButton approve;
+	private InvoiceblService invoiceblService;
 	
 	public AccountPanel(JFrame frame, String url, UIController controller,
 			AccountUIController accountUIController) {
 		super(frame, url, controller);
 		this.accountUIController= accountUIController;
+		refuse = new RefuseButton(this);
+		approve = new ApproveButton(this);
+		invoiceblService = new InvoiceController();
 		this.addButton();
-
 		}
 
 	public void addButton() {
+		refuse.setLable();
+		approve.setLable();
 		FirstButtonListener listener = new FirstButtonListener();
 		for(int i = 0 ;i < buttons.length;i++){
 			buttons[i] = new MyButton(images_ori[i], firstX, firstY +i * inter,
@@ -55,7 +67,7 @@ public class AccountPanel extends FatherPanel{
 			buttons[i].addMouseListener(listener);
 		}
 		
-		refresh = new MyButton("Image/refresh.png",25,514,"Image/refresh_stop.png","Image/refresh_stop.png");
+		refresh = new RefreshButton(this).refreshButton;
 		this.add(refresh);
 		refresh.addMouseListener(listener);
 
@@ -120,13 +132,14 @@ public class AccountPanel extends FatherPanel{
 
 		public void mousePressed(MouseEvent e) {
 			if (e.getSource() == refresh){
-				ImageIcon re = new ImageIcon("Image/remind.png");
-				remind = new JLabel(re);
-				remind.setBounds(32, 276,5,5);
-				AccountPanel.this.add(remind);
-				AccountPanel.this.repaint();
-				System.out.println("fff");
-			}//刷新数据，如果有新的审批单据返回情况，收支单据button上面会出现红点,
+				if(invoiceblService.show_pass() != null){
+					approve.setButton();
+					AccountPanel.this.repaint();
+				}else if(invoiceblService.show_refuse() != null){
+					refuse.setButton();
+					AccountPanel.this.repaint();
+				}
+			}
 			 else if(e.getSource() == buttons[0]){
 				getAccountInfo();
 			}else if(e.getSource() == buttons[1]){
@@ -158,22 +171,9 @@ public class AccountPanel extends FatherPanel{
 				accountUIController.toIniPanel();
 			}
 		}
-
 		public void mouseExited(MouseEvent e) {
 		
 		}
 		
 	}
-
-	
-	public void addRestButton() {
-		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
-				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
-		back = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
-				"Image/Sales/Sales_image/返回_press_on.png");
-		this.add(detail);
-		this.add(back);
-	
-	}
-
 }

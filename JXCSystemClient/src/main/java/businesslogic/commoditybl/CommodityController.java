@@ -6,10 +6,12 @@ import po.CommodityPO;
 import po.PatchPO;
 import po.SortPO;
 import vo.CommodityVO;
+import vo.ExamineVO;
 import vo.SortVO;
 import vo.StockVO;
 import vo.WarnVO;
 import vo.bill.PatchVO;
+import businesslogic.userbl.User;
 import businesslogicservice.commodityblservice.CommodityblService;
 
 public class CommodityController implements CommodityblService{
@@ -43,7 +45,7 @@ public class CommodityController implements CommodityblService{
 		CommodityVO com;
 		int i=0;
 		for(i=0;i<po.size();i++){
-			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
 			com.fatherSort=po.get(i).father;
 			vo.add(com);
 		}
@@ -69,17 +71,21 @@ public class CommodityController implements CommodityblService{
 		return commodity.updateSort(vo1.name, vo2.name);
 	}
 
-	public ArrayList<CommodityVO> Examine_up(String time1, String time2) {
+	public ArrayList<ExamineVO> Examine_up(String time1, String time2) {
 		// TODO Auto-generated method stub
-		ArrayList<CommodityPO> po=commodity.Examine(time1, time2);
-		ArrayList<CommodityVO> vo=new ArrayList<CommodityVO>();
-		CommodityVO com;
+		ArrayList<ExamineVO> vo=commodity.Examine(time1, time2);
+		ExamineVO lin;
 		int i=0;
-		for(i=0;i<po.size();i++){
-			com=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
-			com.fatherSort=po.get(i).father;
-			vo.add(com);
+		for(i=0;i<vo.size();i++){
+			for(int j=1;j<vo.size();j++){
+				if(vo.get(j).time.compareTo(vo.get(j-1).time)<0){
+					lin=vo.get(j);
+					vo.set(j, vo.get(j-1));
+					vo.set(j-1, lin);
+				}	
+			}
 		}
+		
 		return vo;
 	}
 
@@ -139,9 +145,31 @@ public class CommodityController implements CommodityblService{
 		ArrayList<SortVO> array=new ArrayList<SortVO>();
 		SortVO vo=null;
 		for(int i=0;i<sort.size();i++){
-			vo=new SortVO();
+			array.add(getMulSort(sort.get(i)));
 		}
-		return null;
+		return array;
+	}
+	
+	public SortVO getMulSort(SortPO po){
+		SortVO vo=new SortVO(po.getName());
+		vo.fatherSort=po.father;
+		vo.note=po.getNote();
+		int i=0;
+		
+		if(po.commodityList!=null){
+			for(i=0;i<po.commodityList.size();i++){
+				CommodityVO com=new CommodityVO(po.commodityList.get(i).getNote(), po.commodityList.get(i).getName(), po.commodityList.get(i).getType(), po.commodityList.get(i).getNumber(), po.commodityList.get(i).getIn_price(), po.commodityList.get(i).getOut_price(),
+						po.commodityList.get(i).getRecent_in_price(), po.commodityList.get(i).getRecent_out_price(),po.commodityList.get(i).warn);
+				com.fatherSort=po.commodityList.get(i).father;
+				vo.commodity.add(com);
+			}
+		}
+		
+		for(i=0;i<po.sortList.size();i++){
+			SortVO so=getMulSort(po.sortList.get(i));
+			vo.sortList.add(so);
+		}
+		return vo;
 	}
 
 	public ArrayList<CommodityVO> getAllCommodity_up() {
@@ -150,7 +178,7 @@ public class CommodityController implements CommodityblService{
 		ArrayList<CommodityVO> array=new ArrayList<CommodityVO>();
 		CommodityVO vo=null;
 		for(int i=0;i<po.size();i++){
-			vo=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price());
+			vo=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
 			vo.fatherSort=po.get(i).father;
 			array.add(vo);
 		}
@@ -222,19 +250,37 @@ public class CommodityController implements CommodityblService{
 	public CommodityVO searchAccurateCommodity_up(String name,String type) {
 		// TODO Auto-generated method stub
 		CommodityPO po=commodity.findCommodity(name, type);
-		CommodityVO vo=new CommodityVO(po.getNote(), po.getName(), po.getType(), po.getNumber(), po.getIn_price(), po.getOut_price(), po.getRecent_in_price(), po.getRecent_out_price());
+		CommodityVO vo=new CommodityVO(po.getNote(), po.getName(), po.getType(), po.getNumber(), po.getIn_price(), po.getOut_price(), po.getRecent_in_price(), po.getRecent_out_price(),po.warn);
 		vo.fatherSort=po.father;
 		return vo;
 	}
 
 	public ArrayList<SortVO> getComSort_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<SortVO> array=new ArrayList<SortVO>();
+		ArrayList<SortPO> po=commodity.getComSort();
+		SortVO so;
+		for(int i=0;i<po.size();i++){
+			so=new SortVO(po.get(i).getName());
+			so.fatherSort=po.get(i).father;
+			so.note=po.get(i).getNote();
+			array.add(so);
+		}
+		return array;
 	}
 
 	public ArrayList<SortVO> getSortSort_up() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<SortVO> array=new ArrayList<SortVO>();
+		ArrayList<SortPO> po=commodity.getSortSort();
+		SortVO so;
+		for(int i=0;i<po.size();i++){
+			so=new SortVO(po.get(i).getName());
+			so.fatherSort=po.get(i).father;
+			so.note=po.get(i).getNote();
+			array.add(so);
+		}
+		return array;
 	}
 
 

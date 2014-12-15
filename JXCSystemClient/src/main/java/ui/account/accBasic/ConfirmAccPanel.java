@@ -40,7 +40,6 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		SetBackAcc();
 		accountblService = new AccountController();
 		resControllerS = new ResultPanelController(frame,uiController.getMainPanel());
-		System.out.println(uiController.getMainPanel());
 		resControllerF = new ResultPanelController(frame, uiController.getPanel());
 		setOpe();
 	}
@@ -88,7 +87,8 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		accountController.setBack_third(ConfirmAccPanel.this);
 	}
 	protected void SetBackMan() {
-		managerController.setBack_third(this);
+		System.out.println("123");
+		managerController.setBack_third(ConfirmAccPanel.this);
 	}
 	private void setOpe() {
 		if(ope.equals("add")){

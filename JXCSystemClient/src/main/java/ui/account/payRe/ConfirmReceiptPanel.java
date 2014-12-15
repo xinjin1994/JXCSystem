@@ -30,20 +30,22 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 	GetVO newReceipt;
 	MyButton forwardButton;
 	
-	ResultPanelController resController;
+	ResultPanelController resControllerS,resControllerF;
 	public ConfirmReceiptPanel(MyFrame frame,String url,
 			AccountAllUIController uiController,GetVO newReceipt,String person,String operater,double totalValue,double balanceValue){
 		super(frame,url,uiController);
 		this.uiController = uiController;
 		this.repaint();
 		this.newReceipt = newReceipt;
-		uiController.setBack_first(this);
 		accountblService = new AccountController();
 		this.person = person;
 		this.operater = operater;
 		this.totalValue = totalValue;
 		this.balanceValue = balanceValue;
-		resController = new ResultPanelController(uiController, frame);
+		
+		resControllerS = new ResultPanelController(frame,uiController.getMainPanel());
+		resControllerF = new ResultPanelController(frame,uiController.getPanel() );
+		uiController.setBack_third(this);
 		setLabel();
 		
 		setForward();
@@ -102,10 +104,10 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 		    switch(accountblService.addReceipt_up(newReceipt)){
 		    case 0:
-		    	resController.succeeded("成功添加收款单！","account");
+		    	resControllerS.succeeded("成功添加收款单！","account");
 		    	break;
 		    case 4:
-		    	resController.failed("客户不存在！", "account");
+		    	resControllerF.failed("客户不存在！", "account");
 		    	break;
 		    }
 		}

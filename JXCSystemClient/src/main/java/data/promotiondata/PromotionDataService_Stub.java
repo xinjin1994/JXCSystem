@@ -53,12 +53,12 @@ public class PromotionDataService_Stub implements PromotionDataService{
 	}
 
 	public DiscountPO getDiscount() {
-		return new DiscountPO(1,"t1","t2",1000,2000);
+		return new DiscountPO(1,"t1","t2",1000,2000,1);
 	}
 
 	public ProGiftPO getGift() {
 		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, "10", 10, 10, 10);
-		return new ProGiftPO(gift, "time1", "time2", 0, 0, 0);
+		return new ProGiftPO(gift, "time1", "time2", 0, 0, 0,1);
 	}
 
 	public ArrayList<DiscountPO> showDiscount() {
@@ -92,6 +92,21 @@ public class PromotionDataService_Stub implements PromotionDataService{
 	public boolean clear() throws RemoteException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public DiscountPO getDiscount(int level) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ProGiftPO getGift(int level) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public VoucherPO getVoucher(int level) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

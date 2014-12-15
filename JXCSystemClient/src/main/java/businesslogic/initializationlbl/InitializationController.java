@@ -41,7 +41,7 @@ public class InitializationController implements InitializationblService{
 			po3.add(po33);
 		}
 		for(i=0;i<vo4.size();i++){
-			UserPO po44=new UserPO(vo4.get(i).name,vo4.get(i).password,vo4.get(i).duty,vo4.get(i).note);
+			UserPO po44=new UserPO(vo4.get(i).name,vo4.get(i).password,vo4.get(i).duty,vo4.get(i).id);
 			po4.add(po44);
 		}
 		

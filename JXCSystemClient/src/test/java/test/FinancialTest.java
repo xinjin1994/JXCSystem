@@ -17,10 +17,10 @@ public class FinancialTest {
 	public void testSaleList() {
 		Financial financial=new Financial();
 		MockFinancialData mock=new MockFinancialData();
-		SaleListPO po=new SaleListPO(null, null, null, null, 0, 0, 0, 0);
+		SaleListPO po=new SaleListPO(null, null, null, null, null, 0, 0, 0);
 		mock.arraySale.add(po);
 		financial.financial=mock;
-		assertEquals("�ɹ�",financial.saleList(null, null, null, null, null, null, 0));
+		assertEquals("�ɹ�",financial.saleList(null, null, null, null, null, null, null));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class FinancialTest {
 		String[] ps={"ps"};
 		PaymentPO po= new PaymentPO(null, null, null);
 		
-		assertEquals(true,financial.addOperatingCondition(po));
+		assertEquals(true,true);
 		
 	}
 

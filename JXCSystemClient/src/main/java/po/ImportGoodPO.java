@@ -5,16 +5,16 @@ import java.io.Serializable;
 public class ImportGoodPO implements Serializable{
 
 	CommodityPO commodity;
-	int number;
-	int price;  	//这里是商品的单价，人工输入
-	int money;		//这里是这个入库商品列表的总价
+	public int number;
+	public double price;  	//这里是商品的单价，人工输入
+	public double money;		//这里是这个入库商品列表的总价
 	String ps;
 	
-	public ImportGoodPO(CommodityPO commodity,int number,int price,int money,String ps){
+	public ImportGoodPO(CommodityPO commodity,int number,double price,double money,String ps){
 		this.commodity=commodity;
 		this.number=number;
 		this.price=price;
-		this.money=money;
+		this.money=price*number;
 		this.ps=ps;
 	}
 	
@@ -25,10 +25,10 @@ public class ImportGoodPO implements Serializable{
 	public int getNumber(){
 		return number;
 	}
-	public int getPrice(){
+	public double getPrice(){
 		return price;
 	}
-	public int getMoney(){
+	public double getMoney(){
 		return money;
 	}
 	public String getPs(){

@@ -15,6 +15,7 @@ public class CommodityPO implements Serializable{
 	public int warn;
 	
 	public String father;
+	public double mean;
 	
 	
 	public CommodityPO(Boolean isGift,String name,String type,double in_price,double out_price,
@@ -61,6 +62,7 @@ public class CommodityPO implements Serializable{
 		CommodityPO po=new CommodityPO(isGift, name, type, in_price, out_price,note,
 				recent_in_price, recent_out_price, number);
 		po.warn=warn;
+		po.mean=mean;
 		return po;
 	}
 	
@@ -101,5 +103,8 @@ public class CommodityPO implements Serializable{
 	
 	public int getNumber() {
 		return number;
+	}
+	public double getMean(){
+		return mean;
 	}
 }

@@ -17,7 +17,7 @@ public class CommodityTest {
 		Commodity commodity=new Commodity();
 		MockCommodityData mock=new MockCommodityData();
 		commodity.sto=mock;
-		assertEquals("�ɹ�",commodity.addCommodity("name", "type", 0, 0));
+		assertEquals("�ɹ�",commodity.addCommodity(null, null));
 	}
 
 	@Test
@@ -27,7 +27,7 @@ public class CommodityTest {
 		commodity.invoice=mock1;
 		MockSystemlog mock2=new MockSystemlog();
 		commodity.systemlog=mock2;
-		assertEquals("�ɹ�",commodity.patch("name", "type", 100));
+		assertEquals("�ɹ�",commodity.patch("name", "type", 100, null));
 	}
 	
 	@Test

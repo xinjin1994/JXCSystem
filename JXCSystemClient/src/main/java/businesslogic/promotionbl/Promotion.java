@@ -29,7 +29,7 @@ public class Promotion {
 			String time1, String time2) {
 		// TODO Auto-generated method stub
 		//pro=new PromotionDataService_Stub(); 
-		DiscountPO dis=new DiscountPO(1,"t1","t2",1000,2000);
+		DiscountPO dis=new DiscountPO(1,"t1","t2",1000,2000,1);
 		try {
 			if(promotion.addDiscount(dis)){
 				systemlog.add_up("AddDiscount:");
@@ -47,7 +47,7 @@ public class Promotion {
 	public int delPromotion(String note) {
 		// TODO Auto-generated method stub
 		//PromotionDataService pro=new PromotionDataService_Stub(); 
-		DiscountPO dis= new DiscountPO(1,"t1","t2",1000,2000);
+		DiscountPO dis= new DiscountPO(1,"t1","t2",1000,2000,1);
 		try {
 			if(promotion.delDiscount(dis)){
 				systemlog.add_up("DelDiscount:");
@@ -64,7 +64,7 @@ public class Promotion {
 		// TODO Auto-generated method stub
 //		PromotionDataService pro=new PromotionDataService_Stub(); 
 		CommodityPO gift=new CommodityPO(true, "n", "t", 10, 10, "10", 10, 10, 10);
-		ProGiftPO dis=new ProGiftPO(gift, time1, time2, start_money, start_money, start_money);
+		ProGiftPO dis=new ProGiftPO(gift, time1, time2, start_money, start_money, start_money,1);
 		try {
 			if(promotion.addGift(dis)){
 				systemlog.add_up("AddGift:");
@@ -82,7 +82,7 @@ public class Promotion {
 //		PromotionDataService pro=new PromotionDataService_Stub(); 
 		ArrayList<DiscountVO> vo=new ArrayList<DiscountVO>();
 		try {
-			if(promotion.getDiscount()!=null){
+			if(promotion.getDiscount(1)!=null){
 				systemlog.add_up("Search:");
 				return vo;
 			}

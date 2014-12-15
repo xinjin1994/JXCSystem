@@ -13,6 +13,7 @@ import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import vo.bill.GetVO;
 import vo.bill.TransferListVO;
@@ -36,12 +37,17 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	double turnMoney;
 	GetVO newReceipt;	
 	String remark, person, id, operate;
+	
+	private ResultPanelController resController;
+	private String failedAddress = "acc/finManage/rec";
+	
 	public AddReceiptPanel(MyFrame frame, String url, AccountAllUIController uiController) {
 		super(frame, url, uiController);
 		this.uiController = uiController;
 		this.repaint();
 		accountblService = new AccountController();
 		uiController.setBack_first(this);
+		resController = new ResultPanelController(frame, this);
 		addLabel();
 		setForward();
 		setIDOpe();
@@ -161,38 +167,41 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
-			
+
 			remark = ps.getText();// 备注
 			person = agent.getText();// 业务员
-			
-			if(remark.equals("")||person.equals("")||money.getText().equals("")){
-				failLabel.setText("请正确输入信息！");
-			}else{
-				try{
-			turnMoney = Double.parseDouble(money.getText());// 转账金额
-			String accName = account.getSelectedItem().toString();// 银行账户
-			String cusName = customer.getSelectedItem().toString();// 客户姓名
-			double balance = accountblService.searchAccurateAccount_up(accName).balance;// 余额
-			// TransferListVO(String bankAccount,double transferValue,String
-			// remark){
-			// 银行账户，转账金额，备注
-//			String accName = "ss";
-//			String cusName = "121";
-//			double balance = 20;
-			setBalanceLabel(balance);
-			TransferListVO transferListVO = new TransferListVO(accName, turnMoney, remark);
-			newReceipt = new GetVO(id, cusName,transferListVO);
-			total.setText(accountblService.calTotalMoney_up(newReceipt) + "");
-//			setTotal();
 
-			frame.remove(this);
-			uiController.confirmReceipt(newReceipt,person,operate,accountblService.calTotalMoney_up(newReceipt),balance);
-				}catch(Exception e2){
-					failLabel.setText("请正确输入信息！");
-				}
-			//这边将新生成的收款单信息传给确认收款单界面
-				} 
-			
+			if(remark.equals("")||person.equals("")||money.getText().equals("")){
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
+			}else{
+//				try{
+					turnMoney = Double.parseDouble(money.getText());// 转账金额
+					String accName = account.getSelectedItem().toString();// 银行账户
+					String cusName = customer.getSelectedItem().toString();// 客户姓名
+					double balance = accountblService.searchAccurateAccount_up(accName).balance;// 余额
+					// TransferListVO(String bankAccount,double transferValue,String
+					// remark){
+					// 银行账户，转账金额，备注
+					//			String accName = "ss";
+					//			String cusName = "121";
+					//			double balance = 20;
+					setBalanceLabel(balance);
+					TransferListVO transferListVO = new TransferListVO(accName, turnMoney, remark);
+					newReceipt = new GetVO(id, cusName,transferListVO);
+					total.setText(accountblService.calTotalMoney_up(newReceipt) + "");
+					//			setTotal();
+
+					uiController.setTempPanel(this);
+					frame.remove(this);
+					uiController.confirmReceipt(newReceipt,person,operate,accountblService.calTotalMoney_up(newReceipt),balance);
+//				}catch(Exception e2){
+//					frame.remove(this);
+//					resController.failed("存在输入错误！",failedAddress);
+//				}
+				//这边将新生成的收款单信息传给确认收款单界面
+			} 
+
 		}else if (e.getSource() == account) {
 			String accName = account.getSelectedItem().toString();
 			// int balance = 10;//根据accName到下层寻找的余额

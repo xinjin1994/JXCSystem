@@ -1,9 +1,10 @@
 package businesslogic.commoditybl;
 
-import po.PatchPO;
+import po.InvoicePO;
+import po.SendGiftPO;
 
 public interface InvoiceInfo {
 
-	public String add(PatchPO po);
+	public String add(InvoicePO po);
 	
 }

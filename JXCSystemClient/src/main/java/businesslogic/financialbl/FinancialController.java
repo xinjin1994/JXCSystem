@@ -32,6 +32,7 @@ import vo.bill.ItemList;
 import vo.bill.PatchVO;
 import vo.bill.PayVO;
 import vo.bill.TransferListVO;
+import businesslogic.userbl.User;
 import businesslogicservice.financialblservice.FinancialblService;
 
 public class FinancialController implements FinancialblService{
@@ -39,7 +40,7 @@ public class FinancialController implements FinancialblService{
 	public Financial financial=new Financial();
 
 	public ArrayList<SalesDetailVO> saleList_up(String time1, String time2, String good_name,
-			String good_type, String customer_name, String clerk, int warehouse) {
+			String good_type, String customer_name, String clerk, String warehouse) {
 		// TODO Auto-generated method stub
 		ArrayList<SaleListPO> array=financial.saleList(time1, time2, good_name, good_type, customer_name, clerk, warehouse);
 	
@@ -53,7 +54,7 @@ public class FinancialController implements FinancialblService{
 	}
 
 	public ArrayList<AllBillVO> allBill_up(String time1, String time2, String note_type,
-			String customer_name, String clerk, int warehouse) {
+			String customer_name, String clerk, String warehouse) {
 		// TODO Auto-generated method stub
 		ArrayList<AllBillPO> array=financial.allBill(time1, time2, note_type, customer_name, clerk, warehouse);
 		ArrayList<AllBillVO> res=new ArrayList<AllBillVO>();
@@ -128,22 +129,22 @@ public class FinancialController implements FinancialblService{
 		ArrayList<ConditionVO> vo=new ArrayList<ConditionVO>();
 		ConditionVO con;
 		for(int i=0;i<po.size();i++){
-			con=new ConditionVO(po.get(i).getIncome(),po.get(i).getGoodIncome(),po.get(i).getDiscount(),po.get(i).getOutcome(),po.get(i).getGoodOutcome());
+			con=new ConditionVO(po.get(i).getOldNote(),po.get(i).getIncome(),po.get(i).getGoodIncome(),po.get(i).getDiscount(),po.get(i).getOutcome(),po.get(i).getGoodOutcome());
 			vo.add(con);
 		}
 		return vo;
 	}
-
-	public int saleListExcel_up(SaleListConditionVO saleList_condition) {
+	
+	public int saleListExcel_up(ArrayList<SaleListConditionVO> saleList_condition) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int allBillExcel_up(AllBillConditionVO allBill_condition) {
+	public int allBillExcel_up(ArrayList<AllBillConditionVO> allBill_condition) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	public int operatingConditionExcel_up(ArrayList<ConditionVO> operating_condition) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -156,15 +157,17 @@ public class FinancialController implements FinancialblService{
 
 	public boolean hasPower_up() {
 		// TODO Auto-generated method stub
-		if(User.Operator==4||User.Operator==5){
-			return true;
-		}
+//		if(User.operator==4||User.operator==5){
+//			return true;
+//		}
 		return false;
 	}
 
-	public int getOperator_up() {
+	public String getOperator_up() {
 		// TODO Auto-generated method stub
 		return User.operator;
 	}
+
+
 
 }
