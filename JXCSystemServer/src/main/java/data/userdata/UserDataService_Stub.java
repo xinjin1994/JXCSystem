@@ -113,40 +113,78 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	}
 	
 	
-	
-	public boolean addUser(UserPO po) {
-		return true;
-	}
 
-	public boolean delUser(UserPO po) {
+	public boolean addUser(UserPO po) {
+		for(int i=0;i<userList.size();i++){
+			if(po.getName().equals(userList.get(i).getName())){
+				return false;
+			}
+		}
+		userList.add(po.copy());
 		return true;
 	}
 
 	public UserPO getUser(String name) {
-		return new UserPO(name, name, 0, name);
+		for(int i=0;i<userList.size();i++){
+			if(userList.get(i).getName().equals(name)){
+				return new UserPO(userList.get(i).getName(),"",userList.get(i).getDuty(),userList.get(i).getNote());
+			}
+		}
+		return null;
+	}
+	
+	public UserPO getUser_Note(String note) {
+		for(int i=0;i<userList.size();i++){
+			if(userList.get(i).getName().equals(note)){
+				return new UserPO(userList.get(i).getNote(),"",userList.get(i).getDuty(),userList.get(i).getNote());
+			}
+		}
+		return null;
 	}
 
 	public ArrayList<UserPO> show() {
+		ArrayList<UserPO> array=new ArrayList<UserPO>();
+		for(int i=0;i<userList.size();i++){
+			UserPO po=new UserPO(userList.get(i).getName(),"",userList.get(i).getDuty(),userList.get(i).getNote());
+			array.add(po);
+		}
 		return userList;
 	}
 
 	public boolean clear() {
+		userList=new ArrayList<UserPO>();
+		user_note=0;
 		return true;
 	}
 
-	public boolean delUser(String string) {
+	public boolean delUser(String note) {
 		// TODO Auto-generated method stub
+		for(int i=0;i<userList.size();i++){
+			if(userList.get(i).getNote().equals(note)){
+				userList.remove(i);
+				return true;
+			}
+		}
 		return false;
 	}
 
 	public UserPO login(UserPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		for(int i=0;i<userList.size();i++){
+			if(userList.get(i).getName().equals(po.getName())&&userList.get(i).getPassword().equals(po.getPassword())){
+				return new UserPO(userList.get(i).getName(),"",userList.get(i).getDuty(),userList.get(i).getNote());
+			}
+		}
+		
 		return null;
 	}
 
 	public String getNote() throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		String part1="User";
+		String part2=Integer.toString(user_note);
+		user_note++;
+		return part1+"-"+part2;
 	}
 
 }

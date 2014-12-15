@@ -2,6 +2,7 @@ package businesslogic.userbl;
 
 import java.util.ArrayList;
 
+import po.UserPO;
 import vo.UserVO;
 import businesslogicservice.userblservice.UserblService;
 
@@ -9,22 +10,15 @@ public class UserController implements UserblService{
 	
 	public User user=new User();
 
-	public int addUser(String name, String password, int duty) {
-		// TODO Auto-generated method stub
-		int message=user.addUser(name, password, duty);
-		return message;
-	}
-
-	public int delUser(String name) {
-		// TODO Auto-generated method stub
-		int message=user.delUser(name);
-		return message;
-	}
-
 	public ArrayList<UserVO> show_up() {
 		// TODO Auto-generated method stub
-		ArrayList<UserVO> result=user.show();
-		return result;
+		ArrayList<UserPO> po=user.show();
+		ArrayList<UserVO> array=new ArrayList<UserVO>();
+		for(int i=0;i<po.size();i++){
+			UserVO vo=new UserVO(po.get(i).getNote(),po.get(i).getName(),"",po.get(i).getDuty());
+			array.add(vo);
+		}
+		return array;
 	}
 
 	public int login_up(String name, String password) {
@@ -35,27 +29,28 @@ public class UserController implements UserblService{
 
 	public int addUser_up(UserVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return user.addUser(vo.name, vo.password, vo.duty,vo.id);
 	}
 
 	public int delUser_up(UserVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return user.delUser(vo.id);
 	}
 
-	public UserVO searchUser_up(String name) {
+	public ArrayList<UserVO> searchUser_up(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<UserPO> po=user.getUser_Note(name);
+		ArrayList<UserVO> array=new ArrayList<UserVO>();
+		for(int i=0;i<po.size();i++){
+			UserVO vo=new UserVO(po.get(i).getNote(),po.get(i).getName(),"",po.get(i).getDuty());
+			array.add(vo);
+		}
+		return array;
 	}
 
 	public String getUserNote() {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public UserVO searchUser_Note(String note) {
-		// TODO Auto-generated method stub
-		return null;
+		return user.getUserNote();
 	}
 
 }
