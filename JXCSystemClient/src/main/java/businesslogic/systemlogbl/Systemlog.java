@@ -9,6 +9,7 @@ import po.AccountPO;
 import po.SystemlogPO;
 import vo.AccountVO;
 import vo.SystemlogVO;
+import businesslogic.userbl.User;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 import data.systemlogdata.SystemlogDataService_Stub;
 import dataservice.systemlogdataservice.SystemlogDataService;
@@ -31,47 +32,26 @@ public class Systemlog implements businesslogic.commoditybl.SystemlogInfo,
 		this.sys = sys;
 	}
 
-	public ArrayList<SystemlogVO> show_up() {
+	public ArrayList<SystemlogPO> show_up() {
 		// TODO Auto-generated method stub
 		// SystemlogDataService sys = new SystemlogDataService_Stub();
-		ArrayList<SystemlogVO> vo=new ArrayList<SystemlogVO>();
-		
+		ArrayList<SystemlogPO> po=new ArrayList<SystemlogPO>();
 		try {
-			
-			
-			ArrayList<SystemlogPO> po=sys.get();
-			
-			
-			if (sys.get() != null) {
-				
-				
-				for(int i=0;i<po.size();i++){
-					vo.get(i).time=po.get(i).getTime();
-					vo.get(i).operation=po.get(i).getOperation();
-				}
-				
-				
-			
-				
-				
-				return vo ;
+			po=sys.get();
+			if (sys.get() != null) {	
+				return po ;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return vo;
+		return po;
 	}
 
 	public int add_up(String word) {
 		// TODO Auto-generated method stub
 		
-		Date date = new Date(); 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String time = dateFormat.format( date ); //这一段要不要写在这里啊啊啊啊啊啊啊啊
-		
-		SystemlogPO system = new SystemlogPO(word,time);
-		// SystemlogDataService sys = new SystemlogDataService_Stub();
+		SystemlogPO system = new SystemlogPO(User.operator,word);
 		try {
 			if (sys.add(system)) {
 				return 0;

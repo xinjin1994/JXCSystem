@@ -2,6 +2,7 @@ package businesslogic.systemlogbl;
 
 import java.util.ArrayList;
 
+import po.SystemlogPO;
 import vo.SystemlogVO;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 
@@ -11,8 +12,14 @@ public class SystemlogController implements SystemlogblService{
 
 	public ArrayList<SystemlogVO> show_up() {
 		// TODO Auto-generated method stub
-		ArrayList<SystemlogVO> result=systemlog.show_up();
-		return result;
+		ArrayList<SystemlogPO> po=systemlog.show_up();
+		ArrayList<SystemlogVO> vo=new ArrayList<SystemlogVO>();
+		
+		for(int i=0;i<po.size();i++){
+			SystemlogVO lin=new SystemlogVO(po.get(i).getTime(),po.get(i).getOperation(),po.get(i).getWord());
+			vo.add(lin);
+		}
+		return vo;
 	}
 
 	public int add_up(String word) {

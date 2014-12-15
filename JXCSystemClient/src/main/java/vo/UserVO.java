@@ -15,9 +15,6 @@ public class UserVO {
 		this.password=password;
 		this.duty=duty;
 	
-	}public UserVO(UserPO po){
-		this.name=po.getName();
-		this.password=po.getPassword();
-		this.duty=po.getDuty();
 	}
+	
 }
