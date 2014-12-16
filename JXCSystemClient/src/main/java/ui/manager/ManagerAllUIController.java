@@ -1,6 +1,7 @@
 package ui.manager;
 
 import ui.FatherPanel;
+import ui.ManagerPanel;
 import ui.UIController;
 import ui.account.AccountDetailPanel;
 import ui.account.accBasic.AddAccountPanel;
@@ -13,6 +14,7 @@ import ui.account.list.OpeConPanel;
 import ui.account.list.SalesListPanel;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
+import ui.setting.Button.LogOutButton;
 import ui.setting.Button.MyButton;
 import vo.AccountVO;
 import vo.promotion.DiscountVO;
@@ -59,6 +61,10 @@ public class ManagerAllUIController extends UIController{
 		findAccountPanel = new FindAccountPanel(frame,"Image/Manager/查找账户.jpg",this,"manager");
 		frame.setPanel(findAccountPanel);
 		frame.repaint();
+	}
+	
+	public void logOut(ManagerPanel managerPanel){
+		new LogOutButton(frame, managerPanel, "manager", uiController);
 	}
 	
 	public void addAccount(){

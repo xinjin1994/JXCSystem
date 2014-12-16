@@ -1,5 +1,6 @@
 package ui.commodity;
 
+import ui.CommodityPanel;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.commodity.manage.AddComPanel;
@@ -19,6 +20,7 @@ import ui.commodity.storage.ExamineStockPanel;
 import ui.commodity.storage.PatchDetailPanel;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
+import ui.setting.Button.LogOutButton;
 import vo.CommodityVO;
 import vo.SortVO;
 import vo.bill.PatchVO;
@@ -190,6 +192,10 @@ public class CommodityAllUIController extends UIController{
 		patchDetailPanel = new PatchDetailPanel(frame,"Image/Commodity/stockManage/confirmPatch.jpg",this,patch);
 		frame.setPanel(patchDetailPanel);
 		frame.repaint();
+	}
+	
+	public void logOut(CommodityPanel panel){
+		new LogOutButton(frame, panel, "commodity", uiController);
 	}
 	/**
 	 * 以下两个是commodity模块中的返回按钮，都会返回到主界面

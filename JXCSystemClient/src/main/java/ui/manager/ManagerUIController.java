@@ -57,6 +57,8 @@ public class ManagerUIController {
 		promotionblService = new PromotionController();
 		this.managerPanel = new ManagerPanel(frame, "Image/Manager/manager.jpg",
 				uiController, this);
+		uiController.logOut(managerPanel);
+		managerPanel.repaint();
 		
 		managerPanel.add(managerThirdPanel);
 		frame.setPanel(managerPanel);

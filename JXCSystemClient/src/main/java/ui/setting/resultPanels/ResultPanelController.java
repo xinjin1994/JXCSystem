@@ -64,7 +64,11 @@ public class ResultPanelController extends UIController implements ActionListene
 	
 		textLabel.setText(text);
 		setPanel();
-		
+	}
+	
+	public void logOut(String type){
+		resultPanel = new FatherPanel(frame, "Image/result/"+type+"_logOut.jpg", this);
+		setChoose();
 	}
 	
 	private void setPanel() {
@@ -74,6 +78,10 @@ public class ResultPanelController extends UIController implements ActionListene
 		frame.repaint();
 	}
 
+	private void setChoose(){
+		
+	}
+	
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(382, 327);
 		forwardButton = forward.forward_black;

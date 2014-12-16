@@ -24,6 +24,7 @@ import ui.account.payRe.ConfirmReceiptPanel;
 import ui.manager.ManagerAllUIController;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
+import ui.setting.Button.LogOutButton;
 import ui.setting.Button.MyButton;
 import vo.AccountVO;
 import vo.bill.GetVO;
@@ -67,11 +68,17 @@ public class AccountAllUIController extends UIController{
 
 	public AccountAllUIController(UIController uiController,MyFrame frame) {
 		this.frame = frame;
+		this.uiController = uiController;
 		addMainPanel();
 	}
 	public AccountAllUIController(UIController uiController,MyFrame frame,ManagerAllUIController managerController){
 		this.frame = frame;
+		this.uiController = uiController;
 		this.managerController = managerController;
+	}
+	
+	public void logOut(AccountPanel accountPanel){
+		new LogOutButton(frame, accountPanel, "account", uiController);
 	}
 	
 	public void addMainPanel(){

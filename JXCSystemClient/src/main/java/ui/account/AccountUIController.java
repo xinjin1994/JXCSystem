@@ -46,6 +46,9 @@ public class AccountUIController {
 		this.frame = frame;
 		this.accountPanel = new AccountPanel(frame, "Image/Account/account_背景.jpg",
 				uiController, this);
+		uiController.logOut(accountPanel);
+		accountPanel.repaint();
+		
 		invoiceblService = new InvoiceController();
 		colors = new ColorFactory();
 		frame.setPanel(accountPanel);

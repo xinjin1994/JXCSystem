@@ -41,6 +41,8 @@ public class CommodityUIController {
 		this.frame = frame;
 		this.commodityPanel = new CommodityPanel(frame, "Image/Commodity/commodity.jpg",
 				uiController, this);
+		uiController.logOut(commodityPanel);
+		commodityPanel.repaint();
 		frame.setPanel(commodityPanel);
 		resController = new ResultPanelController(frame,commodityPanel);
 		invoiceblService = new InvoiceController();

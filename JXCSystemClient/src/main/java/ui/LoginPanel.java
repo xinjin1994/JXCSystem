@@ -115,6 +115,7 @@ public class LoginPanel extends FatherPanel {
 	class LoginListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			
 			UserblService userbl = new UserController();
 			int identity = userbl.login_up(userText, passwordText);
 			identity = 3;

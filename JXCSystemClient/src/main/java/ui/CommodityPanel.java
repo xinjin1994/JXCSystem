@@ -42,6 +42,7 @@ public class CommodityPanel extends FatherPanel{
 			CommodityUIController commodityUIController) {
 		super(frame, url, controller);
 		this.commodityUIController= commodityUIController;
+		
 		remind = new RemindButton(this);
 		this.addButton();
 

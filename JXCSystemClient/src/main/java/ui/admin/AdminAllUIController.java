@@ -1,10 +1,13 @@
 package ui.admin;
 
+import junit.awtui.Logo;
 import ui.AdminPanel;
+import ui.CommodityPanel;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
+import ui.setting.Button.LogOutButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
 
@@ -23,9 +26,14 @@ public class AdminAllUIController extends UIController{
 		this.uiController = uiController;
 		resController = new ResultPanelController(frame, adminPanel);
 		addMainPanel();
+		
+	}
+	public void logOut(){
+		new LogOutButton(frame, adminPanel, "admin", uiController);
 	}
 	private void addMainPanel() {
 		adminPanel = new AdminPanel(frame, "Image/User/user.jpg", uiController,this);
+		logOut();
 		frame.setPanel(adminPanel);
 		frame.repaint();
 		setMainPanel(adminPanel);
@@ -54,12 +62,12 @@ public class AdminAllUIController extends UIController{
 		adminPanel.repaint();
 	}
 	
-	public void confirmUserDel(UserVO user,String type){
-		confirmUserPanel = new ConfirmUserDel(frame,"Image/User/ConfirmUser.jpg", this, user,type);
-		confirmUserPanel.setLocation(0, 217);
-		adminPanel.add(confirmUserPanel);
-		adminPanel.repaint();
-	}
+//	public void confirmUserDel(UserVO user,String type){
+//		confirmUserPanel = new ConfirmUserDel(frame,"Image/User/ConfirmUser.jpg", this, user,type);
+//		confirmUserPanel.setLocation(0, 217);
+//		adminPanel.add(confirmUserPanel);
+//		adminPanel.repaint();
+//	}
 	/**
 	 * 以下两个是admin模块中的返回按钮，都会返回到主界面
 	 * @param prePanel

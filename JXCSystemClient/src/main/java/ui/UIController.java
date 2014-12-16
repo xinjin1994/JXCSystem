@@ -12,7 +12,7 @@ public class UIController {
 
 	private MyFrame frame;
 	private WelcomePanel welcomePanel;
-	private LoginPanel loginPanel;
+	public LoginPanel loginPanel;
 	private AdminPanel admin;
 	private AccountPanel accountPanel; // 财务管理界面
 	private FinPersonPanel financialPerson; // 财务人员界面
@@ -20,34 +20,34 @@ public class UIController {
 	private SalesPersonPanel salesPerson;
 	
 	
-	static private FatherPanel tempMainPanel,tempPanel;
+	static private FatherPanel tempMainPanel,tempPanel,logPanel;
 	public FatherPanel prePanel;
-//	public UIController(){
-//		
-//	}
-	public UIController() {
+	public UIController(){
+		
+	}
+	public UIController(int i) {
 
 		this.frame = new MyFrame();
-//	    this.welcomePanel();
+	    this.welcomePanel();
 //	    this.SalesManagerPanel();
 	}
 	
-	public UIController(int i){
-		this.frame = new MyFrame();
-
-		this.CommodityPanel();
-//	  	this.AccountPanel();
-
-//		this.SalesManagerPanel();
-
-//		this.AccountPanel();
-
-//	this.ManagerPanel();
-//		this.SalesManagerPanel();
-
-		this.AdminPanel();
-
-	}
+//	public UIController(int i){
+//		this.frame = new MyFrame();
+//
+//		this.CommodityPanel();
+////	  	this.AccountPanel();
+//
+////		this.SalesManagerPanel();
+//
+////		this.AccountPanel();
+//
+////	this.ManagerPanel();
+////		this.SalesManagerPanel();
+//
+//	//	this.AdminPanel();
+//
+//	}
 
 	public void welcomePanel() {
 		welcomePanel = new WelcomePanel(frame,"Image/welcome.jpg",this);
@@ -96,7 +96,8 @@ public class UIController {
 	}
 
 	public void CommodityPanel() {
-//		frame.remove(loginPanel);
+		frame.remove(loginPanel);
+		System.out.println("1111");
 		new CommodityAllUIController(this, frame);
 		frame.repaint();
 	}
@@ -128,6 +129,10 @@ public class UIController {
 	public FatherPanel getPanel(){
 		return tempPanel;
 	}
+	
+//	public void setLogInPanel(FatherPanel logInPanel){
+//		this.l
+//	}
 
 
 
