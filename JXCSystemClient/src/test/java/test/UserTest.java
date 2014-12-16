@@ -17,31 +17,31 @@ public class UserTest {
 	public void testAddUser() {
 		MockAddUser mockAdd = new MockAddUser();
 		User user = new User();
-		user.setUser(mockAdd);
-		assertEquals("³É¹¦", user.addUser("name", "password", 10));
+//		user.setUser();
+		assertEquals("ï¿½É¹ï¿½", user.addUser("name", "password", 10, null));
 	}
 	
 	@Test
 	public void testDelUser() {
 		MockGetUser mockGet = new MockGetUser();
 		User user = new User();
-		user.setUser(mockGet);
-		assertEquals("³É¹¦", user.delUser("name"));
+//		user.setUser(mockGet);
+		assertEquals("ï¿½É¹ï¿½", user.delUser("name"));
 	}
 	
 	@Test
 	public void testLogin() {
 		MockGetUser mockGet = new MockGetUser();
 		User user = new User();
-		user.setUser(mockGet);
-		assertEquals("³É¹¦", user.login("name", "password"));
+//		user.setUser(mockGet);
+		assertEquals("ï¿½É¹ï¿½", user.login("name", "password"));
 	}
 
 	@Test
 	public void testShow() {
 		MockShow mockShow = new MockShow();
 		User user = new User();
-		user.setUser(mockShow);
-		assertEquals("³É¹¦", user.show());
+//		user.setUser(mockShow);
+		assertEquals("ï¿½É¹ï¿½", user.show());
 	}
 }

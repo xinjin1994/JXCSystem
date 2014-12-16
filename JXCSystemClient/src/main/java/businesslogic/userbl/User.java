@@ -24,6 +24,10 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 //		this.us = us;
 //	}
 	
+	public void setInfo(SystemlogInfo systemlog){
+		this.systemlog=systemlog;
+	}
+	
 	public int addUser(String name, String password, int duty, String note) {
 		// TODO Auto-generated method stub
 		UserPO user = new UserPO(name, password, duty,note);

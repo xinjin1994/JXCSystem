@@ -63,7 +63,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockAddIm);
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport_up(new ImportMenuVO(null, null, null, null, null, null, 0, null, 0, null)));
+		assertEquals("�ɹ�", sale.addImport_up(null));
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class SalesTest {
 		sale.setSale(mockAddEx);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport_up(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null, null, 0, null)));
+		assertEquals("�ɹ�", sale.addExport_up(null));
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class SalesTest {
 		sale.setSale(mockAddExRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport_Return_up(new ExportMenuVO(null, null, null, null, null, null, 0, 0, 0, 0, null, null, 0, null)));
+		assertEquals("�ɹ�", sale.addExport_Return_up(null));
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class SalesTest {
 		sale.setSale(mockAddImRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport_Return_up(new ImportMenuVO(null, null, null, null, null, null, 0, null, 0, null)));
+		assertEquals("�ɹ�", sale.addImport_Return_up(null));
 	}
 
 }

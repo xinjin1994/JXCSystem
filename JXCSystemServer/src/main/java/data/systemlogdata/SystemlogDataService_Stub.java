@@ -68,6 +68,9 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 	
 	public SystemlogDataService_Stub() throws RemoteException {
 		super();
+		
+		this.writeSystemlogList();
+		
 		this.readSystemlogList();
 		// TODO Auto-generated constructor stub
 	}

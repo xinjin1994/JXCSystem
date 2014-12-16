@@ -20,7 +20,12 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	int user_note=0;
 	
 	public UserDataService_Stub() throws RemoteException{
+		
+		this.writeUserList();
+		this.writeUserNote();
+		
 		this.readUserList();
+		this.readUserNote();
 	}
 	
 	public void writeUserList(){

@@ -17,7 +17,7 @@ public class PromotionTest {
 		MockAddDiscount mockDis=new MockAddDiscount();
 		Promotion promotion=new Promotion();
 		promotion.setPro(mockDis);
-		assertEquals("成功",promotion.makeDiscount(1, 1, 1, "t1", "t2"));
+		assertEquals("成功",promotion.makeDiscount(1, 1, 1, "t1", "t2", 0));
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class PromotionTest {
 		MockAddGift mock=new MockAddGift();
         Promotion promotion=new Promotion();
         promotion.setPro(mock);
-		assertEquals("成功",promotion.makeGift(1, "time1","time2"));
+		assertEquals("成功",promotion.makeGift(null, null, 1, "time1","time2", 0, 0));
 	}
 
 	@Test
@@ -33,7 +33,7 @@ public class PromotionTest {
 		MockDelDiscount mockDis=new MockDelDiscount();
 		Promotion pro=new Promotion();
         pro.setPro(mockDis);
-		assertEquals("成功",pro.delDiscount("t1"));
+		assertEquals("成功",pro.delDiscount(0));
 	}
 
 	@Test

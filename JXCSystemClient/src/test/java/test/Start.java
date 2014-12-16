@@ -69,6 +69,8 @@ public class Start {
 		accountController.account.setInfo(financialController.financial, invoiceController.invoice, salesController.sale, systemlogController.systemlog);
 		financialController.financial.setInfo(accountController.account, commodityController.commodity, salesController.sale, systemlogController.systemlog);
 		invoiceController.invoice.setInfo(accountController.account, salesController.sale, commodityController.commodity);
+		promotionController.promotion.setInfo(systemlogController.systemlog, commodityController.commodity);
+		userController.user.setInfo(systemlogController.systemlog);
 		
 		try {
 			
@@ -78,7 +80,7 @@ public class Start {
 			initializationController.initialization.initialization=(InitializationDataService) Naming.lookup("rmi://127.0.0.1:8891/InitializationDataService");
 			invoiceController.invoice.invoice=(InvoiceDataService) Naming.lookup("rmi://127.0.0.1:8892/InvoiceDataService");
 			promotionController.promotion.promotion=(PromotionDataService) Naming.lookup("rmi://127.0.0.1:8893/PromotionDataService");
-			salesController.sale.sale=(SalesDataService) Naming.lookup("rmi://127.0.0.1:8894/SalesDataService");
+//			salesController.sale.sale=(SalesDataService) Naming.lookup("rmi://127.0.0.1:8894/SalesDataService");
 			systemlogController.systemlog.sys=(SystemlogDataService) Naming.lookup("rmi://127.0.0.1:8895/SystemlogDataService");
 			userController.user.us=(UserDataService) Naming.lookup("rmi://127.0.0.1:8896/UserDataService");
 
