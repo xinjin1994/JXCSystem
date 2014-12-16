@@ -25,29 +25,29 @@ public class UIController {
 	public UIController(){
 		
 	}
-	public UIController(int i) {
-
-		this.frame = new MyFrame();
-	    this.welcomePanel();
-//	    this.SalesManagerPanel();
-	}
-	
-//	public UIController(int i){
+//	public UIController(int i) {
+//
 //		this.frame = new MyFrame();
-//
-//		this.CommodityPanel();
-////	  	this.AccountPanel();
-//
-////		this.SalesManagerPanel();
-//
-////		this.AccountPanel();
-//
-////	this.ManagerPanel();
-////		this.SalesManagerPanel();
-//
-//	//	this.AdminPanel();
-//
+//	    this.welcomePanel();
+////	    this.SalesManagerPanel();
 //	}
+	
+	public UIController(int i){
+		this.frame = new MyFrame();
+
+//		this.CommodityPanel();
+//	  	this.AccountPanel();
+
+//		this.SalesManagerPanel();
+
+//		this.AccountPanel();
+
+//	this.ManagerPanel();
+//		this.SalesManagerPanel();
+
+		this.AdminPanel();
+
+	}
 
 	public void welcomePanel() {
 		welcomePanel = new WelcomePanel(frame,"Image/welcome.jpg",this);

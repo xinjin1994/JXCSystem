@@ -9,6 +9,7 @@ import ui.setting.MyFrame;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
@@ -24,6 +25,8 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 	
 	private UserblService userblService;
 	
+	private ResultPanelController resController;
+	private String failedAddress;
 	public DelUserPanel(MyFrame frame, String url, AdminAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
@@ -31,6 +34,8 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 		
 		controller.setBack_second(this,195,168);
 		
+		resController = new ResultPanelController(frame, this);
+		this.failedAddress = "admin/delUser";
 		addTextField();
 		setForward();
 		
@@ -49,18 +54,30 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 		this.add(idTextField);
 		idTextField.setForeground(new ColorFactory().greyFont);
 	}
+	
+	
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == forwardButton){
 			frame.remove(this);
-			frame.setPanel(adminAllUIController.getMainPanel());
-			/*
-			 * user是从下层搜索到的
-			 * 
-			 */
-//			user = userblService.searchUser_up(idTextField.getText());
-			user = new UserVO("21", "2", "2", 1);
-			adminAllUIController.confirmUserDel(user,"删除");
-			frame.repaint();
+			String id = idTextField.getText();
+			
+			if(id.equals("")){
+				resController.failed("存在输入为空！",failedAddress);
+				frame.repaint();
+			}else if(userblService.searchUser_up(id).get(0) == null){
+				resController.failed("不存在该用户！", failedAddress);
+				frame.repaint();
+			}else{
+				frame.setPanel(adminAllUIController.getMainPanel());
+				/*
+				 * user是从下层搜索到的
+				 * 
+				 */
+				user = userblService.searchUser_up(id).get(0);
+				//			user = new UserVO("21", "2", "2", 1);
+				adminAllUIController.confirmUserPanel(user,"删除");
+				frame.repaint();
+			}
 		}
 	}
 

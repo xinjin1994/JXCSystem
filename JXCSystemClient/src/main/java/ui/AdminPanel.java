@@ -55,7 +55,7 @@ public class AdminPanel extends FatherPanel{
 		this.add(adminThirdPanel);
 		userblService = new UserController();
 		
-		resController = new ResultPanelController(frame, this);
+	
 		setLabel();
 		setButtons();
 		setSearchText();
@@ -107,9 +107,9 @@ public class AdminPanel extends FatherPanel{
 		
 	}
 	private void setButtons() {
-		userButtons[0] = new MyButton(image_ori[0],288,99,image_stop[0],image_stop[0]);
-		userButtons[1] = new MyButton(image_ori[1], 15, 158, image_stop[1], image_stop[1]);
-		userButtons[2] = new MyButton(image_ori[2], 191, 158,image_stop[2], image_stop[2]);
+		userButtons[0] = new MyButton(image_ori[0],288,99,image_stop[0],image_stop[0]);//search
+		userButtons[1] = new MyButton(image_ori[1], 15, 158, image_stop[1], image_stop[1]);//add
+		userButtons[2] = new MyButton(image_ori[2], 191, 158,image_stop[2], image_stop[2]);//del
 
 		UserListener listener = new UserListener();
 		for(int i = 0;i < userButtons.length;i++){
@@ -138,6 +138,7 @@ public class AdminPanel extends FatherPanel{
 		}
 		if(user.duty <0){
 			frame.remove(this);
+			resController = new ResultPanelController(frame, this);
 			resController.failedConfirm("用户不存在！", "user");
 			frame.repaint();
 		}else{
@@ -173,23 +174,46 @@ public class AdminPanel extends FatherPanel{
 		}
 		this.repaint();
 	}
+	
+	private void clear(){
+		try {
+			infoLabels[0].setText("");
+			infoLabels[1].setText("");
+			infoLabels[2].setText("");
+		} catch (Exception e) {
+			
+		}
+	
+		
+	}
 
 	class UserListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == userButtons[0]){
 				String findInfoS = searchTextField.getText();
-				UserVO user = userblService.searchUser_up(findInfoS);
-//				UserVO user = new UserVO("a","v","c",-1);
-				setInfoLabel(user);
+				if(findInfoS.equals("")){
+					frame.remove(AdminPanel.this);
+					resController = new ResultPanelController(frame, AdminPanel.this);
+					resController.failedConfirm("请输入要搜索的用户名称或编号！","user");
+					frame.repaint();
+				}else{
+					
+					searchTextField.setText("");
+					UserVO user = userblService.searchUser_up(findInfoS).get(0);
+					//				UserVO user = new UserVO("a","v","c",-1);
+					setInfoLabel(user);
+				}
 				//根据此信息寻找，级如果在下方详细信息中显示,将参数UserVo传给setInfoLabel方法
 			}else if(e.getSource() == userButtons[1]){
-//				adminAllUIController.setMainPanel(AdminPanel.this);
+				clear();
+				adminAllUIController.setMainPanel(AdminPanel.this);
 				frame.remove(AdminPanel.this);
 				adminAllUIController.addUser();
 				
 			}else if(e.getSource() == userButtons[2]){
-//				adminAllUIController.setMainPanel(AdminPanel.this);
+				clear();
+				adminAllUIController.setMainPanel(AdminPanel.this);
 				frame.remove(AdminPanel.this);
 				adminAllUIController.delUser();
 			}
