@@ -176,7 +176,8 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 		if(nameString.equals("")||typeString.equals("")||inPrice.getText().equals("")
 				||outPrice.getText().equals("")||warnNumber.getText().equals("")){
 			//添加失败
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			frame.remove(this);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 		try{
 		inValue = Double.parseDouble(inPrice.getText());
@@ -190,6 +191,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 		newCom.fatherSort = sortVO.name;
 		commodityAllUIController.confirmCom(newCom,"add",sortVO);
 		}catch(Exception e){
+			frame.remove(this);
 			resController.failedConfirm("请重新确认输入信息！", failedAddress);
 		//添加失败	
 			}

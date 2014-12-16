@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import ui.setting.MyFrame;
+import ui.setting.resultPanels.ResultPanelController;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
 
@@ -33,9 +35,13 @@ public class LoginPanel extends FatherPanel {
 	private String passwordText;
 	private JLabel failure;
 	
-
-	public LoginPanel(JFrame frame, String url, UIController controller) {
+	private ResultPanelController resController;
+	
+	
+	public LoginPanel(MyFrame frame, String url, UIController controller) {
 		super(frame, url, controller);
+		resController = new ResultPanelController(frame, this);
+		
 		this.addUserField();
 		this.addField();
 		this.addLogin();

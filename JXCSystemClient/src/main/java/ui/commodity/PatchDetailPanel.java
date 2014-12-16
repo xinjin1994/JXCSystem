@@ -1,6 +1,7 @@
 package ui.commodity;
 
 import ui.FatherPanel;
+import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
@@ -16,6 +17,7 @@ public class PatchDetailPanel extends FatherPanel{
 	protected MyLabel labels[] = new MyLabel[6];
 	protected ColorFactory color = new ColorFactory();
 	
+	private UIController uiController;
 	public PatchDetailPanel(MyFrame frame, String string,
 			CommodityAllUIController commodityAllUIController,PatchVO patch) {
 		super(frame, string, commodityAllUIController);
@@ -23,6 +25,16 @@ public class PatchDetailPanel extends FatherPanel{
 		this.commodityAllUIController = commodityAllUIController;
 		this.patch = patch;
 		back();
+		setLabels();
+	}
+
+	public PatchDetailPanel(MyFrame frame, String string,
+			UIController uiController, PatchVO patch) {
+		super(frame, string, uiController);
+		this.frame = frame;
+		this.uiController = uiController;
+		this.patch = patch;
+		uiController.setBackBills(this);
 		setLabels();
 	}
 

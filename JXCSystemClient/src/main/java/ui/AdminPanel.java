@@ -70,7 +70,7 @@ public class AdminPanel extends FatherPanel{
 	/**
 	 * 这个table在已进入admin界面就会出现，内容是现有的所有员工的信息
 	 */
-	private void setTable() {
+	public void setTable() {
 		ArrayList<UserVO> user = new ArrayList<UserVO>();
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("ID;用户名;职位");

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.UIController;
 import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -50,7 +51,20 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 		uiController.setBack_third(this);
 		
 		setLabel();
+		setBalance();
 		setForward();
+	}
+
+	public ConfirmPaymentPanel(MyFrame frame, String string,
+			UIController uiController, PayVO payVO) {
+		super(frame, string, uiController);
+		this.newPayment = payVO;
+		this.person = payVO.itemList.itemName;
+		this.operate = payVO.operator;
+		this.totalValue = payVO.itemList.money;
+		setLabel();
+		uiController
+		.setBackBills(this);
 	}
 
 	private void setLabel() {
@@ -83,7 +97,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 			this.add(transferList[i]);
 		}
 		transferList[0].setText(newPayment.bankAccount);
-		transferList[1].setText(balanceValue + "123");
+		
 		transferList[2].setText(newPayment.itemList.money + "");
 
 	}
@@ -98,6 +112,9 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 		forwardButton.addActionListener(this);
 	}
 
+	private void setBalance(){
+		transferList[1].setText(balanceValue + "");
+	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == forwardButton) {
 			frame.remove(this);

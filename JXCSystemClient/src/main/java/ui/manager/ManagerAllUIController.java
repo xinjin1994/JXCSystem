@@ -1,5 +1,6 @@
 package ui.manager;
 
+import po.SendGiftPO;
 import ui.FatherPanel;
 import ui.ManagerPanel;
 import ui.UIController;
@@ -17,6 +18,7 @@ import ui.setting.SetBack;
 import ui.setting.Button.LogOutButton;
 import ui.setting.Button.MyButton;
 import vo.AccountVO;
+import vo.SendGiftVO;
 import vo.promotion.DiscountVO;
 import vo.promotion.ProGiftVO;
 import vo.promotion.VoucherVO;
@@ -41,6 +43,7 @@ public class ManagerAllUIController extends UIController{
 	private ConfirmProPanel confirmProPanel;
 	private CheckProPanel checkProPanel;
 	
+	private SendGiftPanel sendGiftPanel;
 	FatherPanel prePanel;
 	ManagerAllUIController controller;
 	
@@ -153,6 +156,11 @@ public class ManagerAllUIController extends UIController{
 		frame.repaint();
 	}
 	
+	public void sendGiftBill(SendGiftVO gift){
+		sendGiftPanel = new SendGiftPanel(frame,"Image/Manager/snedGift.jpg", this, gift);
+		frame.setPanel(sendGiftPanel);
+		frame.repaint();
+	}
 	
 	public void setBack_first(FatherPanel prePanel){
 		this.prePanel = prePanel;
@@ -169,6 +177,8 @@ public class ManagerAllUIController extends UIController{
 		new SetBack(frame,this,prePanel).setBack_third();
 		
 	}
+	
+	
 
 
 }

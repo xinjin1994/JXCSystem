@@ -8,6 +8,7 @@ import ui.ManagerPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
 import ui.setting.SecondPanel;
 import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
@@ -48,6 +49,9 @@ public class ManagerUIController {
 	private ManagerAllUIController uiController;
 	private MyFrame frame;
 	private ResultPanelController resController ;
+	
+	private SaveTempBills infos;
+	
 	public ManagerUIController(ManagerAllUIController uiController,MyFrame frame){
 		this.uiController = uiController;
 		this.frame = frame;
@@ -331,13 +335,13 @@ public class ManagerUIController {
 					item = billsArray.get(i).note+itemName;
 					bills.add(item);
 				}
-				managerPanel.setTable(bills);
+				
+				infos = new SaveTempBills(frame, billsArray, uiController);
+				managerPanel.setTable(bills,infos);
+				
 			} catch (Exception e2) {
 				frame.remove(managerPanel);
-				resController.failed("无新审批"+type+"单据！", "manager");
-			}
-			if(e.getSource() == invoiceButtons[2]){
-				new InvoiceBills(managerPanel);
+				resController.failed("无新"+type+"单据！", "manager");
 			}
 		}
 
