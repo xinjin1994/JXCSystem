@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -8,16 +9,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import businesslogic.accountbl.AccountController;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogic.userbl.User;
+import businesslogicservice.accountblservice.AccountblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 import ui.account.AccountUIController;
 import ui.setting.ColorFactory;
+import ui.setting.MyFrame;
 import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
 import ui.setting.ThirdPanel;
 import ui.setting.Button.ApproveButton;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RefuseButton;
+import ui.setting.resultPanels.ResultPanelController;
 
 //财务经理
 public class AccountPanel extends FatherPanel{
@@ -30,6 +37,8 @@ public class AccountPanel extends FatherPanel{
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage;
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage};
 	private MyButton refresh;
+	private MyFrame frame;
+	
 	private MyTable showTable; 
 	private ColorFactory colors = new ColorFactory();
 	private AccountUIController accountUIController;
@@ -47,16 +56,24 @@ public class AccountPanel extends FatherPanel{
 	private RefuseButton refuse;
 	private ApproveButton approve;
 	private InvoiceblService invoiceblService;
+	private AccountblService accountblService;
+	private ResultPanelController resController;
+	private String failedAddress;
 	
-	public AccountPanel(JFrame frame, String url, UIController controller,
+	private SaveTempBills bills;
+	public AccountPanel(MyFrame frame, String url, UIController controller,
 			AccountUIController accountUIController) {
 		super(frame, url, controller);
 		accountThirdPanel = new ThirdPanel();
 		this.add(accountThirdPanel);
+		
+		this.failedAddress = "account";
+		this.frame = frame;
 		this.accountUIController= accountUIController;
 		refuse = new RefuseButton(this);
 		approve = new ApproveButton(this);
 		invoiceblService = new InvoiceController();
+		accountblService = new AccountController();
 		this.addButton();
 		}
 
@@ -89,6 +106,20 @@ public class AccountPanel extends FatherPanel{
 		accountThirdPanel.repaint();
 		this.repaint();
 	}
+	
+	public void setTable(ArrayList<String> info,SaveTempBills bills) {
+		this.bills = bills;
+		accountThirdPanel.removeAll();
+		showTable = new MyTable();
+		showTable.setInfo(bills);
+		showTable.setColor(colors.manTableColor,colors.manBkColor, colors.manColor,Color.white);
+		showTable.setTable(info);
+		
+		accountThirdPanel.add(showTable.tablePanel);
+		accountThirdPanel.repaint();
+		this.repaint();
+	}
+	
 	/**
 	 * 该方法用于从下曾获得被审批的单据数据
 	 */
@@ -122,12 +153,13 @@ public class AccountPanel extends FatherPanel{
 	 * 该方法用于显示当前所有账户的信息，该方法要根据登陆人员的身份判断能否选择
 	 */
 	private void getAccountInfo() {
-		ArrayList <String> info = new ArrayList<String>();
-		info.add("a;b;c;e");
-		info.add("s,r,t,h");
-		info.add("w;t;x;h");
-		info.add("gg");
-		setTable(info);
+		
+//		ArrayList <String> info = new ArrayList<String>();
+//		info.add("a;b;c;e");
+//		info.add("s,r,t,h");
+//		info.add("w;t;x;h");
+//		info.add("gg");
+//		setTable(info);
 	}
 
 	
@@ -137,6 +169,7 @@ public class AccountPanel extends FatherPanel{
 		}
 
 		public void mousePressed(MouseEvent e) {
+			
 			if (e.getSource() == refresh){
 				if(invoiceblService.show_pass() != null){
 					approve.setButton();
@@ -146,8 +179,18 @@ public class AccountPanel extends FatherPanel{
 					AccountPanel.this.repaint();
 				}
 			}
-			 else if(e.getSource() == buttons[0]){
-				getAccountInfo();
+		
+			else if(e.getSource() == buttons[0]){
+//				 if (User.duty!= 5) {
+//					 System.out.println("here");
+//					resController = new ResultPanelController(frame, AccountPanel.this);
+//					frame.remove(AccountPanel.this);
+//					resController.failed("您没有账户管理的权限！", failedAddress);
+//					frame.repaint();
+//				 }else {
+					 getAccountInfo();
+//				 }
+				
 			}else if(e.getSource() == buttons[1]){
 				getFinanceInfo();
 			}else if(e.getSource() == buttons[2]){

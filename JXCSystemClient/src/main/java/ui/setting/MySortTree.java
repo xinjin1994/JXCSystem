@@ -1,17 +1,22 @@
 package ui.setting;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.text.TabableView;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
@@ -19,20 +24,28 @@ import vo.SortVO;
 
 public class MySortTree {
 	DefaultTreeModel treeModel;
-	JTree tree;
-	JScrollPane scrollPane;
+	public JTree tree;
+	public JScrollPane scrollPane;
+	public ShowPanel treePanel;
 	ArrayList<SortID> allSortsIds = new ArrayList<SortID>();
 	SortID temp;
+	
+	private DefaultTreeCellRenderer render;
+	/**
+	 * 
+	 * @param allSorts 当前所有商品和对应分类
+	 */
 	public MySortTree(ArrayList<SortVO> allSorts) {
-		JFrame f = new JFrame("TreeDemo");
-		Container contentPane = f.getContentPane();
+//		JFrame f = new JFrame("TreeDemo");
+//		Container contentPane = f.getContentPane();
 
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("商品");
-
+		render = new DefaultTreeCellRenderer();
 		treeModel = new DefaultTreeModel(root);
 		
+		treePanel = new ShowPanel();
 		ArrayList<SortID> fatherSorts = new ArrayList<SortID>();
-		
+		this.treePanel = new ShowPanel();
 		for(SortVO sort:allSorts){
 			System.out.println(sort.getNote());
 			String tempIDs[] = sort.getNote().split("-");
@@ -57,11 +70,33 @@ public class MySortTree {
 
 		// 以TreeModel建立JTree。
 		tree = new JTree(treeModel);
+		tree.setOpaque(false);
+		render.setOpaque(false);
+		
+		render.setBackgroundNonSelectionColor(new Color(0,0,0,0));
+		render.setBackgroundSelectionColor(new Color(0,0,0,0));
+		render.setFont(new FontFactory(14).font);
+		
+		
+		tree.setCellRenderer(render);
+		tree.setBounds(43,44,360,380);
 		/* 改变JTree的外观* */
 		tree.putClientProperty("JTree.lineStyle", "Horizontal");
 		/* 改变JTree的外观* */
-		scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane(tree);
+		scrollPane.setBounds(43,44,360,380);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setVisible(true);
+		
+	
+		
+		
+		scrollPane.setOpaque(false);
 		scrollPane.setViewportView(tree);
+		
+		scrollPane.repaint();
+		treePanel.add(scrollPane);
+		treePanel.repaint();
 //		contentPane.add(scrollPane);
 //		f.pack();
 //		f.setVisible(true);
@@ -73,6 +108,18 @@ public class MySortTree {
 //		});
 	}
 
+//private  void setPanel() {
+//		
+////		tablePanel = new ShowPanel();
+//		treePanel = new JPanel();
+//		
+//		treePanel.setLayout(null);
+//		treePanel.setBounds(0,0,437 ,428);
+//		treePanel.removeAll();
+//		treePanel.setOpaque(false);
+//		treePanel.setVisible(true);
+//	//	backPanel.add(tablePanel);
+//	}
 	
 	
 	private void setSort(SortID fatSort) {

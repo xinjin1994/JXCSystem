@@ -11,6 +11,7 @@ import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;
+import ui.setting.SetTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
@@ -37,6 +38,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	private String failedAddress;
 	
 	private ResultPanelController resController;
+	private AccountAllUIController accountAllUIController;
 	public FindAccountPanel(MyFrame frame,String url,
 			AccountAllUIController accountController){
 		super(frame,url,accountController);
@@ -110,10 +112,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		showTable = new MyTable();
 		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
-		frame.remove(this);
-		frame.add(showTable.tablePanel);
-		accountController.addMainPanel();
-		frame.repaint();
+		new SetTable(showTable, frame, accountAllUIController);
 	}
 	
 	

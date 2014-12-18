@@ -10,6 +10,7 @@ import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.MyTextFieldBorder;
+import ui.setting.SetTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
@@ -111,10 +112,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 		showTable = new MyTable();
 		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
-		frame.remove(this);
-		frame.add(showTable.tablePanel);
-		commodityAllUIController.addMainPanel();
-		frame.repaint();
+		new SetTable(showTable, frame, commodityAllUIController);
 	}
 
 	private void fuzzyFind() {

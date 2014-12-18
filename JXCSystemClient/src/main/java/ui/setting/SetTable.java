@@ -2,9 +2,12 @@ package ui.setting;
 
 import java.util.ArrayList;
 
+import businesslogic.commoditybl.Commodity;
 import ui.AccountPanel;
+import ui.CommodityPanel;
 import ui.ManagerPanel;
 import ui.account.AccountAllUIController;
+import ui.commodity.CommodityAllUIController;
 import ui.manager.ManagerAllUIController;
 
 public class SetTable {
@@ -33,6 +36,19 @@ public class SetTable {
 		temp.repaint();
 		
 		managerAllUIController.setMainPanel(temp);
+		frame.setPanel(temp);
+		frame.repaint();
+	}
+	public SetTable(MyTable showTable,MyFrame frame,
+			CommodityAllUIController commodityAllUIController) {
+		CommodityPanel temp = (CommodityPanel)(commodityAllUIController.getMainPanel());
+		
+		temp.commodityThirdPanel.removeAll();
+		temp.commodityThirdPanel.add(showTable.tablePanel);
+		temp.commodityThirdPanel.repaint();
+		temp.repaint();
+		
+		commodityAllUIController.setMainPanel(temp);
 		frame.setPanel(temp);
 		frame.repaint();
 	}

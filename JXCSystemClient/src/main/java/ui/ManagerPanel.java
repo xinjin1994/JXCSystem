@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
-import ui.manager.InvoiceBills;
 import ui.manager.ManagerUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -22,6 +21,7 @@ import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RemindButton;
 import ui.setting.resultPanels.ResultPanelController;
+import vo.bill.InvoiceVO;
 
 /**
  * 6 总经理
@@ -60,6 +60,8 @@ public class ManagerPanel extends FatherPanel{
 	private InvoiceblService invoiceblService;
 	
 	private String failedAddress;
+
+	private SaveTempBills bills;
 	public ManagerPanel(MyFrame frame, String url, UIController controller,
 			ManagerUIController managerUIController) {
 		super(frame, url, controller);
@@ -123,6 +125,7 @@ public class ManagerPanel extends FatherPanel{
 	}
 
 	public void setTable(ArrayList<String> info,SaveTempBills bills) {
+		this.bills = bills;
 		managerThirdPanel.removeAll();
 		showTable = new MyTable();
 		showTable.setInfo(bills);
@@ -150,7 +153,7 @@ public class ManagerPanel extends FatherPanel{
 		this.repaint();
 	}
 	
-	private void check(int i){
+	private void check(int i,String type){
 		switch(i){
 		case 1:
 			frame.remove(ManagerPanel.this);
@@ -158,7 +161,7 @@ public class ManagerPanel extends FatherPanel{
 			break;
 		case 0:
 			frame.remove(ManagerPanel.this);
-			resController.succeeded("审批通过该单据！", "manager");
+			resController.succeeded("审批"+type+"该单据！", "manager");
 			break;
 		case -1:
 			frame.remove(ManagerPanel.this);
@@ -183,10 +186,16 @@ public class ManagerPanel extends FatherPanel{
 		}
 
 		public void mousePressed(MouseEvent e) {
-			if(e.getSource() == approveButton){
-//				check(invoiceblService.pass_up(vo));
-			}else if (e.getSource() == refuseButton) {
-//				check(invoiceblService.refuse_up(note));
+			InvoiceVO temp = bills.getInfo();
+			if(temp == null){
+				resController.failed("请选中要审批的单据",failedAddress);
+			}
+			else {
+				if(e.getSource() == approveButton){
+					check(invoiceblService.pass_up(temp),"通过");
+				}else if (e.getSource() == refuseButton) {
+					check(invoiceblService.refuse_up(temp.note),"拒绝");
+				}
 			}
 		}
 

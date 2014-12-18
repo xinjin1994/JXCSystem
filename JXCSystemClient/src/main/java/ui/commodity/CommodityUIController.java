@@ -8,6 +8,7 @@ import ui.CommodityPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
 import ui.setting.SecondPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
@@ -35,6 +36,8 @@ public class CommodityUIController {
 	private ResultPanelController resController;
 	private CommodityAllUIController uiController;
 	private InvoiceblService invoiceblService;	
+	
+	private SaveTempBills infos;
 	ArrayList<InvoiceVO> billsArray = new ArrayList<InvoiceVO>() ;
 	public CommodityUIController(CommodityAllUIController uiController,MyFrame frame){
 		this.uiController = uiController;
@@ -233,7 +236,7 @@ public class CommodityUIController {
 			try {
 				ArrayList<String> bills = new ArrayList<String>();
 				bills.add("单据编号;单据类型");
-			/*	for(int i=0;i<billsArray.size();i++){
+				for(int i=0;i<billsArray.size();i++){
 					switch(billsArray.get(i).bill_note) {
 					//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
 					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
@@ -264,8 +267,10 @@ public class CommodityUIController {
 					}
 					item = billsArray.get(i).note+itemName;
 					bills.add(item);
-				}*/
-				setTable(bills);
+				}
+				infos = new SaveTempBills(frame, billsArray, uiController);
+				commodityPanel.setTable(bills,infos);
+				
 			} catch (Exception e2) {
 				frame.remove(commodityPanel);
 				resController.failed("无新"+type+"单据！", "account");

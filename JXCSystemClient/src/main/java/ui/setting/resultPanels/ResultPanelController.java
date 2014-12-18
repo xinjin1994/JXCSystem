@@ -53,6 +53,8 @@ public class ResultPanelController extends UIController implements ActionListene
 
 	public void failed(String text,String type){
 		resultPanel = new FatherPanel(frame, "Image/result/"+type+"Failed.jpg", this);
+		
+		System.out.println("kkk");
 		setForward();
 //		System.out.println("12");
 		textLabel.setText(text);

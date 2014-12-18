@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 
 import ui.admin.AdminAllUIController;
 import ui.setting.ColorFactory;
@@ -83,7 +84,7 @@ public class AdminPanel extends FatherPanel{
 		showTable = new MyTable();
 		showTable.setColor(colors.adminTableColor,colors.adminBkColor, colors.adminColor,Color.white);
 		showTable.setTable(info);
-		
+		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
 		adminThirdPanel.add(showTable.tablePanel);
 		adminThirdPanel.repaint();
 		this.repaint();

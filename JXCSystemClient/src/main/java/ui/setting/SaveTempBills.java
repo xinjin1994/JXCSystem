@@ -27,6 +27,7 @@ public class SaveTempBills {
 	UIController uiController;
 	MyFrame frame;
 	
+	InvoiceVO pending;
 	public SaveTempBills(MyFrame frame,ArrayList<InvoiceVO> invoiceBills,UIController uiController) {
 		this.invoiceBills = invoiceBills;
 		this.uiController = uiController;
@@ -34,7 +35,20 @@ public class SaveTempBills {
 		
 		invoiceblService = new InvoiceController();
 	}
-	
+	/**
+	 * 单击
+	 * @param loc
+	 */
+	public void setInfo(int loc){
+		pending = invoiceBills.get(loc);
+	}
+	public InvoiceVO getInfo(){
+		return pending;
+	}
+	/**
+	 * 双击
+	 * @param loc
+	 */
 	public void getInvoiceInfo(int loc){
 		temp = invoiceBills.get(loc);
 		bill = invoiceblService.searchNote_up(temp.note);

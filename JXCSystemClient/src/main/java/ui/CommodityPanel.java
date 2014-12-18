@@ -1,16 +1,31 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
+import junit.framework.Test;
+import businesslogic.commoditybl.CommodityController;
+import businesslogicservice.commodityblservice.CommodityblService;
 import ui.commodity.CommodityUIController;
+import ui.setting.ColorFactory;
+import ui.setting.Com;
+import ui.setting.MyFrame;
 import ui.setting.MyLabel;
+import ui.setting.MyScrollPane;
+import ui.setting.MySortTree;
+import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
+import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RemindButton;
+import vo.SortVO;
 
 //1 库存人员
 public class CommodityPanel extends FatherPanel{
@@ -18,12 +33,16 @@ public class CommodityPanel extends FatherPanel{
 	private int firstY = 110;
 	private int inter = 54;
 	
+	public ThirdPanel commodityThirdPanel;
 	MyButton comManage,sortManage,stockManage,invoiceManage;
 	private MyButton [] buttons = new MyButton[]{comManage,sortManage,stockManage,invoiceManage};
 	private MyButton refresh, warn,newBills,detail;
 	
+	private MyFrame frame;
 	private CommodityUIController commodityUIController;
 	private JLabel remindLabel;
+	
+	private JScrollPane scrollPane;
 	private String images_ori[] = new String[]{"Image/Commodity/button/comManage.png",
 			"Image/Commodity/button/sortManage.png","Image/Commodity/button/stockManage.png",
 			"Image/Commodity/button/invoiceManage.png"};
@@ -37,12 +56,27 @@ public class CommodityPanel extends FatherPanel{
 	private FirstButtonListener listener = new FirstButtonListener();
 
 	private RemindButton remind;
+	private MySortTree comTree;
 	
-	public CommodityPanel(JFrame frame, String url, UIController controller,
+	private CommodityblService commodityblService;
+	
+	private SaveTempBills bills;
+	
+	private MyTable showTable;
+	
+	private ColorFactory color;
+	public CommodityPanel(MyFrame frame, String url, UIController controller,
 			CommodityUIController commodityUIController) {
 		super(frame, url, controller);
-		this.commodityUIController= commodityUIController;
+		commodityThirdPanel = new ThirdPanel();
+		this.add(commodityThirdPanel);
 		
+		this.commodityUIController= commodityUIController;
+		this.frame = frame;
+		
+		color = new ColorFactory();
+		scrollPane = new MyScrollPane();
+		commodityblService = new CommodityController();
 		remind = new RemindButton(this);
 		this.addButton();
 
@@ -61,6 +95,40 @@ public class CommodityPanel extends FatherPanel{
 		this.add(refresh);
 		refresh.addMouseListener(listener);
 	}
+	
+	
+	private void setTree(ArrayList<SortVO> allCom) {
+		System.out.println("lklk");
+		commodityThirdPanel.removeAll();
+		comTree = new MySortTree(allCom);
+//		scrollPane =  new JScrollPane(comTree.tree);
+//		scrollPane.setVisible(true);
+//		scrollPane.setViewportView(comTree.tree);
+//		scrollPane.setBounds(43,44,360,380);
+//		scrollPane.setViewportView(comTree.tree);
+//		commodityThirdPanel.add(comTree.tree);
+//		commodityThirdPanel.add(scrollPane);
+		commodityThirdPanel.add(comTree.scrollPane);
+		commodityThirdPanel.repaint();
+//		this.add(commodityThirdPanel);
+		this.repaint();
+		
+	}
+	
+	public void setTable(ArrayList<String> info,SaveTempBills bills) {
+		this.bills = bills;
+		commodityThirdPanel.removeAll();
+		showTable = new MyTable();
+		showTable.setInfo(bills);
+		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+		showTable.setTable(info);
+		
+		commodityThirdPanel.add(showTable.tablePanel);
+		commodityThirdPanel.repaint();
+		this.repaint();
+	}
+	
+	
 	/**
 	 * 库存报警时该按钮亮,点击后按钮消失
 	 */
@@ -90,9 +158,11 @@ public class CommodityPanel extends FatherPanel{
 
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == buttons[0]) {
-				
+//				setTree(commodityblService.getAllSort_up());
+			System.out.println("llkl");
+				setTree(new Com().allSorts);
 			}else if(e.getSource() == buttons[1]) {
-	
+				setTree(new Com().allSorts);
 			}else if(e.getSource() == buttons[2]) {
 			
 			}else if (e.getSource() == buttons[3]) {
@@ -110,6 +180,7 @@ public class CommodityPanel extends FatherPanel{
 		}
 
 		
+
 
 		public void mouseReleased(MouseEvent e) {
 		}

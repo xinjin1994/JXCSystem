@@ -1,18 +1,16 @@
 package ui.setting;
 
-import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 /*
@@ -25,7 +23,7 @@ public class MyTable extends JTable{
 	
 	public static JPanel tablePanel;
 	static JScrollPane tableSp ;
-	static JTable table;
+	public static JTable table;
 	DefaultTableModel tableModel;
 	Vector columnNames, rowData;
 	static DefaultTableCellRenderer render;
@@ -57,6 +55,8 @@ public class MyTable extends JTable{
 	 * 初始化panel
 	 */
 	private  void setPanel() {
+		
+//		tablePanel = new ShowPanel();
 		tablePanel = new JPanel();
 		
 		tablePanel.setLayout(null);
@@ -65,7 +65,6 @@ public class MyTable extends JTable{
 		tablePanel.setOpaque(false);
 		tablePanel.setVisible(true);
 	//	backPanel.add(tablePanel);
-		
 	}
 	
 	/*
@@ -86,21 +85,51 @@ public class MyTable extends JTable{
 		makeFace(table);
 		table.setOpaque(false);// 现将table设置为透明
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
 //		table.setRowHeight(25);//第一行行高
 //		table.setRowHeight(0,30);//其余行高
 	
-		
+		table.setRowSelectionAllowed(true);
 		
 		render.setOpaque(false);// 将渲染器设置为透明
 		table.setDefaultRenderer(Object.class, render);
 
-		
+		table.addMouseListener(new UserMouseAdapter() {
+			/** *//**
+			 * 鼠标单击事件
+			 * @param e 事件源参数
+			 */
+			public void mouseSingleClicked(MouseEvent e){
+				//System.out.println("Single Clicked!");
+				int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
+				if (rowI > -1){
+					find(rowI,rowI);
+					infos.setInfo(rowI);
+				}
+//					System.out.println("单击鼠标 "+(tableModel.getValueAt(rowI, 0)));
+			}
+
+			/** *//**
+			 * 鼠标双击事件
+			 * @param e 事件源参数
+			 */
+			public void mouseDoubleClicked(MouseEvent e){
+				//System.out.println("Doublc Clicked!");
+				int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
+				if ( rowI > -1){
+					infos.getInvoiceInfo(rowI-1);
+					table.setRowSelectionInterval(rowI, rowI);
+					System.out.println(rowI);
+//					System.out.println("双击鼠标 "+(tableModel.getValueAt(rowI, 0)));
+				}
+
+			}
+		}  );
+
 		tableSp = new JScrollPane(table);
 		tableSp.setBounds(43,44,360,380);
-		
-	//	tableSp.setBorder(new LineBorder(Color.gray));
+
+		//	tableSp.setBorder(new LineBorder(Color.gray));
 		tableSp.getViewport().setOpaque(false);
 		tableSp.setOpaque(false);
 		tableSp.setViewportView(table);
@@ -221,12 +250,15 @@ public class MyTable extends JTable{
 	 * 查找行，参数为开始行数，结束行数
 	 */
 	public void find(int loc1,int loc2){
+
 		Color selectColor = new Color(1,1,1,50);
 		
 		table.setRowSelectionInterval(loc1,loc2);
 		table.setSelectionBackground(selectColor);
 		table.setSelectionForeground(new Color(30,30,30));
 	}
+	
+	
 	
 	public void setInfo(SaveTempBills infos){
 		this.infos = infos;

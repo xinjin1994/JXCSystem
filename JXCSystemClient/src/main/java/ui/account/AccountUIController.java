@@ -9,11 +9,13 @@ import ui.AccountPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
 import ui.setting.SecondPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogic.userbl.User;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 
 public class AccountUIController {
@@ -41,6 +43,7 @@ public class AccountUIController {
 	private MyFrame frame;
 	private ResultPanelController resController;
 	
+	private SaveTempBills infos;
 	public AccountUIController(AccountAllUIController uiController,MyFrame frame){
 		this.uiController = uiController;
 		this.frame = frame;
@@ -180,18 +183,30 @@ public class AccountUIController {
 
 		public void mousePressed(MouseEvent event) {
 			uiController.setMainPanel(accountPanel);
-			frame.remove(accountPanel);	
-			if(event.getSource() == accButtons[0]){
-				uiController.addAccount();
-			}else if(event.getSource() == accButtons[1]){
-				uiController.delAccount();
-			}else if(event.getSource() == accButtons[2]){
-				uiController.changeAccount();
-			}else if(event.getSource() == accButtons[3]){
-				uiController.findAccount();
+			if(checkDuty()){
+				frame.remove(accountPanel);	
+				if(event.getSource() == accButtons[0]){
+					uiController.addAccount();
+				}else if(event.getSource() == accButtons[1]){
+					uiController.delAccount();
+				}else if(event.getSource() == accButtons[2]){
+					uiController.changeAccount();
+				}else if(event.getSource() == accButtons[3]){
+					uiController.findAccount();
+				}
 			}
 		}
 
+		private boolean checkDuty() {
+			if(User.duty != 5){
+				resController = new ResultPanelController(frame, uiController.getMainPanel());
+				frame.remove(accountPanel);
+				resController.failed("您没有账户管理的权限！", "account");
+				frame.repaint();
+				return false;
+			}
+			return true;
+		}
 		public void mouseReleased(MouseEvent event) {
 		}
 	}
@@ -346,7 +361,9 @@ public class AccountUIController {
 					bills.add(item);
 
 				}
-				accountPanel.setTable(bills);
+				
+				infos = new SaveTempBills(frame, billsArray, uiController);
+				accountPanel.setTable(bills,infos);
 			} catch (Exception e2) {
 				frame.remove(accountPanel);
 				resController.failed("无新审批"+type+"单据！", "account");
