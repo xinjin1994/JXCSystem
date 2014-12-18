@@ -24,8 +24,6 @@ public class UIController {
 	static private FatherPanel tempMainPanel,tempPanel,logPanel;
 	public FatherPanel prePanel;
 	public UIController(){
-		this.frame = new MyFrame();
-	    this.welcomePanel();
 		
 	}
 //	public UIController(int i) {
