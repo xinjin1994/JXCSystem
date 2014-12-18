@@ -1,6 +1,5 @@
 package ui.manager;
 
-import po.SendGiftPO;
 import ui.FatherPanel;
 import ui.ManagerPanel;
 import ui.UIController;
