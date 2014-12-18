@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.UIController;
 import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -47,9 +48,20 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 		resControllerF = new ResultPanelController(frame,uiController.getPanel() );
 		uiController.setBack_third(this);
 		setLabel();
-		
+		setBalance();
 		setForward();
 		
+	}
+	public ConfirmReceiptPanel(MyFrame frame, String string,
+			UIController uiController, GetVO getVO) {
+		super(frame, string, uiController);
+		this.newReceipt = getVO;
+		this.person  = getVO.cusName;
+		this.operater = getVO.operator;
+		this.totalValue = getVO.transferList.transferValue;
+
+		uiController.setBackBills(this);
+		setLabel();
 	}
 	private void setLabel() {
 		idLabel = new MyLabel(106, 165, 221, 55);
@@ -85,7 +97,7 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 //			transferList[i].setText("我也是空的，我也要内容");
 		}
 		transferList[0].setText(newReceipt.transferList.bankAccount);
-		transferList[1].setText(balanceValue+"");
+		
 		transferList[2].setText(newReceipt.transferList.transferValue+"");
 		
 	}
@@ -98,6 +110,9 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 		forwardButton = forward.forward_black;
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);	
+	}
+	private void setBalance(){
+		transferList[1].setText(balanceValue+"");
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){

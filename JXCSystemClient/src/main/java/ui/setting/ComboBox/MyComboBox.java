@@ -7,7 +7,6 @@ public class MyComboBox extends JComboBox{
 	public MyComboBox(String [] roleList,int x,int y,int width,int height) {
 		super(roleList);
 		this.setBounds(x, y, width, height);
-		
-		
+		this.setSelectedItem(null);
 	}
 }

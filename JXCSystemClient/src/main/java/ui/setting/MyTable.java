@@ -1,6 +1,7 @@
 package ui.setting;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -17,8 +18,11 @@ import javax.swing.table.DefaultTableModel;
 /*
  * 实现table初始化，内容添加，删除，显示，查找等操作
  */
+
 public class MyTable extends JTable{
 //	JPanel backPanel;
+	private SaveTempBills infos;
+	
 	public static JPanel tablePanel;
 	static JScrollPane tableSp ;
 	static JTable table;
@@ -27,10 +31,11 @@ public class MyTable extends JTable{
 	static DefaultTableCellRenderer render;
 	private Color evenColor,oddColor,fontColorEven,fontColorOdd;
 	Color headerColor = new Color(239,140,142);
-//	Color evenColor = new Color(237,237,237);
+
+	//	Color evenColor = new Color(237,237,237);
 //	Color oddColor = new Color(245,190,185);
-//	Color fontColor = new Color(159,122,116);
-	
+//	Color fontColorEven = new Color(159,122,116);
+//	Color fontColorOdd = new ColorFactory().accColor
 	private ArrayList<Object> vo = new ArrayList<Object>();
 	
 	public MyTable(){
@@ -223,12 +228,12 @@ public class MyTable extends JTable{
 		table.setSelectionForeground(new Color(30,30,30));
 	}
 	
-	public void setInfo(ArrayList<Object> vo){
-		this.vo = vo;
-	}
-	public ArrayList<Object> getInfo(){
-		return vo;
+	public void setInfo(SaveTempBills infos){
+		this.infos = infos;
 	}
 
+	public SaveTempBills getInfo(){
+		return infos;
+	}
 	
 }

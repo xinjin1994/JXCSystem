@@ -7,6 +7,7 @@ import ui.manager.ManagerAllUIController;
 //import ui.sales.SalesAllUIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
+import ui.setting.SetBack;
 
 public class UIController {
 
@@ -31,7 +32,7 @@ public class UIController {
 //
 //		this.frame = new MyFrame();
 //	    this.welcomePanel();
-////	    this.SalesManagerPanel();
+//////	    this.SalesManagerPanel();
 //	}
 	
 	public UIController(int i){
@@ -98,7 +99,7 @@ public class UIController {
 	}
 
 	public void CommodityPanel() {
-		frame.remove(loginPanel);
+//		frame.remove(loginPanel);
 		System.out.println("1111");
 		new CommodityAllUIController(this, frame);
 		frame.repaint();
@@ -130,6 +131,9 @@ public class UIController {
 	}
 	public FatherPanel getPanel(){
 		return tempPanel;
+	}
+	public void setBackBills(FatherPanel prePanel){
+		new SetBack(frame, this, prePanel).setBack_first();
 	}
 	
 //	public void setLogInPanel(FatherPanel logInPanel){

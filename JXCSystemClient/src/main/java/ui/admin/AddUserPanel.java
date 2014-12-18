@@ -11,6 +11,7 @@ import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
+import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
@@ -22,6 +23,8 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
 	private MyTextFieldBorder textInfos[] = new MyTextFieldBorder[5];
 	private MyButton forwardButton;
+	
+	private MyComboBox duty;
 	private MyLabel label;
 	
 	private UserVO user;
@@ -29,6 +32,8 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 	private int dutyGet;
 	
 	private ResultPanelController resController;
+	private String dutyString;
+	
 	private String failedAddress;
 	public AddUserPanel(MyFrame frame, String url, AdminAllUIController controller) {
 		super(frame, url, controller);
@@ -41,11 +46,20 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 	
 		addTextField();
 		addLabel();
+		addComboBox();
 		
 		setForward();
 		this.repaint();
 	}
 	
+	private void addComboBox() {
+		String [] roleList = new String[]{"管理员","库存人员","销售人员","销售经理","财务人员","财务经理","总经理"};
+		
+		duty = new MyComboBox(roleList, 320, 295, 319, 37);
+		this.add(duty);
+		duty.addActionListener(this);
+	}
+
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(700, 500);
 		forwardButton = forward.forward_white;
@@ -64,6 +78,7 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 			textInfos[i].setForeground(new ColorFactory().greyFont);
 		}
 		textInfos[4].addFocusListener(new TextListener());
+		this.remove(textInfos[2]);
 	}
 	
 	class TextListener implements FocusListener{
@@ -81,13 +96,12 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == forwardButton){
 			boolean isLegal = true;
-			try{
-				dutyGet = Integer.parseInt(textInfos[2].getText());
-			}catch(Exception e){
-				isLegal = false;
-			}
-			
-			if(textInfos[0].getText().equals("")||textInfos[1].getText().equals("")||textInfos[2].getText().equals("")||
+//			try{
+//				dutyGet = Integer.parseInt(textInfos[2].getText());
+//			}catch(Exception e){
+//				isLegal = false;
+//			}
+			if(textInfos[0].getText().equals("")||textInfos[1].getText().equals("")||dutyString == null||
 					textInfos[3].getText().equals("")||textInfos[4].getText().equals("")){
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
@@ -105,10 +119,14 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			frame.setPanel(uiController.getMainPanel());
 			user = new UserVO(textInfos[0].getText(),textInfos[1].getText()
-					,textInfos[3].getText(),Integer.parseInt(textInfos[2].getText()));
+					,textInfos[3].getText(),dutyGet);
 			uiController.confirmUserPanel(user,"添加");
 			}
 			frame.repaint();
+		}
+		else if (event.getSource() == duty) {
+			dutyString = duty.getSelectedItem().toString();
+			dutyGet = duty.getSelectedIndex();
 		}
 	}
 

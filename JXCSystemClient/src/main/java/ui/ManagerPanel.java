@@ -11,10 +11,12 @@ import javax.swing.JLabel;
 
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
+import ui.manager.InvoiceBills;
 import ui.manager.ManagerUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
 import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
@@ -111,18 +113,19 @@ public class ManagerPanel extends FatherPanel{
 	}
 
 	private void getAccountInfo() {
-		// TODO Auto-generated method stub
-		ArrayList <String> info = new ArrayList<String>();
-		info.add("a;b;c;e");
-		info.add("s,r,t,h");
-		info.add("w;t;x;h");
-		info.add("gg");
-		setTable(info);
+//		// TODO Auto-generated method stub
+//		ArrayList <String> info = new ArrayList<String>();
+//		info.add("a;b;c;e");
+//		info.add("s,r,t,h");
+//		info.add("w;t;x;h");
+//		info.add("gg");
+//		setTable(info);
 	}
 
-	public void setTable(ArrayList<String> info) {
+	public void setTable(ArrayList<String> info,SaveTempBills bills) {
 		managerThirdPanel.removeAll();
 		showTable = new MyTable();
+		showTable.setInfo(bills);
 		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
 		showTable.setTable(info);
 		
@@ -205,10 +208,7 @@ public class ManagerPanel extends FatherPanel{
 					ManagerPanel.this.repaint();
 				}
 			}
-			//刷新数据，如果有新的审批单据返回情况，收支单据button上面会出现红点,
-			else if(e.getSource() == details){
-				
-			}else if(e.getSource() == buttons[0]) {
+			else if(e.getSource() == buttons[0]) {
 				getAccountInfo();
 			}else if(e.getSource() == buttons[1]) {
 				getRecInfo();

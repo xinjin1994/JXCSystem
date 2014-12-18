@@ -9,9 +9,8 @@ public class SortPO implements Serializable{
 	
 	public String father;
 	
-//	SortPO fatherSort;
-	public ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
-	public ArrayList<SortPO> sortList=new ArrayList<SortPO>();
+	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
+	public ArrayList<SortPO> sortList;
 	
 	public boolean hasSort(){
 		if(sortList!=null&&sortList.size()>0){
@@ -134,7 +133,7 @@ public class SortPO implements Serializable{
 	
 	public boolean delCommodity(CommodityPO po){
 		int i=0;
-		if(hasSort()){
+		if(hasCommodity()){
 			for(i=0;i<commodityList.size();i++){
 				if(commodityList.get(i).getName().equals(po.name)&&
 						commodityList.get(i).getType().equals(po.type)){
@@ -142,7 +141,8 @@ public class SortPO implements Serializable{
 					return true;
 				}
 			}
-		}else{
+		}
+		if(hasSort()){
 			for(i=0;i<sortList.size();i++){
 				if(sortList.get(i).delCommodity(po)){
 					return true;

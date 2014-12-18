@@ -3,6 +3,7 @@ package ui.admin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ui.AdminPanel;
 import ui.FatherPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -100,6 +101,14 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	}
 	private void check(int i){
 		System.out.println(i);
+		
+		AdminPanel temp= (AdminPanel)(adminAllUIController.getMainPanel());
+		temp.setTable();
+		
+		resController = new ResultPanelController(frame, temp);
+		temp.remove(this);
+		adminAllUIController.setMainPanel(temp);
+		
 		switch (i) {
 		case -1:
 			frame.remove(adminAllUIController.getMainPanel());
@@ -123,12 +132,7 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent event) {
-		
-		FatherPanel temp= adminAllUIController.getMainPanel();
-		resController = new ResultPanelController(frame, temp);
-		temp.remove(this);
-		adminAllUIController.setMainPanel(temp);
-		
+	
 		if(event.getSource() == forwardButton){
 			if(type.equals("添加")){
 				check(userblService.addUser_up(user));
