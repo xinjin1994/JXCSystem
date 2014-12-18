@@ -2,6 +2,7 @@ package businesslogic.userbl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.UserPO;
 import vo.UserVO;
 import businesslogicservice.userblservice.UserblService;
@@ -9,6 +10,10 @@ import businesslogicservice.userblservice.UserblService;
 public class UserController implements UserblService{
 	
 	public User user=new User();
+	
+	public UserController(){
+		user=ClientStart.user;
+	}
 
 	public ArrayList<UserVO> show_up() {
 		// TODO Auto-generated method stub

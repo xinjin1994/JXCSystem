@@ -2,6 +2,7 @@ package businesslogic.initializationlbl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.AccountPO;
 import po.CommodityPO;
 import po.CustomerPO;
@@ -16,6 +17,10 @@ import businesslogicservice.initializationblservice.InitializationblService;
 public class InitializationController implements InitializationblService{
 	
 	public Initialization initialization=new Initialization();
+	
+	public InitializationController(){
+		initialization=ClientStart.initialization;
+	}
 
 	public int newSystem(ArrayList<CommodityVO> vo1,ArrayList<CustomerVO> vo2,
 			ArrayList<AccountVO> vo3,ArrayList<UserVO> vo4) {

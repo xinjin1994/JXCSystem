@@ -29,58 +29,81 @@ import dataservice.financialdataservice.FinancialDataService;
 import dataservice.initializationdataservice.InitializationDataService;
 import dataservice.invoicedataservice.InvoiceDataService;
 import dataservice.promotiondataservice.PromotionDataService;
+import dataservice.salesdataservice.SalesDataService;
 import dataservice.systemlogdataservice.SystemlogDataService;
 import dataservice.userdataservice.UserDataService;
 
 public class ClientStart {
 	
+	public static Commodity commodity;
+	public static Account account;
+	public static Financial financial;
+	public static Initialization initialization;
+	public static Invoice invoice;
+	public static Promotion promotion;
+	public static Sales sales;
+	public static Systemlog systemlog;
+	public static User user;
+	
+	
 	public void start(){
-		CommodityController commodityController=new CommodityController();
-		commodityController.commodity=new Commodity();
+//		CommodityController commodityController=new CommodityController();
+		commodity=new Commodity();
 		
-		AccountController accountController=new AccountController();
-		accountController.account=new Account();
+//		AccountController accountController=new AccountController();
+		account=new Account();
 		
-		FinancialController financialController=new FinancialController();
-		financialController.financial=new Financial();
+//		FinancialController financialController=new FinancialController();
+		financial=new Financial();
 		
-		InitializationController initializationController=new InitializationController();
-		initializationController.initialization=new Initialization();
+//		InitializationController initializationController=new InitializationController();
+		initialization=new Initialization();
 		
-		InvoiceController invoiceController=new InvoiceController();
-		invoiceController.invoice=new Invoice();
+//		InvoiceController invoiceController=new InvoiceController();
+		invoice=new Invoice();
 		
-		PromotionController promotionController=new PromotionController();
-		promotionController.promotion=new Promotion();
+//		PromotionController promotionController=new PromotionController();
+		promotion=new Promotion();
 		
-		SalesController salesController=new SalesController();
-		salesController.sale=new Sales();
+//		SalesController salesController=new SalesController();
+		sales=new Sales();
 		
-		SystemlogController systemlogController=new SystemlogController();
-		systemlogController.systemlog=new Systemlog();
+//		SystemlogController systemlogController=new SystemlogController();
+		systemlog=new Systemlog();
 		
-		UserController userController=new UserController();
-		userController.user=new User();
-		
-		commodityController.commodity.setInfo(invoiceController.invoice, systemlogController.systemlog,salesController.sale);
-		accountController.account.setInfo(financialController.financial, invoiceController.invoice, salesController.sale, systemlogController.systemlog);
-		financialController.financial.setInfo(accountController.account, commodityController.commodity, salesController.sale, systemlogController.systemlog);
-		invoiceController.invoice.setInfo(accountController.account, salesController.sale, commodityController.commodity);
-		promotionController.promotion.setInfo(systemlogController.systemlog, commodityController.commodity);
-		userController.user.setInfo(systemlogController.systemlog);
+//		UserController userController=new UserController();
+		user=new User();
 		
 		try {
 			
-			commodityController.commodity.sto=(CommodityDataService) Naming.lookup("rmi://127.0.0.1:8888/CommodityDataService");
-			accountController.account.account=(AccountDataService) Naming.lookup("rmi://127.0.0.1:8889/AccountDataService");
-			financialController.financial.financial=(FinancialDataService) Naming.lookup("rmi://127.0.0.1:8890/FinancialDataService");
-			initializationController.initialization.initialization=(InitializationDataService) Naming.lookup("rmi://127.0.0.1:8891/InitializationDataService");
-			invoiceController.invoice.invoice=(InvoiceDataService) Naming.lookup("rmi://127.0.0.1:8892/InvoiceDataService");
-			promotionController.promotion.promotion=(PromotionDataService) Naming.lookup("rmi://127.0.0.1:8893/PromotionDataService");
-//			salesController.sale.sale=(SalesDataService) Naming.lookup("rmi://127.0.0.1:8894/SalesDataService");
-			systemlogController.systemlog.sys=(SystemlogDataService) Naming.lookup("rmi://127.0.0.1:8895/SystemlogDataService");
-			userController.user.us=(UserDataService) Naming.lookup("rmi://127.0.0.1:8896/UserDataService");
+			commodity.sto=(CommodityDataService) Naming.lookup("rmi://127.0.0.1:8888/CommodityDataService");
+			account.account=(AccountDataService) Naming.lookup("rmi://127.0.0.1:8889/AccountDataService");
+			financial.financial=(FinancialDataService) Naming.lookup("rmi://127.0.0.1:8890/FinancialDataService");
+			initialization.initialization=(InitializationDataService) Naming.lookup("rmi://127.0.0.1:8891/InitializationDataService");
+			invoice.invoice=(InvoiceDataService) Naming.lookup("rmi://127.0.0.1:8892/InvoiceDataService");
+			promotion.promotion=(PromotionDataService) Naming.lookup("rmi://127.0.0.1:8893/PromotionDataService");
+//			sales.sale=(SalesDataService) Naming.lookup("rmi://127.0.0.1:8894/SalesDataService");
+			systemlog.sys=(SystemlogDataService) Naming.lookup("rmi://127.0.0.1:8895/SystemlogDataService");
+			user.us=(UserDataService) Naming.lookup("rmi://127.0.0.1:8896/UserDataService");
 
+			commodity.setInfo(invoice, systemlog,sales);
+			account.setInfo(financial, invoice, sales, systemlog);
+			financial.setInfo(account, commodity, sales, systemlog);
+			invoice.setInfo(account, sales, commodity);
+			promotion.setInfo(systemlog, commodity);
+			user.setInfo(systemlog);
+			
+//			commodityController.commodity.sto=commodityRMI;
+//			accountController.account.account=accountRMI;
+//			financialController.financial.financial=financialRMI;
+//			initializationController.initialization.initialization=initializationRMI;
+//			invoiceController.invoice.invoice=invoiceRMI;
+//			promotionController.promotion.promotion=promotionRMI;
+//			salesController.sale.sale=salesRMI;
+//			systemlogController.systemlog.sys=systemlogRMI;
+//			userController.user.us=userRMI;
+
+			
 //			System.out.println("Hello");
 //			for(int i=0;i<1000;i++){
 //

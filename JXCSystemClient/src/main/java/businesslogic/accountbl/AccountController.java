@@ -2,6 +2,7 @@ package businesslogic.accountbl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.AccountPO;
 import po.CustomerPO;
 import po.ItemPO;
@@ -18,6 +19,10 @@ import businesslogicservice.accountblservice.AccountblService;
 
 public class AccountController implements AccountblService{
 	public Account account=new Account();
+	
+	public AccountController(){
+		account=ClientStart.account;
+	}
 
 	public AccountVO checkAccount_up() {
 		// TODO Auto-generated method stub

@@ -2,6 +2,7 @@ package businesslogic.invoicebl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.CommodityPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
@@ -27,6 +28,10 @@ import businesslogicservice.invoiceblservice.InvoiceblService;
 public class InvoiceController implements InvoiceblService{
 	
 	public Invoice invoice=new Invoice();
+	
+	public InvoiceController(){
+		invoice=ClientStart.invoice;
+	}
 
 	public ArrayList<InvoiceVO> show_up() {
 		// TODO Auto-generated method stub
