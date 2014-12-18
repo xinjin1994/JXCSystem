@@ -10,7 +10,7 @@ public class SortPO implements Serializable{
 	public String father;
 	
 	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
-	public ArrayList<SortPO> sortList;
+	public ArrayList<SortPO> sortList=new ArrayList<SortPO>();
 	
 	public boolean hasSort(){
 		if(sortList!=null&&sortList.size()>0){
@@ -58,11 +58,15 @@ public class SortPO implements Serializable{
 	
 	public boolean addCommodity(CommodityPO po){
 		int i=0;
+		
+		if(hasSort()){
+			return false;
+		}
+		
 		for(i=0;i<commodityList.size();i++){
 			if(commodityList.get(i).getName().equals(po.getName())&&
 					commodityList.get(i).getType().equals(po.getType())){
-				commodityList.get(i).number=commodityList.get(i).number+po.number;
-				return true;
+				return false;
 			}
 		}
 		commodityList.add(po.copy());
@@ -70,7 +74,7 @@ public class SortPO implements Serializable{
 	}
 	
 	public boolean addSort(SortPO po){
-		if(hasSort()){
+		if(hasCommodity()){
 			return false;
 		}else{
 			SortPO po1=findSort_true(po.getName());
@@ -84,11 +88,11 @@ public class SortPO implements Serializable{
 	}
 	
 	public boolean delSort(SortPO po){
-		if(hasSort()){
+		if(hasCommodity()){
 			return false;
 		}else{
 			SortPO po1=findSort_true(po.getName());
-			if(po1!=null){
+			if(po1!=null&&!po1.hasCommodity()){
 				sortList.remove(po1);
 				return true;
 			}else {
@@ -99,7 +103,7 @@ public class SortPO implements Serializable{
 	
 	public SortPO findSort_true(String name){
 		int i=0;
-		if(hasSort()){
+		if(hasCommodity()){
 			return null;
 		}else{
 			for(i=0;i<sortList.size();i++){
@@ -133,7 +137,7 @@ public class SortPO implements Serializable{
 	
 	public boolean delCommodity(CommodityPO po){
 		int i=0;
-		if(hasSort()){
+		if(hasCommodity()){
 			for(i=0;i<commodityList.size();i++){
 				if(commodityList.get(i).getName().equals(po.name)&&
 						commodityList.get(i).getType().equals(po.type)){
@@ -141,7 +145,8 @@ public class SortPO implements Serializable{
 					return true;
 				}
 			}
-		}else{
+		}
+		if(hasSort()){
 			for(i=0;i<sortList.size();i++){
 				if(sortList.get(i).delCommodity(po)){
 					return true;

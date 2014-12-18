@@ -58,7 +58,7 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureDelInfo.this);
 				switch(salesblService.delCustomer_up(customerVO)){
 				case 0:
-					salesResult.succeeded("删除成功！", "sales");
+					salesResult.succeeded("删除成功！");
 					break;
 				}
 				

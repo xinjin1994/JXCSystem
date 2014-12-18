@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
@@ -57,7 +58,7 @@ public class ImInPanel extends FatherPanel {
 	}
 
 	public void addCombox() {
-		ArrayList<CommodityVO> comVOArray = salesblService.getAllCommodity_up();
+//		ArrayList<CommodityVO> comVOArray = salesblService.getAllCommodity_up();
 		// String []commodityName = new String[comVOArray.size()];
 		// for(int i=0;i<comVOArray.size();i++){
 		// commodityName[i] =comVOArray.get(i).name;
@@ -188,7 +189,8 @@ public class ImInPanel extends FatherPanel {
 			
 				if(id.getText().equals("")||remark.getText().equals("")||supplier.getText().equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
-					failLabel.setText("请正确输入信息！");
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ImInPanel.this);
+					salesResult.failed("请重新确认输入信息！", "import_failed");
 				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());

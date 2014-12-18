@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
@@ -73,14 +74,15 @@ public class DelCusPanel extends FatherPanel {
 						String id = cusID.getText();
 						SalesblService salesBlService = new SalesController();
 						CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
-//						CustomerVO customerVO = new CustomerVO("id",true,1,"gg","123","add","zip","e",20,30,40,"me");
+//						CustomerVO customerVO = new CustomerVO("id",true,1,"gg","123","add","zip","e",30,40,"me");
 						
 						frame.remove(DelCusPanel.this);
 						frame.setPanel(new MakeSureDelInfo(frame, "Image/Sales/对话框/二次确认/客户确认信息.jpg", controller,
 								salesUIController, customerVO, DelCusPanel.this));
 
 					} catch (Exception e2) {
-						failLabel.setText("请正确输入信息！");
+						SalesResult salesResult = new SalesResult(frame,controller,salesUIController,DelCusPanel.this);
+						salesResult.failed("请重新确认输入信息！", "delCusFailed");
 					}
 				}
 				frame.repaint();

@@ -30,16 +30,16 @@ public class SalesResult implements ActionListener{
 
 	}
 	
-	public void succeeded(String text,String type){
+	public void succeeded(String text){
 		System.out.println("Ffdf");
-			resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", controller);
+			resultPanel = new FatherPanel(frame, "Image/Sales/sales_result.jpg", controller);
 			setForward(resultPanel);
 			textLabel.setText(text);
 			setPanel(resultPanel);
 		}
 
 		public void failed(String text,String type){
-			resultPanel = new FatherPanel(frame, "Image/result/"+type+"_result.jpg", controller);
+			resultPanel = new FatherPanel(frame, "Image/Sales/fail/"+type+".jpg", controller);
 			setForward(resultPanel);
 			
 			forwardButton.setActionCommand("failed");
@@ -67,10 +67,6 @@ public class SalesResult implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("succ")){
-			/*	frame.remove(resultPanel);
-				frame.setPanel(controller.getMainPanel());		
-				frame.repaint();*/
-				System.out.println("Gege");
 				salesUIController.backPanel(resultPanel);
 			}else if(e.getActionCommand().equals("failed")){
 				frame.remove(resultPanel);

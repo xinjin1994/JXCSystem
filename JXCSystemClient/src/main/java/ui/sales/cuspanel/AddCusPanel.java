@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
@@ -14,6 +15,7 @@ import ui.setting.MyStopButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldFilled;
 import ui.setting.TextField.MyTextFieldTrans;
+import ui.setting.resultPanels.ResultPanelController;
 import vo.CustomerVO;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
@@ -37,6 +39,7 @@ public class AddCusPanel extends FatherPanel {
 	protected boolean classification = true;
 	SalesUIController salesUIController;
 	SalesblService salesblService;
+	
 	
 	public AddCusPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame,url,controller);
@@ -185,7 +188,8 @@ public class AddCusPanel extends FatherPanel {
 				frame.remove(AddCusPanel.this);
 				frame.setPanel(new MakeSureAddInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,AddCusPanel.this));
 				}catch(Exception e2){
-					failLabel.setText("请正确输入信息！");
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,AddCusPanel.this);
+					salesResult.failed("请重新确认输入信息！", "addCusFailed");
 				}
 				
 				frame.repaint();
