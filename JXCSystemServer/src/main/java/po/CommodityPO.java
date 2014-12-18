@@ -60,7 +60,9 @@ public class CommodityPO implements Serializable{
 	public CommodityPO copy(){
 		CommodityPO po=new CommodityPO(isGift, name, type, in_price, out_price,note,
 				recent_in_price, recent_out_price, number);
+		po.father=father;
 		po.warn=warn;
+		po.mean=mean;
 		return po;
 	}
 	
