@@ -56,11 +56,10 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureAddInfo.this);
 //			    switch(salesblService.addCustomer_up(customerVO)){
 //			    	case 0:
-//						salesResult.succeeded("成功！", "sales");
+						salesResult.succeeded("成功！");
 //						break;
 				
 //			    }
-//				salesResult.failed("失败", "account");
 			} else if (e.getSource() == secondCusBack) {
 				frame.remove(MakeSureAddInfo.this);
 				frame.setPanel(addCusPanel);

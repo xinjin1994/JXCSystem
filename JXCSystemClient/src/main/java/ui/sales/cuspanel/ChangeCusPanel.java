@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
@@ -65,7 +66,8 @@ public class ChangeCusPanel extends FatherPanel{
 				salesUIController.backPanel(ChangeCusPanel.this);
 			}else if(e.getSource() == forward){
 				if(cusName.getText().equals("")||cusID.getText().equals("")){
-					failLabel.setText("请正确输入信息！");
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ChangeCusPanel.this);
+					salesResult.failed("请重新确认输入信息！", "changeCusFailed");
 				}else{
 				String name = cusName.getText();
 				String id = cusID.getText();

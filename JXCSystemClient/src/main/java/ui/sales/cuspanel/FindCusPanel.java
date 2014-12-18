@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 import ui.FatherPanel;
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
+import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
+import ui.setting.MyTable;
+import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import vo.CustomerVO;
@@ -19,19 +23,23 @@ public class FindCusPanel extends FatherPanel {
 
 	private ButtonListener buttonListener;
 	private MyFrame frame;
-	private UIController controller;
 	private MyButton secondCusBack, forward1, forward2;
 	private SalesUIController salesUIController;
 	protected MyTextFieldBorder cusName, cusID, cusExactFind;
 	protected CustomerVO customerVO;
-	SalesblService salesBlService;
+	private SalesblService salesBlService;
+	private MyTable showTable; 
+	private ColorFactory colors = new ColorFactory();
+	ArrayList<String> infoArray = new ArrayList<String>();
 	protected MyLabel failLabel;
-
-	public FindCusPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
+	protected ThirdPanel thirdPanel;
+	
+	public FindCusPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,
+			ThirdPanel thirdPanel) {
 		super(frame, url, controller);
 		salesBlService = new SalesController();
 		this.frame = frame;
-		this.controller = controller;
+		this.thirdPanel = thirdPanel;
 		this.salesUIController = salesUIController;
 		buttonListener = new ButtonListener();
 		this.addSecondTextField();
@@ -67,6 +75,14 @@ public class FindCusPanel extends FatherPanel {
 		failLabel = new MyLabel(254, 500, 200, 35);
 		this.add(failLabel);
 	}
+	
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		thirdPanel.add(MyTable.tablePanel);
+		salesUIController.backPanel(this);
+	}
 
 	class ButtonListener implements MouseListener {
 
@@ -75,8 +91,12 @@ public class FindCusPanel extends FatherPanel {
 				salesUIController.backPanel(FindCusPanel.this);
 			} else if (e.getSource() == forward1) {
 				if(cusName.getText().equals("")||cusID.getText().equals("")){
-					failLabel.setText("请正确输入信息！");
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
+					salesResult.failed("请重新确认输入信息！", "finComFailed");
 				}else{
+					ArrayList<String> cusStr = new ArrayList<String>();
+					cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
+					cusStr.add("a;bs;c;d;c;d;f;d;g");
 				String name = cusName.getText();
 				String id = cusID.getText();
 				CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
@@ -89,28 +109,34 @@ public class FindCusPanel extends FatherPanel {
 				// 编号、分类（进货商、销售商）、级别（五级，一级普通用户，五级VIP客户）、姓名、电话、
 				//地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员
 				// 0代表进货商，非0代表销售商
-			/*	if (customerVO.classification) {
+				if (customerVO.classification) {
 					classification = "销售商";
-				}*/
-			/*	String cusInTable = customerVO.id + ";" + classification + ";" + customerVO.level + ";"
+				}
+				String cusInTable = customerVO.id + ";" + classification + ";" + customerVO.level + ";"
 						+ customerVO.cusName + ";" + customerVO.tel + ";" + customerVO.address + ";"
 						+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
-						+ customerVO.shouldGet + ";" + customerVO.shouldPay + ";" + customerVO.person;*/
-				String cusInTable = "1;2;3;4;5;6;7;8;9;10";
-				frame.setPanel(new MakeSureFindInfo(frame,"Image/Sales/对话框/null.jpg",controller,FindCusPanel.this,cusInTable,salesUIController));
-				}
+						+ customerVO.shouldGet + ";"  + ";" + customerVO.person;
+				cusStr.add(cusInTable);
+				setTable(cusStr);
 				frame.repaint();
-				// 此次应该显示表格
-				// frame.setPanel(new
-				// MakeSureFindInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,FindCusPanel.this));
-			} else if (e.getSource() == forward2) {
+			}
+			}else if (e.getSource() == forward2) {
 				String info = cusExactFind.getText();
+				if(info.equals("")){
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
+					salesResult.failed("请重新确认输入信息！", "finComFailed");
+				}else{
+				String classification = "进货商";
 				ArrayList<CustomerVO> cusVOArray = salesBlService.searchFuzzyCustomer_up(info);
 				ArrayList<String> cusStr = new ArrayList<String>();
-				cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
+				cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
+//				cusStr.add("1;2;3;4;5,6;7");
 				for(int i=0;i<cusVOArray.size();i++){
 					CustomerVO customerVO = cusVOArray.get(i);
-					String item = customerVO.id + customerVO.classification + ";" + customerVO.level + ";"
+						if (customerVO.classification) {
+					classification = "销售商";
+				}
+					String item = customerVO.id + classification + ";" + customerVO.level + ";"
 							+ customerVO.cusName + ";" + customerVO.tel + ";" + customerVO.address + ";"
 							+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
 							+ customerVO.shouldGet + ";" + ";" + customerVO.person;
@@ -118,8 +144,9 @@ public class FindCusPanel extends FatherPanel {
 				}
 				// 此次应该显示表格
 				frame.remove(FindCusPanel.this);
-				frame.setPanel(new MakeSureFindInfo(frame,"Image/Sales/对话框/null.jpg",controller,FindCusPanel.this,cusStr,salesUIController));
+				setTable(cusStr);
 				frame.repaint();
+				}
 			}
 
 		}

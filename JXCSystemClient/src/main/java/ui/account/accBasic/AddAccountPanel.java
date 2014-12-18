@@ -34,8 +34,8 @@ public class AddAccountPanel extends FatherPanel implements ActionListener{
 	private AccountblService accountblService;
 	private ResultPanelController resController;
 	String type = "account";
-
 	private String failedAddress;
+
 	public AddAccountPanel(MyFrame frame, String string,
 			AccountAllUIController accountAllUIController) {
 		super(frame,string,accountAllUIController);

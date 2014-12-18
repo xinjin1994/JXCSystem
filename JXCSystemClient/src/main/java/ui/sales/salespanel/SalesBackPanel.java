@@ -4,7 +4,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import ui.UIController;
+import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
+import ui.sales.impanel.ImBackPanel;
 import ui.sales.impanel.ImInPanel;
 import ui.sales.impanel.MakeSureIm;
 import ui.setting.MyFrame;
@@ -40,7 +42,8 @@ public class SalesBackPanel extends SalesInPanel{
 			} else if (e.getSource() == forward) {
 				if(id.getText().equals("")||newRemark.getText().equals("")||supplier.getText().equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
-					failLabel.setText("请正确输入信息！");
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesBackPanel.this);
+					salesResult.failed("请重新确认输入信息！", "export_return_failed");
 				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, num*price, newRemark.getText());

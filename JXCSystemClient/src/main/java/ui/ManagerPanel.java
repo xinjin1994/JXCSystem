@@ -5,13 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-import businesslogic.invoicebl.InvoiceController;
-import businesslogicservice.invoiceblservice.InvoiceblService;
-import ui.manager.InvoiceBills;
 import ui.manager.ManagerUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -22,6 +15,8 @@ import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RemindButton;
 import ui.setting.resultPanels.ResultPanelController;
+import businesslogic.invoicebl.InvoiceController;
+import businesslogicservice.invoiceblservice.InvoiceblService;
 
 /**
  * 6 总经理

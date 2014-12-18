@@ -203,7 +203,7 @@ public class MakeSureIm extends FatherPanel {
 				// System.out.println("hello");
 				switch (salesblService.addImport_up(importMenuVO)) {
 				case 0:
-					salesResult.succeeded("添加成功！", "sales");
+					salesResult.succeeded("添加成功！");
 					break;
 				}
 			} else if (e.getSource() == back2) {
@@ -213,7 +213,7 @@ public class MakeSureIm extends FatherPanel {
 			} else if (e.getSource() == forward2) {
 				switch (salesblService.addImport_Return_up(importMenuVO)) {
 				case 0:
-					salesResult.succeeded("添加成功！", "sales");
+					salesResult.succeeded("添加成功！");
 					break;
 				}
 			} else if (e.getSource() == backSales) {
@@ -223,7 +223,7 @@ public class MakeSureIm extends FatherPanel {
 			} else if (e.getSource() == forwardSales) {
 				switch(salesblService.addExport_up(exportMenuVO)){
 				case 0:
-					salesResult.succeeded("添加成功！","sales");
+					salesResult.succeeded("添加成功！");
 					break;
 				}
 			}else if(e.getSource() == backSales2){
@@ -233,7 +233,7 @@ public class MakeSureIm extends FatherPanel {
 			}else if(e.getSource() == forwardSales2){
 				switch(salesblService.addExport_Return_up(exportMenuVO)){
 				case 0:
-					salesResult.succeeded("添加成功！","sales");
+					salesResult.succeeded("添加成功！");
 					break;
 				}
 			}

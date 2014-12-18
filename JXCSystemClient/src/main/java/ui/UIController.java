@@ -39,14 +39,14 @@ public class UIController {
 //		this.CommodityPanel();
 //	  	this.AccountPanel();
 
-//		this.SalesManagerPanel();
+		this.SalesManagerPanel();
 
 //		this.AccountPanel();
 
 //	this.ManagerPanel();
 //		this.SalesManagerPanel();
 
-		this.AdminPanel();
+//		this.AdminPanel();
 
 	}
 

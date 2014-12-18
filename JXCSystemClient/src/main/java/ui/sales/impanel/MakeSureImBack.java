@@ -43,7 +43,7 @@ public class MakeSureImBack extends MakeSureIm{
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureImBack.this);
 				switch(salesblService.addImport_up(importMenuVO)){
 				case 0:
-					salesResult.succeeded("添加成功！", "sales");
+					salesResult.succeeded("添加成功！");
 					break;
 				}
 			}

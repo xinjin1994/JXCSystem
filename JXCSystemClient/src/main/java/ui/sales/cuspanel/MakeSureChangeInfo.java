@@ -68,7 +68,7 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureChangeInfo.this);
 				switch(salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter)){
 				case 0:
-					salesResult.succeeded("修改成功！","sales");
+					salesResult.succeeded("修改成功！");
 					break;
 				}
 			} else if (e.getSource() == secondCusBack) {
