@@ -64,7 +64,7 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 			if(id.equals("")){
 				resController.failed("存在输入为空！",failedAddress);
 				frame.repaint();
-			}else if(userblService.searchUser_up(id).get(0) == null){
+			}else if(userblService.searchUser_up(id).size() == 0){
 				resController.failed("不存在该用户！", failedAddress);
 				frame.repaint();
 			}else{

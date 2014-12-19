@@ -126,7 +126,6 @@ public class LoginPanel extends FatherPanel {
 			userText = user.getText();
 			passwordText = new String(password.getPassword());
 			int identity = userbl.login_up(userText, passwordText);
-			System.out.println(identity);
 			switch (identity) {
 			case 0:
 				controller.AdminPanel();
