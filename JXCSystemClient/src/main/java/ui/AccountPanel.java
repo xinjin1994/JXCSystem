@@ -25,6 +25,8 @@ import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RefuseButton;
 import ui.setting.resultPanels.ResultPanelController;
+import vo.bill.GetVO;
+import vo.bill.PayVO;
 
 //财务经理
 public class AccountPanel extends FatherPanel{
@@ -34,8 +36,8 @@ public class AccountPanel extends FatherPanel{
 	private int inter = 54;
 	
 	public ThirdPanel accountThirdPanel;
-	MyButton accManage,finManage,recManage,invoiceManage,iniManage;
-	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage};
+	MyButton accManage,finManage,recManage,invoiceManage,iniManage,saveCheck;
+	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage,saveCheck};
 	private MyButton refresh;
 	private MyFrame frame;
 	
@@ -45,13 +47,16 @@ public class AccountPanel extends FatherPanel{
 	
 	private String images_ori[] = new String[]{"Image/Account/button/accManage.png",
 			"Image/Account/button/finManage.png","Image/Account/button/recManage.png",
-			"Image/Account/button/invoiceManage.png","Image/Account/button/iniManage.png"};
+			"Image/Account/button/invoiceManage.png","Image/Account/button/iniManage.png",
+			"Image/Account/button/saveCheck.png"};
 	private String images_stop[] = new String[]{"Image/Account/button/accManage_stop.png",
 			"Image/Account/button/finManage_stop.png","Image/Account/button/recManage_stop.png",
-			"Image/Account/button/invoiceManage_stop.png",	"Image/Account/button/iniManage_stop.png"};
+			"Image/Account/button/invoiceManage_stop.png",	"Image/Account/button/iniManage_stop.png",
+			"Image/Account/button/saveCheck_stop.png"};
 	private String images_press_on[] = new String[]{"Image/Account/button/accManage_press_on.png",
 			"Image/Account/button/finManage_press_on.png","Image/Account/button/recManage_press_on.png",
-			"Image/Account/button/invoiceManage_press_on.png",	"Image/Account/button/iniManage_press_on.png"};
+			"Image/Account/button/invoiceManage_press_on.png",	"Image/Account/button/iniManage_press_on.png",
+			"Image/Account/button/saveCheck_press_on.png"};
 	
 	private RefuseButton refuse;
 	private ApproveButton approve;
@@ -61,6 +66,10 @@ public class AccountPanel extends FatherPanel{
 	private String failedAddress;
 	
 	private SaveTempBills bills;
+	
+	private ArrayList<PayVO> payDraft = new ArrayList<PayVO>();
+	private ArrayList<GetVO> getDraft = new ArrayList<GetVO>();
+	
 	public AccountPanel(MyFrame frame, String url, UIController controller,
 			AccountUIController accountUIController) {
 		super(frame, url, controller);
@@ -199,6 +208,13 @@ public class AccountPanel extends FatherPanel{
 				getInvoiceInfo();
 			}else if(e.getSource() == buttons[4]){
 				getInitialInfo();
+			}else if(e.getSource() == buttons[5]){
+				payDraft = accountblService.getAllDraftPayment_up();
+				getDraft = accountblService.getAllDraftReceipt_up();
+				
+				ArrayList<String> infos = new ArrayList<String>();
+				infos.add("单据编号;单据类型");
+				
 			}
 		}
 

@@ -3,6 +3,8 @@ package ui.commodity;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import businesslogic.commoditybl.CommodityController;
+import businesslogicservice.commodityblservice.CommodityblService;
 import ui.FatherPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -25,12 +27,14 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 	private String nameString,typeString,idString,timeString,opeString;
 	
 	private MyLabel id,time,operator;
-	private MyButton forwardButton;
+	private MyButton forwardButton,saveButton;
 	private PatchVO newPatch;
 	private int num;
 	private ColorFactory color = new ColorFactory();
 	
 	private String failedAddress;
+	
+	private CommodityblService commodityblService;
 	public AddPatchPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
@@ -39,6 +43,7 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		resController = new ResultPanelController(frame, this);
 	
 		commodityAllUIController.setBack_first(this);
+		commodityblService = new CommodityController();
 		setTextField();
 		setComboBox();
 		
@@ -83,6 +88,10 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		forwardButton = forward.forward_black;
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);
+		
+		saveButton = new MyButton("Image/save.png", 724, 480, "Image/save_stop.png", "Image/save_stop");
+		this.add(saveButton);
+		saveButton.addActionListener(this);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == name){
@@ -94,6 +103,9 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			setNewPatch();
 			commodityAllUIController.confirmPatch(newPatch);
+		}else if (e.getSource() == saveButton) {
+			setNewPatch();
+			commodityblService.patchDraft_up(newPatch);
 		}
 	}
 	private void setNewPatch() {

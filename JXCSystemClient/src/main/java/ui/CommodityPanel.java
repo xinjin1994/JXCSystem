@@ -10,10 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+import po.PatchPO;
 import junit.framework.Test;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
 import ui.commodity.CommodityUIController;
+import ui.commodity.storage.PatchDetailPanel;
 import ui.setting.ColorFactory;
 import ui.setting.Com;
 import ui.setting.MyFrame;
@@ -26,6 +28,7 @@ import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RemindButton;
 import vo.SortVO;
+import vo.bill.PatchVO;
 
 //1 库存人员
 public class CommodityPanel extends FatherPanel{
@@ -34,8 +37,8 @@ public class CommodityPanel extends FatherPanel{
 	private int inter = 54;
 	
 	public ThirdPanel commodityThirdPanel;
-	MyButton comManage,sortManage,stockManage,invoiceManage;
-	private MyButton [] buttons = new MyButton[]{comManage,sortManage,stockManage,invoiceManage};
+	MyButton comManage,sortManage,stockManage,invoiceManage,saveCheck;
+	private MyButton [] buttons = new MyButton[]{comManage,sortManage,stockManage,invoiceManage,saveCheck};
 	private MyButton refresh, warn,newBills,detail;
 	
 	private MyFrame frame;
@@ -45,13 +48,13 @@ public class CommodityPanel extends FatherPanel{
 	private JScrollPane scrollPane;
 	private String images_ori[] = new String[]{"Image/Commodity/button/comManage.png",
 			"Image/Commodity/button/sortManage.png","Image/Commodity/button/stockManage.png",
-			"Image/Commodity/button/invoiceManage.png"};
+			"Image/Commodity/button/invoiceManage.png","Image/Commodity/button/saveCheck.png"};
 	private String images_stop[] = new String[]{"Image/Commodity/button/comManage_stop.png",
 			"Image/Commodity/button/sortManage_stop.png","Image/Commodity/button/stockManage_stop.png",
-			"Image/Commodity/button/invoiceManage_stop.png"};
+			"Image/Commodity/button/invoiceManage_stop.png","Image/Commodity/button/saveCheck_stop.png"};
 	private String images_press_on[] = new String[]{"Image/Commodity/button/comManage_press_on.png",
 			"Image/Commodity/button/sortManage_press_on.png","Image/Commodity/button/stockManage_press_on.png",
-			"Image/Commodity/button/invoiceManage_press_on.png"};
+			"Image/Commodity/button/invoiceManage_press_on.png","Image/Commodity/button/saveCheck_press_on.png"};
 	
 	private FirstButtonListener listener = new FirstButtonListener();
 
@@ -60,9 +63,11 @@ public class CommodityPanel extends FatherPanel{
 	
 	private CommodityblService commodityblService;
 	
-	private SaveTempBills bills;
+	private SaveTempBills bills,draft;
 	
 	private MyTable showTable;
+	
+	private ArrayList<PatchVO> drafts = new ArrayList<PatchVO>();
 	
 	private ColorFactory color;
 	public CommodityPanel(MyFrame frame, String url, UIController controller,
@@ -120,7 +125,7 @@ public class CommodityPanel extends FatherPanel{
 		commodityThirdPanel.removeAll();
 		showTable = new MyTable();
 		showTable.setInfo(bills);
-		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+		showTable.setColor(color.comColor,color.greyFont, color.comColor,Color.white);
 		showTable.setTable(info);
 		
 		commodityThirdPanel.add(showTable.tablePanel);
@@ -167,7 +172,18 @@ public class CommodityPanel extends FatherPanel{
 			
 			}else if (e.getSource() == buttons[3]) {
 			
-			}else if(e.getSource() == refresh){
+			}else if (e.getSource() == buttons[4]) {
+				drafts = commodityblService.getAllDraftPatch_up();
+				ArrayList<String> infos = new ArrayList<String>();
+				infos.add("单据编号;时间;单据类型");
+				for(int i = 0;i < drafts.size();i++){
+
+				
+				}
+//				draft = new SaveTempBills(frame,drafts, controller);
+				setTable(infos, bills);
+			}
+			else if(e.getSource() == refresh){
 				setWarn();
 				remind.setButton();
 			}else if(e.getSource() == warn){

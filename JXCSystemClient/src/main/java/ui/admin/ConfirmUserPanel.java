@@ -116,6 +116,7 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 			break;
 		case 0:
 			frame.remove(adminAllUIController.getMainPanel());
+			
 			resController.succeeded("成功"+type+"用户！", "user");
 			break;
 		case 1:
