@@ -160,10 +160,10 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 					frame.remove(this);
 					resController.failed("存在输入错误！", failedAddress);
 				}
-//				if(sales.size() ==1){
-//					frame.remove(this);
-//					resController.failed("不存在符合该条件的单据！", failedAddress);
-//				}else{
+				if(sales.size() ==1){
+					frame.remove(this);
+					resController.failed("不存在符合该条件的单据！", failedAddress);
+				}else{
 					if(type.equals("account")){
 						setTableA(sales);
 						//				frame.setPanel(accountController.getMainPanel());
@@ -172,7 +172,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 						setTableM(sales);
 					}
 
-//				}
+				}
 
 			}
 			frame.repaint();

@@ -147,10 +147,10 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 				ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
 				ArrayList <String> infoArray = new ArrayList<String>();
 				infoArray.add("账户名称;账户余额");
-				/*for(int i=0; i<fuzzyAccVO.size();i++){
+				for(int i=0; i<fuzzyAccVO.size();i++){
 				String infoOfArray = fuzzyAccVO.get(i).name+";"+fuzzyAccVO.get(i).balance;
 				infoArray.add(infoOfArray);
-			}*/
+			}
 				if(infoArray.size() != 1){
 					setTable(infoArray);
 				}else {

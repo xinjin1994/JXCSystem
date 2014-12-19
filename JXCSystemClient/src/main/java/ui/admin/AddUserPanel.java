@@ -15,6 +15,8 @@ import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
+import businesslogic.userbl.UserController;
+import businesslogicservice.userblservice.UserblService;
 
 public class AddUserPanel extends FatherPanel implements ActionListener{
 	
@@ -35,12 +37,14 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 	private String dutyString;
 	
 	private String failedAddress;
+	private UserblService userblService;
 	public AddUserPanel(MyFrame frame, String url, AdminAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.uiController = controller;
 		this.failedAddress = "admin/addUser";
 		
+		userblService = new UserController();
 		resController = new ResultPanelController(frame, this);
 		controller.setBack_second(this,188,70);
 	
@@ -79,6 +83,7 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 		}
 		textInfos[4].addFocusListener(new TextListener());
 		this.remove(textInfos[2]);
+		textInfos[0].setText(userblService.getUserNote());
 	}
 	
 	class TextListener implements FocusListener{
@@ -113,6 +118,8 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 				textInfos[4].setText("");
 			}
 			else if(isLegal == false||dutyGet<0||dutyGet>6){
+				System.out.println("isLegal:"+isLegal);
+				System.out.println("dutyGet"+dutyGet);
 				frame.remove(this);
 				resController.failed("输入存在错误！请重新确认您的输入信息！", failedAddress);
 			}else {
@@ -120,6 +127,8 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 			frame.setPanel(uiController.getMainPanel());
 			user = new UserVO(textInfos[0].getText(),textInfos[1].getText()
 					,textInfos[3].getText(),dutyGet);
+			System.out.println(user.id);
+			System.out.println(textInfos[0].getText());
 			uiController.confirmUserPanel(user,"添加");
 			}
 			frame.repaint();

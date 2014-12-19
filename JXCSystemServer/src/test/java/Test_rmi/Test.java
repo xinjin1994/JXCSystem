@@ -77,6 +77,8 @@ public class Test {
 			LocateRegistry.createRegistry(8896);
 			Naming.bind("rmi://127.0.0.1:8896/UserDataService",userdataservice);
 			
+			System.out.println("Service Start!");
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

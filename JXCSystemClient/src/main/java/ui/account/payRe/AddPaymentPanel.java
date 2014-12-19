@@ -62,12 +62,12 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	 * account从下层获得
 	 */
 	private void setAccount() {
-		String [] accounts = new String[]{"a","b"};//从下层获得
-		/*ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
+//		String [] accounts = new String[]{"a","b"};//从下层获得
+		ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
 		String []accounts = new String[accVOArray.size()];
 		for(int i=0;i<accVOArray.size();i++){
 			accounts[i] = accVOArray.get(i).name;
-		}*/
+		}
 		account = new MyComboBox(accounts, 491, 162, 205, 43);
 		this.add(account);
 		account.addActionListener(this);
@@ -101,13 +101,13 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	private void setIDOpe() {
 		idLabel = new MyLabel(106,165, 221,55);
 		idLabel.setForeground(new ColorFactory().accColor);
-//		id = accountblService.getPaymentNote_up();
+		id = accountblService.getPaymentNote_up();
 		idLabel.setText(id);
 		this.add(idLabel);
 		
 		operator = new MyLabel(575, 370, 155, 55);
 		operator.setForeground(new ColorFactory().accColor);
-//		operate = accountblService.getOperator_up();
+		operate = accountblService.getOperator_up();
 		operator.setText(operate);
 		this.add(operator);
 	}

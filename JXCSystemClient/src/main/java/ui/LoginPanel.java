@@ -123,10 +123,10 @@ public class LoginPanel extends FatherPanel {
 		public void actionPerformed(ActionEvent e) {
 			
 			UserblService userbl = new UserController();
-			int identity = userbl.login_up(userText, passwordText);
-			identity = 3;
 			userText = user.getText();
 			passwordText = new String(password.getPassword());
+			int identity = userbl.login_up(userText, passwordText);
+			System.out.println(identity);
 			switch (identity) {
 			case 0:
 				controller.AdminPanel();

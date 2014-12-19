@@ -35,15 +35,15 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
-
-		this.CommodityPanel();
+		this.welcomePanel();
+//		this.CommodityPanel();
 //	  	this.AccountPanel();
 
 //		this.SalesManagerPanel();
 
 //		this.AccountPanel();
 
-	this.ManagerPanel();
+//	this.ManagerPanel();
 //		this.SalesManagerPanel();
 
 //		this.AdminPanel();
@@ -67,25 +67,25 @@ public class UIController {
 	}
 
 	public void SalesManagerPanel() {
-//		frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new SalesUIController(this, frame);
 	}
 	
 	public void AdminPanel() {
-	//	frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new AdminAllUIController(this, frame);
 		frame.repaint();
 	}
 	
 
 	public void AccountPanel() {
-	//	frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new AccountAllUIController(this,frame);
 		frame.repaint();
 	}
 
 	public void ManagerPanel() {
-	//	frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new ManagerAllUIController(this, frame);
 		frame.repaint();
 	}
@@ -97,8 +97,7 @@ public class UIController {
 	}
 
 	public void CommodityPanel() {
-//		frame.remove(loginPanel);
-		System.out.println("1111");
+		frame.remove(loginPanel);
 		new CommodityAllUIController(this, frame);
 		frame.repaint();
 	}
