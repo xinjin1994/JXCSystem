@@ -192,6 +192,7 @@ public class AdminPanel extends FatherPanel{
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == userButtons[0]){
+				clear();
 				String findInfoS = searchTextField.getText();
 				if(findInfoS.equals("")){
 					frame.remove(AdminPanel.this);
@@ -201,9 +202,13 @@ public class AdminPanel extends FatherPanel{
 				}else{
 					
 					searchTextField.setText("");
+					if(userblService.searchUser_up(findInfoS).size() == 0){
+						resController.failedConfirm("不存在您要查找的用户！","user");
+					}else{
 					UserVO user = userblService.searchUser_up(findInfoS).get(0);
 					//				UserVO user = new UserVO("a","v","c",-1);
 					setInfoLabel(user);
+					}
 				}
 				//根据此信息寻找，级如果在下方详细信息中显示,将参数UserVo传给setInfoLabel方法
 			}else if(e.getSource() == userButtons[1]){

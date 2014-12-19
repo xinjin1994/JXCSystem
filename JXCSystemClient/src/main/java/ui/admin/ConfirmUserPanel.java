@@ -100,7 +100,7 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 		this.repaint();
 	}
 	private void check(int i){
-		System.out.println(i);
+//		System.out.println(i);
 		
 		AdminPanel temp= (AdminPanel)(adminAllUIController.getMainPanel());
 		temp.setTable();
