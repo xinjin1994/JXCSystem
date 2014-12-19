@@ -16,6 +16,7 @@ public class UserPO implements Serializable{
 		name = n;
 		password = p;
 		duty = d;
+		this.note=note;
 	}
 	
 	public UserPO copy(){
