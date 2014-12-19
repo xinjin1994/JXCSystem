@@ -16,7 +16,6 @@ public class UIController {
 	public LoginPanel loginPanel;
 	private AdminPanel admin;
 	private AccountPanel accountPanel; // 财务管理界面
-	private FinPersonPanel financialPerson; // 财务人员界面
 	private ManagerPanel manager;
 	private SalesPersonPanel salesPerson;
 	
@@ -90,11 +89,6 @@ public class UIController {
 		frame.repaint();
 	}
 	
-	public void FinPersonPanel() {
-		financialPerson = new FinPersonPanel(frame,"",this);
-		frame.remove(loginPanel);
-		frame.setPanel(financialPerson);
-	}
 
 	public void CommodityPanel() {
 		frame.remove(loginPanel);

@@ -135,15 +135,16 @@ public class LoginPanel extends FatherPanel {
 				controller.CommodityPanel();;
 				break;
 			case 2:
+				controller.SalesManagerPanel();
 				break;
 			case 3:
 				controller.SalesManagerPanel();
 				break;
 			case 4:
-				controller.FinPersonPanel();
+				controller.AccountPanel();
 				break;
 			case 5:
-				controller.FinManagerPanel();
+				controller.AccountPanel();
 				break;
 			case 6:
 				controller.ManagerPanel();
@@ -152,8 +153,9 @@ public class LoginPanel extends FatherPanel {
 				// 登陆失败
 				// System.out.println("hello");
 				addFailure();
-
 			}
+			user.setText("");
+			password.setText("");
 
 		}
 

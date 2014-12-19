@@ -46,6 +46,9 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 	}
 	private void setFatherSort() {
 		ArrayList<SortVO> arraySort = commodityblService.getSortSort_up();
+		if(arraySort.size() == 0){
+			resController.failedConfirm("信息不存在！", failedAddress);
+		}else{
 		String roleList[] = new String[arraySort.size()+1];
 		roleList[0] = "";
 		for(int i=0;i<arraySort.size();i++){
@@ -55,6 +58,7 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 		fatherSortBox = new MyComboBox(roleList,253 , 423, 319, 37);
 		fatherSortBox.addActionListener(this);
 		this.add(fatherSortBox);
+		}
 	}
 	private void setTextField() {
 		id = new MyTextFieldBorder(254, 218);
