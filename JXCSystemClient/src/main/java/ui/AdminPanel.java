@@ -200,7 +200,7 @@ public class AdminPanel extends FatherPanel{
 					resController.failedConfirm("请输入要搜索的用户名称或编号！","user");
 					frame.repaint();
 				}else{
-					
+					clear();
 					searchTextField.setText("");
 					if(userblService.searchUser_up(findInfoS).size() == 0){
 						resController.failedConfirm("不存在您要查找的用户！","user");

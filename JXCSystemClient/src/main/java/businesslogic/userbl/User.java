@@ -43,7 +43,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			}
 			
 			if (us.addUser(user)) {
-				systemlog.add_up("AddUser:");
+				System.out.println("addUser:"+name+" note:"+note);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -124,6 +124,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			po=us.getUser(note);
 			if(po!=null){
 				array.add(po);
+				System.out.println("User:"+po.getName()+" Note:"+po.getNote());
 			}
 			po=us.getUser_Note(note);
 			if(po!=null){

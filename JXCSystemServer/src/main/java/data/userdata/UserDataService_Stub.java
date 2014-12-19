@@ -125,6 +125,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 				return false;
 			}
 		}
+		System.out.println("addUser:"+po.getName()+" Note:"+po.getNote());
 		userList.add(po.copy());
 		return true;
 	}
@@ -132,6 +133,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	public UserPO getUser(String name) {
 		for(int i=0;i<userList.size();i++){
 			if(userList.get(i).getName().equals(name)){
+				System.out.println("User:"+userList.get(i).getName()+" Note:"+userList.get(i).getNote());
 				return new UserPO(userList.get(i).getName(),"",userList.get(i).getDuty(),userList.get(i).getNote());
 			}
 		}

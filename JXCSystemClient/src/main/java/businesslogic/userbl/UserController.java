@@ -34,6 +34,7 @@ public class UserController implements UserblService{
 
 	public int addUser_up(UserVO vo) {
 		// TODO Auto-generated method stub
+		System.out.println("AddUser_up:"+vo.name+" Note:"+vo.id);
 		return user.addUser(vo.name, vo.password, vo.duty,vo.id);
 	}
 
@@ -48,6 +49,7 @@ public class UserController implements UserblService{
 		ArrayList<UserVO> array=new ArrayList<UserVO>();
 		for(int i=0;i<po.size();i++){
 			UserVO vo=new UserVO(po.get(i).getNote(),po.get(i).getName(),"",po.get(i).getDuty());
+			System.out.println("searchUser_up:"+i+" note:"+po.get(i).getNote());
 			array.add(vo);
 		}
 		return array;
