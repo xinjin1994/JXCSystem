@@ -20,24 +20,6 @@ public class SalesController implements SalesblService {
 
 	public Sales sale = new Sales();
 
-	public int addCustomer_up(CustomerVO customerVO) {
-		// TODO Auto-generated method stub
-		int message = sale.addCustomer(customerVO);
-		return message;
-	}
-
-	public int delCustomer_up(CustomerVO customerVO) {
-		// TODO Auto-generated method stub
-		int message = sale.delCustomer(customerVO);
-		return message;
-	}
-
-	public int updateCustomer_up(CustomerVO vo1, CustomerVO vo2) { // 这里的参数个数有问题
-		// TODO Auto-generated method stub
-		int message = sale.updateCustomer(vo1, vo2); // 这里的对应方法名有问题
-		return message;
-	}
-
 	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub
 		ArrayList<CustomerVO> result = new ArrayList<CustomerVO>();
@@ -186,6 +168,85 @@ public class SalesController implements SalesblService {
 		return customerVO;
 	}
 
+	public int addDraftImport_up(ImportMenuVO importMenuVO) {
+		// TODO Auto-generated method stub
+		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
+				0, 0, 0);
+		ImportGoodPO importGood = new ImportGoodPO(commodity, 0, 0, 0, null);
+		ArrayList<ImportGoodPO> importGoodPO = new ArrayList<ImportGoodPO>();
+		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
+		ImportPO importPO = new ImportPO(null, null, null, null, null, null, 0);
+		importPO.setCondition(0);
+		importPO.setNote(importMenuVO.note);
+		int message = sale.addDraftImport(importPO);
+		return message;
+	}
+
+	public int addDraftExport_Return_up(ExportMenuVO exportMenuVO) {
+		// TODO Auto-generated method stub
+		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
+				0, 0, 0);
+		ExportGoodPO exportGood = new ExportGoodPO(commodity, 0, 0, 0, null);
+		ArrayList<ExportGoodPO> exportGoodPO = new ArrayList<ExportGoodPO>();
+		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
+		Export_ReturnPO export_ReturnPO = new Export_ReturnPO(null, null, null,
+				null, null, null, 0, 0, 0, 0, null);
+		export_ReturnPO.setCondition(0);
+		export_ReturnPO.setNote(exportMenuVO.note);
+		int message = sale.addDraftExport_Return(export_ReturnPO);
+		return message;
+	}
+
+	public int addDraftImport_Return_up(ImportMenuVO importMenuVO) {
+		// TODO Auto-generated method stub
+		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
+				0, 0, 0);
+		ImportGoodPO importGood = new ImportGoodPO(commodity, 0, 0, 0, null);
+		ArrayList<ImportGoodPO> importGoodPO = new ArrayList<ImportGoodPO>();
+		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
+		Import_ReturnPO import_ReturnPO = new Import_ReturnPO(null, null, null,
+				null, null, null, 0, null);
+
+		import_ReturnPO.setCondition(0);
+		import_ReturnPO.setNote(importMenuVO.note);
+		int message = sale.addDraftImport_Return(import_ReturnPO);
+		return message;
+	}
+
+	public int addDraftExport_up(ExportMenuVO exportMenuVO) {
+		// TODO Auto-generated method stub
+		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
+				0, 0, 0);
+		ExportGoodPO exportGood = new ExportGoodPO(commodity, 0, 0, 0, null);
+		ArrayList<ExportGoodPO> exportGoodPO = new ArrayList<ExportGoodPO>();
+		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
+		ExportPO exportPO = new ExportPO(null, null, null, null, null, null, 0,
+				0, 0, 0);
+
+		exportPO.setCondition(0);
+		exportPO.setNote(exportMenuVO.note);
+		int message = sale.addDraftExport(exportPO);
+		return message;
+	}
+
+	public int addCustomer_up(CustomerVO customerVO) {
+		// TODO Auto-generated method stub
+		int message = sale.addCustomer(customerVO);
+		return message;
+	}
+
+	public int delCustomer_up(CustomerVO customerVO) {
+		// TODO Auto-generated method stub
+		int message = sale.delCustomer(customerVO);
+		return message;
+	}
+
+	public int updateCustomer_up(CustomerVO vo1, CustomerVO vo2) {
+		// TODO Auto-generated method stub
+		int message = sale.updateCustomer(vo1, vo2);
+		return message;
+	}
+
 	public int getClerk_up() {
 		// TODO Auto-generated method stub
 		return sale.getClerk();
@@ -241,70 +302,9 @@ public class SalesController implements SalesblService {
 		return sale.getClerkDiscount();
 	}
 
-	public int addDraftImport_up(ImportMenuVO importMenuVO) {
-		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
-				0, 0, 0);
-		ImportGoodPO importGood = new ImportGoodPO(commodity, 0, 0, 0, null);
-		ArrayList<ImportGoodPO> importGoodPO = new ArrayList<ImportGoodPO>();
-		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
-		ImportPO importPO = new ImportPO(null, null, null, null, null, null, 0);
-		importPO.setCondition(0);
-		importPO.setNote(importMenuVO.note);
-		int message = sale.addDraftImport(importPO);
-		return message;
-	}
-
-	public int addDraftExport_Return_up(ExportMenuVO exportMenuVO) {
-		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
-				0, 0, 0);
-		ExportGoodPO exportGood = new ExportGoodPO(commodity, 0, 0, 0, null);
-		ArrayList<ExportGoodPO> exportGoodPO = new ArrayList<ExportGoodPO>();
-		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
-		Export_ReturnPO export_ReturnPO = new Export_ReturnPO(null, null, null,
-				null, null, null, 0, 0, 0, 0, null);
-		export_ReturnPO.setCondition(0);
-		export_ReturnPO.setNote(exportMenuVO.note);
-		int message = sale.addDraftExport_Return(export_ReturnPO);
-		return message;
-	}
-
 	public String getCustomerNote_up() {
 		// TODO Auto-generated method stub
 		return sale.getCustomerNote();
-	}
-
-	public int addDraftImport_Return_up(ImportMenuVO importMenuVO) {
-		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
-				0, 0, 0);
-		ImportGoodPO importGood = new ImportGoodPO(commodity, 0, 0, 0, null);
-		ArrayList<ImportGoodPO> importGoodPO = new ArrayList<ImportGoodPO>();
-		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
-		Import_ReturnPO import_ReturnPO = new Import_ReturnPO(null, null, null,
-				null, null, null, 0, null);
-
-		import_ReturnPO.setCondition(0);
-		import_ReturnPO.setNote(importMenuVO.note);
-		int message = sale.addDraftImport_Return(import_ReturnPO);
-		return message;
-	}
-
-	public int addDraftExport_up(ExportMenuVO exportMenuVO) {
-		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(null, null, null, 0, 0, null,
-				0, 0, 0);
-		ExportGoodPO exportGood = new ExportGoodPO(commodity, 0, 0, 0, null);
-		ArrayList<ExportGoodPO> exportGoodPO = new ArrayList<ExportGoodPO>();
-		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
-		ExportPO exportPO = new ExportPO(null, null, null, null, null, null, 0,
-				0, 0, 0);
-
-		exportPO.setCondition(0);
-		exportPO.setNote(exportMenuVO.note);
-		int message = sale.addDraftExport(exportPO);
-		return message;
 	}
 
 	public ArrayList<ImportMenuVO> getAllDraftImport_up() {
@@ -320,16 +320,6 @@ public class SalesController implements SalesblService {
 	public CommodityVO getProGift_up(int money, int level) {
 		// TODO Auto-generated method stub
 		return sale.getProGift(money, level);
-	}
-
-	public ImportMenuVO searchImportNote_up() {
-		// TODO Auto-generated method stub
-		return sale.searchImportNote();
-	}
-
-	public ExportMenuVO searchExportNote_up() {
-		// TODO Auto-generated method stub
-		return sale.searchExportNote();
 	}
 
 	public ArrayList<ImportMenuVO> getAllDraftImport_Return_up() {
@@ -349,7 +339,7 @@ public class SalesController implements SalesblService {
 
 	public ExportMenuVO searchDraftExport_up(String note) {
 		// TODO Auto-generated method stub
-		return sale.searchDraftExport();
+		return sale.searchDraftExport(note);
 	}
 
 	public ArrayList<ExportMenuVO> getAllDraftExport_Return_up() {

@@ -3,6 +3,7 @@ package businesslogic.salesbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import po.AccountPO;
 import po.CommodityPO;
 import po.CustomerPO;
 import po.ExportPO;
@@ -13,6 +14,7 @@ import po.PaymentPO;
 import po.ReceiptPO;
 import vo.CommodityVO;
 import vo.CustomerVO;
+import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
 import vo.bill.ImportMenuVO;
 import businesslogic.commoditybl.Commodity;
@@ -97,11 +99,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			customer1 = sale.findCustomer(vo1.cusName);
 			customer2 = sale.findCustomer(vo2.cusName);
 
-			if (customer2 == null) {
+			if (customer1 == null) {
 				return 2;
 			}
 			if (sale.updateCustomer(customer1, customer2)) {
-				systemlog.add_up("UpdateCustomer:" + customer2.getName());
+				systemlog.add_up("UpdateCustomer:" + customer1.getName());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -109,19 +111,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			e.printStackTrace();
 		}
 		return -1;
-	}
-
-	public ArrayList<CustomerVO> searchCustomer(CustomerVO customerVO) {
-		// TODO Auto-generated method stub
-		try {
-			if (sale.findCustomer("word") != null) {
-				return null;
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	public int addImport(ImportPO po) {
@@ -192,7 +181,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public CustomerPO findCustomer(String name) {
 		// TODO Auto-generated method stub
 		try {
-			return sale.findCustomer(name);
+			CustomerPO po = sale.findCustomer(name);
+			if (po != null) {
+				systemlog.add_up("FindCustomer:" + name);
+			}
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -203,7 +196,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<ImportPO> getAllImport() {
 		// TODO Auto-generated method stub
 		try {
-			return sale.getAllImport();
+			ArrayList<ImportPO> po = sale.getAllImport();
+			if (po != null) {
+				systemlog.add_up("GetAllImport");
+			}
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -214,7 +211,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<Import_ReturnPO> getAllImport_Return() {
 		// TODO Auto-generated method stub
 		try {
-			return sale.getAllImport_Return();
+			ArrayList<Import_ReturnPO> po = sale.getAllImport_Return();
+			if (po != null) {
+				systemlog.add_up("GetAllImport_Return");
+			}
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -225,7 +226,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<ExportPO> getAllExport() {
 		// TODO Auto-generated method stub
 		try {
-			return sale.getAllExport();
+			ArrayList<ExportPO> po = sale.getAllExport();
+			if (po != null) {
+				systemlog.add_up("getAllExport");
+			}
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -236,7 +241,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<Export_ReturnPO> getAllExport_Return() {
 		// TODO Auto-generated method stub
 		try {
-			return sale.getAllExport_Return();
+			ArrayList<Export_ReturnPO> po = sale.getAllExport_Return();
+			if (po != null) {
+				systemlog.add_up("getAllExport_Return");
+			}
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -244,7 +253,223 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
+	public ArrayList<CustomerPO> searchFuzzyCustomer(String name) {
+		// TODO Auto-generated method stub
+		try {
+			ArrayList<CustomerPO> po = sale.getAllCustomer();
+			ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
+			CustomerPO lin = sale.findCustomer(name);
+			array.add(lin);
+			systemlog.add_up("SearchFuzzyCustomer:" + name);
+			return po;
+
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<CustomerPO>();
+	}
+
+	public CustomerPO searchExactCustomer(String name) {
+		// TODO Auto-generated method stub
+		try {
+			CustomerPO po = sale.findCustomer(name);
+			systemlog.add_up("SearchExactCustomer:" + name);
+			return po;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<CustomerPO> getAllCustomer() {
+		// TODO Auto-generated method stub
+		try {
+			ArrayList<CustomerPO> po = sale.getAllCustomer();
+			if (po != null) {
+				systemlog.add_up("getAllCustomer");
+			}
+			return po;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public CustomerPO getCustomer(String name, String id) {
+		// TODO Auto-generated method stub
+		try {
+			if (sale.findCustomer(name) != null) {
+				systemlog.add_up("GetCustomer:" + name);
+			}
+			return sale.findCustomer(name);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String getCustomerNote() {
+		// TODO Auto-generated method stub
+		try {
+			return sale.getCustomerNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public ArrayList<ImportMenuVO> getAllDraftImport() {
+		// TODO Auto-generated method stub
+		try {
+			ArrayList<ImportPO> importPO = sale.getAllDraftImport();
+
+			ArrayList<ImportMenuVO> importMenu = new ArrayList<ImportMenuVO>();
+
+			for (int i = 0; i < importPO.size(); i++) {
+				CommodityListVO commodityList = new CommodityListVO(null, null,
+						null, i, i, i, null);
+				importMenu.set(i, new ImportMenuVO(null, null, null, null,
+						commodityList, null, i, null, i, null));
+			}
+			systemlog.add_up("GetAllDraftImport");
+			return importMenu;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public ArrayList<ImportMenuVO> getAllDraftImport_Return() {
+		// TODO Auto-generated method stub
+		try {
+			ArrayList<Import_ReturnPO> import_ReturnPO = sale
+					.getAllDraftImport_Return();
+
+			ArrayList<ImportMenuVO> importMenu = new ArrayList<ImportMenuVO>();
+
+			for (int i = 0; i < import_ReturnPO.size(); i++) {
+				CommodityListVO commodityList = new CommodityListVO(null, null,
+						null, i, i, i, null);
+				importMenu.set(i, new ImportMenuVO(null, null, null, null,
+						commodityList, null, i, null, i, null));
+			}
+			systemlog.add_up("GetAllDraftImport_Return");
+			return importMenu;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public ArrayList<ExportMenuVO> getAllDraftExport() {
+		// TODO Auto-generated method stub
+
+		try {
+			ArrayList<ExportPO> export = sale.getAllDraftExport();
+
+			ArrayList<ExportMenuVO> exportMenu = new ArrayList<ExportMenuVO>();
+
+			for (int i = 0; i < export.size(); i++) {
+				CommodityListVO commodityList = new CommodityListVO(null, null,
+						null, i, i, i, null);
+				exportMenu.set(i, new ExportMenuVO(null, null, null, null,
+						commodityList, i, i, i, i));
+			}
+			systemlog.add_up("GetAllDraftExport");
+			return exportMenu;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
+	public ArrayList<ExportMenuVO> getAllDraftExport_Return() {
+		// TODO Auto-generated method stub
+		try {
+			ArrayList<Export_ReturnPO> export_ReturnPO = sale
+					.getAllDraftExport_Return();
+
+			ArrayList<ExportMenuVO> exportMenu = new ArrayList<ExportMenuVO>();
+
+			for (int i = 0; i < export_ReturnPO.size(); i++) {
+				CommodityListVO commodityList = new CommodityListVO(null, null,
+						null, i, i, i, null);
+				exportMenu.set(i, new ExportMenuVO(null, null, null, null,
+						commodityList, i, i, i, i));
+			}
+			systemlog.add_up("GetAllDraftExport_Return");
+			return exportMenu;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String getImportNote() {
+		// TODO Auto-generated method stub
+
+		try {
+			return sale.getImportNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public String getImport_ReturnNote() {
+		// TODO Auto-generated method stub
+		try {
+			return sale.getImport_ReturnNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public String getExportNote() {
+		// TODO Auto-generated method stub
+		try {
+			return sale.getExportNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public String getExport_ReturnNote() {
+		// TODO Auto-generated method stub
+		try {
+			return sale.getExport_ReturnNote();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	public CommodityPO getAllCommodity() {
+
 		return null;
 	}
 
@@ -257,25 +482,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public ArrayList<CustomerPO> getAllExportCustomer() {
-		return null;
-	}
-
-	public ArrayList<CustomerPO> searchFuzzyCustomer(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public CustomerPO searchExactCustomer(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<CustomerPO> getAllCustomer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public CustomerPO getCustomer(String name, String id) {
 		return null;
 	}
 
@@ -347,34 +553,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public String getImportNote() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getImport_ReturnNote() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getExportNote() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getExport_ReturnNote() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public int getClerkDiscount() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	public String getCustomerNote() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public int getImport_ReturnMaxNumber(String old_note) {
@@ -405,11 +586,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return 0;
 	}
 
-	public ArrayList<ImportMenuVO> getAllDraftImport() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public ImportMenuVO searchDraftImport(String note) {
 		// TODO Auto-generated method stub
 		return null;
@@ -420,37 +596,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public ImportMenuVO searchImportNote() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public ExportMenuVO searchExportNote() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<ImportMenuVO> getAllDraftImport_Return() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ImportMenuVO searchDraftImport_Return(String note) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<ExportMenuVO> getAllDraftExport() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ExportMenuVO searchDraftExport() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<ExportMenuVO> getAllDraftExport_Return() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -469,4 +615,15 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public ExportMenuVO searchDraftExport(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ImportMenuVO searchDraftImport_Return(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
