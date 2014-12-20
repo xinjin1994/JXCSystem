@@ -313,7 +313,13 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<ImportMenuVO> getAllDraftImport_up() {
 		// TODO Auto-generated method stub
-		return sale.getAllDraftImport();
+		ArrayList<ImportPO> po=sale.getAllDraftImport();
+		ArrayList<ImportMenuVO> vo=new ArrayList<ImportMenuVO>();
+		for(int i=0;i<po.size();i++){
+			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
+			vo.set(i, new ImportMenuVO(null, null, null, null, null, null, i, null, i, null));
+		}
+		return vo;		
 	}
 
 	public ImportMenuVO searchDraftImport_up(String note) {
@@ -333,7 +339,13 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<ImportMenuVO> getAllDraftImport_Return_up() {
 		// TODO Auto-generated method stub
-		return sale.getAllDraftImport_Return();
+		ArrayList<Import_ReturnPO> po=sale.getAllDraftImport_Return();
+		ArrayList<ImportMenuVO> vo=new ArrayList<ImportMenuVO>();
+		for(int i=0;i<po.size();i++){
+			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
+			vo.set(i, new ImportMenuVO(null, null, null, null, null, null, i, null, i, null));
+		}
+		return vo;
 	}
 
 	public ImportMenuVO searchDraftImport_Return_up(String note) {
@@ -346,7 +358,13 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<ExportMenuVO> getAllDraftExport_up() {
 		// TODO Auto-generated method stub
-		return sale.getAllDraftExport();
+		ArrayList<ExportPO> po=sale.getAllDraftExport();
+		ArrayList<ExportMenuVO> vo=new ArrayList<ExportMenuVO>();
+		for(int i=0;i<po.size();i++){
+			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
+			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i, i, i, i, null, null, i, null));
+		}
+		return vo;
 	}
 
 	public ExportMenuVO searchDraftExport_up(String note) {
@@ -359,7 +377,13 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<ExportMenuVO> getAllDraftExport_Return_up() {
 		// TODO Auto-generated method stub
-		return sale.getAllDraftExport_Return();
+		ArrayList<Export_ReturnPO> po=sale.getAllDraftExport_Return();
+		ArrayList<ExportMenuVO> vo=new ArrayList<ExportMenuVO>();
+		for(int i=0;i<po.size();i++){
+			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
+			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i, i, i, i, null, null, i, null));
+		}
+		return vo;
 	}
 
 	public ExportMenuVO searchDraftExport_Return_up(String note) {
@@ -390,6 +414,22 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		CommodityPO po=sale.getCommodity(name, type);
 		CommodityVO vo=new CommodityVO(type, type, type, 0, 0, 0, 0, 0, 0);
+		return vo;
+	}
+
+	public ImportMenuVO searchImport_ReturnNote_up(String note) {
+		// TODO Auto-generated method stub
+		Import_ReturnPO po=sale.searchImport_ReturnNote(note);
+		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
+		ImportMenuVO vo=new ImportMenuVO(note, note, note, commodityList, 0);
+		return vo;
+	}
+
+	public ExportMenuVO searchExport_ReturnNote_up(String note) {
+		// TODO Auto-generated method stub
+		Export_ReturnPO po=sale.searchExport_ReturnNote(note);
+		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
+		ExportMenuVO vo=new ExportMenuVO(note, note, note, note, note, commodityList, 0, 0, 0, 0, note, note, 0, note);
 		return vo;
 	}
 }

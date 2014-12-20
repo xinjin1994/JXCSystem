@@ -90,6 +90,12 @@ public interface SalesblService {
 	// 根据编号查找销售单
 	public ExportMenuVO searchExportNote_up(String note);
 
+	// 根据编号查找进货退货单
+	public ImportMenuVO searchImport_ReturnNote_up(String note);
+	
+	// 根据编号查找销售退货单
+	public ExportMenuVO searchExport_ReturnNote_up(String note);
+	
 	// 获得所有客户信息
 	public ArrayList<CustomerVO> getAllCustomer_up();
 
