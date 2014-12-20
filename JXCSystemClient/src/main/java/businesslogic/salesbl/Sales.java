@@ -468,12 +468,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public CommodityPO getAllCommodity() {
-
+	public ArrayList<CommodityPO> getAllCommodity() {
 		return null;
 	}
 
-	public CommodityVO getCommodity(String name, String id) {
+	public CommodityPO getCommodity(String name, String id) {
 		return null;
 	}
 
@@ -482,56 +481,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public ArrayList<CustomerPO> getAllExportCustomer() {
-		return null;
-	}
-
-	public String passImport(ImportPO importPO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String passImport_Return(Import_ReturnPO import_ReturnPO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String passExport(ExportPO exportPO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String passExport_Return(Export_ReturnPO export_ReturnPO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String refuseImport(String note) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String refuseImport_Return(String note) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String refuseExport(String note) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String refuseExport_Return(String note) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String passReceipt(ReceiptPO receiptPO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String passPayment(PaymentPO paymentPO) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -586,42 +535,93 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return 0;
 	}
 
-	public ImportMenuVO searchDraftImport(String note) {
+	public ImportPO searchDraftImport(String note) {
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+
+	public CommodityPO getProGift(int money, int level) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public CommodityVO getProGift(int money, int level) {
+	public ExportPO searchExportNote() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ExportMenuVO searchExportNote() {
+	public Export_ReturnPO searchDraftExport_Return(String note) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ExportMenuVO searchDraftExport_Return(String note) {
+	public ImportPO searchImportNote(String note) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ImportMenuVO searchImportNote(String note) {
+	public ExportPO searchExportNote(String note) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ExportMenuVO searchExportNote(String note) {
+	public ExportPO searchDraftExport(String note) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ExportMenuVO searchDraftExport(String note) {
+	public Import_ReturnPO searchDraftImport_Return(String note) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ImportMenuVO searchDraftImport_Return(String note) {
+	public String passImport(ImportPO importPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passImport_Return(Import_ReturnPO import_ReturnPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passExport(ExportPO exportPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passExport_Return(Export_ReturnPO export_ReturnPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseImport(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseImport_Return(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseExport(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String refuseExport_Return(String note) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passReceipt(ReceiptPO receiptPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String passPayment(PaymentPO paymentPO) {
 		// TODO Auto-generated method stub
 		return null;
 	}

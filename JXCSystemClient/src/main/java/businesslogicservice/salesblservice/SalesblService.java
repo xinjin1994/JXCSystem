@@ -60,8 +60,6 @@ public interface SalesblService {
 	// 获得所有的草稿销售单
 	public ArrayList<ExportMenuVO> getAllDraftExport_up();
 
-	
-
 	// 添加销售退货单
 	public int addExport_Return_up(ExportMenuVO exportMenuVO);
 
@@ -104,12 +102,6 @@ public interface SalesblService {
 	// 获得所有销售客户信息
 	public ArrayList<CustomerVO> getAllExportCustomer_up();
 
-	
-	
-	
-	
-	
-	
 	// 根据进货编号查找进货可退货最大数量,输入进货时的编号，返回最大可退货数量
 	public int getImport_ReturnMaxNumber_up(String old_note);
 
@@ -139,8 +131,8 @@ public interface SalesblService {
 
 	// 查看当前其他促销策略
 	public String getOtherPromotion_up();
-	
+
 	// 根据编号查找草稿销售单
-		public ExportMenuVO searchDraftExport_up(String note);
+	public ExportMenuVO searchDraftExport_up(String note);
 
 }
