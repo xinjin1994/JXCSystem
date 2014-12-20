@@ -582,22 +582,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public ArrayList<CommodityPO> getAllCommodity() {
-		return null;
-	}
-
-	public CommodityPO getCommodity(String name, String id) {
-		return null;
-	}
-
-	public ArrayList<CustomerPO> getAllImportCustomer() {
-		return null;
-	}
-
-	public ArrayList<CustomerPO> getAllExportCustomer() {
-		return null;
-	}
-
 	public int getClerk() {
 		return 0;
 	}
@@ -632,6 +616,24 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
+	
+
+	public ArrayList<CustomerPO> getAllImportCustomer() {
+		return null;
+	}
+
+	public ArrayList<CustomerPO> getAllExportCustomer() {
+		return null;
+	}
+
+	
+	public ArrayList<CommodityPO> getAllCommodity() {
+		return null;
+	}
+
+	public CommodityPO getCommodity(String name, String id) {
+		return null;
+	}
 
 	public String passImport(ImportPO importPO) {
 		// TODO Auto-generated method stub
