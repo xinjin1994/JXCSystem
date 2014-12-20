@@ -750,7 +750,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public ArrayList<SortPO> getAllSort() throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<SortPO> sort=new ArrayList<SortPO>();
-		int i=0,j=0;
+		int i=0;
 		for(i=0;i<sortList.size();i++){
 			sort.add(sortList.get(i).copy());
 		}
@@ -761,7 +761,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		ArrayList<SortPO> sort=new ArrayList<SortPO>();
 		int i=0,j=0;
 	
-		if(!po.hasSort()){
+		if(po.hasSort()){
 			for(i=0;i<po.sortList.size();i++){
 				sort.add(po.sortList.get(i));
 			

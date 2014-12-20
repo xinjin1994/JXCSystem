@@ -579,6 +579,17 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		return -1;
 	}
 	
+	public ArrayList<CommodityPO> getAllWarnGood(){
+		ArrayList<CommodityPO> po=getAllCommodity();
+		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
+		for(int i=0;i<po.size();i++){
+			if(po.get(i).warn>=po.get(i).getNumber()){
+				array.add(po.get(i));
+			}
+		}
+		return array;
+	}
+	
 	public ArrayList<CommodityPO> getAllCommodity(){
 		
 		try {

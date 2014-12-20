@@ -87,6 +87,8 @@ public interface CommodityblService {
 	//设置库存警戒数量，无须审批
 	public int warn_up(WarnVO vo);
 	
+	public ArrayList<CommodityVO> getAllWarnGood_up();
+	
 	//获得所有分类信息，用于添加与更新商品或分类时分类的选择
 	public ArrayList<SortVO> getAllSort_up();
 	//获得所有可以添加商品的分类

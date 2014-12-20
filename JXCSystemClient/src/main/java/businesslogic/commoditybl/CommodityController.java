@@ -119,6 +119,18 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		return commodity.warn(vo.name,vo.type,vo.number);
 	}
+	
+	public ArrayList<CommodityVO> getAllWarnGood_up(){
+		ArrayList<CommodityPO> po=commodity.getAllWarnGood();
+		ArrayList<CommodityVO> array=new ArrayList<CommodityVO>();
+		CommodityVO vo=null;
+		for(int i=0;i<po.size();i++){
+			vo=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
+			vo.fatherSort=po.get(i).father;
+			array.add(vo);
+		}
+		return array;
+	}
 
 //	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {
 //		// TODO Auto-generated method stub
