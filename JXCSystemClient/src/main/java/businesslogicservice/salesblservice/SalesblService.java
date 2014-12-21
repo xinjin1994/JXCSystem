@@ -120,8 +120,8 @@ public interface SalesblService {
 	// 获得单个商品信息
 	public CommodityVO getCommodity_up(String name, String type);
 
-	// 获得操作员权限
-	public int getClerk_up();
+//	// 获得操作员权限
+//	public int getClerk_up();
 
 	// 获得操作员能修改的最大折扣，注意这里的折扣不包括促销产生的折扣
 	public int getClerkDiscount_up();
