@@ -61,6 +61,9 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		SortPO po1=new SortPO(vo1.name);
 		po1.note=vo1.note;
+		if(vo2==null){
+			return commodity.addSort(po1, null);
+		}
 		SortPO po2=new SortPO(vo2.name);
 		po2.note=vo2.note;
 		return commodity.addSort(po1,po2);

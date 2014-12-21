@@ -24,12 +24,8 @@ import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RemindButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.InvoiceVO;
-<<<<<<< HEAD
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
-=======
-
->>>>>>> origin/master
 
 /**
  * 6 总经理
@@ -41,9 +37,9 @@ public class ManagerPanel extends FatherPanel{
 	private int firstY = 110;
 	private int inter = 54;
 	
-	private MyButton accManage,recManage,invoiceManage,proManage,details,refresh;
+	private MyButton accManage,recManage,invoiceManage,proManage,systemLog,details,refresh;
 	private MyButton approveButton,refuseButton;
-	private MyButton [] buttons = new MyButton[]{ accManage, recManage,invoiceManage,proManage};
+	private MyButton [] buttons = new MyButton[]{ accManage, recManage,invoiceManage,proManage,systemLog};
 	private MyButton back;
 	
 
@@ -58,11 +54,11 @@ public class ManagerPanel extends FatherPanel{
 	private ResultPanelController resController;
 	
 	private String images_ori[] = new String[]{"Image/Manager/button/accManage.png","Image/Manager/button/recManage.png",
-			"Image/Manager/button/invoiceManage.png","Image/Manager/button/proManage.png"};
+			"Image/Manager/button/invoiceManage.png","Image/Manager/button/proManage.png","Image/Manager/button/systemLog.png"};
 	private String images_stop[] = new String[]{"Image/Manager/button/accManage_stop.png","Image/Manager/button/recManage_stop.png",
-			"Image/Manager/button/invoiceManage_stop.png",	"Image/Manager/button/proManage_stop.png"};
+			"Image/Manager/button/invoiceManage_stop.png",	"Image/Manager/button/proManage_stop.png","Image/Manager/button/systemLog_stop.png"};
 	private String images_press_on[] = new String[]{"Image/Manager/button/accManage_press_on.png","Image/Manager/button/recManage_press_on.png",
-			"Image/Manager/button/invoiceManage_press_on.png",	"Image/Manager/button/proManage_press_on.png"};
+			"Image/Manager/button/invoiceManage_press_on.png",	"Image/Manager/button/proManage_press_on.png","Image/Manager/button/systemLog_press_on.png"};
 	
 	private ColorFactory color = new ColorFactory();
 	private InvoiceblService invoiceblService;
@@ -233,6 +229,8 @@ public class ManagerPanel extends FatherPanel{
 				getInvoiceInfo();
 			}else if (e.getSource() == buttons[3]) {
 				getProInfo();
+			}else if(e.getSource() == buttons[4]){
+				
 			}
 			
 		}

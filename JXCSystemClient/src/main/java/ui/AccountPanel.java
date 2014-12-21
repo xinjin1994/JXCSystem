@@ -36,8 +36,8 @@ public class AccountPanel extends FatherPanel{
 	private int inter = 54;
 	
 	public ThirdPanel accountThirdPanel;
-	MyButton accManage,finManage,recManage,invoiceManage,iniManage,saveCheck;
-	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage,saveCheck};
+	MyButton accManage,finManage,recManage,invoiceManage,iniManage,saveCheck,systemLog;
+	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage,saveCheck,systemLog};
 	private MyButton refresh;
 	private MyFrame frame;
 	
@@ -48,15 +48,15 @@ public class AccountPanel extends FatherPanel{
 	private String images_ori[] = new String[]{"Image/Account/button/accManage.png",
 			"Image/Account/button/finManage.png","Image/Account/button/recManage.png",
 			"Image/Account/button/invoiceManage.png","Image/Account/button/iniManage.png",
-			"Image/Account/button/saveCheck.png"};
+			"Image/Account/button/saveCheck.png","Image/Account/button/systemLog.png"};
 	private String images_stop[] = new String[]{"Image/Account/button/accManage_stop.png",
 			"Image/Account/button/finManage_stop.png","Image/Account/button/recManage_stop.png",
 			"Image/Account/button/invoiceManage_stop.png",	"Image/Account/button/iniManage_stop.png",
-			"Image/Account/button/saveCheck_stop.png"};
+			"Image/Account/button/saveCheck_stop.png","Image/Account/button/systemLog_stop.png"};
 	private String images_press_on[] = new String[]{"Image/Account/button/accManage_press_on.png",
 			"Image/Account/button/finManage_press_on.png","Image/Account/button/recManage_press_on.png",
 			"Image/Account/button/invoiceManage_press_on.png",	"Image/Account/button/iniManage_press_on.png",
-			"Image/Account/button/saveCheck_press_on.png"};
+			"Image/Account/button/saveCheck_press_on.png","Image/Account/button/systemLog_press_on.png"};
 	
 	private RefuseButton refuse;
 	private ApproveButton approve;
@@ -214,6 +214,8 @@ public class AccountPanel extends FatherPanel{
 				
 				ArrayList<String> infos = new ArrayList<String>();
 				infos.add("单据编号;单据类型");
+				
+			}else if (e.getSource() == buttons[6]) {
 				
 			}
 		}

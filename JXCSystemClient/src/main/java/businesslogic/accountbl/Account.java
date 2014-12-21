@@ -23,7 +23,7 @@ import dataservice.accountdataservice.AccountDataService;
 public class Account implements businesslogic.financialbl.AccountInfo,
 			businesslogic.initializationlbl.AccountInfo, businesslogic.invoicebl.AccountInfo {
 
-	public AccountDataService account=new AccountDataService_Stub("mainAccount",0);
+	public AccountDataService account;
 	public FinancialInfo financial;
 	public InvoiceInfo invoice;
 	public SalesInfo sales;

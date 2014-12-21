@@ -39,7 +39,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public InvoiceInfo invoice;
 	public SystemlogInfo systemlog;
 	public SalesInfo sales;
-	public CommodityDataService sto=new CommodityDataService_Stub();
+	public CommodityDataService sto;
 	
 	
 	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog,SalesInfo sales){
@@ -224,25 +224,27 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(sort1.getName())){
 					po1=sort.get(i);
-				}else if(sort.get(i).getName().equals(sort2.getName())){
-					po2=sort.get(i);
+				}
+				if(sort2!=null){
+					if(sort.get(i).getName().equals(sort2.getName())){
+						po2=sort.get(i);
+					}
 				}
 			}
 			
 			if(po1!=null){
 				return 3;
 			}
-			if(po2==null){
-				return 4;
-			}
 			
-			if(po2.hasCommodity()){
-				return 10;
+			if(po2!=null){
+				if(po2.hasCommodity()){
+					return 10;
+				}
 			}
 			
 			sort1.father=sort2.getName();
 			
-			if (sto.addSort(sort1,sort2)) {
+			if (sto.addSort(sort1,po2)) {
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -787,7 +789,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<SortPO> array=new ArrayList<SortPO>();
 		ArrayList<SortPO> po=getAllSort();
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
-		po.remove(po.size()-1);
+//		po.remove(po.size()-1);
 		
 		for(int i=0;i<po.size();i++){
 			lin=getSortSon(po.get(i));

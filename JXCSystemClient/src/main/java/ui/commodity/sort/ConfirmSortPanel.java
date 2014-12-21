@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.UIController;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.FontFactory;
 import ui.setting.MyFrame;
@@ -35,7 +36,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		this.commodityAllUIController = controller;
 		
 		resControllerF = new ResultPanelController(frame,this);
-		resControllerS = new ResultPanelController(frame,this);
+		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
 		this.failedAddress = "commodity2";
 		
 		this.sort = sort;
@@ -72,7 +73,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		this.commodityAllUIController = controller;
 		
 		resControllerF = new ResultPanelController(frame,this);
-		resControllerS = new ResultPanelController(frame,this);
+		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
 		this.failedAddress = "commodity2";
 		
 		this.oldSort= oldSort;
@@ -109,7 +110,9 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
+			controller.setTempPanel(this);
 			if(type.equals("add")){
+				System.out.println("123");
 				addSort();
 			}else if(type.equals("del")){
 				delSort();
@@ -147,6 +150,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			resControllerS.succeeded("成功删除分类！", "commodity");
 			break;
 		case 4:
+			
 			resControllerF.failedConfirm("分类不存在！", failedAddress);
 			break;
 		default:
@@ -154,14 +158,19 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		}
 	}
 	private void addSort() {
-		SortVO fatherSortVO = new SortVO(sortBelong);
+		SortVO fatherSortVO = commodityblService.searchSort_up(sortBelong);
+		
 		switch(commodityblService.addSort_up(sort, fatherSortVO)){
+		
 		case 0:
 			resControllerS.succeeded("成功添加分类！", "commodity");
+			break;
 		case 3:
 			resControllerF.failedConfirm("分类不存在！",failedAddress);
+			break;
 		default:
 			resControllerF.failedConfirm("未知错误！", failedAddress);
+			break;
 		}
 	}
 }

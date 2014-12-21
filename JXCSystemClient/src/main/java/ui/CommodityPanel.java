@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 
 import po.PatchPO;
 import junit.framework.Test;
+import businesslogic.commoditybl.Commodity;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
 import ui.commodity.CommodityUIController;
@@ -27,6 +28,7 @@ import ui.setting.SaveTempBills;
 import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RemindButton;
+import vo.CommodityVO;
 import vo.SortVO;
 import vo.bill.PatchVO;
 
@@ -46,6 +48,8 @@ public class CommodityPanel extends FatherPanel{
 	private JLabel remindLabel;
 	
 	private JScrollPane scrollPane;
+	
+	private ArrayList<CommodityVO> warnCom = new ArrayList<CommodityVO>();
 	private String images_ori[] = new String[]{"Image/Commodity/button/comManage.png",
 			"Image/Commodity/button/sortManage.png","Image/Commodity/button/stockManage.png",
 			"Image/Commodity/button/invoiceManage.png","Image/Commodity/button/saveCheck.png"};
@@ -132,6 +136,16 @@ public class CommodityPanel extends FatherPanel{
 		commodityThirdPanel.repaint();
 		this.repaint();
 	}
+	public void setTable(ArrayList<String> info) {
+		commodityThirdPanel.removeAll();
+		showTable = new MyTable();
+		showTable.setColor(color.comColor,color.greyFont, color.comColor,Color.white);
+		showTable.setTable(info);
+		
+		commodityThirdPanel.add(showTable.tablePanel);
+		commodityThirdPanel.repaint();
+		this.repaint();
+	}
 	
 	
 	/**
@@ -145,6 +159,14 @@ public class CommodityPanel extends FatherPanel{
 		warn.addMouseListener(listener);
 		this.repaint();
 	}
+	
+	private boolean checkWarn() {
+		warnCom = commodityblService.getAllWarnGood_up();
+		if(warnCom.size() != 0){
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * 当有新单据要处理时该按钮亮，点击后按钮消失
 	 */
@@ -153,7 +175,6 @@ public class CommodityPanel extends FatherPanel{
 		this.add(newBills);
 		newBills.addMouseListener(listener);
 		this.repaint();
-		
 	}
 	
 	class FirstButtonListener implements MouseListener{
@@ -184,11 +205,25 @@ public class CommodityPanel extends FatherPanel{
 				setTable(infos, bills);
 			}
 			else if(e.getSource() == refresh){
-				setWarn();
-				remind.setButton();
+				if(checkWarn()){
+					setWarn();
+				}
+			
+//				remind.setButton();
 			}else if(e.getSource() == warn){
 				CommodityPanel.this.remove(warn);
 				CommodityPanel.this.repaint();
+				ArrayList<String> infos = new ArrayList<String>();
+				infos.add("商品编号;商品名称;商品型号;库存数量;警戒数量");
+				try {
+					for(int i = 0;i < warnCom.size();i++){
+						CommodityVO temp = warnCom.get(i);
+						infos.add(temp.id+";"+temp.name+";"+temp.type+";"+temp.num+";"+temp.warn+";");
+						setTable(infos);
+					}
+				} catch (Exception e2) {
+
+				}
 			}else if(e.getSource() == newBills){
 				CommodityPanel.this.remove(newBills);
 				CommodityPanel.this.repaint();
@@ -197,6 +232,8 @@ public class CommodityPanel extends FatherPanel{
 
 		
 
+
+	
 
 		public void mouseReleased(MouseEvent e) {
 		}

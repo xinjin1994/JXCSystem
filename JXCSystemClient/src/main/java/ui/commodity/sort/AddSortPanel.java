@@ -46,9 +46,9 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 	}
 	private void setFatherSort() {
 		ArrayList<SortVO> arraySort = commodityblService.getSortSort_up();
-		if(arraySort.size() == 0){
-			resController.failedConfirm("信息不存在！", failedAddress);
-		}else{
+//		if(arraySort.size() == 0){
+//			resController.failedConfirm("信息不存在！", failedAddress);
+//		}else{
 		String roleList[] = new String[arraySort.size()+1];
 		roleList[0] = "";
 		for(int i=0;i<arraySort.size();i++){
@@ -58,7 +58,7 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 		fatherSortBox = new MyComboBox(roleList,253 , 423, 319, 37);
 		fatherSortBox.addActionListener(this);
 		this.add(fatherSortBox);
-		}
+//		}
 	}
 	private void setTextField() {
 		id = new MyTextFieldBorder(254, 218);
@@ -80,11 +80,18 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 	private void setNewSort() {
 		nameString = name.getText();
 		idString = id.getText();
-		if(nameString.equals("")||idString.equals("")){
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+		if(nameString.equals("")){
+			controller.setTempPanel(this);
+			frame.remove(this);
+			resController.failed("存在输入为空！", failedAddress);
 		}else{
 			newSort = new SortVO(nameString);
-			newSort.note = idString;
+			newSort.note = commodityblService.getSortNote_up(newSort);
+			
+//			if(sortString.equals("")){
+//				sortString = "根目录";
+//			}
+			System.out.println(sortString);
 			newSort.fatherSort = sortString;
 			frame.remove(this);
 			commodityAllUIController.confirmSort(newSort,"add",sortString);

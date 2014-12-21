@@ -594,10 +594,10 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean addSort(SortPO po1,SortPO po2) {
 		SortPO po=findSort_true(po1.getName());
-		po2=findSort_true(po2.getName());
 		if(po!=null){
 			return false;
 		}else if(po2!=null){
+			po2=findSort_true(po2.getName());
 			if(po2.hasCommodity()){
 				return false;
 			}
