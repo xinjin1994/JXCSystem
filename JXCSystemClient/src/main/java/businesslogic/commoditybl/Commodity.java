@@ -347,12 +347,52 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	
 	public ArrayList<SortPO> getAllSort(){
 		try {
-			return sto.getAllSort();
+			ArrayList<SortPO> sort=new ArrayList<SortPO>();
+			ArrayList<SortPO> po=sto.getAllSort();
+			ArrayList<SortPO> lin=new ArrayList<SortPO>();
+			SortPO so;
+			
+			for(int i=0;i<po.size();i++){
+				lin=getAllSortSon(po.get(i));
+				for(int j=0;j<lin.size();j++){
+					so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					so.commodityList=lin.get(j).commodityList;
+					sort.add(so);
+				}
+			}
+			
+			return sort;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new ArrayList<SortPO>();
+	}
+	
+	public ArrayList<SortPO> getAllSortSon(SortPO po){
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		SortPO so=new SortPO(po.getName());
+		so.note=po.getNote();
+		so.commodityList=po.commodityList;
+		so.father=po.father;
+		sort.add(so);
+		
+		if(po.hasSort()){
+			for(int i=0;i<po.sortList.size();i++){
+				lin=getAllSortSon(po);
+				for(int j=0;j<lin.size();j++){
+					so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					so.commodityList=lin.get(j).commodityList;
+					sort.add(so);
+				}
+			}
+		}
+		return sort;
 	}
 	
 	public String getSortNote(SortPO po){
