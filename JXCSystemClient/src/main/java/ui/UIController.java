@@ -84,7 +84,7 @@ public class UIController {
 	
 
 	public void AccountPanel() {
-//		frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new AccountAllUIController(this,frame);
 		frame.repaint();
 	}

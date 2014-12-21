@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class AccountPO implements Serializable{
 	public String name;
-	public int money;
+	public double money;
 	
-	public AccountPO(String name,int money){
+	public AccountPO(String name,double money){
 		this.name = name;
 		this.money = money;
 	}
@@ -20,7 +20,7 @@ public class AccountPO implements Serializable{
 		return name;
 	}
 	
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}
 	

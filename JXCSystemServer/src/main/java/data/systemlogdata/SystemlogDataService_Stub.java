@@ -75,22 +75,23 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArrayList<SystemlogPO> get() {
+	public ArrayList<SystemlogPO> get() throws RemoteException {
 		ArrayList<SystemlogPO> po=new ArrayList<SystemlogPO>();
-		for(int i=0;i<po.size();i++){
+		for(int i=0;i<systemlogList.size();i++){
 			po.add(systemlogList.get(i).copy());
 		}
 		return po;
 	}
 
-	public boolean add(SystemlogPO po) {
+	public boolean add(SystemlogPO po) throws RemoteException {
 		SystemlogPO po2=po.copy();
 		po2.setTime(AccountDataService_Stub.getNoteTime());
+		System.out.println("addSystemlog:"+po.getWord());
 		systemlogList.add(po2);
 		return true;
 	}
 
-	public boolean clear() {
+	public boolean clear() throws RemoteException {
 		systemlogList=new ArrayList<SystemlogPO>();
 		return true;
 	}

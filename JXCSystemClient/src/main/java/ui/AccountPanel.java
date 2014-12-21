@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 
 import businesslogic.accountbl.AccountController;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogic.systemlogbl.SystemlogController;
 import businesslogic.userbl.User;
 import businesslogicservice.accountblservice.AccountblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
+import businesslogicservice.systemlogblservice.SystemlogblService;
 import ui.account.AccountUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -25,6 +28,8 @@ import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RefuseButton;
 import ui.setting.resultPanels.ResultPanelController;
+import vo.AccountVO;
+import vo.SystemlogVO;
 import vo.bill.GetVO;
 import vo.bill.PayVO;
 
@@ -65,6 +70,7 @@ public class AccountPanel extends FatherPanel{
 	private ResultPanelController resController;
 	private String failedAddress;
 	
+	private SystemlogblService systemlogblService;
 	private SaveTempBills bills;
 	
 	private ArrayList<PayVO> payDraft = new ArrayList<PayVO>();
@@ -79,11 +85,15 @@ public class AccountPanel extends FatherPanel{
 		this.failedAddress = "account";
 		this.frame = frame;
 		this.accountUIController= accountUIController;
+		
 		refuse = new RefuseButton(this);
 		approve = new ApproveButton(this);
 		invoiceblService = new InvoiceController();
 		accountblService = new AccountController();
+		
+		systemlogblService = new SystemlogController();
 		this.addButton();
+		
 		}
 
 	public void addButton() {
@@ -110,7 +120,9 @@ public class AccountPanel extends FatherPanel{
 		accountThirdPanel.removeAll();
 		showTable = new MyTable();
 		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+//		System.out.println(info.get(1));
 		showTable.setTable(info);
+		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		accountThirdPanel.add(showTable.tablePanel);
 		accountThirdPanel.repaint();
 		this.repaint();
@@ -163,7 +175,19 @@ public class AccountPanel extends FatherPanel{
 	 */
 	private void getAccountInfo() {
 		
-//		ArrayList <String> info = new ArrayList<String>();
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("账户名称;账户余额");
+		ArrayList<AccountVO> accounts = new ArrayList<AccountVO>();
+		accounts = accountblService.getAllAccount_up();
+		try {
+			for(AccountVO temp:accounts){
+				info.add(temp.name+";"+temp.balance);
+			}
+			setTable(info);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 //		info.add("a;b;c;e");
 //		info.add("s,r,t,h");
 //		info.add("w;t;x;h");
@@ -190,15 +214,15 @@ public class AccountPanel extends FatherPanel{
 			}
 		
 			else if(e.getSource() == buttons[0]){
-//				 if (User.duty!= 5) {
-//					 System.out.println("here");
-//					resController = new ResultPanelController(frame, AccountPanel.this);
-//					frame.remove(AccountPanel.this);
-//					resController.failed("您没有账户管理的权限！", failedAddress);
-//					frame.repaint();
-//				 }else {
+				 if (User.duty!= 5) {
+					 System.out.println("here");
+					resController = new ResultPanelController(frame, AccountPanel.this);
+					frame.remove(AccountPanel.this);
+					resController.failed("您没有账户管理的权限！", failedAddress);
+					frame.repaint();
+				 }else {
 					 getAccountInfo();
-//				 }
+				 }
 				
 			}else if(e.getSource() == buttons[1]){
 				getFinanceInfo();
@@ -216,7 +240,20 @@ public class AccountPanel extends FatherPanel{
 				infos.add("单据编号;单据类型");
 				
 			}else if (e.getSource() == buttons[6]) {
-				
+				ArrayList<String> infos = new ArrayList<String>();
+				infos.add("操作时间;操作员;操作内容");
+				ArrayList<SystemlogVO> logs = new ArrayList<SystemlogVO>();
+				logs = systemlogblService.show_up();
+					
+				System.out.println("logs"+logs.size());
+//				try {
+					for(SystemlogVO temp:logs){
+						infos.add(temp.time+";"+temp.operation+";"+temp.word);
+					}
+					setTable(infos);
+//				} catch (Exception e2) {
+//					// TODO: handle exception
+//				}
 			}
 		}
 
