@@ -38,6 +38,10 @@ public class Systemlog implements businesslogic.commoditybl.SystemlogInfo,
 		ArrayList<SystemlogPO> po=new ArrayList<SystemlogPO>();
 		try {
 			po=sys.get();
+			
+			System.out.println("show_up:"+po.size());
+			
+			
 			if (sys.get() != null) {	
 				return po ;
 			}
@@ -54,6 +58,7 @@ public class Systemlog implements businesslogic.commoditybl.SystemlogInfo,
 		SystemlogPO system = new SystemlogPO(User.operator,word);
 		try {
 			if (sys.add(system)) {
+				System.out.println("addSystemlog:"+word);
 				return 0;
 			}
 		} catch (RemoteException e) {

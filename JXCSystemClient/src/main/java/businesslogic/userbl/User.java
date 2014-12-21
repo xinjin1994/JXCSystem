@@ -44,6 +44,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			
 			if (us.addUser(user)) {
 				System.out.println("addUser:"+name+" note:"+note);
+				systemlog.add_up("addUser："+user.getName());
 				return 0;
 			}
 		} catch (RemoteException e) {
