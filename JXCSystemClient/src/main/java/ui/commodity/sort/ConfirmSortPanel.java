@@ -32,6 +32,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	private CommodityblService commodityblService;
 	public ConfirmSortPanel(MyFrame frame, String url, CommodityAllUIController controller,SortVO sort,String type) {
 		super(frame, url, controller);
+		System.out.println("hello");
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		
@@ -90,6 +91,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		name = new MyLabel(255, 323, 271, 42);
 		fatherSort = new MyLabel(255, 442, 271, 42);
 		MyLabel labels[] = new MyLabel[]{sortId,name,fatherSort};
+		sort.note = commodityblService.getSortNote_up(new SortVO(sort.fatherSort));
 		labels[0].setText(sort.note);
 		labels[1].setText(sort.name);
 		labels[2].setText(sort.fatherSort);
@@ -144,12 +146,12 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		}
 	}
 	private void delSort() {
+		System.out.println("成功删除分类！");
 		switch(commodityblService.delSort_up(sort)){
 		case 0:
 			resControllerS.succeeded("成功删除分类！", "commodity");
 			break;
 		case 4:
-			
 			resControllerF.failedConfirm("分类不存在！", failedAddress);
 			break;
 		default:
@@ -157,9 +159,9 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		}
 	}
 	private void addSort() {
-		SortVO fatherSortVO = commodityblService.searchSort_up(sortBelong);
+//		SortVO fatherSortVO = commodityblService.searchSort_up(sortBelong);
 		
-		switch(commodityblService.addSort_up(sort, fatherSortVO)){
+		switch(commodityblService.addSort_up(sort, new SortVO(sortBelong))){
 		
 		case 0:
 			resControllerS.succeeded("成功添加分类！", "commodity");

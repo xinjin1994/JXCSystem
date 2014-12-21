@@ -27,7 +27,7 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 	private MyComboBox fatherSortBox;
 	private MyButton forwardButton;
 
-	private String idString,nameString,sortString;
+	private String nameString,sortString;
 	private String failedAddress;
 	
 	private CommodityblService commodityblService;
@@ -67,7 +67,6 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 		id.setForeground(new ColorFactory().accColor);
 		name.setForeground(new ColorFactory().accColor);
 		
-		this.add(id);
 		this.add(name);
 	}
 	
@@ -79,20 +78,19 @@ public class AddSortPanel extends FatherPanel implements ActionListener{
 	}
 	private void setNewSort() {
 		nameString = name.getText();
-		idString = id.getText();
 		if(nameString.equals("")){
 			controller.setTempPanel(this);
 			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
 		}else{
 			newSort = new SortVO(nameString);
-			newSort.note = commodityblService.getSortNote_up(newSort);
+//			newSort.note = commodityblService.getSortNote_up(newSort);
+			newSort.fatherSort = sortString;
 			
 //			if(sortString.equals("")){
 //				sortString = "根目录";
 //			}
-			System.out.println(sortString);
-			newSort.fatherSort = sortString;
+//			System.out.println(sortString);
 			frame.remove(this);
 			commodityAllUIController.confirmSort(newSort,"add",sortString);
 		}

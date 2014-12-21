@@ -33,9 +33,9 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
-//		this.welcomePanel();
+		this.welcomePanel();
 //		this.CommodityPanel();
-	  	this.AccountPanel();
+//	  	this.AccountPanel();
 
 //		this.SalesManagerPanel();
 
@@ -48,13 +48,13 @@ public class UIController {
 
 	}
 
-	public UIController(String str){
-		this.frame = new MyFrame(); 
-//		this.ManagerPanel();
-		this.CommodityPanel();
-//		this.SalesManagerPanel();
-		
-	}
+//	public UIController(String str){
+//		this.frame = new MyFrame(); 
+////		this.ManagerPanel();
+//		this.CommodityPanel();
+////		this.SalesManagerPanel();
+//		
+//	}
 	public void welcomePanel() {
 		welcomePanel = new WelcomePanel(frame,"Image/welcome.jpg",this);
 		frame.setPanel(welcomePanel);
@@ -97,7 +97,7 @@ public class UIController {
 	
 
 	public void CommodityPanel() {
-//		frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new CommodityAllUIController(this, frame);
 		frame.repaint();
 	}
