@@ -72,7 +72,7 @@ public class UIController {
 	}
 
 	public void SalesManagerPanel() {
-//		frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new SalesUIController(this, frame);
 	}
 	

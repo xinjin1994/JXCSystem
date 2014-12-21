@@ -83,11 +83,11 @@ public class SalesUIController {
 	}
 	
 	public void setCustomer(){
-//		ArrayList<CustomerVO> cusVO = salesblService.getAllCustomer_up();
+		ArrayList<CustomerVO> cusVO = salesblService.getAllCustomer_up();
 		String classification = "进货商";
 		ArrayList<String> cusStr = new ArrayList<String>();
 		cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
-		/*for(int i=0;i<cusVO.size();i++){
+		for(int i=0;i<cusVO.size();i++){
 			CustomerVO customerVO = cusVO.get(i);
 			if (customerVO.classification) {
 				classification = "销售商";
@@ -97,7 +97,7 @@ public class SalesUIController {
 					+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
 					+ customerVO.shouldGet + ";" + ";" + customerVO.person;
 			cusStr.add(item);
-		}*/
+		}
 		setTable(cusStr);
 	}
 	
