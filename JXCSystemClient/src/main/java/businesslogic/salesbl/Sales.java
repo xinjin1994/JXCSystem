@@ -582,10 +582,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public int getClerk() {
-		return 0;
-	}
-
 	public int getDiscount() {
 		return 0;
 	}
