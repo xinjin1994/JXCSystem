@@ -74,6 +74,8 @@ public class AdminPanel extends FatherPanel{
 	public void setTable() {
 		ArrayList<UserVO> user = new ArrayList<UserVO>();
 		ArrayList <String> info = new ArrayList<String>();
+		
+		user = userblService.show_up();
 		info.add("ID;用户名;职位");
 		for(int i=0;i<user.size();i++){
 			String userItem = user.get(i).id+";"+user.get(i).name+";"+user.get(i).duty;
@@ -192,6 +194,7 @@ public class AdminPanel extends FatherPanel{
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getSource() == userButtons[0]){
+				clear();
 				String findInfoS = searchTextField.getText();
 				if(findInfoS.equals("")){
 					frame.remove(AdminPanel.this);
