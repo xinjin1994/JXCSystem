@@ -16,7 +16,7 @@ public class Initialization {
 	public CommodityInfo commodityInfo;
 	public SalesInfo salesInfo;
 	public UserInfo userInfo;
-	public InitializationDataService initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, "10", 10, 10, 10), new CustomerPO("10", "time", 10, false, "operation", "style", "mail", 10, 10, "zip", "plugin"), new AccountPO("zip", 10),new UserPO("123","312",10,"note"));
+	public InitializationDataService initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, "10", 10, 10, 10), new CustomerPO("10", "time", 10, false, "operation", "style", "mail", 10, 10, 10, "zip", "plugin"), new AccountPO("zip", 10),new UserPO("123","312",10,"note"));
 	
 	
 	public int newSystem(ArrayList<CommodityPO> po1,ArrayList<CustomerPO> po2,

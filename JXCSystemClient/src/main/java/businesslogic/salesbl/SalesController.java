@@ -31,7 +31,7 @@ public class SalesController implements SalesblService {
 					.getType(), po.get(i).getLevel(), po.get(i).getName(), po
 					.get(i).getPhone(), po.get(i).getAddress(), po.get(i)
 					.getZip(), po.get(i).getMail(), po.get(i).getAmount(), po
-					.get(i).getMoney(), po.get(i).getClerk());
+					.get(i).getMoneyIn(), po.get(i).getMoneyOut(),po.get(i).getClerk());
 			result.add(vo);
 		}
 		return result;
@@ -42,7 +42,7 @@ public class SalesController implements SalesblService {
 		CustomerPO po = sale.searchExactCustomer(name);
 		CustomerVO result = new CustomerVO(po.getId(), po.getType(),
 				po.getLevel(), po.getName(), po.getPhone(), po.getAddress(),
-				po.getZip(), po.getMail(), po.getAmount(), po.getMoney(),
+				po.getZip(), po.getMail(), po.getAmount(), po.getMoneyIn(),po.getMoneyOut(),
 				po.getClerk());
 		return result;
 	}
@@ -61,7 +61,7 @@ public class SalesController implements SalesblService {
 		importGood.add(importGoodPO);
 		UserPO user = new UserPO(null, null, 0, null);
 		CustomerPO customerPO = new CustomerPO(importMenuVO.supplier, null, 0,
-				false, null, null, null, 0, 0, null, null);
+				false, null, null, null, 0, 0, 0, null, null);
 		ImportPO imp = new ImportPO(customerPO, importGood,
 				importMenuVO.remark, importMenuVO.operator, user.getName(),
 				importMenuVO.warehouse, importMenuVO.total);
@@ -83,7 +83,7 @@ public class SalesController implements SalesblService {
 		importGood.add(importGoodPO);
 		UserPO user = new UserPO(null, null, 0, null); // 这里有问题
 		CustomerPO customerPO = new CustomerPO(importMenuVO.supplier, null, 0,
-				false, null, null, null, 0, 0, null, null); // 这里也有问题
+				false, null, null, null, 0, 0, 0, null, null); // 这里也有问题
 		Import_ReturnPO imp = new Import_ReturnPO(customerPO, importGood,
 				importMenuVO.remark, importMenuVO.operator, user.getName(),
 				importMenuVO.warehouse, importMenuVO.total, null);
@@ -137,7 +137,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerPO> po = sale.getAllCustomer();
 		for (int i = 0; i < po.size(); i++) {
 			customerVO.set(i, new CustomerVO(null, false, i, null, null, null,
-					null, null, i, i, null));
+					null, null, i, i, i, null));
 		}
 		return customerVO;
 	}
@@ -146,7 +146,7 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		CustomerPO po = sale.getCustomer(vo.cusName, vo.id);
 		CustomerVO customer = new CustomerVO(null, false, 0, null, null, null,
-				null, null, 0, 0, null);
+				null, null, 0, 0, 0, null);
 		return customer;
 	}
 
@@ -156,7 +156,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerPO> po = sale.getAllImportCustomer();
 		for (int i = 0; i < po.size(); i++) {
 			customerVO.set(i, new CustomerVO(null, false, i, null, null, null,
-					null, null, i, i, null));
+					null, null, i, i, i, null));
 		}
 		return customerVO;
 	}
@@ -167,7 +167,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerPO> po = sale.getAllExportCustomer();
 		for (int i = 0; i < po.size(); i++) {
 			customerVO.set(i, new CustomerVO(null, false, i, null, null, null,
-					null, null, i, i, null));
+					null, null, i, i, i, null));
 		}
 		return customerVO;
 	}

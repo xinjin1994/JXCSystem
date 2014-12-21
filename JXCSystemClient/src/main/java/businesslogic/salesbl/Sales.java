@@ -55,8 +55,8 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 					customerVO.cusName, customerVO.level,
 					customerVO.classification, customerVO.tel,
 					customerVO.zipCode, customerVO.ezipCode,
-					customerVO.shouldGet, customerVO.mostOwe,
-					customerVO.person, customerVO.address);
+					customerVO.shouldGet,customerVO.shouldPay, customerVO.mostOwe,
+					 customerVO.person, customerVO.address);
 			if (sale.addCustomer(customer)) {
 				systemlog.add_up("AddCustomer:" + customer.getName() + ","
 						+ customer.getId());
@@ -77,7 +77,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			if (customer == null) {
 				return 2;
 			}
-			if (customer.getMoney() != 0) {
+			if ((customer.getMoneyIn() != 0)||(customer.getMoneyOut()!=0)) {
 				return 3;
 			}
 			if (sale.delCustomer(customer)) {
