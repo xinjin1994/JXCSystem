@@ -17,7 +17,6 @@ public class UIController {
 	private AdminPanel admin;
 	private AccountPanel accountPanel; // 财务管理界面
 	private ManagerPanel manager;
-	private SalesPersonPanel salesPerson;
 	
 	
 	static private FatherPanel tempMainPanel,tempPanel,logPanel;
@@ -42,13 +41,20 @@ public class UIController {
 
 //		this.AccountPanel();
 
-//	this.ManagerPanel();
+//	    this.ManagerPanel();
 //		this.SalesManagerPanel();
 
 //		this.AdminPanel();
 
 	}
 
+	public UIController(String str){
+		this.frame = new MyFrame(); 
+//		this.ManagerPanel();
+		this.CommodityPanel();
+//		this.SalesManagerPanel();
+		
+	}
 	public void welcomePanel() {
 		welcomePanel = new WelcomePanel(frame,"Image/welcome.jpg",this);
 		frame.setPanel(welcomePanel);
@@ -66,7 +72,7 @@ public class UIController {
 	}
 
 	public void SalesManagerPanel() {
-		frame.remove(loginPanel);
+//		frame.remove(loginPanel);
 		new SalesUIController(this, frame);
 	}
 	
@@ -84,7 +90,7 @@ public class UIController {
 	}
 
 	public void ManagerPanel() {
-		frame.remove(loginPanel);
+//		frame.remove(loginPanel);
 		new ManagerAllUIController(this, frame);
 		frame.repaint();
 	}
@@ -100,14 +106,6 @@ public class UIController {
 		//强迫症患者帮你们改bug o(╯□╰)o
 		//qiang po zheng huan zhe bang ni men gai bug o(╯□╰)o
 	}
-
-
-	public void SalesPersonPanel() {
-		salesPerson = new SalesPersonPanel(frame,"",this);
-		frame.remove(loginPanel);
-		frame.setPanel(salesPerson);
-	}
-
 	
 	public void setMainPanel(FatherPanel mainPanel){
 		this.tempMainPanel = mainPanel;

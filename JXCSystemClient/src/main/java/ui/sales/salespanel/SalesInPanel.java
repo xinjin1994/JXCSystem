@@ -1,12 +1,14 @@
 package ui.sales.salespanel;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import businesslogic.userbl.User;
 import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
-import ui.sales.impanel.ImBackPanel;
 import ui.sales.impanel.ImInPanel;
 import ui.sales.impanel.MakeSureIm;
 import ui.setting.MyFrame;
@@ -18,6 +20,7 @@ import vo.bill.ExportMenuVO;
 public class SalesInPanel extends ImInPanel{
 
 	MyTextFieldFilled newRemark;
+	SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesInPanel.this);
 	public SalesInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame, url, controller,salesUIController);
 //		this.remove(remark);
@@ -42,8 +45,32 @@ public class SalesInPanel extends ImInPanel{
 		this.add(newRemark);
 		this.add(discount);
 		this.add(voucher);
+		discount.addFocusListener(new disLis());
 	}
 	
+	class disLis implements FocusListener{
+
+		public void focusGained(FocusEvent e) {
+		}
+
+		public void focusLost(FocusEvent e) {
+			double dis = Double.parseDouble(discount.getText());
+			int i = User.duty;
+			if(i == 2){
+				//销售人员
+				if(dis>1000){
+					salesResult.failed("您的权限无法制定此价值的折让！", "export_failed");
+				}
+			}else if(i == 3){
+				//销售经理
+				if(dis>5000){
+					salesResult.failed("您的权限无法制定此价值的折让！", "export_failed");
+				}
+			}
+		}
+		
+	}
+
 	public double getPrice() {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
 		// commodityVO = salesblService.getCommodity_up(goodsNameSelected,
@@ -73,7 +100,6 @@ public class SalesInPanel extends ImInPanel{
 				
 				if(id.getText().equals("")||newRemark.getText().equals("")||supplier.getText().equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
-					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesInPanel.this);
 					salesResult.failed("请重新确认输入信息！", "export_failed");
 				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,

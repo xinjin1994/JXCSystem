@@ -178,6 +178,7 @@ public class ManagerUIController {
 			uiController.setMainPanel(managerPanel);
 			frame.remove(managerPanel);
 			if(event.getSource() == proButtons[0]){
+				uiController.checkPro();
 				if(examine()){
 					uiController.checkPro();
 				}

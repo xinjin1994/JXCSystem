@@ -107,7 +107,6 @@ public class CommodityPanel extends FatherPanel{
 	
 	
 	private void setTree(ArrayList<SortVO> allCom) {
-		System.out.println("lklk");
 		commodityThirdPanel.removeAll();
 		comTree = new MySortTree(allCom);
 //		scrollPane =  new JScrollPane(comTree.tree);
@@ -185,7 +184,7 @@ public class CommodityPanel extends FatherPanel{
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == buttons[0]) {
 //				setTree(commodityblService.getAllSort_up());
-			System.out.println("llkl");
+//			System.out.println("llkl");
 				setTree(new Com().allSorts);
 			}else if(e.getSource() == buttons[1]) {
 				setTree(new Com().allSorts);

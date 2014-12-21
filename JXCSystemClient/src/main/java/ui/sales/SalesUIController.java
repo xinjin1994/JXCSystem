@@ -53,9 +53,9 @@ public class SalesUIController {
 	public SalesUIController(UIController uiController, MyFrame frame) {
 		this.frame = frame;
 		this.uiController = uiController;
-		this.salesManagerPanel = new SalesManagerPanel(frame, "Image/Sales/sales.jpg", uiController, this);
-		salesblService = new SalesController();
 		this.thirdPanel = new ThirdPanel();
+		this.salesManagerPanel = new SalesManagerPanel(frame, "Image/Sales/sales.jpg", uiController, this,thirdPanel);
+		salesblService = new SalesController();
 		salesManagerPanel.add(thirdPanel);
 		this.setSalesPanel();
 		this.setAllPanel();

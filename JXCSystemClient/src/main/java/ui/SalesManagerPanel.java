@@ -3,12 +3,20 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import ui.sales.SalesUIController;
+import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
+import ui.setting.MyTable;
+import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
+import vo.CommodityVO;
+import businesslogic.commoditybl.CommodityController;
+import businesslogicservice.commodityblservice.CommodityblService;
 
 /**
  * 3销售经理
@@ -23,17 +31,27 @@ public class SalesManagerPanel extends FatherPanel {
 	private int firstY = 110;
 	private int inter = 54;
 	
-	private MyButton cusManage, salesManage, importManage;
+	private MyButton cusManage, salesManage, importManage,warn,refresh;
 	private SalesUIController salesController;
 	public MyFrame frame;
 	private MyButton detail, firstBack;
 	private UIController controller;
-
-	public SalesManagerPanel(MyFrame frame, String url, UIController controller, SalesUIController salesController) {
+	private CommodityblService commodityblService;
+	private MyLabel label;
+	private FirstButtonListener listener = new FirstButtonListener();
+	private ArrayList<CommodityVO> commodityVO;
+	private MyTable showTable;
+	private ThirdPanel thirdPanel;
+	private ColorFactory colors = new ColorFactory();
+	
+	public SalesManagerPanel(MyFrame frame, String url, UIController controller, SalesUIController 
+			salesController,ThirdPanel thirdPanel) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.controller = controller;
+		this.thirdPanel = thirdPanel;
 		this.salesController = salesController;
+		commodityblService = new CommodityController();
 		this.addButton();
 	}
 	
@@ -42,20 +60,6 @@ public class SalesManagerPanel extends FatherPanel {
 	public void removeThis(JFrame frame) {
 		frame.remove(this);
 	}
-/*	private void testTable() {
-		ArrayList <String> info = new ArrayList<String>();
-		info.add("a;b;c;e");
-		info.add("s,r,t,h");
-		info.add("w;t;x;h");
-		info.add("gg");
-		MyTable testTable = new MyTable();
-		testTable.setTable(info);
-		testTable.add("a;g;g");
-		testTable.find(1, 2);
-		testTable.del(3);
-		
-	}*/
-
 
 	public void addButton() {
 
@@ -69,16 +73,33 @@ public class SalesManagerPanel extends FatherPanel {
 				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
 		firstBack = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
 				"Image/Sales/Sales_image/返回_press_on.png");
+		refresh = new MyButton("Image/refresh.png",70,555,"Image/refresh_stop.png","Image/refresh_stop.png");
+		this.add(refresh);
 		this.add(detail);
 		this.add(firstBack);
 		this.add(cusManage);
 		this.add(salesManage);
 		this.add(importManage);
-		FirstButtonListener listener = new FirstButtonListener();
 		firstBack.addMouseListener(listener);
 		cusManage.addMouseListener(listener);
 		salesManage.addMouseListener(listener);
 		importManage.addMouseListener(listener);
+		refresh.addMouseListener(listener);
+	}
+	
+	public void addWarn(){
+		warn = new MyButton("Image/Commodity/button/warn.png",26,549,"Image/Commodity/button/warn.png",
+				"Image/Commodity/button/warn.png");
+		this.add(warn);
+		warn.addMouseListener(listener);
+	}
+	
+	private void setTable(ArrayList<String> info){
+		showTable = new MyTable();
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setTable(info);
+		thirdPanel.add(MyTable.tablePanel);
+		salesController.backPanel(this);
 	}
 	
 	class FirstButtonListener implements MouseListener{
@@ -88,7 +109,25 @@ public class SalesManagerPanel extends FatherPanel {
 				frame.remove(SalesManagerPanel.this);
 				controller.backLoginPanel();
 				frame.repaint();
-				
+			}else if(e.getSource() == refresh){
+				/*commodityVO = commodityblService.getAllWarnGood_up();
+				if(commodityVO.size() == 0){
+				}else{
+					addWarn();
+				}*/
+				addWarn();
+				SalesManagerPanel.this.repaint();
+			}else if(e.getSource() == warn){
+				ArrayList<String> commodityStr = new ArrayList<String>();
+				commodityStr.add("商品编号;商品名称;商品型号;库存数量;警戒数量");
+				/*for(int i=0;i<commodityVO.size();i++){
+					CommodityVO commodityItem = commodityVO.get(i);
+					String item = commodityItem.id+";"+commodityItem.name+";"+commodityItem.type+
+				";"+commodityItem.num+";"+commodityItem.warn;
+					commodityStr.add(item);
+				}*/
+				thirdPanel.removeAll();
+				setTable(commodityStr);
 			}
 		}
 

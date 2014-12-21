@@ -1,5 +1,7 @@
 package ui.sales.impanel;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -7,8 +9,10 @@ import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
 import ui.sales.cuspanel.AddCusPanel;
+import ui.sales.impanel.ImInPanel.FocusAdapter;
 import ui.setting.MyFrame;
 import ui.setting.Button.MyButton;
+import ui.setting.TextField.MyTextFieldTrans;
 import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.SalesController;
@@ -16,8 +20,10 @@ import businesslogicservice.salesblservice.SalesblService;
 
 public class ImBackPanel extends ImInPanel {
 
+	SalesblService salesblService;
 	public ImBackPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame, url, controller, salesUIController);
+		salesblService = new SalesController();
 	}
 
 	public void addButton() {
@@ -31,6 +37,33 @@ public class ImBackPanel extends ImInPanel {
 		forward.addMouseListener(new MouListener());
 	}
 
+	public void addNum() {
+		goodsNum = new MyTextFieldTrans(488, 334, 237, 31);
+		this.add(goodsNum);
+		goodsNum.addFocusListener(new FocusAdapter());
+	}
+
+	class FocusAdapter implements FocusListener {
+
+		public void focusGained(FocusEvent e) {
+			goodsTotal.setText("");
+		}
+
+		public void focusLost(FocusEvent e) {
+			try {
+				num = Integer.parseInt(goodsNum.getText());
+				if (num < 0 || num == 0||num>salesblService.getImport_ReturnMaxNumber_up("")) {
+					failLabel.setText("请正确输入信息!");
+				} else {
+					getTotalPrice();
+				}
+			} catch (Exception e2) {
+				failLabel.setText("请正确输入信息!");
+			}
+		}
+
+	}
+	
 	class MouListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {

@@ -1,10 +1,9 @@
 package ui.manager;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 import ui.FatherPanel;
-import ui.UIController;
+import ui.setting.FontFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import vo.promotion.DiscountVO;
@@ -133,6 +132,8 @@ public class ProDetailPanel extends FatherPanel{
 		timeBeginLabel = new MyLabel(87,224, 112, 42);
 		timeEndLabel = new MyLabel(200, 224, 112, 42);
 		
+		timeBeginLabel.setFont(new FontFactory(14).font);
+		timeEndLabel.setFont(new FontFactory(14).font);
 		timeBeginLabel.setText(timeBegin);
 		timeEndLabel.setText(timeEnd);
 		

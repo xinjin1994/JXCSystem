@@ -60,7 +60,8 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 		forwardButton.setActionCommand("gift");
 	}
 	protected void back() {
-		uiController.setBack_third(this);
+		System.out.println("here");
+		super.uiController.setBack_third(this);
 	}
 	protected void init(){
 		super.init();

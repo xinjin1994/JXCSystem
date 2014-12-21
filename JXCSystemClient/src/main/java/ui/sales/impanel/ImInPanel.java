@@ -29,7 +29,7 @@ public class ImInPanel extends FatherPanel {
 	protected MyComboBox goodsName, goodsType;
 	protected MyTextFieldFilled person, operator;
 	protected MyButton back, forward;
-	protected MyLabel goodsID, id,failLabel;
+	protected MyLabel goodsID, id, failLabel;
 	protected SalesblService salesblService;
 	protected CommodityVO commodityVO;
 	protected int num;
@@ -46,19 +46,21 @@ public class ImInPanel extends FatherPanel {
 		this.controller = controller;
 		buttonListener = new ButtonListener();
 		salesblService = new SalesController();
-//		this.addTextField();
-//		this.addButton();
-//		this.addCombox();
-//		this.addID();
+		// this.addTextField();
+		// this.addButton();
+		// this.addCombox();
+		// this.addID();
 		this.addLabel();
 		this.addTextField();
 		this.addButton();
 		this.addCombox();
 		this.addID();
+		this.addNum();
 	}
 
 	public void addCombox() {
-//		ArrayList<CommodityVO> comVOArray = salesblService.getAllCommodity_up();
+		// ArrayList<CommodityVO> comVOArray =
+		// salesblService.getAllCommodity_up();
 		// String []commodityName = new String[comVOArray.size()];
 		// for(int i=0;i<comVOArray.size();i++){
 		// commodityName[i] =comVOArray.get(i).name;
@@ -122,7 +124,7 @@ public class ImInPanel extends FatherPanel {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
 		// commodityVO = salesblService.getCommodity_up(goodsNameSelected,
 		// goodsTypeSelected);
-//		 goodsPrice.setText(commodityVO.inValue+"");
+		// goodsPrice.setText(commodityVO.inValue+"");
 		goodsPrice.setText("20");
 		this.add(goodsPrice);
 		// price = commodityVO.inValue;
@@ -143,7 +145,6 @@ public class ImInPanel extends FatherPanel {
 		// discount = new MyTextFieldFilled(235, 421, 91, 37);
 		// voucher = new MyTextFieldFilled(235, 500, 91, 27);
 		goodsID = new MyLabel(488, 211, 237, 31);
-		goodsNum = new MyTextFieldTrans(488, 334, 237, 31);
 		person = new MyTextFieldFilled(408, 481, 147, 36);
 		operator = new MyTextFieldFilled(576, 481, 147, 36);
 		goodsTotal = new MyTextFieldTrans(488, 375, 237, 31);
@@ -153,9 +154,13 @@ public class ImInPanel extends FatherPanel {
 		// this.add(discount);
 		// this.add(voucher);
 		this.add(goodsID);
-		this.add(goodsNum);
 		this.add(person);
 		this.add(operator);
+	}
+
+	public void addNum() {
+		goodsNum = new MyTextFieldTrans(488, 334, 237, 31);
+		this.add(goodsNum);
 		goodsNum.addFocusListener(new FocusAdapter());
 	}
 
@@ -166,41 +171,48 @@ public class ImInPanel extends FatherPanel {
 		}
 
 		public void focusLost(FocusEvent e) {
-			try{
-			num = Integer.parseInt(goodsNum.getText());
-			getTotalPrice();
-			}catch(Exception e2){
+			try {
+				num = Integer.parseInt(goodsNum.getText());
+				if (num < 0 || num == 0) {
+					failLabel.setText("请正确输入信息!");
+				} else {
+					getTotalPrice();
+				}
+			} catch (Exception e2) {
 				failLabel.setText("请正确输入信息!");
 			}
 		}
 
 	}
+
 	public void addLabel() {
 		failLabel = new MyLabel(488, 530, 200, 35);
 		this.add(failLabel);
 	}
-	
+
 	class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(ImInPanel.this);
 			} else if (e.getSource() == forward) {
-			
-				if(id.getText().equals("")||remark.getText().equals("")||supplier.getText().equals("")||
-						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
-					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ImInPanel.this);
+
+				if (id.getText().equals("") || remark.getText().equals("") || supplier.getText().equals("")
+						|| warehouse.getText().equals("") || person.getText().equals("")
+						|| operator.getText().equals("")) {
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
 					salesResult.failed("请重新确认输入信息！", "import_failed");
-				}else{
-				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
-						goodsTypeSelected, num, price, totalPriceText, remark.getText());
-				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
-						warehouse.getText(), commodityListVO, 2);
-	
-				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg", controller,
-						importMenuVO, commodityListVO, person.getText(), operator.getText(), ImInPanel.this,salesUIController);
-				frame.remove(ImInPanel.this);
-				frame.setPanel(makeSureIm);
+				} else {
+					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+							goodsTypeSelected, num, price, totalPriceText, remark.getText());
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+							warehouse.getText(), commodityListVO, 2);
+
+					MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg",
+							controller, importMenuVO, commodityListVO, person.getText(), operator.getText(),
+							ImInPanel.this, salesUIController);
+					frame.remove(ImInPanel.this);
+					frame.setPanel(makeSureIm);
 				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {
