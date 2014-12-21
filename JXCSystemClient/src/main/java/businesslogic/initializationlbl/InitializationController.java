@@ -37,7 +37,7 @@ public class InitializationController implements InitializationblService{
 		}
 		for(i=0;i<vo2.size();i++){
 			CustomerPO po22=new CustomerPO(vo2.get(i).id, vo2.get(i).cusName,vo2.get(i).level,false,
-					vo2.get(i).tel, vo2.get(i).zipCode, "mail", 0, vo2.get(i).mostOwe,
+					vo2.get(i).tel, vo2.get(i).zipCode, "mail",vo2.get(i).shouldGet, vo2.get(i).shouldPay, vo2.get(i).mostOwe,
 					vo2.get(i).person, vo2.get(i).address);
 			po2.add(po22);
 		}

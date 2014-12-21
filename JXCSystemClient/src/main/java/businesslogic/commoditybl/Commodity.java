@@ -350,15 +350,16 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			ArrayList<SortPO> sort=new ArrayList<SortPO>();
 			ArrayList<SortPO> po=sto.getAllSort();
 			ArrayList<SortPO> lin=new ArrayList<SortPO>();
-			SortPO so;
 			
 			for(int i=0;i<po.size();i++){
 				lin=getAllSortSon(po.get(i));
 				for(int j=0;j<lin.size();j++){
-					so=new SortPO(lin.get(j).getName());
+					SortPO so=new SortPO(lin.get(j).getName());
 					so.note=lin.get(j).getNote();
 					so.father=lin.get(j).father;
+					so.sortList=lin.get(j).sortList;
 					so.commodityList=lin.get(j).commodityList;
+					System.out.println("getAllSort:Note:"+so.note);
 					sort.add(so);
 				}
 			}
@@ -377,21 +378,23 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		SortPO so=new SortPO(po.getName());
 		so.note=po.getNote();
 		so.commodityList=po.commodityList;
+		so.sortList=po.sortList;
 		so.father=po.father;
 		sort.add(so);
 		
-		if(po.hasSort()){
+//		if(po.hasSort()){
 			for(int i=0;i<po.sortList.size();i++){
-				lin=getAllSortSon(po);
+				lin=getAllSortSon(po.sortList.get(i));
 				for(int j=0;j<lin.size();j++){
 					so=new SortPO(lin.get(j).getName());
 					so.note=lin.get(j).getNote();
 					so.father=lin.get(j).father;
+					so.sortList=po.sortList;
 					so.commodityList=lin.get(j).commodityList;
 					sort.add(so);
 				}
 			}
-		}
+//		}
 		return sort;
 	}
 	

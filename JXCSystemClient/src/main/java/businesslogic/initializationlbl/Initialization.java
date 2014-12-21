@@ -28,7 +28,7 @@ public class Initialization {
 			addCommodity(po1.get(i).getName(),po1.get(i).getType(),po1.get(i).getIn_price(),po1.get(i).getOut_price());
 		}
 		for(i=0;i<po2.size();i++){
-			addCustomer(po2.get(i).getName(),po2.get(i).getPhone(),po2.get(i).getLevel(),(int) po2.get(i).getMoney());
+			addCustomer(po2.get(i).getName(),po2.get(i).getPhone(),po2.get(i).getLevel(), po2.get(i).getMoneyIn()-po2.get(i).getMoneyOut());
 		}
 		for(i=0;i<po3.size();i++){
 			addAccount(po3.get(i).getName(),po3.get(i).getMoney());
@@ -51,7 +51,7 @@ public class Initialization {
 		return commodityInfo.addCommodity(name, type, d, e);
 	}
 
-	public String addCustomer(String name, String phone, int level, int money) {
+	public String addCustomer(String name, String phone, int level, double money) {
 		// TODO Auto-generated method stub
 		return salesInfo.addCustomer(name, level, phone, money);
 	}
@@ -68,7 +68,7 @@ public class Initialization {
 
 	public String showInformation() {
 		// TODO Auto-generated method stub
-		initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, "10", 10, 10, 10), new CustomerPO("10", "time", 10,false, "operation",  "style", "mail", 10, 10, "zip", "plugin"), new AccountPO("zip", 10),new UserPO("132","12312",10,"note"));
+		initialization=new InitializationDataService_Stub(new CommodityPO(true, "time", "operation", 10, 10, "10", 10, 10, 10), new CustomerPO("10", "time", 10,false, "operation",  "style", "mail", 10, 10, 10, "zip", "plugin"), new AccountPO("zip", 10),new UserPO("132","12312",10,"note"));
 		try {
 			if(initialization.getInfomation()!=null){
 				return "�ɹ�";

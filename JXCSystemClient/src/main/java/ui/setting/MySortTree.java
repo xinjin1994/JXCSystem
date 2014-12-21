@@ -52,9 +52,11 @@ public class MySortTree {
 			System.out.println(tempIDs[0]);
 			if(tempIDs.length == 2){
 				SortID temp = new SortID("",tempIDs[1],sort.name,sort.commodity);
+//				System.out.println("add 2 Sort");
 				fatherSorts.add(temp);
 			}else if(tempIDs.length == 3){
 				SortID temp = new SortID(tempIDs[1], tempIDs[2], sort.name,sort.commodity);
+//				System.out.println("add 3 Sort");
 				allSortsIds.add(temp);
 			}
 		}
@@ -123,22 +125,22 @@ public class MySortTree {
 	
 	
 	private void setSort(SortID fatSort) {
-		if(fatSort.commodities!=null){
+		if(fatSort.commodities!=null&&(fatSort.commodities.size()!=0)){
 			addCommodities(fatSort);
-		}else{
+		}
 			DefaultMutableTreeNode fatherNode = fatSort.treeNode;
 			String node = fatSort.node;
 			for(SortID tempSortSon:allSortsIds){
 				
 				if(tempSortSon.fatherNode.equals(node)){
 					DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(tempSortSon.name);
-					tempSortSon.setNode(sonNode);
 					treeModel.insertNodeInto(sonNode,fatherNode, fatherNode.getChildCount());
+					tempSortSon.setNode(sonNode);
 					temp = tempSortSon;
 					setSort(temp);
 				}
 			}
-		}
+		
 
 
 //		for(SortID tempSortFather:fatherSorts){

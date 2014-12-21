@@ -185,10 +185,10 @@ public class CommodityController implements CommodityblService{
 			}
 		}
 		
-		for(i=0;i<po.sortList.size();i++){
-			SortVO so=getMulSort(po.sortList.get(i));
-			vo.sortList.add(so);
-		}
+//		for(i=0;i<po.sortList.size();i++){
+//			SortVO so=getMulSort(po.sortList.get(i));
+//			vo.sortList.add(so);
+//		}
 		return vo;
 	}
 

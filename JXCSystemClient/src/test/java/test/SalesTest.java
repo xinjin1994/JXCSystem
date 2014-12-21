@@ -42,7 +42,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockUpdate);
 		assertEquals("�ɹ�", sale.updateCustomer(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, "clerk"), null));
+				"mail", null, null, 10, 0, 0, "clerk"), null));
 	}
 
 	@Test

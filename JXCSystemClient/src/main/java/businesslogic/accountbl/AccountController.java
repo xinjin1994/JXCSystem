@@ -136,7 +136,7 @@ public class AccountController implements AccountblService{
 		ArrayList<CustomerVO> vo=new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po=account.getAllCustomer();
 		for(int i=0;i<po.size();i++){
-			CustomerVO cus=new CustomerVO(po.get(i).getId(),po.get(i).getType(),po.get(i).getLevel(),po.get(i).getName(),po.get(i).getPhone(),po.get(i).getAddress(),po.get(i).getZip(),po.get(i).getMail(),po.get(i).getAmount(),po.get(i).getMoney(),po.get(i).getClerk());
+			CustomerVO cus=new CustomerVO(po.get(i).getId(),po.get(i).getType(),po.get(i).getLevel(),po.get(i).getName(),po.get(i).getPhone(),po.get(i).getAddress(),po.get(i).getZip(),po.get(i).getMail(),po.get(i).getAmount(),po.get(i).getMoneyIn(),po.get(i).getMoneyOut(),po.get(i).getClerk());
 			vo.add(cus);
 		}
 		return vo;
