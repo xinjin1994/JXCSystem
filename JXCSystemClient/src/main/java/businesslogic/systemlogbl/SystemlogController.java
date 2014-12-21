@@ -2,6 +2,7 @@ package businesslogic.systemlogbl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.SystemlogPO;
 import vo.SystemlogVO;
 import businesslogicservice.systemlogblservice.SystemlogblService;
@@ -9,6 +10,10 @@ import businesslogicservice.systemlogblservice.SystemlogblService;
 public class SystemlogController implements SystemlogblService{
 	
 	public Systemlog systemlog=new Systemlog();
+	
+	public SystemlogController(){
+		systemlog=ClientStart.systemlog;
+	}
 
 	public ArrayList<SystemlogVO> show_up() {
 		// TODO Auto-generated method stub

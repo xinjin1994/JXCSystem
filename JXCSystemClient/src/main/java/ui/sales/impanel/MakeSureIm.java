@@ -52,7 +52,8 @@ public class MakeSureIm extends FatherPanel {
 		addLabel();
 		setLabel();
 	}
-
+	
+	
 	public MakeSureIm(MyFrame frame, String url, UIController controller, ImportMenuVO importMenuVO,
 			CommodityListVO commodityListVO, String personLabel, String operatorLabel, ImBackPanel imBackPanel,
 			SalesUIController salesUIController) {

@@ -123,10 +123,9 @@ public class LoginPanel extends FatherPanel {
 		public void actionPerformed(ActionEvent e) {
 			
 			UserblService userbl = new UserController();
-			int identity = userbl.login_up(userText, passwordText);
-			identity = 3;
 			userText = user.getText();
 			passwordText = new String(password.getPassword());
+			int identity = userbl.login_up(userText, passwordText);
 			switch (identity) {
 			case 0:
 				controller.AdminPanel();
@@ -135,15 +134,16 @@ public class LoginPanel extends FatherPanel {
 				controller.CommodityPanel();;
 				break;
 			case 2:
+				controller.SalesManagerPanel();
 				break;
 			case 3:
 				controller.SalesManagerPanel();
 				break;
 			case 4:
-				controller.FinPersonPanel();
+				controller.AccountPanel();
 				break;
 			case 5:
-				controller.FinManagerPanel();
+				controller.AccountPanel();
 				break;
 			case 6:
 				controller.ManagerPanel();
@@ -152,8 +152,9 @@ public class LoginPanel extends FatherPanel {
 				// 登陆失败
 				// System.out.println("hello");
 				addFailure();
-
 			}
+			user.setText("");
+			password.setText("");
 
 		}
 

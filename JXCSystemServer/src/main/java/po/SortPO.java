@@ -9,7 +9,7 @@ public class SortPO implements Serializable{
 	
 	public String father;
 	
-	ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
+	public ArrayList<CommodityPO> commodityList=new ArrayList<CommodityPO>();
 	public ArrayList<SortPO> sortList=new ArrayList<SortPO>();
 	
 	public boolean hasSort(){
@@ -33,6 +33,7 @@ public class SortPO implements Serializable{
 	public SortPO copy(){
 		SortPO po=new SortPO(name);
 		po.note=note;
+		po.father=father;
 		ArrayList<CommodityPO> array;
 		if(commodityList!=null){
 			array=new ArrayList<CommodityPO>();
@@ -92,7 +93,7 @@ public class SortPO implements Serializable{
 			return false;
 		}else{
 			SortPO po1=findSort_true(po.getName());
-			if(po1!=null&&!po1.hasCommodity()){
+			if(po1!=null&&!(po1.hasCommodity()||po1.hasSort())){
 				sortList.remove(po1);
 				return true;
 			}else {
@@ -109,6 +110,24 @@ public class SortPO implements Serializable{
 			for(i=0;i<sortList.size();i++){
 				if(sortList.get(i).getName().equals(name)){
 					return sortList.get(i);
+				}
+			}
+		}
+		return null;
+	}
+	
+	public SortPO findSort_In(String name){
+		int i=0;
+		if(hasCommodity()){
+			return null;
+		}else{
+			for(i=0;i<sortList.size();i++){
+				if(sortList.get(i).getName().equals(name)){
+					return sortList.get(i);
+				}else{
+					if(sortList.get(i).findSort_true(name)!=null){
+						return sortList.get(i).findSort_true(name);
+					}
 				}
 			}
 		}
@@ -146,13 +165,13 @@ public class SortPO implements Serializable{
 				}
 			}
 		}
-		if(hasSort()){
-			for(i=0;i<sortList.size();i++){
-				if(sortList.get(i).delCommodity(po)){
-					return true;
-				}
-			}
-		}
+//		if(hasSort()){
+//			for(i=0;i<sortList.size();i++){
+//				if(sortList.get(i).delCommodity(po)){
+//					return true;
+//				}
+//			}
+//		}
 		return false;
 	}
 	
@@ -160,6 +179,20 @@ public class SortPO implements Serializable{
 		return note;
 	}
 	
+	public ArrayList<CommodityPO> getAllCommodity(){
+		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
+		int i=0;
+		for(i=0;i<commodityList.size();i++){
+			array.add(commodityList.get(i).copy());
+		}
+		for(i=0;i<sortList.size();i++){
+			ArrayList<CommodityPO> lin=sortList.get(i).getAllCommodity();
+			for(int j=0;j<lin.size();j++){
+				array.add(lin.get(j).copy());
+			}
+		}
+		return array;
+	}
 	
 
 }

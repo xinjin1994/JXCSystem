@@ -2,6 +2,7 @@ package businesslogic.promotionbl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.DiscountPO;
 import po.ProGiftPO;
 import po.VoucherPO;
@@ -14,6 +15,10 @@ import businesslogicservice.promotionblservice.PromotionblService;
 public class PromotionController implements PromotionblService{
 	
 	public Promotion promotion=new Promotion();
+	
+	public PromotionController(){
+		promotion=ClientStart.promotion;
+	}
 
 	public int makeDiscount_up(DiscountVO vo) {
 		// TODO Auto-generated method stub

@@ -73,12 +73,14 @@ public class AdminPanel extends FatherPanel{
 	 */
 	public void setTable() {
 		ArrayList<UserVO> user = new ArrayList<UserVO>();
+		user = userblService.show_up();
 		ArrayList <String> info = new ArrayList<String>();
 		
 		user = userblService.show_up();
 		info.add("ID;用户名;职位");
 		for(int i=0;i<user.size();i++){
-			String userItem = user.get(i).id+";"+user.get(i).name+";"+user.get(i).duty;
+			
+			String userItem = user.get(i).id+";"+user.get(i).name+";"+checkDuty(user.get(i).duty);
 			info.add(userItem);
 		}
 		
@@ -109,6 +111,38 @@ public class AdminPanel extends FatherPanel{
 		}
 		
 	}
+	
+	private String checkDuty(int i){
+		String userDuty = "";
+		switch(i){
+		case 0:
+			userDuty = "管理员";
+			break;
+		case 1:
+			userDuty = "库存人员";
+			break;
+		case 2:
+			userDuty = "销售人员";
+			break;
+		case 3:
+			userDuty = "销售经理";
+			break;
+		case 4:
+			userDuty = "财务人员";
+			break;
+		case 5:
+			userDuty = "财务经理";
+			break;
+		case 6:
+			userDuty = "总经理";
+			break;
+		default:
+			userDuty = "";
+			break;
+		}
+		return userDuty;
+	}
+	
 	private void setButtons() {
 		userButtons[0] = new MyButton(image_ori[0],288,99,image_stop[0],image_stop[0]);//search
 		userButtons[1] = new MyButton(image_ori[1], 15, 158, image_stop[1], image_stop[1]);//add
@@ -145,32 +179,7 @@ public class AdminPanel extends FatherPanel{
 			resController.failedConfirm("用户不存在！", "user");
 			frame.repaint();
 		}else{
-		switch(user.duty){
-		case 0:
-			userDuty = "管理员";
-			break;
-		case 1:
-			userDuty = "库存人员";
-			break;
-		case 2:
-			userDuty = "销售人员";
-			break;
-		case 3:
-			userDuty = "销售经理";
-			break;
-		case 4:
-			userDuty = "财务人员";
-			break;
-		case 5:
-			userDuty = "财务经理";
-			break;
-		case 6:
-			userDuty = "总经理";
-			break;
-		default:
-			userDuty = "";
-			break;
-		}
+		userDuty = checkDuty(user.duty);
 		infoLabels[0].setText(user.id);
 		infoLabels[1].setText(user.name);
 		infoLabels[2].setText(userDuty);
@@ -202,11 +211,14 @@ public class AdminPanel extends FatherPanel{
 					resController.failedConfirm("请输入要搜索的用户名称或编号！","user");
 					frame.repaint();
 				}else{
-					
 					searchTextField.setText("");
+					if(userblService.searchUser_up(findInfoS).size() == 0){
+						resController.failedConfirm("不存在您要查找的用户！","user");
+					}else{
 					UserVO user = userblService.searchUser_up(findInfoS).get(0);
 					//				UserVO user = new UserVO("a","v","c",-1);
 					setInfoLabel(user);
+					}
 				}
 				//根据此信息寻找，级如果在下方详细信息中显示,将参数UserVo传给setInfoLabel方法
 			}else if(e.getSource() == userButtons[1]){

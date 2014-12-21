@@ -2,6 +2,7 @@ package businesslogic.commoditybl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.CommodityPO;
 import po.PatchPO;
 import po.SortPO;
@@ -17,6 +18,10 @@ import businesslogicservice.commodityblservice.CommodityblService;
 public class CommodityController implements CommodityblService{
 
 	public Commodity commodity=new Commodity();
+	
+	public CommodityController(){
+		commodity=ClientStart.commodity;
+	}
 	
 	public int addCommodity_up(CommodityVO vo1,SortVO vo2) {
 		// TODO Auto-generated method stub
@@ -34,7 +39,7 @@ public class CommodityController implements CommodityblService{
 	public int updateCommodity_up(CommodityVO vo1,CommodityVO vo2) {
 		// TODO Auto-generated method stub
 		CommodityPO po1=new CommodityPO(vo1.name,vo1.type);
-		CommodityPO po2=new CommodityPO(vo1.name,vo1.type,vo2.inValue,vo2.outValue);
+		CommodityPO po2=new CommodityPO(null, vo1.name,vo1.type,vo2.inValue,vo2.outValue, null, 0, 0, 0);
 		return commodity.updateCommodity(po1, po2);
 	}
 
@@ -113,6 +118,18 @@ public class CommodityController implements CommodityblService{
 	public int warn_up(WarnVO vo) {
 		// TODO Auto-generated method stub
 		return commodity.warn(vo.name,vo.type,vo.number);
+	}
+	
+	public ArrayList<CommodityVO> getAllWarnGood_up(){
+		ArrayList<CommodityPO> po=commodity.getAllWarnGood();
+		ArrayList<CommodityVO> array=new ArrayList<CommodityVO>();
+		CommodityVO vo=null;
+		for(int i=0;i<po.size();i++){
+			vo=new CommodityVO(po.get(i).getNote(), po.get(i).getName(), po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i).getRecent_in_price(), po.get(i).getRecent_out_price(),po.get(i).warn);
+			vo.fatherSort=po.get(i).father;
+			array.add(vo);
+		}
+		return array;
 	}
 
 //	public ArrayList<CommodityVO> searchAccurateCommodity_up(CommodityVO vo) {

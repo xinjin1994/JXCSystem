@@ -2,6 +2,7 @@ package businesslogic.financialbl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.AllBillPO;
 import po.CommodityPO;
 import po.ExportPO;
@@ -37,8 +38,14 @@ import businesslogicservice.financialblservice.FinancialblService;
 
 public class FinancialController implements FinancialblService{
 	
-	public Financial financial=new Financial();
 
+	
+	public Financial financial=new Financial();
+	
+	public FinancialController(){
+		financial=ClientStart.financial;
+	}
+	
 	public ArrayList<SalesDetailVO> saleList_up(String time1, String time2, String good_name,
 			String good_type, String customer_name, String clerk, String warehouse) {
 		// TODO Auto-generated method stub

@@ -12,6 +12,7 @@ public class ExportMenuVO extends InvoiceVO{
 	public double voucherPrice;
 	public double afterValue;
 	String remark;
+	public String id,operator,time;
 	
 	public ExportMenuVO(String id,String cusName,String salesMan,String operator,String warehouse,
 			CommodityListVO commodityList,double beforeValue,double discount,double voucherPrice,
@@ -27,6 +28,9 @@ public class ExportMenuVO extends InvoiceVO{
 		this.voucherPrice=voucherPrice;
 		this.afterValue=afterValue;
 		this.remark=remark;
+		this.id = id;
+		this.operator = operator;
+		this.time = time;
 	}
 	// CommodityListVO(String id, String name, String type, int num, double price(折让前总价), double total, String remark)
 	public ExportMenuVO(String note,String cusName,String salesMan,String warehouse,

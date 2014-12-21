@@ -25,8 +25,7 @@ public class SalesTest {
 		MockAddCustomer mockAdd = new MockAddCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockAdd);
-		assertEquals("�ɹ�", sale.addCustomer_up(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, "clerk")));
+		assertEquals("�ɹ�", sale.addCustomer(null));
 	}
 
 	@Test
@@ -34,8 +33,7 @@ public class SalesTest {
 		MockDelCustomer mockDel = new MockDelCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockDel);
-		assertEquals("�ɹ�", sale.delCustomer_up(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, "clerk")));
+		assertEquals("�ɹ�", sale.delCustomer(null));
 	}
 
 	@Test
@@ -52,8 +50,7 @@ public class SalesTest {
 		MockFindCustomer mockFind = new MockFindCustomer();
 		Sales sale = new Sales();
 		sale.setSale(mockFind);
-		assertEquals("�ɹ�", sale.searchCustomer(new CustomerVO("string", false, 10, "phone", "zip",
-				"mail", null, null, 10, 0, "clerk")));
+		assertEquals("�ɹ�", sale.searchFuzzyCustomer(null));
 	}
 
 	@Test
@@ -63,7 +60,7 @@ public class SalesTest {
 		Sales sale = new Sales();
 		sale.setSale(mockAddIm);
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport_up(null));
+		assertEquals("�ɹ�", sale.addImport(null));
 	}
 
 	@Test
@@ -73,7 +70,7 @@ public class SalesTest {
 		sale.setSale(mockAddEx);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport_up(null));
+		assertEquals("�ɹ�", sale.addExport(null));
 	}
 
 	@Test
@@ -83,7 +80,7 @@ public class SalesTest {
 		sale.setSale(mockAddExRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addExport_Return_up(null));
+		assertEquals("�ɹ�", sale.addExport_Return(null));
 	}
 
 	@Test
@@ -93,7 +90,7 @@ public class SalesTest {
 		sale.setSale(mockAddImRe);
 		MockInvoice mock=new MockInvoice();
 		sale.invoice=mock;
-		assertEquals("�ɹ�", sale.addImport_Return_up(null));
+		assertEquals("�ɹ�", sale.addImport_Return(null));
 	}
 
 }

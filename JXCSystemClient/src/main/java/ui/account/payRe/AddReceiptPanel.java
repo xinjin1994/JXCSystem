@@ -15,6 +15,7 @@ import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+import vo.CustomerVO;
 import vo.bill.GetVO;
 import vo.bill.TransferListVO;
 import businesslogic.accountbl.AccountController;
@@ -61,11 +62,11 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	 */
 	private void setAccount() {
 		ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
-	/*	String[] accounts = new String[accVOArray.size()];
+		String[] accounts = new String[accVOArray.size()];
 		for (int i = 0; i < accVOArray.size(); i++) {
 			accounts[i] = accVOArray.get(i).name;
-		}*/
-		 String [] accounts = new String[]{"a","b"};//从下层获得
+		}
+//		 String [] accounts = new String[]{"a","b"};//从下层获得
 		account = new MyComboBox(accounts, 491, 162, 205, 43);
 		this.add(account);
 		account.addActionListener(this);
@@ -96,12 +97,12 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	 * Customer的ComboButton 从下层获得客户名称，供由操作员选择
 	 */
 	private void setCustomer() {
-		 String [] customers = new String []{"a","b"};//从下层获得
-	/*	ArrayList<CustomerVO> cusVOArray = accountblService.getAllCustomer_up();
+//		 String [] customers = new String []{"a","b"};//从下层获得
+		ArrayList<CustomerVO> cusVOArray = accountblService.getAllCustomer_up();
 		String[] customers = new String[cusVOArray.size()];
 		for (int i = 0; i < cusVOArray.size(); i++) {
 			customers[i] = cusVOArray.get(i).cusName;
-		}*/
+		}
 
 		customer = new MyComboBox(customers, 221, 255, 106, 41);
 		this.add(customer);
@@ -114,14 +115,14 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		idLabel = new MyLabel(106, 165, 221, 55);
 		idLabel.setForeground(new ColorFactory().accColor);
 		// idLabel.setText("id");
-//		id = accountblService.getReceiptNote_up();
+		id = accountblService.getReceiptNote_up();
 		idLabel.setText(id);
 		this.add(idLabel);
 
 		operator = new MyLabel(575, 370, 155, 55);
 		operator.setForeground(new ColorFactory().accColor);
 		// operator.setText("我是操作员");
-//		operate = accountblService.getOperator_up();
+		operate = accountblService.getOperator_up();
 		operator.setText(operate);
 		this.add(operator);
 	}
@@ -175,7 +176,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 			}else{
-//				try{
+				try{
 					turnMoney = Double.parseDouble(money.getText());// 转账金额
 					String accName = account.getSelectedItem().toString();// 银行账户
 					String cusName = customer.getSelectedItem().toString();// 客户姓名
@@ -195,10 +196,10 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 					uiController.setTempPanel(this);
 					frame.remove(this);
 					uiController.confirmReceipt(newReceipt,person,operate,accountblService.calTotalMoney_up(newReceipt),balance);
-//				}catch(Exception e2){
-//					frame.remove(this);
-//					resController.failed("存在输入错误！",failedAddress);
-//				}
+				}catch(Exception e2){
+					frame.remove(this);
+					resController.failed("存在输入错误！",failedAddress);
+				}
 				//这边将新生成的收款单信息传给确认收款单界面
 			} 
 

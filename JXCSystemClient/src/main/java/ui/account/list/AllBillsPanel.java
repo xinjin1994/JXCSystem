@@ -124,7 +124,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 			String note_type = billType.getText();
 			String customer_name = customer.getText();
 			String clerk = agent.getText();
-
+//
 //			SimpleDateFormat dateFormat = null;
 //			dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //			dateFormat.setLenient(false);
@@ -134,7 +134,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 //				isLegal = true;
 //			}catch(Exception e2){
 //				isLegal = false;
-			//			}
+//						}
 
 			if(time1.equals("")||time2.equals("")||note_type.equals("")||customer_name.equals("")
 					||clerk.equals("")){

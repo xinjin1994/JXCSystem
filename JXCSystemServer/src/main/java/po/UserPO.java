@@ -3,6 +3,10 @@ package po;
 import java.io.Serializable;
 
 public class UserPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	String name;//���
 	String password;//����
 	int duty;//ְ��
@@ -12,6 +16,7 @@ public class UserPO implements Serializable{
 		name = n;
 		password = p;
 		duty = d;
+		this.note=note;
 	}
 	
 	public UserPO copy(){

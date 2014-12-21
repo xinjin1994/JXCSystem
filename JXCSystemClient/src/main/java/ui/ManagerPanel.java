@@ -24,8 +24,12 @@ import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RemindButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.InvoiceVO;
+<<<<<<< HEAD
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
+=======
+
+>>>>>>> origin/master
 
 /**
  * 6 总经理

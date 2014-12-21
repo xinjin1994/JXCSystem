@@ -12,7 +12,7 @@ import dataservice.userdataservice.UserDataService;
 
 public class User implements businesslogic.initializationlbl.UserInfo{
 	
-	public UserDataService us=new UserDataService_Stub("password", "duty", 10);
+	public UserDataService us;
 	SystemlogInfo systemlog=new Systemlog();
 	public static String operator;
 	public static int duty;
@@ -43,7 +43,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			}
 			
 			if (us.addUser(user)) {
-				systemlog.add_up("AddUser:");
+				System.out.println("addUser:"+name+" note:"+note);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -89,8 +89,11 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 	public int login(String name, String password) {
 		// TODO Auto-generated method stub
 		try {
+			System.out.println("login:"+name+" "+password);
 			UserPO po=new UserPO(name,password,0,"note");
+			System.out.println("login:"+po.getName()+" "+po.getPassword());
 			UserPO lin=us.login(po);
+			System.out.println("login:"+lin.getName()+" "+lin.getPassword());
 			if(lin!=null){
 				User.operator=lin.getName();
 				User.duty=lin.getDuty();
@@ -121,6 +124,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			po=us.getUser(note);
 			if(po!=null){
 				array.add(po);
+				System.out.println("User:"+po.getName()+" Note:"+po.getNote());
 			}
 			po=us.getUser_Note(note);
 			if(po!=null){

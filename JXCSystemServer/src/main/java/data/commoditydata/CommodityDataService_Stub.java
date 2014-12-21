@@ -535,7 +535,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public boolean addGood(CommodityPO po1, SortPO po2) {
 		SortPO sort=findSort_true(po2.getName());
 		if(sort!=null&&!sort.hasSort()){
-			sort.addCommodity(po1);
+			po1.father=po2.getName();
+			sort.addCommodity(po1.copy());
 			System.out.println("addGood:");
 			this.writeSortList();
 			return true;
@@ -545,19 +546,18 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean delGood(CommodityPO po) {
 		CommodityPO po1=findGood_true(po.getName(),po.getType());
-		int i=0;
+		SortPO sort=findSort_true(po.father);
+		CommodityPO gift=findGift(po.getName(),po.getType());
 		
 		if(po1==null){
 			return false;
 		}
 		
-		if(po1.number==0){
-			for(i=0;i<sortList.size();i++){
-				if(sortList.get(i).delCommodity(po1)){
-					System.out.println("delGood:");
-					this.writeSortList();
-					return true;
-				}
+		if(po1.number==0&&gift==null){
+			if(sort.delCommodity(po1)){
+				System.out.println("delGood:");
+				this.writeSortList();
+				return true;
 			}
 		}
 		return false;
@@ -594,7 +594,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean addSort(SortPO po1,SortPO po2) {
 		SortPO po=findSort_true(po1.getName());
-		po2=po2.findSort_true(po2.getName());
+		po2=findSort_true(po2.getName());
 		if(po!=null){
 			return false;
 		}else if(po2!=null){
@@ -605,12 +605,14 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			if(po2.sortList==null){
 				po2.sortList=new ArrayList<SortPO>();
 			}
+			po1.father=po2.getName();
 			po2.sortList.add(po1.copy());
 			System.out.println("addSort:");
 			this.writeSortList();
 			return true;
 			
 		}else{
+			po1.father=null;
 			sortList.add(po1);
 			System.out.println("addSort:");
 			this.writeSortList();
@@ -620,9 +622,19 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 ///////////////////////////////////////////////////////////////
 	public boolean delSort(SortPO po) {
 		SortPO po1=findSort_true(po.getName());
+		SortPO po_father=findSort_true(po.father);
+		
 		
 		if(po1==null){
 			return false;
+		}
+		
+		if(po_father!=null){
+			if(po_father.delSort(po1)){
+				System.out.println("delSort:");
+				this.writeSortList();
+				return true;
+			}
 		}
 		
 		int i=0;
@@ -630,12 +642,6 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			if(po1.getName().equals(sortList.get(i).getName())){
 				if(!(po1.hasCommodity()||po1.hasSort())){
 					sortList.remove(i);
-					this.writeSortList();
-					System.out.println("delSort:");
-					return true;
-				}
-			}else{
-				if(sortList.get(i).delSort(po1)){
 					this.writeSortList();
 					System.out.println("delSort:");
 					return true;
@@ -664,7 +670,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		if(po1!=null){
 			if(!po1.isGift){
-				if(po1.number>=po.number){
+				if(po1.number>=number){
 					po1.number=po1.number-number;
 					po=po1.copy();
 					po.isGift=true;
@@ -700,6 +706,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				if(po1!=null){
 					po1.number=giftList.get(i).number+po1.number;
 					giftList.remove(i);
+					System.out.println("delGift:");
 					this.writeSortList();
 					this.writeGiftList();
 					return true;
@@ -717,9 +724,17 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 
 	public ArrayList<CommodityPO> getAll() {
-		CommodityPO com=new CommodityPO(null, null, null, 0, 0, null, 0, 0, 0);
 		ArrayList<CommodityPO> array=new ArrayList<CommodityPO>();
-		array.add(com);
+		for(int i=0;i<sortList.size();i++){
+			ArrayList<CommodityPO> lin=sortList.get(i).getAllCommodity();
+			for(int j=0;j<lin.size();j++){
+//				CommodityPO gift=findGift(lin.get(j).getName(),lin.get(j).getType());
+//				if(gift!=null){
+//					lin.get(j).number=lin.get(j).number+gift.getNumber();
+//				}
+				array.add(lin.get(j).copy());
+			}
+		}
 		return array;
 	}
 
@@ -735,19 +750,10 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public ArrayList<SortPO> getAllSort() throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<SortPO> sort=new ArrayList<SortPO>();
-		int i=0,j=0;
+		int i=0;
 		for(i=0;i<sortList.size();i++){
 			sort.add(sortList.get(i).copy());
 		}
-		sort.add(getTempSort().copy());
-			
-//			if(!sortList.get(i).hasSort()){
-//				ArrayList<SortPO> lin=getSort(sortList.get(i));
-//				for(j=0;j<lin.size();j++){
-//					sort.add(lin.get(j).copy());
-//				}
-//			}
-		
 		return sort;
 	}
 	
@@ -755,7 +761,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		ArrayList<SortPO> sort=new ArrayList<SortPO>();
 		int i=0,j=0;
 	
-		if(!po.hasSort()){
+		if(po.hasSort()){
 			for(i=0;i<po.sortList.size();i++){
 				sort.add(po.sortList.get(i));
 			
@@ -778,6 +784,18 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		SortPO po3=findSort_true(po1.getName());
 		SortPO po4=findSort_true(po2.getName());
 		String[] str3=po3.getNote().split("-");
+		
+		if(po4==null){
+			SortPO po5=findSort_true(po3.father);
+			po5.sortList.remove(po3);
+			po3.note=str3[0]+str3[2];
+			sortList.add(po3);
+			this.writeSortList();
+			System.out.println("updateSort_Mov");
+			return true;
+		}
+		
+
 		String[] str4=po4.getNote().split("-");
 		
 		if(po4.father!=null){
@@ -785,24 +803,24 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		}else{
 			father=str4[1];
 		}
-		if(po4!=null){
-			SortPO po5=findSort_true(po1.father);
-			po5.sortList.remove(po3);
-			po3.note=str3[0]+father+str3[2];
-			addSort(po3,po4);
-			this.writeSortList();
-			return true;
-		}
 		
-		return false;
+		SortPO po5=findSort_true(po3.father);
+		po5.sortList.remove(po3);
+		po3.note=str3[0]+father+str3[2];
+		addSort(po3,po4);
+		this.writeSortList();
+		System.out.println("updateSort_Mov:");
+		return true;
+		
 	}
 
 	public boolean addWarn(WarnPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		CommodityPO po1=findGood_true(po.commodity.getName(),po.commodity.getType());
 		if(po1!=null){
-			po1.warn=po.warn_number;
+			po1.warn=po.warn_number+po1.warn;
 			this.writeSortList();
+			System.out.println("addWarn:");
 			return true;
 		}
 		return false;
@@ -811,8 +829,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public boolean addDraftPatch(PatchPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		draftPatchList.add(po);
-		this.writePatchList();
-		return false;
+		this.writeDraftPatchList();
+		System.out.println("addDraftPatch:");
+		return true;
 	}
 
 	public boolean delDraftPatch(String note) throws RemoteException {
@@ -822,6 +841,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			if(draftPatchList.get(i).getNote().equals(note)){
 				draftPatchList.remove(i);
 				this.writeDraftPatchList();
+				System.out.println("delDraftPatch:");
 				return true;
 			}
 		}
@@ -833,6 +853,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		int i=0;
 		for(i=0;i<draftPatchList.size();i++){
 			if(draftPatchList.get(i).getNote().equals(note)){
+				System.out.println("getDraftPatch:");
 				return draftPatchList.get(i).copy();
 			}
 		}
@@ -846,12 +867,15 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(i=0;i<draftPatchList.size();i++){
 			array.add(draftPatchList.get(i));
 		}
+		System.out.println("getAllDraftPatch:");
 		return array;
 	}
 
 	public boolean addPatch(PatchPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		patchList.add(po.copy());
+		this.writePatchList();
+		System.out.println("addPatch:");
 		return true;
 	}
 
@@ -860,6 +884,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(int i=0;i<patchList.size();i++){
 			if(patchList.get(i).getNote().equals(note)){
 				patchList.remove(i);
+				this.writePatchList();
+				System.out.println("delPatch:");
 				return true;
 			}
 		}
@@ -870,6 +896,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		// TODO Auto-generated method stub
 		for(int i=0;i<patchList.size();i++){
 			if(patchList.get(i).getNote().equals(note)){
+				System.out.println("getPatch:");
 				return patchList.get(i).copy();
 			}
 		}
@@ -880,8 +907,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		// TODO Auto-generated method stub
 		ArrayList<PatchPO> array=new ArrayList<PatchPO>();
 		for(int i=0;i<patchList.size();i++){
-			array.add(patchList.get(i));
+			array.add(patchList.get(i).copy());
 		}
+		System.out.println("getAllPatch:");
 		return array;
 	}
 
@@ -891,8 +919,11 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(int i=0;i<giftList.size();i++){
 			if(giftList.get(i).getName().equals(po.getCommodity().getName())&&giftList.get(i).getType().equals(po.getCommodity().getType())){
 				if(giftList.get(i).getNumber()>=po.getNumber()){
-					giftList.get(i).number=giftList.get(i).number=po.getNumber();
+					giftList.get(i).number=giftList.get(i).number-po.getNumber();
 					sendGiftList.add(po.copy());
+					this.writeGiftList();
+					this.writeSendGiftList();
+					System.out.println("addSendGift:");
 					return true;
 				}
 			}
@@ -904,6 +935,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		// TODO Auto-generated method stub
 		for(int i=0;i<sendGiftList.size();i++){
 			if(sendGiftList.get(i).getNote().equals(po.getNote())){
+				System.out.println("findSendGift:");
 				return sendGiftList.get(i).copy();
 			}
 		}
@@ -914,6 +946,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		// TODO Auto-generated method stub
 		for(int i=0;i<sendGiftList.size();i++){
 			if(sendGiftList.get(i).getNote().equals(note)){
+				System.out.println("findSendGift:");
 				return sendGiftList.get(i).copy();
 			}
 		}
@@ -925,6 +958,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(int i=0;i<sendGiftList.size();i++){
 			if(sendGiftList.get(i).getNote().equals(po.getNote())){
 				sendGiftList.remove(i);
+				this.writeSendGiftList();
+				System.out.println("delSendGift:");
 				return true;
 			}
 		}
@@ -936,6 +971,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(int i=0;i<sendGiftList.size();i++){
 			if(sendGiftList.get(i).getNote().equals(note)){
 				sendGiftList.remove(i);
+				this.writeSendGiftList();
+				System.out.println("delSendGift:");
 				return true;
 			}
 		}
@@ -946,6 +983,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		// TODO Auto-generated method stub
 		for(int i=0;i<giftList.size();i++){
 			if(giftList.get(i).getName().equals(po.getName())&&giftList.get(i).getType().equals(po.getType())){
+				System.out.println("findGift:");
 				return giftList.get(i).copy();
 			}
 		}
@@ -958,27 +996,52 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(int i=0;i<giftList.size();i++){
 			array.add(giftList.get(i).copy());
 		}
-		
+		System.out.println("getAllGift:");
 		return array;
 	}
 
 	public String getGoodNote(SortPO po1) throws RemoteException {
 		// TODO Auto-generated method stub
+		po1=findSort_true(po1.getName());
 		String[] sortNote=po1.getNote().split("-");
 		String part1="COM";
-		String part2="SORT"+sortNote[1];
+		String part2="";;
+		if(po1.father==null){
+			part2=sortNote[1];
+		}else{
+			part2=sortNote[2];
+		}
 		String part3=Integer.toString(comNote);
 		comNote++;
-		return part1+"-"+part2+"-"+part3;
+		this.writeComNote();
+		System.out.println("getGoodNote:");
+		if(po1.father!=null){
+			return part1+"-"+part2+"-"+part3;	
+		}else{
+			return part1+"-"+part3;
+		}
 	}
 
 	public String getSortNote(SortPO po1) throws RemoteException {
 		// TODO Auto-generated method stub
+		po1=findSort_true(po1.getName());
 		String part1="SORT";
 		String part3=Integer.toString(sortNote);
 		sortNote++;
-		return part1+"-"+part3;
-
+		this.writeSortNote();
+		System.out.println("getSortNote:");
+		if(po1==null){
+			return part1+"-"+part3;
+		}
+		String[] sortNote=po1.getNote().split("-");
+		String part2;
+		if(po1.father==null){
+			part2=sortNote[1];
+		}else{
+			part2=sortNote[2];
+		}
+		
+		return part1+"-"+part2+"-"+part3;
 	}
 
 	public String getPatchNote() throws RemoteException {
@@ -987,6 +1050,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		String part2=AccountDataService_Stub.getNoteTime();
 		String part3=Integer.toString(patchNote);
 		patchNote++;
+		this.writePatchNote();
+		System.out.println("getPatchNote:");
 		return part1+"-"+part2+"-"+part3;
 	}
 	
@@ -995,6 +1060,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		String part2=AccountDataService_Stub.getNoteTime();
 		String part3=Integer.toString(sendNote);
 		sendNote++;
+		this.writeSendNote();
+		System.out.println("getSendGiftNote:");
 		return part1+"-"+part2+"-"+part3;
 	}
 	
@@ -1002,21 +1069,23 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		// TODO Auto-generated method stub
 		CommodityPO po1=findGood_true(po.getName(),po.getType());
 		po1.number=po1.number+number;
+		this.writeSortList();
+		System.out.println("addGoodNumber:");
 		return true;
 	}	
 	
 	public SortPO findSort_true(String name){
 		int i=0;
+		System.out.println("findSort_true");
 		for(i=0;i<sortList.size();i++){
 			if(sortList.get(i).getName().equals(name)){
-				return sortList.get(i);
+				return sortList.get(i).copy();
 			}
-			if(!sortList.get(i).hasSort()){
-				SortPO po=sortList.get(i).findSort_true(name);
+			if(sortList.get(i).hasSort()){
+				SortPO po=sortList.get(i).findSort_In(name);
 				if(po!=null){
-					return po;
+					return po.copy();
 				}
-				
 			}
 		}
 		return null;
@@ -1024,6 +1093,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	
 	public CommodityPO findGood_true(String name, String type) {
 		int i=0;
+		System.out.println("findGood_true:");
 		for(i=0;i<sortList.size();i++){
 			CommodityPO po=sortList.get(i).findCommodity_true(name, type);
 			if(po!=null){
@@ -1040,6 +1110,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				if(addGoodNumber(patchList.get(i).getCommodity(),po.getNumber())){
 					patchList.get(i).setCondition(2);
 					patchList.get(i).setNumber(po.getNumber());
+					this.writePatchList();
+					System.out.println("passPatch:");
 					return true;
 				}
 			}
@@ -1052,6 +1124,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(int i=0;i<patchList.size();i++){
 			if(patchList.get(i).getNote().equals(note)){
 				patchList.get(i).setCondition(3);
+				this.writePatchList();
+				System.out.println("refusePatch:");
 				return true;
 			}
 		}
@@ -1067,13 +1141,16 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 					return false;
 				}
 				
-				for(i=0;i<giftList.size();i++){
-					if(giftList.get(i).getName().equals(po.getCommodity().getName())&&giftList.get(i).getType().equals(po.getCommodity().getType())){
-						giftList.get(i).number=giftList.get(i).number-po.getNumber();
+				for(int j=0;j<giftList.size();j++){
+					if(giftList.get(j).getName().equals(po.getCommodity().getName())&&giftList.get(j).getType().equals(po.getCommodity().getType())){
+						giftList.get(j).number=giftList.get(j).number-po.getNumber()+sendGiftList.get(i).getNumber();
 					}
 				}
 				sendGiftList.get(i).setCondition(2);
 				sendGiftList.get(i).setNumber(po.getNumber());
+				this.writeSendGiftList();
+				this.writeGiftList();
+				System.out.println("passSendGift:");
 				return true;
 			}
 		}
@@ -1086,6 +1163,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			if(sendGiftList.get(i).getNote().equals(note)){
 				if(addGoodNumber(sendGiftList.get(i).getCommodity(),sendGiftList.get(i).getNumber())){
 					sendGiftList.get(i).setCondition(3);
+					this.writeSendGiftList();
 					return true;
 				}
 			}
@@ -1107,7 +1185,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			number=number+gift.getNumber();
 		}
 		com.number=com.number+po.getImportGoodList().get(0).getNumber();
-		if(number+po.getImportGoodList().get(0).getNumber()!=0){
+		if((number+po.getImportGoodList().get(0).getNumber())!=0){
 			com.mean=((number*com.mean)+po.getTotalMoney())/(number+po.getImportGoodList().get(0).getNumber());
 		}
 		
@@ -1117,6 +1195,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				gift.mean=com.mean;
 			}
 		}
+		this.writeGiftList();
+		this.writeSortList();
+		System.out.println("passImport:");
 		return true;
 	}
 	
@@ -1133,7 +1214,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			number=number+gift.getNumber();
 		}
 		com.number=com.number-po.getImportGoodList().get(0).getNumber();
-		if(number-po.getImportGoodList().get(0).getNumber()!=0){
+		if((number-po.getImportGoodList().get(0).getNumber())!=0){
 			com.mean=((number*com.mean)-po.getTotalMoney())/(number-po.getImportGoodList().get(0).getNumber());
 		}
 		for(int i=0;i<giftList.size();i++){
@@ -1141,6 +1222,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				gift.mean=com.mean;
 			}
 		}
+		this.writeGiftList();
+		this.writeSortList();
+		System.out.println("passImport_Return:");
 		return true;
 	}
 	
@@ -1160,6 +1244,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				gift.recent_out_price=com.recent_in_price;
 			}
 		}
+		this.writeGiftList();
+		this.writeSortList();
+		System.out.println("passExport:");
 		return true;
 	}
 	
@@ -1172,7 +1259,9 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		com.number=com.number-po.getImportGoodList().get(0).getNumber();
 		
-		
+		this.writeGiftList();
+		this.writeSortList();
+		System.out.println("passExport_Return:");
 		return true;
 	}
 
@@ -1187,6 +1276,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		for(int i=0;i<sendGiftList.size();i++){
 			array.add(sendGiftList.get(i).copy());
 		}
+		System.out.println("getAllSendGift:");
 		return array;
 	}
 

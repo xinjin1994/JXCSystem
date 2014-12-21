@@ -13,7 +13,6 @@ public class WelcomePanel extends FatherPanel {
 		super(frame, url,controller);
 		thread=new ThreadDis();
 		thread.start();
-		this.addMouseListener(new JPanelListener());
 	}
 	
 	class ThreadDis extends Thread{
@@ -22,7 +21,7 @@ public class WelcomePanel extends FatherPanel {
 		public void run(){
 			while(true){
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -36,32 +35,4 @@ public class WelcomePanel extends FatherPanel {
 		}
 	}
 	
-	class JPanelListener implements MouseListener {
-
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			controller.loginPanel();
-		}
-
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
 }

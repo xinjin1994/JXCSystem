@@ -15,6 +15,8 @@ import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
+import businesslogic.userbl.UserController;
+import businesslogicservice.userblservice.UserblService;
 
 public class AddUserPanel extends FatherPanel implements ActionListener{
 	
@@ -35,6 +37,8 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 	private String dutyString;
 	
 	private String failedAddress;
+	private UserblService userblService;
+	
 	public AddUserPanel(MyFrame frame, String url, AdminAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
@@ -43,7 +47,7 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 		
 		resController = new ResultPanelController(frame, this);
 		controller.setBack_second(this,188,70);
-	
+		userblService = new UserController();
 		addTextField();
 		addLabel();
 		addComboBox();
@@ -79,6 +83,7 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 		}
 		textInfos[4].addFocusListener(new TextListener());
 		this.remove(textInfos[2]);
+		textInfos[0].setText(userblService.getUserNote());
 	}
 	
 	class TextListener implements FocusListener{
