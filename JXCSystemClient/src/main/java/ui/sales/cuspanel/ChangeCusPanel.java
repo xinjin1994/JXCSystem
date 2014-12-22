@@ -67,14 +67,19 @@ public class ChangeCusPanel extends FatherPanel{
 			}else if(e.getSource() == forward){
 				if(cusName.getText().equals("")||cusID.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ChangeCusPanel.this);
-					salesResult.failed("请重新确认输入信息！", "changeCusFailed");
+					salesResult.failed("存在您输入的信息为空！", "changeCusFailed");
 				}else{
 				String name = cusName.getText();
 				String id = cusID.getText();
 				SalesblService salesBlService = new SalesController();
 				CustomerVO customerVO= salesBlService.searchExactCustomer_up(name);
+				if(customerVO.equals(null)){
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ChangeCusPanel.this);
+					salesResult.failed("您要更改的客户不存在！", "changeCusFailed");
+				}else{
 				frame.remove(ChangeCusPanel.this);
 				frame.setPanel(new MakeSureChangeInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,ChangeCusPanel.this));
+					}
 				}
 				frame.repaint();
 			}

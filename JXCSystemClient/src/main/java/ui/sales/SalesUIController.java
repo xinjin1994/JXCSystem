@@ -59,7 +59,6 @@ public class SalesUIController {
 		salesManagerPanel.add(thirdPanel);
 		this.setSalesPanel();
 		this.setAllPanel();
-		setCustomer();
 		frame.setPanel(salesManagerPanel);
 		frame.repaint();
 	}
@@ -75,7 +74,7 @@ public class SalesUIController {
 	    salesBackPanel = new SalesBackPanel(frame,"Image/Sales/对话框/创建销售单/创建销售退货单_背景.jpg",uiController,this);
 	}
 	
-	private void setTable(ArrayList<String> info){
+/*	private void setTable(ArrayList<String> info){
 		showTable = new MyTable();
 		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 		showTable.setTable(info);
@@ -99,7 +98,7 @@ public class SalesUIController {
 			cusStr.add(item);
 		}
 		setTable(cusStr);
-	}
+	}*/
 	
 	public void setSalesPanel() {
 		cusPanel = new CusPanel(this);
@@ -132,9 +131,9 @@ public class SalesUIController {
 	}
 	
 	public void backPanel(FatherPanel panelNow) {
-		if(!panelNow.equals(seeCusInfoPanel)){
-			setCustomer();
-		}
+//		if(!panelNow.equals(seeCusInfoPanel)){
+//			setCustomer();
+//		}
 		frame.remove(panelNow);
 		frame.setPanel(salesManagerPanel);
 		frame.repaint();

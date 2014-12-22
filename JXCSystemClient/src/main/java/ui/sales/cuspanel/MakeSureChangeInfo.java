@@ -63,16 +63,19 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 				double shouldPay = 0;
 				String person = salesManField.getText();
 				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
-				System.out.println("qianjing!");
 				SalesblService salesBlService = new SalesController();
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureChangeInfo.this);
 				switch(salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter)){
 				case 0:
 					salesResult.succeeded("修改成功！");
 					break;
+				case 3:
+					salesResult.failed("客户的应收应付不为0", "changeCusFailed");
+					break;
+				default:
+					salesResult.failed("未知错误！", "");
 				}
 			} else if (e.getSource() == secondCusBack) {
-				System.out.println("fff");
 				frame.remove(MakeSureChangeInfo.this);
 				frame.setPanel(changeCusPanel);
 				frame.repaint();

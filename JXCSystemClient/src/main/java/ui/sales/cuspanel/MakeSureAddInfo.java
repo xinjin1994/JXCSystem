@@ -49,15 +49,27 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 
 	class Listener implements ActionListener {
 
+		//1 客户名称重复
+		//2 客户名称不存在
+		//3 客户的应收应付不为0
+		//-1 未知错误
+
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
 //		 SalesResult(MyFrame frame,UIController controller,SalesUIController salesUIController,FatherPanel backPanel){
 				SalesblService salesblService = new SalesController();
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureAddInfo.this);
-			    switch(salesblService.addCustomer_up(customerVO)){
+				System.out.println(salesblService.addCustomer_up(customerVO));
+				switch(salesblService.addCustomer_up(customerVO)){
 			    	case 0:
-						salesResult.succeeded("成功！");
+						salesResult.succeeded("添加客户成功！");
 						break;
+			    	case 1:
+			    		salesResult.failed("客户名称重复", "addCusFailed");
+			    		break;
+			    	default:
+			    		salesResult.failed("未知错误！", "addCusFailed");
+			    		break;
 				
 			    }
 			} else if (e.getSource() == secondCusBack) {
