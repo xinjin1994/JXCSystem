@@ -51,15 +51,15 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
-		// SalesResult(MyFrame frame,UIController controller,SalesUIController salesUIController,FatherPanel backPanel){
+//		 SalesResult(MyFrame frame,UIController controller,SalesUIController salesUIController,FatherPanel backPanel){
 				SalesblService salesblService = new SalesController();
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureAddInfo.this);
-//			    switch(salesblService.addCustomer_up(customerVO)){
-//			    	case 0:
+			    switch(salesblService.addCustomer_up(customerVO)){
+			    	case 0:
 						salesResult.succeeded("成功！");
-//						break;
+						break;
 				
-//			    }
+			    }
 			} else if (e.getSource() == secondCusBack) {
 				frame.remove(MakeSureAddInfo.this);
 				frame.setPanel(addCusPanel);

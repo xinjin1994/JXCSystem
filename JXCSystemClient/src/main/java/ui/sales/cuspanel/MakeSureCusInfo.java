@@ -26,7 +26,7 @@ public class MakeSureCusInfo extends AddCusPanel{
 		cusShouldPay.setText(customerVO.mostOwe+"");
 		person.setText(customerVO.person);
 		shouldGet.setText(customerVO.shouldGet+"");
-//		shouldPay.setText(customerVO.shouldPay+"");
+		shouldPay.setText(customerVO.shouldPay+"");
 		//false代表供应商，true代表销售商
 		if(customerVO.classification == true){
 			sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供应商_press_on_03.png"));

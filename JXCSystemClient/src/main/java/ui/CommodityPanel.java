@@ -183,11 +183,13 @@ public class CommodityPanel extends FatherPanel{
 
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == buttons[0]) {
-//				setTree(commodityblService.getAllSort_up());
-//			System.out.println("llkl");
-				setTree(new Com().allSorts);
+				setTree(commodityblService.getAllSort_up());
+				CommodityPanel.this.repaint();
+//				setTree(new Com().allSorts);
 			}else if(e.getSource() == buttons[1]) {
-				setTree(new Com().allSorts);
+//				setTree(new Com().allSorts);
+				setTree(commodityblService.getAllSort_up());
+				CommodityPanel.this.repaint();
 			}else if(e.getSource() == buttons[2]) {
 			
 			}else if (e.getSource() == buttons[3]) {

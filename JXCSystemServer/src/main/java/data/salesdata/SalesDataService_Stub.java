@@ -698,7 +698,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 		CustomerPO po1 = findCustomer_true(po.getName());
 		if (po1 != null) {
-			if (po1.getMoney() == 0) {
+			if ((po1.getMoneyIn() == 0)&&(po1.getMoneyOut()==0)) {
 				customerList.remove(po1);
 				this.writeCustomerList();
 				return true;

@@ -120,12 +120,12 @@ public class SalesManagerPanel extends FatherPanel {
 			}else if(e.getSource() == warn){
 				ArrayList<String> commodityStr = new ArrayList<String>();
 				commodityStr.add("商品编号;商品名称;商品型号;库存数量;警戒数量");
-				/*for(int i=0;i<commodityVO.size();i++){
+				for(int i=0;i<commodityVO.size();i++){
 					CommodityVO commodityItem = commodityVO.get(i);
 					String item = commodityItem.id+";"+commodityItem.name+";"+commodityItem.type+
 				";"+commodityItem.num+";"+commodityItem.warn;
 					commodityStr.add(item);
-				}*/
+				}
 				thirdPanel.removeAll();
 				setTable(commodityStr);
 			}

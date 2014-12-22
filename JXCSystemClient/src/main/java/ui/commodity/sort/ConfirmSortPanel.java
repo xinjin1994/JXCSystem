@@ -90,6 +90,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		name = new MyLabel(255, 323, 271, 42);
 		fatherSort = new MyLabel(255, 442, 271, 42);
 		MyLabel labels[] = new MyLabel[]{sortId,name,fatherSort};
+		sort.note = commodityblService.getSortNote_up(new SortVO(sort.fatherSort));
 		labels[0].setText(sort.note);
 		labels[1].setText(sort.name);
 		labels[2].setText(sort.fatherSort);
@@ -111,7 +112,6 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			controller.setTempPanel(this);
 			if(type.equals("add")){
-				System.out.println("123");
 				addSort();
 			}else if(type.equals("del")){
 				delSort();
@@ -149,23 +149,25 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			resControllerS.succeeded("成功删除分类！", "commodity");
 			break;
 		case 4:
-			
 			resControllerF.failedConfirm("分类不存在！", failedAddress);
+			break;
+		case 5:
+			resControllerF.failedConfirm("删除的分类下存在商品，不能删除", failedAddress);
 			break;
 		default:
 			resControllerF.failedConfirm("未知错误！", failedAddress);
 		}
 	}
 	private void addSort() {
-		SortVO fatherSortVO = commodityblService.searchSort_up(sortBelong);
+//		SortVO fatherSortVO = commodityblService.searchSort_up(sortBelong);
 		
-		switch(commodityblService.addSort_up(sort, fatherSortVO)){
+		switch(commodityblService.addSort_up(sort, new SortVO(sortBelong))){
 		
 		case 0:
 			resControllerS.succeeded("成功添加分类！", "commodity");
 			break;
 		case 3:
-			resControllerF.failedConfirm("分类不存在！",failedAddress);
+			resControllerF.failedConfirm("分类已存在！",failedAddress);
 			break;
 		default:
 			resControllerF.failedConfirm("未知错误！", failedAddress);

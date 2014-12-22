@@ -118,17 +118,27 @@ public class SortPO implements Serializable{
 	
 	public SortPO findSort_In(String name){
 		int i=0;
+		
+		if(this.name.equals(name)){
+			return this;
+		}
+		
 		if(hasCommodity()){
 			return null;
-		}else{
+		}
+		if(hasSort()){
 			for(i=0;i<sortList.size();i++){
-				if(sortList.get(i).getName().equals(name)){
-					return sortList.get(i);
-				}else{
-					if(sortList.get(i).findSort_true(name)!=null){
-						return sortList.get(i).findSort_true(name);
-					}
+				SortPO lin=sortList.get(i).findSort_In(name);
+				if(lin!=null){
+					return lin;
 				}
+//				if(sortList.get(i).getName().equals(name)){
+//					return sortList.get(i);
+//				}else{
+//					if(sortList.get(i).findSort_true(name)!=null){
+//						return sortList.get(i).findSort_true(name);
+//					}
+//				}
 			}
 		}
 		return null;

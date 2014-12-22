@@ -99,6 +99,7 @@ public class CommodityController implements CommodityblService{
 
 	public ArrayList<StockVO> Iventory_up() {
 		// TODO Auto-generated method stub
+		//无用方法o(╯□╰)o
 		return commodity.Iventory();
 	}
 
@@ -114,7 +115,6 @@ public class CommodityController implements CommodityblService{
 
 	public int patch_up(PatchVO vo) {
 		// TODO Auto-generated method stub
-		
 		return commodity.patch(vo.name,vo.type,vo.number,vo.note);
 	}
 
@@ -185,10 +185,10 @@ public class CommodityController implements CommodityblService{
 			}
 		}
 		
-		for(i=0;i<po.sortList.size();i++){
-			SortVO so=getMulSort(po.sortList.get(i));
-			vo.sortList.add(so);
-		}
+//		for(i=0;i<po.sortList.size();i++){
+//			SortVO so=getMulSort(po.sortList.get(i));
+//			vo.sortList.add(so);
+//		}
 		return vo;
 	}
 
@@ -207,7 +207,7 @@ public class CommodityController implements CommodityblService{
 
 	public int patchDraft_up(PatchVO vo) {
 		// TODO Auto-generated method stub
-		CommodityPO com=new CommodityPO(vo.name,vo.type);
+		CommodityPO com=commodity.findCommodity(vo.name,vo.type);
 		PatchPO po=new PatchPO(com, vo.number, User.operator);
 		po.setNote(vo.note);
 		po.setCondition(0);
@@ -229,6 +229,9 @@ public class CommodityController implements CommodityblService{
 	public PatchVO searchDraftPatch_up(String note) {
 		// TODO Auto-generated method stub
 		PatchPO po=commodity.searchDraftPatch(note);
+		if(po==null){
+			return null;
+		}
 		PatchVO vo=new PatchVO(po.getCommodity().getName(),po.getCommodity().getType(),po.getNumber(),po.getNote(),po.getTime(),po.getOperator(),po.getInvoiceNote());
 		return vo;
 	}
@@ -247,7 +250,12 @@ public class CommodityController implements CommodityblService{
 	public SortVO searchSort_up(String name) {
 		// TODO Auto-generated method stub
 		SortPO po=commodity.findSort(name);
+		if(po==null){
+			return null;
+		}
 		SortVO vo=new SortVO(po.getName());
+		vo.fatherSort=po.father;
+		vo.note=po.note;
 		return vo;
 	}
 
@@ -270,6 +278,9 @@ public class CommodityController implements CommodityblService{
 	public CommodityVO searchAccurateCommodity_up(String name,String type) {
 		// TODO Auto-generated method stub
 		CommodityPO po=commodity.findCommodity(name, type);
+		if(po==null){
+			return null;
+		}
 		CommodityVO vo=new CommodityVO(po.getNote(), po.getName(), po.getType(), po.getNumber(), po.getIn_price(), po.getOut_price(), po.getRecent_in_price(), po.getRecent_out_price(),po.warn);
 		vo.fatherSort=po.father;
 		return vo;

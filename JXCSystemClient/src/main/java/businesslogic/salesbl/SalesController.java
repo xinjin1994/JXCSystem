@@ -31,7 +31,8 @@ public class SalesController implements SalesblService {
 					.getType(), po.get(i).getLevel(), po.get(i).getName(), po
 					.get(i).getPhone(), po.get(i).getAddress(), po.get(i)
 					.getZip(), po.get(i).getMail(), po.get(i).getAmount(), po
-					.get(i).getMoney(), po.get(i).getClerk());
+					.get(i).getMoneyIn(), po.get(i).getMoneyOut(), po.get(i)
+					.getClerk());
 			result.add(vo);
 		}
 		return result;
@@ -42,8 +43,8 @@ public class SalesController implements SalesblService {
 		CustomerPO po = sale.searchExactCustomer(name);
 		CustomerVO result = new CustomerVO(po.getId(), po.getType(),
 				po.getLevel(), po.getName(), po.getPhone(), po.getAddress(),
-				po.getZip(), po.getMail(), po.getAmount(), po.getMoney(),
-				po.getClerk());
+				po.getZip(), po.getMail(), po.getAmount(), po.getMoneyIn(),
+				po.getMoneyOut(), po.getClerk());
 		return result;
 	}
 
@@ -61,7 +62,7 @@ public class SalesController implements SalesblService {
 		importGood.add(importGoodPO);
 		UserPO user = new UserPO(null, null, 0, null);
 		CustomerPO customerPO = new CustomerPO(importMenuVO.supplier, null, 0,
-				false, null, null, null, 0, 0, null, null);
+				false, null, null, null, 0, 0, 0, null, null);
 		ImportPO imp = new ImportPO(customerPO, importGood,
 				importMenuVO.remark, importMenuVO.operator, user.getName(),
 				importMenuVO.warehouse, importMenuVO.total);
@@ -83,7 +84,7 @@ public class SalesController implements SalesblService {
 		importGood.add(importGoodPO);
 		UserPO user = new UserPO(null, null, 0, null); // 这里有问题
 		CustomerPO customerPO = new CustomerPO(importMenuVO.supplier, null, 0,
-				false, null, null, null, 0, 0, null, null); // 这里也有问题
+				false, null, null, null, 0, 0, 0, null, null); // 这里也有问题
 		Import_ReturnPO imp = new Import_ReturnPO(customerPO, importGood,
 				importMenuVO.remark, importMenuVO.operator, user.getName(),
 				importMenuVO.warehouse, importMenuVO.total, null);
@@ -121,13 +122,14 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		ArrayList<CommodityVO> commodityVO = new ArrayList<CommodityVO>();
 		ArrayList<CommodityPO> po = sale.getAllCommodity();
-		for(int i=0;i<po.size();i++){
-			CommodityVO vo = new CommodityVO(po.get(i).getNote(), po.get(i).getName(),
-				po.get(i).getType(), po.get(i).getNumber(), po.get(i).getIn_price(),
-				po.get(i).getOut_price(), po.get(i).getRecent_in_price(),
-				po.get(i).getRecent_out_price(), po.get(i).warn);
+		for (int i = 0; i < po.size(); i++) {
+			CommodityVO vo = new CommodityVO(po.get(i).getNote(), po.get(i)
+					.getName(), po.get(i).getType(), po.get(i).getNumber(), po
+					.get(i).getIn_price(), po.get(i).getOut_price(), po.get(i)
+					.getRecent_in_price(), po.get(i).getRecent_out_price(),
+					po.get(i).warn);
 			commodityVO.add(vo);
-		}		
+		}
 		return commodityVO;
 	}
 
@@ -137,7 +139,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerPO> po = sale.getAllCustomer();
 		for (int i = 0; i < po.size(); i++) {
 			customerVO.set(i, new CustomerVO(null, false, i, null, null, null,
-					null, null, i, i, null));
+					null, null, i, i, i, null));
 		}
 		return customerVO;
 	}
@@ -146,7 +148,7 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		CustomerPO po = sale.getCustomer(vo.cusName, vo.id);
 		CustomerVO customer = new CustomerVO(null, false, 0, null, null, null,
-				null, null, 0, 0, null);
+				null, null, 0, 0, 0, null);
 		return customer;
 	}
 
@@ -156,7 +158,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerPO> po = sale.getAllImportCustomer();
 		for (int i = 0; i < po.size(); i++) {
 			customerVO.set(i, new CustomerVO(null, false, i, null, null, null,
-					null, null, i, i, null));
+					null, null, i, i, i, null));
 		}
 		return customerVO;
 	}
@@ -167,7 +169,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerPO> po = sale.getAllExportCustomer();
 		for (int i = 0; i < po.size(); i++) {
 			customerVO.set(i, new CustomerVO(null, false, i, null, null, null,
-					null, null, i, i, null));
+					null, null, i, i, i, null));
 		}
 		return customerVO;
 	}
@@ -251,11 +253,6 @@ public class SalesController implements SalesblService {
 		return message;
 	}
 
-	public int getClerk_up() {
-		// TODO Auto-generated method stub
-		return sale.getClerk();
-	}
-
 	public int getDiscount_up(int money, int level) {
 		// TODO Auto-generated method stub
 		return sale.getDiscount();
@@ -313,123 +310,147 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<ImportMenuVO> getAllDraftImport_up() {
 		// TODO Auto-generated method stub
-		ArrayList<ImportPO> po=sale.getAllDraftImport();
-		ArrayList<ImportMenuVO> vo=new ArrayList<ImportMenuVO>();
-		for(int i=0;i<po.size();i++){
-			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
-			vo.set(i, new ImportMenuVO(null, null, null, null, null, null, i, null, i, null));
+		ArrayList<ImportPO> po = sale.getAllDraftImport();
+		ArrayList<ImportMenuVO> vo = new ArrayList<ImportMenuVO>();
+		for (int i = 0; i < po.size(); i++) {
+			CommodityListVO commodityList = new CommodityListVO(null, null,
+					null, i, i, i, null);
+			vo.set(i, new ImportMenuVO(null, null, null, null, null, null, i,
+					null, i, null));
 		}
-		return vo;		
+		return vo;
 	}
 
 	public ImportMenuVO searchDraftImport_up(String note) {
 		// TODO Auto-generated method stub
-		ImportPO po=sale.searchDraftImport(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ImportMenuVO importMenu=new ImportMenuVO(note, note, note, note, commodityList, note, 0, note, 0, note);
+		ImportPO po = sale.searchDraftImport(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ImportMenuVO importMenu = new ImportMenuVO(note, note, note, note,
+				commodityList, note, 0, note, 0, note);
 		return importMenu;
 	}
 
 	public CommodityVO getProGift_up(int money, int level) {
 		// TODO Auto-generated method stub
-		CommodityPO po=sale.getProGift(money, level);
-		CommodityVO vo=new CommodityVO(null, null, null, level, level, level, level, level, level);
+		CommodityPO po = sale.getProGift(money, level);
+		CommodityVO vo = new CommodityVO(null, null, null, level, level, level,
+				level, level, level);
 		return vo;
 	}
 
 	public ArrayList<ImportMenuVO> getAllDraftImport_Return_up() {
 		// TODO Auto-generated method stub
-		ArrayList<Import_ReturnPO> po=sale.getAllDraftImport_Return();
-		ArrayList<ImportMenuVO> vo=new ArrayList<ImportMenuVO>();
-		for(int i=0;i<po.size();i++){
-			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
-			vo.set(i, new ImportMenuVO(null, null, null, null, null, null, i, null, i, null));
+		ArrayList<Import_ReturnPO> po = sale.getAllDraftImport_Return();
+		ArrayList<ImportMenuVO> vo = new ArrayList<ImportMenuVO>();
+		for (int i = 0; i < po.size(); i++) {
+			CommodityListVO commodityList = new CommodityListVO(null, null,
+					null, i, i, i, null);
+			vo.set(i, new ImportMenuVO(null, null, null, null, null, null, i,
+					null, i, null));
 		}
 		return vo;
 	}
 
 	public ImportMenuVO searchDraftImport_Return_up(String note) {
 		// TODO Auto-generated method stub
-		Import_ReturnPO po=sale.searchDraftImport_Return(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ImportMenuVO vo=new ImportMenuVO(note, note, note, note, commodityList, note, 0, note, 0, note);
+		Import_ReturnPO po = sale.searchDraftImport_Return(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ImportMenuVO vo = new ImportMenuVO(note, note, note, note,
+				commodityList, note, 0, note, 0, note);
 		return vo;
 	}
 
 	public ArrayList<ExportMenuVO> getAllDraftExport_up() {
 		// TODO Auto-generated method stub
-		ArrayList<ExportPO> po=sale.getAllDraftExport();
-		ArrayList<ExportMenuVO> vo=new ArrayList<ExportMenuVO>();
-		for(int i=0;i<po.size();i++){
-			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
-			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i, i, i, i, null, null, i, null));
+		ArrayList<ExportPO> po = sale.getAllDraftExport();
+		ArrayList<ExportMenuVO> vo = new ArrayList<ExportMenuVO>();
+		for (int i = 0; i < po.size(); i++) {
+			CommodityListVO commodityList = new CommodityListVO(null, null,
+					null, i, i, i, null);
+			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i,
+					i, i, i, null, null, i, null));
 		}
 		return vo;
 	}
 
 	public ExportMenuVO searchDraftExport_up(String note) {
 		// TODO Auto-generated method stub
-		ExportPO exportPO=sale.searchDraftExport(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ExportMenuVO exportMenu=new ExportMenuVO(note, note, note, note, note, commodityList, 0, 0, 0, 0, note, note, 0, note);
+		ExportPO exportPO = sale.searchDraftExport(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ExportMenuVO exportMenu = new ExportMenuVO(note, note, note, note,
+				note, commodityList, 0, 0, 0, 0, note, note, 0, note);
 		return exportMenu;
 	}
 
 	public ArrayList<ExportMenuVO> getAllDraftExport_Return_up() {
 		// TODO Auto-generated method stub
-		ArrayList<Export_ReturnPO> po=sale.getAllDraftExport_Return();
-		ArrayList<ExportMenuVO> vo=new ArrayList<ExportMenuVO>();
-		for(int i=0;i<po.size();i++){
-			CommodityListVO commodityList=new CommodityListVO(null, null, null, i, i, i, null);
-			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i, i, i, i, null, null, i, null));
+		ArrayList<Export_ReturnPO> po = sale.getAllDraftExport_Return();
+		ArrayList<ExportMenuVO> vo = new ArrayList<ExportMenuVO>();
+		for (int i = 0; i < po.size(); i++) {
+			CommodityListVO commodityList = new CommodityListVO(null, null,
+					null, i, i, i, null);
+			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i,
+					i, i, i, null, null, i, null));
 		}
 		return vo;
 	}
 
 	public ExportMenuVO searchDraftExport_Return_up(String note) {
 		// TODO Auto-generated method stub
-		Export_ReturnPO export_ReturnPO=sale.searchDraftExport_Return(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ExportMenuVO exportMenu=new ExportMenuVO(note, note, note, note, note, commodityList, 0, 0, 0, 0, note, note, 0, note);
+		Export_ReturnPO export_ReturnPO = sale.searchDraftExport_Return(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ExportMenuVO exportMenu = new ExportMenuVO(note, note, note, note,
+				note, commodityList, 0, 0, 0, 0, note, note, 0, note);
 		return exportMenu;
 	}
 
 	public ImportMenuVO searchImportNote_up(String note) {
 		// TODO Auto-generated method stub
-		ImportPO po=sale.searchImportNote(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ImportMenuVO vo=new ImportMenuVO(note, note, note, note, commodityList, note, 0, note, 0, note);
+		ImportPO po = sale.searchImportNote(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ImportMenuVO vo = new ImportMenuVO(note, note, note, note,
+				commodityList, note, 0, note, 0, note);
 		return vo;
 	}
 
 	public ExportMenuVO searchExportNote_up(String note) {
 		// TODO Auto-generated method stub
-		ExportPO po=sale.searchExportNote(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ExportMenuVO vo=new ExportMenuVO(note, note, note, note, note, commodityList, 0, 0, 0, 0, note, note, 0, note);
+		ExportPO po = sale.searchExportNote(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ExportMenuVO vo = new ExportMenuVO(note, note, note, note, note,
+				commodityList, 0, 0, 0, 0, note, note, 0, note);
 		return vo;
 	}
 
 	public CommodityVO getCommodity_up(String name, String type) {
 		// TODO Auto-generated method stub
-		CommodityPO po=sale.getCommodity(name, type);
-		CommodityVO vo=new CommodityVO(type, type, type, 0, 0, 0, 0, 0, 0);
+		CommodityPO po = sale.getCommodity(name, type);
+		CommodityVO vo = new CommodityVO(type, type, type, 0, 0, 0, 0, 0, 0);
 		return vo;
 	}
 
 	public ImportMenuVO searchImport_ReturnNote_up(String note) {
 		// TODO Auto-generated method stub
-		Import_ReturnPO po=sale.searchImport_ReturnNote(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ImportMenuVO vo=new ImportMenuVO(note, note, note, commodityList, 0);
+		Import_ReturnPO po = sale.searchImport_ReturnNote(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ImportMenuVO vo = new ImportMenuVO(note, note, note, commodityList, 0);
 		return vo;
 	}
 
 	public ExportMenuVO searchExport_ReturnNote_up(String note) {
 		// TODO Auto-generated method stub
-		Export_ReturnPO po=sale.searchExport_ReturnNote(note);
-		CommodityListVO commodityList=new CommodityListVO(note, note, note, 0, 0, 0, note);
-		ExportMenuVO vo=new ExportMenuVO(note, note, note, note, note, commodityList, 0, 0, 0, 0, note, note, 0, note);
+		Export_ReturnPO po = sale.searchExport_ReturnNote(note);
+		CommodityListVO commodityList = new CommodityListVO(note, note, note,
+				0, 0, 0, note);
+		ExportMenuVO vo = new ExportMenuVO(note, note, note, note, note,
+				commodityList, 0, 0, 0, 0, note, note, 0, note);
 		return vo;
 	}
 }

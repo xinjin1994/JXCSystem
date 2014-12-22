@@ -168,6 +168,9 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			if(sort2==null){
 				return 4;
 			}
+			if(sort2.hasSort()){
+				return 9;
+			}
 			
 			sto.updateGood(com1, sort2);
 			return 0;
@@ -199,7 +202,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			e.printStackTrace();
 		}
 		
-		return null;
+		return new ArrayList<CommodityPO>();
 	}
 	
 	public String getCommodityNote(SortPO po){
@@ -219,7 +222,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		try {
 			
-			ArrayList<SortPO> sort=sto.getAllSort();
+			ArrayList<SortPO> sort=getAllSort();
 			
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(sort1.getName())){
@@ -261,7 +264,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		try {
 			
-			ArrayList<SortPO> sort=sto.getAllSort();
+			ArrayList<SortPO> sort=getAllSort();
 			
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(name)){
@@ -299,7 +302,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		try {
 			
-			ArrayList<SortPO> sort=sto.getAllSort();
+			ArrayList<SortPO> sort=getAllSort();
 			
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(name1)){
@@ -347,12 +350,55 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	
 	public ArrayList<SortPO> getAllSort(){
 		try {
-			return sto.getAllSort();
+			ArrayList<SortPO> sort=new ArrayList<SortPO>();
+			ArrayList<SortPO> po=sto.getAllSort();
+			ArrayList<SortPO> lin=new ArrayList<SortPO>();
+			
+			for(int i=0;i<po.size();i++){
+				lin=getAllSortSon(po.get(i));
+				for(int j=0;j<lin.size();j++){
+					SortPO so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					so.sortList=lin.get(j).sortList;
+					so.commodityList=lin.get(j).commodityList;
+					System.out.println("getAllSort:Note:"+so.note);
+					sort.add(so);
+				}
+			}
+			
+			return sort;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return new ArrayList<SortPO>();
+	}
+	
+	public ArrayList<SortPO> getAllSortSon(SortPO po){
+		ArrayList<SortPO> sort=new ArrayList<SortPO>();
+		ArrayList<SortPO> lin=new ArrayList<SortPO>();
+		SortPO so=new SortPO(po.getName());
+		so.note=po.getNote();
+		so.commodityList=po.commodityList;
+		so.sortList=po.sortList;
+		so.father=po.father;
+		sort.add(so);
+		
+//		if(po.hasSort()){
+			for(int i=0;i<po.sortList.size();i++){
+				lin=getAllSortSon(po.sortList.get(i));
+				for(int j=0;j<lin.size();j++){
+					so=new SortPO(lin.get(j).getName());
+					so.note=lin.get(j).getNote();
+					so.father=lin.get(j).father;
+					so.sortList=po.sortList;
+					so.commodityList=lin.get(j).commodityList;
+					sort.add(so);
+				}
+			}
+//		}
+		return sort;
 	}
 	
 	public String getSortNote(SortPO po){
@@ -654,8 +700,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	
 	public SortPO findSort(String name){
 		ArrayList<SortPO> sort;
-		try {
-			sort = sto.getAllSort();
+			sort = getAllSort();
 		
 			int i=0;
 			for(i=0;i<sort.size();i++){
@@ -663,10 +708,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 					return sort.get(i);
 				}
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		return null;
 	}
 	
@@ -808,13 +850,14 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		SortPO so;
 		
-		if(!po.hasCommodity()){
-			so=new SortPO(po.getName());
-			so.note=po.getNote();
-			so.father=po.father;
-			sort.add(so);
+		so=new SortPO(po.getName());
+		so.note=po.getNote();
+		so.father=po.father;
+		sort.add(so);
+		
+		if(po.hasSort()){
 			for(int i=0;i<po.sortList.size();i++){
-				lin=getSortSon(po);
+				lin=getSortSon(po.sortList.get(i));
 				for(int j=0;j<lin.size();j++){
 					so=new SortPO(lin.get(j).getName());
 					so.note=lin.get(j).getNote();
@@ -831,7 +874,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		SortPO so;
 		
-		if(!po.hasSort()){
+		if(po.hasCommodity()){
 			so=new SortPO(po.getName());
 			so.note=po.getNote();
 			so.father=po.father;
