@@ -59,7 +59,7 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 //		 SalesResult(MyFrame frame,UIController controller,SalesUIController salesUIController,FatherPanel backPanel){
 				SalesblService salesblService = new SalesController();
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureAddInfo.this);
-				System.out.println(salesblService.addCustomer_up(customerVO));
+//				System.out.println(salesblService.addCustomer_up(customerVO));
 				switch(salesblService.addCustomer_up(customerVO)){
 			    	case 0:
 						salesResult.succeeded("添加客户成功！");
