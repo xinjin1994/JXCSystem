@@ -39,7 +39,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 
 		commodityblService = new CommodityController();
 		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
-		resControllerF = new ResultPanelController(frame, this);
+		resControllerF = new ResultPanelController(frame,commodityAllUIController.getPanel());
 		//!!!!!!
 		//这个是错误，调用resControllerF.failedConfirm("错误信息", failedAddress);
 		setForward();

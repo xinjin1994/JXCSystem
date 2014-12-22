@@ -81,6 +81,7 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 			SortVO sort = new SortVO("g");*/
 			comDel = commodityblService.searchAccurateCommodity_up(nameString, typeString);
 			SortVO sort = new SortVO(comDel.fatherSort);
+			commodityAllUIController.setTempPanel(this);
 			commodityAllUIController.confirmCom(comDel, "del",sort);
 		}
 	}

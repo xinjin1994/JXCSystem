@@ -71,7 +71,8 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 			if(sort.equals(null)){
 				resController.failed("您要删除的分类不存在！", failedAddress);
 			}else{
-			commodityAllUIController.confirmSort(sort,"del");
+				commodityAllUIController.setTempPanel(this);
+				commodityAllUIController.confirmSort(sort,"del");
 			}
 			}catch(Exception e){
 				resController.failed("您要删除的分类不存在！", failedAddress);

@@ -22,7 +22,7 @@ public class ConfirmPatchPanel extends PatchDetailPanel implements ActionListene
 		
 		super(frame, string, commodityAllUIController, newPatch);
 		setForward();
-		resControllerS = new ResultPanelController(frame,this);
+		resControllerS = new ResultPanelController(frame, commodityAllUIController.getPanel());
 		resControllerF = new ResultPanelController(frame, commodityAllUIController.getMainPanel());
 		this.failedAddress = "commodity3";
 		commodityblService = new CommodityController();

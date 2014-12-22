@@ -35,7 +35,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		
-		resControllerF = new ResultPanelController(frame,this);
+		resControllerF = new ResultPanelController(frame,commodityAllUIController.getPanel());
 		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
 		this.failedAddress = "commodity2";
 		
