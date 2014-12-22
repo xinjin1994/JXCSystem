@@ -17,11 +17,12 @@ public class ColorFactory {
 	public Color adminTableColor;
 	
 	public Color comColor;
+	public Color salesBkColor;
 	public ColorFactory(){
 		
 		greyFont = new Color(225,225,225);
 		accColor = new Color(135,144,153);
-		saleColor = new Color(245,190,185);
+		
 		accTableColor = new Color(185,188,193);
 		
 		manTableColor = new Color(166,199,230);
@@ -33,6 +34,9 @@ public class ColorFactory {
 		adminBkColor = new Color(232,229,216);
 		
 		comColor = new Color(104,184,157);
+		
+		saleColor = new Color(245,190,185);
+		salesBkColor = new Color(228,130,121);
 		
 	}
 }

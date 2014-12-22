@@ -74,6 +74,7 @@ public class ChaComDPanel extends AddComPanel implements ActionListener{
 			commodityAllUIController.setTempPanel(this);
 			frame.remove(ChaComDPanel.this);
 			setNewCom();
+			commodityAllUIController.setTempPanel(this);
 			commodityAllUIController.confirmCom(newCom,"cha",sortVO,chaCom);
 		}else if(event.getSource() == sortBox){
 			sortString = sortBox.getSelectedItem().toString();

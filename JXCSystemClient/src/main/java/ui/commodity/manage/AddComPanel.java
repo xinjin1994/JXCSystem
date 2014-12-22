@@ -180,16 +180,17 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 		try{
-		inValue = Double.parseDouble(inPrice.getText());
-		outValue = Double.parseDouble(outPrice.getText());
-		warnNum = Integer.parseInt(warnNumber.getText());
-		//CommodityVO(String id, String name, String type, int num, double inValue, double outValue,
-				//double latestInValue, double latestOutValue,int warn
-		sortVO = new SortVO(sortString);
-		newCom = new CommodityVO(idString, nameString, typeString, num, inValue,
-				outValue, latestInValue, latestOutValue, warnNum);
-		newCom.fatherSort = sortVO.name;
-		commodityAllUIController.confirmCom(newCom,"add",sortVO);
+			inValue = Double.parseDouble(inPrice.getText());
+			outValue = Double.parseDouble(outPrice.getText());
+			warnNum = Integer.parseInt(warnNumber.getText());
+			//CommodityVO(String id, String name, String type, int num, double inValue, double outValue,
+			//double latestInValue, double latestOutValue,int warn
+			sortVO = new SortVO(sortString);
+			newCom = new CommodityVO(idString, nameString, typeString, num, inValue,
+					outValue, latestInValue, latestOutValue, warnNum);
+			newCom.fatherSort = sortVO.name;
+			commodityAllUIController.setTempPanel(this);
+			commodityAllUIController.confirmCom(newCom,"add",sortVO);
 		}catch(Exception e){
 			frame.remove(this);
 			resController.failed("请重新确认输入信息！", failedAddress);

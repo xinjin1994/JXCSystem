@@ -23,7 +23,7 @@ import businesslogicservice.salesblservice.SalesblService;
 public class AddCusPanel extends FatherPanel {
 
 	protected MyTextFieldTrans cusName, cusTel, cusAdd, cusEBox, cusCode, cusShouldPay;
-	private int infoX1 = 488, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,
+	private int infoX1 = 495, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,
 			infoHeight = 31;
 	private int levelX = 105, levelY = 328, levelInter = 42;
 	protected MyStopButton supplierButton, sellerButton;
@@ -65,11 +65,11 @@ public class AddCusPanel extends FatherPanel {
 	}
 	public void addTextField() {
 		cusName = new MyTextFieldTrans(infoX1, infoY, infoWidth1, infoHeight);
-		cusTel = new MyTextFieldTrans(infoX2, infoY + infoInter, infoWidth2, infoHeight);
+		cusTel = new MyTextFieldTrans(infoX1, infoY + infoInter, infoWidth1, infoHeight);
 		cusAdd = new MyTextFieldTrans(infoX1, infoY + 2 * infoInter, infoWidth1, infoHeight);
-		cusEBox = new MyTextFieldTrans(infoX2, infoY + 3 * infoInter, infoWidth2, infoHeight);
+		cusEBox = new MyTextFieldTrans(infoX1, infoY + 3 * infoInter, infoWidth1, infoHeight);
 		cusCode = new MyTextFieldTrans(infoX1, infoY + 4 * infoInter, infoWidth1, infoHeight);
-		cusShouldPay = new MyTextFieldTrans(infoX2, infoY + 5 * infoInter, infoWidth2, infoHeight);
+		cusShouldPay = new MyTextFieldTrans(infoX1, infoY + 5 * infoInter, infoWidth1, infoHeight);
 		salesManField = new MyTextFieldFilled(418, 485, 204, 36);
 		this.add(cusName);
 		this.add(cusTel);

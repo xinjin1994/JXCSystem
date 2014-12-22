@@ -74,6 +74,7 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 //			finCom.fatherSort = "b";
 //			System.out.println(finCom.name);
 			frame.remove(this);
+			commodityAllUIController.setTempPanel(this);
 			commodityAllUIController.changeComD(finCom);
 			}catch(Exception e){
 				resController.failed("您要修改的商品不存在！", failedAddress);

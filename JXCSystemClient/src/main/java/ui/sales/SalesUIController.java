@@ -77,7 +77,7 @@ public class SalesUIController {
 	
 	private void setTable(ArrayList<String> info){
 		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setColor(colors.saleColor,colors.greyFont,colors.salesBkColor,colors.greyFont);
 		showTable.setTable(info);
 		thirdPanel.add(MyTable.tablePanel);
 	}
