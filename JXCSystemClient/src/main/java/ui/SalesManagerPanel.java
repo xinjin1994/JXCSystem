@@ -15,8 +15,11 @@ import ui.setting.MyTable;
 import ui.setting.ThirdPanel;
 import ui.setting.Button.MyButton;
 import vo.CommodityVO;
+import vo.CustomerVO;
 import businesslogic.commoditybl.CommodityController;
+import businesslogic.salesbl.SalesController;
 import businesslogicservice.commodityblservice.CommodityblService;
+import businesslogicservice.salesblservice.SalesblService;
 
 /**
  * 3销售经理
@@ -43,6 +46,7 @@ public class SalesManagerPanel extends FatherPanel {
 	private MyTable showTable;
 	private ThirdPanel thirdPanel;
 	private ColorFactory colors = new ColorFactory();
+	private SalesblService salesblService;
 	
 	public SalesManagerPanel(MyFrame frame, String url, UIController controller, SalesUIController 
 			salesController,ThirdPanel thirdPanel) {
@@ -51,6 +55,7 @@ public class SalesManagerPanel extends FatherPanel {
 		this.controller = controller;
 		this.thirdPanel = thirdPanel;
 		this.salesController = salesController;
+		salesblService = new SalesController();
 		commodityblService = new CommodityController();
 		this.addButton();
 	}
@@ -102,6 +107,25 @@ public class SalesManagerPanel extends FatherPanel {
 		salesController.backPanel(this);
 	}
 	
+	public void setCustomer(){
+		ArrayList<CustomerVO> cusVO = salesblService.getAllCustomer_up();
+		String classification = "进货商";
+		ArrayList<String> cusStr = new ArrayList<String>();
+		cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
+		for(int i=0;i<cusVO.size();i++){
+			CustomerVO customerVO = cusVO.get(i);
+			if (customerVO.classification) {
+				classification = "销售商";
+			}
+			String item = customerVO.id + classification + ";" + customerVO.level + ";"
+					+ customerVO.cusName + ";" + customerVO.tel + ";" + customerVO.address + ";"
+					+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
+					+ customerVO.shouldGet + ";" + ";" + customerVO.person;
+			cusStr.add(item);
+		}
+		setTable(cusStr);
+	}
+	
 	class FirstButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -110,12 +134,11 @@ public class SalesManagerPanel extends FatherPanel {
 				controller.backLoginPanel();
 				frame.repaint();
 			}else if(e.getSource() == refresh){
-				/*commodityVO = commodityblService.getAllWarnGood_up();
+				commodityVO = commodityblService.getAllWarnGood_up();
 				if(commodityVO.size() == 0){
 				}else{
 					addWarn();
-				}*/
-				addWarn();
+				}
 				SalesManagerPanel.this.repaint();
 			}else if(e.getSource() == warn){
 				ArrayList<String> commodityStr = new ArrayList<String>();
@@ -128,6 +151,9 @@ public class SalesManagerPanel extends FatherPanel {
 				}
 				thirdPanel.removeAll();
 				setTable(commodityStr);
+			}else if(e.getSource() == cusManage){
+				setCustomer();
+				
 			}
 		}
 
@@ -141,8 +167,10 @@ public class SalesManagerPanel extends FatherPanel {
 			if(e.getSource() == cusManage) {
 				salesController.toCusPanel();
 			}else if(e.getSource() == salesManage) {
+				thirdPanel.removeAll();
 				salesController.toSalesPanel();
 			}else if(e.getSource() == importManage) {
+				thirdPanel.removeAll();
 				salesController.toImPanel();
 			}
 		}

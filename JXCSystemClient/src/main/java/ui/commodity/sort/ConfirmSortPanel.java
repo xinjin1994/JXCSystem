@@ -133,6 +133,10 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	//6  商品数量不足，不能添加为赠品
 	//7  赠品数量不足，不能删除
 	//8  商品数量不能为负
+	//9  分类中存在分类，无法添加商品
+	//10 分类中存在商品，无法添加分类
+	//11 分类中存在分类，无法删除分类
+
 	private void chaSort() {
 //		resControllerS.succeeded("成功修改分类信息！", "commodity");
 		switch(commodityblService.updateSort_up_Inf(oldSort, sort)){
@@ -154,6 +158,9 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		case 5:
 			resControllerF.failedConfirm("删除的分类下存在商品，不能删除", failedAddress);
 			break;
+		case 11:
+			resControllerF.failedConfirm("删除的分类下存在分类，不能删除", failedAddress);
+			break;
 		default:
 			resControllerF.failedConfirm("未知错误！", failedAddress);
 		}
@@ -168,6 +175,9 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			break;
 		case 3:
 			resControllerF.failedConfirm("分类已存在！",failedAddress);
+			break;
+		case 10:
+			resControllerF.failedConfirm("分类中存在商品，无法添加分类", failedAddress);
 			break;
 		default:
 			resControllerF.failedConfirm("未知错误！", failedAddress);

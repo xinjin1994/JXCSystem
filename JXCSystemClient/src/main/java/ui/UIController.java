@@ -33,7 +33,10 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
+<<<<<<< HEAD
 //		this.welcomePanel();
+		this.welcomePanel();
+>>>>>>> origin/master
 //		this.CommodityPanel();
 //	  	this.AccountPanel();
 

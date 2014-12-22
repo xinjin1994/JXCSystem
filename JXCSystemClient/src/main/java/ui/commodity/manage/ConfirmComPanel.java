@@ -86,6 +86,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 			//6  商品数量不足，不能添加为赠品
 			//7  赠品数量不足，不能删除
 			//8  商品数量不能为负
+			//9  分类中存在分类，无法添加商品
 			if(type.equals("add")){
 				switch(commodityblService.addCommodity_up(commodityVO, sortVO)){
 				case 0:
@@ -96,8 +97,13 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 					break;
 				case 1:
 					resControllerF.failedConfirm("商品已存在！", failedAddress);
+					break;
 				case 5:
 					resControllerF.failedConfirm("分类中已存在该商品！", failedAddress);
+					break;
+				case 9:
+					resControllerF.failedConfirm(" 分类中存在分类，无法添加商品", failedAddress);
+					break;
 				default:
 					resControllerF.failedConfirm("未知错误！", failedAddress);
 				}

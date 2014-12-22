@@ -51,6 +51,11 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 	
 	class Listener implements ActionListener {
 
+		//1 客户名称重复
+				//2 客户名称不存在
+				//3 客户的应收应付不为0
+				//-1 未知错误
+
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
 //				System.out.println("qianjing!");
@@ -60,6 +65,8 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 				case 0:
 					salesResult.succeeded("删除成功！");
 					break;
+				default:
+					salesResult.failed("未知错误！", "delCusDFailed");
 				}
 				
 			} else if (e.getSource() == secondCusBack) {
