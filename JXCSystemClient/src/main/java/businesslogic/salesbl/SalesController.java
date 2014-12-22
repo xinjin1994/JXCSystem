@@ -2,6 +2,7 @@ package businesslogic.salesbl;
 
 import java.util.ArrayList;
 
+import main.ClientStart;
 import po.CommodityPO;
 import po.CustomerPO;
 import po.ExportGoodPO;
@@ -21,6 +22,10 @@ import businesslogicservice.salesblservice.SalesblService;
 public class SalesController implements SalesblService {
 
 	public Sales sale = new Sales();
+	
+	public SalesController(){
+		sale=ClientStart.sales;
+	}
 
 	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String name) {
 		// TODO Auto-generated method stub

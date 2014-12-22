@@ -44,6 +44,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public void setSale(SalesDataService sale) {
 		this.sale = sale;
 	}
+	
+	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog,CommodityInfo commodity){
+		this.invoice=invoice;
+		this.systemlog=systemlog;
+		this.commodity=commodity;
+	}
 
 	public int addCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub

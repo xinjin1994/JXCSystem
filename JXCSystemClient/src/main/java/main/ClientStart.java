@@ -82,7 +82,7 @@ public class ClientStart {
 			initialization.initialization=(InitializationDataService) Naming.lookup("rmi://127.0.0.1:8891/InitializationDataService");
 			invoice.invoice=(InvoiceDataService) Naming.lookup("rmi://127.0.0.1:8892/InvoiceDataService");
 			promotion.promotion=(PromotionDataService) Naming.lookup("rmi://127.0.0.1:8893/PromotionDataService");
-//			sales.sale=(SalesDataService) Naming.lookup("rmi://127.0.0.1:8894/SalesDataService");
+			sales.sale=(SalesDataService) Naming.lookup("rmi://127.0.0.1:8894/SalesDataService");
 			systemlog.sys=(SystemlogDataService) Naming.lookup("rmi://127.0.0.1:8895/SystemlogDataService");
 			user.us=(UserDataService) Naming.lookup("rmi://127.0.0.1:8896/UserDataService");
 
@@ -92,6 +92,7 @@ public class ClientStart {
 			invoice.setInfo(account, sales, commodity);
 			promotion.setInfo(systemlog, commodity);
 			user.setInfo(systemlog);
+			sales.setInfo(invoice, systemlog, commodity);
 			
 //			commodityController.commodity.sto=commodityRMI;
 //			accountController.account.account=accountRMI;

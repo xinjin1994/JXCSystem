@@ -671,6 +671,22 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public SalesDataService_Stub() throws RemoteException {
 		super();
+		
+		this.writeCustomerList();
+		this.writeDraftImportList();
+		this.writeDraftImport_ReturnList();
+		this.writeDraftExportList();
+		this.writeDraftExport_ReturnList();
+		this.writeImportList();
+		this.writeImport_ReturnList();
+		this.writeExportList();
+		this.writeExport_ReturnList();
+		this.writeJHDNote();
+		this.writeJHTHDNote();
+		this.writeKHBHNote();
+		this.writeXSDNote();
+		this.writeXSTHDNote();
+		
 		this.readCustomerList();
 		this.readDraftImportList();
 		this.readDraftImport_ReturnList();
@@ -680,6 +696,11 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		this.readImport_ReturnList();
 		this.readExportList();
 		this.readExport_ReturnList();
+		this.readJHDNote();
+		this.readJHTHDNote();
+		this.readKHBHNote();
+		this.readXSDNote();
+		this.readXSTHDNote();
 		// TODO Auto-generated constructor stub
 	}
 

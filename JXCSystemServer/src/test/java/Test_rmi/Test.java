@@ -65,9 +65,9 @@ public class Test {
 			LocateRegistry.createRegistry(8893);
 			Naming.bind("rmi://127.0.0.1:8893/PromotionDataService",promotiondataservice);
 			
-//			salesdataservice = new SalesDataService_Stub();		
-//			LocateRegistry.createRegistry(8894);
-//			Naming.bind("rmi://127.0.0.1:8894/SalesDataService",salesdataservice);
+			salesdataservice = new SalesDataService_Stub();		
+			LocateRegistry.createRegistry(8894);
+			Naming.bind("rmi://127.0.0.1:8894/SalesDataService",salesdataservice);
 			
 			systemlogdataservice = new SystemlogDataService_Stub();		
 			LocateRegistry.createRegistry(8895);

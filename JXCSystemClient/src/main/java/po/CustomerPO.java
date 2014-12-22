@@ -4,21 +4,21 @@ import java.io.Serializable;
 
 public class CustomerPO implements Serializable{
 
-	String id;//�ͻ����
-	String name;//�ͻ����
-	int level;//�ͻ��ȼ�
-	boolean type;//�ͻ�����
-	String phone;//��ϵ��ʽ
-	String zip;//�ʱ�
-	String mail;//����
-	double moneyIn;//Ӧ�ն��
-	double moneyOut;
-	double amount;//Ӧ��Ӧ��
-	String clerk;//ҵ��Ա
-	String address;//��ַ
+	public String id;//�ͻ����
+	public String name;//�ͻ����
+	public int level;//�ͻ��ȼ�
+	public boolean type;//�ͻ�����
+	public String phone;//��ϵ��ʽ
+	public String zip;//�ʱ�
+	public String mail;//����
+	public double moneyIn;//Ӧ�ն��
+	public double moneyOut;
+	public double amount;//Ӧ��Ӧ��
+	public String clerk;//ҵ��Ա
+	public String address;//��ַ
 	
 	public CustomerPO(String id2, String name, int level, boolean b,
-			String phone, String zip, String mail, double moneyIn, double moneyOut,double mostOwe,
+			String phone, String zip, String mail, double moneyIn,double moneyOut, double mostOwe,
 			String clerk, String address) {
 		this.id = id2;
 		this.name = name;
