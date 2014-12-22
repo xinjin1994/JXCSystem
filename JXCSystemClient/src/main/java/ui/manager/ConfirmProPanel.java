@@ -29,9 +29,7 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	public ConfirmProPanel(MyFrame frame, String url,
 			ManagerAllUIController controller, DiscountVO discount) {
 		super(frame, url, controller, discount);
-//		this.frame = frame;
-//		this.uiController = controller;
-//		this.discount = discount;
+
 		
 		
 		forwardButton.setActionCommand("discount");
@@ -60,7 +58,8 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 		forwardButton.setActionCommand("gift");
 	}
 	protected void back() {
-		System.out.println("here");
+		System.out.println(this);
+		System.out.println(uiController);
 		super.uiController.setBack_third(this);
 	}
 	protected void init(){

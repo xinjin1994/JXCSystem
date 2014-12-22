@@ -3,6 +3,8 @@ package ui.account.accBasic;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ui.AccountPanel;
+import ui.ManagerPanel;
 import ui.account.AccountAllUIController;
 import ui.account.AccountDetailPanel;
 import ui.manager.ManagerAllUIController;
@@ -159,6 +161,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		//3 账户中仍存在余额，不能删除
 		case 0:
 			frame.remove(this);
+			checkType();
 			resControllerS.succeeded("成功修改账户！", type);
 			break;
 		case 1:
@@ -188,6 +191,7 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		//3 账户中仍存在余额，不能删除
 		case 0:
 			frame.remove(this);
+			checkType();
 			resControllerS.succeeded("成功删除账户！", type);
 			break;
 		case 2:
@@ -209,6 +213,25 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 	 * 向bl层传送数据accountVO,添加账户
 	 * @param 
 	 */
+	private void checkType(){
+		if(type.equals("account")){
+			chaAccTableAcc();
+		}else if(type.equals("manager")){
+			chaAccTableMan();
+		}
+	}
+	
+	private void chaAccTableAcc(){
+		AccountPanel temp = (AccountPanel)(accountController.getMainPanel());
+		temp.getAccountInfo();
+		accountController.setMainPanel(temp);
+	}
+	private void chaAccTableMan(){
+		ManagerPanel temp = (ManagerPanel)(managerController.getMainPanel());
+		temp.getAccountInfo();
+		managerController.setMainPanel(temp);
+	}
+	
 	private void addAcc() {
 		switch(accountblService.addAccount_up(acc)){
 		//-1 未知错误
@@ -217,6 +240,8 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 		//3 账户中仍存在余额，不能删除
 		case 0:
 			frame.remove(this);
+			
+			checkType();
 			resControllerS.succeeded("成功添加账户！", type);
 			break;
 		case 1:

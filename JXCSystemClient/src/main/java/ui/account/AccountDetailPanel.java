@@ -1,6 +1,7 @@
 package ui.account;
 
 import ui.FatherPanel;
+import ui.UIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
@@ -17,6 +18,8 @@ import vo.initial.InitialCommodityVO;
 public class AccountDetailPanel extends FatherPanel {
 	protected AccountAllUIController accountController;
 	protected ManagerAllUIController managerController;
+	
+	protected UIController controller;
 	protected MyLabel name,balance;
 	protected AccountVO fountAcc;
 	
@@ -25,6 +28,7 @@ public class AccountDetailPanel extends FatherPanel {
 			AccountAllUIController uiController,AccountVO foundAcc){
 		super(frame,url,uiController);
 		this.accountController = uiController;
+		this.controller = uiController;
 		this.fountAcc = foundAcc;
 		this.repaint();
 		SetBackAcc();
@@ -37,6 +41,7 @@ public class AccountDetailPanel extends FatherPanel {
 			ManagerAllUIController uiController,AccountVO foundAcc){
 		super(frame,url,uiController);
 		this.managerController = uiController;
+		this.controller = uiController;
 		this.fountAcc = foundAcc;
 		this.repaint();
 		SetBackMan();

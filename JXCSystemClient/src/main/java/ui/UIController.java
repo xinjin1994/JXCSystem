@@ -33,11 +33,11 @@ public class UIController {
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
-		this.welcomePanel();
+//		this.welcomePanel();
 //		this.CommodityPanel();
 //	  	this.AccountPanel();
 
-//		this.SalesManagerPanel();
+		this.SalesManagerPanel();
 
 //		this.AccountPanel();
 
@@ -74,6 +74,7 @@ public class UIController {
 	public void SalesManagerPanel() {
 //		frame.remove(loginPanel);
 		new SalesUIController(this, frame);
+		
 	}
 	
 	public void AdminPanel() {

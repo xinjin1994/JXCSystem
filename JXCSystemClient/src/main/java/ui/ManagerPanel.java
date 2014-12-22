@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 
+import businesslogic.accountbl.AccountController;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogicservice.accountblservice.AccountblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 import ui.manager.ManagerUIController;
 import ui.setting.ColorFactory;
@@ -23,9 +26,13 @@ import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RemindButton;
 import ui.setting.resultPanels.ResultPanelController;
+import vo.AccountVO;
+import vo.SystemlogVO;
 import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogic.systemlogbl.SystemlogController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
+import businesslogicservice.systemlogblservice.SystemlogblService;
 
 /**
  * 6 总经理
@@ -66,12 +73,17 @@ public class ManagerPanel extends FatherPanel{
 	private String failedAddress;
 
 	private SaveTempBills bills;
+	
+	private SystemlogblService systemlogblService;
+	private AccountblService accountblService;
 	public ManagerPanel(MyFrame frame, String url, UIController controller,
 			ManagerUIController managerUIController) {
 		super(frame, url, controller);
 		managerThirdPanel = new ThirdPanel();
 		invoiceblService = new InvoiceController();
+		accountblService = new AccountController();
 		
+		systemlogblService = new SystemlogController();
 		this.frame = frame;
 		this.add(managerThirdPanel);
 		this.managerUIController= managerUIController;
@@ -118,16 +130,36 @@ public class ManagerPanel extends FatherPanel{
 		
 	}
 
-	private void getAccountInfo() {
-//		// TODO Auto-generated method stub
-//		ArrayList <String> info = new ArrayList<String>();
-//		info.add("a;b;c;e");
-//		info.add("s,r,t,h");
-//		info.add("w;t;x;h");
-//		info.add("gg");
-//		setTable(info);
+	public void getAccountInfo() {
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("账户名称;账户余额");
+		ArrayList<AccountVO> accounts = new ArrayList<AccountVO>();
+		accounts = accountblService.getAllAccount_up();
+		try {
+			for(AccountVO temp:accounts){
+				info.add(temp.name+";"+temp.balance);
+			}
+			setTable(info,"acc");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
-
+	public void setTable(ArrayList<String> info,String type){
+		managerThirdPanel.removeAll();
+		showTable = new MyTable();
+//		System.out.println(info.get(1));
+		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
+		showTable.setTable(info);
+//		if(type.equals("acc")){
+			showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//		}else if (type.equals("log")) {
+//			showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//		}
+		managerThirdPanel.add(showTable.tablePanel);
+		managerThirdPanel.repaint();
+		this.repaint();
+	}
+	
 	public void setTable(ArrayList<String> info,SaveTempBills bills) {
 		this.bills = bills;
 		managerThirdPanel.removeAll();
@@ -230,7 +262,20 @@ public class ManagerPanel extends FatherPanel{
 			}else if (e.getSource() == buttons[3]) {
 				getProInfo();
 			}else if(e.getSource() == buttons[4]){
-				
+				ArrayList<String> infos = new ArrayList<String>();
+				infos.add("操作时间;操作员;操作内容");
+				ArrayList<SystemlogVO> logs = new ArrayList<SystemlogVO>();
+				logs = systemlogblService.show_up();
+					
+				System.out.println("logs"+logs.size());
+				try {
+					for(SystemlogVO temp:logs){
+						infos.add(temp.time+";"+temp.operation+";"+temp.word);
+					}
+					setTable(infos,"log");
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
 			}
 			
 		}

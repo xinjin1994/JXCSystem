@@ -1,5 +1,6 @@
 package ui.setting;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import businesslogic.commoditybl.Commodity;
@@ -12,6 +13,7 @@ import ui.manager.ManagerAllUIController;
 
 public class SetTable {
 	
+	private ColorFactory color = new ColorFactory();
 	public SetTable(MyTable showTable,MyFrame frame,
 			AccountAllUIController accountAllUIController) {
 		AccountPanel temp = (AccountPanel)(accountAllUIController.getMainPanel());
@@ -30,6 +32,7 @@ public class SetTable {
 			ManagerAllUIController managerAllUIController) {
 		ManagerPanel temp = (ManagerPanel)(managerAllUIController.getMainPanel());
 		
+//		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,color.manColor);
 		temp.managerThirdPanel.removeAll();
 		temp.managerThirdPanel.add(showTable.tablePanel);
 		temp.managerThirdPanel.repaint();

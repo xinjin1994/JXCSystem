@@ -3,6 +3,8 @@ package ui.manager;
 import javax.swing.ImageIcon;
 
 import ui.FatherPanel;
+import ui.UIController;
+import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
@@ -74,7 +76,7 @@ public class ProDetailPanel extends FatherPanel{
 
 	public ProDetailPanel(MyFrame frame, String url, ManagerAllUIController controller,DiscountVO discount) {
 		super(frame, url, controller);
-		back();
+		
 		this.frame = frame;
 		this.uiController = controller;
 		this.discount = discount;
@@ -83,6 +85,7 @@ public class ProDetailPanel extends FatherPanel{
 		this.timeBegin = discount.getStartTime();
 		this.timeEnd = discount.getEndTime();
 		
+		back();
 		init();
 		typeLabel = new MyLabel(355, 141, 46, 115);
 		typeLabel.setIcon(new ImageIcon("Image/Manager/promotion/discount_stop.png"));
@@ -134,6 +137,10 @@ public class ProDetailPanel extends FatherPanel{
 		
 		timeBeginLabel.setFont(new FontFactory(14).font);
 		timeEndLabel.setFont(new FontFactory(14).font);
+		
+		timeBeginLabel.setForeground(new ColorFactory().accColor);
+		timeEndLabel.setForeground(new ColorFactory().accColor);
+		
 		timeBeginLabel.setText(timeBegin);
 		timeEndLabel.setText(timeEnd);
 		

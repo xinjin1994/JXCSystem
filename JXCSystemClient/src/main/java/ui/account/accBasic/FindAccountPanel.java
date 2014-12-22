@@ -1,8 +1,11 @@
 package ui.account.accBasic;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JTable;
 
 import ui.FatherPanel;
 import ui.account.AccountAllUIController;
@@ -38,7 +41,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	private String failedAddress;
 	
 	private ResultPanelController resController;
-	private AccountAllUIController accountAllUIController;
+//	private AccountAllUIController accountAllUIController;
 	public FindAccountPanel(MyFrame frame,String url,
 			AccountAllUIController accountController){
 		super(frame,url,accountController);
@@ -110,9 +113,17 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 	
 	private void setTable(ArrayList<String> info){
 		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		
 		showTable.setTable(info);
-		new SetTable(showTable, frame, accountAllUIController);
+		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		if(type.equals("account")){
+			showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+			new SetTable(showTable, frame, accountController);
+		}else if (type.equals("manager")) {
+//			showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+			showTable.setColor(colors.manTableColor,colors.manBkColor, colors.manColor,Color.white);
+			new SetTable(showTable, frame, managerController);
+		}
 	}
 	
 	
@@ -138,6 +149,7 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 				}
 			}
 		}else if(e.getSource() == fuzzyForwardButton){
+			ArrayList <String> infoArray = new ArrayList<String>();
 			infoString = info.getText();
 			if(infoString.equals("")){
 				frame.remove(this);
@@ -145,13 +157,14 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 			}else{
 				info.setText("");
 				ArrayList<AccountVO> fuzzyAccVO = accountblService.searchFuzzyAccount_up(infoString);	
-				ArrayList <String> infoArray = new ArrayList<String>();
+				
 				infoArray.add("账户名称;账户余额");
 				for(int i=0; i<fuzzyAccVO.size();i++){
 				String infoOfArray = fuzzyAccVO.get(i).name+";"+fuzzyAccVO.get(i).balance;
 				infoArray.add(infoOfArray);
 			}
 				if(infoArray.size() != 1){
+					frame.remove(this);
 					setTable(infoArray);
 				}else {
 					frame.remove(this);

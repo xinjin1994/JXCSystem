@@ -85,8 +85,8 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		String discountMoney = discount[1].getText();
 		String upperLimit = discount[2].getText();
 				
-		if( (timeBegin == "") || (timeEnd == "") || (beginMoney == "")
-				||(discountMoney == "")||(upperLimit == "")){
+		if( (timeBegin.equals("")) || (timeEnd.equals("")) || (beginMoney.equals(""))
+				||(discountMoney.equals(""))||(upperLimit.equals(""))){
 			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
 		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
@@ -109,8 +109,8 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		String voucherMoney = voucher[1].getText();
 		String upperLimit = voucher[2].getText();
 				
-		if( (timeBegin == "") || (timeEnd == "") || (beginMoney == "")
-				||(voucherMoney == "")||(upperLimit == "")){
+		if( (timeBegin.equals("")) || (timeEnd.equals("")) || (beginMoney.equals(""))
+				||(voucherMoney.equals(""))||(upperLimit.equals(""))){
 			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
 		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
@@ -132,8 +132,8 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		String beginMoney = price.getText();
 		String num = number.getText();
 				
-		if( (timeBegin == "") || (timeEnd == "") || (beginMoney == "") 
-				||(num == "") || (commodityInfo == "")){
+		if( (timeBegin.equals("")) || (timeEnd.equals("")) || (beginMoney.equals("")) 
+				||(num.equals("")) || (commodityInfo.equals(""))){
 			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
 		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
@@ -186,6 +186,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		for(int i = 0; i < time.length;i++){
 			time[i] = new MyTextFieldTrans(87+113*i,224, 112, 42);
 			time[i].setForeground(new ColorFactory().accColor);
+			time[i].setFont(new FontFactory(14).font);
 			this.add(time[i]);
 		}
 		

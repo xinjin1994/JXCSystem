@@ -116,13 +116,17 @@ public class AccountPanel extends FatherPanel{
 	 * 该方法用于显示table
 	 * @param info 要显示的数据
 	 */
-	public void setTable(ArrayList<String> info){
+	public void setTable(ArrayList<String> info,String type){
 		accountThirdPanel.removeAll();
 		showTable = new MyTable();
 		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 //		System.out.println(info.get(1));
 		showTable.setTable(info);
-		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//		if(type.equals("acc")){
+			showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//		}else if (type.equals("log")) {
+//			showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//		}
 		accountThirdPanel.add(showTable.tablePanel);
 		accountThirdPanel.repaint();
 		this.repaint();
@@ -144,14 +148,14 @@ public class AccountPanel extends FatherPanel{
 	/**
 	 * 该方法用于从下曾获得被审批的单据数据
 	 */
-	private void getInvoiceInfo() {
-		ArrayList <String> info = new ArrayList<String>();
-		info.add("a;b;c;e");
-		info.add("s,r,t,h");
-		info.add("w;t;x;h");
-		info.add("gg");
-		setTable(info);
-	}
+//	private void getInvoiceInfo() {
+//		ArrayList <String> info = new ArrayList<String>();
+//		info.add("a;b;c;e");
+//		info.add("s,r,t,h");
+//		info.add("w;t;x;h");
+//		info.add("gg");
+//		setTable(info);
+//	}
 	/**
 	 * 该方法用于获得当前期初的信息
 	 */
@@ -173,8 +177,7 @@ public class AccountPanel extends FatherPanel{
 	/**
 	 * 该方法用于显示当前所有账户的信息，该方法要根据登陆人员的身份判断能否选择
 	 */
-	private void getAccountInfo() {
-		
+	public void getAccountInfo() {
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("账户名称;账户余额");
 		ArrayList<AccountVO> accounts = new ArrayList<AccountVO>();
@@ -183,16 +186,10 @@ public class AccountPanel extends FatherPanel{
 			for(AccountVO temp:accounts){
 				info.add(temp.name+";"+temp.balance);
 			}
-			setTable(info);
+			setTable(info,"acc");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-//		info.add("a;b;c;e");
-//		info.add("s,r,t,h");
-//		info.add("w;t;x;h");
-//		info.add("gg");
-//		setTable(info);
 	}
 
 	
@@ -229,7 +226,7 @@ public class AccountPanel extends FatherPanel{
 			}else if(e.getSource() == buttons[2]){
 				getReceiptInfo();
 			}else if(e.getSource() == buttons[3]){
-				getInvoiceInfo();
+//				getInvoiceInfo();
 			}else if(e.getSource() == buttons[4]){
 				getInitialInfo();
 			}else if(e.getSource() == buttons[5]){
@@ -246,14 +243,14 @@ public class AccountPanel extends FatherPanel{
 				logs = systemlogblService.show_up();
 					
 				System.out.println("logs"+logs.size());
-//				try {
+				try {
 					for(SystemlogVO temp:logs){
 						infos.add(temp.time+";"+temp.operation+";"+temp.word);
 					}
-					setTable(infos);
-//				} catch (Exception e2) {
-//					// TODO: handle exception
-//				}
+					setTable(infos,"log");
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
 			}
 		}
 
