@@ -168,6 +168,9 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			if(sort2==null){
 				return 4;
 			}
+			if(sort2.hasSort()){
+				return 9;
+			}
 			
 			sto.updateGood(com1, sort2);
 			return 0;
@@ -199,7 +202,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			e.printStackTrace();
 		}
 		
-		return null;
+		return new ArrayList<CommodityPO>();
 	}
 	
 	public String getCommodityNote(SortPO po){
@@ -851,13 +854,14 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		SortPO so;
 		
-		if(!po.hasCommodity()){
-			so=new SortPO(po.getName());
-			so.note=po.getNote();
-			so.father=po.father;
-			sort.add(so);
+		so=new SortPO(po.getName());
+		so.note=po.getNote();
+		so.father=po.father;
+		sort.add(so);
+		
+		if(po.hasSort()){
 			for(int i=0;i<po.sortList.size();i++){
-				lin=getSortSon(po);
+				lin=getSortSon(po.sortList.get(i));
 				for(int j=0;j<lin.size();j++){
 					so=new SortPO(lin.get(j).getName());
 					so.note=lin.get(j).getNote();
@@ -874,7 +878,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		SortPO so;
 		
-		if(!po.hasSort()){
+		if(po.hasCommodity()){
 			so=new SortPO(po.getName());
 			so.note=po.getNote();
 			so.father=po.father;
