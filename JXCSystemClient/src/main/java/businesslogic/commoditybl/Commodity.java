@@ -812,7 +812,10 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	
 	public ArrayList<SortPO> getComSort(){
 		ArrayList<SortPO> array=new ArrayList<SortPO>();
-		ArrayList<SortPO> po=getAllSort();
+		ArrayList<SortPO> po;
+		try {
+			po = sto.getAllSort();
+		
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		
 		for(int i=0;i<po.size();i++){
@@ -824,12 +827,20 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				array.add(so);
 			}
 		}
+		
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return array;
 	}
 	
 	public ArrayList<SortPO> getSortSort(){
 		ArrayList<SortPO> array=new ArrayList<SortPO>();
-		ArrayList<SortPO> po=getAllSort();
+		ArrayList<SortPO> po;
+		try {
+			po = sto.getAllSort();
+		
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 //		po.remove(po.size()-1);
 		
@@ -842,6 +853,10 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				array.add(so);
 			}
 		}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return array;
 	}
 	
@@ -850,10 +865,12 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		SortPO so;
 		
-		so=new SortPO(po.getName());
-		so.note=po.getNote();
-		so.father=po.father;
-		sort.add(so);
+		if(!po.hasCommodity()){
+			so=new SortPO(po.getName());
+			so.note=po.getNote();
+			so.father=po.father;
+			sort.add(so);
+		}
 		
 		if(po.hasSort()){
 			for(int i=0;i<po.sortList.size();i++){
@@ -874,7 +891,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<SortPO> lin=new ArrayList<SortPO>();
 		SortPO so;
 		
-		if(po.hasCommodity()){
+		if(!po.hasSort()){
 			so=new SortPO(po.getName());
 			so.note=po.getNote();
 			so.father=po.father;
