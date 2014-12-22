@@ -27,6 +27,7 @@ public class ChaSortPanel extends DelSortPanel{
 			/*sort = new SortVO(nameString);
 			sort.note = "2";
 			sort.fatherSort = "b";*/
+			
 			sort = commodityblService.searchSort_up(nameString);
 			}catch(Exception e){
 				resController.failed("您要修改的分类不存在！", failedAddress);
