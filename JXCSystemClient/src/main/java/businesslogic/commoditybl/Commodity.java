@@ -222,7 +222,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		try {
 			
-			ArrayList<SortPO> sort=sto.getAllSort();
+			ArrayList<SortPO> sort=getAllSort();
 			
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(sort1.getName())){
@@ -264,7 +264,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		try {
 			
-			ArrayList<SortPO> sort=sto.getAllSort();
+			ArrayList<SortPO> sort=getAllSort();
 			
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(name)){
@@ -302,7 +302,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		try {
 			
-			ArrayList<SortPO> sort=sto.getAllSort();
+			ArrayList<SortPO> sort=getAllSort();
 			
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(name1)){
@@ -700,8 +700,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	
 	public SortPO findSort(String name){
 		ArrayList<SortPO> sort;
-		try {
-			sort = sto.getAllSort();
+			sort = getAllSort();
 		
 			int i=0;
 			for(i=0;i<sort.size();i++){
@@ -709,10 +708,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 					return sort.get(i);
 				}
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		return null;
 	}
 	

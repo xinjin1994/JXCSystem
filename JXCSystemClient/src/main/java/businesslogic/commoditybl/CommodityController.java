@@ -254,6 +254,8 @@ public class CommodityController implements CommodityblService{
 			return null;
 		}
 		SortVO vo=new SortVO(po.getName());
+		vo.fatherSort=po.father;
+		vo.note=po.note;
 		return vo;
 	}
 
