@@ -143,8 +143,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerVO> customerVO = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.getAllCustomer();
 		for (int i = 0; i < po.size(); i++) {
-			customerVO.set(i, new CustomerVO(null, false, i, null, null, null,
-					null, null, i, i, i, null));
+			customerVO.set(i, new CustomerVO(po.get(i).getId(), po.get(i).getType(), po.get(i).getLevel(), po.get(i).getName(),po.get(i).getPhone(), po.get(i).getAddress(), po.get(i).getZip(), po.get(i).getMail(), po.get(i).getAmount(),po.get(i).getMoneyIn(),po.get(i).getMoneyOut(),po.get(i).getClerk()));
 		}
 		return customerVO;
 	}
@@ -152,8 +151,7 @@ public class SalesController implements SalesblService {
 	public CustomerVO getCustomer_up(CustomerVO vo) {
 		// TODO Auto-generated method stub
 		CustomerPO po = sale.getCustomer(vo.cusName, vo.id);
-		CustomerVO customer = new CustomerVO(null, false, 0, null, null, null,
-				null, null, 0, 0, 0, null);
+		CustomerVO customer = new CustomerVO(po.getId(), po.getType(), po.getLevel(), po.getName(),po.getPhone(), po.getAddress(), po.getZip(), po.getMail(), po.getAmount(),po.getMoneyIn(),po.getMoneyOut(),po.getClerk());
 		return customer;
 	}
 
