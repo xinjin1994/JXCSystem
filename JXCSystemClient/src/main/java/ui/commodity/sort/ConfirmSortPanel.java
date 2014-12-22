@@ -112,7 +112,6 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			controller.setTempPanel(this);
 			if(type.equals("add")){
-				System.out.println("123");
 				addSort();
 			}else if(type.equals("del")){
 				delSort();
@@ -145,13 +144,15 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		}
 	}
 	private void delSort() {
-		System.out.println("成功删除分类！");
 		switch(commodityblService.delSort_up(sort)){
 		case 0:
 			resControllerS.succeeded("成功删除分类！", "commodity");
 			break;
 		case 4:
 			resControllerF.failedConfirm("分类不存在！", failedAddress);
+			break;
+		case 5:
+			resControllerF.failedConfirm("删除的分类下存在商品，不能删除", failedAddress);
 			break;
 		default:
 			resControllerF.failedConfirm("未知错误！", failedAddress);
