@@ -235,6 +235,7 @@ public class SalesController implements SalesblService {
 		return message;
 	}
 
+	// ///////////////////////////////////////////////////////
 	public int addCustomer_up(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		int message = sale.addCustomer(customerVO);
@@ -253,6 +254,7 @@ public class SalesController implements SalesblService {
 		return message;
 	}
 
+	// ///////////////////////////////////////////////////////
 	public int getDiscount_up(int money, int level) {
 		// TODO Auto-generated method stub
 		return sale.getDiscount();

@@ -711,7 +711,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 		CustomerPO po = findCustomer_true(po1.getName());
 		CustomerPO poo = findCustomer_true(po2.getName());
-		if (po != null && poo == null) {
+		if ((po != null) && (poo == null)) {
 			po.address = po2.getAddress();
 			po.amount = po2.getAmount();
 			po.clerk = po2.getClerk();
