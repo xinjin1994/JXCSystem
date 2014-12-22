@@ -74,7 +74,7 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 		nameString = name.getText();
 		typeString = typeID.getText();
 		if(nameString.equals("")||typeString.equals("")){
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 		/*	comDel = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
 			comDel.fatherSort = "g";

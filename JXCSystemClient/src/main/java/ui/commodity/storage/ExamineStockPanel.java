@@ -100,10 +100,10 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 
 		if(time1.equals("")||time2.equals("")){
 			frame.remove(this);
-			resController.failedConfirm("存在输入为空！", failedAddress);
+			resController.failed("存在输入为空！", failedAddress);
 		}else if(isLegal == false){
 			frame.remove(this);
-			resController.failedConfirm("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 		}else{
 		ArrayList<ExamineVO> examineVO = commodityblService.Examine_up(time1, time2);
 		ArrayList<String> examStr = new ArrayList<String>();

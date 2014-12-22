@@ -60,7 +60,7 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 	protected void getSort() {
 		nameString = name.getText();
 		if(nameString.equals("")){
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 			try{
 			frame.remove(this);
@@ -74,7 +74,7 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 			commodityAllUIController.confirmSort(sort,"del");
 			}
 			}catch(Exception e){
-				resController.failedConfirm("您要删除的分类不存在！", failedAddress);
+				resController.failed("您要删除的分类不存在！", failedAddress);
 			}
 		}
 	}

@@ -192,7 +192,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 		commodityAllUIController.confirmCom(newCom,"add",sortVO);
 		}catch(Exception e){
 			frame.remove(this);
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		//添加失败	
 			}
 		}

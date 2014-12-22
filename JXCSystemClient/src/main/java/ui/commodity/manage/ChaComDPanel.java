@@ -52,7 +52,7 @@ public class ChaComDPanel extends AddComPanel implements ActionListener{
 		if(nameString.equals("")||typeString.equals("")||inPrice.getText().equals("")
 				||outPrice.getText().equals("")||warnNumber.getText().equals("")){
 			//添加失败
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 		try{
 		inValue = Double.parseDouble(inPrice.getText());
@@ -65,7 +65,7 @@ public class ChaComDPanel extends AddComPanel implements ActionListener{
 				outValue, latestInValue, latestOutValue, warnNum);
 		newCom.fatherSort = sortVO.name;
 		}catch(Exception e){
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 			}
 		}
 	}

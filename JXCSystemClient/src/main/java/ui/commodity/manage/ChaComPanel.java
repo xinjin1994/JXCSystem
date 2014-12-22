@@ -64,7 +64,7 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 		nameString = name.getText();
 		typeString = typeID.getText();
 		if(nameString.equals("")||typeString.equals("")){
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 			try{
 			finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
@@ -76,7 +76,7 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			commodityAllUIController.changeComD(finCom);
 			}catch(Exception e){
-				resController.failedConfirm("您要修改的商品不存在！", failedAddress);
+				resController.failed("您要修改的商品不存在！", failedAddress);
 			}
 		}
 	}

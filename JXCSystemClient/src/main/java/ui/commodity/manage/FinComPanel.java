@@ -118,7 +118,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 	private void fuzzyFind() {
 		infoString = info.getText();
 		if(infoString.equals("")){
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 			//CommodityVO(String id, String name, String type, int num, double inValue, double outValue,
 			//double latestInValue, double latestOutValue,int warn) {
@@ -137,7 +137,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 				setTable(comArr);
 		
 			}catch(Exception e){
-			resController.failedConfirm("您要查看的商品不存在！", failedAddress);
+			resController.failed("您要查看的商品不存在！", failedAddress);
 			}
 		}
 	}
@@ -149,7 +149,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 		nameString = name.getText();
 		typeIDString = typeID.getText();
 		if(nameString.equals("")||typeIDString.equals("")){
-			resController.failedConfirm("请重新确认输入信息", failedAddress);
+			resController.failed("请重新确认输入信息", failedAddress);
 		}else{
 			try{
 			com = commodityblService.searchAccurateCommodity_up(nameString, typeIDString);
@@ -157,7 +157,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 //		com.fatherSort = "b";
 			commodityAllUIController.comDetail(com);
 			}catch(Exception e){
-				resController.failedConfirm("你要查看的商品不存在！", failedAddress);
+				resController.failed("你要查看的商品不存在！", failedAddress);
 			}
 		}
 	}

@@ -20,7 +20,7 @@ public class ChaSortPanel extends DelSortPanel{
 	protected void getSort() {
 		nameString = name.getText();
 		if(nameString.equals("")){
-			resController.failedConfirm("请重新确认输入信息！", failedAddress);
+			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 			try{
 			frame.remove(this);
@@ -29,7 +29,7 @@ public class ChaSortPanel extends DelSortPanel{
 			sort.fatherSort = "b";*/
 			sort = commodityblService.searchSort_up(nameString);
 			}catch(Exception e){
-				resController.failedConfirm("您要修改的分类不存在！", failedAddress);
+				resController.failed("您要修改的分类不存在！", failedAddress);
 			}
 		}
 	}
