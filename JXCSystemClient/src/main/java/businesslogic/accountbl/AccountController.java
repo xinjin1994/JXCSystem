@@ -270,5 +270,28 @@ public class AccountController implements AccountblService{
 		AccountVO vo=new AccountVO(po.getName(),po.getMoney());
 		return vo;
 	}
-
+	
+	public ArrayList<GetVO> getAllReceipt_up(){
+		ArrayList<ReceiptPO> po=account.getAllReceipt();
+		ArrayList<GetVO> array=new ArrayList<GetVO>();
+		GetVO vo=null;
+		for(int i=0;i<po.size();i++){
+			TransferListVO trans=new TransferListVO(po.get(i).getTransfer().get(0).getAccount(),po.get(i).getTransfer().get(0).getMoney(),po.get(i).getTransfer().get(0).getPs());
+			vo=new GetVO(po.get(i).getNote(), po.get(i).getCustomer().getName(), po.get(i).getOperator(), trans,po.get(i).getTime(),po.get(i).getInvoiceNote());
+			array.add(vo);
+		}
+		return array;
+	}
+	
+	public ArrayList<PayVO> getAllPayment_up(){
+		ArrayList<PaymentPO> po=account.getAllPayment();
+		ArrayList<PayVO> array=new ArrayList<PayVO>();
+		PayVO vo=null;
+		for(int i=0;i<po.size();i++){
+			ItemList item=new ItemList(po.get(i).getItem().get(0).getItemName(),po.get(i).getItem().get(0).getMoney(),po.get(i).getItem().get(0).getPs());
+			vo=new PayVO(po.get(i).getNote(),po.get(i).getOperator(),po.get(i).getAccount().getName(),item,po.get(i).getTime(),po.get(i).getInvoiceNote()); 
+			array.add(vo);
+		}
+		return array;
+	}
 }
