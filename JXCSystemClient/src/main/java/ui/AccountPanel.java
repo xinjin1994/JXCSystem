@@ -172,6 +172,13 @@ public class AccountPanel extends FatherPanel{
 	 * 该方法用于获得收款单和付款单的信息，按时间排序
 	 */
 	private void getFinanceInfo() {
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("时间;单据编号");
+		
+		ArrayList<PayVO> payments = new ArrayList<PayVO>();
+		ArrayList<GetVO> receipts = new ArrayList<GetVO>();
+		
+	
 		
 	}
 	/**

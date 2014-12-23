@@ -2,6 +2,7 @@ package ui.account.payRe;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
 import javax.swing.event.DocumentEvent;
@@ -20,10 +21,13 @@ import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+import vo.CustomerVO;
 import vo.bill.ItemList;
 import vo.bill.PayVO;
 import businesslogic.accountbl.AccountController;
+import businesslogic.salesbl.SalesController;
 import businesslogicservice.accountblservice.AccountblService;
+import businesslogicservice.salesblservice.SalesblService;
 /**
  * 添加收款单panel
  * @author ZYC
@@ -32,6 +36,8 @@ import businesslogicservice.accountblservice.AccountblService;
 public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	AccountAllUIController uiController;
 	AccountblService accountblService;
+	SalesblService salesblService;
+	
 	MyButton forwardButton;
 	MyLabel idLabel,balance,operator,total,failLabel;
 	MyTextFieldTrans ps,agent,item;
@@ -39,7 +45,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	MyComboBox customer,account;
 	PayVO newPayment;
 	String id,operate;
-	String accountName;
+	String accountName,customerName,person;
 	double balanceValue,totalValue;
 	ResultPanelController resController;
 	String failedAddress = "acc/finManage/pay";
@@ -49,9 +55,11 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		this.uiController = uiController;
 		this.repaint();
 		accountblService = new AccountController();
+		salesblService = new SalesController();
+		
 		uiController.setBack_first(this);
 		addLabel();
-		setAccount();
+		setComboBox();
 		setIDOpe();
 		setTypeIn();
 		setForward();
@@ -61,16 +69,28 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	 * account的comboBox
 	 * account从下层获得
 	 */
-	private void setAccount() {
+	private void setComboBox() {
 //		String [] accounts = new String[]{"a","b"};//从下层获得
 		ArrayList<AccountVO> accVOArray = accountblService.getAllAccount_up();
 		String []accounts = new String[accVOArray.size()];
 		for(int i=0;i<accVOArray.size();i++){
 			accounts[i] = accVOArray.get(i).name;
 		}
-		account = new MyComboBox(accounts, 491, 162, 205, 43);
+		account = new MyComboBox(accounts, 491, 166, 205, 43);
 		this.add(account);
 		account.addActionListener(this);
+		
+		ArrayList<CustomerVO> cusVoArray = new ArrayList<CustomerVO>();
+		cusVoArray = accountblService.getAllCustomer_up();
+		//		cusVoArray = salesblService.getAllImportCustomer_up();
+		String[]customers = new String[cusVoArray.size()];
+		for(int i = 0;i < cusVoArray.size();i++){
+			customers[i] = cusVoArray.get(i).cusName;
+		}
+		
+		customer = new MyComboBox(customers, 104, 300, 222, 43);
+		this.add(customer);
+		customer.addActionListener(this);
 	}
 	
 	/**
@@ -149,11 +169,9 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
-			String payItem = item.getText();
 		
 			String remark = ps.getText();
-			String person = agent.getText();
-			if(payItem.equals("")||money.getText().equals("")||person.equals("")){
+			if(customerName.equals("")||money.getText().equals("")){
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 				
@@ -162,7 +180,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 			double turnValue = Double.parseDouble(money.getText());
 			//PayVO(String note,String bankAccount,ItemList itemList)
 			//ItemList(String itemName, double money, String remark)
-			ItemList itemList = new ItemList(payItem,turnValue,remark);
+			ItemList itemList = new ItemList(customerName,turnValue,remark);
 			newPayment = new PayVO(id,accountName,itemList);
 			totalValue = accountblService.calTotalMoney_up(newPayment);
 			
@@ -178,6 +196,10 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 			accountName = account.getSelectedItem().toString();
 			balanceValue = accountblService.searchAccurateAccount_up(accountName).balance;
 			setBalanceLabel(balanceValue);
+		}else if(e.getSource() == customer){
+			customerName = customer.getSelectedItem().toString();
+			person = salesblService.searchExactCustomer_up(customerName).person;
+			agent.setText(person);
 		}
 	}
 }

@@ -81,7 +81,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 		}
 
 		idLabel.setText(newPayment.note);
-		operator.setText(newPayment.operator);
+		operator.setText(operate);
 		agent.setText(person);
 		item.setText(newPayment.itemList.itemName);
 		total.setText(totalValue + "");
