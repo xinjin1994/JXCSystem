@@ -23,8 +23,8 @@ public class SalesInPanel extends ImInPanel{
 	SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesInPanel.this);
 	public SalesInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame, url, controller,salesUIController);
-//		this.remove(remark);
-//		this.addRestText();
+		this.remove(remark);
+		this.addRestText();
 	}
 	
 	public void addButton() {
@@ -73,13 +73,13 @@ public class SalesInPanel extends ImInPanel{
 
 	public double getPrice() {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
-		// commodityVO = salesblService.getCommodity_up(goodsNameSelected,
-		// goodsTypeSelected);
-//		 goodsPrice.setText(commodityVO.outValue+"");
-		goodsPrice.setText("30");
+		 commodityVO = salesblService.getCommodity_up(goodsNameSelected,
+		 goodsTypeSelected);
+		 goodsPrice.setText(commodityVO.outValue+"");
+//		goodsPrice.setText("30");
 		this.add(goodsPrice);
-		// price = commodityVO.outValue;
-		price = 30;
+		 price = commodityVO.outValue;
+//		price = 30;
 		return price;
 	}
 	public void getTotalPrice() {

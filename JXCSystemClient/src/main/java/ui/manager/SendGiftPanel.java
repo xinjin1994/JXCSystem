@@ -1,18 +1,11 @@
 package ui.manager;
 
-import javax.swing.JFrame;
-
-import po.SendGiftPO;
-import ui.CommodityPanel;
 import ui.FatherPanel;
 import ui.UIController;
-import ui.commodity.CommodityAllUIController;
-import ui.commodity.PatchDetailPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import vo.SendGiftVO;
-import vo.bill.PatchVO;
 
 public class SendGiftPanel extends FatherPanel{
 	protected MyFrame frame;
