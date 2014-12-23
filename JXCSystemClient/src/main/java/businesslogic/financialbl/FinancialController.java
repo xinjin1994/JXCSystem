@@ -97,11 +97,11 @@ public class FinancialController implements FinancialblService{
 					break;
 			
 			case 5: Export_ReturnPO exp_retpo=(Export_ReturnPO) array.get(i);
-					CommodityPO com3=exp_retpo.getImportGoodList().get(0).getCommodity();
-					CommodityListVO comList3=new CommodityListVO(com3.getNote(), com3.getName(), com3.getType(), exp_retpo.getImportGoodList().get(0).getNumber(), exp_retpo.getImportGoodList().get(0).getPrice(), exp_retpo.getImportGoodList().get(0).getMoney(), exp_retpo.getImportGoodList().get(0).getPs());
+					CommodityPO com3=exp_retpo.getExportGoodList().get(0).getCommodity();
+					CommodityListVO comList3=new CommodityListVO(com3.getNote(), com3.getName(), com3.getType(), exp_retpo.getExportGoodList().get(0).getNumber(), exp_retpo.getExportGoodList().get(0).getPrice(), exp_retpo.getExportGoodList().get(0).getMoney(), exp_retpo.getExportGoodList().get(0).getPs());
 					vo=new ExportMenuVO(exp_retpo.getNote(),exp_retpo.getCustomer().getName(),exp_retpo.getClerk(),exp_retpo.getOperator(),exp_retpo.getWareHouse(),
 							comList3,exp_retpo.getTotalMoneyBefore(),exp_retpo.getDiscount(),exp_retpo.getVoucher(),
-							exp_retpo.getTotalMoneyAfter(),exp_retpo.getImportGoodList().get(0).getPs(),exp_retpo.getTime(),5,exp_retpo.getInvoiceNote());
+							exp_retpo.getTotalMoneyAfter(),exp_retpo.getExportGoodList().get(0).getPs(),exp_retpo.getTime(),5,exp_retpo.getInvoiceNote());
 					break;
 			
 			case 6: PatchPO patch=(PatchPO) array.get(i);

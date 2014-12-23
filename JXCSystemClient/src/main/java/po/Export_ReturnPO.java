@@ -54,7 +54,7 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 	public CustomerPO getCustomer() {
 		return customer;
 	}
-	public ArrayList<ExportGoodPO> getImportGoodList(){
+	public ArrayList<ExportGoodPO> getExportGoodList(){
 		return exportGoodList;
 	}
 

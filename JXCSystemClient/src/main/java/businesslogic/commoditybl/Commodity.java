@@ -453,7 +453,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		for(i=0;i<exp_ret.size();i++){
 			if(exp_ret.get(i).getTime().compareTo(time1)>=0&&exp_ret.get(i).getTime().compareTo(time2)<=0&&(exp_ret.get(i).getCondition()==2)){
-				vo=new ExamineVO(exp_ret.get(i).getImportGoodList().get(0).getCommodity().getName(),exp_ret.get(i).getImportGoodList().get(0).getCommodity().getType(),0,0,0,exp_ret.get(i).getImportGoodList().get(0).getNumber(),
+				vo=new ExamineVO(exp_ret.get(i).getExportGoodList().get(0).getCommodity().getName(),exp_ret.get(i).getExportGoodList().get(0).getCommodity().getType(),0,0,0,exp_ret.get(i).getExportGoodList().get(0).getNumber(),
 						0,0,exp_ret.get(i).getTotalMoneyBefore(),exp_ret.get(i).getTime());
 				array.add(vo);
 			}

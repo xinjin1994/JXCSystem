@@ -99,12 +99,12 @@ public class InvoiceController implements InvoiceblService{
 		
 		case 5: Export_ReturnPO exp_retpo=(Export_ReturnPO) po;
 				ExportMenuVO exp_retvo=(ExportMenuVO) vo;
-				exp_retpo.getImportGoodList().get(0).price=exp_retvo.commodityList.price;
-				exp_retpo.getImportGoodList().get(0).number=exp_retvo.commodityList.num;
-				exp_retpo.getImportGoodList().get(0).money=exp_retpo.getImportGoodList().get(0).getPrice()*exp_retpo.getImportGoodList().get(0).getNumber();
+				exp_retpo.getExportGoodList().get(0).price=exp_retvo.commodityList.price;
+				exp_retpo.getExportGoodList().get(0).number=exp_retvo.commodityList.num;
+				exp_retpo.getExportGoodList().get(0).money=exp_retpo.getExportGoodList().get(0).getPrice()*exp_retpo.getExportGoodList().get(0).getNumber();
 				exp_retpo.discount=exp_retvo.discount;
 				exp_retpo.voucher=exp_retvo.voucherPrice;
-				exp_retpo.total_money_before=exp_retpo.getImportGoodList().get(0).money;
+				exp_retpo.total_money_before=exp_retpo.getExportGoodList().get(0).money;
 				exp_retpo.total_money_after=exp_retpo.getTotalMoneyBefore()-exp_retpo.getDiscount()-exp_retpo.getVoucher();
 				res=invoice.pass(exp_retpo);
 				break;

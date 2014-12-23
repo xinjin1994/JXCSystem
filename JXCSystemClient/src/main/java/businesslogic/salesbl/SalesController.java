@@ -390,10 +390,11 @@ public class SalesController implements SalesblService {
 							.getPrice(), po.get(i).getImportGoodList().get(0)
 							.getMoney(), po.get(i).getImportGoodList().get(0)
 							.getPs());
-			vo.set(i, new ImportMenuVO(po.get(i).getNote(), po.get(i).getImportGoodList()
-					.get(0).getCommodity().getName(), po.get(i).getWareHouse(),
-					User.operator, commodityList, po.get(i).getPs(), po.get(i).getTotalMoney(),
-					po.get(i).getTime(), po.get(i).getDocType(), "Invoice_note"));
+			vo.set(i, new ImportMenuVO(po.get(i).getNote(), po.get(i)
+					.getImportGoodList().get(0).getCommodity().getName(), po
+					.get(i).getWareHouse(), User.operator, commodityList, po
+					.get(i).getPs(), po.get(i).getTotalMoney(), po.get(i)
+					.getTime(), po.get(i).getDocType(), "Invoice_note"));
 		}
 		return vo;
 	}
@@ -403,10 +404,21 @@ public class SalesController implements SalesblService {
 		ArrayList<Import_ReturnPO> po = sale.getAllDraftImport_Return();
 		ArrayList<ImportMenuVO> vo = new ArrayList<ImportMenuVO>();
 		for (int i = 0; i < po.size(); i++) {
-			CommodityListVO commodityList = new CommodityListVO(null, null,
-					null, i, i, i, null);
-			vo.set(i, new ImportMenuVO(null, null, null, null, null, null, i,
-					null, i, null));
+			CommodityListVO commodityList = new CommodityListVO(po.get(i)
+					.getImportGoodList().get(0).getCommodity().getNote(),
+					po.get(i).getImportGoodList().get(0).getCommodity()
+							.getName(), po.get(i).getImportGoodList().get(0)
+							.getCommodity().getType(), po.get(i)
+							.getImportGoodList().get(0).getCommodity()
+							.getNumber(), po.get(i).getImportGoodList().get(0)
+							.getPrice(), po.get(i).getImportGoodList().get(0)
+							.getMoney(), po.get(i).getImportGoodList().get(0)
+							.getPs());
+			vo.set(i, new ImportMenuVO(po.get(i).getNote(), po.get(i)
+					.getImportGoodList().get(0).getCommodity().getName(), po
+					.get(i).getWareHouse(), User.operator, commodityList, po
+					.get(i).getPs(), po.get(i).getTotalMoney(), po.get(i)
+					.getTime(), po.get(i).getDocType(), "Invoice_note"));
 		}
 		return vo;
 	}
@@ -416,10 +428,24 @@ public class SalesController implements SalesblService {
 		ArrayList<ExportPO> po = sale.getAllDraftExport();
 		ArrayList<ExportMenuVO> vo = new ArrayList<ExportMenuVO>();
 		for (int i = 0; i < po.size(); i++) {
-			CommodityListVO commodityList = new CommodityListVO(null, null,
-					null, i, i, i, null);
-			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i,
-					i, i, i, null, null, i, null));
+			CommodityListVO commodityList = new CommodityListVO(po.get(i)
+					.getExportGoodList().get(0).getCommodity().getNote(),
+					po.get(i).getExportGoodList().get(0).getCommodity()
+							.getName(), po.get(i).getExportGoodList().get(0)
+							.getCommodity().getType(), po.get(i)
+							.getExportGoodList().get(0).getCommodity()
+							.getNumber(), po.get(i).getExportGoodList().get(0)
+							.getPrice(), po.get(i).getExportGoodList().get(0)
+							.getMoney(), po.get(i).getExportGoodList().get(0)
+							.getPs());
+			vo.set(i, new ExportMenuVO(po.get(i).getNote(), po.get(i)
+					.getExportGoodList().get(0).getCommodity().getName(), po
+					.get(i).getClerk(), User.operator,
+					po.get(i).getWareHouse(), commodityList, po.get(i)
+							.getTotalMoneyBefore(), po.get(i).getDiscount(), po
+							.get(i).getVoucher(), po.get(i)
+							.getTotalMoneyAfter(), po.get(i).getPs(), po.get(i)
+							.getTime(), po.get(i).getDocType(), "Invoice_note"));
 		}
 		return vo;
 	}
@@ -429,10 +455,24 @@ public class SalesController implements SalesblService {
 		ArrayList<Export_ReturnPO> po = sale.getAllDraftExport_Return();
 		ArrayList<ExportMenuVO> vo = new ArrayList<ExportMenuVO>();
 		for (int i = 0; i < po.size(); i++) {
-			CommodityListVO commodityList = new CommodityListVO(null, null,
-					null, i, i, i, null);
-			vo.set(i, new ExportMenuVO(null, null, null, null, null, null, i,
-					i, i, i, null, null, i, null));
+			CommodityListVO commodityList = new CommodityListVO(po.get(i)
+					.getExportGoodList().get(0).getCommodity().getNote(),
+					po.get(i).getExportGoodList().get(0).getCommodity()
+							.getName(), po.get(i).getExportGoodList().get(0)
+							.getCommodity().getType(), po.get(i)
+							.getExportGoodList().get(0).getCommodity()
+							.getNumber(), po.get(i).getExportGoodList().get(0)
+							.getPrice(), po.get(i).getExportGoodList().get(0)
+							.getMoney(), po.get(i).getExportGoodList().get(0)
+							.getPs());
+			vo.set(i, new ExportMenuVO(po.get(i).getNote(), po.get(i)
+					.getExportGoodList().get(0).getCommodity().getName(), po
+					.get(i).getClerk(), User.operator,
+					po.get(i).getWareHouse(), commodityList, po.get(i)
+							.getTotalMoneyBefore(), po.get(i).getDiscount(), po
+							.get(i).getVoucher(), po.get(i)
+							.getTotalMoneyAfter(), po.get(i).getPs(), po.get(i)
+							.getTime(), po.get(i).getDocType(), "Invoice_note"));
 		}
 		return vo;
 	}
@@ -493,11 +533,20 @@ public class SalesController implements SalesblService {
 
 	public ExportMenuVO searchDraftExport_Return_up(String note) {
 		// TODO Auto-generated method stub
-		Export_ReturnPO export_ReturnPO = sale.searchDraftExport_Return(note);
-		CommodityListVO commodityList = new CommodityListVO(note, note, note,
-				0, 0, 0, note);
-		ExportMenuVO exportMenu = new ExportMenuVO(note, note, note, note,
-				note, commodityList, 0, 0, 0, 0, note, note, 0, note);
+		Export_ReturnPO po = sale.searchDraftExport_Return(note);
+		CommodityListVO commodityList = new CommodityListVO(po
+				.getExportGoodList().get(0).getCommodity().getNote(), po
+				.getExportGoodList().get(0).getCommodity().getName(), po
+				.getExportGoodList().get(0).getCommodity().getType(), po
+				.getExportGoodList().get(0).getCommodity().getNumber(), po
+				.getExportGoodList().get(0).getPrice(), po.getExportGoodList()
+				.get(0).getMoney(), po.getExportGoodList().get(0).getPs());
+		ExportMenuVO exportMenu = new ExportMenuVO(po.getNote(), po
+				.getExportGoodList().get(0).getCommodity().getName(),
+				po.getClerk(), User.operator, po.getWareHouse(), commodityList,
+				po.getTotalMoneyBefore(), po.getDiscount(), po.getVoucher(),
+				po.getTotalMoneyAfter(), po.getPs(), po.getTime(),
+				po.getDocType(), "Invoice_note");
 		return exportMenu;
 	}
 
