@@ -17,6 +17,8 @@ import javax.swing.border.LineBorder;
 
 import ui.setting.FontFactory;
 import ui.setting.MyFrame;
+import ui.setting.Button.ForwardButton;
+import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
@@ -36,8 +38,8 @@ public class LoginPanel extends FatherPanel {
 	private JButton login;
 	private String userText;
 	private String passwordText;
-	private JLabel failure;
 	
+	private MyButton forwardButton;
 	private ResultPanelController resController;
 	private String failedAddress;
 	
@@ -98,22 +100,26 @@ public class LoginPanel extends FatherPanel {
 	}
 
 	private void addLogin() {
-		login = new JButton();
-		login.setBounds(228, 126, 43, 44);
-		login.setBorder(null);
-		login.setContentAreaFilled(false); // 将按钮设置为透明
-		login.addActionListener(new LoginListener());
-		this.add(login);
+		ForwardButton forward = new ForwardButton(229, 127);
+		forwardButton = forward.forward_black;
+		this.add(forwardButton);
+		
+//		login = new JButton();
+//		login.setBounds(228, 126, 43, 44);
+//		login.setBorder(null);
+//		login.setContentAreaFilled(false); // 将按钮设置为透明
+		forwardButton.addActionListener(new LoginListener());
+//		this.add(login);
 	}
 
-	private void addFailure() {
-		failure = new JLabel("您输入的帐户名或密码有误，请重新输入！");
-		failure.setBounds(inputX, inputY + 150, 2 * inputWidth, inputHeight);
-		failure.setFont(new Font("宋体", 0, 20));
-		failure.setForeground(Color.red);
-		this.add(failure);
-		this.repaint();
-	}
+//	private void addFailure() {
+//		failure = new JLabel("您输入的帐户名或密码有误，请重新输入！");
+//		failure.setBounds(inputX, inputY + 150, 2 * inputWidth, inputHeight);
+//		failure.setFont(new Font("宋体", 0, 20));
+//		failure.setForeground(Color.red);
+//		this.add(failure);
+//		this.repaint();
+//	}
 
 	public void remove() {
 		this.remove(jtf);
