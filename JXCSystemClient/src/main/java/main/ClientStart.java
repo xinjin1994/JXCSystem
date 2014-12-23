@@ -52,7 +52,7 @@ public class ClientStart {
 	}
 	
 	public ClientStart(String ip){
-		if(ip==""){
+		if(ip.equals("")){
 			ip="127.0.0.1";
 		}
 		this.ip=ip;
