@@ -522,10 +522,10 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	
 	public CommodityPO findGood(String name, String type) {
 		int i=0;
-//		System.out.println("findGood_true:");
 		for(i=0;i<sortList.size();i++){
 			CommodityPO po=sortList.get(i).findCommodity_true(name, type);
 			if(po!=null){
+				System.out.println("findGood:"+po.getNote());
 				return po.copy();
 			}
 		}
@@ -537,7 +537,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		if(sort!=null&&!sort.hasSort()){
 			po1.father=po2.getName();
 			sort.addCommodity(po1.copy());
-			System.out.println("addGood:");
+			System.out.println("addGood:"+po1.getName()+" Note:"+po1.getNote());
 			this.writeSortList();
 			return true;
 		}

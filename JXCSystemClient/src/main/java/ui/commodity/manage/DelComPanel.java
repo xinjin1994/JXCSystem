@@ -81,7 +81,7 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 			comDel.fatherSort = "g";
 			SortVO sort = new SortVO("g");*/
 			comDel = commodityblService.searchAccurateCommodity_up(nameString, typeString);
-			if(comDel.equals(null)){
+			if(comDel==null){
 				frame.remove(this);
 				resController.failed("您要查找的商品不存在！", failedAddress);
 			}else{

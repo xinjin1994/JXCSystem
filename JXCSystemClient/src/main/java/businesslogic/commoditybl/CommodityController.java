@@ -278,6 +278,7 @@ public class CommodityController implements CommodityblService{
 	public CommodityVO searchAccurateCommodity_up(String name,String type) {
 		// TODO Auto-generated method stub
 		CommodityPO po=commodity.findCommodity(name, type);
+
 		if(po==null){
 			return null;
 		}

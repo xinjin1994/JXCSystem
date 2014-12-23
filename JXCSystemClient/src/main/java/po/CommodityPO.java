@@ -23,7 +23,7 @@ public class CommodityPO implements Serializable{
 		this.type = type;
 		this.in_price = in_price;
 		this.out_price = out_price;
-//		this.note = note_record;
+		this.note=note;
 		this.recent_in_price = recent_in_price;
 		this.recent_out_price = recent_out_price;
 		this.number = number;

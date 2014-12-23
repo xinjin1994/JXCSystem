@@ -146,7 +146,7 @@ public class SortPO implements Serializable{
 	
 	public CommodityPO findCommodity_true(String name,String type){
 		int i=0;
-		if(hasSort()){
+		if(hasCommodity()){
 			for(i=0;i<commodityList.size();i++){
 				if(commodityList.get(i).getName().equals(name)&&
 						commodityList.get(i).getType().equals(type)){
