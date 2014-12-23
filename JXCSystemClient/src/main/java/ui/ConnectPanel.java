@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 
+import main.ClientStart;
 import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
 import ui.setting.MyFrame;
@@ -48,7 +49,8 @@ public class ConnectPanel extends FatherPanel implements ActionListener{
 
 	public void actionPerformed(ActionEvent arg0) {
 		ip = ipTextField.getText();
-		
+		ClientStart start=new ClientStart(ip);
+		start.start();
 		frame.remove(this);
 		ipTextField.setText("");
 		uiController.loginPanel();

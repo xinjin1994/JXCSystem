@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import ui.AccountPanel;
+import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
@@ -18,7 +19,7 @@ import businesslogic.invoicebl.InvoiceController;
 import businesslogic.userbl.User;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 
-public class AccountUIController {
+public class AccountUIController extends UIController{
 	private int secondX = 1;
 	private int secondY = 35;
 	private int inter = 54;

@@ -59,6 +59,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("00000oooooo");
 		commodityAllUIController.setTempPanel(this);
 		frame.remove(this);
 		frame.setPanel(commodityAllUIController.getMainPanel());

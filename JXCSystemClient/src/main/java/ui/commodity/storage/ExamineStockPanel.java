@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import ui.CommodityPanel;
 import ui.FatherPanel;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.ColorFactory;
@@ -73,11 +74,15 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 	}
 
 	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
-		showTable.setTable(info);
+		
+		CommodityPanel temp =(CommodityPanel)(commodityAllUIController.getMainPanel());
+		temp.setTable(info);
+		commodityAllUIController.setMainPanel(temp);
+//		showTable = new MyTable();
+//		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+//		showTable.setTable(info);
 		frame.remove(this);
-		frame.add(showTable.tablePanel);
+//		frame.add(showTable.tablePanel);
 		frame.setPanel(commodityAllUIController.getMainPanel());
 		frame.repaint();
 	}
@@ -129,7 +134,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 			totalNum = totalNum + num;
 			examStr.add(examItem);
 		}
-		examStr.add("总计;;"+import_num+";"+import_return+";"+export_num+";"+export_return+";"+patch_num+";"+sendGift+";"+total+";"+";"+totalNum);
+		examStr.add("总计;"+import_num+";"+import_return+";"+export_num+";"+export_return+";"+patch_num+";"+sendGift+";"+total+";"+";"+totalNum);
 		setTable(examStr);
 		}
 	}

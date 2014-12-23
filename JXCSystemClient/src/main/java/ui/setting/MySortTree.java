@@ -20,6 +20,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
+import vo.CommodityVO;
 import vo.SortVO;
 
 public class MySortTree {
@@ -159,6 +160,10 @@ public class MySortTree {
 	}
 
 	private void addCommodities(SortID tempSort) {
+		for(CommodityVO temp:tempSort.commodities){
+			DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(temp.name);
+			treeModel.insertNodeInto(sonNode,tempSort.treeNode, tempSort.treeNode.getChildCount());
+		}
 		System.out.println("123");
 	}
 //	public static void main(String args[]) {

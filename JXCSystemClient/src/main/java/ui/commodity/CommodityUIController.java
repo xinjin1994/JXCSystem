@@ -200,15 +200,15 @@ public class CommodityUIController {
 		
 	}
 	
-	private void setTable(ArrayList<String> info){
-		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
-		showTable.setTable(info);
-		frame.remove(commodityPanel);
-		frame.add(showTable.tablePanel);
-		uiController.addMainPanel();
-		frame.repaint();
-	}
+//	private void setTable(ArrayList<String> info){
+//		showTable = new MyTable();
+//		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+//		showTable.setTable(info);
+//		frame.remove(commodityPanel);
+//		frame.add(showTable.tablePanel);
+//		uiController.addMainPanel();
+//		frame.repaint();
+//	}
 	class InvoiceListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {

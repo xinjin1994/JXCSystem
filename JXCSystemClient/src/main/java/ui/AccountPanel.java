@@ -31,6 +31,7 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import vo.SystemlogVO;
 import vo.bill.GetVO;
+import vo.bill.InvoiceVO;
 import vo.bill.PayVO;
 
 //财务经理
@@ -137,9 +138,10 @@ public class AccountPanel extends FatherPanel{
 		accountThirdPanel.removeAll();
 		showTable = new MyTable();
 		showTable.setInfo(bills);
-		showTable.setColor(colors.manTableColor,colors.manBkColor, colors.manColor,Color.white);
+		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+//		showTable.setColor(colors.manTableColor,colors.manBkColor, colors.manColor,Color.white);
 		showTable.setTable(info);
-		
+		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		accountThirdPanel.add(showTable.tablePanel);
 		accountThirdPanel.repaint();
 		this.repaint();
@@ -173,17 +175,55 @@ public class AccountPanel extends FatherPanel{
 	 */
 	private void getFinanceInfo() {
 		ArrayList <String> info = new ArrayList<String>();
-		info.add("时间;单据编号");
+		info.add("时间;单据编号;单据类型");
 		
 		ArrayList<PayVO> payments = new ArrayList<PayVO>();
 		ArrayList<GetVO> receipts = new ArrayList<GetVO>();
+		ArrayList<InvoiceVO> finBills = new ArrayList<InvoiceVO>();
 		
-	
+		
+		payments = accountblService.getAllPayment_up();
+		receipts = accountblService.getAllReceipt_up();
+		
+		try {
+			for(PayVO temp:payments){
+				finBills.add(temp);
+//				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
+			}
+			for(GetVO temp: receipts){
+				finBills.add(temp);
+//				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
+			}
+			
+			for(InvoiceVO temp:finBills){
+				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
+			}
+			SaveTempBills bills = new SaveTempBills(frame, finBills,accountUIController );
+			
+			setTable(info, bills);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
+	private String checkBill(int bill_node) {
+		String type = "";
+		switch (bill_node) {
+		case 7:
+			type = "收款单";
+			break;
+
+		case 8:
+			type = "付款单";
+			break;
+		}
+		return type;
+	}
+
 	/**
 	 * 该方法用于显示当前所有账户的信息，该方法要根据登陆人员的身份判断能否选择
 	 */
+	
 	public void getAccountInfo() {
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("账户名称;账户余额");
