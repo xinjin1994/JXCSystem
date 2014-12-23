@@ -19,7 +19,9 @@ import vo.CustomerVO;
 import vo.bill.GetVO;
 import vo.bill.TransferListVO;
 import businesslogic.accountbl.AccountController;
+import businesslogic.salesbl.SalesController;
 import businesslogicservice.accountblservice.AccountblService;
+import businesslogicservice.salesblservice.SalesblService;
 
 /**
  * 添加收款单
@@ -35,9 +37,10 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	MyTextFieldTrans money;
 	MyComboBox customer, account;
 	AccountblService accountblService;
+	SalesblService salesblService;
 	double turnMoney;
 	GetVO newReceipt;	
-	String remark, person, id, operate;
+	String remark, person, id, operate,cusName;
 	
 	private ResultPanelController resController;
 	private String failedAddress = "acc/finManage/rec";
@@ -46,7 +49,10 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		super(frame, url, uiController);
 		this.uiController = uiController;
 		this.repaint();
+		
 		accountblService = new AccountController();
+		salesblService = new SalesController();
+		
 		uiController.setBack_first(this);
 		resController = new ResultPanelController(frame, this);
 		addLabel();
@@ -99,6 +105,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	private void setCustomer() {
 //		 String [] customers = new String []{"a","b"};//从下层获得
 		ArrayList<CustomerVO> cusVOArray = accountblService.getAllCustomer_up();
+//		ArrayList<CustomerVO> cusVOArray = salesblService.getAllExportCustomer_up();
 		String[] customers = new String[cusVOArray.size()];
 		for (int i = 0; i < cusVOArray.size(); i++) {
 			customers[i] = cusVOArray.get(i).cusName;
@@ -106,6 +113,8 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 
 		customer = new MyComboBox(customers, 221, 255, 106, 41);
 		this.add(customer);
+		
+		customer.addActionListener(this);
 	}
 
 	/**
@@ -170,17 +179,19 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		if (e.getSource() == forwardButton) {
 
 			remark = ps.getText();// 备注
-			person = agent.getText();// 业务员
+//			person = agent.getText();// 业务员
 
-			if(remark.equals("")||person.equals("")||money.getText().equals("")){
+			if(person.equals("")||money.getText().equals("")){
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 			}else{
 				try{
 					turnMoney = Double.parseDouble(money.getText());// 转账金额
 					String accName = account.getSelectedItem().toString();// 银行账户
-					String cusName = customer.getSelectedItem().toString();// 客户姓名
+					cusName = customer.getSelectedItem().toString();// 客户姓名
 					double balance = accountblService.searchAccurateAccount_up(accName).balance;// 余额
+					
+					
 					// TransferListVO(String bankAccount,double transferValue,String
 					// remark){
 					// 银行账户，转账金额，备注
@@ -190,8 +201,8 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 					setBalanceLabel(balance);
 					TransferListVO transferListVO = new TransferListVO(accName, turnMoney, remark);
 					newReceipt = new GetVO(id, cusName,transferListVO);
-					total.setText(accountblService.calTotalMoney_up(newReceipt) + "");
-					//			setTotal();
+//					total.setText(accountblService.calTotalMoney_up(newReceipt) + "");
+								setTotal();
 
 					uiController.setTempPanel(this);
 					frame.remove(this);
@@ -208,6 +219,10 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 			// int balance = 10;//根据accName到下层寻找的余额
 			double balance = accountblService.searchAccurateAccount_up(accName).balance;// 余额
 			setBalanceLabel(balance);
+		}else if (e.getSource() == customer) {
+			person = salesblService.searchExactCustomer_up(customer.getSelectedItem().toString()).person;
+			agent.setText(person);
+			AddReceiptPanel.this.repaint();
 		}
 
 	}
