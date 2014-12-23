@@ -121,8 +121,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addImport(ImportPO po) {
 		// TODO Auto-generated method stub
-		ImportPO im = new ImportPO(null, null, null, null, null, null, 0);
-		if (invoice.add(im) != null) {
+		if (invoice.add(po) != null) {
 			systemlog.add_up("AddImport:");
 			return 0;
 		}
@@ -131,31 +130,27 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addImport_Return(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
-		Import_ReturnPO im_re = new Import_ReturnPO(null, null, null, null,
-				null, null, 0, null);
-		if (invoice.add(im_re) != null) {
+		if (invoice.add(po) != null) {
 			systemlog.add_up("AddImport_Return:");
 			return 0;
 		}
 		return -1;
 	}
 
-	public int addImport_Return(String note, int number) {
-		// TODO Auto-generated method stub
-		Import_ReturnPO im_re = new Import_ReturnPO(null, null, note, note,
-				note, note, number, note);
-		if (invoice.add(im_re) != null) {
-			systemlog.add_up("AddImport_Return:");
-			return 0;
-		}
-		return -1;
-	}
+//	public int addImport_Return(String note, int number) {
+//		// TODO Auto-generated method stub
+//		Import_ReturnPO im_re = new Import_ReturnPO(null, null, note, note,
+//				note, note, number, note);
+//		if (invoice.add(im_re) != null) {
+//			systemlog.add_up("AddImport_Return:");
+//			return 0;
+//		}
+//		return -1;
+//	}
 
 	public int addExport(ExportPO po) {
 		// TODO Auto-generated method stub
-		ExportPO ex = new ExportPO(null, null, null, null, null, null, 0, 0, 0,
-				0);
-		if (invoice.add(ex) != null) {
+		if (invoice.add(po) != null) {
 			systemlog.add_up("AddExport:");
 			return 0;
 		}
@@ -164,25 +159,23 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addExport_Return(Export_ReturnPO po) {
 		// TODO Auto-generated method stub
-		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, null, null,
-				null, null, 0, 0, 0, 0, null);
-		if (invoice.add(ex_re) != null) {
+		if (invoice.add(po) != null) {
 			systemlog.add_up("AddExport_Return:");
 			return 0;
 		}
 		return -1;
 	}
 
-	public int addExport_Return(String note, int number) {
-		// TODO Auto-generated method stub
-		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, note, note,
-				note, note, number, number, number, number, note);
-		if (invoice.add(ex_re) != null) {
-			systemlog.add_up("AddExport_Return:");
-			return 0;
-		}
-		return -1;
-	}
+//	public int addExport_Return(String note, int number) {
+//		// TODO Auto-generated method stub
+//		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, note, note,
+//				note, note, number, number, number, number, note);
+//		if (invoice.add(ex_re) != null) {
+//			systemlog.add_up("AddExport_Return:");
+//			return 0;
+//		}
+//		return -1;
+//	}
 
 	public CustomerPO findCustomer(String name) {
 		// TODO Auto-generated method stub

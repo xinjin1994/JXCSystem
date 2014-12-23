@@ -114,6 +114,7 @@ public class MakeSureChangeInfo extends AddCusPanel{
 		}
 
 		public void mouseClicked(MouseEvent e) {
+			SalesResult salesResult = new SalesResult(frame,controller,salesUIController,changeCusPanel);
 			if (e.getSource() == forward) {
 				frame.remove(MakeSureChangeInfo.this);
 				String ID = idField.getText();
@@ -122,52 +123,54 @@ public class MakeSureChangeInfo extends AddCusPanel{
 				String add = cusAdd.getText();
 				String code = cusCode.getText();
 				String eBox = cusEBox.getText();
+				String personText = person.getText();
+				if(ID.equals("")||name.equals("")||tel.equals("")||add.equals("")||
+						code.equals("")||eBox.equals("")||personText.equals("")){
+					salesResult.failed("存在输入为空！", "MakeSureChangeInfo");
+				}else{
+					try{
 				double mostOwe = Double.parseDouble(cusShouldPay.getText());
 				double shouldGetMoney = Double.parseDouble(shouldGet.getText());
 				double shouldPayMoney = Double.parseDouble(shouldPay.getText());
-				String personText = person.getText();
 				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,
 						shouldGetMoney,shouldPayMoney,personText);
-				
 				SalesblService salesBlService = new SalesController();
-				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,changeCusPanel);
 				int i = salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter);
 				switch(i){
 				case 0:
 					salesResult.succeeded("修改成功！");
 					break;
 				case 3:
-					salesResult.failed("客户的应收应付不为0", "changeCusFailed");
+					salesResult.failed("客户的应收应付不为0", "MakeSureChangeInfo");
 					break;
 				default:
-					salesResult.failed("未知错误！", "changeCusFailed");
+					salesResult.failed("未知错误！", "MakeSureChangeInfo");
+				}
+					}catch(Exception e2){
+						salesResult.failed("请重新确认您的输入！", "MakeSureChangeInfo");
+					}
 				}
 			} else if (e.getSource() == secondCusBack) {
 				frame.remove(MakeSureChangeInfo.this);
 				frame.setPanel(changeCusPanel);
 				frame.repaint();
 			}
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 	}

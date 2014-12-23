@@ -6,6 +6,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
+import data.accountdata.AccountDataService_Stub;
 import ui.FatherPanel;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.ColorFactory;
@@ -20,6 +21,7 @@ import vo.CommodityVO;
 import vo.bill.PatchVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogic.userbl.User;
 import businesslogicservice.commodityblservice.CommodityblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 
@@ -61,18 +63,24 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		id = new MyLabel(94, 188, 269, 42);
 		time = new MyLabel(94, 308, 269, 42);
 		operator = new MyLabel(94, 427, 269, 42);
-		
+		this.add(id);
+		this.add(time);
+		this.add(operator);
 //		id.setText("id");
 //		time.setText("time");
 //		operator.setText("operator");
+		try{
 		id.setText(commodityblService.getPatchNote());
-		time.setText(invoiceblService.searchNote_up(id.getText()).time);
-		operator.setText(invoiceblService.searchNote_up(id.getText()).operator);
-		
+		time.setText(AccountDataService_Stub.getNoteTime());
+		operator.setText(User.operator);
 		MyLabel [] labels = new MyLabel[]{id,time,operator};
 		for(int i = 0;i < labels.length;i++){
 			labels[i].setForeground(color.greyFont);
 			this.add(labels[i]);
+		}
+		}catch(Exception e){
+			resController.failed("您要查看的信息不存在！", failedAddress);
+			e.printStackTrace();
 		}
 	}
 	private void setComboBox() {
@@ -138,6 +146,7 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		num = Integer.parseInt(number.getText());
 		newPatch = new PatchVO(nameString, typeString,num, id.getText(), time.getText(), operator.getText(),"");
 		}catch(Exception e){
+			frame.remove(this);
 			resController.failed("请重新确认您的输入！", failedAddress);
 		}
 	}

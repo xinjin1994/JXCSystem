@@ -362,7 +362,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 					so.father=lin.get(j).father;
 					so.sortList=lin.get(j).sortList;
 					so.commodityList=lin.get(j).commodityList;
-					System.out.println("getAllSort:Note:"+so.note);
+//					System.out.println("getAllSort:Name+Size:"+so.name+so.sortList.size());
 					sort.add(so);
 				}
 			}
@@ -385,19 +385,19 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		so.father=po.father;
 		sort.add(so);
 		
-//		if(po.hasSort()){
+		if(po.hasSort()){
 			for(int i=0;i<po.sortList.size();i++){
 				lin=getAllSortSon(po.sortList.get(i));
 				for(int j=0;j<lin.size();j++){
 					so=new SortPO(lin.get(j).getName());
 					so.note=lin.get(j).getNote();
 					so.father=lin.get(j).father;
-					so.sortList=po.sortList;
+					so.sortList=lin.get(j).sortList;
 					so.commodityList=lin.get(j).commodityList;
 					sort.add(so);
 				}
 			}
-//		}
+		}
 		return sort;
 	}
 	
@@ -705,6 +705,8 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			int i=0;
 			for(i=0;i<sort.size();i++){
 				if(sort.get(i).getName().equals(name)){
+					System.out.println("findSort:"+name);
+					System.out.println("findSortSize:"+sort.get(i).sortList.size());
 					return sort.get(i);
 				}
 			}
