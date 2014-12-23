@@ -89,11 +89,11 @@ public class FinancialController implements FinancialblService{
 					break;
 			
 			case 4: ExportPO exportpo=(ExportPO) array.get(i);
-					CommodityPO com2=exportpo.getImportGoodList().get(0).getCommodity();
-					CommodityListVO comList2=new CommodityListVO(com2.getNote(), com2.getName(), com2.getType(), exportpo.getImportGoodList().get(0).getNumber(), exportpo.getImportGoodList().get(0).getPrice(), exportpo.getImportGoodList().get(0).getMoney(), exportpo.getImportGoodList().get(0).getPs());
+					CommodityPO com2=exportpo.getExportGoodList().get(0).getCommodity();
+					CommodityListVO comList2=new CommodityListVO(com2.getNote(), com2.getName(), com2.getType(), exportpo.getExportGoodList().get(0).getNumber(), exportpo.getExportGoodList().get(0).getPrice(), exportpo.getExportGoodList().get(0).getMoney(), exportpo.getExportGoodList().get(0).getPs());
 					vo=new ExportMenuVO(exportpo.getNote(),exportpo.getCustomer().getName(),exportpo.getClerk(),exportpo.getOperator(),exportpo.getWareHouse(),
 							comList2,exportpo.getTotalMoneyBefore(),exportpo.getDiscount(),exportpo.getVoucher(),
-							exportpo.getTotalMoneyAfter(),exportpo.getImportGoodList().get(0).getPs(),exportpo.getTime(),4,exportpo.getInvoiceNote());
+							exportpo.getTotalMoneyAfter(),exportpo.getExportGoodList().get(0).getPs(),exportpo.getTime(),4,exportpo.getInvoiceNote());
 					break;
 			
 			case 5: Export_ReturnPO exp_retpo=(Export_ReturnPO) array.get(i);

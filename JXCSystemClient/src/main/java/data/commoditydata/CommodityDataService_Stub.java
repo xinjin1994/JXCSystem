@@ -1230,15 +1230,15 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 	
 	public boolean passExport(ExportPO po){
-		CommodityPO com=findGood_true(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		CommodityPO com=findGood_true(po.getExportGoodList().get(0).getCommodity().getName(), po.getExportGoodList().get(0).getCommodity().getType());
 		
 		if(com==null){
 			return false;
 		}
 		
-		CommodityPO gift=findGift(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
-		com.recent_out_price=po.getImportGoodList().get(0).getPrice();
-		com.number=com.number-po.getImportGoodList().get(0).getNumber();
+		CommodityPO gift=findGift(po.getExportGoodList().get(0).getCommodity().getName(), po.getExportGoodList().get(0).getCommodity().getType());
+		com.recent_out_price=po.getExportGoodList().get(0).getPrice();
+		com.number=com.number-po.getExportGoodList().get(0).getNumber();
 		
 		for(int i=0;i<giftList.size();i++){
 			if(giftList.get(i).getName().equals(com.getName())&&giftList.get(i).getType().equals(com.getType())){
