@@ -14,6 +14,7 @@ public class UIController {
 	private MyFrame frame;
 	private WelcomePanel welcomePanel;
 	public LoginPanel loginPanel;
+	private ConnectPanel connectPanel;
 	private AdminPanel admin;
 	private AccountPanel accountPanel; // 财务管理界面
 	private ManagerPanel manager;
@@ -34,6 +35,7 @@ public class UIController {
 	public UIController(int i){
 		this.frame = new MyFrame();
 		this.welcomePanel();
+//		this.connectPanel();
 //		this.CommodityPanel();
 //	  	this.AccountPanel();
 
@@ -59,9 +61,15 @@ public class UIController {
 		welcomePanel = new WelcomePanel(frame,"Image/welcome.jpg",this);
 		frame.setPanel(welcomePanel);
 	}
+	
+	public void connectPanel(){
+		frame.remove(welcomePanel);
+		connectPanel = new ConnectPanel(frame, "Image/ip.jpg", this);
+		frame.setPanel(connectPanel);
+		frame.repaint();
+	}
 
 	public void loginPanel() {
-		frame.remove(welcomePanel);
 		loginPanel = new LoginPanel(frame,"Image/login.jpg",this);		
 		frame.setPanel(loginPanel);
 		frame.repaint();
@@ -91,14 +99,14 @@ public class UIController {
 	}
 
 	public void ManagerPanel() {
-//		frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new ManagerAllUIController(this, frame);
 		frame.repaint();
 	}
 	
 
 	public void CommodityPanel() {
-//		frame.remove(loginPanel);
+		frame.remove(loginPanel);
 		new CommodityAllUIController(this, frame);
 		frame.repaint();
 	}

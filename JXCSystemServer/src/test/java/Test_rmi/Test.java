@@ -1,6 +1,8 @@
 package Test_rmi;
 
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -41,43 +43,56 @@ public class Test {
 		
 		try {
 			
+			InetAddress addr;
+			String ip="127.0.0.1";
+			try {
+				addr = InetAddress.getLocalHost();
+				ip=addr.getHostAddress().toString();
+				
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			commoditydataservice = new CommodityDataService_Stub();		
 			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://127.0.0.1:8888/CommodityDataService",commoditydataservice);
+			Naming.bind("rmi://"+ip+":8888/CommodityDataService",commoditydataservice);
 			
 			accountdataservice = new AccountDataService_Stub();		
 			LocateRegistry.createRegistry(8889);
-			Naming.bind("rmi://127.0.0.1:8889/AccountDataService",accountdataservice);
+			Naming.bind("rmi://"+ip+":8889/AccountDataService",accountdataservice);
 			
 			financialdataservice = new FinancialDataService_Stub();		
 			LocateRegistry.createRegistry(8890);
-			Naming.bind("rmi://127.0.0.1:8890/FinancialDataService",financialdataservice);
+			Naming.bind("rmi://"+ip+":8890/FinancialDataService",financialdataservice);
 			
 			initializationdataservice = new InitializationDataService_Stub();		
 			LocateRegistry.createRegistry(8891);
-			Naming.bind("rmi://127.0.0.1:8891/InitializationDataService",initializationdataservice);
+			Naming.bind("rmi://"+ip+":8891/InitializationDataService",initializationdataservice);
 			
 			invoicedataservice = new InvoiceDataService_Stub();		
 			LocateRegistry.createRegistry(8892);
-			Naming.bind("rmi://127.0.0.1:8892/InvoiceDataService",invoicedataservice);
+			Naming.bind("rmi://"+ip+":8892/InvoiceDataService",invoicedataservice);
 			
 			promotiondataservice = new PromotionDataService_Stub();		
 			LocateRegistry.createRegistry(8893);
-			Naming.bind("rmi://127.0.0.1:8893/PromotionDataService",promotiondataservice);
+			Naming.bind("rmi://"+ip+":8893/PromotionDataService",promotiondataservice);
 			
 			salesdataservice = new SalesDataService_Stub();		
 			LocateRegistry.createRegistry(8894);
-			Naming.bind("rmi://127.0.0.1:8894/SalesDataService",salesdataservice);
+			Naming.bind("rmi://"+ip+":8894/SalesDataService",salesdataservice);
 			
 			systemlogdataservice = new SystemlogDataService_Stub();		
 			LocateRegistry.createRegistry(8895);
-			Naming.bind("rmi://127.0.0.1:8895/SystemlogDataService",systemlogdataservice);
+			Naming.bind("rmi://"+ip+":8895/SystemlogDataService",systemlogdataservice);
 			
 			userdataservice = new UserDataService_Stub();		
 			LocateRegistry.createRegistry(8896);
-			Naming.bind("rmi://127.0.0.1:8896/UserDataService",userdataservice);
+			Naming.bind("rmi://"+ip+":8896/UserDataService",userdataservice);
 			
 			System.out.println("Service Start!");
+			System.out.println(ip);
+		
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

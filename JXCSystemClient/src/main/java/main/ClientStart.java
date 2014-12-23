@@ -45,6 +45,16 @@ public class ClientStart {
 	public static Systemlog systemlog;
 	public static User user;
 	
+	public String ip;
+	
+	public ClientStart(){
+		this.ip="127.0.0.1";
+	}
+	
+	public ClientStart(String ip){
+		this.ip=ip;
+	}
+	
 	
 	public void start(){
 //		CommodityController commodityController=new CommodityController();
@@ -76,15 +86,15 @@ public class ClientStart {
 		
 		try {
 			
-			commodity.sto=(CommodityDataService) Naming.lookup("rmi://127.0.0.1:8888/CommodityDataService");
-			account.account=(AccountDataService) Naming.lookup("rmi://127.0.0.1:8889/AccountDataService");
-			financial.financial=(FinancialDataService) Naming.lookup("rmi://127.0.0.1:8890/FinancialDataService");
-			initialization.initialization=(InitializationDataService) Naming.lookup("rmi://127.0.0.1:8891/InitializationDataService");
-			invoice.invoice=(InvoiceDataService) Naming.lookup("rmi://127.0.0.1:8892/InvoiceDataService");
-			promotion.promotion=(PromotionDataService) Naming.lookup("rmi://127.0.0.1:8893/PromotionDataService");
-			sales.sale=(SalesDataService) Naming.lookup("rmi://127.0.0.1:8894/SalesDataService");
-			systemlog.sys=(SystemlogDataService) Naming.lookup("rmi://127.0.0.1:8895/SystemlogDataService");
-			user.us=(UserDataService) Naming.lookup("rmi://127.0.0.1:8896/UserDataService");
+			commodity.sto=(CommodityDataService) Naming.lookup("rmi://"+ip+":8888/CommodityDataService");
+			account.account=(AccountDataService) Naming.lookup("rmi://"+ip+":8889/AccountDataService");
+			financial.financial=(FinancialDataService) Naming.lookup("rmi://"+ip+":8890/FinancialDataService");
+			initialization.initialization=(InitializationDataService) Naming.lookup("rmi://"+ip+":8891/InitializationDataService");
+			invoice.invoice=(InvoiceDataService) Naming.lookup("rmi://"+ip+":8892/InvoiceDataService");
+			promotion.promotion=(PromotionDataService) Naming.lookup("rmi://"+ip+":8893/PromotionDataService");
+			sales.sale=(SalesDataService) Naming.lookup("rmi://"+ip+":8894/SalesDataService");
+			systemlog.sys=(SystemlogDataService) Naming.lookup("rmi://"+ip+":8895/SystemlogDataService");
+			user.us=(UserDataService) Naming.lookup("rmi://"+ip+":8896/UserDataService");
 
 			commodity.setInfo(invoice, systemlog,sales);
 			account.setInfo(financial, invoice, sales, systemlog);

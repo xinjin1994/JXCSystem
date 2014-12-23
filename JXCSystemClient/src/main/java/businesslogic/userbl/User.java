@@ -92,15 +92,15 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 		try {
 			System.out.println("login:"+name+" "+password);
 			UserPO po=new UserPO(name,password,0,"note");
-			System.out.println("login:"+po.getName()+" "+po.getPassword());
+			System.out.println("login_po:"+po.getName()+" "+po.getPassword());
 			UserPO lin=us.login(po);
-			System.out.println("login:"+lin.getName()+" "+lin.getPassword());
+//			System.out.println("login_lin:"+lin.getName()+" "+lin.getPassword());
 			if(lin!=null){
 				User.operator=lin.getName();
 				User.duty=lin.getDuty();
+				return lin.getDuty();
 			}
 			
-			return lin.getDuty();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

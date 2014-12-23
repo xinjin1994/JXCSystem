@@ -28,7 +28,7 @@ public class WelcomePanel extends FatherPanel {
 				}
 				times++;
 				if(times==1){
-					controller.loginPanel();
+					controller.connectPanel();
 					break;
 				}
 			}
