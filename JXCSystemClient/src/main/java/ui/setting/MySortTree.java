@@ -177,7 +177,7 @@ public class MySortTree {
 	private void addCommodities(SortID tempSort) {
 		ArrayList<CommodityVO> commodityVOs = tempSort.commodities;
 		for(CommodityVO temp:commodityVOs){
-			DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(new ImageIcon("Image/good.png")+temp.name+"--"+temp.type);
+			DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(new ImageIcon("Goods: "+temp.name+"--"+temp.type);
 			treeModel.insertNodeInto(sonNode,tempSort.treeNode, tempSort.treeNode.getChildCount());
 			changeIcon(0);
 		}
