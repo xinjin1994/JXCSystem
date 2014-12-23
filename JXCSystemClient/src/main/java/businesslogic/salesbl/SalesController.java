@@ -17,14 +17,15 @@ import vo.CustomerVO;
 import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
 import vo.bill.ImportMenuVO;
+import businesslogic.userbl.User;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class SalesController implements SalesblService {
 
 	public Sales sale = new Sales();
-	
-	public SalesController(){
-		sale=ClientStart.sales;
+
+	public SalesController() {
+		sale = ClientStart.sales;
 	}
 
 	public ArrayList<CustomerVO> searchFuzzyCustomer_up(String name) {
@@ -65,11 +66,9 @@ public class SalesController implements SalesblService {
 				importMenuVO.commodityList.remark);
 		ArrayList<ImportGoodPO> importGood = new ArrayList<ImportGoodPO>();
 		importGood.add(importGoodPO);
-		UserPO user = new UserPO(null, null, 0, null);
-		CustomerPO customerPO = new CustomerPO(importMenuVO.supplier, null, 0,
-				false, null, null, null, 0, 0, 0, null, null);
+		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
 		ImportPO imp = new ImportPO(customerPO, importGood,
-				importMenuVO.remark, importMenuVO.operator, user.getName(),
+				importMenuVO.remark, customerPO.clerk, User.operator,
 				importMenuVO.warehouse, importMenuVO.total);
 		int message = sale.addImport(imp);
 		return message;
@@ -87,38 +86,55 @@ public class SalesController implements SalesblService {
 				importMenuVO.commodityList.remark);
 		ArrayList<ImportGoodPO> importGood = new ArrayList<ImportGoodPO>();
 		importGood.add(importGoodPO);
-		UserPO user = new UserPO(null, null, 0, null); // 这里有问题
-		CustomerPO customerPO = new CustomerPO(importMenuVO.supplier, null, 0,
-				false, null, null, null, 0, 0, 0, null, null); // 这里也有问题
+		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
 		Import_ReturnPO imp = new Import_ReturnPO(customerPO, importGood,
-				importMenuVO.remark, importMenuVO.operator, user.getName(),
-				importMenuVO.warehouse, importMenuVO.total, null);
+				importMenuVO.remark, customerPO.clerk, User.operator,
+				importMenuVO.warehouse, importMenuVO.total, sale
+						.searchImportNote(importMenuVO.supplier).getNote());
 		int message = sale.addImport_Return(imp);
 		return message;
 	}
 
 	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(null, null);
-		ExportGoodPO exportGoodPO = new ExportGoodPO(null, 0, 0, 0, null);
+		CommodityPO commodityPO = new CommodityPO(
+				exportMenuVO.commodityList.name,
+				exportMenuVO.commodityList.type);
+		ExportGoodPO exportGoodPO = new ExportGoodPO(commodityPO,
+				exportMenuVO.commodityList.num,
+				exportMenuVO.commodityList.price,
+				exportMenuVO.commodityList.total,
+				exportMenuVO.commodityList.remark);
 		ArrayList<ExportGoodPO> exportGood = new ArrayList<ExportGoodPO>();
 		exportGood.add(exportGoodPO);
-		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
-		ExportPO ex = new ExportPO(null, null, null, null, null, null, 0, 0, 0,
-				0);
+		CustomerPO customerPO = sale.findCustomer(exportMenuVO.cusName);
+		ExportPO ex = new ExportPO(customerPO, exportGood, exportMenuVO.remark,
+				exportMenuVO.salesMan, User.operator, exportMenuVO.warehouse,
+				exportMenuVO.beforeValue, exportMenuVO.afterValue,
+				exportMenuVO.discount, exportMenuVO.voucherPrice);
 		int message = sale.addExport(ex);
 		return message;
 	}
 
 	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(null, null);
-		ExportGoodPO exportGoodPO = new ExportGoodPO(null, 0, 0, 0, null);
+		CommodityPO commodityPO = new CommodityPO(
+				exportMenuVO.commodityList.name,
+				exportMenuVO.commodityList.type);
+		ExportGoodPO exportGoodPO = new ExportGoodPO(commodityPO,
+				exportMenuVO.commodityList.num,
+				exportMenuVO.commodityList.price,
+				exportMenuVO.commodityList.total,
+				exportMenuVO.commodityList.remark);
 		ArrayList<ExportGoodPO> exportGood = new ArrayList<ExportGoodPO>();
 		exportGood.add(exportGoodPO);
-		CustomerPO customerPO = new CustomerPO(null, 0, false, null);
-		Export_ReturnPO ex = new Export_ReturnPO(null, null, null, null, null,
-				null, 0, 0, 0, 0, null);
+		CustomerPO customerPO = sale.findCustomer(exportMenuVO.cusName);
+		Export_ReturnPO ex = new Export_ReturnPO(customerPO, exportGood,
+				exportMenuVO.remark, exportMenuVO.salesMan, User.operator,
+				exportMenuVO.warehouse, exportMenuVO.beforeValue,
+				exportMenuVO.afterValue, exportMenuVO.discount,
+				exportMenuVO.voucherPrice, sale.searchExport_ReturnNote(
+						exportMenuVO.cusName).getNote());
 		int message = sale.addExport_Return(ex);
 		return message;
 	}
@@ -140,10 +156,16 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<CustomerVO> getAllCustomer_up() {
 		// TODO Auto-generated method stub
+		System.out.print(111);
 		ArrayList<CustomerVO> customerVO = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.getAllCustomer();
 		for (int i = 0; i < po.size(); i++) {
-			customerVO.set(i, new CustomerVO(po.get(i).getId(), po.get(i).getType(), po.get(i).getLevel(), po.get(i).getName(),po.get(i).getPhone(), po.get(i).getAddress(), po.get(i).getZip(), po.get(i).getMail(), po.get(i).getAmount(),po.get(i).getMoneyIn(),po.get(i).getMoneyOut(),po.get(i).getClerk()));
+			customerVO.set(i, new CustomerVO(po.get(i).getId(), po.get(i)
+					.getType(), po.get(i).getLevel(), po.get(i).getName(), po
+					.get(i).getPhone(), po.get(i).getAddress(), po.get(i)
+					.getZip(), po.get(i).getMail(), po.get(i).getAmount(), po
+					.get(i).getMoneyIn(), po.get(i).getMoneyOut(), po.get(i)
+					.getClerk()));
 		}
 		return customerVO;
 	}
@@ -151,7 +173,10 @@ public class SalesController implements SalesblService {
 	public CustomerVO getCustomer_up(CustomerVO vo) {
 		// TODO Auto-generated method stub
 		CustomerPO po = sale.getCustomer(vo.cusName, vo.id);
-		CustomerVO customer = new CustomerVO(po.getId(), po.getType(), po.getLevel(), po.getName(),po.getPhone(), po.getAddress(), po.getZip(), po.getMail(), po.getAmount(),po.getMoneyIn(),po.getMoneyOut(),po.getClerk());
+		CustomerVO customer = new CustomerVO(po.getId(), po.getType(),
+				po.getLevel(), po.getName(), po.getPhone(), po.getAddress(),
+				po.getZip(), po.getMail(), po.getAmount(), po.getMoneyIn(),
+				po.getMoneyOut(), po.getClerk());
 		return customer;
 	}
 
