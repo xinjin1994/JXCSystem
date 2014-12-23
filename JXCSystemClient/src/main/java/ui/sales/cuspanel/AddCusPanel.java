@@ -23,9 +23,9 @@ import businesslogicservice.salesblservice.SalesblService;
 public class AddCusPanel extends FatherPanel {
 
 	protected MyTextFieldTrans cusName, cusTel, cusAdd, cusEBox, cusCode, cusShouldPay;
-	private int infoX1 = 495, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,
+	protected int infoX1 = 495, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,
 			infoHeight = 31;
-	private int levelX = 105, levelY = 328, levelInter = 42;
+	protected int levelX = 105, levelY = 328, levelInter = 42;
 	protected MyStopButton supplierButton, sellerButton;
 	protected MyButton secondCusBack, forward;
 	protected MyStopButton level1,level2,level3,level4,level5;
@@ -173,16 +173,22 @@ public class AddCusPanel extends FatherPanel {
 				//编号、分类（供应商、销售商）、级别（五级，一级普通用户，五级VIP客户）、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员
 		//false代表供应商，true代表销售商
 //				String ID = idField.getText();
-				try{
 				String name = cusName.getText();
 				String tel = cusTel.getText();
 				String add = cusAdd.getText();
 				String code = cusCode.getText();
 				String eBox = cusEBox.getText();
-				double mostOwe = Double.parseDouble(cusShouldPay.getText());
-				double shouldGet = 0;
-				double shouldPay = 0;
 				String person = salesManField.getText();
+				if(name.equals("")||tel.equals("")||add.equals("")||code.equals("")||eBox.equals("")||
+						person.equals("")){
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,AddCusPanel.this);
+					salesResult.failed("存在输入为空！", "addCusFailed");
+				}else{
+					
+					try{
+						double mostOwe = Double.parseDouble(cusShouldPay.getText());
+						double shouldGet = 0;
+						double shouldPay = 0;
 				CustomerVO customerVO = new CustomerVO(idField.getText(),classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
 				frame.remove(AddCusPanel.this);
 				frame.setPanel(new MakeSureAddInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,AddCusPanel.this));
@@ -190,7 +196,7 @@ public class AddCusPanel extends FatherPanel {
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,AddCusPanel.this);
 					salesResult.failed("请重新确认输入信息！", "addCusFailed");
 				}
-				
+				}
 				frame.repaint();
 			} 
 		}

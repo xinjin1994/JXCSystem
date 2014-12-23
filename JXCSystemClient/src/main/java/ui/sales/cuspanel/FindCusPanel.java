@@ -48,10 +48,8 @@ public class FindCusPanel extends FatherPanel {
 
 	public void addSecondTextField() {
 		cusName = new MyTextFieldBorder(254, 218);
-		cusID = new MyTextFieldBorder(254, 307);
 		cusExactFind = new MyTextFieldBorder(254, 424);
 		this.add(cusName);
-		this.add(cusID);
 		this.add(cusExactFind);
 
 	}
@@ -78,7 +76,7 @@ public class FindCusPanel extends FatherPanel {
 	
 	private void setTable(ArrayList<String> info){
 		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setColor(colors.saleColor,colors.greyFont,colors.salesBkColor,colors.greyFont);
 		showTable.setTable(info);
 		thirdPanel.add(MyTable.tablePanel);
 		salesUIController.backPanel(this);
@@ -95,10 +93,8 @@ public class FindCusPanel extends FatherPanel {
 					salesResult.failed("存在输入为空！", "finComFailed");
 				}else{
 					ArrayList<String> cusStr = new ArrayList<String>();
-					cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
-					cusStr.add("a;bs;c;d;c;d;f;d;g");
+					cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
 				String name = cusName.getText();
-				String id = cusID.getText();
 				CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
 				frame.remove(FindCusPanel.this);
 				if(customerVO.equals(null)){
@@ -119,7 +115,7 @@ public class FindCusPanel extends FatherPanel {
 				String cusInTable = customerVO.id + ";" + classification + ";" + customerVO.level + ";"
 						+ customerVO.cusName + ";" + customerVO.tel + ";" + customerVO.address + ";"
 						+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
-						+ customerVO.shouldGet + ";"  + ";" + customerVO.person;
+						+ customerVO.shouldGet + ";" +customerVO.shouldPay + ";" + customerVO.person;
 				cusStr.add(cusInTable);
 				setTable(cusStr);
 				frame.repaint();

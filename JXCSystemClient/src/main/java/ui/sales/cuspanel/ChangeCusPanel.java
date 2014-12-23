@@ -38,9 +38,7 @@ public class ChangeCusPanel extends FatherPanel{
 	
 	public void addSecondTextField(){
 		cusName = new MyTextFieldBorder(254,223);
-		cusID = new MyTextFieldBorder(254,312);
 		this.add(cusName);
-		this.add(cusID);
 		
 	}
 	public void addRestButton(){
@@ -65,12 +63,11 @@ public class ChangeCusPanel extends FatherPanel{
 			if(e.getSource() == secondCusBack){
 				salesUIController.backPanel(ChangeCusPanel.this);
 			}else if(e.getSource() == forward){
-				if(cusName.getText().equals("")||cusID.getText().equals("")){
+				if(cusName.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ChangeCusPanel.this);
 					salesResult.failed("存在您输入的信息为空！", "changeCusFailed");
 				}else{
 				String name = cusName.getText();
-				String id = cusID.getText();
 				SalesblService salesBlService = new SalesController();
 				CustomerVO customerVO= salesBlService.searchExactCustomer_up(name);
 				if(customerVO.equals(null)){

@@ -1,7 +1,8 @@
 package ui.sales.cuspanel;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 
@@ -11,7 +12,6 @@ import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
-import ui.setting.TextField.MyTextFieldFilled;
 import ui.setting.TextField.MyTextFieldTrans;
 import vo.CustomerVO;
 import businesslogic.salesbl.SalesController;
@@ -24,8 +24,9 @@ public class MakeSureChangeInfo extends AddCusPanel{
 	private UIController controller;
 	private SalesUIController salesUIController;
 	private MyButton forward,secondCusBack;
-	private MyTextFieldTrans person,shouldPay;
-	private MyTextFieldTrans shouldGet;
+	private MyTextFieldTrans person;
+	private MyLabel shouldGet,shouldPay;
+	private MyLabel cusNameLabel;
 	
 	public MakeSureChangeInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,
 			CustomerVO customerVO,ChangeCusPanel changeCusPanel){
@@ -36,26 +37,30 @@ public class MakeSureChangeInfo extends AddCusPanel{
 		this.changeCusPanel = changeCusPanel;
 		this.frame = frame;
 		this.remove(salesManField);
+		this.remove(cusName);
 		
-		addRestButton();
+//		addRestButton();
 		setText();
 		setButton();
 	}
 
 	public void addRestButton() {
-		shouldGet = new MyTextFieldTrans(634, 438, 94, 41);
-		shouldPay = new MyTextFieldTrans(634, 494, 94, 41);
-		person = new MyTextFieldTrans(407, 481, 48, 54);
+		shouldGet = new MyLabel(634, 438, 94, 41);
+		shouldPay = new MyLabel(634, 494, 94, 41);
+		person = new MyTextFieldTrans(407, 481, 94, 54);
 		this.add(shouldGet);
 		this.add(shouldPay);
 		this.add(person);
 		
+		cusNameLabel = new MyLabel(infoX1, infoY, infoWidth1, infoHeight);
+		this.add(cusNameLabel);
+		
 		forward = new MyButton("Image/Sales/对话框/images/前进_黑.png", 735, 538, "Image/Sales/对话框/images/前进_黑.png",
 				"Image/Sales/对话框/images/前进_stop_黑.png");
-		forward.addActionListener(new Listener());
+		forward.addMouseListener(new Listener());
 		secondCusBack = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
 				"Image/Sales/Sales_image/返回_press_on.png");
-		secondCusBack.addActionListener(new Listener());
+		secondCusBack.addMouseListener(new Listener());
 		this.add(secondCusBack);
 		this.add(forward);
 		
@@ -63,7 +68,7 @@ public class MakeSureChangeInfo extends AddCusPanel{
 	
 	public void setText(){
 		idField.setText(customerVOBefore.id);
-		cusName.setText(customerVOBefore.cusName);
+		cusNameLabel.setText(customerVOBefore.cusName);
 		cusTel.setText(customerVOBefore.tel);
 		cusAdd.setText(customerVOBefore.address);
 		cusCode.setText(customerVOBefore.zipCode);
@@ -103,13 +108,16 @@ public class MakeSureChangeInfo extends AddCusPanel{
 		
 	}
 	
-	class Listener implements ActionListener {
+	class Listener implements MouseListener {
 
 		public void actionPerformed(ActionEvent e) {
+		}
+
+		public void mouseClicked(MouseEvent e) {
 			if (e.getSource() == forward) {
 				frame.remove(MakeSureChangeInfo.this);
 				String ID = idField.getText();
-				String name = cusName.getText();
+				String name = cusNameLabel.getText();
 				String tel = cusTel.getText();
 				String add = cusAdd.getText();
 				String code = cusCode.getText();
@@ -120,11 +128,10 @@ public class MakeSureChangeInfo extends AddCusPanel{
 				String personText = person.getText();
 				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,
 						shouldGetMoney,shouldPayMoney,personText);
-			
+				
 				SalesblService salesBlService = new SalesController();
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,changeCusPanel);
 				int i = salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter);
-				System.out.println(i+"i");
 				switch(i){
 				case 0:
 					salesResult.succeeded("修改成功！");
@@ -133,13 +140,35 @@ public class MakeSureChangeInfo extends AddCusPanel{
 					salesResult.failed("客户的应收应付不为0", "changeCusFailed");
 					break;
 				default:
-					salesResult.failed("未知错误！", "");
+					salesResult.failed("未知错误！", "changeCusFailed");
 				}
 			} else if (e.getSource() == secondCusBack) {
 				frame.remove(MakeSureChangeInfo.this);
 				frame.setPanel(changeCusPanel);
 				frame.repaint();
 			}
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 }
