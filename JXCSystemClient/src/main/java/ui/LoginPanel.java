@@ -13,7 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
+import ui.setting.FontFactory;
 import ui.setting.MyFrame;
 import ui.setting.resultPanels.ResultPanelController;
 import businesslogic.userbl.UserController;
@@ -22,6 +24,7 @@ import businesslogicservice.userblservice.UserblService;
 public class LoginPanel extends FatherPanel {
 
 	private static final long serialVersionUID = 3788130429021132822L;
+	private static final int CENTER = 0;
 	private JTextField user;
 	private JPasswordField password;
 	private JTextField jtf;
@@ -36,12 +39,13 @@ public class LoginPanel extends FatherPanel {
 	private JLabel failure;
 	
 	private ResultPanelController resController;
-	
+	private String failedAddress;
 	
 	public LoginPanel(MyFrame frame, String url, UIController controller) {
 		super(frame, url, controller);
 		resController = new ResultPanelController(frame, this);
 		
+		this.failedAddress = "login";
 		this.addUserField();
 		this.addField();
 		this.addLogin();
@@ -51,6 +55,12 @@ public class LoginPanel extends FatherPanel {
 	
 	private void addUserField() {
 		user = new JTextField("请输入用户名", 20);
+		user.setHorizontalAlignment(CENTER);
+		user.setOpaque(false);
+		Color borderColor = new Color(230, 230, 230);
+		user.setBorder(new LineBorder(borderColor));
+		
+		user.setFont(new FontFactory(20).font);
 		user.setBounds(inputX, inputY, inputWidth, inputHeight);
 		user.setBorder(BorderFactory.createEmptyBorder());
 		user.addFocusListener(new TextListener());
@@ -62,6 +72,12 @@ public class LoginPanel extends FatherPanel {
 	 */
 	private void addField() {
 		jtf = new JTextField("请输入密码", 20);
+		jtf.setHorizontalAlignment(CENTER);
+		jtf.setOpaque(false);
+		Color borderColor = new Color(230, 230, 230);
+		jtf.setBorder(new LineBorder(borderColor));
+		
+		jtf.setFont(new FontFactory(20).font);
 		jtf.setBounds(inputX, inputY + interval, inputWidth, inputHeight);
 		jtf.setBorder(BorderFactory.createEmptyBorder());
 		jtf.addFocusListener(new TextListener());
@@ -70,8 +86,13 @@ public class LoginPanel extends FatherPanel {
 
 	private void addPasswordField() {
 		password = new JPasswordField();
+		password.setHorizontalAlignment(CENTER);
 		password.setBounds(inputX, inputY + interval, inputWidth, inputHeight);
-		password.setBorder(BorderFactory.createEmptyBorder());
+		
+		
+		password.setOpaque(false);
+		Color borderColor = new Color(230, 230, 230);
+		password.setBorder(new LineBorder(borderColor));
 		password.addFocusListener(new TextListener());
 		this.add(password);
 	}
@@ -121,41 +142,53 @@ public class LoginPanel extends FatherPanel {
 	class LoginListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
+			controller.setTempPanel(LoginPanel.this);
 			
 			UserblService userbl = new UserController();
-			userText = user.getText();
-			passwordText = new String(password.getPassword());
-			int identity = userbl.login_up(userText, passwordText);
-			switch (identity) {
-			case 0:
-				controller.AdminPanel();
-				break;
-			case 1:
-				controller.CommodityPanel();;
-				break;
-			case 2:
-				controller.SalesManagerPanel();
-				break;
-			case 3:
-				controller.SalesManagerPanel();
-				break;
-			case 4:
-				controller.AccountPanel();
-				break;
-			case 5:
-				controller.AccountPanel();
-				break;
-			case 6:
-				controller.ManagerPanel();
-				break;
-			default:
-				// 登陆失败
-				// System.out.println("hello");
-				addFailure();
-			}
-			user.setText("");
-			password.setText("");
+			
+			try {
+				userText = user.getText();
+				passwordText = new String(password.getPassword());
+				int identity = userbl.login_up(userText, passwordText);
+				switch (identity) {
+				case 0:
+					controller.AdminPanel();
+					break;
+				case 1:
+					controller.CommodityPanel();;
+					break;
+				case 2:
+					controller.SalesManagerPanel();
+					break;
+				case 3:
+					controller.SalesManagerPanel();
+					break;
+				case 4:
+					controller.AccountPanel();
+					break;
+				case 5:
+					controller.AccountPanel();
+					break;
+				case 6:
+					controller.ManagerPanel();
+					break;
+				default:
+					frame.remove(LoginPanel.this);
+					resController.failed("用户信息不存在！请检查输入！", failedAddress);
+					frame.repaint();
+				}
+				user.setText("");
+				password.setText("");
 
+			} catch (Exception e2) {
+				frame.remove(LoginPanel.this);
+				resController.failed("存在输入为空！", failedAddress);
+				frame.repaint();
+			}
+				
+			
+			
+			
 		}
 
 	}
