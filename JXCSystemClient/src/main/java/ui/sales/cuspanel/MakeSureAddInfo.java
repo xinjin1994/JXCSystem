@@ -20,6 +20,7 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 	private MyFrame frame;
 	private SalesUIController salesUIController;
 	private UIController controller;
+	private MyButton forward,secondCusBack;
 	
 	public MakeSureAddInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,CustomerVO customerVO,AddCusPanel addCusPanel){
 		super(frame,url,controller,salesUIController,customerVO);
@@ -28,12 +29,10 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 		this.salesUIController = salesUIController;
 		this.controller = controller;
 		this.frame = frame;
+		addRestButton();
 	}
 
 	public void addRestButton() {
-		shouldGet = new MyTextFieldTrans(634, 438, 94, 41);
-		shouldPay = new MyTextFieldFilled(634, 494, 94, 41);
-		person = new MyTextFieldFilled(407, 481, 48, 54);
 		forward = new MyButton("Image/Sales/对话框/images/前进_黑.png", 735, 538, "Image/Sales/对话框/images/前进_黑.png",
 				"Image/Sales/对话框/images/前进_stop_黑.png");
 		forward.addActionListener(new Listener());
@@ -56,10 +55,10 @@ public class MakeSureAddInfo extends MakeSureCusInfo {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
+				frame.remove(MakeSureAddInfo.this);
 //		 SalesResult(MyFrame frame,UIController controller,SalesUIController salesUIController,FatherPanel backPanel){
 				SalesblService salesblService = new SalesController();
-				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureAddInfo.this);
-//				System.out.println(salesblService.addCustomer_up(customerVO));
+				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,addCusPanel);
 				switch(salesblService.addCustomer_up(customerVO)){
 			    	case 0:
 						salesResult.succeeded("添加客户成功！");

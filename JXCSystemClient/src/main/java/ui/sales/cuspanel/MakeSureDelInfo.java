@@ -20,6 +20,7 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 	private MyFrame frame;
 	private UIController controller;
 	private SalesUIController salesUIController;
+	private MyButton forward,secondCusBack;
 	
 	public MakeSureDelInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,CustomerVO customerVO,DelCusPanel delCusPanel){
 		super(frame,url,controller,salesUIController,customerVO);
@@ -28,12 +29,11 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 		this.controller = controller;
 		this.salesUIController = salesUIController;
 		this.frame = frame;
+		addRestButton();
 	}
 
 	public void addRestButton() {
-		shouldGet = new MyTextFieldTrans(634, 438, 94, 41);
-		shouldPay = new MyTextFieldFilled(634, 494, 94, 41);
-		person = new MyTextFieldFilled(407, 481, 48, 54);
+
 		forward = new MyButton("Image/Sales/对话框/images/前进_黑.png", 735, 538, "Image/Sales/对话框/images/前进_黑.png",
 				"Image/Sales/对话框/images/前进_stop_黑.png");
 		forward.addActionListener(new Listener());
@@ -41,9 +41,6 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 				"Image/Sales/Sales_image/返回_press_on.png");
 		secondCusBack.addActionListener(new Listener());
 		this.add(secondCusBack);
-		this.add(shouldGet);
-		this.add(shouldPay);
-		this.add(person);
 		this.add(forward);
 	}
 
@@ -59,8 +56,9 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
 //				System.out.println("qianjing!");
+				frame.remove(MakeSureDelInfo.this);
 				SalesblService salesblService = new SalesController();
-				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureDelInfo.this);
+				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,delCusPanel);
 				switch(salesblService.delCustomer_up(customerVO)){
 				case 0:
 					salesResult.succeeded("删除成功！");

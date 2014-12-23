@@ -3,10 +3,13 @@ package ui.sales.cuspanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+
 import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldFilled;
 import ui.setting.TextField.MyTextFieldTrans;
@@ -14,26 +17,39 @@ import vo.CustomerVO;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
-public class MakeSureChangeInfo extends MakeSureCusInfo{
+public class MakeSureChangeInfo extends AddCusPanel{
 	private CustomerVO customerVOBefore,customerVOAfter;
 	private ChangeCusPanel changeCusPanel;
 	private MyFrame frame;
 	private UIController controller;
 	private SalesUIController salesUIController;
+	private MyButton forward,secondCusBack;
+	private MyTextFieldTrans person,shouldPay;
+	private MyTextFieldTrans shouldGet;
 	
-	public MakeSureChangeInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,CustomerVO customerVO,ChangeCusPanel changeCusPanel){
-		super(frame,url,controller,salesUIController,customerVO);
+	public MakeSureChangeInfo(MyFrame frame, String url, UIController controller, SalesUIController salesUIController,
+			CustomerVO customerVO,ChangeCusPanel changeCusPanel){
+		super(frame,url,controller,salesUIController);
 		this.customerVOBefore = customerVO;
 		this.controller = controller;
 		this.salesUIController = salesUIController;
 		this.changeCusPanel = changeCusPanel;
 		this.frame = frame;
+		this.remove(salesManField);
+		
+		addRestButton();
+		setText();
+		setButton();
 	}
 
 	public void addRestButton() {
 		shouldGet = new MyTextFieldTrans(634, 438, 94, 41);
-		shouldPay = new MyTextFieldFilled(634, 494, 94, 41);
-		person = new MyTextFieldFilled(407, 481, 48, 54);
+		shouldPay = new MyTextFieldTrans(634, 494, 94, 41);
+		person = new MyTextFieldTrans(407, 481, 48, 54);
+		this.add(shouldGet);
+		this.add(shouldPay);
+		this.add(person);
+		
 		forward = new MyButton("Image/Sales/对话框/images/前进_黑.png", 735, 538, "Image/Sales/对话框/images/前进_黑.png",
 				"Image/Sales/对话框/images/前进_stop_黑.png");
 		forward.addActionListener(new Listener());
@@ -41,17 +57,57 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 				"Image/Sales/Sales_image/返回_press_on.png");
 		secondCusBack.addActionListener(new Listener());
 		this.add(secondCusBack);
-		this.add(shouldGet);
-		this.add(shouldPay);
-		this.add(person);
 		this.add(forward);
 		
 	}
+	
+	public void setText(){
+		idField.setText(customerVOBefore.id);
+		cusName.setText(customerVOBefore.cusName);
+		cusTel.setText(customerVOBefore.tel);
+		cusAdd.setText(customerVOBefore.address);
+		cusCode.setText(customerVOBefore.zipCode);
+		cusEBox.setText(customerVOBefore.ezipCode);
+		cusShouldPay.setText(customerVOBefore.mostOwe+"");
+		person.setText(customerVOBefore.person);
+		shouldGet.setText(customerVOBefore.shouldGet+"");
+		shouldPay.setText(customerVOBefore.shouldPay+"");
+		System.out.println(customerVOBefore.person+"person "+customerVOBefore.shouldGet+"shouldGet "+
+				customerVOBefore.shouldPay+"shouldPay ");
+	}
 
+	private void setButton(){
+		if(customerVOBefore.classification == true){
+			//false代表供应商，true代表销售商
+			sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/销售商_press_on_05.png"));
+		}else{
+			supplierButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供应商_press_on_03.png"));
+		}
+		switch(customerVOBefore.level){
+		case 1:
+			level1.setIcon(new ImageIcon("Image/Sales/对话框/images/level1_press_on.png"));
+			break;
+		case 2:
+			level2.setIcon(new ImageIcon("Image/Sales/对话框/images/level2_press_on.png"));
+			break;
+		case 3:
+			level3.setIcon(new ImageIcon("Image/Sales/对话框/images/level3_press_on.png"));
+			break;
+		case 4:
+			level4.setIcon(new ImageIcon("Image/Sales/对话框/images/level4_press_on.png"));
+			break;
+		case 5:
+			level5.setIcon(new ImageIcon("Image/Sales/对话框/images/level5_press_on.png"));
+			break;
+		}
+		
+	}
+	
 	class Listener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
+				frame.remove(MakeSureChangeInfo.this);
 				String ID = idField.getText();
 				String name = cusName.getText();
 				String tel = cusTel.getText();
@@ -59,13 +115,17 @@ public class MakeSureChangeInfo extends MakeSureCusInfo{
 				String code = cusCode.getText();
 				String eBox = cusEBox.getText();
 				double mostOwe = Double.parseDouble(cusShouldPay.getText());
-				double shouldGet = 0;
-				double shouldPay = 0;
-				String person = salesManField.getText();
-				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
+				double shouldGetMoney = Double.parseDouble(shouldGet.getText());
+				double shouldPayMoney = Double.parseDouble(shouldPay.getText());
+				String personText = person.getText();
+				customerVOAfter = new CustomerVO(ID,classification,level,name,tel,add,code,eBox,mostOwe,
+						shouldGetMoney,shouldPayMoney,personText);
+			
 				SalesblService salesBlService = new SalesController();
-				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureChangeInfo.this);
-				switch(salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter)){
+				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,changeCusPanel);
+				int i = salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter);
+				System.out.println(i+"i");
+				switch(i){
 				case 0:
 					salesResult.succeeded("修改成功！");
 					break;

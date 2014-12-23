@@ -92,7 +92,7 @@ public class FindCusPanel extends FatherPanel {
 			} else if (e.getSource() == forward1) {
 				if(cusName.getText().equals("")||cusID.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
-					salesResult.failed("请重新确认输入信息！", "finComFailed");
+					salesResult.failed("存在输入为空！", "finComFailed");
 				}else{
 					ArrayList<String> cusStr = new ArrayList<String>();
 					cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
@@ -101,6 +101,10 @@ public class FindCusPanel extends FatherPanel {
 				String id = cusID.getText();
 				CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
 				frame.remove(FindCusPanel.this);
+				if(customerVO.equals(null)){
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
+					salesResult.failed("您要查找的客户不存在！", "finComFailed");
+				}else{
 				String classification = "进货商";
 				// String id,boolean classification,int level,String
 				// cusName,String tel,String address,String zipCode,String
@@ -119,6 +123,7 @@ public class FindCusPanel extends FatherPanel {
 				cusStr.add(cusInTable);
 				setTable(cusStr);
 				frame.repaint();
+				}
 			}
 			}else if (e.getSource() == forward2) {
 				String info = cusExactFind.getText();
@@ -128,9 +133,13 @@ public class FindCusPanel extends FatherPanel {
 				}else{
 				String classification = "进货商";
 				ArrayList<CustomerVO> cusVOArray = salesBlService.searchFuzzyCustomer_up(info);
+				frame.remove(FindCusPanel.this);
+				if(cusVOArray.size() == 0){
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
+					salesResult.failed("您要查找的客户不存在！", "finComFailed");
+				}else{
 				ArrayList<String> cusStr = new ArrayList<String>();
 				cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
-//				cusStr.add("1;2;3;4;5,6;7");
 				for(int i=0;i<cusVOArray.size();i++){
 					CustomerVO customerVO = cusVOArray.get(i);
 						if (customerVO.classification) {
@@ -143,9 +152,9 @@ public class FindCusPanel extends FatherPanel {
 					cusStr.add(item);
 				}
 				// 此次应该显示表格
-				frame.remove(FindCusPanel.this);
 				setTable(cusStr);
 				frame.repaint();
+					}
 				}
 			}
 

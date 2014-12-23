@@ -59,7 +59,6 @@ public class AddCusPanel extends FatherPanel {
 		idField = new MyLabel(105, 173, 222, 36);
 		this.add(idField);
 		idField.setText(salesblService.getCustomerNote_up());
-		
 		failLabel = new MyLabel(418,550,204,35);
 		this.add(failLabel);
 	}
@@ -184,7 +183,7 @@ public class AddCusPanel extends FatherPanel {
 				double shouldGet = 0;
 				double shouldPay = 0;
 				String person = salesManField.getText();
-				CustomerVO customerVO = new CustomerVO(id,classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
+				CustomerVO customerVO = new CustomerVO(idField.getText(),classification,level,name,tel,add,code,eBox,mostOwe,shouldGet,shouldPay,person);
 				frame.remove(AddCusPanel.this);
 				frame.setPanel(new MakeSureAddInfo(frame,"Image/Sales/对话框/二次确认/客户确认信息.jpg",controller,salesUIController,customerVO,AddCusPanel.this));
 				}catch(Exception e2){
