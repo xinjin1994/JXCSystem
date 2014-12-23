@@ -52,11 +52,14 @@ public class ClientStart {
 	}
 	
 	public ClientStart(String ip){
+		if(ip==""){
+			ip="127.0.0.1";
+		}
 		this.ip=ip;
 	}
 	
 	
-	public void start(){
+	public int start(){
 //		CommodityController commodityController=new CommodityController();
 		commodity=new Commodity();
 		
@@ -104,6 +107,7 @@ public class ClientStart {
 			user.setInfo(systemlog);
 			sales.setInfo(invoice, systemlog, commodity);
 			
+			return 0;
 //			commodityController.commodity.sto=commodityRMI;
 //			accountController.account.account=accountRMI;
 //			financialController.financial.financial=financialRMI;
@@ -124,12 +128,15 @@ public class ClientStart {
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return -1;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return -1;
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return -1;
 		}
 		
 //		commodityController.addCommodity("name", "type",1,2);
