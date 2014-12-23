@@ -74,15 +74,21 @@ public class DelComPanel extends FatherPanel implements ActionListener{
 		nameString = name.getText();
 		typeString = typeID.getText();
 		if(nameString.equals("")||typeString.equals("")){
+			frame.remove(this);
 			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 		/*	comDel = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
 			comDel.fatherSort = "g";
 			SortVO sort = new SortVO("g");*/
 			comDel = commodityblService.searchAccurateCommodity_up(nameString, typeString);
+			if(comDel.equals(null)){
+				frame.remove(this);
+				resController.failed("您要查找的商品不存在！", failedAddress);
+			}else{
 			SortVO sort = new SortVO(comDel.fatherSort);
 			commodityAllUIController.setTempPanel(this);
 			commodityAllUIController.confirmCom(comDel, "del",sort);
+			}
 		}
 	}
 	public void actionPerformed(ActionEvent e) {

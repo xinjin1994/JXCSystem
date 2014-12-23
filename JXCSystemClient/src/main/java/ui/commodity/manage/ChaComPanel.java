@@ -64,10 +64,15 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 		nameString = name.getText();
 		typeString = typeID.getText();
 		if(nameString.equals("")||typeString.equals("")){
+			frame.remove(this);
 			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
 			try{
 			finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
+			if(finCom.equals(null)){
+				frame.remove(this);
+				resController.failed("您要查找的商品不存在！", failedAddress);
+			}else{
 			String fatherSort = finCom.fatherSort;
 			SortVO sortVO = new SortVO(fatherSort);
 //			finCom = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
@@ -76,9 +81,13 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			commodityAllUIController.setTempPanel(this);
 			commodityAllUIController.changeComD(finCom);
-			}catch(Exception e){
-				resController.failed("您要修改的商品不存在！", failedAddress);
+				}
 			}
+			catch(Exception e){
+				frame.remove(this);
+				resController.failed("您要修改的商品不存在！", failedAddress);
+				}
+			
 		}
 	}
 
