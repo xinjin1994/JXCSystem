@@ -553,54 +553,90 @@ public class SalesController implements SalesblService {
 	public ImportMenuVO searchImportNote_up(String note) {
 		// TODO Auto-generated method stub
 		ImportPO po = sale.searchImportNote(note);
-		CommodityListVO commodityList = new CommodityListVO(note, note, note,
-				0, 0, 0, note);
-		ImportMenuVO vo = new ImportMenuVO(note, note, note, note,
-				commodityList, note, 0, note, 0, note);
+		CommodityListVO commodityList = new CommodityListVO(po
+				.getImportGoodList().get(0).getCommodity().getNote(), po
+				.getImportGoodList().get(0).getCommodity().getName(), po
+				.getImportGoodList().get(0).getCommodity().getType(), po
+				.getImportGoodList().get(0).getCommodity().getNumber(), po
+				.getImportGoodList().get(0).getPrice(), po.getImportGoodList()
+				.get(0).getMoney(), po.getImportGoodList().get(0).getPs());
+		ImportMenuVO vo = new ImportMenuVO(po.getNote(), po.getImportGoodList()
+				.get(0).getCommodity().getName(), po.getWareHouse(),
+				User.operator, commodityList, po.getPs(), po.getTotalMoney(),
+				po.getTime(), po.getDocType(), "Invoice_note");
 		return vo;
 	}
 
 	public ExportMenuVO searchExportNote_up(String note) {
 		// TODO Auto-generated method stub
 		ExportPO po = sale.searchExportNote(note);
-		CommodityListVO commodityList = new CommodityListVO(note, note, note,
-				0, 0, 0, note);
-		ExportMenuVO vo = new ExportMenuVO(note, note, note, note, note,
-				commodityList, 0, 0, 0, 0, note, note, 0, note);
+		CommodityListVO commodityList = new CommodityListVO(po
+				.getExportGoodList().get(0).getCommodity().getNote(), po
+				.getExportGoodList().get(0).getCommodity().getName(), po
+				.getExportGoodList().get(0).getCommodity().getType(), po
+				.getExportGoodList().get(0).getCommodity().getNumber(), po
+				.getExportGoodList().get(0).getPrice(), po.getExportGoodList()
+				.get(0).getMoney(), po.getExportGoodList().get(0).getPs());
+		ExportMenuVO vo = new ExportMenuVO(po.getNote(), po.getExportGoodList()
+				.get(0).getCommodity().getName(), po.getClerk(), User.operator,
+				po.getWareHouse(), commodityList, po.getTotalMoneyBefore(),
+				po.getDiscount(), po.getVoucher(), po.getTotalMoneyAfter(),
+				po.getPs(), po.getTime(), po.getDocType(), "Invoice_note");
 		return vo;
 	}
 
 	public ImportMenuVO searchImport_ReturnNote_up(String note) {
 		// TODO Auto-generated method stub
 		Import_ReturnPO po = sale.searchImport_ReturnNote(note);
-		CommodityListVO commodityList = new CommodityListVO(note, note, note,
-				0, 0, 0, note);
-		ImportMenuVO vo = new ImportMenuVO(note, note, note, commodityList, 0);
+		CommodityListVO commodityList = new CommodityListVO(po
+				.getImportGoodList().get(0).getCommodity().getNote(), po
+				.getImportGoodList().get(0).getCommodity().getName(), po
+				.getImportGoodList().get(0).getCommodity().getType(), po
+				.getImportGoodList().get(0).getCommodity().getNumber(), po
+				.getImportGoodList().get(0).getPrice(), po.getImportGoodList()
+				.get(0).getMoney(), po.getImportGoodList().get(0).getPs());
+		ImportMenuVO vo = new ImportMenuVO(po.getNote(), po.getImportGoodList()
+				.get(0).getCommodity().getName(), po.getWareHouse(),
+				User.operator, commodityList, po.getPs(), po.getTotalMoney(),
+				po.getTime(), po.getDocType(), "Invoice_note");
 		return vo;
 	}
 
 	public ExportMenuVO searchExport_ReturnNote_up(String note) {
 		// TODO Auto-generated method stub
 		Export_ReturnPO po = sale.searchExport_ReturnNote(note);
-		CommodityListVO commodityList = new CommodityListVO(note, note, note,
-				0, 0, 0, note);
-		ExportMenuVO vo = new ExportMenuVO(note, note, note, note, note,
-				commodityList, 0, 0, 0, 0, note, note, 0, note);
+		CommodityListVO commodityList = new CommodityListVO(po
+				.getExportGoodList().get(0).getCommodity().getNote(), po
+				.getExportGoodList().get(0).getCommodity().getName(), po
+				.getExportGoodList().get(0).getCommodity().getType(), po
+				.getExportGoodList().get(0).getCommodity().getNumber(), po
+				.getExportGoodList().get(0).getPrice(), po.getExportGoodList()
+				.get(0).getMoney(), po.getExportGoodList().get(0).getPs());
+		ExportMenuVO vo = new ExportMenuVO(po.getNote(), po.getExportGoodList()
+				.get(0).getCommodity().getName(), po.getClerk(), User.operator,
+				po.getWareHouse(), commodityList, po.getTotalMoneyBefore(),
+				po.getDiscount(), po.getVoucher(), po.getTotalMoneyAfter(),
+				po.getPs(), po.getTime(), po.getDocType(), "Invoice_note");
 		return vo;
 	}
 
 	public CommodityVO getProGift_up(int money, int level) {
 		// TODO Auto-generated method stub
 		CommodityPO po = sale.getProGift(money, level);
-		CommodityVO vo = new CommodityVO(null, null, null, level, level, level,
-				level, level, level);
+		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
+				po.getType(), po.getNumber(), po.getIn_price(),
+				po.getOut_price(), po.getRecent_in_price(),
+				po.getRecent_out_price(), po.warn);
 		return vo;
 	}
 
 	public CommodityVO getCommodity_up(String name, String type) {
 		// TODO Auto-generated method stub
 		CommodityPO po = sale.getCommodity(name, type);
-		CommodityVO vo = new CommodityVO(type, type, type, 0, 0, 0, 0, 0, 0);
+		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
+				po.getType(), po.getNumber(), po.getIn_price(),
+				po.getOut_price(), po.getRecent_in_price(),
+				po.getRecent_out_price(), po.warn);
 		return vo;
 	}
 
