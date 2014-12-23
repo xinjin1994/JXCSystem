@@ -190,6 +190,7 @@ public class LoginPanel extends FatherPanel {
 				frame.remove(LoginPanel.this);
 				resController.failed("存在输入为空！", failedAddress);
 				frame.repaint();
+				e2.printStackTrace();
 			}
 				
 			

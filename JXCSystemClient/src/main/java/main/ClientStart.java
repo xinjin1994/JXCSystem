@@ -107,6 +107,8 @@ public class ClientStart {
 			user.setInfo(systemlog);
 			sales.setInfo(invoice, systemlog, commodity);
 			
+			System.out.println("Connect Success!");
+			
 			return 0;
 //			commodityController.commodity.sto=commodityRMI;
 //			accountController.account.account=accountRMI;
