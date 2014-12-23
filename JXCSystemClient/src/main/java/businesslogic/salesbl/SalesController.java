@@ -454,20 +454,26 @@ public class SalesController implements SalesblService {
 				.getImportGoodList().get(0).getCommodity().getNumber(), po
 				.getImportGoodList().get(0).getPrice(), po.getImportGoodList()
 				.get(0).getMoney(), po.getImportGoodList().get(0).getPs());
-		ImportMenuVO importMenu = new ImportMenuVO(po.getNote(), po.getImportGoodList()
-				.get(0).getCommodity().getName(), po.getWareHouse(),
-				User.operator, commodityList, po.getPs(), po.getTotalMoney(),
-				po.getTime(), po.getDocType(), "Invoice_note");
+		ImportMenuVO importMenu = new ImportMenuVO(po.getNote(), po
+				.getImportGoodList().get(0).getCommodity().getName(),
+				po.getWareHouse(), User.operator, commodityList, po.getPs(),
+				po.getTotalMoney(), po.getTime(), po.getDocType(),
+				"Invoice_note");
 		return importMenu;
 	}
 
 	public ExportMenuVO searchDraftExport_up(String note) {
 		// TODO Auto-generated method stub
-		ExportPO exportPO = sale.searchDraftExport(note);
-		CommodityListVO commodityList = new CommodityListVO(exportPO., note, note,
-				0, 0, 0, note);
+		ExportPO po = sale.searchDraftExport(note);
+		CommodityListVO commodityList = new CommodityListVO(po
+				.getExportGoodList().get(0).getCommodity().getNote(), po
+				.getExportGoodList().get(0).getCommodity().getName(), po
+				.getExportGoodList().get(0).getCommodity().getType(), po
+				.getExportGoodList().get(0).getCommodity().getNumber(), po
+				.getExportGoodList().get(0).getPrice(), po.getExportGoodList()
+				.get(0).getMoney(), po.getExportGoodList().get(0).getPs());
 		ExportMenuVO exportMenu = new ExportMenuVO(note, note, note, note,
-				note, commodityList, 0, 0, 0, 0, note, note, 0, note);
+				commodityList, 0, 0, 0, 0);
 		return exportMenu;
 	}
 
