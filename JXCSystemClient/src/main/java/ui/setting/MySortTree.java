@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -124,6 +125,19 @@ public class MySortTree {
 //	//	backPanel.add(tablePanel);
 //	}
 	
+	private void changeIcon(int type){
+//		switch (type) {
+//		case 1:
+//			render.setForeground(new ColorFactory().greyFont);
+//			break;
+//			
+//		case 0:
+//			render.setForeground(new ColorFactory().accColor);
+//			break;
+//		default:
+//			break;
+//		}
+	}
 	
 	private void setSort(SortID fatSort) {
 		if(fatSort.commodities!=null&&(fatSort.commodities.size()!=0)){
@@ -136,6 +150,7 @@ public class MySortTree {
 				if(tempSortSon.fatherNode.equals(node)){
 					DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(tempSortSon.name);
 					treeModel.insertNodeInto(sonNode,fatherNode, fatherNode.getChildCount());
+					changeIcon(1);
 					tempSortSon.setNode(sonNode);
 					temp = tempSortSon;
 					setSort(temp);
@@ -158,11 +173,13 @@ public class MySortTree {
 //		
 		
 	}
-
+	
 	private void addCommodities(SortID tempSort) {
-		for(CommodityVO temp:tempSort.commodities){
-			DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(temp.name);
+		ArrayList<CommodityVO> commodityVOs = tempSort.commodities;
+		for(CommodityVO temp:commodityVOs){
+			DefaultMutableTreeNode sonNode = new DefaultMutableTreeNode(new ImageIcon("Image/good.png")+temp.name+"--"+temp.type);
 			treeModel.insertNodeInto(sonNode,tempSort.treeNode, tempSort.treeNode.getChildCount());
+			changeIcon(0);
 		}
 		System.out.println("123");
 	}
