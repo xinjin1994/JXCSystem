@@ -1015,11 +1015,8 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		comNote++;
 		this.writeComNote();
 		System.out.println("getGoodNote:");
-		if(po1.father!=null){
-			return part1+"-"+part2+"-"+part3;	
-		}else{
-			return part1+"-"+part3;
-		}
+		return part1+"-"+part2+"-"+part3;	
+		
 	}
 
 	public String getSortNote(SortPO po1) throws RemoteException {

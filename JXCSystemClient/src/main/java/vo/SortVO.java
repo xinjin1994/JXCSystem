@@ -13,7 +13,6 @@ public class SortVO {
 	
 	public SortVO(String name){
 		this.name=name;
-		commodity = null;
 	}
 	
 	
