@@ -71,7 +71,7 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 			finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
 			if(finCom == null){
 				frame.remove(this);
-				resController.failed("您要查找的商品不存在！", failedAddress);
+				resController.failed("您要修改的商品不存在！", failedAddress);
 			}else{
 			String fatherSort = finCom.fatherSort;
 			SortVO sortVO = new SortVO(fatherSort);
