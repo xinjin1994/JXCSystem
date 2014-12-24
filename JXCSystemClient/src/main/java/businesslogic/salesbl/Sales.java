@@ -44,11 +44,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public void setSale(SalesDataService sale) {
 		this.sale = sale;
 	}
-	
-	public void setInfo(InvoiceInfo invoice,SystemlogInfo systemlog,CommodityInfo commodity){
-		this.invoice=invoice;
-		this.systemlog=systemlog;
-		this.commodity=commodity;
+
+	public void setInfo(InvoiceInfo invoice, SystemlogInfo systemlog,
+			CommodityInfo commodity) {
+		this.invoice = invoice;
+		this.systemlog = systemlog;
+		this.commodity = commodity;
 	}
 
 	public int addCustomer(CustomerVO customerVO) {
@@ -61,8 +62,8 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 					customerVO.cusName, customerVO.level,
 					customerVO.classification, customerVO.tel,
 					customerVO.zipCode, customerVO.ezipCode,
-					customerVO.shouldGet,customerVO.shouldPay, customerVO.mostOwe,
-					 customerVO.person, customerVO.address);
+					customerVO.shouldGet, customerVO.shouldPay,
+					customerVO.mostOwe, customerVO.person, customerVO.address);
 			if (sale.addCustomer(customer)) {
 				systemlog.add_up("AddCustomer:" + customer.getName() + ","
 						+ customer.getId());
@@ -83,7 +84,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			if (customer == null) {
 				return 2;
 			}
-			if ((customer.getMoneyIn() != 0)||(customer.getMoneyOut()!=0)) {
+			if ((customer.getMoneyIn() != 0) || (customer.getMoneyOut() != 0)) {
 				return 3;
 			}
 			if (sale.delCustomer(customer)) {
@@ -99,17 +100,34 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int updateCustomer(CustomerVO vo1, CustomerVO vo2) {
 		// TODO Auto-generated method stub
+		
 		CustomerPO customer1;
 		CustomerPO customer2;
 		try {
 			customer1 = sale.findCustomer(vo1.cusName);
 			customer2 = sale.findCustomer(vo2.cusName);
+			
+			
 
 			if (customer1 == null) {
 				return 2;
 			}
+			customer1= new CustomerPO(vo1.id, vo1.cusName, vo1.level,
+					vo1.classification, vo1.tel, vo1.zipCode, vo1.ezipCode,
+					vo1.shouldGet, vo1.shouldPay, vo1.mostOwe, vo1.person, vo1.address);
+			customer2 = new CustomerPO(vo2.id, vo2.cusName, vo2.level,
+					vo2.classification, vo2.tel, vo2.zipCode, vo2.ezipCode,
+					vo2.shouldGet, vo2.shouldPay, vo2.mostOwe, vo2.person, vo2.address);
 			if (sale.updateCustomer(customer1, customer2)) {
 				systemlog.add_up("UpdateCustomer:" + customer1.getName());
+				customer1.address = customer2.getAddress();
+				customer1.amount = customer2.getAmount();
+				customer1.clerk = customer2.getClerk();
+				customer1.level = customer2.getLevel();
+				customer1.mail = customer2.getMail();
+				customer1.phone = customer2.getPhone();
+				customer1.type = customer2.getType();
+				customer1.zip = customer2.getZip();
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -137,16 +155,16 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return -1;
 	}
 
-//	public int addImport_Return(String note, int number) {
-//		// TODO Auto-generated method stub
-//		Import_ReturnPO im_re = new Import_ReturnPO(null, null, note, note,
-//				note, note, number, note);
-//		if (invoice.add(im_re) != null) {
-//			systemlog.add_up("AddImport_Return:");
-//			return 0;
-//		}
-//		return -1;
-//	}
+	// public int addImport_Return(String note, int number) {
+	// // TODO Auto-generated method stub
+	// Import_ReturnPO im_re = new Import_ReturnPO(null, null, note, note,
+	// note, note, number, note);
+	// if (invoice.add(im_re) != null) {
+	// systemlog.add_up("AddImport_Return:");
+	// return 0;
+	// }
+	// return -1;
+	// }
 
 	public int addExport(ExportPO po) {
 		// TODO Auto-generated method stub
@@ -166,16 +184,16 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return -1;
 	}
 
-//	public int addExport_Return(String note, int number) {
-//		// TODO Auto-generated method stub
-//		Export_ReturnPO ex_re = new Export_ReturnPO(null, null, note, note,
-//				note, note, number, number, number, number, note);
-//		if (invoice.add(ex_re) != null) {
-//			systemlog.add_up("AddExport_Return:");
-//			return 0;
-//		}
-//		return -1;
-//	}
+	// public int addExport_Return(String note, int number) {
+	// // TODO Auto-generated method stub
+	// Export_ReturnPO ex_re = new Export_ReturnPO(null, null, note, note,
+	// note, note, number, number, number, number, note);
+	// if (invoice.add(ex_re) != null) {
+	// systemlog.add_up("AddExport_Return:");
+	// return 0;
+	// }
+	// return -1;
+	// }
 
 	public CustomerPO findCustomer(String name) {
 		// TODO Auto-generated method stub
@@ -185,7 +203,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 				systemlog.add_up("FindCustomer:" + name);
 				return po;
 			}
-			
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -201,7 +219,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 				systemlog.add_up("GetAllImport");
 				return po;
 			}
-			
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -217,7 +235,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 				systemlog.add_up("GetAllImport_Return");
 				return po;
 			}
-			
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -231,9 +249,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			ArrayList<ExportPO> po = sale.getAllExport();
 			if (po != null) {
 				systemlog.add_up("getAllExport");
-			return po;
+				return po;
 			}
-			
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -249,7 +267,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 				systemlog.add_up("getAllExport_Return");
 				return po;
 			}
-			
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -260,14 +278,14 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<CustomerPO> searchFuzzyCustomer(String name) {
 		// TODO Auto-generated method stub
 		try {
-//			ArrayList<CustomerPO> po = sale.getAllCustomer();
-			CustomerPO po=sale.findCustomer(name);
-			ArrayList<CustomerPO> customer=new ArrayList<CustomerPO>();
-			if(po!=null){
+			// ArrayList<CustomerPO> po = sale.getAllCustomer();
+			CustomerPO po = sale.findCustomer(name);
+			ArrayList<CustomerPO> customer = new ArrayList<CustomerPO>();
+			if (po != null) {
 				systemlog.add_up("SearchFuzzyCustomer:" + name);
 				customer.add(po);
 				return customer;
-			}	
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -279,10 +297,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		try {
 			CustomerPO po = sale.findCustomer(name);
-			if(po!=null){
+			if (po != null) {
 				systemlog.add_up("SearchExactCustomer:" + name);
 				return po;
-			}		
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -619,7 +637,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
-	
 
 	public ArrayList<CustomerPO> getAllImportCustomer() {
 		return null;
@@ -629,7 +646,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	
 	public ArrayList<CommodityPO> getAllCommodity() {
 		return null;
 	}

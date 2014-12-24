@@ -32,37 +32,37 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		ArrayList<CustomerVO> result = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.searchFuzzyCustomer(name);
-		if(po==null){
+		if (po == null) {
 			return null;
-		}else{
+		} else {
 			for (int i = 0; i < po.size(); i++) {
 				CustomerVO vo = new CustomerVO(po.get(i).getId(), po.get(i)
-						.getType(), po.get(i).getLevel(), po.get(i).getName(), po
-						.get(i).getPhone(), po.get(i).getAddress(), po.get(i)
-						.getZip(), po.get(i).getMail(), po.get(i).getAmount(), po
-						.get(i).getMoneyIn(), po.get(i).getMoneyOut(), po.get(i)
-						.getClerk());
+						.getType(), po.get(i).getLevel(), po.get(i).getName(),
+						po.get(i).getPhone(), po.get(i).getAddress(), po.get(i)
+								.getZip(), po.get(i).getMail(), po.get(i)
+								.getAmount(), po.get(i).getMoneyIn(), po.get(i)
+								.getMoneyOut(), po.get(i).getClerk());
 				result.add(vo);
 			}
 			return result;
 		}
-		
+
 	}
 
 	public CustomerVO searchExactCustomer_up(String name) {
 		// TODO Auto-generated method stub
 		CustomerPO po = sale.searchExactCustomer(name);
-		if(po==null){
+		if (po == null) {
 			return null;
-		}else{
+		} else {
 			CustomerVO result = new CustomerVO(po.getId(), po.getType(),
-					po.getLevel(), po.getName(), po.getPhone(), po.getAddress(),
-					po.getZip(), po.getMail(), po.getAmount(), po.getMoneyIn(),
-					po.getMoneyOut(), po.getClerk());
+					po.getLevel(), po.getName(), po.getPhone(),
+					po.getAddress(), po.getZip(), po.getMail(), po.getAmount(),
+					po.getMoneyIn(), po.getMoneyOut(), po.getClerk());
 			return result;
 		}
-		
-	}		
+
+	}
 
 	public int addImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
@@ -169,7 +169,7 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerVO> customerVO = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.getAllCustomer();
 		for (int i = 0; i < po.size(); i++) {
-			CustomerVO customer=new CustomerVO(po.get(i).getId(), po.get(i)
+			CustomerVO customer = new CustomerVO(po.get(i).getId(), po.get(i)
 					.getType(), po.get(i).getLevel(), po.get(i).getName(), po
 					.get(i).getPhone(), po.get(i).getAddress(), po.get(i)
 					.getZip(), po.get(i).getMail(), po.get(i).getAmount(), po
