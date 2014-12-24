@@ -22,14 +22,13 @@ public class ChaSortPanel extends DelSortPanel{
 		if(nameString.equals("")){
 			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{
-			try{
 			frame.remove(this);
 			/*sort = new SortVO(nameString);
 			sort.note = "2";
 			sort.fatherSort = "b";*/
 			
 			sort = commodityblService.searchSort_up(nameString);
-			}catch(Exception e){
+			if(sort == null) {
 				resController.failed("您要修改的分类不存在！", failedAddress);
 			}
 		}

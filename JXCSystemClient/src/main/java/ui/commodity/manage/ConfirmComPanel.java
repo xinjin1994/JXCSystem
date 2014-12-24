@@ -123,6 +123,12 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 				case 0:
 					resControllerS.succeeded("成功修改商品信息！", "commodity");
 					break;
+				case 3:
+					resControllerF.failedConfirm("分类已存在！",failedAddress);
+					break;
+				case 4:
+					resControllerF.failedConfirm("分类不存在！",failedAddress);
+					break;
 				default:
 					resControllerF.failedConfirm("未知错误！", failedAddress);
 				}
