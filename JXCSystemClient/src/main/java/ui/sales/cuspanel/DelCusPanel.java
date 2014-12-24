@@ -65,18 +65,19 @@ public class DelCusPanel extends FatherPanel {
 			if (e.getSource() == secondCusBack) {
 				salesUIController.backPanel(DelCusPanel.this);
 			} else if (e.getSource() == forward) {
+				frame.remove(DelCusPanel.this);
 				if (cusName.getText().equals("")) {
-					failLabel.setText("请确认输入信息！");
+					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,DelCusPanel.this);
+					salesResult.failed("存在您的输入为空！", "delCusFailed");
 				} else {
 					try {
 						String name = cusName.getText();
 						SalesblService salesBlService = new SalesController();
 						CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
-						if(customerVO.equals(null)){
+						if(customerVO == null){
 							SalesResult salesResult = new SalesResult(frame,controller,salesUIController,DelCusPanel.this);
 							salesResult.failed("您要删除的客户不存在！", "delCusFailed");
 						}else{
-						frame.remove(DelCusPanel.this);
 						frame.setPanel(new MakeSureDelInfo(frame, "Image/Sales/对话框/二次确认/客户确认信息.jpg", controller,
 								salesUIController, customerVO, DelCusPanel.this));
 						}

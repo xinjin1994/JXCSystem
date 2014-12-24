@@ -44,7 +44,7 @@ public class MakeSureCusInfo extends FatherPanel{
 		cusShouldPay = new MyLabel(infoX1, infoY + 5 * infoInter, infoWidth1, infoHeight);
 		shouldGet = new MyLabel(634, 438, 94, 41);
 		shouldPay = new MyLabel(634, 494, 94, 41);
-		person = new MyLabel(407, 481, 48, 54);
+		person = new MyLabel(407, 481, 155, 54);
 		this.add(id);
 		this.add(cusName);
 		this.add(cusTel);

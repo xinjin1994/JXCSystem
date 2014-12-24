@@ -136,15 +136,16 @@ public class MakeSureChangeInfo extends AddCusPanel{
 						shouldGetMoney,shouldPayMoney,personText);
 				SalesblService salesBlService = new SalesController();
 				int i = salesBlService.updateCustomer_up(customerVOBefore,customerVOAfter);
+				System.out.println(i+"i");
 				switch(i){
 				case 0:
 					salesResult.succeeded("修改成功！");
 					break;
 				case 3:
-					salesResult.failed("客户的应收应付不为0", "MakeSureChangeInfo");
+					salesResult.failed("客户的应收应付不为0", "changeCusFailed");
 					break;
 				default:
-					salesResult.failed("未知错误！", "MakeSureChangeInfo");
+					salesResult.failed("未知错误！", "changeCusFailed");
 				}
 					}catch(Exception e2){
 						salesResult.failed("请重新确认您的输入！", "MakeSureChangeInfo");

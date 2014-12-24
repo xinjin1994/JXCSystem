@@ -25,7 +25,7 @@ public class FindCusPanel extends FatherPanel {
 	private MyFrame frame;
 	private MyButton secondCusBack, forward1, forward2;
 	private SalesUIController salesUIController;
-	protected MyTextFieldBorder cusName, cusID, cusExactFind;
+	protected MyTextFieldBorder cusName, cusExactFind;
 	protected CustomerVO customerVO;
 	private SalesblService salesBlService;
 	private MyTable showTable; 
@@ -88,7 +88,7 @@ public class FindCusPanel extends FatherPanel {
 			if (e.getSource() == secondCusBack) {
 				salesUIController.backPanel(FindCusPanel.this);
 			} else if (e.getSource() == forward1) {
-				if(cusName.getText().equals("")||cusID.getText().equals("")){
+				if(cusName.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
 					salesResult.failed("存在输入为空！", "finComFailed");
 				}else{
@@ -97,7 +97,7 @@ public class FindCusPanel extends FatherPanel {
 				String name = cusName.getText();
 				CustomerVO customerVO = salesBlService.searchExactCustomer_up(name);
 				frame.remove(FindCusPanel.this);
-				if(customerVO.equals(null)){
+				if(customerVO == null){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
 					salesResult.failed("您要查找的客户不存在！", "finComFailed");
 				}else{
@@ -125,7 +125,7 @@ public class FindCusPanel extends FatherPanel {
 				String info = cusExactFind.getText();
 				if(info.equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
-					salesResult.failed("请重新确认输入信息！", "finComFailed");
+					salesResult.failed("您的输入为空！", "finComFailed");
 				}else{
 				String classification = "进货商";
 				ArrayList<CustomerVO> cusVOArray = salesBlService.searchFuzzyCustomer_up(info);
@@ -135,16 +135,16 @@ public class FindCusPanel extends FatherPanel {
 					salesResult.failed("您要查找的客户不存在！", "finComFailed");
 				}else{
 				ArrayList<String> cusStr = new ArrayList<String>();
-				cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;业务员");
+				cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
 				for(int i=0;i<cusVOArray.size();i++){
 					CustomerVO customerVO = cusVOArray.get(i);
 						if (customerVO.classification) {
 					classification = "销售商";
 				}
-					String item = customerVO.id + classification + ";" + customerVO.level + ";"
+					String item = customerVO.id + ";"+classification + ";" + customerVO.level + ";"
 							+ customerVO.cusName + ";" + customerVO.tel + ";" + customerVO.address + ";"
 							+ customerVO.zipCode + ";" + customerVO.ezipCode + ";" + customerVO.mostOwe + ";"
-							+ customerVO.shouldGet + ";" + ";" + customerVO.person;
+							+ customerVO.shouldGet + ";" +customerVO.shouldPay+ ";" + customerVO.person;
 					cusStr.add(item);
 				}
 				// 此次应该显示表格

@@ -65,11 +65,11 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 		typeString = typeID.getText();
 		if(nameString.equals("")||typeString.equals("")){
 			frame.remove(this);
-			resController.failed("请重新确认输入信息！", failedAddress);
+			resController.failed("存在输入为空！", failedAddress);
 		}else{
 			try{
 			finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
-			if(finCom.equals(null)){
+			if(finCom == null){
 				frame.remove(this);
 				resController.failed("您要查找的商品不存在！", failedAddress);
 			}else{
