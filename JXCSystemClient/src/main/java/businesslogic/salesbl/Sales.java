@@ -120,14 +120,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 					vo2.shouldGet, vo2.shouldPay, vo2.mostOwe, vo2.person, vo2.address);
 			if (sale.updateCustomer(customer1, customer2)) {
 				systemlog.add_up("UpdateCustomer:" + customer1.getName());
-				customer1.address = customer2.getAddress();
-				customer1.amount = customer2.getAmount();
-				customer1.clerk = customer2.getClerk();
-				customer1.level = customer2.getLevel();
-				customer1.mail = customer2.getMail();
-				customer1.phone = customer2.getPhone();
-				customer1.type = customer2.getType();
-				customer1.zip = customer2.getZip();
 //				System.out.println(customer2.getClerk());
 				return 0;
 			}
