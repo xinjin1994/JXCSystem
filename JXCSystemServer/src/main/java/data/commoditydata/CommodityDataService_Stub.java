@@ -654,10 +654,10 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	public boolean updateSort(SortPO po1, SortPO po2) {
 		SortPO po=findSort_true(po1.getName());
 		if(po!=null){
-			if(po2.name!=null){
+			if(po2!=null){
 				po.name=po2.name;
+				this.writeSortList();
 			}
-			this.writeSortList();
 			System.out.println("updateSort:");
 			return true;
 		}
@@ -785,16 +785,20 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		SortPO po4=findSort_true(po2.getName());
 		String[] str3=po3.getNote().split("-");
 		
-		if(po4==null){
+		if(po3.father==null){
+			sortList.remove(po3);
+		}else{
 			SortPO po5=findSort_true(po3.father);
 			po5.sortList.remove(po3);
+		}
+
+		if(po4==null){
 			po3.note=str3[0]+str3[2];
 			sortList.add(po3);
 			this.writeSortList();
 			System.out.println("updateSort_Mov");
 			return true;
 		}
-		
 
 		String[] str4=po4.getNote().split("-");
 		
@@ -804,14 +808,15 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			father=str4[1];
 		}
 		
-		SortPO po5=findSort_true(po3.father);
-		po5.sortList.remove(po3);
 		po3.note=str3[0]+father+str3[2];
-		addSort(po3,po4);
-		this.writeSortList();
-		System.out.println("updateSort_Mov:");
-		return true;
-		
+		if(po4.addSort(po3)){
+			this.writeSortList();
+			System.out.println("updateSort_Mov:");
+			return true;
+		}else{
+			return false;
+		}
+
 	}
 
 	public boolean addWarn(WarnPO po) throws RemoteException {
