@@ -70,7 +70,7 @@ public class ChangeCusPanel extends FatherPanel{
 				String name = cusName.getText();
 				SalesblService salesBlService = new SalesController();
 				CustomerVO customerVO= salesBlService.searchExactCustomer_up(name);
-				if(customerVO.equals(null)){
+				if(customerVO == null){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ChangeCusPanel.this);
 					salesResult.failed("您要更改的客户不存在！", "changeCusFailed");
 				}else{

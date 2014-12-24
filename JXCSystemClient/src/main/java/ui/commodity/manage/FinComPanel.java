@@ -97,7 +97,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 			exactFind();
 		
-			commodityAllUIController.comDetail(com);
+			
 			
 		}else if(e.getSource() == fuzzyForwardButton){
 			commodityAllUIController.setTempPanel(this);
@@ -118,13 +118,16 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 	private void fuzzyFind() {
 		infoString = info.getText();
 		if(infoString.equals("")){
-			resController.failed("请重新确认输入信息！", failedAddress);
+			resController.failed("存在输入为空！", failedAddress);
 		}else{
 			//CommodityVO(String id, String name, String type, int num, double inValue, double outValue,
 			//double latestInValue, double latestOutValue,int warn) {
 		// 编号、名称、型号、库存数量、进价、零售价、最近进价、最近零售价
 			try{
 				ArrayList<CommodityVO> comArray = commodityblService.searchFuzzyCommodity_up(infoString);
+				if(comArray.size() == 0){
+					resController.failed("您要查看的商品不存在！", failedAddress);
+				}else{
 				ArrayList<String> comArr = new ArrayList<String>();
 				comArr.add("编号;名称;型号;库存数量;进价;零售价;最近进价;最近售价;警戒数量;分类");
 				for(int i=0;i<comArray.size();i++){
@@ -135,7 +138,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 					comArr.add(item);
 				}
 				setTable(comArr);
-		
+				}
 			}catch(Exception e){
 			resController.failed("您要查看的商品不存在！", failedAddress);
 			}
@@ -153,9 +156,13 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 		}else{
 			try{
 			com = commodityblService.searchAccurateCommodity_up(nameString, typeIDString);
+			if(com == null){
+				resController.failed("你要查看的商品不存在！", failedAddress);
+			}else{
 //		com = new CommodityVO("id" ,nameString, typeIDString, 11, 11, 11, 12, 12, 12);
 //		com.fatherSort = "b";
 			commodityAllUIController.comDetail(com);
+			}
 			}catch(Exception e){
 				resController.failed("你要查看的商品不存在！", failedAddress);
 			}
