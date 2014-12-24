@@ -123,7 +123,6 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 
 	protected void setSort() {
 		ArrayList<SortVO> sortArray = commodityblService.getComSort_up();
-//		String []sortList = new String[]{"a","b"};//所有可以添加商品的分类
 		String []sortList = new String[sortArray.size()];
 		for(int i =0;i<sortArray.size();i++){
 			String sortItem = sortArray.get(i).name;
@@ -183,8 +182,6 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 			inValue = Double.parseDouble(inPrice.getText());
 			outValue = Double.parseDouble(outPrice.getText());
 			warnNum = Integer.parseInt(warnNumber.getText());
-			//CommodityVO(String id, String name, String type, int num, double inValue, double outValue,
-			//double latestInValue, double latestOutValue,int warn
 			sortVO = new SortVO(sortString);
 			newCom = new CommodityVO(idString, nameString, typeString, num, inValue,
 					outValue, latestInValue, latestOutValue, warnNum);
@@ -194,10 +191,9 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 		}catch(Exception e){
 			frame.remove(this);
 			resController.failed("请重新确认输入信息！", failedAddress);
-		//添加失败	
+			//添加失败	
 			}
 		}
-//		return newCom;
 	}
 
 	public void actionPerformed(ActionEvent event) {

@@ -125,7 +125,7 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 		// 编号、名称、型号、库存数量、进价、零售价、最近进价、最近零售价
 			try{
 				ArrayList<CommodityVO> comArray = commodityblService.searchFuzzyCommodity_up(infoString);
-				if(comArray.size() == 0){
+				if(comArray == null){
 					resController.failed("您要查看的商品不存在！", failedAddress);
 				}else{
 				ArrayList<String> comArr = new ArrayList<String>();

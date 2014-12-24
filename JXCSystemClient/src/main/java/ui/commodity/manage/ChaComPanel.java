@@ -16,31 +16,31 @@ import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
 
-public class ChaComPanel extends FatherPanel implements ActionListener{
+public class ChaComPanel extends FatherPanel implements ActionListener {
 
 	private CommodityAllUIController commodityAllUIController;
 	private MyFrame frame;
 	private ResultPanelController resController;
 	private MyButton forwardButton;
-	private MyTextFieldBorder name,typeID;
-	private String nameString,typeString;
-	
+	private MyTextFieldBorder name, typeID;
+	private String nameString, typeString;
+
 	private CommodityVO finCom;
 	private CommodityblService commodityblService;
 	private String failedAddress;
-	
+
 	public ChaComPanel(MyFrame frame, String url, CommodityAllUIController controller) {
 		super(frame, url, controller);
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		this.repaint();
-	
+
 		commodityAllUIController.setBack_second(this, 183, 151);
 		resController = new ResultPanelController(frame, this);
 		this.failedAddress = "com/chaCom";
-		
+
 		commodityblService = new CommodityController();
-		
+
 		init();
 	}
 
@@ -49,13 +49,14 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 		setForward();
 	}
 
+	
 	private void setTextField() {
 		name = new MyTextFieldBorder(259, 254);
 		typeID = new MyTextFieldBorder(259, 344);
-		
+
 		this.add(name);
 		this.add(typeID);
-		
+
 		name.setForeground(new ColorFactory().accColor);
 		typeID.setForeground(new ColorFactory().accColor);
 	}
@@ -63,44 +64,41 @@ public class ChaComPanel extends FatherPanel implements ActionListener{
 	private void getChaCom() {
 		nameString = name.getText();
 		typeString = typeID.getText();
-		if(nameString.equals("")||typeString.equals("")){
+		if (nameString.equals("") || typeString.equals("")) {
 			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
-		}else{
-			try{
-			finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
-			if(finCom == null){
+		} else {
+			try {
+				finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
+				if (finCom == null) {
+					frame.remove(this);
+					resController.failed("您要修改的商品不存在！", failedAddress);
+				} else {
+					String fatherSort = finCom.fatherSort;
+					SortVO sortVO = new SortVO(fatherSort);
+					frame.remove(this);
+					commodityAllUIController.setTempPanel(this);
+					commodityAllUIController.changeComD(finCom);
+				}
+			} catch (Exception e) {
 				frame.remove(this);
 				resController.failed("您要修改的商品不存在！", failedAddress);
-			}else{
-			String fatherSort = finCom.fatherSort;
-			SortVO sortVO = new SortVO(fatherSort);
-//			finCom = new CommodityVO("id" ,nameString, typeString, 11, 11, 11, 12, 12, 12);
-//			finCom.fatherSort = "b";
-//			System.out.println(finCom.name);
-			frame.remove(this);
-			commodityAllUIController.setTempPanel(this);
-			commodityAllUIController.changeComD(finCom);
-				}
+				e.printStackTrace();
 			}
-			catch(Exception e){
-				frame.remove(this);
-				resController.failed("您要修改的商品不存在！", failedAddress);
-				}
-			
+
 		}
 	}
 
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(591, 403);
 		forwardButton = forward.forward_white;
-		
+
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == forwardButton){
+		if (e.getSource() == forwardButton) {
 			commodityAllUIController.setTempPanel(this);
 			getChaCom();
 		}

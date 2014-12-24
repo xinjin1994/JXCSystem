@@ -320,6 +320,9 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 3;
 			}
 			
+			com2=com1.copy();
+			com2.name=name2;
+			
 			if (sto.updateSort(com1,com2)) {
 				return 0;
 			}
@@ -339,8 +342,9 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			if(sort1==null||sort2==null){
 				return 4;
 			}
-			sto.updateSort_Mov(sort1, sort2);
-			return 0;
+			if(sto.updateSort_Mov(sort1, sort2)){
+				return 0;
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

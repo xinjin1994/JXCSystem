@@ -2,12 +2,16 @@ package ui.commodity.manage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import ui.commodity.CommodityAllUIController;
 import ui.setting.MyFrame;
+import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
 import vo.CommodityVO;
 import vo.SortVO;
+import businesslogic.commoditybl.CommodityController;
+import businesslogicservice.commodityblservice.CommodityblService;
 
 public class ChaComDPanel extends AddComPanel implements ActionListener{
 	
@@ -26,7 +30,20 @@ public class ChaComDPanel extends AddComPanel implements ActionListener{
 		outPriceRec.setText(String.valueOf(chaCom.latestOutValue));
 		stockNumber.setText(String.valueOf(chaCom.num));
 	}
-
+	
+	protected void setSort() {
+		CommodityblService commodityblService = new CommodityController();
+		ArrayList<SortVO> sortArray = commodityblService.getComSort_up();
+		String []sortList = new String[sortArray.size()];
+		for(int i =0;i<sortArray.size();i++){
+			String sortItem = sortArray.get(i).name;
+			sortList[i] = sortItem;
+		}
+		sortBox = new MyComboBox(sortList, 534, 245, 166, 41);
+		sortBox.setForeground(color.accColor);
+		sortBox.addActionListener(this);
+		this.add(sortBox);
+	}
 
 	protected void setTextFields() {
 		name = new MyTextFieldTrans(534, 164, 166, 41);
