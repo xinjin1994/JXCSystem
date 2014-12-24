@@ -81,8 +81,6 @@ public class CheckProPanel extends FatherPanel{
 			}
 		}
 
-
-
 		for(int i = 0;i < 5;i++){
 			for(int j = 0;j < 9;j++){
 				labels[i][j].setFont(new FontFactory(12).font);
