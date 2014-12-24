@@ -1178,4 +1178,4 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return null;
 	}
 
-}d
+}
