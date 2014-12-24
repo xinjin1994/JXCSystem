@@ -56,7 +56,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 		this.commodityAllUIController = controller;
 	
 		commodityblService = new CommodityController();
-		
+
 		setFailedAddress();
 		commodityAllUIController.setBack_first(this);
 		resController = new ResultPanelController(frame, this);

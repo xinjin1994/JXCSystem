@@ -85,23 +85,45 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 	}
 	private void setComboBox() {
 		//获得所有商品，用于报溢报损报警单中商品的选择
-		//public ArrayList<CommodityVO> getAllCommodity_up();
 		ArrayList<CommodityVO> comVO = commodityblService.getAllCommodity_up();
 		String[]rolesList = new String[comVO.size()];
-		String[]rolesList2 = new String[comVO.size()];
 		for(int i=0;i<comVO.size();i++){
-			rolesList[i] = comVO.get(i).name;
-			rolesList2[i] = comVO.get(i).type;
+			if(arrContains(rolesList, comVO.get(i).name)) {
+				rolesList[i] = comVO.get(i).name;
+			}
 		}
-//		String [] rolesList = new String[]{"a","b"};
-//		type = new MyComboBox(rolesList, 427, 308, 269, 42);
+		
 		name = new MyComboBox(rolesList,427,188,269,42);
-		type = new MyComboBox(rolesList2, 427, 308, 269, 42);
 		
 		this.add(name);
-		this.add(type);
 		
 		name.addActionListener(this);
+	}
+	
+	private boolean arrContains(String[] rolesList, String str) {
+		for(int i = 0; i < rolesList.length; i++){
+			if(str.equals(rolesList[i])) {
+				//说明重复
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private void setType(String nameString){
+		ArrayList<CommodityVO> comVO = commodityblService.getAllCommodity_up();
+		ArrayList<String> role = new ArrayList<String>();
+		for(int i=0;i<comVO.size();i++){
+			if(comVO.get(i).name.equals(nameString)) {
+				role.add(comVO.get(i).type);
+			}
+		}
+		String[]rolesList2 = new String[role.size()];
+		for(int j=0;j<role.size();j++){
+			rolesList2[j] = role.get(j);
+		}
+		type = new MyComboBox(rolesList2, 427, 308, 269, 42);
+		this.add(type);
 		type.addActionListener(this);
 	}
 	private void setTextField() {
@@ -132,6 +154,8 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == name){
 			nameString = name.getSelectedItem().toString();
+			setType(nameString);
+			this.repaint();
 		}else if(e.getSource() == type){
 			typeString = type.getSelectedItem().toString();
 		}else if(e.getSource() == forwardButton){
