@@ -21,6 +21,7 @@ import businesslogicservice.salesblservice.SalesblService;
 
 public class FindCusPanel extends FatherPanel {
 
+	private static final long serialVersionUID = -4729036564058484629L;
 	private ButtonListener buttonListener;
 	private MyFrame frame;
 	private MyButton secondCusBack, forward1, forward2;
@@ -130,7 +131,7 @@ public class FindCusPanel extends FatherPanel {
 				String classification = "进货商";
 				ArrayList<CustomerVO> cusVOArray = salesBlService.searchFuzzyCustomer_up(info);
 				frame.remove(FindCusPanel.this);
-				if(cusVOArray.size() == 0){
+				if(cusVOArray == null){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,FindCusPanel.this);
 					salesResult.failed("您要查找的客户不存在！", "finComFailed");
 				}else{

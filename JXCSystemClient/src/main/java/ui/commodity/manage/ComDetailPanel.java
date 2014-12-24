@@ -23,7 +23,7 @@ public class ComDetailPanel extends FatherPanel{
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		this.com = com;
-		
+		initReturn();
 		setLabels();
 	}
 
