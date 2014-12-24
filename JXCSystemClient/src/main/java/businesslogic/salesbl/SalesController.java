@@ -159,12 +159,13 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerVO> customerVO = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.getAllCustomer();
 		for (int i = 0; i < po.size(); i++) {
-			customerVO.set(i, new CustomerVO(po.get(i).getId(), po.get(i)
+			CustomerVO customer=new CustomerVO(po.get(i).getId(), po.get(i)
 					.getType(), po.get(i).getLevel(), po.get(i).getName(), po
 					.get(i).getPhone(), po.get(i).getAddress(), po.get(i)
 					.getZip(), po.get(i).getMail(), po.get(i).getAmount(), po
 					.get(i).getMoneyIn(), po.get(i).getMoneyOut(), po.get(i)
-					.getClerk()));
+					.getClerk());
+			customerVO.add(customer);
 		}
 		return customerVO;
 	}

@@ -255,12 +255,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<CustomerPO> searchFuzzyCustomer(String name) {
 		// TODO Auto-generated method stub
 		try {
-			ArrayList<CustomerPO> po = sale.getAllCustomer();
+//			ArrayList<CustomerPO> po = sale.getAllCustomer();
 			ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
 			CustomerPO lin = sale.findCustomer(name);
 			array.add(lin);
 			systemlog.add_up("SearchFuzzyCustomer:" + name);
-			return po;
+			return array;
 
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
