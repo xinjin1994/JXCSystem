@@ -49,7 +49,6 @@ public class ChaComPanel extends FatherPanel implements ActionListener {
 		setForward();
 	}
 
-	
 	private void setTextField() {
 		name = new MyTextFieldBorder(259, 254);
 		typeID = new MyTextFieldBorder(259, 344);
