@@ -128,6 +128,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 				customer1.phone = customer2.getPhone();
 				customer1.type = customer2.getType();
 				customer1.zip = customer2.getZip();
+//				System.out.println(customer2.getClerk());
 				return 0;
 			}
 		} catch (RemoteException e) {
