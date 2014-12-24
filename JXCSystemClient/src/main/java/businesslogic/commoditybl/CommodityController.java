@@ -39,7 +39,7 @@ public class CommodityController implements CommodityblService{
 	public int updateCommodity_up(CommodityVO vo1,CommodityVO vo2) {
 		// TODO Auto-generated method stub
 		CommodityPO po1=new CommodityPO(vo1.name,vo1.type);
-		CommodityPO po2=new CommodityPO(null, vo1.name,vo1.type,vo2.inValue,vo2.outValue, null, 0, 0, 0);
+		CommodityPO po2=new CommodityPO(false, vo1.name,vo1.type,vo2.inValue,vo2.outValue, null, 0, 0, 0);
 		return commodity.updateCommodity(po1, po2);
 	}
 

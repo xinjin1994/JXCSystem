@@ -729,7 +729,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 	}
 
 	public boolean updateCustomer(CustomerPO customer1, CustomerPO customer2) {
-		CustomerPO po=customer1;
+		CustomerPO po=findCustomer_true(customer1.getName());
 		if ((customer1 != null) && (customer2 != null)) {
 			po.address = customer2.getAddress();
 			po.amount = customer2.getAmount();
