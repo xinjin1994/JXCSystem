@@ -1110,7 +1110,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 	}
 
 	// 以下方法是类内调用
-	private CustomerPO findCustomer_true(String name) {
+	public CustomerPO findCustomer_true(String name) {
 		int i = 0;
 		for (i = 0; i < customerList.size(); i++) {
 			if (customerList.get(i).getName().equals(name)) {

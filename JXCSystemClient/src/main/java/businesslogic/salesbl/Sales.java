@@ -183,8 +183,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			CustomerPO po = sale.findCustomer(name);
 			if (po != null) {
 				systemlog.add_up("FindCustomer:" + name);
+				return po;
 			}
-			return po;
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -198,8 +199,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			ArrayList<ImportPO> po = sale.getAllImport();
 			if (po != null) {
 				systemlog.add_up("GetAllImport");
+				return po;
 			}
-			return po;
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -213,8 +215,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			ArrayList<Import_ReturnPO> po = sale.getAllImport_Return();
 			if (po != null) {
 				systemlog.add_up("GetAllImport_Return");
+				return po;
 			}
-			return po;
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -228,8 +231,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			ArrayList<ExportPO> po = sale.getAllExport();
 			if (po != null) {
 				systemlog.add_up("getAllExport");
-			}
 			return po;
+			}
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -243,8 +247,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			ArrayList<Export_ReturnPO> po = sale.getAllExport_Return();
 			if (po != null) {
 				systemlog.add_up("getAllExport_Return");
+				return po;
 			}
-			return po;
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,25 +261,28 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		try {
 //			ArrayList<CustomerPO> po = sale.getAllCustomer();
-			ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
-			CustomerPO lin = sale.findCustomer(name);
-			array.add(lin);
-			systemlog.add_up("SearchFuzzyCustomer:" + name);
-			return array;
-
+			CustomerPO po=sale.findCustomer(name);
+			ArrayList<CustomerPO> customer=new ArrayList<CustomerPO>();
+			if(po!=null){
+				systemlog.add_up("SearchFuzzyCustomer:" + name);
+				customer.add(po);
+				return customer;
+			}	
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new ArrayList<CustomerPO>();
+		return null;
 	}
 
 	public CustomerPO searchExactCustomer(String name) {
 		// TODO Auto-generated method stub
 		try {
 			CustomerPO po = sale.findCustomer(name);
-			systemlog.add_up("SearchExactCustomer:" + name);
-			return po;
+			if(po!=null){
+				systemlog.add_up("SearchExactCustomer:" + name);
+				return po;
+			}		
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
