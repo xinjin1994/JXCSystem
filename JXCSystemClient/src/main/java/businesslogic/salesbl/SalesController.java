@@ -52,7 +52,7 @@ public class SalesController implements SalesblService {
 				po.getZip(), po.getMail(), po.getAmount(), po.getMoneyIn(),
 				po.getMoneyOut(), po.getClerk());
 		return result;
-	}
+	}		
 
 	public int addImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
@@ -156,7 +156,6 @@ public class SalesController implements SalesblService {
 
 	public ArrayList<CustomerVO> getAllCustomer_up() {
 		// TODO Auto-generated method stub
-		System.out.print(111 + "arraylist");
 		ArrayList<CustomerVO> customerVO = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.getAllCustomer();
 		for (int i = 0; i < po.size(); i++) {
