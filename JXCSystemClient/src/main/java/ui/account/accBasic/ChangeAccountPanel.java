@@ -34,6 +34,7 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 	private String type = "account";
 	private String failedAddress;
 	private ResultPanelController resController;
+
 	public ChangeAccountPanel(MyFrame frame, String url, AccountAllUIController uiController) {
 		super(frame, url, uiController);
 		this.accountController = uiController;
@@ -73,8 +74,6 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 		this.add(changeName);
 	}
 
-	
-
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(606, 394);
 		forwardButton = forward.forward_white;
@@ -92,24 +91,23 @@ public class ChangeAccountPanel extends FatherPanel implements ActionListener {
 				frame.remove(this);
 
 				// 这里根据原有account从下层传回余额
-				try {
 					acc = accountblService.searchAccurateAccount_up(formerName.getText());
-					newAcc = new AccountVO(changeName.getText(), acc.balance);
-					// acc = new AccountVO(changeName.getText(),0);
-					if (type.equals("account")) {
-						accountController.setTempPanel(this);
-						accountController.confirmAcc(acc, "change", newAcc);
-					} else if (type.equals("manager")) {
-						managerController.setTempPanel(this);
-						managerController.confirmAcc(acc, "change", newAcc);
+					if (acc == null) {
+						resController.failed("账户不存在！", failedAddress);
+					} else {
+						newAcc = new AccountVO(changeName.getText(), acc.balance);
+						if (type.equals("account")) {
+							accountController.setTempPanel(this);
+							accountController.confirmAcc(acc, "change", newAcc);
+						} else if (type.equals("manager")) {
+							managerController.setTempPanel(this);
+							managerController.confirmAcc(acc, "change", newAcc);
+						}
 					}
-				} catch (Exception e2) {
-					frame.remove(this);
-					resController.failed("账户不存在！", failedAddress);
-				}
-				
+				} 
+
 			}
 			frame.repaint();
 		}
 	}
-}
+

@@ -16,123 +16,114 @@ import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+
 /**
  * 增加账户，在该类里会判断是否能够添加账户
+ * 
  * @author ZYC
  * @see ConfirmAccPanel
  */
-public class AddAccountPanel extends FatherPanel implements ActionListener{
+public class AddAccountPanel extends FatherPanel implements ActionListener {
 	AccountAllUIController accountController;
 	ManagerAllUIController managerController;
 	private String nameString;
 	private double balance;
-//	private MyLabel failLabel;
-	
+	// private MyLabel failLabel;
+
 	AccountVO newAcc;
 	private MyButton forwardButton;
-	private MyTextFieldBorder name,price;
+	private MyTextFieldBorder name, price;
 	private AccountblService accountblService;
 	private ResultPanelController resController;
 	String type = "account";
 	private String failedAddress;
 
-	public AddAccountPanel(MyFrame frame, String string,
-			AccountAllUIController accountAllUIController) {
-		super(frame,string,accountAllUIController);
+	public AddAccountPanel(MyFrame frame, String string, AccountAllUIController accountAllUIController) {
+		super(frame, string, accountAllUIController);
 		this.accountController = accountAllUIController;
 		this.repaint();
 		this.frame = frame;
-		accountController.setBack_second(this,199,141);
+		accountController.setBack_second(this, 199, 141);
 		resController = new ResultPanelController(frame, this);
 		accountblService = new AccountController();
 		this.failedAddress = "acc/accManage/addAcc";
-//		addLabel();
+		// addLabel();
 		init();
 	}
-	
-	
-	
-	public AddAccountPanel(MyFrame frame,String string,
-			ManagerAllUIController managerAllUIController,String type){
+
+	public AddAccountPanel(MyFrame frame, String string, ManagerAllUIController managerAllUIController, String type) {
 		super(frame, string, managerAllUIController);
 		this.managerController = managerAllUIController;
 		this.repaint();
 		this.frame = frame;
-		this.type = type;;
+		this.type = type;
+		;
 		managerController.setBack_second(this, 199, 141);
 		resController = new ResultPanelController(frame, this);
 		accountblService = new AccountController();
 		this.failedAddress = "manager/accManage/addAcc";
 		init();
-		
+
 	}
-	private void init(){
+
+	private void init() {
 		setTextField();
 		setForward();
 	}
-	
+
 	protected void setForward() {
 		ForwardButton forward = new ForwardButton(607, 393);
 		forwardButton = forward.forward_white;
-		
+
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);
-		
+
 	}
+
 	protected void setTextField() {
 		name = new MyTextFieldBorder(275, 245);
 		price = new MyTextFieldBorder(275, 333);
-		
+
 		name.setForeground(new ColorFactory().greyFont);
 		price.setForeground(new ColorFactory().greyFont);
-		
+
 		this.add(name);
 		this.add(price);
 	}
-	
-	
-//	public void addLabel() {
-//		failLabel = new MyLabel(275, 420, 200, 35);
-//		this.add(failLabel);
-//	}
+
+	// public void addLabel() {
+	// failLabel = new MyLabel(275, 420, 200, 35);
+	// this.add(failLabel);
+	// }
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == forwardButton){
+		if (e.getSource() == forwardButton) {
 			nameString = name.getText();
 			String priceString = price.getText();
-			
-			if(nameString.equals("")||priceString.equals("")){
+
+			if (nameString.equals("") || priceString.equals("")) {
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
-			//	failLabel.setText("请正确输入信息！");
-			}else{
-				try{
+			} else {
+				try {
 					balance = Double.parseDouble(priceString);
-
 					newAcc = new AccountVO(nameString, balance);
-					
-//					name.setText("");
-//					price.setText("");
 					frame.remove(this);
-					if(type.equals("account")){
+					if (type.equals("account")) {
 						accountController.setTempPanel(this);
-						accountController.confirmAcc(newAcc,"add");//跳转到确认界面（允许添加账户时）
+						accountController.confirmAcc(newAcc, "add");// 跳转到确认界面（允许添加账户时）
 
-					}else if(type.equals("manager")){
+					} else if (type.equals("manager")) {
 						managerController.setTempPanel(this);
 						managerController.confirmAcc(newAcc, "add");
 					}
-					
-				}catch(Exception e2){
+
+				} catch (Exception e2) {
 					frame.remove(this);
-					resController.failed("存在输入错误！",failedAddress);
+					resController.failed("存在输入错误！", failedAddress);
 				}
 			}
 		}
-		
+
 	}
-
-
-
-
 
 }

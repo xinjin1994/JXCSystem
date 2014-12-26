@@ -56,7 +56,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 		this.commodityAllUIController = controller;
 	
 		commodityblService = new CommodityController();
-		
+
 		setFailedAddress();
 		commodityAllUIController.setBack_first(this);
 		resController = new ResultPanelController(frame, this);
@@ -176,7 +176,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 				||outPrice.getText().equals("")||warnNumber.getText().equals("")){
 			//添加失败
 			frame.remove(this);
-			resController.failed("请重新确认输入信息！", failedAddress);
+			resController.failed("存在输入为空！", failedAddress);
 		}else{
 		try{
 			inValue = Double.parseDouble(inPrice.getText());

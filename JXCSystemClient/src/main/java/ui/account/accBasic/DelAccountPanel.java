@@ -94,29 +94,22 @@ public class DelAccountPanel extends FatherPanel implements ActionListener{
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 			}else{
-				try {
+				frame.remove(DelAccountPanel.this);
 					delAcc = accountblService.searchAccurateAccount_up(delAccString);
-					frame.remove(DelAccountPanel.this);
+					if(delAcc == null){
+						resController.failed("账户不存在！", failedAddress);
+					} else {
 					if(type.endsWith("account")){
 						accountController.setTempPanel(this);
 						accountController.confirmAcc(delAcc, "del");
 					}else if(type.equals("manager")){
 						managerController.setTempPanel(this);
 						managerController.confirmAcc(delAcc, "del");
+					 }
 					}
-				} catch (Exception e2) {
-					frame.remove(this);
-					resController.failed("账户不存在！", failedAddress);
-				}
-				
-				//			delAcc = new AccountVO(delAccString,20);//这个是从下层传回来的要删除的account，通过查找账户
-				
-
-//				name.setText("");
+				} 
 			}
 			frame.repaint();
 		}
-	}
-
 }
  

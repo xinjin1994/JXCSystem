@@ -60,22 +60,15 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 	protected void getSort() {
 		nameString = name.getText();
 		if(nameString.equals("")){
-			resController.failed("请重新确认输入信息！", failedAddress);
-		}else{
-			try{
+			resController.failed("存在输入为空！", failedAddress);
+		} else {
 			frame.remove(this);
-//			sort = new SortVO(nameString);
-//			sort.note = "2";
-//			sort.fatherSort = "hello";
 			sort = commodityblService.searchSort_up(nameString);
-			if(sort.equals(null)){
+			if(sort == null){
 				resController.failed("您要删除的分类不存在！", failedAddress);
-			}else{
+			} else {
 				commodityAllUIController.setTempPanel(this);
 				commodityAllUIController.confirmSort(sort,"del");
-			}
-			}catch(Exception e){
-				resController.failed("您要删除的分类不存在！", failedAddress);
 			}
 		}
 	}

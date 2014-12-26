@@ -152,17 +152,15 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 		nameString = name.getText();
 		typeIDString = typeID.getText();
 		if(nameString.equals("")||typeIDString.equals("")){
-			resController.failed("请重新确认输入信息", failedAddress);
-		}else{
+			resController.failed("存在输入为空！", failedAddress);
+		} else {
 			try{
-			com = commodityblService.searchAccurateCommodity_up(nameString, typeIDString);
-			if(com == null){
-				resController.failed("你要查看的商品不存在！", failedAddress);
-			}else{
-//		com = new CommodityVO("id" ,nameString, typeIDString, 11, 11, 11, 12, 12, 12);
-//		com.fatherSort = "b";
-			commodityAllUIController.comDetail(com);
-			}
+				com = commodityblService.searchAccurateCommodity_up(nameString, typeIDString);
+				if(com == null){
+					resController.failed("你要查看的商品不存在！", failedAddress);
+				} else {
+					commodityAllUIController.comDetail(com);
+				}
 			}catch(Exception e){
 				resController.failed("你要查看的商品不存在！", failedAddress);
 			}

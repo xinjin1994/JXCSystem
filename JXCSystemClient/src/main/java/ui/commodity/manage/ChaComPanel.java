@@ -49,7 +49,6 @@ public class ChaComPanel extends FatherPanel implements ActionListener {
 		setForward();
 	}
 
-	
 	private void setTextField() {
 		name = new MyTextFieldBorder(259, 254);
 		typeID = new MyTextFieldBorder(259, 344);
@@ -68,7 +67,6 @@ public class ChaComPanel extends FatherPanel implements ActionListener {
 			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
 		} else {
-			try {
 				finCom = commodityblService.searchAccurateCommodity_up(nameString, typeString);
 				if (finCom == null) {
 					frame.remove(this);
@@ -80,11 +78,6 @@ public class ChaComPanel extends FatherPanel implements ActionListener {
 					commodityAllUIController.setTempPanel(this);
 					commodityAllUIController.changeComD(finCom);
 				}
-			} catch (Exception e) {
-				frame.remove(this);
-				resController.failed("您要修改的商品不存在！", failedAddress);
-				e.printStackTrace();
-			}
 
 		}
 	}
