@@ -117,7 +117,7 @@ public class MyTable extends JTable{
 				//System.out.println("Doublc Clicked!");
 				int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
 				if ( rowI > -1){
-					infos.getInvoiceInfo(rowI-1);
+					infos.getInvoiceInfo(rowI);
 					table.setRowSelectionInterval(rowI, rowI);
 					System.out.println(rowI);
 //					System.out.println("双击鼠标 "+(tableModel.getValueAt(rowI, 0)));

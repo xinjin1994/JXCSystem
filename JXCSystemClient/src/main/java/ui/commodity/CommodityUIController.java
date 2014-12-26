@@ -303,6 +303,7 @@ public class CommodityUIController {
 				uiController.inventory();
 			}else if(e.getSource() == stockButtons[2]){
 				frame.remove(commodityPanel);
+				
 				uiController.patch();
 			}
 			

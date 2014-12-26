@@ -105,23 +105,23 @@ public class ProDetailPanel extends FatherPanel{
 	protected void setLevel() {
 		switch (level) {
 		case 1:
-			levelLabel = new MyLabel(92, 306,212, 44);
+			levelLabel = new MyLabel(92, 306,221, 40);
 			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level1.png"));
 			break;
 		case 2:
-			levelLabel = new MyLabel(92, 350,212, 44);
+			levelLabel = new MyLabel(92, 350,221, 40);
 			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level2.png"));
 			break;
 		case 3:
-			levelLabel = new MyLabel(92, 394,212, 44);
+			levelLabel = new MyLabel(89, 393,221, 40);
 			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level3.png"));
 			break;
 		case 4:
-			levelLabel = new MyLabel(92, 438,212, 44);
+			levelLabel = new MyLabel(89, 433,221, 40);
 			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level4.png"));
 			break;
 		case 5:
-			levelLabel = new MyLabel(92, 482,212, 44);
+			levelLabel = new MyLabel(89, 476,223, 42);
 			levelLabel.setIcon(new ImageIcon("Image/Manager/promotion/level5.png"));
 			break;
 		default:

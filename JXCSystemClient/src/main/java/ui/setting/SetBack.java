@@ -63,7 +63,6 @@ public class SetBack {
 
 		public void mousePressed(MouseEvent e) {
 			if(e.getSource() == backButton){
-				System.out.println("lk");
 				frame.remove(prePanel);
 				frame.setPanel(controller.getMainPanel());
 				frame.repaint();

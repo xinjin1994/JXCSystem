@@ -114,7 +114,7 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
 			case -1:
-				resControllerF.failedConfirm("未知错误!", failedAddress);
+				resControllerF.failedConfirm("输入信息存在错误!请检查输入！", failedAddress);
 				break;
 			}
 		}else if(e.getActionCommand().equals("voucher")) {
@@ -133,7 +133,7 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
 			case -1:
-				resControllerF.failedConfirm("未知错误!", failedAddress);
+				resControllerF.failedConfirm("输入信息存在错误!请检查输入！", failedAddress);
 				break;
 			}
 		}else if (e.getActionCommand().equals("gift")) {
@@ -152,7 +152,7 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
 			case -1:
-				resControllerF.failedConfirm("未知错误!", failedAddress);
+				resControllerF.failedConfirm("输入信息存在错误!请检查输入！", failedAddress);
 				break;
 			}
 		}
