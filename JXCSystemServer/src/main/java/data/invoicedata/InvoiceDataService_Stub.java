@@ -168,6 +168,12 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	
 	public InvoicePO findInvoice_true(String note){
 		int i=0;
+		
+		if(note==null){
+			System.out.println("note is null.");
+			return null;
+		}
+		
 		for(i=0;i<invoiceList.size();i++){
 			if(invoiceList.get(i).getNote().equals(note)){
 				return invoiceList.get(i);

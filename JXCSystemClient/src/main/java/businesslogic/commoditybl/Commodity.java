@@ -581,6 +581,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			systemlog.add_up(word);
 			PatchPO po=new PatchPO(com, number,User.operator);
 			po.setCondition(1);
+			po.setNote(note);
 			invoice.add(po);
 			sto.addPatch(po);
 			return 0;
@@ -806,6 +807,16 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<PatchPO> getAllPatch(){
+		try {
+			return sto.getAllPatch();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList<PatchPO>();
 	}
 	
 	public ArrayList<PatchPO> getAllDraftPatch(){

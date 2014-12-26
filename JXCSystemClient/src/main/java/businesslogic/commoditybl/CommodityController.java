@@ -117,7 +117,10 @@ public class CommodityController implements CommodityblService{
 
 	public int patch_up(PatchVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.patch(vo.name,vo.type,vo.number,vo.note);
+		System.out.println("kanxianote:"+vo.note);
+		int res=commodity.patch(vo.name,vo.type,vo.number,vo.note);
+		System.out.println("Patch:"+res);
+		return res;
 	}
 
 	public int warn_up(WarnVO vo) {
@@ -214,6 +217,18 @@ public class CommodityController implements CommodityblService{
 		po.setNote(vo.note);
 		po.setCondition(0);
 		return commodity.patchDraft(po);
+	}
+	
+	public ArrayList<PatchVO> getAllPatch_up() {
+		// TODO Auto-generated method stub
+		ArrayList<PatchPO> po=commodity.getAllPatch();
+		ArrayList<PatchVO> array=new ArrayList<PatchVO>();
+		PatchVO vo=null;
+		for(int i=0;i<po.size();i++){
+			vo=new PatchVO(po.get(i).getCommodity().getName(),po.get(i).getCommodity().getType(),po.get(i).getNumber(),po.get(i).getNote(),po.get(i).getTime(),po.get(i).getOperator(),po.get(i).getInvoiceNote());
+			array.add(vo);
+		}
+		return array;
 	}
 
 	public ArrayList<PatchVO> getAllDraftPatch_up() {

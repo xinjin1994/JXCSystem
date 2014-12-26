@@ -333,6 +333,17 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 		}
 		return array;
 	}
+	
+	public ArrayList<InvoicePO> getWait(){
+		ArrayList<InvoicePO> po=show();
+		ArrayList<InvoicePO> array=new ArrayList<InvoicePO>();
+		for(int i=0;i<po.size();i++){
+			if(po.get(i).getCondition()==1){
+				array.add(po.get(i));
+			}
+		}
+		return array;
+	}
 
 //	public String add(CommodityPO po) {
 //		// TODO Auto-generated method stub
