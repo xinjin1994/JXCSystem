@@ -640,7 +640,8 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public ArrayList<CommodityPO> getAllCommodity() {
-		return null;
+		ArrayList<CommodityPO> commodityPO=commodity.getAllCommodity();	
+		return commodityPO;
 	}
 
 	public CommodityPO getCommodity(String name, String id) {
