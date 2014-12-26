@@ -27,6 +27,7 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		CommodityPO com=new CommodityPO(false,vo1.name,vo1.type,vo1.inValue,vo1.outValue,
 				vo1.id,vo1.latestInValue,vo1.latestOutValue,vo1.num);
+		com.warn=vo1.warn;
 		SortPO sort=new SortPO(vo2.name);
 		return commodity.addCommodity(com,sort);
 	}
@@ -40,6 +41,7 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		CommodityPO po1=new CommodityPO(vo1.name,vo1.type);
 		CommodityPO po2=new CommodityPO(false, vo1.name,vo1.type,vo2.inValue,vo2.outValue, null, 0, 0, 0);
+		po2.warn=vo2.warn;
 		return commodity.updateCommodity(po1, po2);
 	}
 

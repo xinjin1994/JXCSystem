@@ -570,6 +570,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 			po.recent_out_price=po2.recent_out_price;
 			po.in_price=po2.in_price;
 			po.out_price=po2.out_price;
+			po.warn=po2.warn;
 			System.out.println("updateGood:");
 			this.writeSortList();
 			return true;

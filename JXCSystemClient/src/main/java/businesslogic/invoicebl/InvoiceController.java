@@ -39,8 +39,44 @@ public class InvoiceController implements InvoiceblService{
 		ArrayList<InvoiceVO> vo=new ArrayList<InvoiceVO>();
 		int i=0;
 		for(i=0;i<po.size();i++){
-			InvoiceVO lin=new InvoiceVO(po.get(i).getInvoiceNote(),po.get(i).getNote(),po.get(i).getDocType(),po.get(i).getTime(),"");
-			vo.add(lin);
+			switch(po.get(i).getDocType()){
+			case 1: SendGiftPO po1=(SendGiftPO) po.get(i);
+					SendGiftVO vo1=new SendGiftVO(po1.getNote(), po1.getTime(),"",po1.getCommodity().getName(),po1.getCommodity().getType(),po1.getNumber(),null);
+					vo.add(vo1);
+			case 2: ImportPO po2=(ImportPO) po.get(i);
+					CommodityListVO com2=new CommodityListVO(po2.getImportGoodList().get(0).getCommodity().getNote(), po2.getImportGoodList().get(0).getCommodity().getName(), po2.getImportGoodList().get(0).getCommodity().getType(), po2.getImportGoodList().get(0).getNumber(), po2.getImportGoodList().get(0).getPrice(), po2.getImportGoodList().get(0).getMoney(), po2.getImportGoodList().get(0).getPs()); 
+					ImportMenuVO vo2=new ImportMenuVO(po2.getNote(),po2.getCustomer().getName(),po2.getWareHouse(),po2.getOperator(),
+							com2,po2.getPs(),po2.getTotalMoney(),po2.getTime(),2,null);
+					vo.add(vo2);
+			case 3: Import_ReturnPO po3=(Import_ReturnPO) po.get(i);
+					CommodityListVO com3=new CommodityListVO(po3.getImportGoodList().get(0).getCommodity().getNote(), po3.getImportGoodList().get(0).getCommodity().getName(), po3.getImportGoodList().get(0).getCommodity().getType(), po3.getImportGoodList().get(0).getNumber(), po3.getImportGoodList().get(0).getPrice(), po3.getImportGoodList().get(0).getMoney(), po3.getImportGoodList().get(0).getPs()); 
+					ImportMenuVO vo3=new ImportMenuVO(po3.getNote(),po3.getCustomer().getName(),po3.getWareHouse(),po3.getOperator(),
+							com3,po3.getPs(),po3.getTotalMoney(),po3.getTime(),3,null);
+					vo.add(vo3);
+			case 4: ExportPO po4=(ExportPO) po.get(i);
+					CommodityListVO com4=new CommodityListVO(po4.getExportGoodList().get(0).getCommodity().getNote(), po4.getExportGoodList().get(0).getCommodity().getName(), po4.getExportGoodList().get(0).getCommodity().getType(), po4.getExportGoodList().get(0).getNumber(), po4.getExportGoodList().get(0).getPrice(), po4.getExportGoodList().get(0).getMoney(), po4.getExportGoodList().get(0).getPs()); 
+					ExportMenuVO vo4=new ExportMenuVO(po4.getNote(),po4.getCustomer().getName(),po4.getClerk(),po4.getOperator(),po4.getWareHouse(),
+							com4,po4.getTotalMoneyBefore(),po4.getDiscount(),po4.getVoucher(),
+							po4.getTotalMoneyAfter(),po4.getPs(),po4.getTime(),4,null);
+					vo.add(vo4);
+			case 5: Export_ReturnPO po5=(Export_ReturnPO) po.get(i);
+					CommodityListVO com5=new CommodityListVO(po5.getExportGoodList().get(0).getCommodity().getNote(), po5.getExportGoodList().get(0).getCommodity().getName(), po5.getExportGoodList().get(0).getCommodity().getType(), po5.getExportGoodList().get(0).getNumber(), po5.getExportGoodList().get(0).getPrice(), po5.getExportGoodList().get(0).getMoney(), po5.getExportGoodList().get(0).getPs()); 
+					ExportMenuVO vo5=new ExportMenuVO(po5.getNote(),po5.getCustomer().getName(),po5.getClerk(),po5.getOperator(),po5.getWareHouse(),
+							com5,po5.getTotalMoneyBefore(),po5.getDiscount(),po5.getVoucher(),
+							po5.getTotalMoneyAfter(),po5.getPs(),po5.getTime(),5,null);
+					vo.add(vo5);
+			case 6: PatchPO po6=(PatchPO) po.get(i);
+					PatchVO vo6=new PatchVO(po6.getCommodity().getName(),po6.getCommodity().getType(),po6.getNumber(),po6.getNote(),po6.getTime(),po6.getOperator(),null);
+					vo.add(vo6);
+			case 7: ReceiptPO po7=(ReceiptPO) po.get(i);
+					TransferListVO trans=new TransferListVO(po7.getTransfer().get(0).getAccount(),po7.getTransfer().get(0).getMoney(),po7.getTransfer().get(0).getPs());
+					GetVO vo7=new GetVO(po7.getNote(), po7.getCustomer().getName(), po7.getOperator(), trans,po7.getTime(),null);
+					vo.add(vo7);
+			case 8: PaymentPO po8=(PaymentPO) po.get(i);
+					ItemList item=new ItemList(po8.getItem().get(0).getItemName(), po8.getItem().get(0).getMoney(), po8.getItem().get(0).getPs());
+					PayVO vo8=new PayVO(po8.getNote(),po8.getOperator(),po8.getAccount().getName(),item,po8.getTime(),null);
+					vo.add(vo8);
+			}
 		}
 		return vo;
 	}
@@ -136,6 +172,12 @@ public class InvoiceController implements InvoiceblService{
 
 	public int pass_up(ArrayList<InvoiceVO> vo) {
 		// TODO Auto-generated method stub
+		for(int i=0;i<vo.size();i++){
+			int res=pass_up(vo.get(i));
+			if(res!=0){
+				return res;
+			}
+		}	
 		return 0;
 	}
 
@@ -146,6 +188,50 @@ public class InvoiceController implements InvoiceblService{
 
 	public InvoiceVO searchNote_up(String note) {
 		// TODO Auto-generated method stub
+		InvoicePO po=invoice.findInvoice(note);
+		
+		if(po==null){
+			return null;
+		}
+		
+		switch(po.getDocType()){
+		case 1: SendGiftPO po1=(SendGiftPO) po;
+				SendGiftVO vo1=new SendGiftVO(po1.getNote(), po1.getTime(),"",po1.getCommodity().getName(),po1.getCommodity().getType(),po1.getNumber(),null);
+				return vo1;
+		case 2: ImportPO po2=(ImportPO) po;
+				CommodityListVO com2=new CommodityListVO(po2.getImportGoodList().get(0).getCommodity().getNote(), po2.getImportGoodList().get(0).getCommodity().getName(), po2.getImportGoodList().get(0).getCommodity().getType(), po2.getImportGoodList().get(0).getNumber(), po2.getImportGoodList().get(0).getPrice(), po2.getImportGoodList().get(0).getMoney(), po2.getImportGoodList().get(0).getPs()); 
+				ImportMenuVO vo2=new ImportMenuVO(po2.getNote(),po2.getCustomer().getName(),po2.getWareHouse(),po2.getOperator(),
+						com2,po2.getPs(),po2.getTotalMoney(),po2.getTime(),2,null);
+				return vo2;
+		case 3: Import_ReturnPO po3=(Import_ReturnPO) po;
+				CommodityListVO com3=new CommodityListVO(po3.getImportGoodList().get(0).getCommodity().getNote(), po3.getImportGoodList().get(0).getCommodity().getName(), po3.getImportGoodList().get(0).getCommodity().getType(), po3.getImportGoodList().get(0).getNumber(), po3.getImportGoodList().get(0).getPrice(), po3.getImportGoodList().get(0).getMoney(), po3.getImportGoodList().get(0).getPs()); 
+				ImportMenuVO vo3=new ImportMenuVO(po3.getNote(),po3.getCustomer().getName(),po3.getWareHouse(),po3.getOperator(),
+						com3,po3.getPs(),po3.getTotalMoney(),po3.getTime(),3,null);
+				return vo3;
+		case 4: ExportPO po4=(ExportPO) po;
+				CommodityListVO com4=new CommodityListVO(po4.getExportGoodList().get(0).getCommodity().getNote(), po4.getExportGoodList().get(0).getCommodity().getName(), po4.getExportGoodList().get(0).getCommodity().getType(), po4.getExportGoodList().get(0).getNumber(), po4.getExportGoodList().get(0).getPrice(), po4.getExportGoodList().get(0).getMoney(), po4.getExportGoodList().get(0).getPs()); 
+				ExportMenuVO vo4=new ExportMenuVO(po4.getNote(),po4.getCustomer().getName(),po4.getClerk(),po4.getOperator(),po4.getWareHouse(),
+						com4,po4.getTotalMoneyBefore(),po4.getDiscount(),po4.getVoucher(),
+						po4.getTotalMoneyAfter(),po4.getPs(),po4.getTime(),4,null);
+				return vo4;
+		case 5: Export_ReturnPO po5=(Export_ReturnPO) po;
+				CommodityListVO com5=new CommodityListVO(po5.getExportGoodList().get(0).getCommodity().getNote(), po5.getExportGoodList().get(0).getCommodity().getName(), po5.getExportGoodList().get(0).getCommodity().getType(), po5.getExportGoodList().get(0).getNumber(), po5.getExportGoodList().get(0).getPrice(), po5.getExportGoodList().get(0).getMoney(), po5.getExportGoodList().get(0).getPs()); 
+				ExportMenuVO vo5=new ExportMenuVO(po5.getNote(),po5.getCustomer().getName(),po5.getClerk(),po5.getOperator(),po5.getWareHouse(),
+						com5,po5.getTotalMoneyBefore(),po5.getDiscount(),po5.getVoucher(),
+						po5.getTotalMoneyAfter(),po5.getPs(),po5.getTime(),5,null);
+				return vo5;
+		case 6: PatchPO po6=(PatchPO) po;
+				PatchVO vo6=new PatchVO(po6.getCommodity().getName(),po6.getCommodity().getType(),po6.getNumber(),po6.getNote(),po6.getTime(),po6.getOperator(),null);
+				return vo6;
+		case 7: ReceiptPO po7=(ReceiptPO) po;
+				TransferListVO trans=new TransferListVO(po7.getTransfer().get(0).getAccount(),po7.getTransfer().get(0).getMoney(),po7.getTransfer().get(0).getPs());
+				GetVO vo7=new GetVO(po7.getNote(), po7.getCustomer().getName(), po7.getOperator(), trans,po7.getTime(),null);
+				return vo7;
+		case 8: PaymentPO po8=(PaymentPO) po;
+				ItemList item=new ItemList(po8.getItem().get(0).getItemName(), po8.getItem().get(0).getMoney(), po8.getItem().get(0).getPs());
+				PayVO vo8=new PayVO(po8.getNote(),po8.getOperator(),po8.getAccount().getName(),item,po8.getTime(),null);
+				return vo8;
+		}
 		return null;
 	}
 
@@ -156,12 +242,98 @@ public class InvoiceController implements InvoiceblService{
 
 	public ArrayList<InvoiceVO> show_pass() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<InvoicePO> po=invoice.getPass();
+		ArrayList<InvoiceVO> vo=new ArrayList<InvoiceVO>();
+		int i=0;
+		for(i=0;i<po.size();i++){
+			switch(po.get(i).getDocType()){
+			case 1: SendGiftPO po1=(SendGiftPO) po.get(i);
+					SendGiftVO vo1=new SendGiftVO(po1.getNote(), po1.getTime(),"",po1.getCommodity().getName(),po1.getCommodity().getType(),po1.getNumber(),null);
+					vo.add(vo1);
+			case 2: ImportPO po2=(ImportPO) po.get(i);
+					CommodityListVO com2=new CommodityListVO(po2.getImportGoodList().get(0).getCommodity().getNote(), po2.getImportGoodList().get(0).getCommodity().getName(), po2.getImportGoodList().get(0).getCommodity().getType(), po2.getImportGoodList().get(0).getNumber(), po2.getImportGoodList().get(0).getPrice(), po2.getImportGoodList().get(0).getMoney(), po2.getImportGoodList().get(0).getPs()); 
+					ImportMenuVO vo2=new ImportMenuVO(po2.getNote(),po2.getCustomer().getName(),po2.getWareHouse(),po2.getOperator(),
+							com2,po2.getPs(),po2.getTotalMoney(),po2.getTime(),2,null);
+					vo.add(vo2);
+			case 3: Import_ReturnPO po3=(Import_ReturnPO) po.get(i);
+					CommodityListVO com3=new CommodityListVO(po3.getImportGoodList().get(0).getCommodity().getNote(), po3.getImportGoodList().get(0).getCommodity().getName(), po3.getImportGoodList().get(0).getCommodity().getType(), po3.getImportGoodList().get(0).getNumber(), po3.getImportGoodList().get(0).getPrice(), po3.getImportGoodList().get(0).getMoney(), po3.getImportGoodList().get(0).getPs()); 
+					ImportMenuVO vo3=new ImportMenuVO(po3.getNote(),po3.getCustomer().getName(),po3.getWareHouse(),po3.getOperator(),
+							com3,po3.getPs(),po3.getTotalMoney(),po3.getTime(),3,null);
+					vo.add(vo3);
+			case 4: ExportPO po4=(ExportPO) po.get(i);
+					CommodityListVO com4=new CommodityListVO(po4.getExportGoodList().get(0).getCommodity().getNote(), po4.getExportGoodList().get(0).getCommodity().getName(), po4.getExportGoodList().get(0).getCommodity().getType(), po4.getExportGoodList().get(0).getNumber(), po4.getExportGoodList().get(0).getPrice(), po4.getExportGoodList().get(0).getMoney(), po4.getExportGoodList().get(0).getPs()); 
+					ExportMenuVO vo4=new ExportMenuVO(po4.getNote(),po4.getCustomer().getName(),po4.getClerk(),po4.getOperator(),po4.getWareHouse(),
+							com4,po4.getTotalMoneyBefore(),po4.getDiscount(),po4.getVoucher(),
+							po4.getTotalMoneyAfter(),po4.getPs(),po4.getTime(),4,null);
+					vo.add(vo4);
+			case 5: Export_ReturnPO po5=(Export_ReturnPO) po.get(i);
+					CommodityListVO com5=new CommodityListVO(po5.getExportGoodList().get(0).getCommodity().getNote(), po5.getExportGoodList().get(0).getCommodity().getName(), po5.getExportGoodList().get(0).getCommodity().getType(), po5.getExportGoodList().get(0).getNumber(), po5.getExportGoodList().get(0).getPrice(), po5.getExportGoodList().get(0).getMoney(), po5.getExportGoodList().get(0).getPs()); 
+					ExportMenuVO vo5=new ExportMenuVO(po5.getNote(),po5.getCustomer().getName(),po5.getClerk(),po5.getOperator(),po5.getWareHouse(),
+							com5,po5.getTotalMoneyBefore(),po5.getDiscount(),po5.getVoucher(),
+							po5.getTotalMoneyAfter(),po5.getPs(),po5.getTime(),5,null);
+					vo.add(vo5);
+			case 6: PatchPO po6=(PatchPO) po.get(i);
+					PatchVO vo6=new PatchVO(po6.getCommodity().getName(),po6.getCommodity().getType(),po6.getNumber(),po6.getNote(),po6.getTime(),po6.getOperator(),null);
+					vo.add(vo6);
+			case 7: ReceiptPO po7=(ReceiptPO) po.get(i);
+					TransferListVO trans=new TransferListVO(po7.getTransfer().get(0).getAccount(),po7.getTransfer().get(0).getMoney(),po7.getTransfer().get(0).getPs());
+					GetVO vo7=new GetVO(po7.getNote(), po7.getCustomer().getName(), po7.getOperator(), trans,po7.getTime(),null);
+					vo.add(vo7);
+			case 8: PaymentPO po8=(PaymentPO) po.get(i);
+					ItemList item=new ItemList(po8.getItem().get(0).getItemName(), po8.getItem().get(0).getMoney(), po8.getItem().get(0).getPs());
+					PayVO vo8=new PayVO(po8.getNote(),po8.getOperator(),po8.getAccount().getName(),item,po8.getTime(),null);
+					vo.add(vo8);
+			}
+		}
+		return vo;
 	}
 
 	public ArrayList<InvoiceVO> show_refuse() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<InvoicePO> po=invoice.getRefuse();
+		ArrayList<InvoiceVO> vo=new ArrayList<InvoiceVO>();
+		int i=0;
+		for(i=0;i<po.size();i++){
+			switch(po.get(i).getDocType()){
+			case 1: SendGiftPO po1=(SendGiftPO) po.get(i);
+					SendGiftVO vo1=new SendGiftVO(po1.getNote(), po1.getTime(),"",po1.getCommodity().getName(),po1.getCommodity().getType(),po1.getNumber(),null);
+					vo.add(vo1);
+			case 2: ImportPO po2=(ImportPO) po.get(i);
+					CommodityListVO com2=new CommodityListVO(po2.getImportGoodList().get(0).getCommodity().getNote(), po2.getImportGoodList().get(0).getCommodity().getName(), po2.getImportGoodList().get(0).getCommodity().getType(), po2.getImportGoodList().get(0).getNumber(), po2.getImportGoodList().get(0).getPrice(), po2.getImportGoodList().get(0).getMoney(), po2.getImportGoodList().get(0).getPs()); 
+					ImportMenuVO vo2=new ImportMenuVO(po2.getNote(),po2.getCustomer().getName(),po2.getWareHouse(),po2.getOperator(),
+							com2,po2.getPs(),po2.getTotalMoney(),po2.getTime(),2,null);
+					vo.add(vo2);
+			case 3: Import_ReturnPO po3=(Import_ReturnPO) po.get(i);
+					CommodityListVO com3=new CommodityListVO(po3.getImportGoodList().get(0).getCommodity().getNote(), po3.getImportGoodList().get(0).getCommodity().getName(), po3.getImportGoodList().get(0).getCommodity().getType(), po3.getImportGoodList().get(0).getNumber(), po3.getImportGoodList().get(0).getPrice(), po3.getImportGoodList().get(0).getMoney(), po3.getImportGoodList().get(0).getPs()); 
+					ImportMenuVO vo3=new ImportMenuVO(po3.getNote(),po3.getCustomer().getName(),po3.getWareHouse(),po3.getOperator(),
+							com3,po3.getPs(),po3.getTotalMoney(),po3.getTime(),3,null);
+					vo.add(vo3);
+			case 4: ExportPO po4=(ExportPO) po.get(i);
+					CommodityListVO com4=new CommodityListVO(po4.getExportGoodList().get(0).getCommodity().getNote(), po4.getExportGoodList().get(0).getCommodity().getName(), po4.getExportGoodList().get(0).getCommodity().getType(), po4.getExportGoodList().get(0).getNumber(), po4.getExportGoodList().get(0).getPrice(), po4.getExportGoodList().get(0).getMoney(), po4.getExportGoodList().get(0).getPs()); 
+					ExportMenuVO vo4=new ExportMenuVO(po4.getNote(),po4.getCustomer().getName(),po4.getClerk(),po4.getOperator(),po4.getWareHouse(),
+							com4,po4.getTotalMoneyBefore(),po4.getDiscount(),po4.getVoucher(),
+							po4.getTotalMoneyAfter(),po4.getPs(),po4.getTime(),4,null);
+					vo.add(vo4);
+			case 5: Export_ReturnPO po5=(Export_ReturnPO) po.get(i);
+					CommodityListVO com5=new CommodityListVO(po5.getExportGoodList().get(0).getCommodity().getNote(), po5.getExportGoodList().get(0).getCommodity().getName(), po5.getExportGoodList().get(0).getCommodity().getType(), po5.getExportGoodList().get(0).getNumber(), po5.getExportGoodList().get(0).getPrice(), po5.getExportGoodList().get(0).getMoney(), po5.getExportGoodList().get(0).getPs()); 
+					ExportMenuVO vo5=new ExportMenuVO(po5.getNote(),po5.getCustomer().getName(),po5.getClerk(),po5.getOperator(),po5.getWareHouse(),
+							com5,po5.getTotalMoneyBefore(),po5.getDiscount(),po5.getVoucher(),
+							po5.getTotalMoneyAfter(),po5.getPs(),po5.getTime(),5,null);
+					vo.add(vo5);
+			case 6: PatchPO po6=(PatchPO) po.get(i);
+					PatchVO vo6=new PatchVO(po6.getCommodity().getName(),po6.getCommodity().getType(),po6.getNumber(),po6.getNote(),po6.getTime(),po6.getOperator(),null);
+					vo.add(vo6);
+			case 7: ReceiptPO po7=(ReceiptPO) po.get(i);
+					TransferListVO trans=new TransferListVO(po7.getTransfer().get(0).getAccount(),po7.getTransfer().get(0).getMoney(),po7.getTransfer().get(0).getPs());
+					GetVO vo7=new GetVO(po7.getNote(), po7.getCustomer().getName(), po7.getOperator(), trans,po7.getTime(),null);
+					vo.add(vo7);
+			case 8: PaymentPO po8=(PaymentPO) po.get(i);
+					ItemList item=new ItemList(po8.getItem().get(0).getItemName(), po8.getItem().get(0).getMoney(), po8.getItem().get(0).getPs());
+					PayVO vo8=new PayVO(po8.getNote(),po8.getOperator(),po8.getAccount().getName(),item,po8.getTime(),null);
+					vo.add(vo8);
+			}
+		}
+		return vo;
 	}
 
 //	public String add(PatchPO po) {

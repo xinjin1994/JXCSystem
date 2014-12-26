@@ -126,7 +126,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	public InvoicePO getInvoice(String note) {
 		int i=0;
 		for(i=0;i<invoiceList.size();i++){
-			if(invoiceList.get(i).getInvoiceNote().equals(note)){
+			if(invoiceList.get(i).getNote().equals(note)){
 				return invoiceList.get(i).copy();
 			}
 		}
@@ -134,7 +134,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	}
 
 	public boolean addInvoice(InvoicePO po) {
-		InvoicePO po1=findInvoice_true(po.getInvoiceNote());
+		InvoicePO po1=findInvoice_true(po.getNote());
 		if(po1==null){
 			invoiceList.add(po.copy());
 			return true;
@@ -144,7 +144,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 
 	public boolean delInvoice(InvoicePO po) {
 		for(int i=0;i<invoiceList.size();i++){
-			if(invoiceList.get(i).getInvoiceNote().equals(po.getInvoiceNote())){
+			if(invoiceList.get(i).getNote().equals(po.getNote())){
 				invoiceList.remove(i);
 				return true;
 			}
@@ -169,7 +169,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	public InvoicePO findInvoice_true(String note){
 		int i=0;
 		for(i=0;i<invoiceList.size();i++){
-			if(invoiceList.get(i).getInvoiceNote().equals(note)){
+			if(invoiceList.get(i).getNote().equals(note)){
 				return invoiceList.get(i);
 			}
 		}
@@ -180,7 +180,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	public boolean passInvoice(InvoicePO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		for(int i=0;i<invoiceList.size();i++){
-			if(invoiceList.get(i).getInvoiceNote().equals(po.getInvoiceNote())){
+			if(invoiceList.get(i).getNote().equals(po.getNote())){
 				po.setCondition(2);
 				invoiceList.remove(i);
 				invoiceList.add(po);
@@ -195,7 +195,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	public boolean refuseInvoice(InvoicePO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		for(int i=0;i<invoiceList.size();i++){
-			if(invoiceList.get(i).getInvoiceNote().equals(po.getInvoiceNote())){
+			if(invoiceList.get(i).getNote().equals(po.getNote())){
 				invoiceList.get(i).setCondition(3);
 				return true;
 			}
