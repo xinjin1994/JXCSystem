@@ -3,6 +3,7 @@ package ui.commodity.manage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ui.CommodityPanel;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.MyFrame;
 import ui.setting.Button.ForwardButton;
@@ -58,8 +59,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 		commodityAllUIController.setBack_first(this);
 
 		commodityblService = new CommodityController();
-		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
-		resControllerF = new ResultPanelController(frame, this);
+		resControllerF = new ResultPanelController(frame, commodityAllUIController.getPanel());
 		//!!!!!!
 		//这个是错误，调用resControllerF.failedConfirm("错误信息", failedAddress);
 		setForward();
@@ -71,6 +71,12 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 		
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);		
+	}
+	private void changeMainPanel(){
+		CommodityPanel temp = (CommodityPanel)(commodityAllUIController.getMainPanel());
+		temp.setTree(commodityblService.getAllSort_up());
+		commodityAllUIController.setMainPanel(temp);
+		resControllerS = new ResultPanelController(frame, commodityAllUIController.getMainPanel());
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -90,6 +96,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 			if(type.equals("add")){
 				switch(commodityblService.addCommodity_up(commodityVO, sortVO)){
 				case 0:
+					changeMainPanel();
 					resControllerS.succeeded("成功添加商品！", "commodity");
 					break;
 				case -1:
@@ -110,6 +117,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 			}else if(type.equals("del")){
 				switch(commodityblService.delCommodity_up(commodityVO)){
 				case 0:
+					changeMainPanel();
 					resControllerS.succeeded("成功删除商品！", "commodity");
 					break;
 				case 2:
@@ -121,6 +129,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 			}else if (type.equals("cha")) {
 				switch(commodityblService.updateCommodity_up(oldVO, commodityVO)){
 				case 0:
+					changeMainPanel();
 					resControllerS.succeeded("成功修改商品信息！", "commodity");
 					break;
 				case 3:

@@ -156,6 +156,11 @@ public class ManagerUIController {
 		managerPanel.repaint();
 		
 	}
+	public void toSysLogPanel(){
+		managerSecondPanel.removeAll();
+		managerPanel.add(managerSecondPanel);
+		managerPanel.repaint();
+	}
 		
 	class ProButtonListener implements MouseListener{
 
@@ -333,13 +338,13 @@ public class ManagerUIController {
 						itemName = "付款单";
 						break;	
 					}
-					item = billsArray.get(i).note+itemName;
+					item = billsArray.get(i).note+";"+itemName;
 					bills.add(item);
 				}
 				
 				infos = new SaveTempBills(frame, billsArray, uiController);
 				managerPanel.setTable(bills,infos);
-				
+				managerPanel.setThirdPanelButton();
 			} catch (Exception e2) {
 				frame.remove(managerPanel);
 				resController.failed("无新"+type+"单据！", "manager");

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTree;
 
 import po.PatchPO;
 import junit.framework.Test;
@@ -48,6 +49,7 @@ public class CommodityPanel extends FatherPanel{
 	private JLabel remindLabel;
 	
 	private JScrollPane scrollPane;
+	private static JTree tempTree;
 	
 	private ArrayList<CommodityVO> warnCom = new ArrayList<CommodityVO>();
 	private String images_ori[] = new String[]{"Image/Commodity/button/comManage.png",
@@ -79,12 +81,12 @@ public class CommodityPanel extends FatherPanel{
 		super(frame, url, controller);
 		commodityThirdPanel = new ThirdPanel();
 		this.add(commodityThirdPanel);
+		this.repaint();
 		
 		this.commodityUIController= commodityUIController;
 		this.frame = frame;
 		
 		color = new ColorFactory();
-		scrollPane = new MyScrollPane();
 		commodityblService = new CommodityController();
 		remind = new RemindButton(this);
 		this.addButton();
@@ -106,20 +108,27 @@ public class CommodityPanel extends FatherPanel{
 	}
 	
 	
-	private void setTree(ArrayList<SortVO> allCom) {
+	public void setTree(ArrayList<SortVO> allCom) {
 		commodityThirdPanel.removeAll();
 		comTree = new MySortTree(allCom);
-//		scrollPane =  new JScrollPane(comTree.tree);
+//		tempTree = comTree.tree;
+//		scrollPane =  new JScrollPane();
 //		scrollPane.setVisible(true);
+//		scrollPane.setViewportView(tempTree);
+		MySortTree.tree.setBounds(43,44,360,380);
+//		scrollPane.add(tempTree);
 //		scrollPane.setViewportView(comTree.tree);
-//		scrollPane.setBounds(43,44,360,380);
-//		scrollPane.setViewportView(comTree.tree);
-//		commodityThirdPanel.add(comTree.tree);
 //		commodityThirdPanel.add(scrollPane);
-		commodityThirdPanel.add(comTree.scrollPane);
+		
+		commodityThirdPanel.add(MySortTree.tree);
+//		scrollPane = comTree.scrollPane;
+//		commodityThirdPanel.add(scrollPane);
+//		commodityThirdPanel.add(MySortTree.scrollPane);
 		commodityThirdPanel.repaint();
 //		this.add(commodityThirdPanel);
 		this.repaint();
+//		frame.add(comTree.tree);
+//		frame.repaint();
 		
 	}
 	

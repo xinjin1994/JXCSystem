@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ui.setting.Button.MyButton;
+
 public class FatherPanel extends JPanel {
 
 	/** serialVersionUID */
@@ -29,6 +31,7 @@ public class FatherPanel extends JPanel {
 	private JLabel minimize1, minimize2;
 	private ImageIcon closeImage, closeImage2, miniImage1, miniImage2;
 	
+	protected MyButton mini,close;
 	public FatherPanel(JFrame frame,String url,UIController controller) {
 		this.controller = controller;
 		this.url=url;
@@ -45,16 +48,18 @@ public class FatherPanel extends JPanel {
 		this.repaint();
 	}
 	private void addMiniLabel() {
-		miniImage1 = new ImageIcon("Image/mini.png");
-		miniImage2 = new ImageIcon("Image/mini-pressON.png");
-		minimize1 = new JLabel(miniImage1);
-		minimize1.setBounds(miniX, exitY, exitWidth, exitHeight);
-		minimize1.addMouseListener(new MiniListener());
-		this.add(minimize1);
-		minimize2 = new JLabel(miniImage2);
-		minimize2.setBounds(exitX, exitY, exitWidth, exitHeight);
-		minimize2.setVisible(false);
-		this.add(minimize2);
+		
+		mini = new MyButton("Image/mini.png", miniX, exitY,"Image/mini-pressON.png" ,"Image/mini-pressON.png");
+//		miniImage1 = new ImageIcon("Image/mini.png");
+//		miniImage2 = new ImageIcon("Image/mini-pressON.png");
+//		minimize1 = new JLabel(miniImage1);
+//		minimize1.setBounds(miniX, exitY, exitWidth, exitHeight);
+		mini.addMouseListener(new MiniListener());
+//		this.add(minimize1);
+//		minimize2 = new JLabel(miniImage2);
+//		minimize2.setBounds(exitX, exitY, exitWidth, exitHeight);
+//		minimize2.setVisible(false);
+		this.add(mini);
 	}
 
 	class MiniListener implements MouseListener {
@@ -74,37 +79,38 @@ public class FatherPanel extends JPanel {
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			if (times == 0 || times == 1) {
-				minimize1.setVisible(false);
-				minimize2.setVisible(true);
-			}
-			times++;
+//			if (times == 0 || times == 1) {
+//				minimize1.setVisible(false);
+//				minimize2.setVisible(true);
+//			}
+//			times++;
 		}
 
 		public void mouseExited(MouseEvent e) {
-			minimize2.setVisible(false);
-			minimize1.setVisible(true);
-			times = 0;
+//			minimize2.setVisible(false);
+//			minimize1.setVisible(true);
+//			times = 0;
 		}
 
 	}
 
 	private void addCloseLabel() {
-		closeImage = new ImageIcon("Image/exit.png");
-		closeImage2 = new ImageIcon("Image/exit-pressON.png");
-		close1 = new JLabel(closeImage);
-		close1.setBounds(exitX, exitY, exitWidth, exitHeight);
-		close1.addMouseListener(new closeListener());
-		this.add(close1);
-		close2 = new JLabel(closeImage2);
-		close2.setBounds(exitX, exitY, exitWidth, exitHeight);
-		close2.setVisible(false);
-		this.add(close2);
+		close = new MyButton("Image/exit.png", exitX, exitY, "Image/exit-pressON.png", "Image/exit-pressON.png");
+//		closeImage = new ImageIcon("Image/exit.png");
+//		closeImage2 = new ImageIcon("Image/exit-pressON.png");
+//		close1 = new JLabel(closeImage);
+//		close1.setBounds(exitX, exitY, exitWidth, exitHeight);
+		close.addMouseListener(new closeListener());
+//		this.add(close1);
+//		close2 = new JLabel(closeImage2);
+//		close2.setBounds(exitX, exitY, exitWidth, exitHeight);
+//		close2.setVisible(false);
+		this.add(close);
 	}
 
 	class closeListener implements MouseListener {
 
-		int times = 0;
+//		int times = 0;
 
 		public void mouseClicked(MouseEvent e) {
 			System.exit(0);
@@ -118,17 +124,17 @@ public class FatherPanel extends JPanel {
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			if (times == 0 || times == 1) {
-				close1.setVisible(false);
-				close2.setVisible(true);
-			}
-			times++;
+//			if (times == 0 || times == 1) {
+//				close1.setVisible(false);
+//				close2.setVisible(true);
+//			}
+//			times++;
 		}
 
 		public void mouseExited(MouseEvent e) {
-			close2.setVisible(false);
-			close1.setVisible(true);
-			times = 0;
+//			close2.setVisible(false);
+//			close1.setVisible(true);
+//			times = 0;
 		}
 
 	}
