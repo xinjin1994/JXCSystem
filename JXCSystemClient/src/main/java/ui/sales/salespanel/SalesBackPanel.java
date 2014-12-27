@@ -6,15 +6,11 @@ import java.awt.event.MouseListener;
 import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
-import ui.sales.impanel.ImBackPanel;
-import ui.sales.impanel.ImInPanel;
 import ui.sales.impanel.MakeSureIm;
 import ui.setting.MyFrame;
 import ui.setting.Button.MyButton;
 import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
-import businesslogic.salesbl.SalesController;
-import businesslogicservice.salesblservice.SalesblService;
 
 public class SalesBackPanel extends SalesInPanel{
 
@@ -34,6 +30,11 @@ public class SalesBackPanel extends SalesInPanel{
 		forward.addMouseListener(new MouListener());
 	}
 	
+	public void addSaveButton(){
+		saveButton = new MyButton("Image/save.png", 670, 550, "Image/save_stop.png", "Image/save_stop");
+		this.add(saveButton);
+		saveButton.addMouseListener(new MouListener());
+	}
 	class MouListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -44,7 +45,28 @@ public class SalesBackPanel extends SalesInPanel{
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesBackPanel.this);
 					salesResult.failed("请重新确认输入信息！", "export_return_failed");
-				}else{
+				}else if(e.getSource() == saveButton){
+					try{
+						CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+								goodsTypeSelected, num, price, num*price, newRemark.getText());
+
+						ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
+								warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
+						exportMenuVO.person = person.getText();
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, SalesBackPanel.this);
+//					salesResult.succeeded("成功添加草稿单！");
+					switch(salesblService.addDraftExport_Return_up(exportMenuVO)){
+					case 0:
+						salesResult.succeeded("成功添加草稿单！");
+						break;
+					default:
+						salesResult.failed("添加失败！", "export_return_failed");
+					}
+					}catch(Exception e2){
+						e2.printStackTrace();
+					}
+				}
+				else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, num*price, newRemark.getText());
 				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),

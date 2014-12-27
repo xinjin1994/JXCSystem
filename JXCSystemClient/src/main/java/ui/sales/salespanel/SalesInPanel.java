@@ -5,7 +5,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import businesslogic.userbl.User;
 import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
@@ -16,11 +15,18 @@ import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldFilled;
 import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
+import businesslogic.userbl.User;
 
 public class SalesInPanel extends ImInPanel{
 
 	MyTextFieldFilled newRemark;
 	SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesInPanel.this);
+	
+	public SalesInPanel(MyFrame frame, String url, UIController controller){
+		super(frame, url, controller);
+		this.remove(remark);
+		this.addRestText();
+	}
 	public SalesInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){
 		super(frame, url, controller,salesUIController);
 		this.remove(remark);
@@ -97,6 +103,12 @@ public class SalesInPanel extends ImInPanel{
 			failLabel.setText("请正确输入信息！");
 		}
 	}
+	
+	public void addSaveButton(){
+		saveButton = new MyButton("Image/save.png", 670, 550, "Image/save_stop.png", "Image/save_stop");
+		this.add(saveButton);
+		saveButton.addMouseListener(new MouListener());
+	}
 	class MouListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -125,6 +137,26 @@ public class SalesInPanel extends ImInPanel{
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();
 				getPrice();
+			}else if(e.getSource() == saveButton){
+				try{
+					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+							goodsTypeSelected, num, price, num*price, newRemark.getText());
+
+					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
+							warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
+					exportMenuVO.person = person.getText();
+				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, SalesInPanel.this);
+//				salesResult.succeeded("成功添加草稿单！");
+				switch(salesblService.addDraftExport_up(exportMenuVO)){
+				case 0:
+					salesResult.succeeded("成功添加草稿单！");
+					break;
+				default:
+					salesResult.failed("添加失败！", "export_failed");
+				}
+				}catch(Exception e2){
+					e2.printStackTrace();
+				}
 			}
 			}
 		

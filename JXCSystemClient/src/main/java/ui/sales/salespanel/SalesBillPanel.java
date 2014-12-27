@@ -31,9 +31,13 @@ public class SalesBillPanel extends FatherPanel{
 		addLabel();
 		addDis();
 		setSalesLabel();
-		controller.setBackBills(this);
+		back();
 	}
 	
+	public void back(){
+		controller.setBackBills(this);
+		
+	}
 	public void addLabel() {
 		id = new MyLabel(105, 173, 222, 36);
 		supplier = new MyLabel(210, 255, 116, 42);
