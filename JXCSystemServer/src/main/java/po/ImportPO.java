@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ImportPO extends InvoicePO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 100;
 	CustomerPO customer;
 	String ps;//��
 	String clerk;//Ĭ��ҵ��Ա
 	String operator;//����Ա
 	String wareHouse;//�ֿ�
 	ArrayList<ImportGoodPO> importGoodList; 
-	double total_money;//这个是进货的总价
+	public double total_money;//这个是进货的总价
 	
 	public ImportPO(CustomerPO customer, ArrayList<ImportGoodPO> po,String ps, String clerk,
 			String operator,String wareHouse, double total_money) {
@@ -20,7 +24,7 @@ public class ImportPO extends InvoicePO implements Serializable{
 		this.clerk = clerk;
 		this.operator = operator;
 		this.wareHouse = wareHouse;
-		this.total_money = total_money;
+		this.total_money = po.get(0).getMoney();
 		this.doc_type=2;
 	}
 	
