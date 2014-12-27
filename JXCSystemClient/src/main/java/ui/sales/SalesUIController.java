@@ -1,7 +1,5 @@
 package ui.sales;
 
-import java.util.ArrayList;
-
 import ui.FatherPanel;
 import ui.SalesManagerPanel;
 import ui.UIController;
@@ -20,7 +18,7 @@ import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.ThirdPanel;
-import vo.CustomerVO;
+import ui.setting.Button.MyButton;
 import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 

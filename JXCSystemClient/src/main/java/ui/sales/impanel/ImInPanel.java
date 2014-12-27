@@ -1,7 +1,6 @@
 package ui.sales.impanel;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -15,6 +14,7 @@ import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
+import ui.setting.Button.SaveButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldFilled;
 import ui.setting.TextField.MyTextFieldTrans;
@@ -42,7 +42,28 @@ public class ImInPanel extends FatherPanel {
 	protected MyFrame frame;
 	protected UIController controller;
 	protected boolean isGo = false;
+	protected MyButton saveButton;
 	
+	public ImInPanel(MyFrame frame, String url, UIController controller){
+		super(frame,url,controller);
+		this.frame = frame;
+		this.controller = controller;
+		salesUIController = new SalesUIController(controller,frame);
+		buttonListener = new ButtonListener();
+		salesblService = new SalesController();
+		// this.addTextField();
+		// this.addButton();
+		// this.addCombox();
+		// this.addID();
+		this.addTextField();
+		this.addButton();
+		this.addCombox();
+		this.addLabel();
+		this.addID();
+		this.addNum();
+		this.addTotalListener();
+		this.addSaveButton();
+	}
 	public ImInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame, url, controller);
 		this.salesUIController = salesUIController;
@@ -61,6 +82,7 @@ public class ImInPanel extends FatherPanel {
 		this.addID();
 		this.addNum();
 		this.addTotalListener();
+		this.addSaveButton();
 	}
 
 	public void addCombox() {
@@ -178,6 +200,13 @@ public class ImInPanel extends FatherPanel {
 		goodsTotal.addFocusListener(new FocusAdapter());
 		
 	}
+	
+	public void addSaveButton(){
+		saveButton = new MyButton("Image/save.png", 670, 550, "Image/save_stop.png", "Image/save_stop");
+		this.add(saveButton);
+		saveButton.addActionListener(buttonListener);
+	}
+	
 	class FocusAdapter implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
@@ -241,6 +270,25 @@ public class ImInPanel extends FatherPanel {
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();
 				getPrice();
+			}else if(e.getSource() == saveButton){
+				try{
+				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+						goodsTypeSelected, num, price, totalPriceText, remark.getText());
+				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+						warehouse.getText(), commodityListVO, 2);
+				importMenuVO.person = person.getText();
+				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
+//				salesResult.succeeded("成功添加草稿单！");
+				switch(salesblService.addDraftImport_Return_up(importMenuVO)){
+				case 0:
+					salesResult.succeeded("成功添加草稿单！");
+					break;
+				default:
+					salesResult.failed("添加失败！", "importFailed");
+				}
+				}catch(Exception e2){
+					e2.printStackTrace();
+				}
 			}
 
 		}

@@ -77,6 +77,12 @@ public class ImBackPanel extends ImInPanel {
 		}
 
 	}
+
+	public void addSaveButton(){
+		saveButton = new MyButton("Image/save.png", 670, 550, "Image/save_stop.png", "Image/save_stop");
+		this.add(saveButton);
+		saveButton.addMouseListener(new MouListener());
+	}
 	
 	class MouListener implements MouseListener{
 
@@ -105,6 +111,25 @@ public class ImBackPanel extends ImInPanel {
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();
 				getPrice();
+			}else if(e.getSource() == saveButton){
+				try{
+				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+						goodsTypeSelected, num, price, totalPriceText, remark.getText());
+				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+						warehouse.getText(), commodityListVO, 2);
+				importMenuVO.person = person.getText();
+				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImBackPanel.this);
+//				salesResult.succeeded("成功添加草稿单！");
+				switch(salesblService.addDraftImport_up(importMenuVO)){
+				case 0:
+					salesResult.succeeded("成功添加草稿单！");
+					break;
+				default:
+					salesResult.failed("添加失败！", "import_return_failed");
+				}
+				}catch(Exception e2){
+					e2.printStackTrace();
+				}
 			}
 		}
 

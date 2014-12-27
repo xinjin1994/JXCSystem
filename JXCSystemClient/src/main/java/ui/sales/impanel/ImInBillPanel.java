@@ -17,8 +17,8 @@ public class ImInBillPanel extends FatherPanel {
 			goodsType, person, operator, newRemark, discount, voucher;
 	protected MyButton back;
 	protected ImportMenuVO importMenuVO;
-	private UIController controller;
-	private MyFrame frame;
+	protected UIController controller;
+	protected MyFrame frame;
 	
 	public ImInBillPanel(MyFrame frame, String url, UIController controller, ImportMenuVO importMenuVO) {
 		super(frame, url, controller);
@@ -27,9 +27,13 @@ public class ImInBillPanel extends FatherPanel {
 		this.controller = controller;
 		addLabel();
 		setLabel();
-		controller.setBackBills(this);
+		back();
 	}
 
+	public void back(){
+		controller.setBackBills(this);
+		
+	}
 	public void addLabel() {
 		id = new MyLabel(105, 173, 222, 36);
 		supplier = new MyLabel(210, 255, 116, 42);
