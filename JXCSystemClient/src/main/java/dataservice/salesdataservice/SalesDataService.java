@@ -56,4 +56,6 @@ public interface SalesDataService extends Remote {
 	public String getExport_ReturnNote() throws RemoteException;
 	
 	public boolean clear() throws RemoteException;
+	public int getImport_ReturnMaxNumber(String old_note);
+	public int getExport_ReturnMaxNumber(String old_note);
 }

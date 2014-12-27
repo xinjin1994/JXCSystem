@@ -1176,4 +1176,14 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return null;
 	}
 
+	public int getImport_ReturnMaxNumber(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getExport_ReturnMaxNumber(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -621,12 +621,14 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int getImport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result=sale.getImport_ReturnMaxNumber(old_note);
+		return result;
 	}
 
 	public int getExport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		return 0;
+		int result=sale.getExport_ReturnMaxNumber(old_note);
+		return result;
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
