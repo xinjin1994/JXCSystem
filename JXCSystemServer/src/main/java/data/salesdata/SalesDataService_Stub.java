@@ -671,7 +671,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public SalesDataService_Stub() throws RemoteException {
 		super();
-		
+
 		this.writeCustomerList();
 		this.writeDraftImportList();
 		this.writeDraftImport_ReturnList();
@@ -686,7 +686,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		this.writeKHBHNote();
 		this.writeXSDNote();
 		this.writeXSTHDNote();
-		
+
 		this.readCustomerList();
 		this.readDraftImportList();
 		this.readDraftImport_ReturnList();
@@ -719,7 +719,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 		CustomerPO po1 = findCustomer_true(po.getName());
 		if (po1 != null) {
-			if ((po1.getMoneyIn() == 0)&&(po1.getMoneyOut()==0)) {
+			if ((po1.getMoneyIn() == 0) && (po1.getMoneyOut() == 0)) {
 				customerList.remove(po1);
 				this.writeCustomerList();
 				return true;
@@ -729,7 +729,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 	}
 
 	public boolean updateCustomer(CustomerPO customer1, CustomerPO customer2) {
-		CustomerPO po=findCustomer_true(customer1.getName());
+		CustomerPO po = findCustomer_true(customer1.getName());
 		if ((customer1 != null) && (customer2 != null)) {
 			po.address = customer2.getAddress();
 			po.amount = customer2.getAmount();
@@ -1178,12 +1178,59 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public int getImport_ReturnMaxNumber(String note) throws RemoteException {
 		// TODO Auto-generated method stub
+		int i = 0;
+		for(i=0;i<importList.size();i++){
+			if(note.equals(importList.get(i).getNote())){
+				ArrayList<Integer> array=getAllImport_ReturnNote(importList.get(i).getNote());
+				int j=0;
+				int sum=0;
+				for(j=0;j<array.size();j++){
+					sum=sum+array.get(i);
+				}
+				int importNumber=importList.get(i).getImportGoodList().get(0).getNumber();
+				return importNumber-sum;
+			}
+		}
 		return 0;
 	}
 
 	public int getExport_ReturnMaxNumber(String note) throws RemoteException {
 		// TODO Auto-generated method stub
+		int i = 0;
+		for(i=0;i<exportList.size();i++){
+			if(note.equals(exportList.get(i).getNote())){
+				ArrayList<Integer> array=getAllExport_ReturnNote(exportList.get(i).getNote());
+				int j=0;
+				int sum=0;
+				for(j=0;j<array.size();j++){
+					sum=sum+array.get(i);
+				}
+				int exportNumber=exportList.get(i).getImportGoodList().get(0).getNumber();
+				return exportNumber-sum;
+			}
+		}
 		return 0;
+	}
+	public ArrayList<Integer> getAllImport_ReturnNote(String note){
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		int i=0;
+		for(i=0;i<import_returnList.size();i++){
+			if(note.equals(import_returnList.get(i).getOldNote())){
+				array.add(import_returnList.get(i).getImportGoodList().get(0).getNumber());
+			}
+		}
+		return array;		
+	}
+	
+	public ArrayList<Integer> getAllExport_ReturnNote(String note){
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		int i=0;
+		for(i=0;i<export_returnList.size();i++){
+			if(note.equals(export_returnList.get(i).getOldNote())){
+				array.add(export_returnList.get(i).getImportGoodList().get(0).getNumber());
+			}
+		}
+		return array;
 	}
 
 }
