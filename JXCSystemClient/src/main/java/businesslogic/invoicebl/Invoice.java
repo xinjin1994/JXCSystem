@@ -150,6 +150,10 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 				return 1;
 			}
 			
+			if(!invoice.refuseInvoice(tempInvoice)){
+				return -1;
+			}
+			
 			switch(tempInvoice.getDocType()){
 			
 			case 1: SendGiftPO po1=(SendGiftPO) tempInvoice;

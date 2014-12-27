@@ -333,30 +333,14 @@ public class AccountUIController extends UIController{
 					switch(billsArray.get(i).bill_note) {
 					//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
 					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
-					case 1:
-						itemName = "商品赠送单";
-						break;
-					case 2:
-						itemName = "进货单";
-						break;
-					case 3:
-						itemName = "进货退货单";
-						break;
-					case 4:
-						itemName = "销售单";
-						break;
-					case 5:
-						itemName = "销售退货单";
-						break;
-					case 6:
-						itemName = "报溢报损单";
-						break;
 					case 7:
 						itemName = "收款单";
 						break;
 					case 8:
 						itemName = "付款单";
 						break;	
+					default:
+						break;
 					}
 					item = billsArray.get(i).note+itemName;
 					bills.add(item);
