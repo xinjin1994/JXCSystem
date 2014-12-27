@@ -223,4 +223,24 @@ public class SaleDataService_Stub implements SalesDataService{
 		return null;
 	}
 
+	public int getImport_ReturnMaxNumber(String old_note) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getExport_ReturnMaxNumber(String old_note) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public ArrayList<CustomerPO> getAllImportCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<CustomerPO> getAllExportCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -634,11 +634,13 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	// ////////////////////////////////////////////////////////////////////////////////
 
 	public ArrayList<CustomerPO> getAllImportCustomer() {
-		return null;
+		ArrayList<CustomerPO> po=sale.getAllImportCustomer();
+		return po;
 	}
 
 	public ArrayList<CustomerPO> getAllExportCustomer() {
-		return null;
+		ArrayList<CustomerPO> po=sale.getAllExportCustomer();
+		return po;
 	}
 
 	public ArrayList<CommodityPO> getAllCommodity() {
