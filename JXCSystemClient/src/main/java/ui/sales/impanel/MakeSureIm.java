@@ -15,6 +15,7 @@ import ui.setting.Button.MyButton;
 import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
 import vo.bill.ImportMenuVO;
+import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class MakeSureIm extends FatherPanel {
@@ -24,7 +25,7 @@ public class MakeSureIm extends FatherPanel {
 	protected MyLabel supplier, warehouse, remark, id, goodsID, goodsPrice, goodsNum, goodsTotal, goodsName,
 			goodsType, person, operator, newRemark, discount, voucher;
 	protected MyButton back, forward, back2, forward2, backSales, forwardSales,backSales2,forwardSales2;
-	protected SalesblService salesblService;
+	protected SalesblService salesblService = new SalesController();
 	protected ImportMenuVO importMenuVO;
 	protected CommodityListVO commodityListVO;
 	protected String personLabel, operatorLabel;
@@ -206,6 +207,8 @@ public class MakeSureIm extends FatherPanel {
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
+				default:
+					salesResult.failed("未知错误！", "import_failed");
 				}
 			} else if (e.getSource() == back2) {
 				frame.remove(MakeSureIm.this);
@@ -216,16 +219,22 @@ public class MakeSureIm extends FatherPanel {
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
+				default:
+					salesResult.failed("添加失败！", "import_return_failed");
 				}
 			} else if (e.getSource() == backSales) {
 				frame.remove(MakeSureIm.this);
 				frame.setPanel(salesInPanel);
 				frame.repaint();
 			} else if (e.getSource() == forwardSales) {
-				switch(salesblService.addExport_up(exportMenuVO)){
+				int i = salesblService.addExport_up(exportMenuVO);
+//				System.out.println(i);
+				switch(i){
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
+				default:
+					salesResult.failed("添加失败！", "export_return_failed");
 				}
 			}else if(e.getSource() == backSales2){
 				frame.remove(MakeSureIm.this);
@@ -236,6 +245,8 @@ public class MakeSureIm extends FatherPanel {
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
+				default:
+					salesResult.failed("添加失败！", "export_failed");
 				}
 			}
 		}

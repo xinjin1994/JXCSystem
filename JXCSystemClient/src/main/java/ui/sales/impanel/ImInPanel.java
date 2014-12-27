@@ -207,7 +207,7 @@ public class ImInPanel extends FatherPanel {
 						|| warehouse.getText().equals("") || person.getText().equals("")
 						|| operator.getText().equals("")) {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
-					salesResult.failed("请重新确认输入信息！", "import_failed");
+					salesResult.failed("请重新确认输入信息！", "importFailed");
 				} else {
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());

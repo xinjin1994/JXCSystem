@@ -77,6 +77,9 @@ public class SalesController implements SalesblService {
 		ArrayList<ImportGoodPO> importGood = new ArrayList<ImportGoodPO>();
 		importGood.add(importGoodPO);
 		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
+		System.out.println(importMenuVO.remark);
+		System.out.println(customerPO.clerk);
+		System.out.println(User.operator);
 		ImportPO imp = new ImportPO(customerPO, importGood,
 				importMenuVO.remark, customerPO.clerk, User.operator,
 				importMenuVO.warehouse, importMenuVO.total);
