@@ -22,10 +22,10 @@ public interface FinancialblService {
 	public ArrayList<ConditionVO> operatingCondition_up(String start_time, String end_time);
 
 	//销售记录导出，未实现
-	public int saleListExcel_up(ArrayList<SaleListConditionVO> saleList_condition);
+	public int saleListExcel_up(ArrayList<SalesDetailVO> saleList_condition);
 	
 	//经营历程导出，未实现
-	public int allBillExcel_up(ArrayList<AllBillConditionVO> allBill_condition);
+	public int allBillExcel_up(ArrayList<AllBillVO> allBill_condition);
 	
 	//经营情况导出，未实现
 	public int operatingConditionExcel_up(ArrayList<ConditionVO> oprating_condition);

@@ -3,6 +3,9 @@ package businesslogic.financialbl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Vector;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -15,18 +18,35 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 
 
+
 public class Excel {
 	
-	public void output(String[][] inf,String place){
+	public int output(Vector<String[]> vector,String place){
 		
-		try {	
-			File excelFile = new File(place);
-			if (!excelFile.exists()) {
-				excelFile.createNewFile();
-			} 
+		String fileLocation=place+".xls";
+		
+		try {
+			Calendar rightNow = Calendar.getInstance();
+		    SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+		    String sysDatetime = fmt.format(rightNow.getTime());
+			
+
+			place=place+"_"+sysDatetime;
+			fileLocation=place+".xls";
+			File excelFile = new File(fileLocation);
+
+//			File excelFile = new File("E://text_2014_12_28.xls");
+			int i=1;
+			while (excelFile.exists()) {
+				fileLocation=place+"("+i+").xls";
+				excelFile=new File(fileLocation);
+				i++;
+			}
+			excelFile.createNewFile();
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return -1;
 		}
 		
 		
@@ -38,8 +58,8 @@ public class Excel {
 	    
 	    int cellIndex = 0 ;  
         Row title = sh.createRow(0);    //创建一行  
-        for(cellIndex=0;cellIndex<inf[0].length;cellIndex++){
-        	title.createCell(cellIndex).setCellValue(inf[0][cellIndex]);
+        for(cellIndex=0;cellIndex<vector.elementAt(0).length;cellIndex++){
+        	title.createCell(cellIndex).setCellValue(vector.elementAt(0)[cellIndex]);
         }
   
   
@@ -57,22 +77,24 @@ public class Excel {
         } 
 	    
         
-        for (int i = 1; i < inf.length ; i++) {  
+        for (int i = 1; i < vector.capacity() ; i++) {  
             Row row = sh.createRow(i);
-            for(cellIndex = 0 ; cellIndex<inf[0].length;cellIndex++){  
-            	row.createCell(cellIndex).setCellValue(inf[i][cellIndex]); 
+            for(cellIndex = 0 ; cellIndex<vector.elementAt(i).length ;cellIndex++){  
+            	row.createCell(cellIndex).setCellValue(vector.elementAt(i)[cellIndex]); 
             }
         }
         
         try  
         {
-            FileOutputStream fout = new FileOutputStream(place);  
+            FileOutputStream fout = new FileOutputStream(fileLocation);  
             wb.write(fout);  
             fout.close();  
-        }  
+            return 0;
+        }
         catch (Exception e)  
-        {  
+        {  	
             e.printStackTrace();  
+            return -1;
         }  
 //            {   //入住日期(如果入住日期在今天之后， 显示为红色)  
 //                Cell checkIn = row.createCell(cellIndex++);  

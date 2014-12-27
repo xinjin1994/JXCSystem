@@ -2,6 +2,7 @@ package businesslogic.financialbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import po.AllBillPO;
 import po.CommodityPO;
@@ -15,11 +16,9 @@ import po.PaymentPO;
 import po.ReceiptPO;
 import po.SaleListPO;
 import po.SendGiftPO;
-import vo.SaleListConditionVO;
-import businesslogic.accountbl.Account;
-import businesslogic.commoditybl.Commodity;
-import businesslogic.salesbl.Sales;
-import businesslogic.systemlogbl.Systemlog;
+import vo.ConditionVO;
+import vo.SalesDetailVO;
+import vo.bill.AllBillVO;
 import data.financialdata.FinancialDataService_Stub;
 import dataservice.financialdataservice.FinancialDataService;
 
@@ -349,16 +348,70 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 		return false;
 	}
 	
-	public int outputSaleListExcel(ArrayList<SaleListConditionVO> saleList){
+	public int outputSaleListExcel(ArrayList<SalesDetailVO> saleList){
+		Vector<String[]> vec=new Vector<String[]>(1,1);
+		String[] title={"时间","商品名称","商品型号","商品数量","商品单价","商品总额"};
+		vec.add(title);
 		
+		for(int i=0;i<saleList.size();i++){
+			String[] cell=new String[6];
+			cell[0]=saleList.get(i).time;
+			cell[1]=saleList.get(i).commodityName;
+			cell[2]=saleList.get(i).type;
+			cell[3]=Integer.toString(saleList.get(i).num);
+			cell[4]=Double.toString(saleList.get(i).unitPrice);
+			cell[5]=Double.toString(saleList.get(i).total);
+			vec.addElement(cell);
+		}
+		
+		Excel excel=new Excel();
+		return excel.output(vec, "D://销售明细表");
 	}
 	
-	public int outputAllBillExcel(){
+	public int outputAllBillExcel(ArrayList<AllBillVO> allbill){
+		Vector<String[]> vec=new Vector<String[]>(1,1);
+		String[] title={"时间","单据编号","单据类型"};
+		vec.add(title);
 		
+		for(int i=0;i<allbill.size();i++){
+			String[] cell=new String[3];
+			cell[0]=allbill.get(i).time;
+			cell[1]=allbill.get(i).note;
+			switch(allbill.get(i).bill_note){
+			case 1:	cell[2]="赠品赠送单";break;
+			case 2:	cell[2]="进货单";break;
+			case 3:	cell[2]="进货退货单";break;
+			case 4:	cell[2]="销售单";break;
+			case 5:	cell[2]="销售退货单";break;
+			case 6:	cell[2]="报溢报损单";break;
+			case 7:	cell[2]="收款单";break;
+			case 8:	cell[2]="付款单";break;
+			}
+			vec.addElement(cell);
+		}
+		
+		Excel excel=new Excel();
+		return excel.output(vec, "D://经营历程表");
 	}
 	
-	public int outputOperatingExcel(){
+	public int outputOperatingExcel(ArrayList<ConditionVO> condition){
+		Vector<String[]> vec=new Vector<String[]>(1,1);
+		String[] title={"销售收入","商品收入","折扣","销售支出","商品支出","利润"};
+		vec.add(title);
 		
+		for(int i=0;i<condition.size();i++){
+			String[] cell=new String[6];
+			cell[0]=Double.toString(condition.get(i).sales_income);
+			cell[1]=Double.toString(condition.get(i).com_income);
+			cell[2]=Double.toString(condition.get(i).discount);
+			cell[3]=Double.toString(condition.get(i).sales_outcome);
+			cell[4]=Double.toString(condition.get(i).com_outcome);
+			cell[5]=Double.toString(condition.get(i).profit);
+			vec.addElement(cell);
+		}
+		
+		Excel excel=new Excel();
+		return excel.output(vec, "D://经营情况表");
 	}
 
 }

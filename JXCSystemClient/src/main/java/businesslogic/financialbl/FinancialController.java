@@ -142,19 +142,19 @@ public class FinancialController implements FinancialblService{
 		return vo;
 	}
 	
-	public int saleListExcel_up(ArrayList<SaleListConditionVO> saleList_condition) {
+	public int saleListExcel_up(ArrayList<SalesDetailVO> saleList_condition) {
 		// TODO Auto-generated method stub
-		return 0;
+		return financial.outputSaleListExcel(saleList_condition);
 	}
 
-	public int allBillExcel_up(ArrayList<AllBillConditionVO> allBill_condition) {
+	public int allBillExcel_up(ArrayList<AllBillVO> allBill_condition) {
 		// TODO Auto-generated method stub
-		return 0;
+		return financial.outputAllBillExcel(allBill_condition);
 	}
 	
 	public int operatingConditionExcel_up(ArrayList<ConditionVO> operating_condition) {
 		// TODO Auto-generated method stub
-		return 0;
+		return financial.outputOperatingExcel(operating_condition);
 	}
 
 	public int redRush_up(AllBillVO allBill) {
