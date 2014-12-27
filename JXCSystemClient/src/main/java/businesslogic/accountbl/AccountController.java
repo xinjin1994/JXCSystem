@@ -267,6 +267,9 @@ public class AccountController implements AccountblService{
 	public AccountVO searchAccurateAccount_up(String name) {
 		// TODO Auto-generated method stub
 		AccountPO po=account.searchAccurateAccount_up(name);
+		if(po==null){
+			return null;
+		}
 		AccountVO vo=new AccountVO(po.getName(),po.getMoney());
 		return vo;
 	}
