@@ -50,10 +50,10 @@ public class ImInPanel extends FatherPanel {
 		// this.addButton();
 		// this.addCombox();
 		// this.addID();
-		this.addLabel();
 		this.addTextField();
 		this.addButton();
 		this.addCombox();
+		this.addLabel();
 		this.addID();
 		this.addNum();
 	}
@@ -117,13 +117,13 @@ public class ImInPanel extends FatherPanel {
 	}
 
 	public void setGoodsID() {
+		goodsTypeSelected = goodsType.getSelectedItem().toString();
 		commodityVO = salesblService.getCommodity_up(goodsNameSelected,goodsTypeSelected);
 		 goodsID.setText(commodityVO.id);
 //		goodsID.setText("id");
 	}
 
 	public double getPrice() {
-		goodsTypeSelected = goodsType.getSelectedItem().toString();
 		 goodsPrice.setText(commodityVO.inValue+"");
 //		goodsPrice.setText("20");
 		this.add(goodsPrice);
@@ -132,8 +132,10 @@ public class ImInPanel extends FatherPanel {
 		return price;
 	}
 
-	public void getTotalPrice() {
-		totalPriceText = this.getPrice() * num;
+	public void getNewTotalPrice() {
+		System.out.println("hello");
+		System.out.println("getTotalPrice"+getPrice()+" "+num);
+		totalPriceText = getPrice() * num;
 		goodsTotal.setText(totalPriceText + "");
 		this.add(goodsTotal);
 	}
@@ -173,12 +175,16 @@ public class ImInPanel extends FatherPanel {
 		public void focusLost(FocusEvent e) {
 			try {
 				num = Integer.parseInt(goodsNum.getText());
-				if (num < 0 || num == 0) {
+				System.out.println(num);
+				if (num <= 0) {
+//					System.out.println("hello");
 					failLabel.setText("请正确输入信息!");
 				} else {
-					getTotalPrice();
+					System.out.println("focusLost:else");
+					ImInPanel.this.getNewTotalPrice();
 				}
 			} catch (Exception e2) {
+				e2.printStackTrace();
 				failLabel.setText("请正确输入信息!");
 			}
 		}

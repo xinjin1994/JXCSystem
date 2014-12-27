@@ -694,9 +694,14 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		// TODO Auto-generated method stub
 		
 		try {
-			CommodityPO po=sto.findGood(name, type);
-//			System.out.println(po.getNote());
-			return po;
+			int i=0;
+			ArrayList<CommodityPO> res=sto.getAll();
+			
+			for(i=0;i<res.size();i++){
+				if(res.get(i).getName().equals(name)&&res.get(i).getType().equals(type)){
+					return res.get(i);
+				}
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

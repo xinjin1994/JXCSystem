@@ -55,7 +55,7 @@ public class ImBackPanel extends ImInPanel {
 				if (num < 0 || num == 0||num>salesblService.getImport_ReturnMaxNumber_up("")) {
 					failLabel.setText("请正确输入信息!");
 				} else {
-					getTotalPrice();
+					getNewTotalPrice();
 				}
 			} catch (Exception e2) {
 				failLabel.setText("请正确输入信息!");

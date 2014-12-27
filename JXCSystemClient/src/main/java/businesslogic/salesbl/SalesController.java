@@ -642,7 +642,9 @@ public class SalesController implements SalesblService {
 
 	public CommodityVO getCommodity_up(String name, String type) {
 		// TODO Auto-generated method stub
+		System.out.println("name:"+name+"  type:"+type);
 		CommodityPO po = sale.getCommodity(name, type);
+		System.out.println(po==null);
 		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
 				po.getType(), po.getNumber(), po.getIn_price(),
 				po.getOut_price(), po.getRecent_in_price(),
