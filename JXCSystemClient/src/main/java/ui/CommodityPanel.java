@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTree;
 
 import po.PatchPO;
@@ -140,6 +141,7 @@ public class CommodityPanel extends FatherPanel{
 		showTable.setColor(color.comColor,color.greyFont, color.comColor,Color.white);
 		showTable.setTable(info);
 		
+		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		commodityThirdPanel.add(showTable.tablePanel);
 		commodityThirdPanel.repaint();
 		this.repaint();
@@ -266,9 +268,4 @@ public class CommodityPanel extends FatherPanel{
 		
 	}
 
-	public void addRestButton() {
-		detail = new MyButton("Image/Sales/Sales_image/details.png", 670, 537,
-				"Image/Sales/Sales_image/details.png", "Image/Sales/Sales_image/details_press_on.png");
-		this.add(detail);
-	}
 }

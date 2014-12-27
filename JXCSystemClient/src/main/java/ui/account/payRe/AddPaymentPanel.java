@@ -82,7 +82,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		
 		ArrayList<CustomerVO> cusVoArray = new ArrayList<CustomerVO>();
 		cusVoArray = accountblService.getAllCustomer_up();
-		//		cusVoArray = salesblService.getAllImportCustomer_up();
+//				cusVoArray = salesblService.getAllImportCustomer_up();
 		String[]customers = new String[cusVoArray.size()];
 		for(int i = 0;i < cusVoArray.size();i++){
 			customers[i] = cusVoArray.get(i).cusName;

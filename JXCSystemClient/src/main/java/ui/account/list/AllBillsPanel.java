@@ -151,7 +151,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 					ArrayList<AllBillVO> billsArray = financialblService.allBill_up(time1, time2, note_type, 
 							customer_name, clerk, String.valueOf(warehouse));
 
-					bills.add("单据编号;单据类型");
+					bills.add("时间;单据编号;单据类型");
 					for(int i=0;i<billsArray.size();i++){
 						switch(billsArray.get(i).bill_note) {
 						//1代表SendGiftVO，                  2代表ImportVO，  3代表Import_ReturnVO， 4代表ExportVO，
@@ -181,7 +181,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 							itemName = "付款单";
 							break;	
 						}
-						item = billsArray.get(i).note+itemName;
+						item = billsArray.get(i).time+";"+billsArray.get(i).note+";"+itemName;
 						bills.add(item);
 					}}catch(Exception e2){
 						frame.remove(this);

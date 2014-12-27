@@ -93,38 +93,42 @@ public class MyTable extends JTable{
 		
 		render.setOpaque(false);// 将渲染器设置为透明
 		table.setDefaultRenderer(Object.class, render);
-
-		table.addMouseListener(new UserMouseAdapter() {
-			/** *//**
-			 * 鼠标单击事件
-			 * @param e 事件源参数
-			 */
-			public void mouseSingleClicked(MouseEvent e){
-				//System.out.println("Single Clicked!");
-				int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
-				if (rowI > -1){
-					find(rowI,rowI);
-					infos.setInfo(rowI);
-				}
-//					System.out.println("单击鼠标 "+(tableModel.getValueAt(rowI, 0)));
-			}
-
-			/** *//**
-			 * 鼠标双击事件
-			 * @param e 事件源参数
-			 */
-			public void mouseDoubleClicked(MouseEvent e){
-				//System.out.println("Doublc Clicked!");
-				int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
-				if ( rowI > -1){
-					infos.getInvoiceInfo(rowI);
-					table.setRowSelectionInterval(rowI, rowI);
-					System.out.println(rowI);
-//					System.out.println("双击鼠标 "+(tableModel.getValueAt(rowI, 0)));
+		try {
+			table.addMouseListener(new UserMouseAdapter() {
+				/** *//**
+				 * 鼠标单击事件
+				 * @param e 事件源参数
+				 */
+				public void mouseSingleClicked(MouseEvent e){
+					//System.out.println("Single Clicked!");
+					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
+					if (rowI > -1){
+						find(rowI,rowI);
+						infos.setInfo(rowI);
+					}
+//						System.out.println("单击鼠标 "+(tableModel.getValueAt(rowI, 0)));
 				}
 
-			}
-		}  );
+				/** *//**
+				 * 鼠标双击事件
+				 * @param e 事件源参数
+				 */
+				public void mouseDoubleClicked(MouseEvent e){
+					//System.out.println("Doublc Clicked!");
+					int rowI  = table.rowAtPoint(e.getPoint());// 得到table的行号
+					if ( rowI > -1){
+						infos.getInvoiceInfo(rowI);
+						table.setRowSelectionInterval(rowI, rowI);
+						System.out.println(rowI);
+//						System.out.println("双击鼠标 "+(tableModel.getValueAt(rowI, 0)));
+					}
+
+				}
+			}  );
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 
 		tableSp = new JScrollPane(table);
 		tableSp.setBounds(43,44,360,380);
