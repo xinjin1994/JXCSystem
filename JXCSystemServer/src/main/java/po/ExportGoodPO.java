@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class ExportGoodPO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 400;
 	CommodityPO commodity;
 	int number;
 	int price;  	//这里是商品的单价，人工输入
