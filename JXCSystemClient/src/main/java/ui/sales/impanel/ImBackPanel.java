@@ -39,27 +39,41 @@ public class ImBackPanel extends ImInPanel {
 
 	public void addNum() {
 		goodsNum = new MyTextFieldTrans(488, 334, 237, 31);
+////	goodsNum.setText(salesblService.getImport_ReturnMaxNumber_up("")+"");
+		goodsNum.setText("1");
 		this.add(goodsNum);
-		goodsNum.addFocusListener(new FocusAdapter());
+//		goodsNum.addFocusListener(new FocusAdapter());
 	}
-
+	
+	public void addTotalListener(){
+		goodsTotal.addFocusListener(new FocusAdapter());
+		
+	}
 	class FocusAdapter implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
 			goodsTotal.setText("");
+			try {
+				num = Integer.parseInt(goodsNum.getText());
+				totalPriceText = Double.parseDouble(goodsPrice.getText()) * num;
+				int numMost = salesblService.getImport_ReturnMaxNumber_up("");
+				numMost = 10;
+				if (num <= 0) {
+//					System.out.println("hello");
+					failLabel.setText("商品数量有误！");
+				}else if(num > numMost){
+					failLabel.setText("超过最大可退货数量");
+				} else {
+					goodsTotal.setText(totalPriceText + "");
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				failLabel.setText("请正确输入信息!");
+				}
 		}
 
 		public void focusLost(FocusEvent e) {
-			try {
-				num = Integer.parseInt(goodsNum.getText());
-				if (num < 0 || num == 0||num>salesblService.getImport_ReturnMaxNumber_up("")) {
-					failLabel.setText("请正确输入信息!");
-				} else {
-					getNewTotalPrice();
-				}
-			} catch (Exception e2) {
-				failLabel.setText("请正确输入信息!");
-			}
+
 		}
 
 	}
@@ -73,7 +87,7 @@ public class ImBackPanel extends ImInPanel {
 				if(id.getText().equals("")||remark.getText().equals("")||supplier.getText().equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ImBackPanel.this);
-					salesResult.failed("请重新确认输入信息！", "import_return_failed");
+					salesResult.failed("存在输入为空！", "import_return_failed");
 				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());

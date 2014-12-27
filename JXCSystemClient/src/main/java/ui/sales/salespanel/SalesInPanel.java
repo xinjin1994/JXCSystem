@@ -71,20 +71,26 @@ public class SalesInPanel extends ImInPanel{
 		
 	}
 
-	public double getPrice() {
+	public void getPrice() {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
 		 commodityVO = salesblService.getCommodity_up(goodsNameSelected,
 		 goodsTypeSelected);
 		 goodsPrice.setText(commodityVO.outValue+"");
 //		goodsPrice.setText("30");
 		this.add(goodsPrice);
-		 price = commodityVO.outValue;
-//		price = 30;
-		return price;
+		try{
+			 price = Double.parseDouble(goodsPrice.getText());
+			 if(price <= 0){
+				 this.addLabel();
+			 	}
+			 }catch(Exception e){
+				 this.addLabel();
+			 }
+		//		price = 30;
 	}
 	public void getTotalPrice() {
 		try{
-			totalPriceText = this.getPrice() * num-Double.parseDouble(discount.getText())-Double.parseDouble(voucher.getText());
+			totalPriceText = Double.parseDouble(goodsPrice.getText()) * num-Double.parseDouble(discount.getText())-Double.parseDouble(voucher.getText());
 			goodsTotal.setText(totalPriceText + "");
 			this.add(goodsTotal);
 		}catch(Exception e2){

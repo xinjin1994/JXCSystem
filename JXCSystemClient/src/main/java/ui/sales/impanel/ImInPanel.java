@@ -1,5 +1,7 @@
 package ui.sales.impanel;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -20,6 +22,7 @@ import vo.CommodityVO;
 import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.SalesController;
+import businesslogic.userbl.User;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class ImInPanel extends FatherPanel {
@@ -38,7 +41,8 @@ public class ImInPanel extends FatherPanel {
 	protected SalesUIController salesUIController;
 	protected MyFrame frame;
 	protected UIController controller;
-
+	protected boolean isGo = false;
+	
 	public ImInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame, url, controller);
 		this.salesUIController = salesUIController;
@@ -56,6 +60,7 @@ public class ImInPanel extends FatherPanel {
 		this.addLabel();
 		this.addID();
 		this.addNum();
+		this.addTotalListener();
 	}
 
 	public void addCombox() {
@@ -123,22 +128,21 @@ public class ImInPanel extends FatherPanel {
 //		goodsID.setText("id");
 	}
 
-	public double getPrice() {
-		 goodsPrice.setText(commodityVO.inValue+"");
-//		goodsPrice.setText("20");
+	public void getPrice() {
 		this.add(goodsPrice);
-		 price = commodityVO.inValue;
-//		price = 20;
-		return price;
+		goodsPrice.setText(commodityVO.inValue+"");
+//		goodsPrice.addFocusListener(new FocusAdapter());
+		try{
+		 price = Double.parseDouble(goodsPrice.getText());
+		 if(price <= 0){
+			 this.addLabel();
+		 	}
+		 }catch(Exception e){
+			 this.addLabel();
+		 }
+		
 	}
 
-	public void getNewTotalPrice() {
-		System.out.println("hello");
-		System.out.println("getTotalPrice"+getPrice()+" "+num);
-		totalPriceText = getPrice() * num;
-		goodsTotal.setText(totalPriceText + "");
-		this.add(goodsTotal);
-	}
 
 	public void addTextField() {
 		supplier = new MyTextFieldFilled(210, 255, 116, 42);
@@ -158,41 +162,51 @@ public class ImInPanel extends FatherPanel {
 		this.add(goodsID);
 		this.add(person);
 		this.add(operator);
+		this.add(goodsTotal);
+		operator.setText(User.operator);
 	}
 
 	public void addNum() {
 		goodsNum = new MyTextFieldTrans(488, 334, 237, 31);
+////	goodsNum.setText(salesblService.getImport_ReturnMaxNumber_up("")+"");
+		goodsNum.setText("1");
 		this.add(goodsNum);
-		goodsNum.addFocusListener(new FocusAdapter());
+//		goodsNum.addFocusListener(new FocusAdapter());
 	}
 
+	public void addTotalListener(){
+		goodsTotal.addFocusListener(new FocusAdapter());
+		
+	}
 	class FocusAdapter implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
 			goodsTotal.setText("");
-		}
-
-		public void focusLost(FocusEvent e) {
 			try {
 				num = Integer.parseInt(goodsNum.getText());
-				System.out.println(num);
+				totalPriceText = Double.parseDouble(goodsPrice.getText()) * num;
 				if (num <= 0) {
 //					System.out.println("hello");
-					failLabel.setText("请正确输入信息!");
+					failLabel.setText("您输入的商品数量有误！");
 				} else {
-					System.out.println("focusLost:else");
-					ImInPanel.this.getNewTotalPrice();
+					goodsTotal.setText(totalPriceText + "");
+					isGo = true;
 				}
 			} catch (Exception e2) {
 				e2.printStackTrace();
 				failLabel.setText("请正确输入信息!");
-			}
+				}
+		}
+
+		public void focusLost(FocusEvent e) {
+
 		}
 
 	}
 
 	public void addLabel() {
-		failLabel = new MyLabel(488, 530, 200, 35);
+		failLabel = new MyLabel(488, 530, 200, 50);
+		failLabel.setForeground(Color.red);
 		this.add(failLabel);
 	}
 
@@ -209,6 +223,7 @@ public class ImInPanel extends FatherPanel {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
 					salesResult.failed("请重新确认输入信息！", "importFailed");
 				} else {
+//					System.out.println("isGo"+isGo);
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());
 					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),

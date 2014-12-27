@@ -88,7 +88,9 @@ public class ImInBillPanel extends FatherPanel {
 	class MouListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent e) {
+			frame.remove(ImInBillPanel.this);
 			controller.setBackBills(ImInBillPanel.this);
+			
 		}
 
 		public void mousePressed(MouseEvent e) {
