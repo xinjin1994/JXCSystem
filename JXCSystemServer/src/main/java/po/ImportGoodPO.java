@@ -4,17 +4,21 @@ import java.io.Serializable;
 
 public class ImportGoodPO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 200;
 	CommodityPO commodity;
-	int number;
-	double price;  	//这里是商品的单价，人工输入
-	double money;		//这里是这个入库商品列表的总价
+	public int number;
+	public double price;  	//这里是商品的单价，人工输入
+	public double money;		//这里是这个入库商品列表的总价
 	String ps;
 	
 	public ImportGoodPO(CommodityPO commodity,int number,double price,double money,String ps){
 		this.commodity=commodity;
 		this.number=number;
 		this.price=price;
-		this.money=money;
+		this.money=price*number;
 		this.ps=ps;
 	}
 	

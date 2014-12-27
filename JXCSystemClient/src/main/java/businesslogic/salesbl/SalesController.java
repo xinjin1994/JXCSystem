@@ -77,12 +77,12 @@ public class SalesController implements SalesblService {
 		ArrayList<ImportGoodPO> importGood = new ArrayList<ImportGoodPO>();
 		importGood.add(importGoodPO);
 		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
-		System.out.println(importMenuVO.remark);
+		System.out.println(importMenuVO.supplier==null);
 		System.out.println(customerPO.clerk);
-		System.out.println(User.operator);
 		ImportPO imp = new ImportPO(customerPO, importGood,
 				importMenuVO.remark, customerPO.clerk, User.operator,
 				importMenuVO.warehouse, importMenuVO.total);
+		imp.setNote(importMenuVO.note);
 		int message = sale.addImport(imp);
 		return message;
 	}
@@ -104,6 +104,7 @@ public class SalesController implements SalesblService {
 				importMenuVO.remark, customerPO.clerk, User.operator,
 				importMenuVO.warehouse, importMenuVO.total, sale
 						.searchImportNote(importMenuVO.supplier).getNote());
+		imp.setNote(importMenuVO.note);
 		int message = sale.addImport_Return(imp);
 		return message;
 	}
@@ -125,6 +126,7 @@ public class SalesController implements SalesblService {
 				exportMenuVO.salesMan, User.operator, exportMenuVO.warehouse,
 				exportMenuVO.beforeValue, exportMenuVO.afterValue,
 				exportMenuVO.discount, exportMenuVO.voucherPrice);
+		ex.setNote(exportMenuVO.note);
 		int message = sale.addExport(ex);
 		return message;
 	}
@@ -148,6 +150,7 @@ public class SalesController implements SalesblService {
 				exportMenuVO.afterValue, exportMenuVO.discount,
 				exportMenuVO.voucherPrice, sale.searchExport_ReturnNote(
 						exportMenuVO.cusName).getNote());
+		ex.setNote(exportMenuVO.note);
 		int message = sale.addExport_Return(ex);
 		return message;
 	}
