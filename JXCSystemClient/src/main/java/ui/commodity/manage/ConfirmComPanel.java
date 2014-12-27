@@ -90,6 +90,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 			if(type.equals("add")){
 				switch(commodityblService.addCommodity_up(commodityVO, sortVO)){
 				case 0:
+//					System.out.println("添加时id"+commodityVO.id);
 					resControllerS.succeeded("成功添加商品！", "commodity");
 					break;
 				case -1:

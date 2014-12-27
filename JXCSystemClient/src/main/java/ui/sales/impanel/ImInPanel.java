@@ -114,13 +114,13 @@ public class ImInPanel extends FatherPanel {
 	}
 
 	public void setGoodsID() {
+		goodsTypeSelected = goodsType.getSelectedItem().toString();
+		commodityVO = salesblService.getCommodity_up(goodsNameSelected,goodsTypeSelected);
 		 goodsID.setText(commodityVO.id);
 //		goodsID.setText("id");
 	}
 
 	public double getPrice() {
-		goodsTypeSelected = goodsType.getSelectedItem().toString();
-		 commodityVO = salesblService.getCommodity_up(goodsNameSelected,goodsTypeSelected);
 		 goodsPrice.setText(commodityVO.inValue+"");
 //		goodsPrice.setText("20");
 		this.add(goodsPrice);
