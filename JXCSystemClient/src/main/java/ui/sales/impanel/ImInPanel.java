@@ -106,6 +106,9 @@ public class ImInPanel extends FatherPanel {
 		 	}
 		 }
 		 String[]typeString = new String[commodityType.size()];
+		 for(int i=0;i<commodityType.size();i++){
+			 typeString[i] = commodityType.get(i);
+		 }
 //		String[] typeString = { "a", "b" };
 		goodsType = new MyComboBox(typeString, 488, 252, 237, 31);
 		goodsType.addActionListener(buttonListener);
@@ -114,13 +117,13 @@ public class ImInPanel extends FatherPanel {
 	}
 
 	public void setGoodsID() {
+		commodityVO = salesblService.getCommodity_up(goodsNameSelected,goodsTypeSelected);
 		 goodsID.setText(commodityVO.id);
 //		goodsID.setText("id");
 	}
 
 	public double getPrice() {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
-		 commodityVO = salesblService.getCommodity_up(goodsNameSelected,goodsTypeSelected);
 		 goodsPrice.setText(commodityVO.inValue+"");
 //		goodsPrice.setText("20");
 		this.add(goodsPrice);
