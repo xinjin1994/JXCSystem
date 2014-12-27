@@ -44,7 +44,7 @@ public class ManagerAllUIController extends UIController{
 	
 	private SendGiftPanel sendGiftPanel;
 	FatherPanel prePanel;
-	ManagerAllUIController controller;
+	public static ManagerAllUIController controller;
 	
 	MyButton backButton;
 	
@@ -52,6 +52,7 @@ public class ManagerAllUIController extends UIController{
 		this.frame = frame;
 		this.uiController = uiController;
 		addMainPanel();
+		controller = ManagerAllUIController.this;
 	}
 
 	private void addMainPanel() {

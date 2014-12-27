@@ -64,8 +64,7 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 		this.operate = payVO.operator;
 		this.totalValue = payVO.itemList.money;
 		setLabel();
-		uiController
-		.setBackBills(this);
+		uiController.setBackBills(this);
 	}
 
 	private void setLabel() {

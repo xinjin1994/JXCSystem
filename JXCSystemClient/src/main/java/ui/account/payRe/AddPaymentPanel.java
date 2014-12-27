@@ -10,6 +10,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
+import po.PaymentPO;
 import ui.FatherPanel;
 import ui.account.AccountAllUIController;
 import ui.setting.ColorFactory;
@@ -17,11 +18,13 @@ import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
+import ui.setting.Button.SaveButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import vo.CustomerVO;
+import vo.bill.GetVO;
 import vo.bill.ItemList;
 import vo.bill.PayVO;
 import businesslogic.accountbl.AccountController;
@@ -38,21 +41,27 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	AccountblService accountblService;
 	SalesblService salesblService;
 	
-	MyButton forwardButton;
+	MyFrame frame;
+	MyButton forwardButton,saveButton;
 	MyLabel idLabel,balance,operator,total,failLabel;
 	MyTextFieldTrans ps,agent,item;
 	MyTextFieldTrans money;
 	MyComboBox customer,account;
 	PayVO newPayment;
-	String id,operate;
+	String id,operate,remark;
 	String accountName,customerName,person;
 	double balanceValue,totalValue;
+	double turnValue;
 	ResultPanelController resController;
 	String failedAddress = "acc/finManage/pay";
+	ItemList itemList;
+
+	
 	public AddPaymentPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
 		this.uiController = uiController;
+		this.frame = frame;
 		this.repaint();
 		accountblService = new AccountController();
 		salesblService = new SalesController();
@@ -64,6 +73,17 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		setTypeIn();
 		setForward();
 		resController = new ResultPanelController(frame, this);
+	}
+	public AddPaymentPanel(MyFrame frame,String url,
+			AccountAllUIController uiController,GetVO get){
+		this(frame,url,uiController);
+		setInfo(get);
+	}
+	/**
+	 * 
+	 */
+	private void setInfo(GetVO get) {
+		
 	}
 	/**
 	 * account的comboBox
@@ -133,6 +153,11 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	}
 	
 	private void setForward() {
+		SaveButton save = new SaveButton(this,736, 493);
+		saveButton = save.saveButton;
+		this.add(saveButton);
+		saveButton.addActionListener(this);
+		
 		ForwardButton forward = new ForwardButton(737, 540);
 		forwardButton = forward.forward_black;
 		
@@ -167,31 +192,44 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		this.add(failLabel);
 	}
 	
+	private void setNewPayment(){
+		remark = ps.getText();
+		try{
+		turnValue = Double.parseDouble(money.getText());
+		}catch(Exception e){
+			turnValue = 0.0;
+		}
+		//PayVO(String note,String bankAccount,ItemList itemList)
+		//ItemList(String itemName, double money, String remark)
+		itemList = new ItemList(customerName,turnValue,remark);
+		newPayment = new PayVO(id,accountName,itemList);
+		totalValue = turnValue;
+	}
+	
+	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 		
-			String remark = ps.getText();
+			
 			if(customerName.equals("")||money.getText().equals("")){
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 				
 			}else{
 				try{
-			double turnValue = Double.parseDouble(money.getText());
-			//PayVO(String note,String bankAccount,ItemList itemList)
-			//ItemList(String itemName, double money, String remark)
-			ItemList itemList = new ItemList(customerName,turnValue,remark);
-			newPayment = new PayVO(id,accountName,itemList);
-			totalValue = accountblService.calTotalMoney_up(newPayment);
-			
-			uiController.setTempPanel(this);
-			frame.remove(this);
-			uiController.confirmPayment(newPayment,person,operate,
-					totalValue,balanceValue);
-				}catch(Exception e2){
+					
+//					totalValue = accountblService.calTotalMoney_up(newPayment);
+					setNewPayment();
+					uiController.setTempPanel(this);
 					frame.remove(this);
-					resController.failed("存在输入错误！",failedAddress);				}
+					uiController.confirmPayment(newPayment,person,operate,
+							totalValue,balanceValue);
+						}catch(Exception e2){
+							frame.remove(this);
+							resController.failed("存在输入错误！",failedAddress);		
+							}
 			}
+				
 		}else if(e.getSource() == account){
 			accountName = account.getSelectedItem().toString();
 			balanceValue = accountblService.searchAccurateAccount_up(accountName).balance;
@@ -200,6 +238,13 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 			customerName = customer.getSelectedItem().toString();
 			person = salesblService.searchExactCustomer_up(customerName).person;
 			agent.setText(person);
+		}else if(e.getSource() == saveButton){
+			setNewPayment();
+			PayVO draft = new PayVO(id, person, accountName, itemList, "", "0");
+			accountblService.addDraftPayment_up(draft);
+			frame.remove(this);
+			resController = new ResultPanelController(frame, uiController.getMainPanel());
+			resController.succeeded("保存一条付款草稿单！", "account");
 		}
 	}
 }

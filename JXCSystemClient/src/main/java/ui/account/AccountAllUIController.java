@@ -122,6 +122,14 @@ public class AccountAllUIController extends UIController{
 		frame.repaint();
 	}
 	
+	public void addReceiptDraft(GetVO draft) {
+		addPaymentPanel = new AddPaymentPanel(frame,"Image/Account/收款单_背景.jpg", this,draft);
+		frame.setPanel(addPaymentPanel);
+		frame.repaint();
+	}
+	public void addPaymentDraft() {
+		
+	}
 	public void confirmReceipt(GetVO newReceipt,String person,String operater,double totalValue,double balanceValue){
 		confirmReceiptPanel = new ConfirmReceiptPanel(frame, "Image/Account/创建收款单_确认信息.jpg", this,
 				newReceipt,person,operater,totalValue,balanceValue);
@@ -221,4 +229,5 @@ public class AccountAllUIController extends UIController{
 		this.prePanel = prePanel;
 		new SetBack(frame, this, prePanel).setBack_third();
 	}
+	
 }

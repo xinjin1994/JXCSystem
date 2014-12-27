@@ -238,6 +238,38 @@ public class AccountPanel extends FatherPanel{
 			// TODO: handle exception
 		}
 	}
+	
+	public void getDraftInfo() {
+		payDraft = accountblService.getAllDraftPayment_up();
+		getDraft = accountblService.getAllDraftReceipt_up();
+		
+		ArrayList <String> info = new ArrayList<String>();
+		info.add("时间;单据编号;单据类型");
+
+		ArrayList<InvoiceVO> finBills = new ArrayList<InvoiceVO>();
+
+		
+		try {
+			for(PayVO temp:payDraft){
+				finBills.add(temp);
+//				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
+			}
+			for(GetVO temp: getDraft){
+				finBills.add(temp);
+//				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
+			}
+			
+			for(InvoiceVO temp:finBills){
+				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
+			}
+			SaveTempBills bills = new SaveTempBills(frame, finBills,accountUIController );
+			
+			setTable(info, bills);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+	}
 
 	
 	class FirstButtonListener implements MouseListener{
@@ -277,11 +309,8 @@ public class AccountPanel extends FatherPanel{
 			}else if(e.getSource() == buttons[4]){
 				getInitialInfo();
 			}else if(e.getSource() == buttons[5]){
-				payDraft = accountblService.getAllDraftPayment_up();
-				getDraft = accountblService.getAllDraftReceipt_up();
-				
-				ArrayList<String> infos = new ArrayList<String>();
-				infos.add("单据编号;单据类型");
+				getDraftInfo();
+		
 				
 			}else if (e.getSource() == buttons[6]) {
 				ArrayList<String> infos = new ArrayList<String>();
@@ -302,6 +331,8 @@ public class AccountPanel extends FatherPanel{
 		}
 
 	
+		
+
 		public void mouseReleased(MouseEvent e) {
 	
 		}
@@ -317,6 +348,8 @@ public class AccountPanel extends FatherPanel{
 				accountUIController.toInvoicePanel();
 			}else if (e.getSource() == buttons[4]) {
 				accountUIController.toIniPanel();
+			}else if(e.getSource() == buttons[5]){
+				accountUIController.toSavePanel();
 			}
 		}
 		public void mouseExited(MouseEvent e) {

@@ -2,10 +2,14 @@ package ui.setting;
 
 import java.util.ArrayList;
 
+import ui.ManagerPanel;
 import ui.UIController;
+import ui.account.AccountAllUIController;
+import ui.account.payRe.AddPaymentPanel;
 import ui.account.payRe.ConfirmPaymentPanel;
 import ui.account.payRe.ConfirmReceiptPanel;
 import ui.commodity.PatchDetailPanel;
+import ui.manager.ManagerAllUIController;
 import ui.manager.SendGiftPanel;
 import ui.sales.impanel.ImInBillPanel;
 import ui.sales.salespanel.SalesBillPanel;
@@ -87,12 +91,22 @@ public class SaveTempBills {
 					uiController, (PatchVO)(bill)));
 			break;
 		case 7:
-			frame.setPanel(new ConfirmReceiptPanel(frame, "Image/Account/receiptDetail.jpg", uiController, 
-					(GetVO)(bill)));
+			try {
+				frame.setPanel(new ConfirmReceiptPanel(frame, "Image/Account/receiptDetail.jpg", uiController, 
+						(GetVO)(bill)));
+			} catch (Exception e) {
+				UIController.accountAllUIController.addReceiptDraft((GetVO)bill);
+			}
+			
 			break;
 		case 8:
-			frame.setPanel(new ConfirmPaymentPanel(frame, "Image/Account/paymentDetail.jpg", uiController, 
-					(PayVO)(bill)));
+			try {
+				frame.setPanel(new ConfirmPaymentPanel(frame, "Image/Account/paymentDetail.jpg", uiController, 
+						(PayVO)(bill)));
+			} catch (Exception e) {
+				UIController.accountAllUIController.addPaymentDraft();
+			}
+		
 			break;	
 		}
 		frame.repaint();

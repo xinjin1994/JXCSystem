@@ -20,6 +20,8 @@ public class UIController {
 	private ManagerPanel manager;
 	
 	
+	public static AccountAllUIController accountAllUIController;
+	
 	static private FatherPanel tempMainPanel,tempPanel,logPanel;
 	public FatherPanel prePanel;
 	public UIController(){
@@ -94,7 +96,7 @@ public class UIController {
 
 	public void AccountPanel() {
 		frame.remove(loginPanel);
-		new AccountAllUIController(this,frame);
+		accountAllUIController = new AccountAllUIController(this,frame);
 		frame.repaint();
 	}
 

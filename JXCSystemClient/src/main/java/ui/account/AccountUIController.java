@@ -342,7 +342,7 @@ public class AccountUIController extends UIController{
 					default:
 						break;
 					}
-					item = billsArray.get(i).note+itemName;
+					item = billsArray.get(i).note+";"+itemName;
 					bills.add(item);
 
 				}
@@ -360,6 +360,10 @@ public class AccountUIController extends UIController{
 			
 		}
 		
+	}
+
+	public void toSavePanel() {
+		accountSecondPanel.removeAll();
 	}
 	
 	

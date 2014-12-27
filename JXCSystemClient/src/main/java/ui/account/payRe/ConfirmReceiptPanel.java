@@ -58,13 +58,13 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 		super(frame, string, uiController);
 		frame.repaint();
 		System.out.println("vo"+getVO);
-//		this.newReceipt = getVO;
-//		this.person  = getVO.cusName;
-//		this.operater = getVO.operator;
-//		this.totalValue = getVO.transferList.transferValue;
-//
+		this.newReceipt = getVO;
+		this.person  = getVO.cusName;
+		this.operater = getVO.operator;
+		this.totalValue = getVO.transferList.transferValue;
+
 		uiController.setBackBills(this);
-//		setLabel();
+		setLabel();
 		
 	}
 	private void setLabel() {
