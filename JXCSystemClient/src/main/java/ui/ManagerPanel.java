@@ -92,7 +92,7 @@ public class ManagerPanel extends FatherPanel{
 		resController = new ResultPanelController(frame, this);
 		remind = new RemindButton(this);
 		this.addButton();
-
+		
 		}
 
 
@@ -167,7 +167,7 @@ public class ManagerPanel extends FatherPanel{
 		showTable.setInfo(bills);
 		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
 		showTable.setTable(info);
-		
+		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		managerThirdPanel.add(showTable.tablePanel);
 		managerThirdPanel.repaint();
 		this.repaint();
@@ -228,6 +228,7 @@ public class ManagerPanel extends FatherPanel{
 			}
 			else {
 				if(e.getSource() == approveButton){
+					System.out.println(temp+"temp");
 					check(invoiceblService.pass_up(temp),"通过");
 				}else if (e.getSource() == refuseButton) {
 					check(invoiceblService.refuse_up(temp.note),"拒绝");
@@ -293,6 +294,8 @@ public class ManagerPanel extends FatherPanel{
 				managerUIController.toInvoicePanel();
 			}else if (e.getSource() == buttons[3]) {
 				managerUIController.toProPanel();
+			}else if (e.getSource() == buttons[4]) {
+				managerUIController.toSysLogPanel();
 			}
 		}
 

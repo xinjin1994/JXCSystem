@@ -50,10 +50,10 @@ public class ImInPanel extends FatherPanel {
 		// this.addButton();
 		// this.addCombox();
 		// this.addID();
-		this.addLabel();
 		this.addTextField();
 		this.addButton();
 		this.addCombox();
+		this.addLabel();
 		this.addID();
 		this.addNum();
 	}
@@ -106,6 +106,9 @@ public class ImInPanel extends FatherPanel {
 		 	}
 		 }
 		 String[]typeString = new String[commodityType.size()];
+		 for(int i=0;i<commodityType.size();i++){
+			 typeString[i] = commodityType.get(i);
+		 }
 //		String[] typeString = { "a", "b" };
 		goodsType = new MyComboBox(typeString, 488, 252, 237, 31);
 		goodsType.addActionListener(buttonListener);
@@ -129,8 +132,10 @@ public class ImInPanel extends FatherPanel {
 		return price;
 	}
 
-	public void getTotalPrice() {
-		totalPriceText = this.getPrice() * num;
+	public void getNewTotalPrice() {
+		System.out.println("hello");
+		System.out.println("getTotalPrice"+getPrice()+" "+num);
+		totalPriceText = getPrice() * num;
 		goodsTotal.setText(totalPriceText + "");
 		this.add(goodsTotal);
 	}
@@ -170,12 +175,16 @@ public class ImInPanel extends FatherPanel {
 		public void focusLost(FocusEvent e) {
 			try {
 				num = Integer.parseInt(goodsNum.getText());
-				if (num < 0 || num == 0) {
+				System.out.println(num);
+				if (num <= 0) {
+//					System.out.println("hello");
 					failLabel.setText("请正确输入信息!");
 				} else {
-					getTotalPrice();
+					System.out.println("focusLost:else");
+					ImInPanel.this.getNewTotalPrice();
 				}
 			} catch (Exception e2) {
+				e2.printStackTrace();
 				failLabel.setText("请正确输入信息!");
 			}
 		}
@@ -198,7 +207,7 @@ public class ImInPanel extends FatherPanel {
 						|| warehouse.getText().equals("") || person.getText().equals("")
 						|| operator.getText().equals("")) {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
-					salesResult.failed("请重新确认输入信息！", "import_failed");
+					salesResult.failed("请重新确认输入信息！", "importFailed");
 				} else {
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());

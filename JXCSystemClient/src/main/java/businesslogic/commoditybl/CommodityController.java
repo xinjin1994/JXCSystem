@@ -27,6 +27,7 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		CommodityPO com=new CommodityPO(false,vo1.name,vo1.type,vo1.inValue,vo1.outValue,
 				vo1.id,vo1.latestInValue,vo1.latestOutValue,vo1.num);
+		com.warn=vo1.warn;
 		SortPO sort=new SortPO(vo2.name);
 		return commodity.addCommodity(com,sort);
 	}
@@ -40,6 +41,7 @@ public class CommodityController implements CommodityblService{
 		// TODO Auto-generated method stub
 		CommodityPO po1=new CommodityPO(vo1.name,vo1.type);
 		CommodityPO po2=new CommodityPO(false, vo1.name,vo1.type,vo2.inValue,vo2.outValue, null, 0, 0, 0);
+		po2.warn=vo2.warn;
 		return commodity.updateCommodity(po1, po2);
 	}
 
@@ -115,7 +117,10 @@ public class CommodityController implements CommodityblService{
 
 	public int patch_up(PatchVO vo) {
 		// TODO Auto-generated method stub
-		return commodity.patch(vo.name,vo.type,vo.number,vo.note);
+		System.out.println("kanxianote:"+vo.note);
+		int res=commodity.patch(vo.name,vo.type,vo.number,vo.note);
+		System.out.println("Patch:"+res);
+		return res;
 	}
 
 	public int warn_up(WarnVO vo) {
@@ -212,6 +217,18 @@ public class CommodityController implements CommodityblService{
 		po.setNote(vo.note);
 		po.setCondition(0);
 		return commodity.patchDraft(po);
+	}
+	
+	public ArrayList<PatchVO> getAllPatch_up() {
+		// TODO Auto-generated method stub
+		ArrayList<PatchPO> po=commodity.getAllPatch();
+		ArrayList<PatchVO> array=new ArrayList<PatchVO>();
+		PatchVO vo=null;
+		for(int i=0;i<po.size();i++){
+			vo=new PatchVO(po.get(i).getCommodity().getName(),po.get(i).getCommodity().getType(),po.get(i).getNumber(),po.get(i).getNote(),po.get(i).getTime(),po.get(i).getOperator(),po.get(i).getInvoiceNote());
+			array.add(vo);
+		}
+		return array;
 	}
 
 	public ArrayList<PatchVO> getAllDraftPatch_up() {

@@ -156,6 +156,11 @@ public class ManagerUIController {
 		managerPanel.repaint();
 		
 	}
+	public void toSysLogPanel(){
+		managerSecondPanel.removeAll();
+		managerPanel.add(managerSecondPanel);
+		managerPanel.repaint();
+	}
 		
 	class ProButtonListener implements MouseListener{
 
@@ -298,9 +303,9 @@ public class ManagerUIController {
 				billsArray = invoiceblService.show_up();
 				type = "待审批";	
 			}
-			
+			ArrayList<String> bills = new ArrayList<String>();
 			try {
-				ArrayList<String> bills = new ArrayList<String>();
+				
 				bills.add("单据编号;单据类型");
 				System.out.println("101");
 				for(int i=0;i<billsArray.size();i++){
@@ -333,14 +338,21 @@ public class ManagerUIController {
 						itemName = "付款单";
 						break;	
 					}
-					item = billsArray.get(i).note+itemName;
+					item = billsArray.get(i).note+";"+itemName;
 					bills.add(item);
 				}
 				
 				infos = new SaveTempBills(frame, billsArray, uiController);
 				managerPanel.setTable(bills,infos);
+				if(type.equals("待审批")){
+					managerPanel.setThirdPanelButton();
+				}
 				
 			} catch (Exception e2) {
+				
+				managerPanel.setTable(bills,infos);
+				resController = new ResultPanelController(frame, managerPanel);
+				
 				frame.remove(managerPanel);
 				resController.failed("无新"+type+"单据！", "manager");
 			}

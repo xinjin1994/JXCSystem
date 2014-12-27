@@ -76,6 +76,7 @@ public interface CommodityblService {
 	public int patchDraft_up(PatchVO vo);
 	//获得所有的草稿报溢报损单
 	public ArrayList<PatchVO> getAllDraftPatch_up();
+	public ArrayList<PatchVO> getAllPatch_up() ;
 	//获得报溢报损单编号
 	public String getPatchNote();
 	//根据编号查找草稿报溢报损单

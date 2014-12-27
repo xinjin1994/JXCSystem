@@ -3,6 +3,7 @@ package ui.account.payRe;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ui.AccountPanel;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.account.AccountAllUIController;
@@ -55,13 +56,16 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 	public ConfirmReceiptPanel(MyFrame frame, String string,
 			UIController uiController, GetVO getVO) {
 		super(frame, string, uiController);
-		this.newReceipt = getVO;
-		this.person  = getVO.cusName;
-		this.operater = getVO.operator;
-		this.totalValue = getVO.transferList.transferValue;
-
+		frame.repaint();
+		System.out.println("vo"+getVO);
+//		this.newReceipt = getVO;
+//		this.person  = getVO.cusName;
+//		this.operater = getVO.operator;
+//		this.totalValue = getVO.transferList.transferValue;
+//
 		uiController.setBackBills(this);
-		setLabel();
+//		setLabel();
+		
 	}
 	private void setLabel() {
 		idLabel = new MyLabel(106, 165, 221, 55);
@@ -119,6 +123,9 @@ public class ConfirmReceiptPanel extends FatherPanel implements ActionListener{
 			frame.remove(this);
 		    switch(accountblService.addReceipt_up(newReceipt)){
 		    case 0:
+				AccountPanel temp = (AccountPanel)(uiController.getMainPanel());
+				temp.getFinanceInfo();
+				uiController.setMainPanel(temp);
 		    	resControllerS.succeeded("成功添加收款单！","account");
 		    	break;
 		    case 4:

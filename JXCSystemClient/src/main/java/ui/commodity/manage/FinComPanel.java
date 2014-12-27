@@ -1,9 +1,11 @@
 package ui.commodity.manage;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import ui.CommodityPanel;
 import ui.FatherPanel;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.ColorFactory;
@@ -109,8 +111,9 @@ public class FinComPanel extends FatherPanel implements ActionListener{
 
 
 	private void setTable(ArrayList<String> info){
+	
 		showTable = new MyTable();
-		showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
+		showTable.setColor(colors.comColor,colors.greyFont, colors.comColor,Color.white);
 		showTable.setTable(info);
 		new SetTable(showTable, frame, commodityAllUIController);
 	}

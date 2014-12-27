@@ -258,14 +258,10 @@ public class CommodityUIController {
 					case 6:
 						itemName = "报溢报损单";
 						break;
-					case 7:
-						itemName = "收款单";
+					default:
 						break;
-					case 8:
-						itemName = "付款单";
-						break;	
 					}
-					item = billsArray.get(i).note+itemName;
+					item = billsArray.get(i).note+";"+itemName;
 					bills.add(item);
 				}
 				infos = new SaveTempBills(frame, billsArray, uiController);
@@ -273,7 +269,7 @@ public class CommodityUIController {
 				
 			} catch (Exception e2) {
 				frame.remove(commodityPanel);
-				resController.failed("无新"+type+"单据！", "account");
+				resController.failed("无新"+type+"单据！", "commodity");
 			}
 		}
 
@@ -303,6 +299,7 @@ public class CommodityUIController {
 				uiController.inventory();
 			}else if(e.getSource() == stockButtons[2]){
 				frame.remove(commodityPanel);
+				
 				uiController.patch();
 			}
 			

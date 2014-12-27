@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ui.CommodityPanel;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.commodity.CommodityAllUIController;
@@ -36,7 +37,6 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		this.commodityAllUIController = controller;
 		
 		resControllerF = new ResultPanelController(frame,commodityAllUIController.getPanel());
-		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
 		this.failedAddress = "commodity2";
 		
 		this.sort = sort;
@@ -53,8 +53,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		
-		resControllerF = new ResultPanelController(frame,this);
-		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
+		resControllerF = new ResultPanelController(frame,commodityAllUIController.getPanel());
 		this.failedAddress = "commodity2";
 		
 		this.sortBelong = sortBelong;
@@ -72,8 +71,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		
-		resControllerF = new ResultPanelController(frame,this);
-		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
+		resControllerF = new ResultPanelController(frame,commodityAllUIController.getPanel());
 		this.failedAddress = "commodity2";
 		
 		this.oldSort= oldSort;
@@ -107,6 +105,12 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);
 	}
+	private void changeMainPanel(){
+		CommodityPanel temp = (CommodityPanel)(commodityAllUIController.getMainPanel());
+		temp.setTree(commodityblService.getAllSort_up());
+		commodityAllUIController.setMainPanel(temp);
+		resControllerS = new ResultPanelController(frame, commodityAllUIController.getMainPanel());
+	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
@@ -137,10 +141,12 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	//10 分类中存在商品，无法添加分类
 	//11 分类中存在分类，无法删除分类
 
+	
 	private void chaSort() {
 //		resControllerS.succeeded("成功修改分类信息！", "commodity");
 		switch(commodityblService.updateSort_up_Inf(oldSort, sort)){
 		case 0:
+			changeMainPanel();
 			resControllerS.succeeded("成功修改分类信息！", "commodity");
 			break;
 		default:
@@ -150,6 +156,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	private void delSort() {
 		switch(commodityblService.delSort_up(sort)){
 		case 0:
+			changeMainPanel();
 			resControllerS.succeeded("成功删除分类！", "commodity");
 			break;
 		case 4:
@@ -171,6 +178,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		switch(commodityblService.addSort_up(sort, new SortVO(sortBelong))){
 		
 		case 0:
+			changeMainPanel();
 			resControllerS.succeeded("成功添加分类！", "commodity");
 			break;
 		case 3:

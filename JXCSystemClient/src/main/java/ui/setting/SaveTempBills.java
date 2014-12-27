@@ -28,6 +28,8 @@ public class SaveTempBills {
 	
 	InvoiceVO pending;
 	public SaveTempBills(MyFrame frame,ArrayList<InvoiceVO> invoiceBills,UIController uiController) {
+		System.out.println(invoiceBills+"bills");
+		System.out.println(invoiceBills.get(0));
 		this.invoiceBills = invoiceBills;
 		this.uiController = uiController;
 		this.frame = frame;
@@ -49,8 +51,10 @@ public class SaveTempBills {
 	 * @param loc
 	 */
 	public void getInvoiceInfo(int loc){
+		System.out.println(loc);
 		temp = invoiceBills.get(loc);
 		bill = invoiceblService.searchNote_up(temp.note);
+		System.out.println(temp+"aaaaa");
 		checkType(temp.bill_note);
 	}
 
@@ -83,11 +87,11 @@ public class SaveTempBills {
 					uiController, (PatchVO)(bill)));
 			break;
 		case 7:
-			frame.setPanel(new ConfirmReceiptPanel(frame, "Image/Account/receiptDetails.jpg", uiController, 
+			frame.setPanel(new ConfirmReceiptPanel(frame, "Image/Account/receiptDetail.jpg", uiController, 
 					(GetVO)(bill)));
 			break;
 		case 8:
-			frame.setPanel(new ConfirmPaymentPanel(frame, "Image/Account/paymentDetails.jpg", uiController, 
+			frame.setPanel(new ConfirmPaymentPanel(frame, "Image/Account/paymentDetail.jpg", uiController, 
 					(PayVO)(bill)));
 			break;	
 		}

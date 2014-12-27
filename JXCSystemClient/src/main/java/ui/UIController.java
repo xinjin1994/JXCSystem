@@ -11,7 +11,7 @@ import ui.setting.SetBack;
 
 public class UIController {
 
-	private MyFrame frame;
+	static private MyFrame frame;
 	private WelcomePanel welcomePanel;
 	public LoginPanel loginPanel;
 	private ConnectPanel connectPanel;
@@ -23,7 +23,7 @@ public class UIController {
 	static private FatherPanel tempMainPanel,tempPanel,logPanel;
 	public FatherPanel prePanel;
 	public UIController(){
-		
+		this.frame = frame;
 	}
 //	public UIController(int i) {
 //

@@ -66,11 +66,10 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 		InvoicePO tempInvoice = null;
 		try {
 			tempInvoice = invoice.getInvoice(po.getNote());
-			invoice.passInvoice(po);
-			
 			if(tempInvoice==null){
 				return 1;
 			}
+			invoice.passInvoice(po);
 			
 			switch(tempInvoice.getDocType()){
 			
@@ -151,6 +150,10 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 				return 1;
 			}
 			
+			if(!invoice.refuseInvoice(tempInvoice)){
+				return -1;
+			}
+			
 			switch(tempInvoice.getDocType()){
 			
 			case 1: SendGiftPO po1=(SendGiftPO) tempInvoice;
@@ -204,8 +207,6 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			return -1;
 			
 			}
-			
-			
 			
 			if(invoice.passInvoice(tempInvoice)){
 				return 0;
@@ -313,6 +314,39 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			e.printStackTrace();
 		}
 		return "�ɹ�";
+	}
+	
+	public ArrayList<InvoicePO> getPass(){
+		ArrayList<InvoicePO> po=show();
+		ArrayList<InvoicePO> array=new ArrayList<InvoicePO>();
+		for(int i=0;i<po.size();i++){
+			if(po.get(i).getCondition()==2){
+				array.add(po.get(i));
+			}
+		}
+		return array;
+	}
+	
+	public ArrayList<InvoicePO> getRefuse(){
+		ArrayList<InvoicePO> po=show();
+		ArrayList<InvoicePO> array=new ArrayList<InvoicePO>();
+		for(int i=0;i<po.size();i++){
+			if(po.get(i).getCondition()==3){
+				array.add(po.get(i));
+			}
+		}
+		return array;
+	}
+	
+	public ArrayList<InvoicePO> getWait(){
+		ArrayList<InvoicePO> po=show();
+		ArrayList<InvoicePO> array=new ArrayList<InvoicePO>();
+		for(int i=0;i<po.size();i++){
+			if(po.get(i).getCondition()==1){
+				array.add(po.get(i));
+			}
+		}
+		return array;
 	}
 
 //	public String add(CommodityPO po) {

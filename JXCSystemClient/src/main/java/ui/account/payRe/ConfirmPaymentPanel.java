@@ -3,6 +3,7 @@ package ui.account.payRe;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ui.AccountPanel;
 import ui.FatherPanel;
 import ui.UIController;
 import ui.account.AccountAllUIController;
@@ -120,6 +121,9 @@ public class ConfirmPaymentPanel extends FatherPanel implements ActionListener {
 			frame.remove(this);
 			switch (accountblService.addPayment_up(newPayment)) {
 			case 0:
+				AccountPanel temp = (AccountPanel)(uiController.getMainPanel());
+				temp.getFinanceInfo();
+				uiController.setMainPanel(temp);
 				resControllerS.succeeded("成功添加付款单！", "account");
 				break;
 			case 4:

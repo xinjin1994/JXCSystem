@@ -22,8 +22,8 @@ public class ConfirmPatchPanel extends PatchDetailPanel implements ActionListene
 		
 		super(frame, string, commodityAllUIController, newPatch);
 		setForward();
-		resControllerS = new ResultPanelController(frame, commodityAllUIController.getPanel());
-		resControllerF = new ResultPanelController(frame, commodityAllUIController.getMainPanel());
+		resControllerS = new ResultPanelController(frame, commodityAllUIController.getMainPanel());
+		resControllerF = new ResultPanelController(frame, commodityAllUIController.getPanel());
 		this.failedAddress = "commodity3";
 		commodityblService = new CommodityController();
 	}
@@ -41,14 +41,14 @@ public class ConfirmPatchPanel extends PatchDetailPanel implements ActionListene
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == forwardButton){
 			frame.remove(this);
-			resControllerS.succeeded("成功添加报溢报损单！", "commodity");
-			/*switch(commodityblService.patch_up(patch)){
+//			resControllerS.succeeded("成功添加报溢报损单！", "commodity");
+			switch(commodityblService.patch_up(patch)){
 			case 0:
 				resControllerS.succeeded("成功添加报溢报损单！", "commodity");
 				break;
 			default:
 				resControllerF.failedConfirm("未知错误！", failedAddress);
-			}*/
+			}
 		} 
 	}
 }

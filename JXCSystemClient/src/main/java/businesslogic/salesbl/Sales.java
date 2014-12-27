@@ -640,11 +640,16 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public ArrayList<CommodityPO> getAllCommodity() {
-		return null;
+		ArrayList<CommodityPO> commodityPO=commodity.getAllCommodity();	
+		return commodityPO;
 	}
 
 	public CommodityPO getCommodity(String name, String id) {
-		return null;
+		CommodityPO commodityPO=commodity.findCommodity(name, id);
+		if(commodityPO==null){
+			System.out.println("getCommodity is null!");
+		}
+		return commodityPO;
 	}
 
 	public String passImport(ImportPO importPO) {

@@ -26,8 +26,8 @@ import vo.SortVO;
 
 public class MySortTree {
 	DefaultTreeModel treeModel;
-	public JTree tree;
-	public JScrollPane scrollPane;
+	static public JTree tree;
+	static public JScrollPane scrollPane;
 	public ShowPanel treePanel;
 	ArrayList<SortID> allSortsIds = new ArrayList<SortID>();
 	SortID temp;
