@@ -202,9 +202,9 @@ public class MakeSureIm extends FatherPanel {
 				frame.setPanel(imInPanel);
 				frame.repaint();
 			} else if (e.getSource() == forward) {
-				// System.out.println("hello");
 				switch (salesblService.addImport_up(importMenuVO)) {
 				case 0:
+					System.out.println(importMenuVO.person+"person");
 					salesResult.succeeded("添加成功！");
 					break;
 				default:

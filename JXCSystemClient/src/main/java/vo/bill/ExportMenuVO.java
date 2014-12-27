@@ -13,6 +13,7 @@ public class ExportMenuVO extends InvoiceVO{
 	public double afterValue;
 	public String remark;
 	public String id,operator,time;
+	public String person;//新增业务员
 	
 	public ExportMenuVO(String id,String cusName,String salesMan,String operator,String warehouse,
 			CommodityListVO commodityList,double beforeValue,double discount,double voucherPrice,

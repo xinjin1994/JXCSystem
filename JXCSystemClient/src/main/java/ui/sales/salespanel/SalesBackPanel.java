@@ -49,6 +49,7 @@ public class SalesBackPanel extends SalesInPanel{
 						goodsTypeSelected, num, price, num*price, newRemark.getText());
 				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
 						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,5);
+				exportMenuVO.person = person.getText();
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
 						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesBackPanel.this,salesUIController);
 				frame.remove(SalesBackPanel.this);

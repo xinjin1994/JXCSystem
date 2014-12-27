@@ -31,7 +31,7 @@ public class SalesBillPanel extends FatherPanel{
 		addLabel();
 		addDis();
 		setSalesLabel();
-		addSalesButton();
+		controller.setBackBills(this);
 	}
 	
 	public void addLabel() {
@@ -85,21 +85,5 @@ public class SalesBillPanel extends FatherPanel{
 		voucher.setText(exportMenuVO.voucherPrice + "");
 
 	}
-	
-	public void addSalesButton() {
-		backSales = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
-				"Image/Sales/Sales_image/返回_press_on.png");
-		this.add(backSales);
-		backSales.addActionListener(new SalesListener());
-
-	}
-	class SalesListener implements ActionListener{
-
-		public void actionPerformed(ActionEvent e) {
-			controller.setBackBills(SalesBillPanel.this);
-		}
-		
-	}
-
 
 }

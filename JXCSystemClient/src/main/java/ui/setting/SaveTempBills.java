@@ -55,10 +55,8 @@ public class SaveTempBills {
 	 * @param loc
 	 */
 	public void getInvoiceInfo(int loc){
-		System.out.println(loc);
 		temp = invoiceBills.get(loc);
 		bill = invoiceblService.searchNote_up(temp.note);
-		System.out.println(temp+"aaaaa");
 		checkType(temp.bill_note);
 	}
 
@@ -70,8 +68,8 @@ public class SaveTempBills {
 					,uiController,(SendGiftVO)(bill)));
 			break;
 		case 2:
-//			(ImportMenuVO)(bill);
-			frame.setPanel(new ImInBillPanel(frame,"Image/Sales/详细信息/importDetail.jpg",uiController,(ImportMenuVO)(bill)));
+			ImportMenuVO imp = (ImportMenuVO)(bill);
+			frame.setPanel(new ImInBillPanel(frame,"Image/Sales/详细信息/importDetail.jpg",uiController,imp));
 			break;
 		case 3:
 //			(ImportMenuVO)(bill);

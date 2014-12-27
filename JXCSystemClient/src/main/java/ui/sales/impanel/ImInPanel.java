@@ -147,7 +147,7 @@ public class ImInPanel extends FatherPanel {
 	public void addTextField() {
 		supplier = new MyTextFieldFilled(210, 255, 116, 42);
 		warehouse = new MyTextFieldFilled(210, 308, 116, 42);
-		remark = new MyTextFieldFilled(104, 420, 111, 118);
+		remark = new MyTextFieldFilled(104, 420, 200, 118);
 		// discount = new MyTextFieldFilled(235, 421, 91, 37);
 		// voucher = new MyTextFieldFilled(235, 500, 91, 27);
 		goodsID = new MyLabel(488, 211, 237, 31);
@@ -228,7 +228,7 @@ public class ImInPanel extends FatherPanel {
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());
 					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
 							warehouse.getText(), commodityListVO, 2);
-
+					importMenuVO.person = person.getText();
 					MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg",
 							controller, importMenuVO, commodityListVO, person.getText(), operator.getText(),
 							ImInPanel.this, salesUIController);

@@ -93,6 +93,7 @@ public class ImBackPanel extends ImInPanel {
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());
 				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
 						warehouse.getText(), commodityListVO, 3);
+				importMenuVO.person = person.getText();
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg", controller,
 						importMenuVO, commodityListVO, person.getText(), operator.getText(), ImBackPanel.this,salesUIController);
 				frame.remove(ImBackPanel.this);
