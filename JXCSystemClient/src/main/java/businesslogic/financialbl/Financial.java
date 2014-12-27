@@ -15,6 +15,7 @@ import po.PaymentPO;
 import po.ReceiptPO;
 import po.SaleListPO;
 import po.SendGiftPO;
+import vo.SaleListConditionVO;
 import businesslogic.accountbl.Account;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.salesbl.Sales;
@@ -346,6 +347,18 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public int outputSaleListExcel(ArrayList<SaleListConditionVO> saleList){
+		
+	}
+	
+	public int outputAllBillExcel(){
+		
+	}
+	
+	public int outputOperatingExcel(){
+		
 	}
 
 }
