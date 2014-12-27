@@ -35,7 +35,7 @@ public class InvoiceController implements InvoiceblService{
 
 	public ArrayList<InvoiceVO> show_up() {
 		// TODO Auto-generated method stub
-		ArrayList<InvoicePO> po=invoice.show();
+		ArrayList<InvoicePO> po=invoice.getWait();
 		ArrayList<InvoiceVO> vo=new ArrayList<InvoiceVO>();
 		int i=0;
 		for(i=0;i<po.size();i++){

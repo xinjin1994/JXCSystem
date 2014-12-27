@@ -136,6 +136,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	public boolean addInvoice(InvoicePO po) {
 		InvoicePO po1=findInvoice_true(po.getNote());
 		if(po1==null){
+			po.setTime(AccountDataService_Stub.getNoteTime());
 			invoiceList.add(po.copy());
 			return true;
 		}

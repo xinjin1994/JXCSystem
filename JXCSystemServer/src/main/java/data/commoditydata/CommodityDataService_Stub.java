@@ -879,6 +879,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 
 	public boolean addPatch(PatchPO po) throws RemoteException {
 		// TODO Auto-generated method stub
+		po.setTime(AccountDataService_Stub.getNoteTime());
 		patchList.add(po.copy());
 		this.writePatchList();
 		System.out.println("addPatch:");
