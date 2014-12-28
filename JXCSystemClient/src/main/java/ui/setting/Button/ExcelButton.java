@@ -19,27 +19,27 @@ public class ExcelButton extends MyButton implements ActionListener{
 	ArrayList<AllBillVO> allBillVOs = new ArrayList<AllBillVO>();
 	ArrayList<SalesDetailVO> salesDetailVOs = new ArrayList<SalesDetailVO>();
 	ArrayList<ConditionVO> conditionVOs = new ArrayList<ConditionVO>();
+	public MyButton excel;
 	
-	public ExcelButton(ThirdPanel prePanel,ArrayList<AllBillVO> allBillVOs) {
-		super("Image/output.png", 10, 10, "Image/output_stop.png", "Image/output_stop.png");
+	public ExcelButton(ArrayList<AllBillVO> allBillVOs) {
+	excel = new MyButton("Image/Manager/button/proManage/approve.png", 290, 450,
+			"Image/Manager/button/proManage/approve_stop.png", "Image/Manager/button/proManage/approve.png");	
+//		excel = new MyButton("Image/output.png", 10, 10, "Image/output_stop.png", "Image/output_stop.png");
 		this.allBillVOs = allBillVOs;
-		prePanel.add(this);
 		this.setActionCommand("allBill");
 		this.addActionListener(this);
 	}
 	
-	public ExcelButton(ThirdPanel prePanel,ArrayList<SalesDetailVO> salesDetailVOs,int i) {
-		super("Image/output.png", 400, 390, "Image/output_stop.png", "Image/output_stop.png");
+	public ExcelButton(ArrayList<SalesDetailVO> salesDetailVOs,int i) {
+		excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
 		this.salesDetailVOs = salesDetailVOs;
-		prePanel.add(this);
 		this.setActionCommand("saleList");
 		this.addActionListener(this);
 	}
 
-	public ExcelButton(ThirdPanel prePanel,ArrayList<ConditionVO> conditionVOs,String s) {
-		super("Image/output.png", 400, 390, "Image/output_stop.png", "Image/output_stop.png");
+	public ExcelButton(ArrayList<ConditionVO> conditionVOs,String s) {
+		excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
 		this.conditionVOs = conditionVOs;
-		prePanel.add(this);
 		this.setActionCommand("opeCon");
 		this.addActionListener(this);
 	}

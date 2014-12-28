@@ -119,6 +119,8 @@ public class FindAccountPanel extends FatherPanel implements ActionListener{
 		if(type.equals("account")){
 			showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 			new SetTable(showTable, frame, accountController);
+			frame.setPanel(accountController.getMainPanel());
+			frame.repaint();
 		}else if (type.equals("manager")) {
 //			showTable.setColor(colors.accTableColor,colors.greyFont,colors.accColor,colors.greyFont);
 			showTable.setColor(colors.manTableColor,colors.manBkColor, colors.manColor,Color.white);

@@ -39,7 +39,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 	FinancialblService financialblService;
 	private ColorFactory color = new ColorFactory();
 	MyTable showTable = new MyTable();
-	private MyButton forwardButton;
+	private MyButton forwardButton,excel;
 	private MyTextFieldBorder timeBegin,timeFinish,stock,billType,customer,agent;
 	private String itemName,item;
 	private String type = "account";
@@ -197,26 +197,54 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 				}else{
 
 					frame.remove(this);
-					if(type.equals("account")){
+					if (type.equals("account")) {
+						setTableA(sales);
+						
 						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
-						accountPanel.setExcelButtonAllBill(billsArray);
+						
+						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+						accountPanel.accountThirdPanel.add(excel);
+						excel.addActionListener(this);
+						accountPanel.accountThirdPanel.repaint();
+						this.repaint();
 						accountController.setMainPanel(accountPanel);
 						
-//						SaveTempBills bill = new SaveTempBills(frame, billsArray,accountController );
-//						
-//						setTable(info, bills);
-						setTableA(bills);
-					}else if(type.equals("manager")){
-						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());;
-						managerPanel.setExcelButtonAllBill(billsArray);
+						frame.setPanel(accountPanel);
+						
+						frame.repaint();
+					} else if (type.equals("manager")) {
+						
+						
+						setTableM(sales);
+						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());
+						
+						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+						managerPanel.managerThirdPanel.add(excel);
+						excel.addActionListener(this);
+						managerPanel.managerThirdPanel.repaint();
+						this.repaint();
 						managerController.setMainPanel(managerPanel);
 						
-						setTableM(bills);
+						frame.setPanel(managerPanel);
+						
+						frame.repaint();
 					}
+
 				}
 				frame.repaint();
 			}
 
+		}else if (e.getSource() == excel) {
+			financialblService.allBillExcel_up(billsArray);
+			if (type.equals("account")) {
+				resController = new ResultPanelController(frame, accountController.getMainPanel());
+				frame.remove(accountController.getMainPanel());
+			}else {
+				resController = new ResultPanelController(frame, managerController.getMainPanel());
+				frame.remove(managerController.getMainPanel());
+			}
+			
+			resController.succeeded("成功导出经营历程表！", type);
 		}
 	}
 }

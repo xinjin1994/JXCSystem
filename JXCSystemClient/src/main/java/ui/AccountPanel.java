@@ -157,20 +157,6 @@ public class AccountPanel extends FatherPanel{
 		this.repaint();
 	}
 	
-	public void setExcelButtonAllBill(ArrayList<AllBillVO> all){
-		ExcelButton excelButton = new ExcelButton(accountThirdPanel, all);
-		accountThirdPanel.repaint();
-	}
-	
-	public void setExcelButtonSaleList(ArrayList<SalesDetailVO> salesDetailVOs){
-		ExcelButton excelButton = new ExcelButton(accountThirdPanel, salesDetailVOs,0);
-		accountThirdPanel.repaint();
-	}
-	public void setExcelButtonOpeCon(ArrayList<ConditionVO> conditionVOs){
-		ExcelButton excelButton = new ExcelButton(accountThirdPanel, conditionVOs,"");
-		accountThirdPanel.repaint();
-	}
-	
 	
 	
 	/**

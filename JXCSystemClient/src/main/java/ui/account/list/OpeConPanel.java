@@ -17,6 +17,7 @@ import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;
 import ui.setting.SetTable;
+import ui.setting.Button.ExcelButton;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
@@ -41,7 +42,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 	private MyTable showTable = new MyTable();
 	
 	private MyTextFieldBorder timeBegin, timeFinish;
-	private MyButton forwardButton;
+	private MyButton forwardButton,excel;
 	private MyFrame frame;
 	private String type = "account";
 
@@ -149,21 +150,52 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 //				}else{
 				frame.remove(this);
 					if (type.equals("account")) {
+						setTableA(info);
+						
 						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
-						accountPanel.setExcelButtonOpeCon(conditionVO);
+						
+						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+						accountPanel.accountThirdPanel.add(excel);
+						excel.addActionListener(this);
+						accountPanel.accountThirdPanel.repaint();
+						this.repaint();
 						accountController.setMainPanel(accountPanel);
 						
-						setTableA(info);
+						frame.setPanel(accountPanel);
+						
+						frame.repaint();
 					} else if (type.equals("manager")) {
-						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());;
-						managerPanel.setExcelButtonOpeCon(conditionVO);
-						managerController.setMainPanel(managerPanel);
+						
 						
 						setTableM(info);
+						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());
+						
+						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+						managerPanel.managerThirdPanel.add(excel);
+						excel.addActionListener(this);
+						managerPanel.managerThirdPanel.repaint();
+						this.repaint();
+						managerController.setMainPanel(managerPanel);
+						
+						frame.setPanel(managerPanel);
+						
+						frame.repaint();
 					}
 //				}
 			}
 			frame.repaint();
+		}
+		else if (e.getSource() == excel) {
+			financialblService.operatingConditionExcel_up(conditionVO);
+			if (type.equals("account")) {
+				resController = new ResultPanelController(frame, accountController.getMainPanel());
+				frame.remove(accountController.getMainPanel());
+			}else {
+				resController = new ResultPanelController(frame, managerController.getMainPanel());
+				frame.remove(managerController.getMainPanel());
+			}
+			
+			resController.succeeded("成功导出经营情况表！", type);
 		}
 	}
 }

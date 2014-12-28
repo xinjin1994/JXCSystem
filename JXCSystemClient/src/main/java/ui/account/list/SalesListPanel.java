@@ -34,7 +34,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 	private AccountAllUIController accountController;
 	private ManagerAllUIController managerController;
 	
-	private MyButton forwardButton;
+	private MyButton forwardButton,excel;
 	private MyTable showTable = new MyTable();
 	private ColorFactory color = new ColorFactory();
 	private MyTextFieldBorder timeBegin,timeFinish,commodity,stock,customer,agent;
@@ -164,25 +164,55 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 					frame.remove(this);
 					resController.failed("不存在符合该条件的单据！", failedAddress);
 				}else{
-					if(type.equals("account")){
-						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
-						accountPanel.setExcelButtonSaleList(salesArray);
-						accountController.setMainPanel(accountPanel);
+					if (type.equals("account")) {
 						setTableA(sales);
-						//				frame.setPanel(accountController.getMainPanel());
-					}else if(type.equals("manager")){
-						//				frame.setPanel(managerController.getMainPanel());
-						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());;
-						managerPanel.setExcelButtonSaleList(salesArray);
-						managerController.setMainPanel(managerPanel);
+						
+						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
+						
+						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+						accountPanel.accountThirdPanel.add(excel);
+						excel.addActionListener(this);
+						accountPanel.accountThirdPanel.repaint();
+						this.repaint();
+						accountController.setMainPanel(accountPanel);
+						
+						frame.setPanel(accountPanel);
+						
+						frame.repaint();
+					} else if (type.equals("manager")) {
+						
 						
 						setTableM(sales);
+						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());
+						
+						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+						managerPanel.managerThirdPanel.add(excel);
+						excel.addActionListener(this);
+						managerPanel.managerThirdPanel.repaint();
+						this.repaint();
+						managerController.setMainPanel(managerPanel);
+						
+						frame.setPanel(managerPanel);
+						
+						frame.repaint();
 					}
 
 				}
 
 			}
 			frame.repaint();
+		}
+		else if(e.getSource() == excel){
+			financialblService.saleListExcel_up(salesArray);
+			if (type.equals("account")) {
+				resController = new ResultPanelController(frame, accountController.getMainPanel());
+				frame.remove(accountController.getMainPanel());
+			}else {
+				resController = new ResultPanelController(frame, managerController.getMainPanel());
+				frame.remove(managerController.getMainPanel());
+			}
+			
+			resController.succeeded("成功导出销售明细表！", type);
 		}
 	}
 }

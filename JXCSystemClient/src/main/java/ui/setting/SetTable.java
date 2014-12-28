@@ -24,8 +24,8 @@ public class SetTable {
 		temp.repaint();
 		
 		accountAllUIController.setMainPanel(temp);
-		frame.setPanel(temp);
-		frame.repaint();
+//		frame.setPanel(temp);
+//		frame.repaint();
 	}
 	
 	public SetTable(MyTable showTable,MyFrame frame,
