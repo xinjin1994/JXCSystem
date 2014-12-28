@@ -6,6 +6,10 @@ import java.io.Serializable;
 //这个是所有促销策略PO的父类
 public class PromotionPO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 600;
 	double start_money;
 	double end_money;
 	int level;

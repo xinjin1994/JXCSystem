@@ -6,13 +6,17 @@ import java.io.Serializable;
 //这个是所有促销策略PO的父类
 public class PromotionPO implements Serializable{
 
-	int start_money;
-	int end_money;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 600;
+	double start_money;
+	double end_money;
 	int level;
 	String start_time;
 	String end_time;
 	
-	public PromotionPO(String start_time,String end_time,int level,int start_money,int end_money){
+	public PromotionPO(String start_time,String end_time,int level,double start_money,double end_money){
 		this.start_money=start_money;
 		this.end_money=end_money;
 		this.level=level;
@@ -21,10 +25,10 @@ public class PromotionPO implements Serializable{
 	}
 	
 	
-	public int getStartMoney(){
+	public double getStartMoney(){
 		return start_money;
 	}
-	public int getEndMoney(){
+	public double getEndMoney(){
 		return end_money;
 	}
 	public String getStartTime(){
