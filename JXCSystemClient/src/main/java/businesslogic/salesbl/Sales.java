@@ -24,6 +24,7 @@ import businesslogic.commoditybl.Commodity;
 import businesslogic.invoicebl.Invoice;
 import businesslogic.promotionbl.Promotion;
 import businesslogic.systemlogbl.Systemlog;
+import businesslogic.userbl.User;
 import businesslogicservice.salesblservice.SalesblService;
 import data.salesdata.SaleDataService_Stub;
 import dataservice.salesdataservice.SalesDataService;
@@ -31,6 +32,8 @@ import dataservice.salesdataservice.SalesDataService;
 //2 客户名称不存在
 //3 客户的应收应付不为0
 //-1 未知错误
+//5 销售退货数量超出可退数量
+//6 进货退货数量超出可退数量
 
 public class Sales implements businesslogic.accountbl.SalesInfo,
 		businesslogic.invoicebl.SalesInfo, businesslogic.financialbl.SalesInfo,
@@ -146,11 +149,14 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addImport_Return(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
-		if (invoice.add(po) != null) {
-			systemlog.add_up("AddImport_Return:");
+		int number=getImport_ReturnMaxNumber(po.getOldNote());
+		if(po.getImportGoodList().get(0).getNumber()>number){
+			return 5;
+		}else{
+			invoice.add(po);
+			systemlog.add_up("AddImport_Return:"+User.operator);
 			return 0;
 		}
-		return -1;
 	}
 
 	// public int addImport_Return(String note, int number) {
@@ -175,11 +181,15 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addExport_Return(Export_ReturnPO po) {
 		// TODO Auto-generated method stub
-		if (invoice.add(po) != null) {
-			systemlog.add_up("AddExport_Return:");
+		int number=getExport_ReturnMaxNumber(po.getOldNote());
+		if(po.getExportGoodList().get(0).getNumber()>number){
+			return 5;
+		}else{
+			invoice.add(po);
+			systemlog.add_up("AddExport_Return:"+User.operator);
 			return 0;
 		}
-		return -1;
+
 	}
 
 	// public int addExport_Return(String note, int number) {
