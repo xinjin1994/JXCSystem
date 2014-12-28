@@ -63,32 +63,55 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		this.uiController = uiController;
 		this.frame = frame;
 		this.repaint();
+		init();
+		setIDOpe();
+		
+	}
+	public AddPaymentPanel(MyFrame frame,String url,
+			AccountAllUIController uiController,PayVO pay){
+		super(frame, url, uiController);
+		this.uiController = uiController;
+		this.frame = frame;
+		this.repaint();
+
+		init();
+		setInfo(pay);
+	}
+
+	private void init(){
+		
 		accountblService = new AccountController();
 		salesblService = new SalesController();
 		
 		uiController.setBack_first(this);
 		addLabel();
 		setComboBox();
-		setIDOpe();
+		
 		setTypeIn();
 		setForward();
 		resController = new ResultPanelController(frame, this);
 	}
-	public AddPaymentPanel(MyFrame frame,String url,
-			AccountAllUIController uiController,GetVO get){
-		this(frame,url,uiController);
-		setInfo(get);
-	}
-	public AddPaymentPanel(MyFrame frame2, String string,
-			AccountAllUIController accountAllUIController, PayVO draft) {
-		// TODO Auto-generated constructor stub
+	
+	private void setInfo(PayVO pay) {
+		System.out.println(pay);
+		idLabel.setText(pay.note);
+		
+		operator.setText(operate);
+		agent.setText(person);
+		item.setText(pay.itemList.itemName);
+		total.setText(totalValue + "");
+		ps.setText(pay.itemList.remark);
+		
+		account.setSelectedItem(pay.bankAccount);
+		balance.setText(accountblService.searchAccurateAccount_up(pay.bankAccount).balance+"");
+		money.setText(pay.itemList.money+"");
+//		customer.setSelectedItem(pay.custom);
+		
 	}
 	/**
 	 * 
 	 */
-	private void setInfo(GetVO get) {
-		
-	}
+	
 	/**
 	 * account的comboBox
 	 * account从下层获得
@@ -106,7 +129,8 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		
 		ArrayList<CustomerVO> cusVoArray = new ArrayList<CustomerVO>();
 		cusVoArray = accountblService.getAllCustomer_up();
-//				cusVoArray = salesblService.getAllImportCustomer_up();
+		
+//		cusVoArray = salesblService.getAllImportCustomer_up();
 		String[]customers = new String[cusVoArray.size()];
 		for(int i = 0;i < cusVoArray.size();i++){
 			customers[i] = cusVoArray.get(i).cusName;
@@ -220,6 +244,13 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 				resController.failed("存在输入为空！", failedAddress);
 				
 			}else{
+				try {
+					
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+				
+				
 				try{
 					
 //					totalValue = accountblService.calTotalMoney_up(newPayment);

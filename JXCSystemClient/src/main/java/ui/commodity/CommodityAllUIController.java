@@ -183,6 +183,13 @@ public class CommodityAllUIController extends UIController{
 		frame.repaint();
 	}
 	
+
+	public void patchDraft(PatchVO bill) {
+		addPatchPanel = new AddPatchPanel(frame,"Image/Commodity/stockManage/patch.jpg", this,bill);
+		frame.setPanel(addPatchPanel);
+		frame.repaint();
+	}
+	
 	public void confirmPatch(PatchVO newPatch) {
 		confitmPatchPanel = new ConfirmPatchPanel(frame,"Image/Commodity/stockManage/confirmPatch.jpg",this,newPatch);
 		frame.setPanel(confitmPatchPanel);
@@ -215,4 +222,6 @@ public class CommodityAllUIController extends UIController{
 		this.prePanel = prePanel;
 		new SetBack(frame, this, prePanel).setBack_third();
 	}
+
+
 }

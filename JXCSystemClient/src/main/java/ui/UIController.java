@@ -21,6 +21,7 @@ public class UIController {
 	
 	
 	public static AccountAllUIController accountAllUIController;
+	public static CommodityAllUIController commodityAllUIController;
 	
 	static private FatherPanel tempMainPanel,tempPanel,logPanel;
 	public FatherPanel prePanel;
@@ -109,7 +110,7 @@ public class UIController {
 
 	public void CommodityPanel() {
 		frame.remove(loginPanel);
-		new CommodityAllUIController(this, frame);
+		commodityAllUIController = new CommodityAllUIController(this, frame);
 		frame.repaint();
 	}
 	

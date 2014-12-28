@@ -70,7 +70,7 @@ public class MyTable extends JTable{
 	/*
 	 * 初始化table
 	 */
-	public void setTable(ArrayList<String> info){
+	public void setTable (ArrayList<String> info) {
 		render = new DefaultTableCellRenderer();
 		transInformation(info);
 		
@@ -93,6 +93,7 @@ public class MyTable extends JTable{
 		
 		render.setOpaque(false);// 将渲染器设置为透明
 		table.setDefaultRenderer(Object.class, render);
+		
 		try {
 			table.addMouseListener(new UserMouseAdapter() {
 				/** *//**
@@ -126,7 +127,7 @@ public class MyTable extends JTable{
 				}
 			}  );
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	
 

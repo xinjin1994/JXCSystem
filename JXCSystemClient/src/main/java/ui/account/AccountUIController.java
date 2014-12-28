@@ -145,32 +145,32 @@ public class AccountUIController extends UIController{
 		accountPanel.repaint();
 		
 	}
-	public void toIniPanel() {
-		accountSecondPanel.removeAll();
-		IniButtonListener iniListener = new IniButtonListener();
-		
-		String images_ori_ini[] = new String[]{"Image/Account/button/iniManage/comInfo.png",
-				"Image/Account/button/iniManage/cusInfo.png","Image/Account/button/iniManage/accInfo.png",
-				"Image/Account/button/iniManage/check.png"};
-		String images_stop_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_stop.png",
-				"Image/Account/button/iniManage/cusInfo_stop.png","Image/Account/button/iniManage/accInfo_stop.png",
-				"Image/Account/button/iniManage/check_stop.png"};
-		String images_press_on_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_press_on.png",
-				"Image/Account/button/iniManage/cusInfo_press_on.png","Image/Account/button/iniManage/accInfo_press_on.png",
-			"Image/Account/button/iniManage/check_press_on.png"};
-		
-		
-		for(int i = 0;i < iniButtons.length;i++){
-			System.out.println(i);
-			iniButtons[i] = new MyButton(images_ori_ini[i], secondX, secondY+i*inter,
-					images_stop_ini[i], images_press_on_ini[i]);
-			accountSecondPanel.add(iniButtons[i]);
-			iniButtons[i].addMouseListener(iniListener);
-		}
-		accountPanel.add(accountSecondPanel);
-		accountPanel.repaint();
-		
-	}
+//	public void toIniPanel() {
+//		accountSecondPanel.removeAll();
+//		IniButtonListener iniListener = new IniButtonListener();
+//		
+//		String images_ori_ini[] = new String[]{"Image/Account/button/iniManage/comInfo.png",
+//				"Image/Account/button/iniManage/cusInfo.png","Image/Account/button/iniManage/accInfo.png",
+//				"Image/Account/button/iniManage/check.png"};
+//		String images_stop_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_stop.png",
+//				"Image/Account/button/iniManage/cusInfo_stop.png","Image/Account/button/iniManage/accInfo_stop.png",
+//				"Image/Account/button/iniManage/check_stop.png"};
+//		String images_press_on_ini[] = new String[]{"Image/Account/button/iniManage/comInfo_press_on.png",
+//				"Image/Account/button/iniManage/cusInfo_press_on.png","Image/Account/button/iniManage/accInfo_press_on.png",
+//			"Image/Account/button/iniManage/check_press_on.png"};
+//		
+//		
+//		for(int i = 0;i < iniButtons.length;i++){
+//			System.out.println(i);
+//			iniButtons[i] = new MyButton(images_ori_ini[i], secondX, secondY+i*inter,
+//					images_stop_ini[i], images_press_on_ini[i]);
+//			accountSecondPanel.add(iniButtons[i]);
+//			iniButtons[i].addMouseListener(iniListener);
+//		}
+//		accountPanel.add(accountSecondPanel);
+//		accountPanel.repaint();
+//		
+//	}
 	
 	class AccButtonListener implements MouseListener{
 
@@ -267,41 +267,41 @@ public class AccountUIController extends UIController{
 		
 	}
 	
-	class IniButtonListener implements MouseListener{
-
-		public void mouseClicked(MouseEvent e) {
-			
-		}
-
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		public void mouseExited(MouseEvent e) {
-			
-		}
-
-		public void mousePressed(MouseEvent e) {
-			uiController.setMainPanel(accountPanel);
-			frame.remove(accountPanel);
-		
-			if(e.getSource() == iniButtons[0]){
-				uiController.iniCom();
-			}else if(e.getSource() == iniButtons[1]){
-				uiController.iniCus();
-			}else if(e.getSource() == iniButtons[2]){
-				uiController.iniAcc();
-			}else if(e.getSource() == iniButtons[3]){
-				
-			}
-		}
-
-		public void mouseReleased(MouseEvent e) {
-			
-		}
-		
-	}
-	
+//	class IniButtonListener implements MouseListener{
+//
+//		public void mouseClicked(MouseEvent e) {
+//			
+//		}
+//
+//		public void mouseEntered(MouseEvent e) {
+//			
+//		}
+//
+//		public void mouseExited(MouseEvent e) {
+//			
+//		}
+//
+//		public void mousePressed(MouseEvent e) {
+//			uiController.setMainPanel(accountPanel);
+//			frame.remove(accountPanel);
+//		
+//			if(e.getSource() == iniButtons[0]){
+//				uiController.iniCom();
+//			}else if(e.getSource() == iniButtons[1]){
+//				uiController.iniCus();
+//			}else if(e.getSource() == iniButtons[2]){
+//				uiController.iniAcc();
+//			}else if(e.getSource() == iniButtons[3]){
+//				
+//			}
+//		}
+//
+//		public void mouseReleased(MouseEvent e) {
+//			
+//		}
+//		
+//	}
+//	
 	class InvoiceButtonListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
@@ -364,6 +364,7 @@ public class AccountUIController extends UIController{
 
 	public void toSavePanel() {
 		accountSecondPanel.removeAll();
+		accountPanel.repaint();
 	}
 	
 	

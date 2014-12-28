@@ -43,7 +43,7 @@ public class AccountPanel extends FatherPanel{
 	
 	public ThirdPanel accountThirdPanel;
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage,saveCheck,systemLog;
-	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,iniManage,saveCheck,systemLog};
+	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,saveCheck,systemLog};
 	private MyButton refresh;
 	private MyFrame frame;
 	
@@ -53,16 +53,16 @@ public class AccountPanel extends FatherPanel{
 	
 	private String images_ori[] = new String[]{"Image/Account/button/accManage.png",
 			"Image/Account/button/finManage.png","Image/Account/button/recManage.png",
-			"Image/Account/button/invoiceManage.png","Image/Account/button/iniManage.png",
-			"Image/Account/button/saveCheck.png","Image/Account/button/systemLog.png"};
+			"Image/Account/button/invoiceManage.png","Image/Account/button/saveCheck.png",
+			"Image/Account/button/systemLog.png"};
 	private String images_stop[] = new String[]{"Image/Account/button/accManage_stop.png",
 			"Image/Account/button/finManage_stop.png","Image/Account/button/recManage_stop.png",
-			"Image/Account/button/invoiceManage_stop.png",	"Image/Account/button/iniManage_stop.png",
-			"Image/Account/button/saveCheck_stop.png","Image/Account/button/systemLog_stop.png"};
+			"Image/Account/button/invoiceManage_stop.png","Image/Account/button/saveCheck_stop.png",
+			"Image/Account/button/systemLog_stop.png"};
 	private String images_press_on[] = new String[]{"Image/Account/button/accManage_press_on.png",
 			"Image/Account/button/finManage_press_on.png","Image/Account/button/recManage_press_on.png",
-			"Image/Account/button/invoiceManage_press_on.png",	"Image/Account/button/iniManage_press_on.png",
-			"Image/Account/button/saveCheck_press_on.png","Image/Account/button/systemLog_press_on.png"};
+			"Image/Account/button/invoiceManage_press_on.png",	"Image/Account/button/saveCheck_press_on.png",
+			"Image/Account/button/systemLog_press_on.png"};
 	
 	private RefuseButton refuse;
 	private ApproveButton approve;
@@ -202,7 +202,8 @@ public class AccountPanel extends FatherPanel{
 			
 			setTable(info, bills);
 		} catch (Exception e) {
-			// TODO: handle exception
+			setTable(info, "");
+			e.printStackTrace();
 		}
 		
 	}
@@ -241,7 +242,7 @@ public class AccountPanel extends FatherPanel{
 	
 	public void getDraftInfo() {
 		payDraft = accountblService.getAllDraftPayment_up();
-		getDraft = accountblService.getAllDraftReceipt_up();
+	//	getDraft = accountblService.getAllDraftReceipt_up();
 		
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("时间;单据编号;单据类型");
@@ -266,6 +267,12 @@ public class AccountPanel extends FatherPanel{
 			
 			setTable(info, bills);
 		} catch (Exception e) {
+			setTable(info, "");
+			
+			frame.remove(this);
+			resController = new ResultPanelController(frame, this);
+			resController.failed("无新草稿单据！","account");
+			frame.repaint();
 			e.printStackTrace();
 		}
 			
@@ -290,29 +297,29 @@ public class AccountPanel extends FatherPanel{
 			}
 		
 			else if(e.getSource() == buttons[0]){
-				 if (User.duty!= 5) {
-					 System.out.println("here");
+				if (User.duty!= 5) {
+					System.out.println("here");
 					resController = new ResultPanelController(frame, AccountPanel.this);
 					frame.remove(AccountPanel.this);
 					resController.failed("您没有账户管理的权限！", failedAddress);
 					frame.repaint();
-				 }else {
-					 getAccountInfo();
-				 }
-				
+				}else {
+					getAccountInfo();
+				}
+
 			}else if(e.getSource() == buttons[1]){
 				getFinanceInfo();
 			}else if(e.getSource() == buttons[2]){
 				getReceiptInfo();
 			}else if(e.getSource() == buttons[3]){
-//				getInvoiceInfo();
+				//				getInvoiceInfo();
 			}else if(e.getSource() == buttons[4]){
-				getInitialInfo();
-			}else if(e.getSource() == buttons[5]){
 				getDraftInfo();
+			}
+
 		
 				
-			}else if (e.getSource() == buttons[6]) {
+			else if (e.getSource() == buttons[5]) {
 				ArrayList<String> infos = new ArrayList<String>();
 				infos.add("操作时间;操作员;操作内容");
 				ArrayList<SystemlogVO> logs = new ArrayList<SystemlogVO>();
@@ -347,8 +354,6 @@ public class AccountPanel extends FatherPanel{
 			}else if (e.getSource() == buttons[3]) {
 				accountUIController.toInvoicePanel();
 			}else if (e.getSource() == buttons[4]) {
-				accountUIController.toIniPanel();
-			}else if(e.getSource() == buttons[5]){
 				accountUIController.toSavePanel();
 			}
 		}

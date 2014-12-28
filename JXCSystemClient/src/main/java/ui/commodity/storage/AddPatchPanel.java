@@ -49,6 +49,25 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		this.frame = frame;
 		this.commodityAllUIController = controller;
 		this.failedAddress = "com/addPatch";
+		init();
+		setId();
+	}
+	public AddPatchPanel(MyFrame frame2, String string,
+			CommodityAllUIController commodityAllUIController2, PatchVO bill) {
+		super(frame2, string, commodityAllUIController2);
+		init();
+		setInfo(bill);
+	}
+	
+	private void setInfo(PatchVO bill) {
+		id.setText(bill.note);
+		time.setText(bill.time);
+		operator.setText(bill.operator);
+		name.setSelectedItem(bill.name);
+		type.setSelectedItem(bill.type);
+		number.setText(String.valueOf(bill.number));
+	}
+	private void init(){
 		resController = new ResultPanelController(frame, this);
 		commodityblService = new CommodityController();
 		invoiceblService = new InvoiceController();
@@ -58,6 +77,11 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		
 		setLabels();
 		setForward();
+	}
+	
+	private void setId(){
+
+		id.setText(commodityblService.getPatchNote());
 	}
 	private void setLabels() {
 		id = new MyLabel(94, 188, 269, 42);
@@ -70,7 +94,7 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 //		time.setText("time");
 //		operator.setText("operator");
 		try{
-		id.setText(commodityblService.getPatchNote());
+		
 		time.setText(AccountDataService_Stub.getNoteTime());
 		operator.setText(User.operator);
 		MyLabel [] labels = new MyLabel[]{id,time,operator};
