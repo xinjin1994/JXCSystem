@@ -573,6 +573,11 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	public ReceiptPO findDraftReceipt(String note) throws RemoteException {
 		// TODO Auto-generated method stub
 		ReceiptPO po=findDraftReceipt_true(note);
+		
+		if(po==null){
+			return null;
+		}
+		
 		po=po.copy();
 		return po;
 	}
@@ -580,6 +585,11 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	public PaymentPO findDraftPayment(String note) throws RemoteException {
 		// TODO Auto-generated method stub
 		PaymentPO po=findDraftPayment_true(note);
+		
+		if(po==null){
+			return null;
+		}
+		
 		po=po.copy();
 		return po;
 	}
@@ -658,7 +668,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		// TODO Auto-generated method stub
 		int i=0;
 		for(i=0;i<draftReceiptList.size();i++){
-			if(note.equals(draftReceiptList.get(i))){
+			if(note.equals(draftReceiptList.get(i).getNote())){
 				return draftReceiptList.get(i);
 			}
 		}
@@ -669,7 +679,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		// TODO Auto-generated method stub
 		int i=0;
 		for(i=0;i<draftPaymentList.size();i++){
-			if(note.equals(draftPaymentList.get(i))){
+			if(note.equals(draftPaymentList.get(i).getNote())){
 				return draftPaymentList.get(i);
 			}
 		}

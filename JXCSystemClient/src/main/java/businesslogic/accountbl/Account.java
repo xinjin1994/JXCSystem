@@ -351,7 +351,7 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public PaymentPO searchDraftPayment(String note) {
 		// TODO Auto-generated method stub
 		try {
-			PaymentPO po=account.findPayment(note);
+			PaymentPO po=account.findDraftPayment(note);
 			
 			if(po!=null){
 				account.delDraftPayment(note);
