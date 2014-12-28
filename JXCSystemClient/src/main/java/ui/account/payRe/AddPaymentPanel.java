@@ -80,6 +80,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 
 	private void init(){
 		
+		idLabel = new MyLabel(106,165, 221,55);
+		idLabel.setForeground(new ColorFactory().accColor);
+		this.add(idLabel);
+		
+		operator = new MyLabel(575, 370, 155, 55);
+		operator.setForeground(new ColorFactory().accColor);
+		this.add(operator);
+		
 		accountblService = new AccountController();
 		salesblService = new SalesController();
 		
@@ -167,17 +175,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	 * 自动生成单据的编号，和操作员
 	 */
 	private void setIDOpe() {
-		idLabel = new MyLabel(106,165, 221,55);
-		idLabel.setForeground(new ColorFactory().accColor);
+		
 		id = accountblService.getPaymentNote_up();
 		idLabel.setText(id);
-		this.add(idLabel);
 		
-		operator = new MyLabel(575, 370, 155, 55);
-		operator.setForeground(new ColorFactory().accColor);
+		
 		operate = accountblService.getOperator_up();
 		operator.setText(operate);
-		this.add(operator);
+
 	}
 	
 	private void setForward() {

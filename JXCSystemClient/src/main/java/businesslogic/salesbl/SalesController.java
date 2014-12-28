@@ -79,7 +79,7 @@ public class SalesController implements SalesblService {
 		importGood.add(importGoodPO);
 		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
 		ImportPO imp = new ImportPO(customerPO, importGood,
-				importMenuVO.remark, customerPO.clerk, User.operator,
+				importMenuVO.remark, importMenuVO.person, User.operator,
 				importMenuVO.warehouse, importMenuVO.total);
 		imp.setNote(importMenuVO.note);
 		int message = sale.addImport(imp);
@@ -335,24 +335,19 @@ public class SalesController implements SalesblService {
 	}
 
 	// ///////////////////////////////////////////////////////
-	public int getDiscount_up(int money, int level) {
+	public double getDiscount_up(int money, int level) {
 		// TODO Auto-generated method stub
 		return sale.getDiscount(money,level);
 	}
 
-	public int getVoucher_up(int money, int level) {
+	public double getVoucher_up(int money, int level) {
 		// TODO Auto-generated method stub
 		return sale.getVoucher(money,level);
 	}
 	
-	public CommodityVO getProGift_up(int money, int level) {
+	public ProGiftPO getProGift_up(int money, int level) {
 		// TODO Auto-generated method stub
-		CommodityPO po = sale.getProGift(money, level);
-		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
-				po.getType(), po.getNumber(), po.getIn_price(),
-				po.getOut_price(), po.getRecent_in_price(),
-				po.getRecent_out_price(), po.warn);
-		return vo;
+		return sale.getProGift(money, level);
 	}
 	
 	public String getOtherPromotion_up() {
@@ -390,7 +385,7 @@ public class SalesController implements SalesblService {
 		return sale.getExport_ReturnMaxNumber(old_note);
 	}
 //销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
-	public int getClerkDiscount_up() {
+	public double getClerkDiscount_up() {
 		// TODO Auto-generated method stub
 		return sale.getClerkDiscount();
 	}

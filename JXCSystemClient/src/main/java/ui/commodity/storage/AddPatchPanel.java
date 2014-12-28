@@ -14,11 +14,13 @@ import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
+import ui.setting.Button.SaveButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.CommodityVO;
 import vo.bill.PatchVO;
+import vo.bill.PayVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogic.userbl.User;
@@ -36,7 +38,7 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 	private String nameString,typeString,idString,timeString,opeString;
 	
 	private MyLabel id,time,operator;
-	private MyButton forwardButton;
+	private MyButton forwardButton,saveButton;
 	private PatchVO newPatch;
 	private int num;
 	private ColorFactory color = new ColorFactory();
@@ -170,6 +172,11 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		
 	}
 	private void setForward() {
+		SaveButton save = new SaveButton(this,736, 493);
+		saveButton = save.saveButton;
+		this.add(saveButton);
+		saveButton.addActionListener(this);
+		
 		ForwardButton forward = new ForwardButton(724, 426);
 		forwardButton = forward.forward_black;
 		this.add(forwardButton);
@@ -185,18 +192,29 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		}else if(e.getSource() == forwardButton){
 			commodityAllUIController.setTempPanel(this);
 			frame.remove(this);
-			setNewPatch();
+			try{
+				num = Integer.parseInt(number.getText());
+				newPatch = new PatchVO(nameString, typeString,num, id.getText(), time.getText(), operator.getText(),"1");
+				}catch(Exception e1){
+					frame.remove(this);
+					resController.failed("请重新确认您的输入！", failedAddress);
+				}
 			commodityAllUIController.confirmPatch(newPatch);
+		}else if(e.getSource() == saveButton){
+			setNewPatch();
+			commodityblService.patchDraft_up(newPatch);
+			frame.remove(this);
+			resController = new ResultPanelController(frame, commodityAllUIController.getMainPanel());
+			resController.succeeded("保存一条报溢报损草稿单！", "commodity");
 		}
 	}
 	private void setNewPatch() {
-		try{
-		num = Integer.parseInt(number.getText());
-		newPatch = new PatchVO(nameString, typeString,num, id.getText(), time.getText(), operator.getText(),"1");
-		}catch(Exception e){
-			frame.remove(this);
-			resController.failed("请重新确认您的输入！", failedAddress);
+		try {
+			num = Integer.parseInt(number.getText());
+		} catch (Exception e) {
+			num = 0;
 		}
+		newPatch = new PatchVO(nameString, typeString,num, id.getText(), time.getText(), operator.getText(),"1");
 	}
 
 }

@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import ui.AccountPanel;
 import ui.FatherPanel;
+import ui.ManagerPanel;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.CheckTimeFormat;
@@ -42,6 +44,8 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 	
 	private String failedAddress;
 	private ResultPanelController resController;
+	
+	ArrayList<SalesDetailVO> salesArray;
 	public SalesListPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -133,11 +137,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 //				isLegal = false;
 //			}
 
-			if(time1.equals("")||time2.equals("")||good_name.equals("")||customer_name.equals("")
-					||clerk.equals("")){
-				frame.remove(this);
-				resController.failed("存在输入为空！", failedAddress);
-			}else if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
+			if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 				frame.remove(this);
 				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
@@ -147,7 +147,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 				try{
 					int warehouse = Integer.parseInt(stock.getText());
 					frame.remove(this);
-					ArrayList<SalesDetailVO> salesArray = financialblService.saleList_up(time1,
+					salesArray = financialblService.saleList_up(time1,
 							time2, good_name, "", customer_name, clerk, String.valueOf(warehouse));
 				
 					sales.add("时间;商品名称;型号;数量;单价;总额");
@@ -165,10 +165,17 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 					resController.failed("不存在符合该条件的单据！", failedAddress);
 				}else{
 					if(type.equals("account")){
+						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
+						accountPanel.setExcelButtonSaleList(salesArray);
+						accountController.setMainPanel(accountPanel);
 						setTableA(sales);
 						//				frame.setPanel(accountController.getMainPanel());
 					}else if(type.equals("manager")){
 						//				frame.setPanel(managerController.getMainPanel());
+						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());;
+						managerPanel.setExcelButtonSaleList(salesArray);
+						managerController.setMainPanel(managerPanel);
+						
 						setTableM(sales);
 					}
 

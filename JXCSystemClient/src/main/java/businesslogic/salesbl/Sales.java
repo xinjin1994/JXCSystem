@@ -1,7 +1,9 @@
 package businesslogic.salesbl;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import po.AccountPO;
 import po.CommodityPO;
@@ -43,7 +45,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public InvoiceInfo invoice = new Invoice();
 	SystemlogInfo systemlog = new Systemlog();
 	CommodityInfo commodity = new Commodity();
-	PromotionInfo promotion=new Promotion();
+	PromotionInfo promotion = new Promotion();
 
 	public SalesDataService getSale() {
 		return sale;
@@ -108,27 +110,27 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int updateCustomer(CustomerVO vo1, CustomerVO vo2) {
 		// TODO Auto-generated method stub
-		
+
 		CustomerPO customer1;
 		CustomerPO customer2;
 		try {
 			customer1 = sale.findCustomer(vo1.cusName);
 			customer2 = sale.findCustomer(vo2.cusName);
-			
-			
 
 			if (customer1 == null) {
 				return 2;
 			}
-			customer1= new CustomerPO(vo1.id, vo1.cusName, vo1.level,
+			customer1 = new CustomerPO(vo1.id, vo1.cusName, vo1.level,
 					vo1.classification, vo1.tel, vo1.zipCode, vo1.ezipCode,
-					vo1.shouldGet, vo1.shouldPay, vo1.mostOwe, vo1.person, vo1.address);
+					vo1.shouldGet, vo1.shouldPay, vo1.mostOwe, vo1.person,
+					vo1.address);
 			customer2 = new CustomerPO(vo2.id, vo2.cusName, vo2.level,
 					vo2.classification, vo2.tel, vo2.zipCode, vo2.ezipCode,
-					vo2.shouldGet, vo2.shouldPay, vo2.mostOwe, vo2.person, vo2.address);
+					vo2.shouldGet, vo2.shouldPay, vo2.mostOwe, vo2.person,
+					vo2.address);
 			if (sale.updateCustomer(customer1, customer2)) {
 				systemlog.add_up("UpdateCustomer:" + customer1.getName());
-//				System.out.println(customer2.getClerk());
+				// System.out.println(customer2.getClerk());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -149,12 +151,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addImport_Return(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
-		int number=getImport_ReturnMaxNumber(po.getOldNote());
-		if(po.getImportGoodList().get(0).getNumber()>number){
+		int number = getImport_ReturnMaxNumber(po.getOldNote());
+		if (po.getImportGoodList().get(0).getNumber() > number) {
 			return 5;
-		}else{
+		} else {
 			invoice.add(po);
-			systemlog.add_up("AddImport_Return:"+User.operator);
+			systemlog.add_up("AddImport_Return:" + User.operator);
 			return 0;
 		}
 	}
@@ -181,12 +183,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addExport_Return(Export_ReturnPO po) {
 		// TODO Auto-generated method stub
-		int number=getExport_ReturnMaxNumber(po.getOldNote());
-		if(po.getExportGoodList().get(0).getNumber()>number){
+		int number = getExport_ReturnMaxNumber(po.getOldNote());
+		if (po.getExportGoodList().get(0).getNumber() > number) {
 			return 5;
-		}else{
+		} else {
 			invoice.add(po);
-			systemlog.add_up("AddExport_Return:"+User.operator);
+			systemlog.add_up("AddExport_Return:" + User.operator);
 			return 0;
 		}
 
@@ -610,49 +612,55 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-////////////////////////////////////
+	// //////////////////////////////////
 	public String getOtherPromotion() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-////////////////////////////////////////
+
+	// //////////////////////////////////////
 	public int getClerkDiscount() {
 		// TODO Auto-generated method stub
+		if (User.duty == 3) {
+
+		} else {
+
+		}
 		return 0;
 	}
 
 	public int getImport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		int result=sale.getImport_ReturnMaxNumber(old_note);
+		int result = sale.getImport_ReturnMaxNumber(old_note);
 		return result;
 	}
 
 	public int getExport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		int result=sale.getExport_ReturnMaxNumber(old_note);
+		int result = sale.getExport_ReturnMaxNumber(old_note);
 		return result;
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
 
 	public ArrayList<CustomerPO> getAllImportCustomer() {
-		ArrayList<CustomerPO> po=sale.getAllImportCustomer();
+		ArrayList<CustomerPO> po = sale.getAllImportCustomer();
 		return po;
 	}
 
 	public ArrayList<CustomerPO> getAllExportCustomer() {
-		ArrayList<CustomerPO> po=sale.getAllExportCustomer();
+		ArrayList<CustomerPO> po = sale.getAllExportCustomer();
 		return po;
 	}
 
 	public ArrayList<CommodityPO> getAllCommodity() {
-		ArrayList<CommodityPO> commodityPO=commodity.getAllCommodity();	
+		ArrayList<CommodityPO> commodityPO = commodity.getAllCommodity();
 		return commodityPO;
 	}
 
 	public CommodityPO getCommodity(String name, String id) {
-		CommodityPO commodityPO=commodity.findCommodity(name, id);
-		if(commodityPO==null){
+		CommodityPO commodityPO = commodity.findCommodity(name, id);
+		if (commodityPO == null) {
 			System.out.println("getCommodity is null!");
 		}
 		return commodityPO;
@@ -708,20 +716,59 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public int getDiscount(int money,int level) {
+	public double getDiscount(int money, int level) {
 		// TODO Auto-generated method stub
+		DiscountPO discountPO = promotion.getDiscount(level);
+		String time = Sales.getNowTime();
+		int start = time.compareTo(discountPO.getStartTime());
+		int end = time.compareTo(discountPO.getEndTime());
+		if ((start >= 0) && (end <= 0)) {
+			if (money > discountPO.getEndMoney()) {
+				int result=(int) (discountPO.getEndMoney()/discountPO.getStartMoney());
+				return result*discountPO.getDiscountMoney();
+			} else {
+				int result=(int) (money/discountPO.getStartMoney());
+				return  result*discountPO.getDiscountMoney();
+			}
+		}
+
 		return 0;
+
 	}
 
-	public CommodityPO getProGift(int money,int level) {
+	public ProGiftPO getProGift(int money, int level) {
 		// TODO Auto-generated method stub
+		ProGiftPO proGiftPO=promotion.getProGift(level);
+		String time = Sales.getNowTime();
+		int start = time.compareTo(proGiftPO.getStartTime());
+		int end = time.compareTo(proGiftPO.getEndTime());
+		if ((start >= 0) && (end <= 0)){
+			if(money>proGiftPO.getStartMoney()){
+				return proGiftPO;
+			}
+		}
 		return null;
 	}
 
-	public int getVoucher(int money,int level) {
+	public double getVoucher(int money, int level) {
 		// TODO Auto-generated method stub
+		VoucherPO voucherPO=promotion.getVoucher(level);
+		String time = Sales.getNowTime();
+		int start = time.compareTo(voucherPO.getStartTime());
+		int end = time.compareTo(voucherPO.getEndTime());
+		if ((start >= 0) && (end <= 0)){
+			if(money>voucherPO.getStartMoney()){
+				return voucherPO.getVoucherMoney();
+			}
+		}
 		return 0;
 	}
-	
+
+	public static String getNowTime() {
+		Calendar rightNow = Calendar.getInstance();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+		String sysDatetime = fmt.format(rightNow.getTime());
+		return sysDatetime;
+	}
 
 }

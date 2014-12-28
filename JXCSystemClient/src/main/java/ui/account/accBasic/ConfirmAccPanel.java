@@ -194,6 +194,10 @@ public class ConfirmAccPanel extends AccountDetailPanel implements ActionListene
 			checkType();
 			resControllerS.succeeded("成功删除账户！", type);
 			break;
+		case 1:
+			frame.remove(this);
+			resControllerF.failed("帐户名重复！", type);
+			break;
 		case 2:
 			frame.remove(this);
 			resControllerF.failedConfirm("账户名不存在！", type);

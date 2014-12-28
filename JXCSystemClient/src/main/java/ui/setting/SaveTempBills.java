@@ -18,12 +18,18 @@ import vo.bill.ImportMenuVO;
 import vo.bill.InvoiceVO;
 import vo.bill.PatchVO;
 import vo.bill.PayVO;
+import businesslogic.accountbl.AccountController;
+import businesslogic.commoditybl.CommodityController;
 import businesslogic.invoicebl.InvoiceController;
+import businesslogicservice.accountblservice.AccountblService;
+import businesslogicservice.commodityblservice.CommodityblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 
 public class SaveTempBills {
 	ArrayList<InvoiceVO> invoiceBills = new ArrayList<InvoiceVO>();
 	InvoiceblService invoiceblService;
+	CommodityblService commodityblService;
+	AccountblService accountblService;
 	InvoiceVO temp,bill;
 	UIController uiController;
 	MyFrame frame;
@@ -37,6 +43,8 @@ public class SaveTempBills {
 		this.frame = frame;
 		
 		invoiceblService = new InvoiceController();
+		commodityblService = new CommodityController();
+		accountblService = new AccountController();
 	}
 	/**
 	 * 单击
@@ -104,7 +112,7 @@ public class SaveTempBills {
 				frame.setPanel(new PatchDetailPanel(frame, "Image/Commodity/stockManage/patchDetail.jpg",
 						uiController, (PatchVO)(bill)));
 			} catch (Exception e) {
-				UIController.commodityAllUIController.patchDraft((PatchVO)bill);
+				UIController.commodityAllUIController.patchDraft(commodityblService.searchDraftPatch_up(temp.note));
 			}
 			
 			break;
@@ -113,7 +121,7 @@ public class SaveTempBills {
 				frame.setPanel(new ConfirmReceiptPanel(frame, "Image/Account/receiptDetail.jpg", uiController, 
 						(GetVO)(bill)));
 			} catch (Exception e) {
-				UIController.accountAllUIController.addReceiptDraft((GetVO)bill);
+				UIController.accountAllUIController.addReceiptDraft(accountblService.searchDraftReceipt_up(temp.note));
 			}
 			
 			break;
@@ -124,7 +132,7 @@ public class SaveTempBills {
 			} catch (Exception e) {
 				
 				System.out.println(invoiceBills+"bill");
-				UIController.accountAllUIController.addPaymentDraft((PayVO)bill);
+				UIController.accountAllUIController.addPaymentDraft(accountblService.searchDraftPayment_up(temp.note));
 			}
 		
 			break;	

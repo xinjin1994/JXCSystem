@@ -4,11 +4,13 @@ import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
 
 import po.AccountPO;
 import po.SystemlogPO;
 import vo.AccountVO;
 import vo.SystemlogVO;
+import businesslogic.financialbl.Excel;
 import businesslogic.userbl.User;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 import data.systemlogdata.SystemlogDataService_Stub;
@@ -66,6 +68,25 @@ public class Systemlog implements businesslogic.commoditybl.SystemlogInfo,
 			e.printStackTrace();
 		}
 		return -1;// 此数字应该对应某种失败结果
+	}
+	
+	public int outputSystemlogExcel(ArrayList<SystemlogVO> system){
+		
+		Vector<String[]> vec=new Vector<String[]>(1,1);
+		String[] title={"时间","操作员","操作项目"};
+		vec.add(title);
+		
+		for(int i=0;i<system.size();i++){
+			String[] cell=new String[3];
+			cell[0]=system.get(i).time;
+			cell[1]=system.get(i).operation;
+			cell[2]=system.get(i).word;
+			vec.addElement(cell);
+		}
+		
+		Excel excel=new Excel();
+		return excel.output(vec, "D://系统日志");
+		
 	}
 
 }

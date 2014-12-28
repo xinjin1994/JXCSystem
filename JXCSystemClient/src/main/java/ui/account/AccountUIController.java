@@ -335,15 +335,18 @@ public class AccountUIController extends UIController{
 					//5代表Export_ReturnVO， 6代表PatchVO，     7代表ReceiptVO，                      8代表PaymentVO
 					case 7:
 						itemName = "收款单";
+						item = billsArray.get(i).note+";"+itemName;
+						bills.add(item);
 						break;
 					case 8:
 						itemName = "付款单";
+						item = billsArray.get(i).note+";"+itemName;
+						bills.add(item);
 						break;	
 					default:
 						break;
 					}
-					item = billsArray.get(i).note+";"+itemName;
-					bills.add(item);
+					
 
 				}
 				

@@ -6,30 +6,38 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import businesslogic.accountbl.AccountController;
+import businesslogic.financialbl.FinancialController;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogic.systemlogbl.SystemlogController;
 import businesslogic.userbl.User;
 import businesslogicservice.accountblservice.AccountblService;
+import businesslogicservice.financialblservice.FinancialblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 import ui.account.AccountUIController;
+import ui.account.list.AllBillsPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SaveTempBills;
 import ui.setting.ThirdPanel;
 import ui.setting.Button.ApproveButton;
+import ui.setting.Button.ExcelButton;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RefuseButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+import vo.ConditionVO;
+import vo.SalesDetailVO;
 import vo.SystemlogVO;
+import vo.bill.AllBillVO;
 import vo.bill.GetVO;
 import vo.bill.InvoiceVO;
 import vo.bill.PayVO;
@@ -44,7 +52,7 @@ public class AccountPanel extends FatherPanel{
 	public ThirdPanel accountThirdPanel;
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage,saveCheck,systemLog;
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,saveCheck,systemLog};
-	private MyButton refresh;
+	private MyButton refresh,output;
 	private MyFrame frame;
 	
 	private MyTable showTable; 
@@ -68,6 +76,8 @@ public class AccountPanel extends FatherPanel{
 	private ApproveButton approve;
 	private InvoiceblService invoiceblService;
 	private AccountblService accountblService;
+	private FinancialblService financialblService;
+	
 	private ResultPanelController resController;
 	private String failedAddress;
 	
@@ -91,7 +101,7 @@ public class AccountPanel extends FatherPanel{
 		approve = new ApproveButton(this);
 		invoiceblService = new InvoiceController();
 		accountblService = new AccountController();
-		
+		financialblService = new FinancialController();
 		systemlogblService = new SystemlogController();
 		this.addButton();
 		
@@ -147,6 +157,22 @@ public class AccountPanel extends FatherPanel{
 		this.repaint();
 	}
 	
+	public void setExcelButtonAllBill(ArrayList<AllBillVO> all){
+		ExcelButton excelButton = new ExcelButton(accountThirdPanel, all);
+		accountThirdPanel.repaint();
+	}
+	
+	public void setExcelButtonSaleList(ArrayList<SalesDetailVO> salesDetailVOs){
+		ExcelButton excelButton = new ExcelButton(accountThirdPanel, salesDetailVOs,0);
+		accountThirdPanel.repaint();
+	}
+	public void setExcelButtonOpeCon(ArrayList<ConditionVO> conditionVOs){
+		ExcelButton excelButton = new ExcelButton(accountThirdPanel, conditionVOs,"");
+		accountThirdPanel.repaint();
+	}
+	
+	
+	
 	/**
 	 * 该方法用于从下曾获得被审批的单据数据
 	 */
@@ -195,6 +221,7 @@ public class AccountPanel extends FatherPanel{
 //				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
 			}
 			
+			
 			for(InvoiceVO temp:finBills){
 				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
 			}
@@ -217,7 +244,10 @@ public class AccountPanel extends FatherPanel{
 		case 8:
 			type = "付款单";
 			break;
+		default:
+			break;
 		}
+		
 		return type;
 	}
 
@@ -242,7 +272,7 @@ public class AccountPanel extends FatherPanel{
 	
 	public void getDraftInfo() {
 		payDraft = accountblService.getAllDraftPayment_up();
-	//	getDraft = accountblService.getAllDraftReceipt_up();
+		getDraft = accountblService.getAllDraftReceipt_up();
 		
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("时间;单据编号;单据类型");

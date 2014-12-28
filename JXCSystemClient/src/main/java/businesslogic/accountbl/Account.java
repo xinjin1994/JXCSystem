@@ -336,7 +336,11 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public ReceiptPO searchDraftReceipt(String note) {
 		// TODO Auto-generated method stub
 		try {
-			return account.findDraftReceipt(note);
+			ReceiptPO po=account.findDraftReceipt(note);
+			if(po!=null){
+				account.delDraftReceipt(note);
+			}
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -347,7 +351,13 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public PaymentPO searchDraftPayment(String note) {
 		// TODO Auto-generated method stub
 		try {
-			return account.findPayment(note);
+			PaymentPO po=account.findDraftPayment(note);
+			
+			if(po!=null){
+				account.delDraftPayment(note);
+			}
+			
+			return po;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

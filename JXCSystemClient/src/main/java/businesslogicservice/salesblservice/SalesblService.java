@@ -2,6 +2,7 @@ package businesslogicservice.salesblservice;
 
 import java.util.ArrayList;
 
+import po.ProGiftPO;
 import vo.CommodityVO;
 import vo.CustomerVO;
 import vo.bill.ExportMenuVO;
@@ -73,6 +74,7 @@ public interface SalesblService {
 	// 获得单个商品信息
 	public CommodityVO getCommodity_up(String name, String type);
 	// 获得操作员能修改的最大折扣，注意这里的折扣不包括促销产生的折扣
+
 	public int getClerkDiscount_up();
 	
 	// 查看获得的折扣促销
@@ -83,6 +85,7 @@ public interface SalesblService {
 	
 	// 查看获得的赠品促销
 	public CommodityVO getProGift_up(int money, int level);
+	
 	// 获得所有供货商信息
 	public ArrayList<CustomerVO> getAllImportCustomer_up();
 	// 获得分配的客户编号
@@ -102,6 +105,16 @@ public interface SalesblService {
 	
 	/*我是分割线
 	 * */
+//	public double getClerkDiscount_up();
+//
+//	// 查看获得的折扣促销
+//	public double getDiscount_up(int money, int level);
+//
+//	// 查看获得的代金券促销
+//	public double getVoucher_up(int money, int level);
+//
+//	// 查看获得的赠品促销
+//	public ProGiftPO getProGift_up(int money, int level);
 
 
 

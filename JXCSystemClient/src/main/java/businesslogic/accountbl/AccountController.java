@@ -159,10 +159,10 @@ public class AccountController implements AccountblService{
 		CustomerPO cus=new CustomerPO(vo.cusName,0, true, "");
 		ArrayList<TransferPO> trans=new ArrayList<TransferPO>();
 		TransferPO tra=new TransferPO(vo.transferList.bankAccount,vo.transferList.transferValue,vo.transferList.remark);
+		trans.add(tra);
 		ReceiptPO po=new ReceiptPO(getOperator_up(), cus, trans);
 		po.setNote(vo.note);
 		po.setCondition(0);
-		
 		
 		return account.addDraftReceipt(po);
 	}
@@ -184,14 +184,16 @@ public class AccountController implements AccountblService{
 		// TODO Auto-generated method stub
 //		ReceiptPO po=account.searchDraftReceipt(note);
 		
-		ArrayList<ReceiptPO> po=account.getAllDraftReceipt();
+		ReceiptPO po=account.searchDraftReceipt(note);
 		GetVO vo=null;
-		for(int i=0;i<po.size();i++){
-			if(po.get(i).getNote().equals(note)){
-				TransferListVO trans=new TransferListVO(po.get(i).getTransfer().get(0).getAccount(),po.get(i).getTransfer().get(0).getMoney(),po.get(i).getTransfer().get(0).getPs());
-				vo=new GetVO(po.get(i).getNote(), po.get(i).getCustomer().getName(), po.get(i).getOperator(), trans,po.get(i).getTime(),po.get(i).getInvoiceNote());
-			}
+
+		if(po==null){
+			return null;
 		}
+		
+		TransferListVO trans=new TransferListVO(po.getTransfer().get(0).getAccount(),po.getTransfer().get(0).getMoney(),po.getTransfer().get(0).getPs());
+		vo=new GetVO(po.getNote(), po.getCustomer().getName(), po.getOperator(), trans,po.getTime(),po.getInvoiceNote());
+
 		return vo;
 	}
 
@@ -224,16 +226,16 @@ public class AccountController implements AccountblService{
 
 	public PayVO searchDraftPayment_up(String note) {
 		// TODO Auto-generated method stub
-		ArrayList<PaymentPO> po=account.getAllDraftPayment();
+		PaymentPO po=account.searchDraftPayment(note);
 		PayVO vo=null;
-		for(int i=0;i<po.size();i++){
-			if(po.get(i).getNote().equals(note)){
-				ItemList item=new ItemList(po.get(i).getItem().get(0).getItemName(),po.get(i).getItem().get(0).getMoney(),po.get(i).getItem().get(0).getPs());
-				vo=new PayVO(po.get(i).getNote(),po.get(i).getOperator(),po.get(i).getAccount().getName(),item,po.get(i).getTime(),po.get(i).getInvoiceNote()); 
-				return vo;
-			}
+		
+		if(po==null){
+			return null;
 		}
-		return null;
+		
+		ItemList item=new ItemList(po.getItem().get(0).getItemName(),po.getItem().get(0).getMoney(),po.getItem().get(0).getPs());
+		vo=new PayVO(po.getNote(),po.getOperator(),po.getAccount().getName(),item,po.getTime(),po.getInvoiceNote()); 
+		return vo;
 	}
 
 	public GetVO searchReceipt_up(String note) {
