@@ -242,7 +242,7 @@ public class AccountPanel extends FatherPanel{
 	
 	public void getDraftInfo() {
 		payDraft = accountblService.getAllDraftPayment_up();
-	//	getDraft = accountblService.getAllDraftReceipt_up();
+		getDraft = accountblService.getAllDraftReceipt_up();
 		
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("时间;单据编号;单据类型");
