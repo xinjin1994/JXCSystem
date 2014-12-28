@@ -236,6 +236,10 @@ public class AccountPanel extends FatherPanel{
 	private String checkBill(int bill_node) {
 		String type = "";
 		switch (bill_node) {
+		case 6:
+			type = "报溢报损单"
+			break;
+			
 		case 7:
 			type = "收款单";
 			break;
@@ -243,7 +247,10 @@ public class AccountPanel extends FatherPanel{
 		case 8:
 			type = "付款单";
 			break;
+		default:
+			break;
 		}
+		
 		return type;
 	}
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import ui.AccountPanel;
 import ui.FatherPanel;
+import ui.ManagerPanel;
 import ui.account.AccountAllUIController;
 import ui.manager.ManagerAllUIController;
 import ui.setting.CheckTimeFormat;
@@ -46,6 +47,8 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 
 	private String failedAddress;
 	private ResultPanelController resController;
+	
+	ArrayList<ConditionVO> conditionVO;
 	public OpeConPanel(MyFrame frame, String url, AccountAllUIController uiController) {
 		super(frame, url, uiController);
 		this.frame = frame;
@@ -134,7 +137,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
 			else{
-				ArrayList<ConditionVO> conditionVO= financialblService.operatingCondition_up(time1, time2);
+				conditionVO= financialblService.operatingCondition_up(time1, time2);
 				ArrayList<String> info = new ArrayList<String>();
 				info.add("单据编号;銷售收入;商品类收入;折扣;销售成本;商品类支出;利润");
 				for(int i=0;i<conditionVO.size();i++){
@@ -146,8 +149,16 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 				}else{
 				frame.remove(this);
 					if (type.equals("account")) {
+						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
+						accountPanel.setExcelButtonOpeCon(conditionVO);
+						accountController.setMainPanel(accountPanel);
+						
 						setTableA(info);
 					} else if (type.equals("manager")) {
+						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());;
+						managerPanel.setExcelButtonOpeCon(conditionVO);
+						managerController.setMainPanel(managerPanel);
+						
 						setTableM(info);
 					}
 				}
