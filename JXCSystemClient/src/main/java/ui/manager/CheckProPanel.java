@@ -40,11 +40,11 @@ public class CheckProPanel extends FatherPanel{
 	}
 
 	private void setProLabels() {
-		setLabels(98, 385, labels[0]);//level1
-		setLabels(247, 326, labels[1]);//level2
-		setLabels(401, 268, labels[2]);//level3
+		setLabels(96, 385, labels[0]);//level1
+		setLabels(243, 326, labels[1]);//level2
+		setLabels(400, 268, labels[2]);//level3
 		setLabels(550, 210, labels[3]);//level4
-		setLabels(698, 144, labels[4]);//level5
+		setLabels(700, 144, labels[4]);//level5
 		// DiscountVO(String time1,String time2,double start_money,double end_money,double discount_money,int level)
 		//VoucherVO(String start_time,String end_time,double start_money,double end_money,double money,int level)
 		//ProGiftVO(CommodityVO commodity,int number,String start_time,String end_time,double start_money,int level)
@@ -57,8 +57,8 @@ public class CheckProPanel extends FatherPanel{
 				DiscountVO dis = discount.get(j);
 				int level = dis.level-1;
 				labels[level][0].setText(dis.start_money+"");
-				labels[level][1].setText(dis.end_money+"");
-				labels[level][2].setText(dis.discount_money+"");
+				labels[level][1].setText(dis.discount_money+"");
+				labels[level][2].setText(dis.end_money+"");
 			}
 		}
 		if(voucher != null){
@@ -66,8 +66,8 @@ public class CheckProPanel extends FatherPanel{
 				VoucherVO vou = voucher.get(j);
 				int level = vou.level-1;
 				labels[level][3].setText(vou.start_money+"");
-				labels[level][4].setText(vou.end_money+"");
-				labels[level][5].setText(vou.money+"");
+				labels[level][4].setText(vou.money+"");
+				labels[level][5].setText(vou.end_money+"");
 			}
 		}
 		if(gift != null){
@@ -83,7 +83,7 @@ public class CheckProPanel extends FatherPanel{
 
 		for(int i = 0;i < 5;i++){
 			for(int j = 0;j < 9;j++){
-				labels[i][j].setFont(new FontFactory(12).font);
+				labels[i][j].setFont(new FontFactory(8).font);
 				labels[i][j].setForeground(Color.white);
 				this.add(labels[i][j]);
 			}
@@ -92,15 +92,15 @@ public class CheckProPanel extends FatherPanel{
 	}
 	
 	private void setLabels(int x,int y,MyLabel[] la){
-		la[0] = new MyLabel(x, y, 21, 14);
-		la[1] = new MyLabel(x+42, y, 21, 14);
+		la[0] = new MyLabel(x, y, 30, 14);
+		la[1] = new MyLabel(x+50, y, 30, 14);
 		la[2] = new MyLabel(x+14, y+30, 40, 14);
-		la[3] = new MyLabel(x, y+55, 21, 14);
-		la[4] = new MyLabel(x+42,y+55, 21, 14);
+		la[3] = new MyLabel(x, y+55, 30, 14);
+		la[4] = new MyLabel(x+50,y+55, 30, 14);
 		la[5] = new MyLabel(x+14, y+93, 40, 14);
-		la[6] = new MyLabel(x+42, y+111, 36, 14);
-		la[7] = new MyLabel(x+14, y+133, 40, 14);
-		la[8] = new MyLabel(x+14, y+155, 40, 14);
+		la[6] = new MyLabel(x+42, y+120, 36, 14);
+		la[7] = new MyLabel(x+14, y+143, 40, 14);
+		la[8] = new MyLabel(x+14, y+167, 40, 14);
 	}
 	
 }

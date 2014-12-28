@@ -144,7 +144,7 @@ public class ManagerUIController {
 		String images_stop_pro[] = new String[]{"Image/Manager/button/proManage/chePro_stop.png",
 				"Image/Manager/button/proManage/decPro_stop.png"};
 		String images_press_on_pro[] = new String[]{"Image/Manager/button/proManage/chePro_press_on.png",
-				"Image/Manager/button/proManage/chePro_press_on.png"};
+				"Image/Manager/button/proManage/decPro_press_on.png"};
 		
 		for(int i = 0;i < proButtons.length;i++){
 			proButtons[i] = new MyButton(images_ori_pro[i], secondX, secondY+i*inter,

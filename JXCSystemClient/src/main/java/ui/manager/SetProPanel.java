@@ -92,6 +92,9 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
 			frame.remove(this);
 			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+		}else if (!checkNumber(beginMoney,upperLimit,discountMoney)) {
+			frame.remove(this);
+			resController.failed("金额输入存在错误！！", failedAddress);
 		}else{
 			dis = new DiscountVO(timeBegin,timeEnd,Double.parseDouble(beginMoney),
 						Double.parseDouble(upperLimit),Double.parseDouble(discountMoney),level);
@@ -101,6 +104,28 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 			uiController.confirmProDis(dis);
 		}
 		
+	}
+	
+	private boolean checkNumber(String begin,String end,String discount){
+		
+		try {
+			double beginMoney = Double.parseDouble(begin);
+			double endMoney = Double.parseDouble(end);
+			double disMoney = Double.parseDouble(discount);
+			
+			if(beginMoney > endMoney){
+				return false;
+			}else if(disMoney > beginMoney){
+				return false;
+			}else if (disMoney > endMoney) {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		
+	
+		return true;
 	}
 	private void voucher(){
 		String timeBegin = time[0].getText();
@@ -116,7 +141,11 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 		}else if((new CheckTimeFormat(timeBegin).check() && new CheckTimeFormat(timeEnd).check()) == false ){
 			frame.remove(this);
 			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
-		}else{
+		}else if (!checkNumber(beginMoney,upperLimit,voucherMoney)) {
+			frame.remove(this);
+			resController.failed("金额输入存在错误！！", failedAddress);
+		}
+		else{
 			vou = new VoucherVO(timeBegin,timeEnd,Double.parseDouble(beginMoney),
 					Double.parseDouble(upperLimit),Double.parseDouble(voucherMoney),level);
 		
@@ -141,9 +170,9 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 		}else{
 
-			String info[] = commodityInfo.split("+");
+			String info[] = commodityInfo.split(";");
 			CommodityVO commodityVO = commodityblService.searchAccurateCommodity_up(info[0],info[1]);
-			gift = new ProGiftVO(commodityVO,Integer.parseInt(num),timeBegin,timeEnd,Integer.parseInt(beginMoney),level);
+			gift = new ProGiftVO(commodityVO,Integer.parseInt(num),timeBegin,timeEnd,Double.parseDouble(beginMoney),level);
 
 			uiController.setTempPanel(SetProPanel.this);
 			frame.remove(SetProPanel.this);
@@ -194,16 +223,16 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private void setGiftText() {
 //		String [] rolesList = new String[]{"a","b"};
 //		commodity = new MyComboBox(rolesList,471, 443, 156, 27);
-		number = new MyTextFieldTrans(471,476, 156, 27);
+		number = new MyTextFieldTrans(471,487, 156, 27);
 		price = new MyTextFieldTrans(509, 408,130 ,27);
 //		String [] rolesList = new String[]{"a","b"};
 		ArrayList<CommodityVO> accVOArray = commodityblService.getAllCommodity_up();
 		String[] rolesList = new String[accVOArray.size()];
 		for (int i = 0; i < accVOArray.size(); i++) {
-			rolesList[i] = accVOArray.get(i).name +"+"+accVOArray.get(i).type;
+			rolesList[i] = accVOArray.get(i).name +";"+accVOArray.get(i).type;
 		}
 		commodity = new MyComboBox(rolesList,471, 442, 156, 27);
-		number = new MyTextFieldTrans(471,463, 156, 32);
+		number = new MyTextFieldTrans(471,485, 156, 32);
 		
 		price.setFont(new FontFactory(18).font);
 		number.setFont(new FontFactory(18).font);
@@ -220,7 +249,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	}
 	private void setVoucherText() {
 		for(int i = 0;i < voucher.length;i++){
-			voucher[i] = new MyTextFieldTrans(551,277+37*i,76,27);
+			voucher[i] = new MyTextFieldTrans(551,277+37*i,85,27);
 			voucher[i].setFont(new FontFactory(18).font);
 			voucher[i].setForeground(new ColorFactory().greyFont);
 			this.add(voucher[i]);

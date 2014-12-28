@@ -150,15 +150,17 @@ public class ProDetailPanel extends FatherPanel{
 	}
 	
 	protected void setGiftLabels() {
-		MyLabel commodity = new MyLabel(471, 443, 156, 27);
-		MyLabel number = new MyLabel(471, 476, 156, 27);
-		MyLabel price = new MyLabel(509, 408,130 ,27);
+		MyLabel commodity = new MyLabel(471, 447, 156, 27);
+		MyLabel number = new MyLabel(471, 485, 156, 27);
+		MyLabel price = new MyLabel(509, 413,130 ,27);
 		
-		commodity.setText(gift.commodity.name);
+		price.setText(gift.start_money+"");
+		commodity.setText(gift.commodity.name+";"+gift.commodity.type);
 		number.setText(String.valueOf(gift.number));
 		
 		this.add(commodity);
 		this.add(number);
+		this.add(price);
 	}
 	
 	protected void setVoucherLabel() {
