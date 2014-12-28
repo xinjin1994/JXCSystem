@@ -237,7 +237,7 @@ public class AccountPanel extends FatherPanel{
 		String type = "";
 		switch (bill_node) {
 		case 6:
-			type = "报溢报损单"
+			type = "报溢报损单";
 			break;
 			
 		case 7:
