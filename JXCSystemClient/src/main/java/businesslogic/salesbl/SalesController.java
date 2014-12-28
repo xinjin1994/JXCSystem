@@ -343,7 +343,17 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		return sale.getVoucher();
 	}
-
+	
+	public CommodityVO getProGift_up(int money, int level) {
+		// TODO Auto-generated method stub
+		CommodityPO po = sale.getProGift(money, level);
+		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
+				po.getType(), po.getNumber(), po.getIn_price(),
+				po.getOut_price(), po.getRecent_in_price(),
+				po.getRecent_out_price(), po.warn);
+		return vo;
+	}
+	
 	public String getOtherPromotion_up() {
 		// TODO Auto-generated method stub
 		return sale.getOtherPromotion();
@@ -378,7 +388,7 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		return sale.getExport_ReturnMaxNumber(old_note);
 	}
-
+//销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
 	public int getClerkDiscount_up() {
 		// TODO Auto-generated method stub
 		return sale.getClerkDiscount();
@@ -634,15 +644,7 @@ public class SalesController implements SalesblService {
 		return vo;
 	}
 
-	public CommodityVO getProGift_up(int money, int level) {
-		// TODO Auto-generated method stub
-		CommodityPO po = sale.getProGift(money, level);
-		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
-				po.getType(), po.getNumber(), po.getIn_price(),
-				po.getOut_price(), po.getRecent_in_price(),
-				po.getRecent_out_price(), po.warn);
-		return vo;
-	}
+
 
 	public CommodityVO getCommodity_up(String name, String type) {
 		// TODO Auto-generated method stub

@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import po.AccountPO;
 import po.CommodityPO;
 import po.CustomerPO;
+import po.DiscountPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
 import po.PaymentPO;
+import po.ProGiftPO;
 import po.ReceiptPO;
+import po.VoucherPO;
 import vo.CommodityVO;
 import vo.CustomerVO;
 import vo.bill.CommodityListVO;
@@ -30,7 +33,7 @@ import dataservice.salesdataservice.SalesDataService;
 
 public class Sales implements businesslogic.accountbl.SalesInfo,
 		businesslogic.invoicebl.SalesInfo, businesslogic.financialbl.SalesInfo,
-		businesslogic.commoditybl.SalesInfo {
+		businesslogic.commoditybl.SalesInfo,businesslogic.promotionbl.SalesInfo {
 
 	public SalesDataService sale = new SaleDataService_Stub();
 	public InvoiceInfo invoice = new Invoice();
@@ -608,12 +611,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+////////////////////////////////////
 	public String getOtherPromotion() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+////////////////////////////////////////
 	public int getClerkDiscount() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -702,6 +705,21 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public String passPayment(PaymentPO paymentPO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public DiscountPO getDiscount(int level) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ProGiftPO getProGift(int level) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public VoucherPO getVoucher(int level) {
 		// TODO Auto-generated method stub
 		return null;
 	}
