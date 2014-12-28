@@ -110,13 +110,13 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 			acc1 = account.findAccount(vo1.name);
 			
 			if(acc1==null){
-				return 1;
+				return 2;
 			}
 			
 			acc2=account.findAccount(vo2.name);
 			
 			if(acc2!=null){
-				return 2;
+				return 1;
 			}
 	
 			acc2 = new AccountPO(vo2.name, acc1.getMoney());

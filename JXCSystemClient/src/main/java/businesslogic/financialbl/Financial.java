@@ -51,13 +51,13 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 			
 			for(i=0;i<fin.size();i++){
 				
-				if((time1==null||fin.get(i).getTime().compareTo(time1)>=0)&&
-					(time2==null||fin.get(i).getTime().compareTo(time2)<=0)&&
-					(good_name==null||fin.get(i).getCommodity().equals(good_name))&&
-					(good_type==null||fin.get(i).getCommodity().getType().equals(good_type))&&
-					(customer_name==null||fin.get(i).getCustomer().getName().equals(customer_name))&&
-					(clerk==null||fin.get(i).getClerk().equals(clerk))&&
-					(wareHouse==null||fin.get(i).getWareHouse()==wareHouse)){
+				if((time1==null||time1.equals("")||fin.get(i).getTime().compareTo(time1)>=0)&&
+					(time2==null||time2.equals("")||fin.get(i).getTime().compareTo(time2)<=0)&&
+					(good_name==null||good_name.equals("")||fin.get(i).getCommodity().equals(good_name))&&
+					(good_type==null||good_type.equals("")||fin.get(i).getCommodity().getType().equals(good_type))&&
+					(customer_name==null||customer_name.equals("")||fin.get(i).getCustomer().getName().equals(customer_name))&&
+					(clerk==null||clerk.equals("")||fin.get(i).getClerk().equals(clerk))&&
+					(wareHouse==null||wareHouse.equals("")||fin.get(i).getWareHouse()==wareHouse)){
 					
 					array.add(fin.get(i));
 				}
@@ -82,7 +82,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 			
 			for(int i=0;i<array.size();i++){
 				
-				if(!((time1==null||fin.get(i).getTime().compareTo(time1)>=0)&&(time2==null||fin.get(i).getTime().compareTo(time2)<=0))){
+				if(!((time1==null||time1.equals("")||fin.get(i).getTime().compareTo(time1)>=0)&&(time2==null||time2.equals("")||fin.get(i).getTime().compareTo(time2)<=0))){
 //						&&
 //						(note_type==null||fin.get(i).getDocType().equals(note_type))&&
 //						(good_type==null||fin.get(i).getCommodity().getType().equals(good_type))&&
@@ -95,72 +95,72 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 				
 				switch(fin.get(i).getDocType()){
 					case 1: SendGiftPO po1=(SendGiftPO) fin.get(i);
-							if(customer_name==null||po1.getCustomer().equals(customer_name)){
-								if(clerk==null){
-									if(warehouse==null){
+							if(customer_name==null||customer_name.equals("")||po1.getCustomer().equals(customer_name)){
+								if(clerk==null||clerk.equals("")){
+									if(warehouse==null||warehouse.equals("")){
 										array.add(fin.get(i));
 									}
 								}
 							}
 							break;
 					case 2: ImportPO po2=(ImportPO) fin.get(i);
-							if(customer_name==null||po2.getCustomer().getName().equals(customer_name)){
-								if(clerk==null||po2.getClerk().equals(clerk)){
-									if(warehouse==null||po2.getWareHouse().equals(warehouse)){
+							if(customer_name==null||customer_name.equals("")||po2.getCustomer().getName().equals(customer_name)){
+								if(clerk==null||clerk.equals("")||po2.getClerk().equals(clerk)){
+									if(warehouse==null||warehouse.equals("")||po2.getWareHouse().equals(warehouse)){
 										array.add(fin.get(i));
 									}
 								}
 							}
 							break;
 					case 3: Import_ReturnPO po3=(Import_ReturnPO) fin.get(i);
-							if(customer_name==null||po3.getCustomer().getName().equals(customer_name)){
-								if(clerk==null||po3.getClerk().equals(clerk)){
-									if(warehouse==null||po3.getWareHouse().equals(warehouse)){
+							if(customer_name==null||customer_name.equals("")||po3.getCustomer().getName().equals(customer_name)){
+								if(clerk==null||clerk.equals("")||po3.getClerk().equals(clerk)){
+									if(warehouse==null||warehouse.equals("")||po3.getWareHouse().equals(warehouse)){
 										array.add(fin.get(i));
 									}
 								}
 							}
 							break;
 					case 4: ExportPO po4=(ExportPO) fin.get(i);
-							if(customer_name==null||po4.getCustomer().getName().equals(customer_name)){
-								if(clerk==null||po4.getClerk().equals(clerk)){
-									if(warehouse==null||po4.getWareHouse().equals(warehouse)){
+							if(customer_name==null||customer_name.equals("")||po4.getCustomer().getName().equals(customer_name)){
+								if(clerk==null||clerk.equals("")||po4.getClerk().equals(clerk)){
+									if(warehouse==null||warehouse.equals("")||po4.getWareHouse().equals(warehouse)){
 										array.add(fin.get(i));
 									}
 								}
 							}
 							break;
 					case 5: Export_ReturnPO po5=(Export_ReturnPO) fin.get(i);
-							if(customer_name==null||po5.getCustomer().getName().equals(customer_name)){
-								if(clerk==null||po5.getClerk().equals(clerk)){
-									if(warehouse==null||po5.getWareHouse().equals(warehouse)){
+							if(customer_name==null||customer_name.equals("")||po5.getCustomer().getName().equals(customer_name)){
+								if(clerk==null||clerk.equals("")||po5.getClerk().equals(clerk)){
+									if(warehouse==null||warehouse.equals("")||po5.getWareHouse().equals(warehouse)){
 										array.add(fin.get(i));
 									}
 								}
 							}
 							break;
 					case 6: PatchPO po6=(PatchPO) fin.get(i);
-							if(customer_name==null){
-								if(clerk==null){
-									if(warehouse==null){
+							if(customer_name==null||customer_name.equals("")){
+								if(clerk==null||clerk.equals("")){
+									if(warehouse==null||warehouse.equals("")){
 										array.add(fin.get(i));
 									}
 								}
 							}
 							break;
 					case 7: ReceiptPO po7=(ReceiptPO) fin.get(i);
-							if(customer_name==null||po7.getCustomer().getName().equals(customer_name)){
-								if(clerk==null){
-									if(warehouse==null){
+							if(customer_name==null||customer_name.equals("")||po7.getCustomer().getName().equals(customer_name)){
+								if(clerk==null||clerk.equals("")){
+									if(warehouse==null||warehouse.equals("")){
 										array.add(fin.get(i));
 									}
 								}
 							}
 							break;
 					case 8: PaymentPO po8=(PaymentPO) fin.get(i);
-							if(customer_name==null||po8.getItem().get(0).getItemName().equals(customer_name)){
-								if(clerk==null){
-									if(warehouse==null){
+							if(customer_name==null||customer_name.equals("")||po8.getItem().get(0).getItemName().equals(customer_name)){
+								if(clerk==null||clerk.equals("")){
+									if(warehouse==null||warehouse.equals("")){
 										array.add(fin.get(i));
 									}
 								}
@@ -190,8 +190,8 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 			ArrayList<OperatingConditionPO> fin=financial.getOperatingCondition();
 			
 			for(int i=0;i<fin.size();i++){
-				if((time1==null||fin.get(i).getTime().compareTo(time1)>=0)&&
-						(time2==null||fin.get(i).getTime().compareTo(time2)<=0)){
+				if((time1==null||time1.equals("")||fin.get(i).getTime().compareTo(time1)>=0)&&
+						(time2==null||time2.equals("")||fin.get(i).getTime().compareTo(time2)<=0)){
 						
 						array.add(fin.get(i));
 					}
