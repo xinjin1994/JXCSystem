@@ -270,7 +270,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 			accountblService.addDraftReceipt_up(get);
 			frame.remove(this);
 			resController = new ResultPanelController(frame, uiController.getMainPanel());
-			resController.succeeded("保存一条付款草稿单！", "account");
+			resController.succeeded("保存一条收款草稿单！", "account");
 		}
 
 	}
