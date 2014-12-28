@@ -46,6 +46,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 
 	private String failedAddress;
 	private ResultPanelController resController;
+	ArrayList<AllBillVO> billsArray;
 	public AllBillsPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -136,11 +137,8 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 //				isLegal = false;
 //						}
 
-			if(time1.equals("")||time2.equals("")||note_type.equals("")||customer_name.equals("")
-					||clerk.equals("")){
-				frame.remove(this);
-				resController.failed("存在输入为空！", failedAddress);
-			}else if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
+			
+			if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 				frame.remove(this);
 				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
@@ -148,7 +146,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 				ArrayList<String> bills = new ArrayList<String>();
 				try{
 					int warehouse = Integer.parseInt(stock.getText());
-					ArrayList<AllBillVO> billsArray = financialblService.allBill_up(time1, time2, note_type, 
+					billsArray = financialblService.allBill_up(time1, time2, note_type, 
 							customer_name, clerk, String.valueOf(warehouse));
 
 					bills.add("时间;单据编号;单据类型");
@@ -195,10 +193,15 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 					frame.remove(this);
 					if(type.equals("account")){
 						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
-						
+						accountPanel.setExcelButtonAllBill(billsArray);
+						accountController.setMainPanel(accountPanel);
 						
 						setTableA(bills);
 					}else if(type.equals("manager")){
+						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());;
+						managerPanel.setExcelButtonAllBill(billsArray);
+						managerController.setMainPanel(managerPanel);
+						
 						setTableM(bills);
 					}
 				}

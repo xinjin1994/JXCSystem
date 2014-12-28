@@ -22,12 +22,16 @@ import ui.setting.MyFrame;
 import ui.setting.MyTable;
 import ui.setting.SaveTempBills;
 import ui.setting.ThirdPanel;
+import ui.setting.Button.ExcelButton;
 import ui.setting.Button.MyButton;
 import ui.setting.Button.RefreshButton;
 import ui.setting.Button.RemindButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
+import vo.ConditionVO;
+import vo.SalesDetailVO;
 import vo.SystemlogVO;
+import vo.bill.AllBillVO;
 import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogic.systemlogbl.SystemlogController;
@@ -130,6 +134,20 @@ public class ManagerPanel extends FatherPanel{
 		
 	}
 
+	public void setExcelButtonAllBill(ArrayList<AllBillVO> all){
+		ExcelButton excelButton = new ExcelButton(managerThirdPanel, all);
+		managerThirdPanel.repaint();
+	}
+	
+	public void setExcelButtonSaleList(ArrayList<SalesDetailVO> salesDetailVOs){
+		ExcelButton excelButton = new ExcelButton(managerThirdPanel, salesDetailVOs,0);
+		managerThirdPanel.repaint();
+	}
+	public void setExcelButtonOpeCon(ArrayList<ConditionVO> conditionVOs){
+		ExcelButton excelButton = new ExcelButton(managerThirdPanel, conditionVOs,"");
+		managerThirdPanel.repaint();
+	}
+	
 	public void getAccountInfo() {
 		ArrayList <String> info = new ArrayList<String>();
 		info.add("账户名称;账户余额");
