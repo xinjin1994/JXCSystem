@@ -194,6 +194,9 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 
 					frame.remove(this);
 					if(type.equals("account")){
+						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
+						
+						
 						setTableA(bills);
 					}else if(type.equals("manager")){
 						setTableM(bills);

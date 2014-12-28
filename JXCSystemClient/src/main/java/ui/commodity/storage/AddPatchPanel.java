@@ -195,7 +195,7 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 			try{
 				num = Integer.parseInt(number.getText());
 				newPatch = new PatchVO(nameString, typeString,num, id.getText(), time.getText(), operator.getText(),"1");
-				}catch(Exception e){
+				}catch(Exception e1){
 					frame.remove(this);
 					resController.failed("请重新确认您的输入！", failedAddress);
 				}

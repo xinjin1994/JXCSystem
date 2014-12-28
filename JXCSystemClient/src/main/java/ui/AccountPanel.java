@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -44,7 +45,7 @@ public class AccountPanel extends FatherPanel{
 	public ThirdPanel accountThirdPanel;
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage,saveCheck,systemLog;
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,saveCheck,systemLog};
-	private MyButton refresh;
+	private MyButton refresh,output;
 	private MyFrame frame;
 	
 	private MyTable showTable; 
@@ -145,6 +146,14 @@ public class AccountPanel extends FatherPanel{
 		accountThirdPanel.add(showTable.tablePanel);
 		accountThirdPanel.repaint();
 		this.repaint();
+	}
+	
+	public void setExcelButton(){
+//		output = new MyButton(image, x, y, stopImage, press_onImage)
+		JButton output = new JButton("导出");
+		output.setBounds(290,450,50,50);
+		accountThirdPanel.add(output);
+		accountThirdPanel.repaint();
 	}
 	
 	/**
