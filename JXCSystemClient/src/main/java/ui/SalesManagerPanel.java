@@ -110,12 +110,17 @@ public class SalesManagerPanel extends FatherPanel {
 	public void setCustomer() {
 		ArrayList<CustomerVO> cusVO = salesblService.getAllCustomer_up();
 		String classification = "进货商";
+		//false代表进货商，true代表销售商
 		ArrayList<String> cusStr = new ArrayList<String>();
 		cusStr.add("编号;分类;级别;姓名;电话;地址;邮编;电子邮箱;应收额度;应收;应付;业务员");
 		for (int i = 0; i < cusVO.size(); i++) {
 			CustomerVO customerVO = cusVO.get(i);
-			if (customerVO.classification) {
+			if (customerVO.classification == true) {
+				System.out.println(customerVO.cusName+" "+customerVO.classification);
 				classification = "销售商";
+			} else{
+				System.out.println(customerVO.cusName+" "+customerVO.classification);
+				classification = "进货商";
 			}
 			String item = customerVO.id + ";" + classification + ";" + customerVO.level + ";" + customerVO.cusName
 					+ ";" + customerVO.tel + ";" + customerVO.address + ";" + customerVO.zipCode + ";"

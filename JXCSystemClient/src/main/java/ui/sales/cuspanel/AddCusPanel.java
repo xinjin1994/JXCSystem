@@ -126,6 +126,7 @@ public class AddCusPanel extends FatherPanel {
 			if (e.getSource() == secondCusBack) {
 				salesUIController.backPanel(AddCusPanel.this);
 			}else if(e.getSource() == supplierButton){
+				//false代表进货商，true代表销售商
 				supplierButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供应商_press_on_03.png"));
 				sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/销售商_ori.png"));
 				classification = false;
@@ -172,6 +173,7 @@ public class AddCusPanel extends FatherPanel {
 				//CustomerVO(String id,boolean classification,int level,String cusName,String tel,String address,String zipCode,String ezipCode,double mostOwe,double shouldGet,double shouldPay,String person){
 				//编号、分类（供应商、销售商）、级别（五级，一级普通用户，五级VIP客户）、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员
 		//false代表供应商，true代表销售商
+				//false代表进货商，true代表销售商
 //				String ID = idField.getText();
 				String name = cusName.getText();
 				String tel = cusTel.getText();
