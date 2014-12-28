@@ -33,9 +33,10 @@ public class SystemlogController implements SystemlogblService{
 		return message;
 	}
 
-	public int exportExcel_up() {
+	public int exportExcel_up(ArrayList<SystemlogVO> system) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		return systemlog.outputSystemlogExcel(system);
 	}
 
 }

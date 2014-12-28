@@ -10,7 +10,7 @@ public interface SystemlogblService {
 	public ArrayList<SystemlogVO> show_up();
 	
 	//导出Excel，未实现
-	public int exportExcel_up();
+	public int exportExcel_up(ArrayList<SystemlogVO> sys);
 
 	//添加系统日志
 	public int add_up(String word);
