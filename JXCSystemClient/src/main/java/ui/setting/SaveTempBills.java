@@ -53,6 +53,7 @@ public class SaveTempBills {
 	 * @param loc
 	 */
 	public void getInvoiceInfo(int loc){
+		
 		temp = invoiceBills.get(loc);
 		bill = invoiceblService.searchNote_up(temp.note);
 		checkType(temp.bill_note);
@@ -99,8 +100,13 @@ public class SaveTempBills {
 			}
 			break;
 		case 6:
-			frame.setPanel(new PatchDetailPanel(frame, "Image/Commodity/stockManage/patchDetail.jpg",
-					uiController, (PatchVO)(bill)));
+			try {
+				frame.setPanel(new PatchDetailPanel(frame, "Image/Commodity/stockManage/patchDetail.jpg",
+						uiController, (PatchVO)(bill)));
+			} catch (Exception e) {
+				UIController.commodityAllUIController.patchDraft((PatchVO)bill);
+			}
+			
 			break;
 		case 7:
 			try {
@@ -116,6 +122,8 @@ public class SaveTempBills {
 				frame.setPanel(new ConfirmPaymentPanel(frame, "Image/Account/paymentDetail.jpg", uiController, 
 						(PayVO)(bill)));
 			} catch (Exception e) {
+				
+				System.out.println(invoiceBills+"bill");
 				UIController.accountAllUIController.addPaymentDraft((PayVO)bill);
 			}
 		

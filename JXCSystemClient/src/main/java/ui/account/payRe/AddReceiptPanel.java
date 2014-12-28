@@ -11,12 +11,14 @@ import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
+import ui.setting.Button.SaveButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldTrans;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import vo.CustomerVO;
 import vo.bill.GetVO;
+import vo.bill.PayVO;
 import vo.bill.TransferListVO;
 import businesslogic.accountbl.AccountController;
 import businesslogic.salesbl.SalesController;
@@ -31,22 +33,26 @@ import businesslogicservice.salesblservice.SalesblService;
  */
 public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	AccountAllUIController uiController;
-	MyButton forwardButton;
+	MyButton forwardButton,saveButton;
 	MyLabel idLabel, balance, operator, total,failLabel;
 	MyTextFieldTrans ps, agent;
 	MyTextFieldTrans money;
 	MyComboBox customer, account;
 	AccountblService accountblService;
 	SalesblService salesblService;
-	double turnMoney;
+	double turnMoney,balanceCash;
 	GetVO newReceipt;	
-	String remark, person, id, operate,cusName;
+	String remark, person, id, operate,cusName,accName;
 	
+	TransferListVO transferListVO;
 	private ResultPanelController resController;
 	private String failedAddress = "acc/finManage/rec";
 	
+	MyFrame frame;
 	public AddReceiptPanel(MyFrame frame, String url, AccountAllUIController uiController) {
 		super(frame, url, uiController);
+		
+		this.frame = frame;
 		this.uiController = uiController;
 		this.repaint();
 		
@@ -63,6 +69,24 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		setTypeIn();
 	}
 
+	public AddReceiptPanel(MyFrame frame, String string,
+			AccountAllUIController accountAllUIController, GetVO draft) {
+		this(frame, string, accountAllUIController);
+		setInfo(draft);
+	}
+
+	private void setInfo(GetVO get) {
+		idLabel.setText(get.note);
+		agent.setText(person);
+		total.setText(get.transferList.transferValue+"");
+		operator.setText(get.operator);
+		ps.setText(newReceipt.transferList.remark);
+		
+		customer.setSelectedItem(get.cusName);
+		account.setSelectedItem(get.transferList.bankAccount);
+		balance.setText(accountblService.searchAccurateAccount_up(get.transferList.bankAccount).balance+"");
+		money.setText(get.transferList.transferValue+"");
+	}
 	/**
 	 * account的comboBox account从下层获得
 	 */
@@ -137,6 +161,11 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	}
 
 	private void setForward() {
+		SaveButton save = new SaveButton(this,736, 493);
+		saveButton = save.saveButton;
+		this.add(saveButton);
+		saveButton.addActionListener(this);
+		
 		ForwardButton forward = new ForwardButton(737, 540);
 		forwardButton = forward.forward_black;
 
@@ -165,6 +194,19 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		this.add(total);
 		this.repaint();
 	}
+	
+	private void setNewReceipt(){
+		remark = ps.getText();// 备注
+		try {
+			turnMoney = Double.parseDouble(money.getText());// 转账金额
+		} catch (Exception e) {
+			turnMoney = 0.0;
+		}
+	
+		transferListVO = new TransferListVO(accName, turnMoney, remark);
+		newReceipt = new GetVO(id, cusName,transferListVO);
+		setTotal();
+	}
 
 	/**
 	 * 实现根据输入的名称寻找余额的动态监听
@@ -186,27 +228,25 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 				resController.failed("存在输入为空！", failedAddress);
 			}else{
 				try{
-					turnMoney = Double.parseDouble(money.getText());// 转账金额
-					String accName = account.getSelectedItem().toString();// 银行账户
-					cusName = customer.getSelectedItem().toString();// 客户姓名
-					double balance = accountblService.searchAccurateAccount_up(accName).balance;// 余额
-					
-					
-					// TransferListVO(String bankAccount,double transferValue,String
-					// remark){
-					// 银行账户，转账金额，备注
-					//			String accName = "ss";
-					//			String cusName = "121";
-					//			double balance = 20;
-					setBalanceLabel(balance);
-					TransferListVO transferListVO = new TransferListVO(accName, turnMoney, remark);
-					newReceipt = new GetVO(id, cusName,transferListVO);
-//					total.setText(accountblService.calTotalMoney_up(newReceipt) + "");
-								setTotal();
+					setNewReceipt();
+//					turnMoney = Double.parseDouble(money.getText());// 转账金额
+//					cusName = customer.getSelectedItem().toString();// 客户姓名
+//					
+//					
+//					// TransferListVO(String bankAccount,double transferValue,String
+//					// remark){
+//					// 银行账户，转账金额，备注
+//					//			String accName = "ss";
+//					//			String cusName = "121";
+//					//			double balance = 20;
+//					transferListVO = new TransferListVO(accName, turnMoney, remark);
+//					newReceipt = new GetVO(id, cusName,transferListVO);
+////					total.setText(accountblService.calTotalMoney_up(newReceipt) + "");
+//								setTotal();
 
 					uiController.setTempPanel(this);
 					frame.remove(this);
-					uiController.confirmReceipt(newReceipt,person,operate,accountblService.calTotalMoney_up(newReceipt),balance);
+					uiController.confirmReceipt(newReceipt,person,operate,accountblService.calTotalMoney_up(newReceipt),balanceCash);
 				}catch(Exception e2){
 					frame.remove(this);
 					resController.failed("存在输入错误！",failedAddress);
@@ -215,14 +255,22 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 			} 
 
 		}else if (e.getSource() == account) {
-			String accName = account.getSelectedItem().toString();
+			accName = account.getSelectedItem().toString();
 			// int balance = 10;//根据accName到下层寻找的余额
-			double balance = accountblService.searchAccurateAccount_up(accName).balance;// 余额
-			setBalanceLabel(balance);
+			balanceCash = accountblService.searchAccurateAccount_up(accName).balance;// 余额
+			setBalanceLabel(balanceCash);
 		}else if (e.getSource() == customer) {
+			cusName = customer.getSelectedItem().toString();
 			person = salesblService.searchExactCustomer_up(customer.getSelectedItem().toString()).person;
 			agent.setText(person);
 			AddReceiptPanel.this.repaint();
+		}else if(e.getSource() == saveButton){
+			setNewReceipt();
+			GetVO get = new GetVO(id, cusName, operate, transferListVO, "", "");
+			accountblService.addDraftReceipt_up(get);
+			frame.remove(this);
+			resController = new ResultPanelController(frame, uiController.getMainPanel());
+			resController.succeeded("保存一条付款草稿单！", "account");
 		}
 
 	}
