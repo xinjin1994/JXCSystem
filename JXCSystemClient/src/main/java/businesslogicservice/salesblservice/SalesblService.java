@@ -78,13 +78,13 @@ public interface SalesblService {
 	public int getClerkDiscount_up();
 	
 	// 查看获得的折扣促销
-	public int getDiscount_up(int money, int level);
+	public int getDiscount_up(double money, int level);
 	
 	// 查看获得的代金券促销
-	public int getVoucher_up(int money, int level);
+	public int getVoucher_up(double money, int level);
 	
 	// 查看获得的赠品促销
-	public CommodityVO getProGift_up(int money, int level);
+	public CommodityVO getProGift_up(double money, int level);
 	
 	// 获得所有供货商信息
 	public ArrayList<CustomerVO> getAllImportCustomer_up();

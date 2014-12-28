@@ -96,7 +96,17 @@ public class SalesInPanel extends ImInPanel{
 	}
 	public void getTotalPrice() {
 		try{
-			totalPriceText = Double.parseDouble(goodsPrice.getText()) * num-Double.parseDouble(discount.getText())-Double.parseDouble(voucher.getText());
+			if(Double.parseDouble(voucher.getText()) >  Double.parseDouble(goodsPrice.getText()) * num){
+				totalPriceText = 0;
+			}else{
+			totalPriceText = Double.parseDouble(goodsPrice.getText()) * num-Double.parseDouble(discount.getText())-
+					Double.parseDouble(voucher.getText())-salesblService.getDiscount_up( Double.parseDouble(goodsPrice.getText()) * num, 
+							salesblService.searchExactCustomer_up(supplier.getText()).level
+							);
+			if(totalPriceText < 0){
+				totalPriceText = 0;
+			}
+			}
 			goodsTotal.setText(totalPriceText + "");
 			this.add(goodsTotal);
 		}catch(Exception e2){
