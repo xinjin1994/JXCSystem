@@ -22,6 +22,7 @@ import vo.bill.ExportMenuVO;
 import vo.bill.ImportMenuVO;
 import businesslogic.commoditybl.Commodity;
 import businesslogic.invoicebl.Invoice;
+import businesslogic.promotionbl.Promotion;
 import businesslogic.systemlogbl.Systemlog;
 import businesslogicservice.salesblservice.SalesblService;
 import data.salesdata.SaleDataService_Stub;
@@ -33,12 +34,13 @@ import dataservice.salesdataservice.SalesDataService;
 
 public class Sales implements businesslogic.accountbl.SalesInfo,
 		businesslogic.invoicebl.SalesInfo, businesslogic.financialbl.SalesInfo,
-		businesslogic.commoditybl.SalesInfo,businesslogic.promotionbl.SalesInfo {
+		businesslogic.commoditybl.SalesInfo {
 
 	public SalesDataService sale = new SaleDataService_Stub();
 	public InvoiceInfo invoice = new Invoice();
 	SystemlogInfo systemlog = new Systemlog();
 	CommodityInfo commodity = new Commodity();
+	PromotionInfo promotion=new Promotion();
 
 	public SalesDataService getSale() {
 		return sale;
@@ -598,19 +600,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public CommodityPO getProGift(int money, int level) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getDiscount() {
-		return 0;
-	}
-
-	public int getVoucher() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 ////////////////////////////////////
 	public String getOtherPromotion() {
 		// TODO Auto-generated method stub
@@ -709,19 +698,20 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public DiscountPO getDiscount(int level) {
+	public int getDiscount(int money,int level) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public CommodityPO getProGift(int money,int level) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ProGiftPO getProGift(int level) {
+	public int getVoucher(int money,int level) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
-
-	public VoucherPO getVoucher(int level) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

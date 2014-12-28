@@ -11,6 +11,7 @@ import po.Export_ReturnPO;
 import po.ImportGoodPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
+import po.ProGiftPO;
 import po.UserPO;
 import vo.CommodityVO;
 import vo.CustomerVO;
@@ -336,12 +337,12 @@ public class SalesController implements SalesblService {
 	// ///////////////////////////////////////////////////////
 	public int getDiscount_up(int money, int level) {
 		// TODO Auto-generated method stub
-		return sale.getDiscount();
+		return sale.getDiscount(money,level);
 	}
 
 	public int getVoucher_up(int money, int level) {
 		// TODO Auto-generated method stub
-		return sale.getVoucher();
+		return sale.getVoucher(money,level);
 	}
 	
 	public CommodityVO getProGift_up(int money, int level) {

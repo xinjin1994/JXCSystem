@@ -3,6 +3,7 @@ package businesslogic.promotionbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import businesslogic.salesbl.PromotionInfo;
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
@@ -12,7 +13,7 @@ import vo.promotion.DiscountVO;
 import data.promotiondata.PromotionDataService_Stub;
 import dataservice.promotiondataservice.PromotionDataService;
 
-public class Promotion {
+public class Promotion implements businesslogic.salesbl.PromotionInfo {
 	
 	public PromotionDataService promotion=new PromotionDataService_Stub(); 
 	public SystemlogInfo systemlog;
