@@ -618,7 +618,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 ////////////////////////////////////////
 	public int getClerkDiscount() {
 		// TODO Auto-generated method stub
-		return 0;
+		if(User.duty==3){
+			
+		}else{
+			
+		}
 	}
 
 	public int getImport_ReturnMaxNumber(String old_note) {
@@ -710,7 +714,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int getDiscount(int money,int level) {
 		// TODO Auto-generated method stub
-		return 0;
+		promotion.getDiscount(level);
 	}
 
 	public CommodityPO getProGift(int money,int level) {
