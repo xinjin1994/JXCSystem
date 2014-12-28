@@ -100,7 +100,7 @@ public class SalesController implements SalesblService {
 		importGood.add(importGoodPO);
 		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
 		Import_ReturnPO imp = new Import_ReturnPO(customerPO, importGood,
-				importMenuVO.remark, customerPO.clerk, User.operator,
+				importMenuVO.remark, importMenuVO.person, User.operator,
 				importMenuVO.warehouse, importMenuVO.total, sale
 						.searchImportNote(importMenuVO.supplier).getNote());
 		imp.setNote(importMenuVO.note);
@@ -238,7 +238,7 @@ public class SalesController implements SalesblService {
 		ArrayList<ImportGoodPO> importGoodPO = new ArrayList<ImportGoodPO>();
 		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
 		ImportPO importPO = new ImportPO(customerPO, importGoodPO,
-				importMenuVO.remark, customerPO.clerk, User.operator,
+				importMenuVO.remark, importMenuVO.person, User.operator,
 				importMenuVO.warehouse, importMenuVO.total);
 		importPO.setCondition(0);
 		importPO.setNote(importMenuVO.note);
@@ -259,7 +259,7 @@ public class SalesController implements SalesblService {
 		ArrayList<ExportGoodPO> exportGoodPO = new ArrayList<ExportGoodPO>();
 		CustomerPO customerPO = sale.getCustomer(exportMenuVO.cusName, "id");
 		Export_ReturnPO export_returnPO = new Export_ReturnPO(customerPO,
-				exportGoodPO, exportMenuVO.remark, customerPO.clerk,
+				exportGoodPO, exportMenuVO.remark, exportMenuVO.salesMan,
 				User.operator, exportMenuVO.warehouse,
 				exportMenuVO.beforeValue, exportMenuVO.afterValue,
 				exportMenuVO.discount, exportMenuVO.voucherPrice, sale
@@ -283,7 +283,7 @@ public class SalesController implements SalesblService {
 		ArrayList<ImportGoodPO> importGoodPO = new ArrayList<ImportGoodPO>();
 		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
 		Import_ReturnPO import_returnPO = new Import_ReturnPO(customerPO,
-				importGoodPO, importMenuVO.remark, customerPO.clerk,
+				importGoodPO, importMenuVO.remark, importMenuVO.person,
 				User.operator, importMenuVO.warehouse, importMenuVO.total, sale
 						.searchExportNote(importMenuVO.supplier).getNote());
 		import_returnPO.setCondition(0);
@@ -305,7 +305,7 @@ public class SalesController implements SalesblService {
 		ArrayList<ExportGoodPO> exportGoodPO = new ArrayList<ExportGoodPO>();
 		CustomerPO customerPO = sale.getCustomer(exportMenuVO.cusName, "id");
 		ExportPO exportPO = new ExportPO(customerPO, exportGoodPO,
-				exportMenuVO.remark, customerPO.clerk, User.operator,
+				exportMenuVO.remark, exportMenuVO.salesMan, User.operator,
 				exportMenuVO.warehouse, exportMenuVO.beforeValue,
 				exportMenuVO.afterValue, exportMenuVO.discount,
 				exportMenuVO.voucherPrice);
@@ -337,19 +337,19 @@ public class SalesController implements SalesblService {
 	// ///////////////////////////////////////////////////////
 	public double getDiscount_up(int money, int level) {
 		// TODO Auto-generated method stub
-		return sale.getDiscount(money,level);
+		return sale.getDiscount(money, level);
 	}
 
 	public double getVoucher_up(int money, int level) {
 		// TODO Auto-generated method stub
-		return sale.getVoucher(money,level);
+		return sale.getVoucher(money, level);
 	}
-	
+
 	public ProGiftPO getProGift_up(int money, int level) {
 		// TODO Auto-generated method stub
 		return sale.getProGift(money, level);
 	}
-	
+
 	public String getOtherPromotion_up() {
 		// TODO Auto-generated method stub
 		return sale.getOtherPromotion();
@@ -384,7 +384,8 @@ public class SalesController implements SalesblService {
 		// TODO Auto-generated method stub
 		return sale.getExport_ReturnMaxNumber(old_note);
 	}
-//销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
+
+	// 销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
 	public double getClerkDiscount_up() {
 		// TODO Auto-generated method stub
 		return sale.getClerkDiscount();
@@ -640,13 +641,11 @@ public class SalesController implements SalesblService {
 		return vo;
 	}
 
-
-
 	public CommodityVO getCommodity_up(String name, String type) {
 		// TODO Auto-generated method stub
-		System.out.println("name:"+name+"  type:"+type);
+		System.out.println("name:" + name + "  type:" + type);
 		CommodityPO po = sale.getCommodity(name, type);
-		System.out.println(po==null);
+		System.out.println(po == null);
 		CommodityVO vo = new CommodityVO(po.getNote(), po.getName(),
 				po.getType(), po.getNumber(), po.getIn_price(),
 				po.getOut_price(), po.getRecent_in_price(),
