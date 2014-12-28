@@ -79,7 +79,7 @@ public class SalesController implements SalesblService {
 		importGood.add(importGoodPO);
 		CustomerPO customerPO = sale.getCustomer(importMenuVO.supplier, "id");
 		ImportPO imp = new ImportPO(customerPO, importGood,
-				importMenuVO.remark, customerPO.clerk, User.operator,
+				importMenuVO.remark, importMenuVO.person, User.operator,
 				importMenuVO.warehouse, importMenuVO.total);
 		imp.setNote(importMenuVO.note);
 		int message = sale.addImport(imp);
