@@ -30,8 +30,8 @@ public class Account implements businesslogic.financialbl.AccountInfo,
 	public SystemlogInfo systemlog;
 	
 	
-	public void setInfo(FinancialInfo financial,InvoiceInfo invoice,SalesInfo sales,SystemlogInfo systemlog){
-		this.financial=financial;
+	public void setInfo(FinancialInfo financial2,InvoiceInfo invoice,SalesInfo sales,SystemlogInfo systemlog){
+		this.financial=financial2;
 		this.invoice=invoice;
 		this.sales=sales;
 		this.systemlog=systemlog;

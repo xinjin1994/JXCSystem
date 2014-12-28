@@ -8,12 +8,12 @@ public class SaleListPO implements Serializable{
 	CustomerPO customer;
 	String clerk;//ҵ��Ա
 	String wareHouse;//�ֿ�
-	int price;//销售单价
+	double price;//销售单价
 	int number;//销售数量
-	int totalmoney;//销售总价
+	double totalmoney;//销售总价
 	
 	public SaleListPO(String time,CommodityPO commodity, CustomerPO customer, String clerk,
-			String wareHouse, int price, int number, int totalmoney) {
+			String wareHouse, double price, int number, double totalmoney) {
 		this.time = time;
 		this.commodity=commodity;
 		this.clerk = clerk;
@@ -39,13 +39,13 @@ public class SaleListPO implements Serializable{
 	public CustomerPO getCustomer(){
 		return customer;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	public int getNumber() {
 		return number;
 	}
-	public int getTotalmoney() {
+	public double getTotalmoney() {
 		return totalmoney;
 	}
 	

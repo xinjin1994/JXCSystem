@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import po.AllBillPO;
 import po.CommodityPO;
+import po.CustomerPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
@@ -22,7 +23,8 @@ import vo.bill.AllBillVO;
 import data.financialdata.FinancialDataService_Stub;
 import dataservice.financialdataservice.FinancialDataService;
 
-public class Financial implements businesslogic.accountbl.FinancialInfo{
+public class Financial implements businesslogic.accountbl.FinancialInfo,
+			businesslogic.invoicebl.FinancialInfo{
 	
 	public FinancialDataService financial=new FinancialDataService_Stub();
 	public AccountInfo account;
@@ -412,6 +414,38 @@ public class Financial implements businesslogic.accountbl.FinancialInfo{
 		
 		Excel excel=new Excel();
 		return excel.output(vec, "D://经营情况表");
+	}
+
+
+	public boolean addSaleList(ExportPO po) {
+		// TODO Auto-generated method stub
+		try {
+			
+		SaleListPO sales=new SaleListPO(po.getTime(),po.getExportGoodList().get(0).getCommodity(), po.getCustomer(), po.getClerk(),
+				po.getWareHouse(), po.getExportGoodList().get(0).getPrice(), po.getExportGoodList().get(0).getNumber(), po.getTotalMoneyAfter());
+			return financial.addSaleList(sales);
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+
+	public boolean addSaleList(Export_ReturnPO po) {
+		// TODO Auto-generated method stub
+		try {
+			
+		SaleListPO sales=new SaleListPO(po.getTime(),po.getExportGoodList().get(0).getCommodity(), po.getCustomer(), po.getClerk(),
+				po.getWareHouse(), po.getExportGoodList().get(0).getPrice(), po.getExportGoodList().get(0).getNumber(), po.getTotalMoneyAfter());
+		return financial.addSaleList(sales);
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

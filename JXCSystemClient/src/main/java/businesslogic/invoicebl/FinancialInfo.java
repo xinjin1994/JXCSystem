@@ -1,5 +1,6 @@
 package businesslogic.invoicebl;
 
+import po.AllBillPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
@@ -8,6 +9,12 @@ import po.PatchPO;
 import po.SendGiftPO;
 
 public interface FinancialInfo {
+	
+	public boolean addSaleList(ExportPO po);
+	
+	public boolean addSaleList(Export_ReturnPO po);
+	
+	public boolean addAllBill(AllBillPO po);
 	
 	public boolean addOperatingCondition(ImportPO po);
 
