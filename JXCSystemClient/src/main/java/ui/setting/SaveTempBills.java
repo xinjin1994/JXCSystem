@@ -116,7 +116,7 @@ public class SaveTempBills {
 				frame.setPanel(new ConfirmPaymentPanel(frame, "Image/Account/paymentDetail.jpg", uiController, 
 						(PayVO)(bill)));
 			} catch (Exception e) {
-				UIController.accountAllUIController.addPaymentDraft();
+				UIController.accountAllUIController.addPaymentDraft((PayVO)bill);
 			}
 		
 			break;	

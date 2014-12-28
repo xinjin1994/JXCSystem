@@ -79,6 +79,10 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		this(frame,url,uiController);
 		setInfo(get);
 	}
+	public AddPaymentPanel(MyFrame frame2, String string,
+			AccountAllUIController accountAllUIController, PayVO draft) {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * 
 	 */
