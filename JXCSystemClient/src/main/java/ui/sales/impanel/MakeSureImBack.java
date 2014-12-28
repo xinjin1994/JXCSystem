@@ -45,6 +45,11 @@ public class MakeSureImBack extends MakeSureIm{
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
+				case 5:
+					salesResult.failed("超过最大可退货数量！", "import_returnFailed");
+					break;
+				default:
+					salesResult.failed("添加失败！", "import_returnFailed");
 				}
 			}
 		}

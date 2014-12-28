@@ -120,7 +120,7 @@ public class ImBackPanel extends ImInPanel {
 				importMenuVO.person = person.getText();
 				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImBackPanel.this);
 //				salesResult.succeeded("成功添加草稿单！");
-				switch(salesblService.addDraftImport_up(importMenuVO)){
+				switch(salesblService.addDraftImport_Return_up(importMenuVO)){
 				case 0:
 					salesResult.succeeded("成功添加草稿单！");
 					break;

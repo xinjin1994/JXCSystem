@@ -219,6 +219,9 @@ public class MakeSureIm extends FatherPanel {
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
+				case 5:
+					salesResult.failed("超过最大可退货数量！", "import_returnFailed");
+					break;
 				default:
 					salesResult.failed("添加失败！", "import_return_failed");
 				}
@@ -244,6 +247,9 @@ public class MakeSureIm extends FatherPanel {
 				switch(salesblService.addExport_Return_up(exportMenuVO)){
 				case 0:
 					salesResult.succeeded("添加成功！");
+					break;
+				case 5:
+					salesResult.failed("超过最大可退货数量！", "export_failed");
 					break;
 				default:
 					salesResult.failed("添加失败！", "export_failed");
