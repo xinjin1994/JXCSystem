@@ -1,7 +1,9 @@
 package businesslogic.salesbl;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import po.AccountPO;
 import po.CommodityPO;
@@ -620,7 +622,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public int getClerkDiscount() {
 		// TODO Auto-generated method stub
 		if (User.duty == 3) {
-			
+
 		} else {
 
 		}
@@ -714,20 +716,59 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-	public int getDiscount(int money, int level) {
+	public double getDiscount(int money, int level) {
 		// TODO Auto-generated method stub
-		promotion.getDiscount(level);
+		DiscountPO discountPO = promotion.getDiscount(level);
+		String time = Sales.getNowTime();
+		int start = time.compareTo(discountPO.getStartTime());
+		int end = time.compareTo(discountPO.getEndTime());
+		if ((start >= 0) && (end <= 0)) {
+			if (money > discountPO.getEndMoney()) {
+				int result=(int) (discountPO.getEndMoney()/discountPO.getStartMoney());
+				return result*discountPO.getDiscountMoney();
+			} else {
+				int result=(int) (money/discountPO.getStartMoney());
+				return  result*discountPO.getDiscountMoney();
+			}
+		}
+
 		return 0;
+
 	}
 
-	public CommodityPO getProGift(int money, int level) {
+	public ProGiftPO getProGift(int money, int level) {
 		// TODO Auto-generated method stub
+		ProGiftPO proGiftPO=promotion.getProGift(level);
+		String time = Sales.getNowTime();
+		int start = time.compareTo(proGiftPO.getStartTime());
+		int end = time.compareTo(proGiftPO.getEndTime());
+		if ((start >= 0) && (end <= 0)){
+			if(money>proGiftPO.getStartMoney()){
+				return proGiftPO;
+			}
+		}
 		return null;
 	}
 
-	public int getVoucher(int money, int level) {
+	public double getVoucher(int money, int level) {
 		// TODO Auto-generated method stub
+		VoucherPO voucherPO=promotion.getVoucher(level);
+		String time = Sales.getNowTime();
+		int start = time.compareTo(voucherPO.getStartTime());
+		int end = time.compareTo(voucherPO.getEndTime());
+		if ((start >= 0) && (end <= 0)){
+			if(money>voucherPO.getStartMoney()){
+				return voucherPO.getVoucherMoney();
+			}
+		}
 		return 0;
+	}
+
+	public static String getNowTime() {
+		Calendar rightNow = Calendar.getInstance();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+		String sysDatetime = fmt.format(rightNow.getTime());
+		return sysDatetime;
 	}
 
 }
