@@ -65,8 +65,8 @@ public class AddPatchPanel extends FatherPanel implements ActionListener{
 		id.setText(bill.note);
 		time.setText(bill.time);
 		operator.setText(bill.operator);
-		name.setSelectedItem(bill.name);
-		type.setSelectedItem(bill.type);
+//		name.setSelectedItem(bill.name);
+//		type.setSelectedItem(bill.type);
 		number.setText(String.valueOf(bill.number));
 	}
 	private void init(){

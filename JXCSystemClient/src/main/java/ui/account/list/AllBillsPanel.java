@@ -17,6 +17,7 @@ import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
 import ui.setting.SetTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
@@ -137,17 +138,19 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 //				isLegal = false;
 //						}
 
-			
-			if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
-				frame.remove(this);
-				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+			if(!(time1.equals(""))&&!(time2.equals("")) ){
+				if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
+					frame.remove(this);
+					resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+				}
 			}
 			else{
 				ArrayList<String> bills = new ArrayList<String>();
 				try{
-					int warehouse = Integer.parseInt(stock.getText());
+					String warehouse = stock.getText();
+					
 					billsArray = financialblService.allBill_up(time1, time2, note_type, 
-							customer_name, clerk, String.valueOf(warehouse));
+							customer_name, clerk, warehouse);
 
 					bills.add("时间;单据编号;单据类型");
 					for(int i=0;i<billsArray.size();i++){
@@ -182,9 +185,12 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 						item = billsArray.get(i).time+";"+billsArray.get(i).note+";"+itemName;
 						bills.add(item);
 					}}catch(Exception e2){
+						System.out.println(bills.get(0));
+						e2.printStackTrace();
 						frame.remove(this);
 						resController.failed("存在输入错误！", failedAddress);
 					}
+				
 				if(bills.size() == 1){
 					frame.remove(this);
 					resController.failed("不存在符合该条件的单据！", failedAddress);
@@ -196,6 +202,9 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 						accountPanel.setExcelButtonAllBill(billsArray);
 						accountController.setMainPanel(accountPanel);
 						
+//						SaveTempBills bill = new SaveTempBills(frame, billsArray,accountController );
+//						
+//						setTable(info, bills);
 						setTableA(bills);
 					}else if(type.equals("manager")){
 						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());;

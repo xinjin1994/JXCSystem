@@ -56,6 +56,23 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		this.uiController = uiController;
 		this.repaint();
 		
+		init();
+		setIDOpe();
+	}
+
+	public AddReceiptPanel(MyFrame frame, String string,
+			AccountAllUIController accountAllUIController, GetVO draft) {
+		super(frame, string, accountAllUIController);
+		
+		this.frame = frame;
+		this.uiController = accountAllUIController;
+		this.repaint();
+		
+		init();
+		setInfo(draft);
+	}
+
+	private void init(){
 		accountblService = new AccountController();
 		salesblService = new SalesController();
 		
@@ -63,28 +80,48 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		resController = new ResultPanelController(frame, this);
 		addLabel();
 		setForward();
-		setIDOpe();
+		
 		setCustomer();
 		setAccount();
 		setTypeIn();
+		
+		operator = new MyLabel(575, 370, 155, 55);
+		operator.setForeground(new ColorFactory().accColor);
+		this.add(operator);
+		
+		idLabel = new MyLabel(106, 165, 221, 55);
+		idLabel.setForeground(new ColorFactory().accColor);
+		this.add(idLabel);
+		
+		total = new MyLabel(407, 496, 318, 43);
+		total.setForeground(new ColorFactory().accColor);
+		this.add(total);
+		
+		balance = new MyLabel(491, 205, 205, 41);
+		balance.setForeground(new ColorFactory().greyFont);
+		this.add(balance);
 	}
-
-	public AddReceiptPanel(MyFrame frame, String string,
-			AccountAllUIController accountAllUIController, GetVO draft) {
-		this(frame, string, accountAllUIController);
-		setInfo(draft);
-	}
-
+	
 	private void setInfo(GetVO get) {
 		idLabel.setText(get.note);
 		agent.setText(person);
 		total.setText(get.transferList.transferValue+"");
 		operator.setText(get.operator);
-		ps.setText(newReceipt.transferList.remark);
 		
-		customer.setSelectedItem(get.cusName);
-		account.setSelectedItem(get.transferList.bankAccount);
-		balance.setText(accountblService.searchAccurateAccount_up(get.transferList.bankAccount).balance+"");
+		System.out.println(ps+"ps is");
+		ps.setText(get.transferList.remark);
+		
+		
+//		customer.setSelectedItem(get.cusName);
+//		account.setSelectedItem(get.transferList.bankAccount);
+//		System.out.println(accountblService+"baa");
+//		System.out.println(accountblService.searchAccurateAccount_up(get.transferList.bankAccount).balance+"lll");
+		try {
+			balance.setText(accountblService.searchAccurateAccount_up(get.transferList.bankAccount).balance+"");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		money.setText(get.transferList.transferValue+"");
 	}
 	/**
@@ -145,19 +182,10 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	 * ID和operator的label 自动生成单据的编号，和操作员
 	 */
 	private void setIDOpe() {
-		idLabel = new MyLabel(106, 165, 221, 55);
-		idLabel.setForeground(new ColorFactory().accColor);
-		// idLabel.setText("id");
 		id = accountblService.getReceiptNote_up();
 		idLabel.setText(id);
-		this.add(idLabel);
-
-		operator = new MyLabel(575, 370, 155, 55);
-		operator.setForeground(new ColorFactory().accColor);
-		// operator.setText("我是操作员");
 		operate = accountblService.getOperator_up();
 		operator.setText(operate);
-		this.add(operator);
 	}
 
 	private void setForward() {
@@ -176,24 +204,12 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	/**
 	 * 显示余额
 	 */
-	private void setBalanceLabel(double bal) {
-		balance = new MyLabel(491, 205, 205, 41);
-		balance.setText(String.valueOf(bal));
-		balance.setForeground(new ColorFactory().greyFont);
-		this.add(balance);
-		this.repaint();
-	}
+
 
 	/**
 	 * 总额
 	 */
-	private void setTotal() {
-		total = new MyLabel(407, 496, 318, 43);
-		total.setText(money.getText());
-		total.setForeground(new ColorFactory().accColor);
-		this.add(total);
-		this.repaint();
-	}
+
 	
 	private void setNewReceipt(){
 		remark = ps.getText();// 备注
@@ -202,10 +218,13 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		} catch (Exception e) {
 			turnMoney = 0.0;
 		}
-	
+		
+		id = idLabel.getText();
+		
+		
 		transferListVO = new TransferListVO(accName, turnMoney, remark);
 		newReceipt = new GetVO(id, cusName,transferListVO);
-		setTotal();
+		total.setText(money.getText());
 	}
 
 	/**
@@ -246,6 +265,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 
 					uiController.setTempPanel(this);
 					frame.remove(this);
+					operate = operator.getText();
 					uiController.confirmReceipt(newReceipt,person,operate,accountblService.calTotalMoney_up(newReceipt),balanceCash);
 				}catch(Exception e2){
 					frame.remove(this);
@@ -258,7 +278,7 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 			accName = account.getSelectedItem().toString();
 			// int balance = 10;//根据accName到下层寻找的余额
 			balanceCash = accountblService.searchAccurateAccount_up(accName).balance;// 余额
-			setBalanceLabel(balanceCash);
+			balance.setText(String.valueOf(balanceCash));
 		}else if (e.getSource() == customer) {
 			cusName = customer.getSelectedItem().toString();
 			person = salesblService.searchExactCustomer_up(customer.getSelectedItem().toString()).person;

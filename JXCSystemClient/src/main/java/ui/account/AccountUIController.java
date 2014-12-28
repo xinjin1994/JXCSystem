@@ -324,9 +324,9 @@ public class AccountUIController extends UIController{
 				billsArray = invoiceblService.show_refuse();
 				type = "拒绝";
 			}
-
+			ArrayList<String> bills = new ArrayList<String>();
 			try {
-				ArrayList<String> bills = new ArrayList<String>();
+			
 				bills.add("单据编号;单据类型");
 
 				for(int i=0;i<billsArray.size();i++){
@@ -353,6 +353,9 @@ public class AccountUIController extends UIController{
 				infos = new SaveTempBills(frame, billsArray, uiController);
 				accountPanel.setTable(bills,infos);
 			} catch (Exception e2) {
+				AccountPanel temp = (AccountPanel)(accountAllUIController.getMainPanel());
+				temp.setTable(bills, "");
+				accountAllUIController.setMainPanel(temp);
 				frame.remove(accountPanel);
 				resController.failed("无新审批"+type+"单据！", "account");
 			}

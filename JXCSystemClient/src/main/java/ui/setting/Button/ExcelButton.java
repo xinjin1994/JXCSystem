@@ -21,7 +21,7 @@ public class ExcelButton extends MyButton implements ActionListener{
 	ArrayList<ConditionVO> conditionVOs = new ArrayList<ConditionVO>();
 	
 	public ExcelButton(ThirdPanel prePanel,ArrayList<AllBillVO> allBillVOs) {
-		super("Image/output.png", 400, 390, "Image/output_stop.png", "Image/output_stop.png");
+		super("Image/output.png", 10, 10, "Image/output_stop.png", "Image/output_stop.png");
 		this.allBillVOs = allBillVOs;
 		prePanel.add(this);
 		this.setActionCommand("allBill");

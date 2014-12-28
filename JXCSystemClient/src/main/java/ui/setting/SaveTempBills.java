@@ -36,8 +36,6 @@ public class SaveTempBills {
 	
 	InvoiceVO pending;
 	public SaveTempBills(MyFrame frame,ArrayList<InvoiceVO> invoiceBills,UIController uiController) {
-		System.out.println(invoiceBills+"bills");
-		System.out.println(invoiceBills.get(0));
 		this.invoiceBills = invoiceBills;
 		this.uiController = uiController;
 		this.frame = frame;

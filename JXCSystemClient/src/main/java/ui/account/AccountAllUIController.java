@@ -123,7 +123,7 @@ public class AccountAllUIController extends UIController{
 	}
 	
 	public void addReceiptDraft(GetVO draft) {
-		addReceiptPanel = new AddReceiptPanel(frame,"Image/Account/收款单_背景.jpg", this,draft);
+		addReceiptPanel = new AddReceiptPanel(frame, "Image/Account/收款单_背景.jpg", this,draft);
 		frame.setPanel(addReceiptPanel);
 		frame.repaint();
 	}

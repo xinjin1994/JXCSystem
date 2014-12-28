@@ -88,6 +88,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		operator.setForeground(new ColorFactory().accColor);
 		this.add(operator);
 		
+		balance = new MyLabel(491, 205,205, 41);
+		balance.setForeground(new ColorFactory().greyFont);
+		this.add(balance);
+		
+		total = new MyLabel(407, 496,318, 43);
+		total.setForeground(new ColorFactory().accColor);
+		this.add(total);
+		
 		accountblService = new AccountController();
 		salesblService = new SalesController();
 		
@@ -101,17 +109,21 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	}
 	
 	private void setInfo(PayVO pay) {
-		System.out.println(pay);
+
 		idLabel.setText(pay.note);
 		
-		operator.setText(operate);
+		operator.setText(pay.operator);
 		agent.setText(person);
 		item.setText(pay.itemList.itemName);
 		total.setText(totalValue + "");
 		ps.setText(pay.itemList.remark);
 		
-		account.setSelectedItem(pay.bankAccount);
-		balance.setText(accountblService.searchAccurateAccount_up(pay.bankAccount).balance+"");
+//		account.setSelectedItem(pay.bankAccount);
+		try {
+			balance.setText(accountblService.searchAccurateAccount_up(pay.bankAccount).balance+"");
+		} catch (Exception e) {
+		}
+		
 		money.setText(pay.itemList.money+"");
 //		customer.setSelectedItem(pay.custom);
 		
@@ -197,24 +209,10 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);		
 	}
-	
-	private void setBalanceLabel(double balance2) {
-		balance = new MyLabel(491, 205,205, 41);
-		balance.setText(String.valueOf(balance2));
-		balance.setForeground(new ColorFactory().greyFont);
-		this.add(balance);
-		this.repaint();
-	}
+
 	/**
 	 * 总额
 	 */
-	private void setTotal(){
-		total = new MyLabel(407, 496,318, 43);
-		total.setText(money.getText());
-		total.setForeground(new ColorFactory().accColor);
-		this.add(total);
-		this.repaint();
-	}
 	
 	/**
 	 * 实现根据输入的名称寻找余额的动态监听
@@ -235,6 +233,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		//PayVO(String note,String bankAccount,ItemList itemList)
 		//ItemList(String itemName, double money, String remark)
 		itemList = new ItemList(customerName,turnValue,remark);
+		id = idLabel.getText();
 		newPayment = new PayVO(id,accountName,itemList);
 		totalValue = turnValue;
 	}
@@ -262,6 +261,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 					setNewPayment();
 					uiController.setTempPanel(this);
 					frame.remove(this);
+					operate = operator.getText();
 					uiController.confirmPayment(newPayment,person,operate,
 							totalValue,balanceValue);
 						}catch(Exception e2){
@@ -273,13 +273,14 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		}else if(e.getSource() == account){
 			accountName = account.getSelectedItem().toString();
 			balanceValue = accountblService.searchAccurateAccount_up(accountName).balance;
-			setBalanceLabel(balanceValue);
+			balance.setText(balanceValue+"");
 		}else if(e.getSource() == customer){
 			customerName = customer.getSelectedItem().toString();
 			person = salesblService.searchExactCustomer_up(customerName).person;
 			agent.setText(person);
 		}else if(e.getSource() == saveButton){
 			setNewPayment();
+			
 			PayVO draft = new PayVO(id, person, accountName, itemList, "", "0");
 			accountblService.addDraftPayment_up(draft);
 			frame.remove(this);
