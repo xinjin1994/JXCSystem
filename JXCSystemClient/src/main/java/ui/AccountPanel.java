@@ -221,6 +221,7 @@ public class AccountPanel extends FatherPanel{
 //				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
 			}
 			
+			
 			for(InvoiceVO temp:finBills){
 				info.add(temp.time+";"+temp.note+";"+checkBill(temp.bill_note));
 			}
@@ -236,10 +237,6 @@ public class AccountPanel extends FatherPanel{
 	private String checkBill(int bill_node) {
 		String type = "";
 		switch (bill_node) {
-		case 6:
-			type = "报溢报损单";
-			break;
-			
 		case 7:
 			type = "收款单";
 			break;
