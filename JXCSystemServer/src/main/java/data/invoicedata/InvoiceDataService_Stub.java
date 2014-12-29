@@ -37,7 +37,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("invoiceList.out");
+			fos = new FileOutputStream("out//invoiceList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(invoiceList);	
 			oos.close();
@@ -59,7 +59,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		
 		try{
 			
-			fis=new FileInputStream("InvoiceList.out");
+			fis=new FileInputStream("out//invoiceList.out");
 			ois=new ObjectInputStream(fis);
 			invoiceList=(ArrayList<InvoicePO>) ois.readObject();
 			ois.close();
@@ -82,7 +82,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("invNote.out");
+			fos = new FileOutputStream("out//invNote.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(invNote);	
 			oos.close();
@@ -103,7 +103,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		
 		try{
 			
-			fis=new FileInputStream("invNote.out");
+			fis=new FileInputStream("out//invNote.out");
 			ois=new ObjectInputStream(fis);
 			invNote=(Integer) ois.readObject();
 			ois.close();

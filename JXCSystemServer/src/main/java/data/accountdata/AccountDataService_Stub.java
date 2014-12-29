@@ -37,7 +37,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("skdNote.out");
+			fos = new FileOutputStream("out//skdNote.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(skdNote);	
 			oos.close();
@@ -58,7 +58,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("skdNote.out");
+			fis=new FileInputStream("out//skdNote.out");
 			ois=new ObjectInputStream(fis);
 			skdNote=(Integer) ois.readObject();
 			ois.close();
@@ -81,7 +81,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("fkdNote.out");
+			fos = new FileOutputStream("out//fkdNote.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(fkdNote);	
 			oos.close();
@@ -102,7 +102,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("fkdNote.out");
+			fis=new FileInputStream("out//fkdNote.out");
 			ois=new ObjectInputStream(fis);
 			fkdNote=(Integer) ois.readObject();
 			ois.close();
@@ -125,7 +125,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("nowAccount.out");
+			fos = new FileOutputStream("out//nowAccount.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(nowAccount);	
 			oos.close();
@@ -146,7 +146,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("nowAccount.out");
+			fis=new FileInputStream("out//nowAccount.out");
 			ois=new ObjectInputStream(fis);
 			nowAccount=(AccountPO) ois.readObject();
 			ois.close();
@@ -170,7 +170,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("accountList.out");
+			fos = new FileOutputStream("out//accountList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(accountList);	
 			oos.close();
@@ -192,7 +192,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("accountList.out");
+			fis=new FileInputStream("out//accountList.out");
 			ois=new ObjectInputStream(fis);
 			accountList=(ArrayList<AccountPO>) ois.readObject();
 			ois.close();
@@ -215,7 +215,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("receiptList.out");
+			fos = new FileOutputStream("out//receiptList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(receiptList);	
 			oos.close();
@@ -237,7 +237,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("receiptList.out");
+			fis=new FileInputStream("out//receiptList.out");
 			ois=new ObjectInputStream(fis);
 			receiptList=(ArrayList<ReceiptPO>) ois.readObject();
 			ois.close();
@@ -260,7 +260,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("paymentList.out");
+			fos = new FileOutputStream("out//paymentList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(paymentList);	
 			oos.close();
@@ -282,7 +282,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("paymentList.out");
+			fis=new FileInputStream("out//paymentList.out");
 			ois=new ObjectInputStream(fis);
 			paymentList=(ArrayList<PaymentPO>) ois.readObject();
 			ois.close();
@@ -305,7 +305,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("draftReceiptList.out");
+			fos = new FileOutputStream("out//draftReceiptList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(draftReceiptList);	
 			oos.close();
@@ -327,7 +327,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("draftReceiptList.out");
+			fis=new FileInputStream("out//draftReceiptList.out");
 			ois=new ObjectInputStream(fis);
 			draftReceiptList=(ArrayList<ReceiptPO>) ois.readObject();
 			ois.close();
@@ -350,7 +350,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("draftPaymentList.out");
+			fos = new FileOutputStream("out//draftPaymentList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(draftPaymentList);	
 			oos.close();
@@ -372,7 +372,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		
 		try{
 			
-			fis=new FileInputStream("draftPaymentList.out");
+			fis=new FileInputStream("out//draftPaymentList.out");
 			ois=new ObjectInputStream(fis);
 			draftPaymentList=(ArrayList<PaymentPO>) ois.readObject();
 			ois.close();

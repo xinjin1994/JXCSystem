@@ -21,12 +21,21 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 
 	ArrayList<SystemlogPO> systemlogList=new ArrayList<SystemlogPO>();
 	
+	public SystemlogDataService_Stub() throws RemoteException {
+		super();
+		
+		this.writeSystemlogList();
+		
+		this.readSystemlogList();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public void writeSystemlogList(){
 		
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("systemlogList.out");
+			fos = new FileOutputStream("out//systemlogList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(systemlogList);	
 			oos.close();
@@ -48,7 +57,7 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 		
 		try{
 			
-			fis=new FileInputStream("systemlogList.out");
+			fis=new FileInputStream("out//systemlogList.out");
 			ois=new ObjectInputStream(fis);
 			systemlogList=(ArrayList<SystemlogPO>) ois.readObject();
 			ois.close();
@@ -64,15 +73,6 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 			e.printStackTrace();
 		} 
 		
-	}
-	
-	public SystemlogDataService_Stub() throws RemoteException {
-		super();
-		
-		this.writeSystemlogList();
-		
-		this.readSystemlogList();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ArrayList<SystemlogPO> get() throws RemoteException {

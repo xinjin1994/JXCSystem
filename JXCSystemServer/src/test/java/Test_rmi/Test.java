@@ -1,5 +1,7 @@
 package Test_rmi;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
@@ -40,6 +42,9 @@ public class Test {
 		SalesDataService salesdataservice;
 		SystemlogDataService systemlogdataservice;
 		UserDataService userdataservice;
+		
+		File file=new File("out");
+		file.mkdir();
 		
 		try {
 			
