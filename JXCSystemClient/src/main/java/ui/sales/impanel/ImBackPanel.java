@@ -90,14 +90,14 @@ public class ImBackPanel extends ImInPanel {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(ImBackPanel.this);
 			} else if (e.getSource() == forward) {
-				if(id.getText().equals("")||remark.getText().equals("")||supplier.getText().equals("")||
+				if(id.getText().equals("")||remark.getText().equals("")||supplierString.equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ImBackPanel.this);
 					salesResult.failed("存在输入为空！", "import_return_failed");
 				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());
-				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplierString,
 						warehouse.getText(), commodityListVO, 3);
 				importMenuVO.person = person.getText();
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg", controller,
@@ -115,7 +115,7 @@ public class ImBackPanel extends ImInPanel {
 				try{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, totalPriceText, remark.getText());
-				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplierString,
 						warehouse.getText(), commodityListVO, 2);
 				importMenuVO.person = person.getText();
 				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImBackPanel.this);

@@ -46,6 +46,7 @@ public class ImInPanel extends FatherPanel {
 	protected MyButton saveButton;
 	protected String[] typeString ;
 	protected int i = 0;
+	protected String supplierString;
 
 	public ImInPanel(MyFrame frame, String url, UIController controller) {
 		super(frame, url, controller);
@@ -67,6 +68,7 @@ public class ImInPanel extends FatherPanel {
 		this.addNum();
 		this.addTotalListener();
 		this.addSaveButton();
+		this.addWhichCus();
 	}
 
 	public ImInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
@@ -87,6 +89,7 @@ public class ImInPanel extends FatherPanel {
 		this.addNum();
 		this.addTotalListener();
 		this.addSaveButton();
+		this.addWhichCus();
 	}
 
 	public void addCombox() {
@@ -205,7 +208,10 @@ public class ImInPanel extends FatherPanel {
 		for(int i = 0;i<cus.size();i++){
 			cusStr[i] = cus.get(i).cusName;
 		}
+
 		supplier = new MyComboBox(cusStr,210, 255, 116, 42);
+//		 supplierString = supplier.getSelectedItem().toString();
+		supplier.addActionListener(buttonListener);
 		this.add(supplier);
 	}
 
@@ -268,7 +274,7 @@ public class ImInPanel extends FatherPanel {
 				salesUIController.backPanel(ImInPanel.this);
 			} else if (e.getSource() == forward) {
 
-				if (id.getText().equals("") || remark.getText().equals("") || (supplier.getSelectedItem().toString()).equals("")
+				if (id.getText().equals("") || remark.getText().equals("") || (supplierString.toString()).equals("")
 						|| warehouse.getText().equals("") || person.getText().equals("")
 						|| operator.getText().equals("")) {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
@@ -277,7 +283,7 @@ public class ImInPanel extends FatherPanel {
 					// System.out.println("isGo"+isGo);
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());
-					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getSelectedItem().toString(),
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplierString.toString(),
 							warehouse.getText(), commodityListVO, 2);
 					importMenuVO.person = person.getText();
 					MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg",
@@ -292,15 +298,18 @@ public class ImInPanel extends FatherPanel {
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();
 				getPrice();
-			} else if (e.getSource() == saveButton) {
+			}else if(e.getSource() == supplier){
+				 supplierString = supplier.getSelectedItem().toString();
+			}else if (e.getSource() == saveButton) {
 				try {
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
-							goodsTypeSelected, num, price, totalPriceText, remark.getText());
-					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getSelectedItem().toString(),
+							goodsNameSelected, num, price, totalPriceText, remark.getText());
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplierString,
 							warehouse.getText(), commodityListVO, 2);
 					importMenuVO.person = person.getText();
+					System.out.println("id.getText()"+id.getText()+"goodsNameSelected"+goodsNameSelected
+							+"supplierString"+supplierString);
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
-					// salesResult.succeeded("成功添加草稿单！");
 					switch (salesblService.addDraftImport_up(importMenuVO)) {
 					case 0:
 						salesResult.succeeded("成功添加草稿单！");

@@ -15,7 +15,7 @@ public class ImInDraftBill extends ImInPanel{
 
 	public void setDraft(){
 		id.setText(importMenuVO.commodityList.id);
-		supplier.setText(importMenuVO.supplier);
+		supplier.setSelectedItem(importMenuVO.supplier);
 		warehouse.setText(importMenuVO.warehouse);
 		remark.setText(importMenuVO.commodityList.remark);
 		goodsName.setSelectedItem(importMenuVO.commodityList.name);
