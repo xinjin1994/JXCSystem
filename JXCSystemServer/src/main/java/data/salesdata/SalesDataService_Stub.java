@@ -1277,6 +1277,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 			}
 
 		}
+		
 		return true;
 
 	}
@@ -1398,7 +1399,9 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 
 	public String getImportOldNote(String cusName, String name, String type) throws RemoteException {
 		// TODO Auto-generated method stub
+		System.out.println("getImportOldNote:before");
 		for (int i=importList.size()-1; i >= 0; i--) {
+			System.out.print("getImportOldNote: "+importList.get(i).getCustomer().getName()+" "+importList.get(i).getImportGoodList().get(0).getCommodity().getName()+" "+importList.get(i).getCondition());
 			if (importList.get(i).getCustomer().getName().equals(cusName)) {
 				if (importList.get(i).getImportGoodList().get(0).getCommodity().getName().equals(name)) {
 					if (importList.get(i).getImportGoodList().get(0).getCommodity().getType().equals(type)) {

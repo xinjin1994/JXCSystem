@@ -104,6 +104,11 @@ public class SalesController implements SalesblService {
 				importMenuVO.warehouse, importMenuVO.total,
 				sale.getImportOldNote(customerPO.name, commodityPO.getName(),
 						commodityPO.getType()));
+		System.out.println("addImport_Return_up: "+sale.getImportOldNote(customerPO.name, commodityPO.getName(),
+				commodityPO.getType()));
+		System.out.println(customerPO.name);
+		System.out.println(commodityPO.getName());
+		System.out.println(commodityPO.getType());
 		imp.setNote(importMenuVO.note);
 		int message = sale.addImport_Return(imp);
 		return message;

@@ -128,15 +128,23 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 
 	public int addImport(ImportPO po) {
 		// TODO Auto-generated method stub
-		if (invoice.add(po) != null) {
-			systemlog.add_up("AddImport:");
-			return 0;
+		invoice.add(po);
+		try {
+			if(sale.addImport(po)){
+				systemlog.add_up("addImport: ");
+				return 0;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return -1;
 	}
 
 	public int addImport_Return(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
+		System.out.print(po.getOldNote());
+		
 		int number = getImport_ReturnMaxNumber(po.getOldNote());
 		System.out.println("要求退货数量："+po.getImportGoodList().get(0).getNumber());
 		System.out.println("可退货数量："+number);
@@ -144,6 +152,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 			return 6;
 		} else {
 			invoice.add(po);
+			try {
+				sale.addImport_Return(po);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			systemlog.add_up("AddImport_Return:" + User.operator);
 			return 0;
 		}
@@ -162,9 +176,15 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 
 	public int addExport(ExportPO po) {
 		// TODO Auto-generated method stub
-		if (invoice.add(po) != null) {
-			systemlog.add_up("AddExport:");
-			return 0;
+		invoice.add(po);
+		try {
+			if(sale.addExport(po)){
+				systemlog.add_up("addExport: ");
+				return 0;
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return -1;
 	}
@@ -176,6 +196,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 			return 5;
 		} else {
 			invoice.add(po);
+			try {
+				sale.addExport_Return(po);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			systemlog.add_up("AddExport_Return:" + User.operator);
 			return 0;
 		}
@@ -645,12 +671,15 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 	// ////////////////////////////////////////////////////////////////////////////////
 	public String getImportOldNote(String cusName, String name, String type) {
 		String oldNote = null;
+		System.out.println("getImportOldNote,before:"+oldNote);
 		try {
 			oldNote = sale.getImportOldNote(cusName, name, type);
+			System.out.println("getImportOldNote,after"+oldNote);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("getImportOldNote客户端： "+oldNote);
 		return oldNote;
 	}
 
