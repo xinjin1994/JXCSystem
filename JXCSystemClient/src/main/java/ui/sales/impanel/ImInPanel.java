@@ -14,7 +14,6 @@ import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
-import ui.setting.Button.SaveButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldFilled;
 import ui.setting.TextField.MyTextFieldTrans;
@@ -43,18 +42,21 @@ public class ImInPanel extends FatherPanel {
 	protected UIController controller;
 	protected boolean isGo = false;
 	protected MyButton saveButton;
-	
-	public ImInPanel(MyFrame frame, String url, UIController controller){
-		super(frame,url,controller);
+	protected String[] typeString ;
+	protected int i = 0;
+
+	public ImInPanel(MyFrame frame, String url, UIController controller) {
+		super(frame, url, controller);
 		this.frame = frame;
 		this.controller = controller;
-		salesUIController = new SalesUIController(controller,frame);
+		salesUIController = new SalesUIController(controller, frame);
 		buttonListener = new ButtonListener();
 		salesblService = new SalesController();
-		// this.addTextField();
-		// this.addButton();
-		// this.addCombox();
-		// this.addID();
+//		typeString = new String[1];
+//		typeString[0] = "Type";
+//		goodsType = new MyComboBox(typeString, 488, 252, 237, 31);
+//		goodsType.setSelectedIndex(0);
+//		this.add(goodsType);
 		this.addTextField();
 		this.addButton();
 		this.addCombox();
@@ -64,6 +66,7 @@ public class ImInPanel extends FatherPanel {
 		this.addTotalListener();
 		this.addSaveButton();
 	}
+
 	public ImInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
 		super(frame, url, controller);
 		this.salesUIController = salesUIController;
@@ -71,10 +74,9 @@ public class ImInPanel extends FatherPanel {
 		this.controller = controller;
 		buttonListener = new ButtonListener();
 		salesblService = new SalesController();
-		// this.addTextField();
-		// this.addButton();
-		// this.addCombox();
-		// this.addID();
+//		typeString = new String[0];
+//		goodsType = new MyComboBox(typeString, 488, 252, 237, 31);
+//		this.add(goodsType);
 		this.addTextField();
 		this.addButton();
 		this.addCombox();
@@ -86,12 +88,12 @@ public class ImInPanel extends FatherPanel {
 	}
 
 	public void addCombox() {
-		 ArrayList<CommodityVO> comVOArray =salesblService.getAllCommodity_up();
-		 String []commodityName = new String[comVOArray.size()];
-		 for(int i=0;i<comVOArray.size();i++){
-		 commodityName[i] =comVOArray.get(i).name;
-		 }
-//		String[] commodityName = { "aa", "bb" };
+		ArrayList<CommodityVO> comVOArray = salesblService.getAllCommodity_up();
+		String[] commodityName = new String[comVOArray.size()];
+		for (int i = 0; i < comVOArray.size(); i++) {
+			commodityName[i] = comVOArray.get(i).name;
+		}
+		// String[] commodityName = { "aa", "bb" };
 
 		goodsName = new MyComboBox(commodityName, 488, 170, 237, 31);
 		goodsName.addActionListener(buttonListener);
@@ -111,8 +113,8 @@ public class ImInPanel extends FatherPanel {
 
 	public void addID() {
 		id = new MyLabel(105, 173, 222, 36);
-		 id.setText(salesblService.getImportNote_up());
-//		id.setText("id");
+		id.setText(salesblService.getImportNote_up());
+		// id.setText("id");
 		this.add(id);
 
 	}
@@ -123,48 +125,57 @@ public class ImInPanel extends FatherPanel {
 	 * @return
 	 */
 	public void setType() {
+		if(i > 0){
+			System.out.println("hello");
+			ImInPanel.this.remove(goodsType);
+			ImInPanel.this.repaint();
+		}
+		i++;
+		System.out.println("goodsType is Null");
 		goodsPrice = new MyTextFieldTrans(488, 293, 237, 31);
 		goodsNameSelected = goodsName.getSelectedItem().toString();
-		 ArrayList<CommodityVO> comVOArray = salesblService.getAllCommodity_up();
-		 ArrayList<String> commodityType = new ArrayList<String>();
-		 for(int j=0;j<comVOArray.size();j++){
-		 if(comVOArray.get(j).name.equals(goodsNameSelected)){
-		 commodityType.add(comVOArray.get(j).type);
-		 	}
-		 }
-		 String[]typeString = new String[commodityType.size()];
-		 for(int i=0;i<commodityType.size();i++){
-			 typeString[i] = commodityType.get(i);
-		 }
-//		String[] typeString = { "a", "b" };
+		System.out.println("goodsName" + goodsNameSelected);
+		ArrayList<CommodityVO> comVOArray = salesblService.getAllCommodity_up();
+		ArrayList<String> commodityType = new ArrayList<String>();
+		for (int j = 0; j < comVOArray.size(); j++) {
+			if (comVOArray.get(j).name.equals(goodsNameSelected)) {
+				commodityType.add(comVOArray.get(j).type);
+				System.out.println("type" + comVOArray.get(j).type);
+			}
+		}
+		String[] typeString = new String[commodityType.size()];
+		for (int i = 0; i < commodityType.size(); i++) {
+			typeString[i] = commodityType.get(i);
+		}
+		System.out.println("size " + typeString.length + " " + typeString[0]);
+		// String[] typeString = { "a", "b" };
 		goodsType = new MyComboBox(typeString, 488, 252, 237, 31);
-		goodsType.addActionListener(buttonListener);
 		this.add(goodsType);
+		goodsType.addActionListener(buttonListener);
 		this.repaint();
 	}
 
 	public void setGoodsID() {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
-		commodityVO = salesblService.getCommodity_up(goodsNameSelected,goodsTypeSelected);
-		 goodsID.setText(commodityVO.id);
-//		goodsID.setText("id");
+		commodityVO = salesblService.getCommodity_up(goodsNameSelected, goodsTypeSelected);
+		goodsID.setText(commodityVO.id);
+		// goodsID.setText("id");
 	}
 
 	public void getPrice() {
 		this.add(goodsPrice);
-		goodsPrice.setText(commodityVO.inValue+"");
-//		goodsPrice.addFocusListener(new FocusAdapter());
-		try{
-		 price = Double.parseDouble(goodsPrice.getText());
-		 if(price <= 0){
-			 this.addLabel();
-		 	}
-		 }catch(Exception e){
-			 this.addLabel();
-		 }
-		
-	}
+		goodsPrice.setText(commodityVO.inValue + "");
+		// goodsPrice.addFocusListener(new FocusAdapter());
+		try {
+			price = Double.parseDouble(goodsPrice.getText());
+			if (price <= 0) {
+				this.addLabel();
+			}
+		} catch (Exception e) {
+			this.addLabel();
+		}
 
+	}
 
 	public void addTextField() {
 		supplier = new MyTextFieldFilled(210, 255, 116, 42);
@@ -190,23 +201,24 @@ public class ImInPanel extends FatherPanel {
 
 	public void addNum() {
 		goodsNum = new MyTextFieldTrans(488, 334, 237, 31);
-////	goodsNum.setText(salesblService.getImport_ReturnMaxNumber_up("")+"");
-		goodsNum.setText("1");
+		// //
+//		 goodsNum.setText(salesblService.getImport_ReturnMaxNumber_up("")+"");
+//		goodsNum.setText("1");
 		this.add(goodsNum);
-//		goodsNum.addFocusListener(new FocusAdapter());
+		// goodsNum.addFocusListener(new FocusAdapter());
 	}
 
-	public void addTotalListener(){
+	public void addTotalListener() {
 		goodsTotal.addFocusListener(new FocusAdapter());
-		
+
 	}
-	
-	public void addSaveButton(){
+
+	public void addSaveButton() {
 		saveButton = new MyButton("Image/save.png", 670, 550, "Image/save_stop.png", "Image/save_stop");
 		this.add(saveButton);
 		saveButton.addActionListener(buttonListener);
 	}
-	
+
 	class FocusAdapter implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
@@ -215,7 +227,7 @@ public class ImInPanel extends FatherPanel {
 				num = Integer.parseInt(goodsNum.getText());
 				totalPriceText = Double.parseDouble(goodsPrice.getText()) * num;
 				if (num <= 0) {
-//					System.out.println("hello");
+					// System.out.println("hello");
 					failLabel.setText("您输入的商品数量有误！");
 				} else {
 					goodsTotal.setText(totalPriceText + "");
@@ -224,7 +236,7 @@ public class ImInPanel extends FatherPanel {
 			} catch (Exception e2) {
 				e2.printStackTrace();
 				failLabel.setText("请正确输入信息!");
-				}
+			}
 		}
 
 		public void focusLost(FocusEvent e) {
@@ -252,7 +264,7 @@ public class ImInPanel extends FatherPanel {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
 					salesResult.failed("请重新确认输入信息！", "importFailed");
 				} else {
-//					System.out.println("isGo"+isGo);
+					// System.out.println("isGo"+isGo);
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());
 					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
@@ -270,23 +282,23 @@ public class ImInPanel extends FatherPanel {
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();
 				getPrice();
-			}else if(e.getSource() == saveButton){
-				try{
-				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
-						goodsTypeSelected, num, price, totalPriceText, remark.getText());
-				ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
-						warehouse.getText(), commodityListVO, 2);
-				importMenuVO.person = person.getText();
-				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
-//				salesResult.succeeded("成功添加草稿单！");
-				switch(salesblService.addDraftImport_up(importMenuVO)){
-				case 0:
-					salesResult.succeeded("成功添加草稿单！");
-					break;
-				default:
-					salesResult.failed("添加失败！", "importFailed");
-				}
-				}catch(Exception e2){
+			} else if (e.getSource() == saveButton) {
+				try {
+					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+							goodsTypeSelected, num, price, totalPriceText, remark.getText());
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+							warehouse.getText(), commodityListVO, 2);
+					importMenuVO.person = person.getText();
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
+					// salesResult.succeeded("成功添加草稿单！");
+					switch (salesblService.addDraftImport_up(importMenuVO)) {
+					case 0:
+						salesResult.succeeded("成功添加草稿单！");
+						break;
+					default:
+						salesResult.failed("添加失败！", "importFailed");
+					}
+				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 			}
