@@ -62,11 +62,10 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 	public int makeGift(String name,String type,int number,String start_time,String end_time,double start_money,int level) {
 		// TODO Auto-generated method stub
 		CommodityPO gift=commodity.findCommodity(name, type);
-		ProGiftPO dis=new ProGiftPO(gift, start_time, end_time,number,start_money,9999,level);
-		ProGiftPO lin=new ProGiftPO(gift, start_time, end_time, number,
-				  start_money, 9999.9, level);
+		ProGiftPO dis=new ProGiftPO(gift, start_time, end_time,number,start_money,999999,level);
 		try {
 			if(promotion.addGift(dis)){
+				commodity.addGift(name, type, number);
 				systemlog.add_up("AddGift:");
 				return 0;
 			}

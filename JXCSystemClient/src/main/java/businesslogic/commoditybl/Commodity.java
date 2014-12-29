@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.CommodityPO;
+import po.CustomerPO;
 import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
@@ -15,7 +16,6 @@ import po.WarnPO;
 import vo.ExamineVO;
 import vo.StockVO;
 import businesslogic.userbl.User;
-import data.commoditydata.CommodityDataService_Stub;
 import dataservice.commoditydataservice.CommodityDataService;
 
 
@@ -519,7 +519,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 6;
 			}
 			
-			if (sto.addGift(com,number)) {
+			if (sto.addGift(com,com.number)) {
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -987,6 +987,43 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			e.printStackTrace();
 		}
 		return "失败";
+	}
+
+	public boolean hasGift(CommodityPO gift, int number) {
+		// TODO Auto-generated method stub
+		ArrayList<CommodityPO> po;
+		try {
+			po = sto.getAllGift();
+		
+		for(int i=0;i<po.size();i++){
+			if(po.get(i).getName().equals(gift.getName())&&po.get(i).getType().equals(gift.getType())){
+				if(po.get(i).getNumber()>=number){
+					return true;
+				}
+			}
+		}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean addSendGift(CommodityPO gift, int number,CustomerPO customer) {
+		// TODO Auto-generated method stub
+		try {
+		CommodityPO giftpo=sto.findGift(gift);
+		String note=sto.getSendGiftNote();
+		SendGiftPO po= new SendGiftPO(giftpo,number,note,customer.name);
+		po.setCondition(1);
+		sto.addSendGift(po);
+		invoice.add(po);
+		return true;
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	//////////////////////////////////////////////////////////////
