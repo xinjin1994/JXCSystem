@@ -61,6 +61,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			for(int i=0;i<po.size();i++){
 				if(po.get(i).getNote().equals(note)){
 					us.delUser(note);
+					systemlog.add_up("delUser："+po.get(i).getName());
 					return 0;
 				}
 			}
@@ -98,6 +99,7 @@ public class User implements businesslogic.initializationlbl.UserInfo{
 			if(lin!=null){
 				User.operator=lin.getName();
 				User.duty=lin.getDuty();
+				systemlog.add_up("login："+name);
 				return lin.getDuty();
 			}
 			

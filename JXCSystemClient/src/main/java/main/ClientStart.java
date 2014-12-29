@@ -103,7 +103,7 @@ public class ClientStart {
 			commodity.setInfo(invoice, systemlog,sales);
 			account.setInfo(financial, invoice, sales, systemlog);
 			financial.setInfo(account, commodity, sales, systemlog);
-			invoice.setInfo(account, sales, commodity,financial);
+			invoice.setInfo(account, sales, commodity,financial,systemlog);
 			promotion.setInfo(systemlog, commodity);
 			user.setInfo(systemlog);
 			sales.setInfo(invoice, systemlog, commodity);

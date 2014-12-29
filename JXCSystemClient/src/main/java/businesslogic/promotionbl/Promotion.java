@@ -49,7 +49,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			}
 			
 			if(promotion.addDiscount(dis)){
-				systemlog.add_up("AddDiscount:");
+				systemlog.add_up("AddDiscount: start_money="+start_money+" discount="+discount+" start_time="+time1+" end_time="+time2);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -68,7 +68,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		try {
 			if(promotion.addGift(dis)){
 				commodity.addGift(name, type, number);
-				systemlog.add_up("AddGift:");
+				systemlog.add_up("AddGift: start_money="+start_money+" name="+name+" type="+type+" start_time="+start_time+" end_time="+end_time);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -91,7 +91,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			}
 			
 			if(promotion.addVoucher(dis)){
-				systemlog.add_up("AddDiscount:");
+				systemlog.add_up("AddDiscount: start_money="+start_money+" voucher="+voucher+" start_time="+time1+" end_time="+time2);
 				return 0;
 			}
 		} catch (RemoteException e) {
