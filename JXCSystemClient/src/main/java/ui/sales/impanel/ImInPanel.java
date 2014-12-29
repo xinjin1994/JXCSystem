@@ -18,6 +18,7 @@ import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldFilled;
 import ui.setting.TextField.MyTextFieldTrans;
 import vo.CommodityVO;
+import vo.CustomerVO;
 import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
 import businesslogic.salesbl.SalesController;
@@ -26,7 +27,8 @@ import businesslogicservice.salesblservice.SalesblService;
 
 public class ImInPanel extends FatherPanel {
 	protected ButtonListener buttonListener;
-	protected MyTextFieldFilled supplier, warehouse, remark, discount, voucher;
+	protected MyTextFieldFilled warehouse, remark, discount, voucher;
+	protected MyComboBox supplier;
 	protected MyTextFieldTrans goodsPrice, goodsNum, goodsTotal;
 	protected MyComboBox goodsName, goodsType;
 	protected MyTextFieldFilled person, operator;
@@ -178,7 +180,6 @@ public class ImInPanel extends FatherPanel {
 	}
 
 	public void addTextField() {
-		supplier = new MyTextFieldFilled(210, 255, 116, 42);
 		warehouse = new MyTextFieldFilled(210, 308, 116, 42);
 		remark = new MyTextFieldFilled(104, 420, 200, 118);
 		// discount = new MyTextFieldFilled(235, 421, 91, 37);
@@ -187,7 +188,6 @@ public class ImInPanel extends FatherPanel {
 		person = new MyTextFieldFilled(408, 481, 147, 36);
 		operator = new MyTextFieldFilled(576, 481, 147, 36);
 		goodsTotal = new MyTextFieldTrans(488, 375, 237, 31);
-		this.add(supplier);
 		this.add(warehouse);
 		this.add(remark);
 		// this.add(discount);
@@ -197,6 +197,16 @@ public class ImInPanel extends FatherPanel {
 		this.add(operator);
 		this.add(goodsTotal);
 		operator.setText(User.operator);
+	}
+	
+	public void addWhichCus(){
+		ArrayList<CustomerVO> cus = salesblService.getAllImportCustomer_up();
+		String[] cusStr = new String[cus.size()];
+		for(int i = 0;i<cus.size();i++){
+			cusStr[i] = cus.get(i).cusName;
+		}
+		supplier = new MyComboBox(cusStr,210, 255, 116, 42);
+		this.add(supplier);
 	}
 
 	public void addNum() {
@@ -258,7 +268,7 @@ public class ImInPanel extends FatherPanel {
 				salesUIController.backPanel(ImInPanel.this);
 			} else if (e.getSource() == forward) {
 
-				if (id.getText().equals("") || remark.getText().equals("") || supplier.getText().equals("")
+				if (id.getText().equals("") || remark.getText().equals("") || (supplier.getSelectedItem().toString()).equals("")
 						|| warehouse.getText().equals("") || person.getText().equals("")
 						|| operator.getText().equals("")) {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
@@ -267,7 +277,7 @@ public class ImInPanel extends FatherPanel {
 					// System.out.println("isGo"+isGo);
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());
-					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getSelectedItem().toString(),
 							warehouse.getText(), commodityListVO, 2);
 					importMenuVO.person = person.getText();
 					MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/二次确认/进货单_退货单确认信息.jpg",
@@ -286,7 +296,7 @@ public class ImInPanel extends FatherPanel {
 				try {
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, totalPriceText, remark.getText());
-					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getText(),
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplier.getSelectedItem().toString(),
 							warehouse.getText(), commodityListVO, 2);
 					importMenuVO.person = person.getText();
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
