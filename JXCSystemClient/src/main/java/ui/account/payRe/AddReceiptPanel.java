@@ -165,8 +165,8 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	 */
 	private void setCustomer() {
 //		 String [] customers = new String []{"a","b"};//从下层获得
-		ArrayList<CustomerVO> cusVOArray = accountblService.getAllCustomer_up();
-//		ArrayList<CustomerVO> cusVOArray = salesblService.getAllExportCustomer_up();
+//		ArrayList<CustomerVO> cusVOArray = accountblService.getAllCustomer_up();
+		ArrayList<CustomerVO> cusVOArray = salesblService.getAllExportCustomer_up();
 		String[] customers = new String[cusVOArray.size()];
 		for (int i = 0; i < cusVOArray.size(); i++) {
 			customers[i] = cusVOArray.get(i).cusName;

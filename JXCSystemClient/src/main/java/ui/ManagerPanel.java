@@ -3,6 +3,8 @@ package ui;
 import java.awt.Color;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ import businesslogicservice.systemlogblservice.SystemlogblService;
  * @author lsy
  * @version 2014年11月28日下午4:21:03
  */
-public class ManagerPanel extends FatherPanel{
+public class ManagerPanel extends FatherPanel implements ActionListener{
 	private int firstX = 0;
 	private int firstY = 110;
 	private int inter = 54;
@@ -51,7 +53,7 @@ public class ManagerPanel extends FatherPanel{
 	private MyButton accManage,recManage,invoiceManage,proManage,systemLog,details,refresh;
 	private MyButton approveButton,refuseButton;
 	private MyButton [] buttons = new MyButton[]{ accManage, recManage,invoiceManage,proManage,systemLog};
-	private MyButton back;
+	private MyButton back,excel;
 	
 
 	public MyTable showTable;
@@ -80,6 +82,8 @@ public class ManagerPanel extends FatherPanel{
 	
 	private SystemlogblService systemlogblService;
 	private AccountblService accountblService;
+	
+	ArrayList<SystemlogVO> logs;
 	public ManagerPanel(MyFrame frame, String url, UIController controller,
 			ManagerUIController managerUIController) {
 		super(frame, url, controller);
@@ -132,20 +136,6 @@ public class ManagerPanel extends FatherPanel{
 	private void getRecInfo() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public void setExcelButtonAllBill(ArrayList<AllBillVO> all){
-		ExcelButton excelButton = new ExcelButton(managerThirdPanel, all);
-		managerThirdPanel.repaint();
-	}
-	
-	public void setExcelButtonSaleList(ArrayList<SalesDetailVO> salesDetailVOs){
-		ExcelButton excelButton = new ExcelButton(managerThirdPanel, salesDetailVOs,0);
-		managerThirdPanel.repaint();
-	}
-	public void setExcelButtonOpeCon(ArrayList<ConditionVO> conditionVOs){
-		ExcelButton excelButton = new ExcelButton(managerThirdPanel, conditionVOs,"");
-		managerThirdPanel.repaint();
 	}
 	
 	public void getAccountInfo() {
@@ -283,7 +273,7 @@ public class ManagerPanel extends FatherPanel{
 			}else if(e.getSource() == buttons[4]){
 				ArrayList<String> infos = new ArrayList<String>();
 				infos.add("操作时间;操作员;操作内容");
-				ArrayList<SystemlogVO> logs = new ArrayList<SystemlogVO>();
+				logs = new ArrayList<SystemlogVO>();
 				logs = systemlogblService.show_up();
 					
 				System.out.println("logs"+logs.size());
@@ -293,8 +283,19 @@ public class ManagerPanel extends FatherPanel{
 					}
 					setTable(infos,"log");
 				} catch (Exception e2) {
-					// TODO: handle exception
+					setTable(infos,"log");
 				}
+				excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+				managerThirdPanel.add(excel);
+				excel.addActionListener(ManagerPanel.this);
+				managerThirdPanel.repaint();
+				ManagerPanel.this.repaint();
+				managerUIController.setMainPanel(ManagerPanel.this);
+				
+				frame.setPanel(ManagerPanel.this);
+				
+				frame.repaint();
+	
 			}
 			
 		}
@@ -322,5 +323,13 @@ public class ManagerPanel extends FatherPanel{
 			
 		}
 
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		systemlogblService.exportExcel_up(logs);
+		resController = new ResultPanelController(frame, this);
+		frame.remove(this);
+		resController.succeeded("成功导出系统日志！", "manager");
+		
 	}
 }

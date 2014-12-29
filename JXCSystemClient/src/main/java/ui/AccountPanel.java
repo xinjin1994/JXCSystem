@@ -1,6 +1,8 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ import vo.bill.InvoiceVO;
 import vo.bill.PayVO;
 
 //财务经理
-public class AccountPanel extends FatherPanel{
+public class AccountPanel extends FatherPanel implements ActionListener{
 
 	private int firstX = 0;
 	private int firstY = 110;
@@ -52,7 +54,7 @@ public class AccountPanel extends FatherPanel{
 	public ThirdPanel accountThirdPanel;
 	MyButton accManage,finManage,recManage,invoiceManage,iniManage,saveCheck,systemLog;
 	private MyButton [] buttons = new MyButton[]{ accManage, finManage, recManage,invoiceManage,saveCheck,systemLog};
-	private MyButton refresh,output;
+	private MyButton refresh,excel;
 	private MyFrame frame;
 	
 	private MyTable showTable; 
@@ -87,6 +89,7 @@ public class AccountPanel extends FatherPanel{
 	private ArrayList<PayVO> payDraft = new ArrayList<PayVO>();
 	private ArrayList<GetVO> getDraft = new ArrayList<GetVO>();
 	
+	ArrayList<SystemlogVO> logs;
 	public AccountPanel(MyFrame frame, String url, UIController controller,
 			AccountUIController accountUIController) {
 		super(frame, url, controller);
@@ -338,7 +341,7 @@ public class AccountPanel extends FatherPanel{
 			else if (e.getSource() == buttons[5]) {
 				ArrayList<String> infos = new ArrayList<String>();
 				infos.add("操作时间;操作员;操作内容");
-				ArrayList<SystemlogVO> logs = new ArrayList<SystemlogVO>();
+				logs = new ArrayList<SystemlogVO>();
 				logs = systemlogblService.show_up();
 					
 				System.out.println("logs"+logs.size());
@@ -348,8 +351,21 @@ public class AccountPanel extends FatherPanel{
 					}
 					setTable(infos,"log");
 				} catch (Exception e2) {
-					// TODO: handle exception
+					setTable(infos,"log");
 				}
+				
+				excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
+				accountThirdPanel.add(excel);
+				excel.addActionListener(AccountPanel.this);
+				accountThirdPanel.repaint();
+				AccountPanel.this.repaint();
+				accountUIController.setMainPanel(AccountPanel.this);
+				
+				frame.setPanel(AccountPanel.this);
+				
+				frame.repaint();
+	
+				
 			}
 		}
 
@@ -377,5 +393,13 @@ public class AccountPanel extends FatherPanel{
 		
 		}
 		
+	}
+
+
+	public void actionPerformed(ActionEvent arg0) {
+		systemlogblService.exportExcel_up(logs);
+		resController = new ResultPanelController(frame, this);
+		frame.remove(this);
+		resController.succeeded("成功导出系统日志！", "account");
 	}
 }

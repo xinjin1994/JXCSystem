@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import ui.ManagerPanel;
+import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
@@ -22,7 +23,7 @@ import businesslogic.promotionbl.PromotionController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 import businesslogicservice.promotionblservice.PromotionblService;
 
-public class ManagerUIController {
+public class ManagerUIController extends UIController{
 	private int secondX = 1;
 	private int secondY = 35;
 	private int inter = 54;
