@@ -1172,11 +1172,17 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 		int i = 0;
 		for (i = 0; i < importList.size(); i++) {
 			if (note.equals(importList.get(i).getNote())) {
-				ArrayList<Integer> array = getAllImport_ReturnNote(importList.get(i).getNote());
+//				ArrayList<Integer> array = getAllImport_ReturnNote(importList.get(i).getNote());
 				int j = 0;
 				int sum = 0;
-				for (j = 0; j < array.size(); j++) {
-					sum = sum + array.get(i);
+				for (j = 0; j < import_returnList.size(); j++) {
+					if((import_returnList.get(j).getCondition()==2)
+							&&(import_returnList.get(j).getCustomer().getName().equals(importList.get(i).getCustomer().getName())
+							&&(import_returnList.get(j).getImportGoodList().get(0).getCommodity().getName().equals(importList.get(i).getImportGoodList().get(0).getCommodity().getName())
+							&&(import_returnList.get(j).getImportGoodList().get(0).getCommodity().getType().equals(importList.get(i).getImportGoodList().get(0).getCommodity().getType()))
+							&&(import_returnList.get(j).getTime().compareTo(importList.get(i).getTime())>=0)))){
+						sum=sum+import_returnList.get(j).getImportGoodList().get(0).getNumber();
+					}
 				}
 				int importNumber = importList.get(i).getImportGoodList().get(0).getNumber();
 				return importNumber - sum;
@@ -1190,11 +1196,17 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 		int i = 0;
 		for (i = 0; i < exportList.size(); i++) {
 			if (note.equals(exportList.get(i).getNote())) {
-				ArrayList<Integer> array = getAllExport_ReturnNote(exportList.get(i).getNote());
+//				ArrayList<Integer> array = getAllImport_ReturnNote(exportList.get(i).getNote());
 				int j = 0;
 				int sum = 0;
-				for (j = 0; j < array.size(); j++) {
-					sum = sum + array.get(i);
+				for (j = 0; j < export_returnList.size(); j++) {
+					if((export_returnList.get(j).getCondition()==2)
+							&&(export_returnList.get(j).getCustomer().getName().equals(exportList.get(i).getCustomer().getName())
+							&&(export_returnList.get(j).getImportGoodList().get(0).getCommodity().getName().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getName())
+							&&(export_returnList.get(j).getImportGoodList().get(0).getCommodity().getType().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getType()))
+							&&(export_returnList.get(j).getTime().compareTo(exportList.get(i).getTime())>=0)))){
+						sum=sum+export_returnList.get(j).getImportGoodList().get(0).getNumber();
+					}
 				}
 				int exportNumber = exportList.get(i).getImportGoodList().get(0).getNumber();
 				return exportNumber - sum;
@@ -1386,11 +1398,14 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 
 	public String getImportOldNote(String cusName, String name, String type) throws RemoteException {
 		// TODO Auto-generated method stub
-		for (int i = 0; i < importList.size(); i++) {
+		for (int i=importList.size()-1; i >= 0; i--) {
 			if (importList.get(i).getCustomer().getName().equals(cusName)) {
 				if (importList.get(i).getImportGoodList().get(0).getCommodity().getName().equals(name)) {
 					if (importList.get(i).getImportGoodList().get(0).getCommodity().getType().equals(type)) {
-						return importList.get(i).getNote();
+						if(importList.get(i).getCondition()==2){
+							return importList.get(i).getNote();
+						}
+				
 					}
 				}
 			}
@@ -1401,11 +1416,13 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	}
 
 	public String getExportOldNote(String cusName, String name, String type) {
-		for (int i = 0; i < exportList.size(); i++) {
+		for (int i = exportList.size()-1; i >=0 ; i--) {
 			if (exportList.get(i).getCustomer().getName().equals(cusName)) {
 				if (exportList.get(i).getImportGoodList().get(0).getCommodity().getName().equals(name)) {
 					if (exportList.get(i).getImportGoodList().get(0).getCommodity().getType().equals(type)) {
-						return exportList.get(i).getNote();
+						if(exportList.get(i).getCondition()==2){
+							return exportList.get(i).getNote();
+						}
 					}
 				}
 			}

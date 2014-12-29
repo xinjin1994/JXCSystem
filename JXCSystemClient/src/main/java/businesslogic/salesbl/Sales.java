@@ -138,8 +138,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 	public int addImport_Return(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
 		int number = getImport_ReturnMaxNumber(po.getOldNote());
+		System.out.println("要求退货数量："+po.getImportGoodList().get(0).getNumber());
+		System.out.println("可退货数量："+number);
 		if (po.getImportGoodList().get(0).getNumber() > number) {
-			return 5;
+			return 6;
 		} else {
 			invoice.add(po);
 			systemlog.add_up("AddImport_Return:" + User.operator);
