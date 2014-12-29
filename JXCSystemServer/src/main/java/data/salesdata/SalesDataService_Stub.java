@@ -1244,8 +1244,11 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		// TODO Auto-generated method stub
 		ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
 		int i = 0;
-		for (i = 0; i < importList.size(); i++) {
-			array.add(importList.get(i).getCustomer());
+		for (i = 0; i < customerList.size(); i++) {
+			if(!customerList.get(i).getType()){
+				array.add(customerList.get(i));
+			}
+			
 		}
 		return array;
 	}
@@ -1254,8 +1257,11 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		// TODO Auto-generated method stub
 		ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
 		int i = 0;
-		for (i = 0; i < exportList.size(); i++) {
-			array.add(exportList.get(i).getCustomer());
+		for (i = 0; i < customerList.size(); i++) {
+			if(customerList.get(i).getType()){
+				array.add(customerList.get(i));
+			}
+			
 		}
 		return array;
 	}
