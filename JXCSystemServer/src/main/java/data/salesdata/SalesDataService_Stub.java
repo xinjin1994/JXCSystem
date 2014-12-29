@@ -1262,50 +1262,60 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public boolean passImport(ImportPO importPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<importList.size();i++){
-			if(importList.get(i).getNote().equals(importPO.getNote())){
-				for(int j=0;j<customerList.size();j++){
-					if(customerList.get(j).name.equals(importPO.getCustomer().getName())){
-						customerList.get(j).moneyIn=customerList.get(j).moneyIn+importPO.getTotalMoney();
-					}
-				}
+		for (int j = 0; j < customerList.size(); j++) {
+			if (customerList.get(j).name.equals(importPO.getCustomer()
+					.getName())) {
+				customerList.get(j).moneyIn = customerList.get(j).moneyIn
+						+ importPO.getTotalMoney();
+			}
+		}
+		for (int i = 0; i < importList.size(); i++) {
+			if (importList.get(i).getNote().equals(importPO.getNote())) {
+
 				importList.get(i).setCondition(2);
 			}
-			
+
 		}
 		return true;
-		
+
 	}
 
 	public boolean passImport_Return(Import_ReturnPO import_ReturnPO)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<import_returnList.size();i++){
-			if(import_returnList.get(i).getNote().equals(import_ReturnPO.getNote())){
-				for(int j=0;j<customerList.size();j++){
-					if(customerList.get(j).name.equals(import_ReturnPO.getCustomer().getName())){
-						customerList.get(j).moneyIn=customerList.get(j).moneyIn-import_ReturnPO.getTotalMoney();
-					}
-				}
+		for (int j = 0; j < customerList.size(); j++) {
+			if (customerList.get(j).name.equals(import_ReturnPO.getCustomer()
+					.getName())) {
+				customerList.get(j).moneyIn = customerList.get(j).moneyIn
+						- import_ReturnPO.getTotalMoney();
+			}
+		}
+		for (int i = 0; i < import_returnList.size(); i++) {
+			if (import_returnList.get(i).getNote()
+					.equals(import_ReturnPO.getNote())) {
+
 				import_returnList.get(i).setCondition(2);
 			}
-			
+
 		}
 		return true;
 	}
 
 	public boolean passExport(ExportPO exportPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<exportList.size();i++){
-			if(importList.get(i).getNote().equals(exportPO.getNote())){
-				for(int j=0;j<customerList.size();j++){
-					if(customerList.get(j).name.equals(exportPO.getCustomer().getName())){
-						customerList.get(j).moneyOut=customerList.get(j).moneyOut+exportPO.getTotalMoneyAfter();
-					}
-				}
+		for (int j = 0; j < customerList.size(); j++) {
+			if (customerList.get(j).name.equals(exportPO.getCustomer()
+					.getName())) {
+				customerList.get(j).moneyOut = customerList.get(j).moneyOut
+						+ exportPO.getTotalMoneyAfter();
+			}
+		}
+		for (int i = 0; i < exportList.size(); i++) {
+			if (importList.get(i).getNote().equals(exportPO.getNote())) {
+
 				exportList.get(i).setCondition(2);
 			}
-			
+
 		}
 		return true;
 	}
@@ -1313,72 +1323,89 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 	public boolean passExport_Return(Export_ReturnPO export_ReturnPO)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<export_returnList.size();i++){
-			if(export_returnList.get(i).getNote().equals(export_ReturnPO.getNote())){
-				for(int j=0;j<customerList.size();j++){
-					if(customerList.get(j).name.equals(export_ReturnPO.getCustomer().getName())){
-						customerList.get(j).moneyOut=customerList.get(j).moneyOut-export_ReturnPO.getTotalMoneyAfter();
-					}
-				}
+		for (int j = 0; j < customerList.size(); j++) {
+			if (customerList.get(j).name.equals(export_ReturnPO.getCustomer()
+					.getName())) {
+				customerList.get(j).moneyOut = customerList.get(j).moneyOut
+						- export_ReturnPO.getTotalMoneyAfter();
+			}
+		}
+		for (int i = 0; i < export_returnList.size(); i++) {
+			if (export_returnList.get(i).getNote()
+					.equals(export_ReturnPO.getNote())) {
+
 				export_returnList.get(i).setCondition(2);
 			}
-			
+
 		}
 		return true;
 	}
 
 	public boolean refuseImport(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<importList.size();i++){
-			if(importList.get(i).getNote().equals(note)){
+		for (int i = 0; i < importList.size(); i++) {
+			if (importList.get(i).getNote().equals(note)) {
 				importList.get(i).setCondition(3);
 			}
-			
+
 		}
 		return true;
 	}
 
 	public boolean refuseImport_Return(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<import_returnList.size();i++){
-			if(import_returnList.get(i).getNote().equals(note)){
+		for (int i = 0; i < import_returnList.size(); i++) {
+			if (import_returnList.get(i).getNote().equals(note)) {
 				import_returnList.get(i).setCondition(3);
 			}
-			
+
 		}
 		return true;
 	}
 
 	public boolean refuseExport(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<exportList.size();i++){
-			if(exportList.get(i).getNote().equals(note)){
+		for (int i = 0; i < exportList.size(); i++) {
+			if (exportList.get(i).getNote().equals(note)) {
 				exportList.get(i).setCondition(3);
 			}
-			
+
 		}
 		return true;
 	}
 
 	public boolean refuseExport_Return(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<export_returnList.size();i++){
-			if(export_returnList.get(i).getNote().equals(note)){
+		for (int i = 0; i < export_returnList.size(); i++) {
+			if (export_returnList.get(i).getNote().equals(note)) {
 				export_returnList.get(i).setCondition(3);
 			}
-			
+
 		}
 		return true;
 	}
 
 	public boolean passReceipt(ReceiptPO receiptPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<customerList.size();i++){
+			if (customerList.get(i).name.equals(receiptPO.getCustomer()
+					.getName())) {
+				customerList.get(i).moneyOut = customerList.get(i).moneyOut
+						- receiptPO.getTotalMoney();
+			}
+		}
+		return true;
 	}
 
 	public boolean passPayment(PaymentPO paymentPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<customerList.size();i++){
+			if (customerList.get(i).name.equals(paymentPO.getItemName())) {
+				customerList.get(i).moneyIn = customerList.get(i).moneyOut
+						+ paymentPO.getTotalMoney();
+			}
+		}
+		return true;
 	}
 
 }
