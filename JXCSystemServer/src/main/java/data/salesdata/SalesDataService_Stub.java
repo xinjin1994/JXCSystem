@@ -1414,4 +1414,12 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return true;
 	}
 
+	public String getOldNote(String cusName, String name, String type)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+		
+		return null;
+	}
+
 }

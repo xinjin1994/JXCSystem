@@ -657,6 +657,16 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
+	public String getOldNote(String cusName,String name,String type){
+		String oldNote=null;
+		try {
+			oldNote=sale.getOldNote(cusName,name,type);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return oldNote;
+	}
 
 	public ArrayList<CustomerPO> getAllImportCustomer() {
 		ArrayList<CustomerPO> po=new ArrayList<CustomerPO>();

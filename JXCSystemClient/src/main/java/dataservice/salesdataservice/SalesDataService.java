@@ -135,4 +135,7 @@ public interface SalesDataService extends Remote {
 	public boolean passReceipt(ReceiptPO receiptPO) throws RemoteException;
 
 	public boolean passPayment(PaymentPO paymentPO) throws RemoteException;
+
+	public String getOldNote(String cusName, String name, String type)
+			throws RemoteException;
 }
