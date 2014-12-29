@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: main.Main
+Class-Path: . lib/ojdbc14.jar lib/poi-2.5.1.jar
+Created-By: Lf

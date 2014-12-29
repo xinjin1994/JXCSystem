@@ -26,12 +26,14 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 	public SalesInfo salesInfo;
 	public CommodityInfo commodityInfo;
 	public FinancialInfo financialInfo;
+	public SystemlogInfo systemlog;
 	
-	public void setInfo(AccountInfo account,SalesInfo sales, CommodityInfo commodity, FinancialInfo financial){
+	public void setInfo(AccountInfo account,SalesInfo sales, CommodityInfo commodity, FinancialInfo financial, SystemlogInfo systemlog){
 		this.accountInfo=account;
 		this.salesInfo=sales;
 		this.commodityInfo=commodity;
 		this.financialInfo=financial;
+		this.systemlog=systemlog;
 	}
 	
 	public InvoiceDataService invoice= new InvoiceDataService_Stub("1","2","3");
@@ -70,6 +72,7 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 				return 1;
 			}
 			invoice.passInvoice(po);
+			systemlog.add_up("passBill:"+po.getNote());
 			
 			switch(tempInvoice.getDocType()){
 			
@@ -169,6 +172,8 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 			if(!invoice.refuseInvoice(tempInvoice)){
 				return -1;
 			}
+			
+			systemlog.add_up("refuseBill:"+note);
 			
 			switch(tempInvoice.getDocType()){
 			
