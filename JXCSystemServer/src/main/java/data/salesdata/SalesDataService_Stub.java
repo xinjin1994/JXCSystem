@@ -23,8 +23,7 @@ import po.ReceiptPO;
 import data.accountdata.AccountDataService_Stub;
 import dataservice.salesdataservice.SalesDataService;
 
-public class SalesDataService_Stub extends UnicastRemoteObject implements
-		SalesDataService {
+public class SalesDataService_Stub extends UnicastRemoteObject implements SalesDataService {
 
 	ArrayList<CustomerPO> customerList = new ArrayList<CustomerPO>();
 	ArrayList<ImportPO> importList = new ArrayList<ImportPO>();
@@ -561,8 +560,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 			fis = new FileInputStream("out//draftImport_returnList.out");
 			ois = new ObjectInputStream(fis);
-			draftImport_returnList = (ArrayList<Import_ReturnPO>) ois
-					.readObject();
+			draftImport_returnList = (ArrayList<Import_ReturnPO>) ois.readObject();
 			ois.close();
 
 		} catch (ClassNotFoundException e) {
@@ -652,8 +650,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 			fis = new FileInputStream("out//draftExport_returnList.out");
 			ois = new ObjectInputStream(fis);
-			draftExport_returnList = (ArrayList<Export_ReturnPO>) ois
-					.readObject();
+			draftExport_returnList = (ArrayList<Export_ReturnPO>) ois.readObject();
 			ois.close();
 
 		} catch (ClassNotFoundException e) {
@@ -860,8 +857,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return true;
 	}
 
-	public boolean addDraftImport_Return(Import_ReturnPO po)
-			throws RemoteException {
+	public boolean addDraftImport_Return(Import_ReturnPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		po = po.copy();
 		po.setTime(AccountDataService_Stub.getNowTime());
@@ -881,8 +877,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return true;
 	}
 
-	public boolean addDraftExport_Return(Export_ReturnPO po)
-			throws RemoteException {
+	public boolean addDraftExport_Return(Export_ReturnPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		po = po.copy();
 		po.setTime(AccountDataService_Stub.getNowTime());
@@ -934,8 +929,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return array;
 	}
 
-	public ArrayList<Import_ReturnPO> getAllDraftImport_Return()
-			throws RemoteException {
+	public ArrayList<Import_ReturnPO> getAllDraftImport_Return() throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<Import_ReturnPO> array = new ArrayList<Import_ReturnPO>();
 		int i = 0;
@@ -955,8 +949,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return array;
 	}
 
-	public ArrayList<Export_ReturnPO> getAllDraftExport_Return()
-			throws RemoteException {
+	public ArrayList<Export_ReturnPO> getAllDraftExport_Return() throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<Export_ReturnPO> array = new ArrayList<Export_ReturnPO>();
 		int i = 0;
@@ -999,8 +992,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return null;
 	}
 
-	public Import_ReturnPO getDraftImport_Return(String note)
-			throws RemoteException {
+	public Import_ReturnPO getDraftImport_Return(String note) throws RemoteException {
 		// TODO Auto-generated method stub
 		int i = 0;
 		for (i = 0; i < draftImport_returnList.size(); i++) {
@@ -1044,8 +1036,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return null;
 	}
 
-	public Export_ReturnPO getDraftExport_Return(String note)
-			throws RemoteException {
+	public Export_ReturnPO getDraftExport_Return(String note) throws RemoteException {
 		// TODO Auto-generated method stub
 		int i = 0;
 		for (i = 0; i < draftExport_returnList.size(); i++) {
@@ -1181,15 +1172,13 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		int i = 0;
 		for (i = 0; i < importList.size(); i++) {
 			if (note.equals(importList.get(i).getNote())) {
-				ArrayList<Integer> array = getAllImport_ReturnNote(importList
-						.get(i).getNote());
+				ArrayList<Integer> array = getAllImport_ReturnNote(importList.get(i).getNote());
 				int j = 0;
 				int sum = 0;
 				for (j = 0; j < array.size(); j++) {
 					sum = sum + array.get(i);
 				}
-				int importNumber = importList.get(i).getImportGoodList().get(0)
-						.getNumber();
+				int importNumber = importList.get(i).getImportGoodList().get(0).getNumber();
 				return importNumber - sum;
 			}
 		}
@@ -1201,15 +1190,13 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		int i = 0;
 		for (i = 0; i < exportList.size(); i++) {
 			if (note.equals(exportList.get(i).getNote())) {
-				ArrayList<Integer> array = getAllExport_ReturnNote(exportList
-						.get(i).getNote());
+				ArrayList<Integer> array = getAllExport_ReturnNote(exportList.get(i).getNote());
 				int j = 0;
 				int sum = 0;
 				for (j = 0; j < array.size(); j++) {
 					sum = sum + array.get(i);
 				}
-				int exportNumber = exportList.get(i).getImportGoodList().get(0)
-						.getNumber();
+				int exportNumber = exportList.get(i).getImportGoodList().get(0).getNumber();
 				return exportNumber - sum;
 			}
 		}
@@ -1221,8 +1208,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		int i = 0;
 		for (i = 0; i < import_returnList.size(); i++) {
 			if (note.equals(import_returnList.get(i).getOldNote())) {
-				array.add(import_returnList.get(i).getImportGoodList().get(0)
-						.getNumber());
+				array.add(import_returnList.get(i).getImportGoodList().get(0).getNumber());
 			}
 		}
 		return array;
@@ -1233,8 +1219,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		int i = 0;
 		for (i = 0; i < export_returnList.size(); i++) {
 			if (note.equals(export_returnList.get(i).getOldNote())) {
-				array.add(export_returnList.get(i).getImportGoodList().get(0)
-						.getNumber());
+				array.add(export_returnList.get(i).getImportGoodList().get(0).getNumber());
 			}
 		}
 		return array;
@@ -1245,10 +1230,10 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
 		int i = 0;
 		for (i = 0; i < customerList.size(); i++) {
-			if(!customerList.get(i).getType()){
+			if (!customerList.get(i).getType()) {
 				array.add(customerList.get(i));
 			}
-			
+
 		}
 		return array;
 	}
@@ -1258,10 +1243,10 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
 		int i = 0;
 		for (i = 0; i < customerList.size(); i++) {
-			if(customerList.get(i).getType()){
+			if (customerList.get(i).getType()) {
 				array.add(customerList.get(i));
 			}
-			
+
 		}
 		return array;
 	}
@@ -1269,10 +1254,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 	public boolean passImport(ImportPO importPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		for (int j = 0; j < customerList.size(); j++) {
-			if (customerList.get(j).name.equals(importPO.getCustomer()
-					.getName())) {
-				customerList.get(j).moneyIn = customerList.get(j).moneyIn
-						+ importPO.getTotalMoney();
+			if (customerList.get(j).name.equals(importPO.getCustomer().getName())) {
+				customerList.get(j).moneyIn = customerList.get(j).moneyIn + importPO.getTotalMoney();
 			}
 		}
 		for (int i = 0; i < importList.size(); i++) {
@@ -1286,19 +1269,15 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	}
 
-	public boolean passImport_Return(Import_ReturnPO import_ReturnPO)
-			throws RemoteException {
+	public boolean passImport_Return(Import_ReturnPO import_ReturnPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		for (int j = 0; j < customerList.size(); j++) {
-			if (customerList.get(j).name.equals(import_ReturnPO.getCustomer()
-					.getName())) {
-				customerList.get(j).moneyIn = customerList.get(j).moneyIn
-						- import_ReturnPO.getTotalMoney();
+			if (customerList.get(j).name.equals(import_ReturnPO.getCustomer().getName())) {
+				customerList.get(j).moneyIn = customerList.get(j).moneyIn - import_ReturnPO.getTotalMoney();
 			}
 		}
 		for (int i = 0; i < import_returnList.size(); i++) {
-			if (import_returnList.get(i).getNote()
-					.equals(import_ReturnPO.getNote())) {
+			if (import_returnList.get(i).getNote().equals(import_ReturnPO.getNote())) {
 
 				import_returnList.get(i).setCondition(2);
 			}
@@ -1310,10 +1289,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 	public boolean passExport(ExportPO exportPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		for (int j = 0; j < customerList.size(); j++) {
-			if (customerList.get(j).name.equals(exportPO.getCustomer()
-					.getName())) {
-				customerList.get(j).moneyOut = customerList.get(j).moneyOut
-						+ exportPO.getTotalMoneyAfter();
+			if (customerList.get(j).name.equals(exportPO.getCustomer().getName())) {
+				customerList.get(j).moneyOut = customerList.get(j).moneyOut + exportPO.getTotalMoneyAfter();
 			}
 		}
 		for (int i = 0; i < exportList.size(); i++) {
@@ -1326,19 +1303,15 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		return true;
 	}
 
-	public boolean passExport_Return(Export_ReturnPO export_ReturnPO)
-			throws RemoteException {
+	public boolean passExport_Return(Export_ReturnPO export_ReturnPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		for (int j = 0; j < customerList.size(); j++) {
-			if (customerList.get(j).name.equals(export_ReturnPO.getCustomer()
-					.getName())) {
-				customerList.get(j).moneyOut = customerList.get(j).moneyOut
-						- export_ReturnPO.getTotalMoneyAfter();
+			if (customerList.get(j).name.equals(export_ReturnPO.getCustomer().getName())) {
+				customerList.get(j).moneyOut = customerList.get(j).moneyOut - export_ReturnPO.getTotalMoneyAfter();
 			}
 		}
 		for (int i = 0; i < export_returnList.size(); i++) {
-			if (export_returnList.get(i).getNote()
-					.equals(export_ReturnPO.getNote())) {
+			if (export_returnList.get(i).getNote().equals(export_ReturnPO.getNote())) {
 
 				export_returnList.get(i).setCondition(2);
 			}
@@ -1393,11 +1366,9 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public boolean passReceipt(ReceiptPO receiptPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<customerList.size();i++){
-			if (customerList.get(i).name.equals(receiptPO.getCustomer()
-					.getName())) {
-				customerList.get(i).moneyOut = customerList.get(i).moneyOut
-						- receiptPO.getTotalMoney();
+		for (int i = 0; i < customerList.size(); i++) {
+			if (customerList.get(i).name.equals(receiptPO.getCustomer().getName())) {
+				customerList.get(i).moneyOut = customerList.get(i).moneyOut - receiptPO.getTotalMoney();
 			}
 		}
 		return true;
@@ -1405,21 +1376,42 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public boolean passPayment(PaymentPO paymentPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<customerList.size();i++){
+		for (int i = 0; i < customerList.size(); i++) {
 			if (customerList.get(i).name.equals(paymentPO.getItemName())) {
-				customerList.get(i).moneyIn = customerList.get(i).moneyOut
-						+ paymentPO.getTotalMoney();
+				customerList.get(i).moneyIn = customerList.get(i).moneyOut + paymentPO.getTotalMoney();
 			}
 		}
 		return true;
 	}
 
-	public String getOldNote(String cusName, String name, String type)
-			throws RemoteException {
+	public String getImportOldNote(String cusName, String name, String type) throws RemoteException {
 		// TODO Auto-generated method stub
-		
-		
+		for (int i = 0; i < importList.size(); i++) {
+			if (importList.get(i).getCustomer().getName().equals(cusName)) {
+				if (importList.get(i).getImportGoodList().get(0).getCommodity().getName().equals(name)) {
+					if (importList.get(i).getImportGoodList().get(0).getCommodity().getType().equals(type)) {
+						return importList.get(i).getNote();
+					}
+				}
+			}
+
+		}
+
 		return null;
 	}
 
+	public String getExportOldNote(String cusName, String name, String type) {
+		for (int i = 0; i < exportList.size(); i++) {
+			if (exportList.get(i).getCustomer().getName().equals(cusName)) {
+				if (exportList.get(i).getImportGoodList().get(0).getCommodity().getName().equals(name)) {
+					if (exportList.get(i).getImportGoodList().get(0).getCommodity().getType().equals(type)) {
+						return exportList.get(i).getNote();
+					}
+				}
+			}
+
+		}
+
+		return null;
+	}
 }

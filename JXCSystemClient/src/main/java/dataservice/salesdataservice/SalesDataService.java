@@ -136,6 +136,8 @@ public interface SalesDataService extends Remote {
 
 	public boolean passPayment(PaymentPO paymentPO) throws RemoteException;
 
-	public String getOldNote(String cusName, String name, String type)
+	public String getImportOldNote(String cusName, String name, String type)
 			throws RemoteException;
+
+	public String getExportOldNote(String cusName, String name, String type)throws RemoteException;
 }

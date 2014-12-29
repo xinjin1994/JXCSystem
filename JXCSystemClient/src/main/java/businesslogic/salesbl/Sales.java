@@ -37,9 +37,7 @@ import dataservice.salesdataservice.SalesDataService;
 //5 销售退货数量超出可退数量
 //6 进货退货数量超出可退数量
 
-public class Sales implements businesslogic.accountbl.SalesInfo,
-		businesslogic.invoicebl.SalesInfo, businesslogic.financialbl.SalesInfo,
-		businesslogic.commoditybl.SalesInfo {
+public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.invoicebl.SalesInfo, businesslogic.financialbl.SalesInfo, businesslogic.commoditybl.SalesInfo {
 
 	public SalesDataService sale = new SaleDataService_Stub();
 	public InvoiceInfo invoice = new Invoice();
@@ -55,8 +53,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		this.sale = sale;
 	}
 
-	public void setInfo(InvoiceInfo invoice, SystemlogInfo systemlog,
-			CommodityInfo commodity) {
+	public void setInfo(InvoiceInfo invoice, SystemlogInfo systemlog, CommodityInfo commodity) {
 		this.invoice = invoice;
 		this.systemlog = systemlog;
 		this.commodity = commodity;
@@ -68,15 +65,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			if (sale.findCustomer(customerVO.cusName) != null) {
 				return 1;
 			}
-			CustomerPO customer = new CustomerPO(customerVO.id,
-					customerVO.cusName, customerVO.level,
-					customerVO.classification, customerVO.tel,
-					customerVO.zipCode, customerVO.ezipCode,
-					customerVO.shouldGet, customerVO.shouldPay,
-					customerVO.mostOwe, customerVO.person, customerVO.address);
+			CustomerPO customer = new CustomerPO(customerVO.id, customerVO.cusName, customerVO.level, customerVO.classification, customerVO.tel, customerVO.zipCode, customerVO.ezipCode,
+					customerVO.shouldGet, customerVO.shouldPay, customerVO.mostOwe, customerVO.person, customerVO.address);
 			if (sale.addCustomer(customer)) {
-				systemlog.add_up("AddCustomer:" + customer.getName() + ","
-						+ customer.getId());
+				systemlog.add_up("AddCustomer:" + customer.getName() + "," + customer.getId());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -120,14 +112,8 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			if (customer1 == null) {
 				return 2;
 			}
-			customer1 = new CustomerPO(vo1.id, vo1.cusName, vo1.level,
-					vo1.classification, vo1.tel, vo1.zipCode, vo1.ezipCode,
-					vo1.shouldGet, vo1.shouldPay, vo1.mostOwe, vo1.person,
-					vo1.address);
-			customer2 = new CustomerPO(vo2.id, vo2.cusName, vo2.level,
-					vo2.classification, vo2.tel, vo2.zipCode, vo2.ezipCode,
-					vo2.shouldGet, vo2.shouldPay, vo2.mostOwe, vo2.person,
-					vo2.address);
+			customer1 = new CustomerPO(vo1.id, vo1.cusName, vo1.level, vo1.classification, vo1.tel, vo1.zipCode, vo1.ezipCode, vo1.shouldGet, vo1.shouldPay, vo1.mostOwe, vo1.person, vo1.address);
+			customer2 = new CustomerPO(vo2.id, vo2.cusName, vo2.level, vo2.classification, vo2.tel, vo2.zipCode, vo2.ezipCode, vo2.shouldGet, vo2.shouldPay, vo2.mostOwe, vo2.person, vo2.address);
 			if (sale.updateCustomer(customer1, customer2)) {
 				systemlog.add_up("UpdateCustomer:" + customer1.getName());
 				// System.out.println(customer2.getClerk());
@@ -376,8 +362,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<Import_ReturnPO> getAllDraftImport_Return() {
 		// TODO Auto-generated method stub
 		try {
-			ArrayList<Import_ReturnPO> import_ReturnPO = sale
-					.getAllDraftImport_Return();
+			ArrayList<Import_ReturnPO> import_ReturnPO = sale.getAllDraftImport_Return();
 			systemlog.add_up("GetAllDraftImport_Return");
 			return import_ReturnPO;
 		} catch (RemoteException e) {
@@ -407,8 +392,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ArrayList<Export_ReturnPO> getAllDraftExport_Return() {
 		// TODO Auto-generated method stub
 		try {
-			ArrayList<Export_ReturnPO> export_ReturnPO = sale
-					.getAllDraftExport_Return();
+			ArrayList<Export_ReturnPO> export_ReturnPO = sale.getAllDraftExport_Return();
 			systemlog.add_up("GetAllDraftExport_Return");
 			return export_ReturnPO;
 		} catch (RemoteException e) {
@@ -631,24 +615,24 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int getImport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		int result=0;
+		int result = 0;
 		try {
 			result = sale.getImport_ReturnMaxNumber(old_note);
-			
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
-		
+
 	}
 
 	public int getExport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		int result=0;
+		int result = 0;
 		try {
 			result = sale.getExport_ReturnMaxNumber(old_note);
-			
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -657,19 +641,30 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
-	public String getOldNote(String cusName,String name,String type){
-		String oldNote=null;
+	public String getImportOldNote(String cusName, String name, String type) {
+		String oldNote = null;
 		try {
-			oldNote=sale.getOldNote(cusName,name,type);
+			oldNote = sale.getImportOldNote(cusName, name, type);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		return oldNote;
+	}
+
+	public String getExportOldNote(String cusName, String name, String type) {
+		String oldNote = null;
+		try {
+			oldNote = sale.getExportOldNote(cusName, name, type);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return oldNote;
 	}
 
 	public ArrayList<CustomerPO> getAllImportCustomer() {
-		ArrayList<CustomerPO> po=new ArrayList<CustomerPO>();
+		ArrayList<CustomerPO> po = new ArrayList<CustomerPO>();
 		try {
 			po = sale.getAllImportCustomer();
 		} catch (RemoteException e) {
@@ -680,7 +675,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public ArrayList<CustomerPO> getAllExportCustomer() {
-		ArrayList<CustomerPO> po=new ArrayList<CustomerPO>();
+		ArrayList<CustomerPO> po = new ArrayList<CustomerPO>();
 		try {
 			po = sale.getAllExportCustomer();
 		} catch (RemoteException e) {
@@ -705,7 +700,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String passImport(ImportPO importPO) {
 		try {
-			if(sale.passImport(importPO)){
+			if (sale.passImport(importPO)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -717,7 +712,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String passImport_Return(Import_ReturnPO import_ReturnPO) {
 		try {
-			if(sale.passImport_Return(import_ReturnPO)){
+			if (sale.passImport_Return(import_ReturnPO)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -729,7 +724,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String passExport(ExportPO exportPO) {
 		try {
-			if(sale.passExport(exportPO)){
+			if (sale.passExport(exportPO)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -741,7 +736,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String passExport_Return(Export_ReturnPO export_ReturnPO) {
 		try {
-			if(sale.passExport_Return(export_ReturnPO)){
+			if (sale.passExport_Return(export_ReturnPO)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -753,7 +748,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String refuseImport(String note) {
 		try {
-			if(sale.refuseImport(note)){
+			if (sale.refuseImport(note)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -765,7 +760,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String refuseImport_Return(String note) {
 		try {
-			if(sale.refuseImport_Return(note)){
+			if (sale.refuseImport_Return(note)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -777,7 +772,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String refuseExport(String note) {
 		try {
-			if(sale.refuseExport(note)){
+			if (sale.refuseExport(note)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -789,21 +784,21 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String refuseExport_Return(String note) {
 		// TODO Auto-generated method stub
-		
-			try {
-				if(sale.refuseExport_Return(note)){
-					return "成功";
-				}
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
+		try {
+			if (sale.refuseExport_Return(note)) {
+				return "成功";
 			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "失败";
 	}
 
 	public String passReceipt(ReceiptPO receiptPO) {
 		try {
-			if(sale.passReceipt(receiptPO)){
+			if (sale.passReceipt(receiptPO)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -815,7 +810,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public String passPayment(PaymentPO paymentPO) {
 		try {
-			if(sale.passPayment(paymentPO)){
+			if (sale.passPayment(paymentPO)) {
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -833,11 +828,11 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		int end = time.compareTo(discountPO.getEndTime());
 		if ((start >= 0) && (end <= 0)) {
 			if (money > discountPO.getEndMoney()) {
-				int result=(int) (discountPO.getEndMoney()/discountPO.getStartMoney());
-				return result*discountPO.getDiscountMoney();
+				int result = (int) (discountPO.getEndMoney() / discountPO.getStartMoney());
+				return result * discountPO.getDiscountMoney();
 			} else {
-				int result=(int) (money/discountPO.getStartMoney());
-				return  result*discountPO.getDiscountMoney();
+				int result = (int) (money / discountPO.getStartMoney());
+				return result * discountPO.getDiscountMoney();
 			}
 		}
 
@@ -847,12 +842,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public ProGiftPO getProGift(int money, int level) {
 		// TODO Auto-generated method stub
-		ProGiftPO proGiftPO=promotion.getProGift(level);
+		ProGiftPO proGiftPO = promotion.getProGift(level);
 		String time = Sales.getNowTime();
 		int start = time.compareTo(proGiftPO.getStartTime());
 		int end = time.compareTo(proGiftPO.getEndTime());
-		if ((start >= 0) && (end <= 0)){
-			if(money>proGiftPO.getStartMoney()){
+		if ((start >= 0) && (end <= 0)) {
+			if (money > proGiftPO.getStartMoney()) {
 				return proGiftPO;
 			}
 		}
@@ -861,12 +856,12 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public double getVoucher(int money, int level) {
 		// TODO Auto-generated method stub
-		VoucherPO voucherPO=promotion.getVoucher(level);
+		VoucherPO voucherPO = promotion.getVoucher(level);
 		String time = Sales.getNowTime();
 		int start = time.compareTo(voucherPO.getStartTime());
 		int end = time.compareTo(voucherPO.getEndTime());
-		if ((start >= 0) && (end <= 0)){
-			if(money>voucherPO.getStartMoney()){
+		if ((start >= 0) && (end <= 0)) {
+			if (money > voucherPO.getStartMoney()) {
 				return voucherPO.getVoucherMoney();
 			}
 		}
