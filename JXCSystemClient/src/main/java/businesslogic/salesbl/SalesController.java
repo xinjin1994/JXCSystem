@@ -653,4 +653,24 @@ public class SalesController implements SalesblService {
 		return vo;
 	}
 
+//	public int getClerkDiscount_up() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+
+	public int getDiscount_up(double money, int level) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getVoucher_up(double money, int level) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public CommodityVO getProGift_up(double money, int level) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

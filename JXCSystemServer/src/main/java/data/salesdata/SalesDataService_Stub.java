@@ -726,7 +726,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 		}
 		return false;
-	}
+	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
 	public boolean updateCustomer(CustomerPO customer1, CustomerPO customer2) {
 		CustomerPO po = findCustomer_true(customer1.getName());
@@ -1258,6 +1258,56 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			array.add(exportList.get(i).getCustomer());
 		}
 		return array;
+	}
+
+	public boolean passImport(ImportPO importPO)  throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passImport_Return(Import_ReturnPO import_ReturnPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passExport(ExportPO exportPO)  throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passExport_Return(Export_ReturnPO export_ReturnPO)  throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseImport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseImport_Return(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseExport(String note) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseExport_Return(String note)  throws RemoteException{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passReceipt(ReceiptPO receiptPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passPayment(PaymentPO paymentPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

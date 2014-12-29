@@ -9,6 +9,8 @@ import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
+import po.PaymentPO;
+import po.ReceiptPO;
 
 public interface SalesDataService extends Remote {
 	public boolean addCustomer(CustomerPO po) throws RemoteException;
@@ -64,4 +66,14 @@ public interface SalesDataService extends Remote {
 	public int getExport_ReturnMaxNumber(String old_note);
 	public ArrayList<CustomerPO> getAllImportCustomer();
 	public ArrayList<CustomerPO> getAllExportCustomer();
+	public boolean passImport(ImportPO importPO);
+	public boolean passImport_Return(Import_ReturnPO import_ReturnPO);
+	public boolean passExport(ExportPO exportPO);
+	public boolean passExport_Return(Export_ReturnPO export_ReturnPO);
+	public boolean refuseImport(String note);
+	public boolean refuseImport_Return(String note);
+	public boolean refuseExport(String note);
+	public boolean refuseExport_Return(String note);
+	public boolean passReceipt(ReceiptPO receiptPO);
+	public boolean passPayment(PaymentPO paymentPO);
 }

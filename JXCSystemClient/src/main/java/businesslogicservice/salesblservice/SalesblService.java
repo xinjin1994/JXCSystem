@@ -75,7 +75,7 @@ public interface SalesblService {
 	public CommodityVO getCommodity_up(String name, String type);
 	// 获得操作员能修改的最大折扣，注意这里的折扣不包括促销产生的折扣
 
-	public int getClerkDiscount_up();
+	public double getClerkDiscount_up();
 	
 	// 查看获得的折扣促销
 	public int getDiscount_up(double money, int level);

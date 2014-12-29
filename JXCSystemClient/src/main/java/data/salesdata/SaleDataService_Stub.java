@@ -8,6 +8,8 @@ import po.ExportPO;
 import po.Export_ReturnPO;
 import po.ImportPO;
 import po.Import_ReturnPO;
+import po.PaymentPO;
+import po.ReceiptPO;
 import dataservice.salesdataservice.SalesDataService;
 
 public class SaleDataService_Stub implements SalesDataService{
@@ -241,6 +243,56 @@ public class SaleDataService_Stub implements SalesDataService{
 	public ArrayList<CustomerPO> getAllExportCustomer() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean passImport(ImportPO importPO) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passImport_Return(Import_ReturnPO import_ReturnPO) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passExport(ExportPO exportPO) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passExport_Return(Export_ReturnPO export_ReturnPO) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseImport(String note) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseImport_Return(String note) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseExport(String note) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean refuseExport_Return(String note) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passReceipt(ReceiptPO receiptPO) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean passPayment(PaymentPO paymentPO) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -619,7 +619,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	// //////////////////////////////////////
-	public int getClerkDiscount() {
+	public double getClerkDiscount() {
 		// TODO Auto-generated method stub
 		if (User.duty == 3) {
 
@@ -667,53 +667,75 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public String passImport(ImportPO importPO) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.passImport(importPO)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String passImport_Return(Import_ReturnPO import_ReturnPO) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.passImport_Return(import_ReturnPO)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String passExport(ExportPO exportPO) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.passExport(exportPO)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String passExport_Return(Export_ReturnPO export_ReturnPO) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.passExport_Return(export_ReturnPO)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String refuseImport(String note) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.refuseImport(note)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String refuseImport_Return(String note) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.refuseImport_Return(note)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String refuseExport(String note) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.refuseExport(note)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String refuseExport_Return(String note) {
 		// TODO Auto-generated method stub
-		return null;
+		
+			if(sale.refuseExport_Return(note)){
+				return "成功";
+			}
+		return "失败";
 	}
 
 	public String passReceipt(ReceiptPO receiptPO) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.passReceipt(receiptPO)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public String passPayment(PaymentPO paymentPO) {
-		// TODO Auto-generated method stub
-		return null;
+		if(sale.passPayment(paymentPO)){
+			return "成功";
+		}
+		return "失败";
 	}
 
 	public double getDiscount(int money, int level) {
