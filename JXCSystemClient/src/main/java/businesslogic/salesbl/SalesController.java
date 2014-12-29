@@ -200,12 +200,12 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerVO> customerVO = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.getAllImportCustomer();
 		for (int i = 0; i < po.size(); i++) {
-			customerVO.set(i,
-					new CustomerVO(po.get(i).id, po.get(i).type,
-							po.get(i).level, po.get(i).name, po.get(i).phone,
-							po.get(i).address, po.get(i).zip, po.get(i).mail,
-							po.get(i).amount, po.get(i).moneyIn,
-							po.get(i).moneyOut, po.get(i).clerk));
+			CustomerVO customer=new CustomerVO(po.get(i).id, po.get(i).type,
+					po.get(i).level, po.get(i).name, po.get(i).phone,
+					po.get(i).address, po.get(i).zip, po.get(i).mail,
+					po.get(i).amount, po.get(i).moneyIn,
+					po.get(i).moneyOut, po.get(i).clerk);
+			customerVO.add(customer);
 		}
 		return customerVO;
 	}
@@ -215,12 +215,12 @@ public class SalesController implements SalesblService {
 		ArrayList<CustomerVO> customerVO = new ArrayList<CustomerVO>();
 		ArrayList<CustomerPO> po = sale.getAllExportCustomer();
 		for (int i = 0; i < po.size(); i++) {
-			customerVO.set(i,
-					new CustomerVO(po.get(i).id, po.get(i).type,
-							po.get(i).level, po.get(i).name, po.get(i).phone,
-							po.get(i).address, po.get(i).zip, po.get(i).mail,
-							po.get(i).amount, po.get(i).moneyIn,
-							po.get(i).moneyOut, po.get(i).clerk));
+			CustomerVO customer=new CustomerVO(po.get(i).id, po.get(i).type,
+					po.get(i).level, po.get(i).name, po.get(i).phone,
+					po.get(i).address, po.get(i).zip, po.get(i).mail,
+					po.get(i).amount, po.get(i).moneyIn,
+					po.get(i).moneyOut, po.get(i).clerk);
+			customerVO.add(customer);
 		}
 		return customerVO;
 	}
@@ -258,6 +258,7 @@ public class SalesController implements SalesblService {
 				exportMenuVO.commodityList.total,
 				exportMenuVO.commodityList.remark);
 		ArrayList<ExportGoodPO> exportGoodPO = new ArrayList<ExportGoodPO>();
+		exportGoodPO.add(exportGood);
 		CustomerPO customerPO = sale.getCustomer(exportMenuVO.cusName, "id");
 		Export_ReturnPO export_returnPO = new Export_ReturnPO(customerPO,
 				exportGoodPO, exportMenuVO.remark, exportMenuVO.salesMan,
