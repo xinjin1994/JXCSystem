@@ -726,7 +726,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 		}
 		return false;
-	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+	}
 
 	public boolean updateCustomer(CustomerPO customer1, CustomerPO customer2) {
 		CustomerPO po = findCustomer_true(customer1.getName());
@@ -1242,9 +1242,9 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public ArrayList<CustomerPO> getAllImportCustomer() throws RemoteException {
 		// TODO Auto-generated method stub
-		ArrayList<CustomerPO> array=new ArrayList<CustomerPO>();
-		int i=0;
-		for(i=0;i<importList.size();i++){
+		ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
+		int i = 0;
+		for (i = 0; i < importList.size(); i++) {
 			array.add(importList.get(i).getCustomer());
 		}
 		return array;
@@ -1252,52 +1252,123 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public ArrayList<CustomerPO> getAllExportCustomer() throws RemoteException {
 		// TODO Auto-generated method stub
-		ArrayList<CustomerPO> array=new ArrayList<CustomerPO>();
-		int i=0;
-		for(i=0;i<exportList.size();i++){
+		ArrayList<CustomerPO> array = new ArrayList<CustomerPO>();
+		int i = 0;
+		for (i = 0; i < exportList.size(); i++) {
 			array.add(exportList.get(i).getCustomer());
 		}
 		return array;
 	}
 
-	public boolean passImport(ImportPO importPO)  throws RemoteException{
+	public boolean passImport(ImportPO importPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<importList.size();i++){
+			if(importList.get(i).getNote().equals(importPO.getNote())){
+				for(int j=0;j<customerList.size();j++){
+					if(customerList.get(j).name.equals(importPO.getCustomer().getName())){
+						customerList.get(j).moneyIn=customerList.get(j).moneyIn+importPO.getTotalMoney();
+					}
+				}
+				importList.get(i).setCondition(2);
+			}
+			
+		}
+		return true;
+		
 	}
 
-	public boolean passImport_Return(Import_ReturnPO import_ReturnPO) throws RemoteException {
+	public boolean passImport_Return(Import_ReturnPO import_ReturnPO)
+			throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<import_returnList.size();i++){
+			if(import_returnList.get(i).getNote().equals(import_ReturnPO.getNote())){
+				for(int j=0;j<customerList.size();j++){
+					if(customerList.get(j).name.equals(import_ReturnPO.getCustomer().getName())){
+						customerList.get(j).moneyIn=customerList.get(j).moneyIn-import_ReturnPO.getTotalMoney();
+					}
+				}
+				import_returnList.get(i).setCondition(2);
+			}
+			
+		}
+		return true;
 	}
 
-	public boolean passExport(ExportPO exportPO)  throws RemoteException{
+	public boolean passExport(ExportPO exportPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<exportList.size();i++){
+			if(importList.get(i).getNote().equals(exportPO.getNote())){
+				for(int j=0;j<customerList.size();j++){
+					if(customerList.get(j).name.equals(exportPO.getCustomer().getName())){
+						customerList.get(j).moneyOut=customerList.get(j).moneyOut+exportPO.getTotalMoneyAfter();
+					}
+				}
+				exportList.get(i).setCondition(2);
+			}
+			
+		}
+		return true;
 	}
 
-	public boolean passExport_Return(Export_ReturnPO export_ReturnPO)  throws RemoteException{
+	public boolean passExport_Return(Export_ReturnPO export_ReturnPO)
+			throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<export_returnList.size();i++){
+			if(export_returnList.get(i).getNote().equals(export_ReturnPO.getNote())){
+				for(int j=0;j<customerList.size();j++){
+					if(customerList.get(j).name.equals(export_ReturnPO.getCustomer().getName())){
+						customerList.get(j).moneyOut=customerList.get(j).moneyOut-export_ReturnPO.getTotalMoneyAfter();
+					}
+				}
+				export_returnList.get(i).setCondition(2);
+			}
+			
+		}
+		return true;
 	}
 
 	public boolean refuseImport(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<importList.size();i++){
+			if(importList.get(i).getNote().equals(note)){
+				importList.get(i).setCondition(3);
+			}
+			
+		}
+		return true;
 	}
 
 	public boolean refuseImport_Return(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<import_returnList.size();i++){
+			if(import_returnList.get(i).getNote().equals(note)){
+				import_returnList.get(i).setCondition(3);
+			}
+			
+		}
+		return true;
 	}
 
 	public boolean refuseExport(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<exportList.size();i++){
+			if(exportList.get(i).getNote().equals(note)){
+				exportList.get(i).setCondition(3);
+			}
+			
+		}
+		return true;
 	}
 
-	public boolean refuseExport_Return(String note)  throws RemoteException{
+	public boolean refuseExport_Return(String note) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		for(int i=0;i<export_returnList.size();i++){
+			if(export_returnList.get(i).getNote().equals(note)){
+				export_returnList.get(i).setCondition(3);
+			}
+			
+		}
+		return true;
 	}
 
 	public boolean passReceipt(ReceiptPO receiptPO) throws RemoteException {

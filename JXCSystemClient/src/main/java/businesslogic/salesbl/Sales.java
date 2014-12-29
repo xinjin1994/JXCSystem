@@ -631,25 +631,52 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int getImport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		int result = sale.getImport_ReturnMaxNumber(old_note);
+		int result=0;
+		try {
+			result = sale.getImport_ReturnMaxNumber(old_note);
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
+		
 	}
 
 	public int getExport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
-		int result = sale.getExport_ReturnMaxNumber(old_note);
+		int result=0;
+		try {
+			result = sale.getExport_ReturnMaxNumber(old_note);
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return result;
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////
 
 	public ArrayList<CustomerPO> getAllImportCustomer() {
-		ArrayList<CustomerPO> po = sale.getAllImportCustomer();
+		ArrayList<CustomerPO> po=new ArrayList<CustomerPO>();
+		try {
+			po = sale.getAllImportCustomer();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return po;
 	}
 
 	public ArrayList<CustomerPO> getAllExportCustomer() {
-		ArrayList<CustomerPO> po = sale.getAllExportCustomer();
+		ArrayList<CustomerPO> po=new ArrayList<CustomerPO>();
+		try {
+			po = sale.getAllExportCustomer();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return po;
 	}
 
@@ -667,50 +694,85 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	}
 
 	public String passImport(ImportPO importPO) {
-		if(sale.passImport(importPO)){
-			return "成功";
+		try {
+			if(sale.passImport(importPO)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
 
 	public String passImport_Return(Import_ReturnPO import_ReturnPO) {
-		if(sale.passImport_Return(import_ReturnPO)){
-			return "成功";
+		try {
+			if(sale.passImport_Return(import_ReturnPO)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
 
 	public String passExport(ExportPO exportPO) {
-		if(sale.passExport(exportPO)){
-			return "成功";
+		try {
+			if(sale.passExport(exportPO)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
 
 	public String passExport_Return(Export_ReturnPO export_ReturnPO) {
-		if(sale.passExport_Return(export_ReturnPO)){
-			return "成功";
+		try {
+			if(sale.passExport_Return(export_ReturnPO)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
 
 	public String refuseImport(String note) {
-		if(sale.refuseImport(note)){
-			return "成功";
+		try {
+			if(sale.refuseImport(note)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
 
 	public String refuseImport_Return(String note) {
-		if(sale.refuseImport_Return(note)){
-			return "成功";
+		try {
+			if(sale.refuseImport_Return(note)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
 
 	public String refuseExport(String note) {
-		if(sale.refuseExport(note)){
-			return "成功";
+		try {
+			if(sale.refuseExport(note)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
@@ -718,22 +780,37 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public String refuseExport_Return(String note) {
 		// TODO Auto-generated method stub
 		
-			if(sale.refuseExport_Return(note)){
-				return "成功";
+			try {
+				if(sale.refuseExport_Return(note)){
+					return "成功";
+				}
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		return "失败";
 	}
 
 	public String passReceipt(ReceiptPO receiptPO) {
-		if(sale.passReceipt(receiptPO)){
-			return "成功";
+		try {
+			if(sale.passReceipt(receiptPO)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
 
 	public String passPayment(PaymentPO paymentPO) {
-		if(sale.passPayment(paymentPO)){
-			return "成功";
+		try {
+			if(sale.passPayment(paymentPO)){
+				return "成功";
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "失败";
 	}
