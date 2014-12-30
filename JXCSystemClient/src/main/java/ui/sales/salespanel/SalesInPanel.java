@@ -102,27 +102,47 @@ public class SalesInPanel extends ImInPanel {
 		// price = 30;
 	}
 
-	public void getTotalPrice() {
-		try {
-			if (Double.parseDouble(voucher.getText()) > Double.parseDouble(goodsPrice.getText()) * num) {
-				totalPriceText = 0;
-			} else {
-				totalPriceText = Double.parseDouble(goodsPrice.getText())
-						* num
-						- Double.parseDouble(discount.getText())
-						- Double.parseDouble(voucher.getText())
-						- salesblService
-								.getDiscount_up(Double.parseDouble(goodsPrice.getText()) * num, salesblService
-										.searchExactCustomer_up(newSupplier.getSelectedItem().toString()).level);
-				if (totalPriceText < 0) {
+	
+	public void addTotalListener() {
+		goodsTotal.addFocusListener(new FocusAdapter());
+		
+	}
+	class FocusAdapter implements FocusListener {
+
+		public void focusGained(FocusEvent e) {
+			goodsTotal.setText("");
+			try {
+				num = Integer.parseInt(goodsNum.getText());
+				if (Double.parseDouble(voucher.getText()) > Double.parseDouble(goodsPrice.getText()) * num) {
 					totalPriceText = 0;
+				} else {
+					int level = salesblService
+							.searchExactCustomer_up(newSupplier.getSelectedItem().toString()).level;
+					int dis_UnSeen = salesblService
+							.getDiscount_up(Double.parseDouble(goodsPrice.getText()) * num, level);
+					System.out.println("level"+level+"dis"+dis_UnSeen);
+					totalPriceText = Double.parseDouble(goodsPrice.getText())
+							* num
+							- Double.parseDouble(discount.getText())
+							- Double.parseDouble(voucher.getText())
+							- dis_UnSeen;
+					if (totalPriceText < 0) {
+						totalPriceText = 0;
+					}
 				}
+				
+					goodsTotal.setText(totalPriceText + "");
+					isGo = true;
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				failLabel.setText("请正确输入信息!");
 			}
-			goodsTotal.setText(totalPriceText + "");
-			this.add(goodsTotal);
-		} catch (Exception e2) {
-			failLabel.setText("请正确输入信息！");
 		}
+
+		public void focusLost(FocusEvent e) {
+
+		}
+
 	}
 
 	public void addWhichCus() {

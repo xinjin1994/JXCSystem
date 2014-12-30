@@ -224,10 +224,6 @@ public class ImInPanel extends FatherPanel {
 		// goodsNum.addFocusListener(new FocusAdapter());
 	}
 
-	public void addTotalListener() {
-		goodsTotal.addFocusListener(new FocusAdapter());
-
-	}
 
 	public void addSaveButton() {
 		saveButton = new MyButton("Image/save.png", 670, 550, "Image/save_stop.png", "Image/save_stop");
@@ -235,6 +231,10 @@ public class ImInPanel extends FatherPanel {
 		saveButton.addActionListener(buttonListener);
 	}
 
+	public void addTotalListener() {
+		goodsTotal.addFocusListener(new FocusAdapter());
+		
+	}
 	class FocusAdapter implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
