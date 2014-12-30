@@ -128,10 +128,8 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 //			}catch(Exception e2){
 //				isLegal = false;
 //			}
-			if(time1.equals("")||time2.equals("")){
-				frame.remove(this);
-				resController.failed("存在输入为空！", failedAddress);
-			}else if(!(time1.equals(""))&&!(time2.equals("")) ){
+			
+			if(!(time1.equals(""))&&!(time2.equals("")) ){
 				if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 					System.out.println("count");
 					frame.remove(this);
@@ -146,10 +144,10 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 				for(int i=0;i<conditionVO.size();i++){
 					info.add(conditionVO.get(i).getProfit()+"");
 				}
-//				if(info.size() == 1){
-//					frame.remove(this);
-//					resController.failed("不存在符合该条件的单据！", failedAddress);
-//				}else{
+				if(info.size() == 1){
+					frame.remove(this);
+					resController.failed("不存在符合该条件的单据！", failedAddress);
+				}else{
 				frame.remove(this);
 					if (type.equals("account")) {
 						setTableA(info);
@@ -183,7 +181,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 						
 						frame.repaint();
 					}
-//				}
+				}
 			}
 			frame.repaint();
 		}
