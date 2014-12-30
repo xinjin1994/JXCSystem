@@ -28,7 +28,7 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	protected UserVO user;
 	protected String type;
 	protected UserblService userblService;
-	
+	protected FatherPanel panel;
 	protected MyFrame frame;
 	protected MyLabel[] infoLabels = new MyLabel[3]; 
 	
@@ -36,6 +36,25 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 			UserVO user,String type) {
 		super(frame, url, controller);
 		
+		this.frame = frame;
+		this.type = type;
+		this.user = user;
+		this.adminAllUIController = controller;
+		
+	///	resController = new ResultPanelController(frame, adminAllUIController.getMainPanel());
+		
+		setForward();
+		setInfoLabel();
+		
+		userblService = new UserController();
+		
+		frame.repaint();
+	}
+	
+	public ConfirmUserPanel(MyFrame frame, String url, AdminAllUIController controller,
+			UserVO user,String type,FatherPanel panel) {
+		super(frame, url, controller);
+		this.panel = panel;
 		this.frame = frame;
 		this.type = type;
 		this.user = user;
@@ -151,6 +170,7 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 		default:
 			break;
 		}
+		frame.repaint();
 	}
 	
 	public void actionPerformed(ActionEvent event) {
@@ -165,10 +185,11 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 			
 			
 		}else if(event.getSource() == backButtonConfirm){
-//			
-//			frame.remove(AdminAllUIController.adminPanel);
-//			frame.setPanel(adminAllUIController.getPanel());
-//			
+			AdminPanel temp= (AdminPanel)(adminAllUIController.getMainPanel());
+			temp.remove(ConfirmUserPanel.this);
+			frame.remove(AdminAllUIController.adminPanel);
+			frame.setPanel(panel);
+			frame.repaint();
 		}
 		frame.repaint();		
 	}

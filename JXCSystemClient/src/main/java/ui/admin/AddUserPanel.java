@@ -127,12 +127,12 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 			}else {
 //			uiController.setTempPanel(this);
 			frame.remove(this);
+			uiController.setTempPanel(this);
 			frame.setPanel(uiController.getMainPanel());
 			user = new UserVO(textInfos[0].getText(),textInfos[1].getText()
 					,textInfos[3].getText(),dutyGet);
 			
-			uiController.setTempPanel(this);
-			uiController.confirmUserPanel(user,"添加");
+			uiController.confirmUserPanel(user,"添加",AddUserPanel.this);
 			}
 			frame.repaint();
 		}
