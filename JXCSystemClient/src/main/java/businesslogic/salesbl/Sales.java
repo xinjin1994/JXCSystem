@@ -147,7 +147,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			if (sale.addImport(po)) {
 				systemlog.add_up("addImport: ");
-				
 
 				return 0;
 			}
@@ -166,20 +165,21 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		System.out.println("要求退货数量："
 				+ po.getImportGoodList().get(0).getNumber());
 		System.out.println("可退货数量：" + number);
-		CommodityPO commodityPO=commodity.findCommodity(po.getImportGoodList().get(0)
-				.getCommodity().getName(), po.getImportGoodList()
-				.get(0).getCommodity().getType());
+		CommodityPO commodityPO = commodity.findCommodity(po
+				.getImportGoodList().get(0).getCommodity().getName(), po
+				.getImportGoodList().get(0).getCommodity().getType());
 		ArrayList<CommodityPO> array = new ArrayList<CommodityPO>();
 		array = commodity.getAllCommodity();
-		for(int i=0;i<array.size();i++){
-			if((array.get(i).getName()==commodityPO.getName())&&(array.get(i).getType()==commodityPO.getType())){
-				if(commodityPO.number<po.getImportGoodList().get(0).getNumber()){
+		for (int i = 0; i < array.size(); i++) {
+			if ((array.get(i).getName() == commodityPO.getName())
+					&& (array.get(i).getType() == commodityPO.getType())) {
+				if (commodityPO.number < po.getImportGoodList().get(0)
+						.getNumber()) {
 					return 6;
 				}
 			}
 		}
-		
-		
+
 		if (po.getImportGoodList().get(0).getNumber() > number) {
 			return 6;
 		} else {
@@ -213,19 +213,21 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			if (sale.addExport(po)) {
 				systemlog.add_up("addExport: ");
 
-				CommodityPO commodityPO=commodity.findCommodity(po.getExportGoodList().get(0)
-						.getCommodity().getName(), po.getExportGoodList()
-						.get(0).getCommodity().getType());
+				CommodityPO commodityPO = commodity.findCommodity(po
+						.getExportGoodList().get(0).getCommodity().getName(),
+						po.getExportGoodList().get(0).getCommodity().getType());
 				ArrayList<CommodityPO> array = new ArrayList<CommodityPO>();
 				array = commodity.getAllCommodity();
-				for(int i=0;i<array.size();i++){
-					if((array.get(i).getName()==commodityPO.getName())&&(array.get(i).getType()==commodityPO.getType())){
-						if(commodityPO.number<po.getExportGoodList().get(0).getNumber()){
+				for (int i = 0; i < array.size(); i++) {
+					if ((array.get(i).getName() == commodityPO.getName())
+							&& (array.get(i).getType() == commodityPO.getType())) {
+						if (commodityPO.number < po.getExportGoodList().get(0)
+								.getNumber()) {
 							return 7;
 						}
 					}
 				}
-				
+
 				ProGiftPO proGiftPO = promotion.getProGift(po.getCustomer()
 						.getLevel());
 				String time = Sales.getNowTime();
@@ -792,16 +794,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public String passImport(ImportPO importPO) {
 		try {
 			if (sale.passImport(importPO)) {
-				CommodityPO commodityPO=commodity.findCommodity(importPO.getImportGoodList().get(0)
-						.getCommodity().getName(), importPO.getImportGoodList()
-						.get(0).getCommodity().getType());
-				ArrayList<CommodityPO> array = new ArrayList<CommodityPO>();
-				array = commodity.getAllCommodity();
-				for(int i=0;i<array.size();i++){
-					if((array.get(i).getName()==commodityPO.getName())&&(array.get(i).getType()==commodityPO.getType())){
-						commodityPO.number=commodityPO.getNumber()+importPO.getImportGoodList().get(0).getNumber();
-					}
-				}
 				return "成功";
 			}
 		} catch (RemoteException e) {
@@ -838,15 +830,20 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public String passExport_Return(Export_ReturnPO export_ReturnPO) {
 		try {
 			if (sale.passExport_Return(export_ReturnPO)) {
-				
-				CommodityPO commodityPO=commodity.findCommodity(export_ReturnPO.getExportGoodList().get(0)
-						.getCommodity().getName(), export_ReturnPO.getExportGoodList()
-						.get(0).getCommodity().getType());
+
+				CommodityPO commodityPO = commodity.findCommodity(
+						export_ReturnPO.getExportGoodList().get(0)
+								.getCommodity().getName(), export_ReturnPO
+								.getExportGoodList().get(0).getCommodity()
+								.getType());
 				ArrayList<CommodityPO> array = new ArrayList<CommodityPO>();
 				array = commodity.getAllCommodity();
-				for(int i=0;i<array.size();i++){
-					if((array.get(i).getName()==commodityPO.getName())&&(array.get(i).getType()==commodityPO.getType())){
-						commodityPO.number=commodityPO.getNumber()+export_ReturnPO.getExportGoodList().get(0).getNumber();
+				for (int i = 0; i < array.size(); i++) {
+					if ((array.get(i).getName() == commodityPO.getName())
+							&& (array.get(i).getType() == commodityPO.getType())) {
+						commodityPO.number = commodityPO.getNumber()
+								+ export_ReturnPO.getExportGoodList().get(0)
+										.getNumber();
 					}
 				}
 				return "成功";
@@ -935,8 +932,8 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public double getDiscount(double money, int level) {
 		// TODO Auto-generated method stub
 		DiscountPO discountPO = promotion.getDiscount(level);
-		if(discountPO==null){
-			System.out.println("getDiscount: "+discountPO);
+		if (discountPO == null) {
+			System.out.println("getDiscount: " + discountPO);
 			return 0;
 		}
 		String time = Sales.getNowTime();

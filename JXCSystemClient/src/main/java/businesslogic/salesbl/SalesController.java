@@ -104,8 +104,9 @@ public class SalesController implements SalesblService {
 				importMenuVO.warehouse, importMenuVO.total,
 				sale.getImportOldNote(customerPO.name, commodityPO.getName(),
 						commodityPO.getType()));
-		System.out.println("addImport_Return_up: "+sale.getImportOldNote(customerPO.name, commodityPO.getName(),
-				commodityPO.getType()));
+		System.out.println("addImport_Return_up: "
+				+ sale.getImportOldNote(customerPO.name, commodityPO.getName(),
+						commodityPO.getType()));
 		System.out.println(customerPO.name);
 		System.out.println(commodityPO.getName());
 		System.out.println(commodityPO.getType());
@@ -351,20 +352,20 @@ public class SalesController implements SalesblService {
 		return sale.getDiscount(money, level);
 	}
 
-//	public double getVoucher_up(int money, int level) {
-//		// TODO Auto-generated method stub
-////		return sale.getVoucher(money, level);
-//	}
+	// public double getVoucher_up(int money, int level) {
+	// // TODO Auto-generated method stub
+	// // return sale.getVoucher(money, level);
+	// }
 
-//	public ProGiftPO getProGift_up(int money, int level) {
-//		// TODO Auto-generated method stub
-//		return sale.getProGift(money, level);
-//	}
+	// public ProGiftPO getProGift_up(int money, int level) {
+	// // TODO Auto-generated method stub
+	// return sale.getProGift(money, level);
+	// }
 
-//	public String getOtherPromotion_up() {
-//		// TODO Auto-generated method stub
-//		return sale.getOtherPromotion();
-//	}
+	// public String getOtherPromotion_up() {
+	// // TODO Auto-generated method stub
+	// return sale.getOtherPromotion();
+	// }
 
 	public String getImportNote_up() {
 		// TODO Auto-generated method stub
@@ -396,14 +397,15 @@ public class SalesController implements SalesblService {
 		return sale.getExport_ReturnMaxNumber(old_note);
 	}
 
-	public String getImportOldNote(String cusName, String name, String type){
+	public String getImportOldNote(String cusName, String name, String type) {
 		return sale.getImportOldNote(cusName, name, type);
 	}
+
 	// 销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
-//	public double getClerkDiscount_up() {
-//		// TODO Auto-generated method stub
-//		return sale.getClerkDiscount();
-//	}
+	// public double getClerkDiscount_up() {
+	// // TODO Auto-generated method stub
+	// return sale.getClerkDiscount();
+	// }
 
 	public String getCustomerNote_up() {
 		// TODO Auto-generated method stub
@@ -685,40 +687,40 @@ public class SalesController implements SalesblService {
 		return sale.getDiscount(money, level);
 	}
 
-//	public double getVoucher_up(double money, int level) {
-//		// TODO Auto-generated method stub
-//		return sale.getVoucher(money, level);
-//	}
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return sale.getVoucher(money, level);
+	// }
 
-//	public CommodityVO getProGift_up(double money, int level) {
-//		// TODO Auto-generated method stub
-//		
-//		return null;
-//	}
+	// public CommodityVO getProGift_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	//
+	// return null;
+	// }
 
 	public String getExportOldNote(String cusName, String name, String type) {
 		// TODO Auto-generated method stub
 		return sale.getExportOldNote(cusName, name, type);
 	}
 
-//	public double getClerkDiscount_up() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	public double getVoucher_up(double money, int level) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	// public double getClerkDiscount_up() {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
+	//
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
 
-//	public double getVoucher_up(double money, int level) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
 
-//	public double getVoucher_up(double money, int level) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
 
 }
