@@ -103,7 +103,7 @@ public class SalesManagerPanel extends FatherPanel {
 	private void setTable(ArrayList<String> info) {
 		showTable = new MyTable();
 		showTable.setColor(colors.saleColor, colors.greyFont, colors.salesBkColor, colors.greyFont);
-		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//		showTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		showTable.setTable(info);
 		thirdPanel.add(MyTable.tablePanel);
 		salesController.backPanel(this);
