@@ -38,6 +38,7 @@ public class PromotionController implements PromotionblService{
 	public ArrayList<DiscountVO> getDiscount_up() {
 		// TODO Auto-generated method stub
 		ArrayList<DiscountPO> po= promotion.getAllDiscount();
+		System.out.println("PromotionController"+po.size());
 		ArrayList<DiscountVO> array=new ArrayList<DiscountVO>();
 		for(int i=0;i<po.size();i++){
 			DiscountVO vo=new DiscountVO(po.get(i).getStartTime(),po.get(i).getEndTime(),po.get(i).getStartMoney(),po.get(i).getEndMoney(),po.get(i).getDiscountMoney(),po.get(i).getLevel());

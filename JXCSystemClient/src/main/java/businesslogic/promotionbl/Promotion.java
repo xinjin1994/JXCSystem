@@ -5,13 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import businesslogic.salesbl.PromotionInfo;
+import main.ClientStart;
 import po.CommodityPO;
 import po.DiscountPO;
 import po.ProGiftPO;
 import po.VoucherPO;
-import vo.CommodityVO;
-import vo.promotion.DiscountVO;
 import data.promotiondata.PromotionDataService_Stub;
 import dataservice.promotiondataservice.PromotionDataService;
 
@@ -175,12 +173,23 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 	}
 	
 	public DiscountPO getDiscount(int level){
-		try {
-			return promotion.getDiscount(level);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//			return promotion.getDiscount(level);
+	
+		ArrayList<DiscountPO> po;
+		po = ClientStart.promotion.getAllDiscount();
+
+System.out.println("getAllDIscount:"+po.size());
+			for(int i=0;i<po.size();i++){
+//					if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+					if(po.get(i).getLevel()==level){
+						System.out.println("getDiscountHuin:"+po.get(i).getDiscountMoney());
+						return po.get(i);
+//						}
+				}
+
+			}
+			
+		
 		return null;
 	}
 	
@@ -214,11 +223,13 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		ArrayList<DiscountPO> array=new ArrayList<DiscountPO>();
 		try {
 			po = promotion.showDiscount();
+			System.out.println("getAllDIscount:"+po.size());
 			for(int i=0;i<po.size();i++){
-				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+//				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
 					array.add(po.get(i));
-				}
+//				}
 			}
+			return array;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
