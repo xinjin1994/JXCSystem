@@ -113,8 +113,8 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 	}
 	
 	public InitializationDataService_Stub() throws RemoteException {
-		writeInitializationList();
-		writeNowInitialization();
+//		writeInitializationList();
+//		writeNowInitialization();
 		
 		readInitializationList();
 		readNowInitialization();
