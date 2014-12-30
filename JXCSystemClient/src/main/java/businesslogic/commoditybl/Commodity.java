@@ -438,7 +438,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		ArrayList<Export_ReturnPO> exp_ret=sales.getAllExport_Return();
 		ArrayList<PatchPO> patch=sto.getAllPatch();
 		ArrayList<SendGiftPO> gift=sto.getAllSendGift();
-		
+		System.out.println("Examine: "+sales.getAllImport().size());
 		ExamineVO vo;
 		
 		int i=0;
