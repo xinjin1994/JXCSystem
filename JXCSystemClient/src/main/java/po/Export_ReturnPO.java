@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class Export_ReturnPO extends InvoicePO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1100;
 	CustomerPO customer;
 	String ps;//��
 	String clerk;//Ĭ��ҵ��Ա
