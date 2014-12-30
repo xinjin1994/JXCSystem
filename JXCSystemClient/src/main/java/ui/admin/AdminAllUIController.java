@@ -66,6 +66,13 @@ public class AdminAllUIController extends UIController{
 		adminPanel.repaint();
 	}
 	
+	public void confirmUserPanel(UserVO user,String type,FatherPanel panel){
+		confirmUserPanel = new ConfirmUserPanel(frame,"Image/User/ConfirmUser.jpg", this, user,type,panel);
+		confirmUserPanel.setLocation(0, 217);
+		adminPanel.add(confirmUserPanel);
+		adminPanel.repaint();
+	}
+	
 //	public void confirmUserDel(UserVO user,String type){
 //		confirmUserPanel = new ConfirmUserDel(frame,"Image/User/ConfirmUser.jpg", this, user,type);
 //		confirmUserPanel.setLocation(0, 217);

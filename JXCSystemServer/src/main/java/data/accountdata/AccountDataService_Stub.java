@@ -698,7 +698,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	
 	public static String getNowTime(){
 		 Calendar rightNow = Calendar.getInstance();
-		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		 String sysDatetime = fmt.format(rightNow.getTime());
 		 return sysDatetime; 
 	}

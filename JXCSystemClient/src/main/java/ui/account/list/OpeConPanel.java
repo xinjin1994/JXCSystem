@@ -144,10 +144,10 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 				for(int i=0;i<conditionVO.size();i++){
 					info.add(conditionVO.get(i).getProfit()+"");
 				}
-//				if(info.size() == 1){
-//					frame.remove(this);
-//					resController.failed("不存在符合该条件的单据！", failedAddress);
-//				}else{
+				if(info.size() == 1){
+					frame.remove(this);
+					resController.failed("不存在符合该条件的单据！", failedAddress);
+				}else{
 				frame.remove(this);
 					if (type.equals("account")) {
 						setTableA(info);
@@ -181,7 +181,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 						
 						frame.repaint();
 					}
-//				}
+				}
 			}
 			frame.repaint();
 		}

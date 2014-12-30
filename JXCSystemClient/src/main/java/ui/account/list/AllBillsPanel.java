@@ -24,6 +24,7 @@ import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.AllBillVO;
+import vo.bill.InvoiceVO;
 import businesslogic.financialbl.FinancialController;
 import businesslogicservice.financialblservice.FinancialblService;
 /**
@@ -48,6 +49,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 	private String failedAddress;
 	private ResultPanelController resController;
 	ArrayList<AllBillVO> billsArray;
+	ArrayList<InvoiceVO> billIn;
 	public AllBillsPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -107,15 +109,22 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 		}
 	}
 	private void setTableM(ArrayList<String> info){
-		showTable.setColor(color.manTableColor,color.manBkColor, color.manColor,Color.white);
-		showTable.setTable(info);
-		new SetTable(showTable, frame, managerController);
+		SaveTempBills bills = new SaveTempBills(frame, billIn, managerController);
+		ManagerPanel temp = (ManagerPanel)(managerController.getMainPanel());
+		temp.setTable(info, bills);
+		frame.setPanel(temp);
+		frame.repaint();
+		managerController.setMainPanel(temp);
 	}
 	
 	private void setTableA(ArrayList<String> info){
-		showTable.setColor(color.accTableColor,color.greyFont,color.accColor,color.greyFont);
-		showTable.setTable(info);
-		new SetTable(showTable, frame, accountController);
+		
+		SaveTempBills bills = new SaveTempBills(frame, billIn, accountController);
+		AccountPanel temp = (AccountPanel)(accountController.getMainPanel());
+		temp.setTable(info, bills);
+		frame.setPanel(temp);
+		frame.repaint();
+		accountController.setMainPanel(temp);
 	}
 	
 	
@@ -137,7 +146,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 //			}catch(Exception e2){
 //				isLegal = false;
 //						}
-
+			
 			if(!(time1.equals(""))&&!(time2.equals("")) ){
 				if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 					frame.remove(this);
@@ -184,6 +193,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 						}
 						item = billsArray.get(i).time+";"+billsArray.get(i).note+";"+itemName;
 						bills.add(item);
+						billIn.add((InvoiceVO)(billsArray.get(i)));
 					}}catch(Exception e2){
 						System.out.println(bills.get(0));
 						e2.printStackTrace();
@@ -198,7 +208,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 
 					frame.remove(this);
 					if (type.equals("account")) {
-						setTableA(sales);
+						setTableA(bills);
 						
 						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
 						
@@ -215,7 +225,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 					} else if (type.equals("manager")) {
 						
 						
-						setTableM(sales);
+						setTableM(bills);
 						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());
 						
 						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	

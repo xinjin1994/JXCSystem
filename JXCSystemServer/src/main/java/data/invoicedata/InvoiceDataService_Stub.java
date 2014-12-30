@@ -136,8 +136,9 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	public boolean addInvoice(InvoicePO po) {
 		InvoicePO po1=findInvoice_true(po.getNote());
 		if(po1==null){
-			po.setTime(AccountDataService_Stub.getNoteTime());
+			po.setTime(AccountDataService_Stub.getNowTime());
 			invoiceList.add(po.copy());
+			this.writeInvoiceList();
 			return true;
 		}
 		return false;
@@ -147,6 +148,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		for(int i=0;i<invoiceList.size();i++){
 			if(invoiceList.get(i).getNote().equals(po.getNote())){
 				invoiceList.remove(i);
+				this.writeInvoiceList();
 				return true;
 			}
 		}
@@ -192,6 +194,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 				invoiceList.remove(i);
 				invoiceList.add(po);
 //				invoiceList.get(i).setCondition(2);
+				this.writeInvoiceList();
 				return true;
 			}
 		}
@@ -204,6 +207,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		for(int i=0;i<invoiceList.size();i++){
 			if(invoiceList.get(i).getNote().equals(po.getNote())){
 				invoiceList.get(i).setCondition(3);
+				this.writeInvoiceList();
 				return true;
 			}
 		}

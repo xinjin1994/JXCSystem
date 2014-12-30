@@ -1,13 +1,20 @@
 package ui.commodity.storage;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import ui.CommodityPanel;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.MyFrame;
+import ui.setting.MyTable;
+import ui.setting.SaveTempBills;
+import ui.setting.SetTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
+import vo.bill.InvoiceVO;
 import vo.bill.PatchVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
@@ -49,6 +56,21 @@ public class ConfirmPatchPanel extends PatchDetailPanel implements ActionListene
 			switch(commodityblService.patch_up(patch)){
 			case 0:
 				resControllerS.succeeded("成功添加报溢报损单！", "commodity");
+				ArrayList<PatchVO> patchs = commodityblService.getAllPatch_up();
+				ArrayList<String> info  = new ArrayList<String>();
+				info.add("时间;单据编号");
+				ArrayList<InvoiceVO> patchIn = new ArrayList<InvoiceVO>();
+				for(PatchVO temp:patchs){
+					info.add(temp.time+";"+temp.note);
+					patchIn.add((InvoiceVO)temp);
+				}
+				
+				SaveTempBills bills = new SaveTempBills(frame, patchIn, commodityAllUIController);
+				CommodityPanel temp = (CommodityPanel)(commodityAllUIController.getMainPanel());
+				temp.setTable(info, bills);
+				frame.setPanel(temp);
+				frame.repaint();
+				commodityAllUIController.setMainPanel(temp);
 				break;
 			default:
 				resControllerF.failedConfirm("未知错误！", failedAddress);

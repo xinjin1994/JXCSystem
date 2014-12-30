@@ -317,7 +317,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public boolean addDiscount(DiscountPO po) {
 		
 		for(int i=0;i<discountList.size();i++){
-			if(po.getEndTime().compareTo(AccountDataService_Stub.getNoteTime())>=0&&(po.getLevel()==discountList.get(i).getLevel())){
+			if(po.getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0&&(po.getLevel()==discountList.get(i).getLevel())){
 				return false;
 			}
 		}
@@ -327,7 +327,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public boolean addGift(ProGiftPO po) {
 		
 		for(int i=0;i<proGiftList.size();i++){
-			if(po.getEndTime().compareTo(AccountDataService_Stub.getNoteTime())>=0&&(po.getLevel()==proGiftList.get(i).getLevel())){
+			if(po.getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0&&(po.getLevel()==proGiftList.get(i).getLevel())){
 				return false;
 			}
 		}
@@ -339,7 +339,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		// TODO Auto-generated method stub
 		
 		for(int i=0;i<voucherList.size();i++){
-			if(po.getEndTime().compareTo(AccountDataService_Stub.getNoteTime())>=0&&(po.getLevel()==voucherList.get(i).getLevel())){
+			if(po.getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0&&(po.getLevel()==voucherList.get(i).getLevel())){
 				return false;
 			}
 		}
