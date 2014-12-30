@@ -233,14 +233,20 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 					.getLevel());
 			if (proGiftPO == null) {
 				systemlog.add_up("addExport: ");
+				System.out.println("addExport:before ");
 				return 0;
 			} else {
+				System.out.println("addExport:after");
 				String time = Sales.getNowTime();
 				int start = time.compareTo(proGiftPO.getStartTime());
 				int end = time.compareTo(proGiftPO.getEndTime());
+//				System.out.println("time:"+time);
+//				System.out.println("money1:"+po.getTotalMoneyAfter()+" money2: "+proGiftPO.getStartMoney());
+			
 				if ((start >= 0) && (end <= 0)) {
-					if (po.getExportGoodList().get(0).getMoney() > proGiftPO
+					if (po.getTotalMoneyAfter()>= proGiftPO
 							.getStartMoney()) {
+						
 						commodity.addSendGift(proGiftPO.getGift(),
 								proGiftPO.getNumber(), po.getCustomer());
 					}

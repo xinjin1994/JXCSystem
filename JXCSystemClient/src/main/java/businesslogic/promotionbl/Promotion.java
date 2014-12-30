@@ -195,11 +195,15 @@ System.out.println("getAllDIscount:"+po.size());
 	}
 	
 	public ProGiftPO getProGift(int level){
-		try {
-			return promotion.getGift(level);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ArrayList<ProGiftPO> po;
+		po = ClientStart.promotion.getAllProGift();
+		
+		for(int i=0;i<po.size();i++){
+//				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+			if(po.get(i).getLevel()==level){	
+				return po.get(i);
+//				}}
+			}
 		}
 		return null;
 	}
