@@ -1,6 +1,7 @@
 package ui.admin;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
 import ui.AdminPanel;
@@ -8,6 +9,7 @@ import ui.FatherPanel;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
+import ui.setting.Button.BackButton;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
@@ -16,7 +18,7 @@ import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
 
 public class ConfirmUserPanel extends FatherPanel implements ActionListener{
-	protected MyButton forwardButton;
+	protected MyButton forwardButton,backButtonConfirm;
 	protected ResultPanelController resController;
 	protected AdminAllUIController adminAllUIController;
 	protected UserVO user;
@@ -41,6 +43,8 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 		setInfoLabel();
 		
 		userblService = new UserController();
+		
+		frame.repaint();
 	}
 
 	private void setForward() {
@@ -48,6 +52,13 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 		forwardButton = forward.forward_white;
 		this.add(forwardButton);
 		forwardButton.addActionListener(this);
+		
+		BackButton back = new BackButton(200 ,300);
+		backButtonConfirm = back.back_white;		
+		this.add(backButtonConfirm);
+		backButtonConfirm.addActionListener(this);
+		
+		
 	}
 
 	private void addCloseLabel(){
@@ -102,11 +113,12 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	private void check(int i){
 //		System.out.println(i);
 		
-		AdminPanel temp= (AdminPanel)(adminAllUIController.getMainPanel());
+		AdminPanel temp= AdminAllUIController.adminPanel;
 		temp.setTable();
 		
 		resController = new ResultPanelController(frame, temp);
 		temp.remove(this);
+		
 		adminAllUIController.setMainPanel(temp);
 		
 		switch (i) {
@@ -141,9 +153,13 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 			else if (type.equals("删除")) {
 				check(userblService.delUser_up(user));
 			}
-			frame.repaint();
-		}
 			
+			
+		}else if(event.getSource() == backButtonConfirm){
+			frame.remove(AdminAllUIController.adminPanel);
+			frame.setPanel(adminAllUIController.getPanel());
+		}
+		frame.repaint();		
 	}
 	
 }

@@ -10,6 +10,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.FtrDocument;
+
 import po.PaymentPO;
 import ui.FatherPanel;
 import ui.account.AccountAllUIController;
@@ -151,6 +153,8 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 //		cusVoArray = accountblService.getAllCustomer_up();
 		
 		cusVoArray = salesblService.getAllImportCustomer_up();
+		
+		
 		String[]customers = new String[cusVoArray.size()];
 		for(int i = 0;i < cusVoArray.size();i++){
 			customers[i] = cusVoArray.get(i).cusName;
@@ -247,27 +251,29 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 				frame.remove(this);
 				resController.failed("存在输入为空！", failedAddress);
 				
-			}else{
-				try {
-					
-				} catch (Exception e2) {
-					// TODO: handle exception
-				}
+			}
+			else {
+		
 				
 				
 				try{
 					
-//					totalValue = accountblService.calTotalMoney_up(newPayment);
+					//					totalValue = accountblService.calTotalMoney_up(newPayment);
 					setNewPayment();
-					uiController.setTempPanel(this);
+					if(totalValue > balanceValue){
+						frame.remove(this);
+						resController.failed("账户余额不足！", failedAddress);
+					}else{
+						uiController.setTempPanel(this);
+						frame.remove(this);
+						operate = operator.getText();
+						uiController.confirmPayment(newPayment,person,operate,
+								totalValue,balanceValue);
+					}
+				}catch(Exception e2){
 					frame.remove(this);
-					operate = operator.getText();
-					uiController.confirmPayment(newPayment,person,operate,
-							totalValue,balanceValue);
-						}catch(Exception e2){
-							frame.remove(this);
-							resController.failed("存在输入错误！",failedAddress);		
-							}
+					resController.failed("存在输入错误！",failedAddress);		
+				}
 			}
 				
 		}else if(e.getSource() == account){

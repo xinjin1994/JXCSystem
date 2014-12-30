@@ -11,8 +11,8 @@ import ui.setting.MyLabel;
 import vo.CommodityVO;
 
 public class ComDetailPanel extends FatherPanel{
-	private MyFrame frame;
-	private CommodityAllUIController commodityAllUIController;
+	protected MyFrame frame;
+	protected CommodityAllUIController commodityAllUIController;
 	private CommodityVO com;
 	
 	private MyLabel labels[] = new MyLabel[10];

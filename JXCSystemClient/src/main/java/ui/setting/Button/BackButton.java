@@ -17,5 +17,7 @@ public class BackButton extends MyButton{
 	public BackButton(int x,int y){
 		back_black = new MyButton("Image/Sales/Sales_image/返回_白.png", x, y, "Image/Sales/Sales_image/返回.png",
 				"Image/Sales/Sales_image/返回_press_on.png");
+		back_white= new MyButton("Image/Sales/Sales_image/返回_白.png", x, y, "Image/Sales/Sales_image/返回_press_on.png",
+				"Image/Sales/Sales_image/返回_press_on.png");
 	}
 }
