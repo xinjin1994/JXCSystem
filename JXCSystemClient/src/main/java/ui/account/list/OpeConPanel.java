@@ -128,8 +128,10 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 //			}catch(Exception e2){
 //				isLegal = false;
 //			}
-			
-			if(!(time1.equals(""))&&!(time2.equals("")) ){
+			if(time1.equals("")||time2.equals("")){
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
+			}else if(!(time1.equals(""))&&!(time2.equals("")) ){
 				if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 					System.out.println("count");
 					frame.remove(this);

@@ -236,6 +236,9 @@ public class MakeSureIm extends FatherPanel {
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
+				case 7:
+					salesResult.failed("库存不足！", "export_return_failed");
+					break;
 				default:
 					salesResult.failed("添加失败！", "export_return_failed");
 				}

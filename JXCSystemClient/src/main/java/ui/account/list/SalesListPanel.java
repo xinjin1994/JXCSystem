@@ -137,7 +137,11 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 //				isLegal = false;
 //			}
 
-			if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
+			if(time1.equals("")||time2.equals("")||good_name.equals("")
+					||customer_name.equals("")||clerk.equals("")){
+				frame.remove(this);
+				resController.failed("存在输入为空！", failedAddress);
+			}else if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 				frame.remove(this);
 				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 			}
@@ -151,10 +155,12 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 							time2, good_name, "", customer_name, clerk, String.valueOf(warehouse));
 				
 					sales.add("时间;商品名称;型号;数量;单价;总额");
+					if(salesArray!= null){
 					for(int i=0;i<salesArray.size();i++){
 						String salesItem = salesArray.get(i).time+";"+salesArray.get(i).commodityName+";"+salesArray.get(i).type
 								+";"+salesArray.get(i).num+";"+salesArray.get(i).unitPrice+";"+salesArray.get(i).total;
 						sales.add(salesItem);
+						}
 					}
 				}catch(Exception e2){
 					frame.remove(this);

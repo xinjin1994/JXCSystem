@@ -941,23 +941,27 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		DiscountPO discountPO = promotion.getDiscount(level);
 		if (discountPO == null) {
-			System.out.println("getDiscount: " + discountPO);
+			System.out.println("SalesgetDiscount: " + discountPO);
 			return 0;
-		}
+		}else{
+			System.out.println("disCount is not null");
 		String time = Sales.getNowTime();
 		int start = time.compareTo(discountPO.getStartTime());
 		int end = time.compareTo(discountPO.getEndTime());
+		System.out.println("time "+time+"start "+start+"end "+end);
 		if ((start >= 0) && (end <= 0)) {
+			System.out.println("here");
 			if (money > discountPO.getEndMoney()) {
 				int result = (int) (discountPO.getEndMoney() / discountPO
 						.getStartMoney());
 				return result * discountPO.getDiscountMoney();
 			} else {
+				System.out.println("there");
 				int result = (int) (money / discountPO.getStartMoney());
 				return result * discountPO.getDiscountMoney();
 			}
 		}
-
+		}
 		return 0;
 
 	}

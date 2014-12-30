@@ -128,6 +128,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		System.out.println("addUser:"+po.getName()+" Note:"+po.getNote());
 		userList.add(po.copy());
 		this.writeUserList();
+		this.writeUserNote();
 		return true;
 	}
 

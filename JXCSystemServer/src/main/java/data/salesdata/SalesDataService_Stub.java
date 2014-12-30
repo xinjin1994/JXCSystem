@@ -1170,6 +1170,9 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	public int getImport_ReturnMaxNumber(String note) throws RemoteException {
 		// TODO Auto-generated method stub
 		int i = 0;
+		if(importList.size()==0){
+			return 0;
+		}
 		for (i = 0; i < importList.size(); i++) {
 			if (note.equals(importList.get(i).getNote())) {
 //				ArrayList<Integer> array = getAllImport_ReturnNote(importList.get(i).getNote());

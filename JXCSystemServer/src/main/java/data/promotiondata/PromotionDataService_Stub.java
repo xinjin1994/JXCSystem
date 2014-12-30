@@ -382,11 +382,10 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	}
 
 	public DiscountPO getDiscount(int level) throws RemoteException {
-		System.out.println("getDiscount"+discountList.size());
 		for(int i=0;i<discountList.size();i++){
 			if(level==discountList.get(i).getLevel()){
-				System.out.println("discountList:"+discountList.get(i).getLevel());
-				return discountList.get(i);
+//				System.out.println("discountList:"+discountList.get(i).getLevel());
+				return discountList.get(i).copy();
 			}
 		}
 		return null;
@@ -395,7 +394,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public ProGiftPO getGift(int level) throws RemoteException {
 		for(int i=0;i<proGiftList.size();i++){
 			if(level==proGiftList.get(i).getLevel()){
-				return proGiftList.get(i);
+				return proGiftList.get(i).copy();
 			}
 		}
 		return null;
@@ -405,7 +404,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		// TODO Auto-generated method stub
 		for(int i=0;i<voucherList.size();i++){
 			if(level==voucherList.get(i).getLevel()){
-				return voucherList.get(i);
+				return voucherList.get(i).copy();
 			}
 		}
 		return null;
@@ -414,7 +413,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public ArrayList<DiscountPO> showDiscount() {
 		ArrayList<DiscountPO> array=new ArrayList<DiscountPO>();
 		for(int i=0;i<discountList.size();i++){
-			array.add(discountList.get(i));
+			array.add(discountList.get(i).copy());
 		}
 		return array;
 	}
@@ -422,7 +421,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public ArrayList<ProGiftPO> showProGift() {
 		ArrayList<ProGiftPO> array=new ArrayList<ProGiftPO>();
 		for(int i=0;i<proGiftList.size();i++){
-			array.add(proGiftList.get(i));
+			array.add(proGiftList.get(i).copy());
 		}
 		return array;
 	}
@@ -431,7 +430,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		// TODO Auto-generated method stub
 		ArrayList<VoucherPO> array=new ArrayList<VoucherPO>();
 		for(int i=0;i<voucherList.size();i++){
-			array.add(voucherList.get(i));
+			array.add(voucherList.get(i).copy());
 		}
 		return array;
 	}
