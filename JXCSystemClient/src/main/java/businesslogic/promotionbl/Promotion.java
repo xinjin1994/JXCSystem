@@ -48,6 +48,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			DiscountPO lin=promotion.getDiscount(level);
 			
 			if(lin!=null){
+//				if(lin.getStartTime().equals())
 				return -1;
 			}
 			
@@ -215,15 +216,11 @@ System.out.println("getAllDIscount:"+po.size());
 
 	public ArrayList<DiscountPO> getAllDiscount() {
 		// TODO Auto-generated method stub
-		 Calendar rightNow = Calendar.getInstance();
-		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-		 String sysDatetime = fmt.format(rightNow.getTime());
-		
 		ArrayList<DiscountPO> po=new ArrayList<DiscountPO>();
 		ArrayList<DiscountPO> array=new ArrayList<DiscountPO>();
 		try {
 			po = promotion.showDiscount();
-			System.out.println("getAllDIscount:"+po.size());
+//			System.out.println("getAllDIscount:"+po.size());
 			for(int i=0;i<po.size();i++){
 //				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
 					array.add(po.get(i));
@@ -239,10 +236,6 @@ System.out.println("getAllDIscount:"+po.size());
 	
 	public ArrayList<ProGiftPO> getAllProGift() {
 		// TODO Auto-generated method stub
-		 Calendar rightNow = Calendar.getInstance();
-		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-		 String sysDatetime = fmt.format(rightNow.getTime());
-		
 		ArrayList<ProGiftPO> po=new ArrayList<ProGiftPO>();
 		ArrayList<ProGiftPO> array=new ArrayList<ProGiftPO>();
 		
@@ -250,9 +243,9 @@ System.out.println("getAllDIscount:"+po.size());
 			po = promotion.showProGift();
 			
 			for(int i=0;i<po.size();i++){
-				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+//				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
 					array.add(po.get(i));
-				}
+//				}
 			}
 			
 		} catch (RemoteException e) {
@@ -264,19 +257,14 @@ System.out.println("getAllDIscount:"+po.size());
 	
 	public ArrayList<VoucherPO> getAllVoucher() {
 		// TODO Auto-generated method stub
-		
-		 Calendar rightNow = Calendar.getInstance();
-		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-		 String sysDatetime = fmt.format(rightNow.getTime());
-		
 		ArrayList<VoucherPO> po=new ArrayList<VoucherPO>();
 		ArrayList<VoucherPO> array=new ArrayList<VoucherPO>();
 		try {
 			po = promotion.showVoucher();
 			for(int i=0;i<po.size();i++){
-				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+//				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
 					array.add(po.get(i));
-				}
+//				}
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

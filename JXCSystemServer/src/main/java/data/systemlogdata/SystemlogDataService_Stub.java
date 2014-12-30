@@ -88,6 +88,7 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 		po2.setTime(AccountDataService_Stub.getNowTime());
 		System.out.println("addSystemlog:"+po.getWord());
 		systemlogList.add(po2);
+		this.writeSystemlogList();
 		return true;
 	}
 

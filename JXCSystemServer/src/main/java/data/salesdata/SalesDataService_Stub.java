@@ -1174,6 +1174,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 			return 0;
 		}
 		for (i = 0; i < importList.size(); i++) {
+			System.out.println("getImport_ReturnMaxNumber:"+note);
 			if (note.equals(importList.get(i).getNote())) {
 //				ArrayList<Integer> array = getAllImport_ReturnNote(importList.get(i).getNote());
 				int j = 0;

@@ -219,6 +219,7 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 		String part2=AccountDataService_Stub.getNoteTime();
 		String part3=Integer.toString(invNote);
 		invNote++;
+		this.writeInvNote();
 		return part1+"-"+part2+"-"+part3;
 	}
 

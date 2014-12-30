@@ -478,6 +478,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	public boolean addReceipt(ReceiptPO po) {
 		
 		po=po.copy();
+		po.setCondition(1);
 		po.setTime(AccountDataService_Stub.getNowTime());
 		
 		receiptList.add(po);
@@ -487,6 +488,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 
 	public boolean addPayment(PaymentPO po) {
 		po=po.copy();
+		po.setCondition(1);
 		po.setTime(AccountDataService_Stub.getNowTime());
 		
 		paymentList.add(po);
@@ -515,6 +517,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	public boolean addDraftReceipt(ReceiptPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		po=po.copy();
+		po.setCondition(0);
 		po.setTime(AccountDataService_Stub.getNowTime());
 		
 		draftReceiptList.add(po);
@@ -525,6 +528,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	public boolean addDraftPayment(PaymentPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		po=po.copy();
+		po.setCondition(0);
 		po.setTime(AccountDataService_Stub.getNowTime());
 		
 		draftPaymentList.add(po);
@@ -727,6 +731,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 					addMoney(acc,trans.get(j).getMoney());
 				}
 				receiptList.get(i).setCondition(2);
+				this.writeReceiptList();
 				return true;
 			}
 		}
@@ -749,6 +754,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 					delMoney(paymentList.get(i).getAccount(),trans.get(j).getMoney());
 				}
 				paymentList.get(i).setCondition(2);
+				this.writePaymentList();
 				return true;
 			}
 		}
@@ -760,6 +766,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		for(int i=0;i<receiptList.size();i++){
 			if(receiptList.get(i).getNote().equals(note)){
 				receiptList.get(i).setCondition(3);
+				this.writeReceiptList();
 				return true;
 			}
 		}
@@ -771,6 +778,7 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 		for(int i=0;i<paymentList.size();i++){
 			if(paymentList.get(i).getNote().equals(note)){
 				paymentList.get(i).setCondition(3);
+				this.writePaymentList();
 				return true;
 			}
 		}

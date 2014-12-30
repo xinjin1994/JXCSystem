@@ -68,6 +68,7 @@ public class InvoiceController implements InvoiceblService{
 					ExportMenuVO vo5=new ExportMenuVO(po5.getNote(),po5.getCustomer().getName(),po5.getClerk(),po5.getOperator(),po5.getWareHouse(),
 							com5,po5.getTotalMoneyBefore(),po5.getDiscount(),po5.getVoucher(),
 							po5.getTotalMoneyAfter(),po5.getPs(),po5.getTime(),5,null);
+					System.out.println("Export_Return_Sys_Success");
 					vo.add(vo5);
 					break;
 			case 6: PatchPO po6=(PatchPO) po.get(i);
