@@ -195,11 +195,19 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			if (sale.addExport(po)) {
 				systemlog.add_up("addExport: ");
-				
-				
-				
-				
-//				commodity.addSendGift();
+
+				ProGiftPO proGiftPO = promotion.getProGift(po.getCustomer()
+						.getLevel());
+				String time = Sales.getNowTime();
+				int start = time.compareTo(proGiftPO.getStartTime());
+				int end = time.compareTo(proGiftPO.getEndTime());
+				if ((start >= 0) && (end <= 0)) {
+					if (po.getExportGoodList().get(0).getMoney() > proGiftPO
+							.getStartMoney()) {
+						commodity.addSendGift(proGiftPO.getGift(),
+								proGiftPO.getNumber(), po.getCustomer());
+					}
+				}
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -646,22 +654,22 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return null;
 	}
 
-//	// //////////////////////////////////
-//	public String getOtherPromotion() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// // //////////////////////////////////
+	// public String getOtherPromotion() {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 	// //////////////////////////////////////
-//	public double getClerkDiscount() {
-//		// TODO Auto-generated method stub
-//		if (User.duty == 3) {
-//
-//		} else {
-//
-//		}
-//		return 0;
-//	}
+	// public double getClerkDiscount() {
+	// // TODO Auto-generated method stub
+	// if (User.duty == 3) {
+	//
+	// } else {
+	//
+	// }
+	// return 0;
+	// }
 
 	public int getImport_ReturnMaxNumber(String old_note) {
 		// TODO Auto-generated method stub
@@ -894,33 +902,33 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	}
 
-//	public ProGiftPO getProGift(double money, int level) {
-//		// TODO Auto-generated method stub
-//		ProGiftPO proGiftPO = promotion.getProGift(level);
-//		String time = Sales.getNowTime();
-//		int start = time.compareTo(proGiftPO.getStartTime());
-//		int end = time.compareTo(proGiftPO.getEndTime());
-//		if ((start >= 0) && (end <= 0)) {
-//			if (money > proGiftPO.getStartMoney()) {
-//				return proGiftPO;
-//			}
-//		}
-//		return null;
-//	}
+	// public ProGiftPO getProGift(double money, int level) {
+	// // TODO Auto-generated method stub
+	// ProGiftPO proGiftPO = promotion.getProGift(level);
+	// String time = Sales.getNowTime();
+	// int start = time.compareTo(proGiftPO.getStartTime());
+	// int end = time.compareTo(proGiftPO.getEndTime());
+	// if ((start >= 0) && (end <= 0)) {
+	// if (money > proGiftPO.getStartMoney()) {
+	// return proGiftPO;
+	// }
+	// }
+	// return null;
+	// }
 
-//	public double getVoucher(double money, int level) {
-//		// TODO Auto-generated method stub
-//		VoucherPO voucherPO = promotion.getVoucher(level);
-//		String time = Sales.getNowTime();
-//		int start = time.compareTo(voucherPO.getStartTime());
-//		int end = time.compareTo(voucherPO.getEndTime());
-//		if ((start >= 0) && (end <= 0)) {
-//			if (money > voucherPO.getStartMoney()) {
-//				return voucherPO.getVoucherMoney();
-//			}
-//		}
-//		return 0;
-//	}
+	// public double getVoucher(double money, int level) {
+	// // TODO Auto-generated method stub
+	// VoucherPO voucherPO = promotion.getVoucher(level);
+	// String time = Sales.getNowTime();
+	// int start = time.compareTo(voucherPO.getStartTime());
+	// int end = time.compareTo(voucherPO.getEndTime());
+	// if ((start >= 0) && (end <= 0)) {
+	// if (money > voucherPO.getStartMoney()) {
+	// return voucherPO.getVoucherMoney();
+	// }
+	// }
+	// return 0;
+	// }
 
 	public static String getNowTime() {
 		Calendar rightNow = Calendar.getInstance();
