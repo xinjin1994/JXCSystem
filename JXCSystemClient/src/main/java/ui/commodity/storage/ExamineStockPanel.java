@@ -138,7 +138,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 			totalNum = totalNum + num;
 			examStr.add(examItem);
 		}
-		examStr.add("总计;"+import_num+";"+import_return+";"+export_num+";"+export_return+";"+patch_num+";"+sendGift+";"+total+";"+";"+totalNum);
+		examStr.add("总计;"+";"+import_num+";"+import_return+";"+export_num+";"+export_return+";"+patch_num+";"+sendGift+";"+total+";"+";"+totalNum);
 		setTable(examStr);
 		}
 	}
