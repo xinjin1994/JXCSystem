@@ -137,24 +137,24 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 //				isLegal = false;
 //			}
 
-			if(time1.equals("")||time2.equals("")||good_name.equals("")
-					||customer_name.equals("")||clerk.equals("")){
-				frame.remove(this);
-				resController.failed("存在输入为空！", failedAddress);
-			}else if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
-				frame.remove(this);
-				resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+			if(!(time1.equals(""))&&!(time2.equals("")) ){
+				if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
+					System.out.println("count");
+					frame.remove(this);
+
+					resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+				}
 			}
 
 			else{
 				ArrayList<String> sales = new ArrayList<String>();
-				try{
-					int warehouse = Integer.parseInt(stock.getText());
+				sales.add("时间;商品名称;型号;数量;单价;总额");
+				
+					
 					frame.remove(this);
 					salesArray = financialblService.saleList_up(time1,
-							time2, good_name, "", customer_name, clerk, String.valueOf(warehouse));
+							time2, good_name, "", customer_name, clerk, stock.getText());
 				
-					sales.add("时间;商品名称;型号;数量;单价;总额");
 					if(salesArray!= null){
 					for(int i=0;i<salesArray.size();i++){
 						String salesItem = salesArray.get(i).time+";"+salesArray.get(i).commodityName+";"+salesArray.get(i).type
@@ -162,10 +162,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 						sales.add(salesItem);
 						}
 					}
-				}catch(Exception e2){
-					frame.remove(this);
-					resController.failed("存在输入错误！", failedAddress);
-				}
+				
 				if(sales.size() ==1){
 					frame.remove(this);
 					resController.failed("不存在符合该条件的单据！", failedAddress);
