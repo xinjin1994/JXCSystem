@@ -4,6 +4,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import ui.UIController;
 import ui.sales.SalesResult;
@@ -12,7 +13,9 @@ import ui.sales.impanel.ImInPanel;
 import ui.sales.impanel.MakeSureIm;
 import ui.setting.MyFrame;
 import ui.setting.Button.MyButton;
+import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldFilled;
+import vo.CustomerVO;
 import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
 import businesslogic.userbl.User;
@@ -101,7 +104,7 @@ public class SalesInPanel extends ImInPanel{
 			}else{
 			totalPriceText = Double.parseDouble(goodsPrice.getText()) * num-Double.parseDouble(discount.getText())-
 					Double.parseDouble(voucher.getText())-salesblService.getDiscount_up( Double.parseDouble(goodsPrice.getText()) * num, 
-							salesblService.searchExactCustomer_up(supplier.getText()).level
+							salesblService.searchExactCustomer_up(supplier.getSelectedItem().toString()).level
 							);
 			if(totalPriceText < 0){
 				totalPriceText = 0;
@@ -112,6 +115,16 @@ public class SalesInPanel extends ImInPanel{
 		}catch(Exception e2){
 			failLabel.setText("请正确输入信息！");
 		}
+	}
+	
+	public void addWhichCus(){
+		ArrayList<CustomerVO> cus = salesblService.getAllExportCustomer_up();
+		String[] cusStr = new String[cus.size()];
+		for(int i = 0;i<cus.size();i++){
+			cusStr[i] = cus.get(i).cusName;
+		}
+		supplier = new MyComboBox(cusStr,210, 255, 116, 42);
+		this.add(supplier);
 	}
 	
 	public void addSaveButton(){
@@ -126,14 +139,14 @@ public class SalesInPanel extends ImInPanel{
 				salesUIController.backPanel(SalesInPanel.this);
 			} else if (e.getSource() == forward) {
 				
-				if(id.getText().equals("")||newRemark.getText().equals("")||supplier.getText().equals("")||
+				if(id.getText().equals("")||newRemark.getText().equals("")||supplierString.equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
 					salesResult.failed("请重新确认输入信息！", "export_failed");
 				}else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, num*price, newRemark.getText());
 
-				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
+				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierString,person.getText(),
 						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
 				exportMenuVO.person = person.getText();
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
@@ -147,12 +160,14 @@ public class SalesInPanel extends ImInPanel{
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();
 				getPrice();
-			}else if(e.getSource() == saveButton){
+			}else if(e.getSource() == supplier){
+				 supplierString = supplier.getSelectedItem().toString();
+			}	else if(e.getSource() == saveButton){
 				try{
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, num*price, newRemark.getText());
 
-					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplier.getText(),person.getText(),
+					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierString,person.getText(),
 							warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
 					exportMenuVO.person = person.getText();
 				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, SalesInPanel.this);

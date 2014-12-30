@@ -113,7 +113,7 @@ public class MakeSureIm extends FatherPanel {
 		id = new MyLabel(105, 173, 222, 36);
 		supplier = new MyLabel(210, 255, 116, 42);
 		warehouse = new MyLabel(210, 308, 116, 42);
-		remark = new MyLabel(104, 420, 111, 118);
+		remark = new MyLabel(104, 420, 200, 118);
 		goodsName = new MyLabel(488, 170, 237, 31);
 		goodsID = new MyLabel(488, 211, 237, 31);
 		goodsType = new MyLabel(488, 252, 237, 31);

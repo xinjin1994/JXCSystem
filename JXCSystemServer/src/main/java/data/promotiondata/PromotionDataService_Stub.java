@@ -32,7 +32,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("nowDiscount.out");
+			fos = new FileOutputStream("out//nowDiscount.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(nowDiscount);	
 			oos.close();
@@ -53,7 +53,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		
 		try{
 			
-			fis=new FileInputStream("nowDiscount.out");
+			fis=new FileInputStream("out//nowDiscount.out");
 			ois=new ObjectInputStream(fis);
 			nowDiscount=(DiscountPO) ois.readObject();
 			ois.close();
@@ -76,7 +76,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("nowProGift.out");
+			fos = new FileOutputStream("out//nowProGift.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(nowProGift);	
 			oos.close();
@@ -97,7 +97,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		
 		try{
 			
-			fis=new FileInputStream("nowProGift.out");
+			fis=new FileInputStream("out//nowProGift.out");
 			ois=new ObjectInputStream(fis);
 			nowProGift=(ProGiftPO) ois.readObject();
 			ois.close();
@@ -120,7 +120,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("nowVoucher.out");
+			fos = new FileOutputStream("out//nowVoucher.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(nowVoucher);	
 			oos.close();
@@ -141,7 +141,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		
 		try{
 			
-			fis=new FileInputStream("nowVoucher.out");
+			fis=new FileInputStream("out//nowVoucher.out");
 			ois=new ObjectInputStream(fis);
 			nowVoucher=(VoucherPO) ois.readObject();
 			ois.close();
@@ -164,7 +164,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("proGiftList.out");
+			fos = new FileOutputStream("out//proGiftList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(proGiftList);	
 			oos.close();
@@ -186,7 +186,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		
 		try{
 			
-			fis=new FileInputStream("proGiftList.out");
+			fis=new FileInputStream("out//proGiftList.out");
 			ois=new ObjectInputStream(fis);
 			proGiftList=(ArrayList<ProGiftPO>) ois.readObject();
 			ois.close();
@@ -210,7 +210,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("discountList.out");
+			fos = new FileOutputStream("out//discountList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(discountList);	
 			oos.close();
@@ -232,7 +232,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		
 		try{
 			
-			fis=new FileInputStream("discountList.out");
+			fis=new FileInputStream("out//discountList.out");
 			ois=new ObjectInputStream(fis);
 			discountList=(ArrayList<DiscountPO>) ois.readObject();
 			ois.close();
@@ -255,7 +255,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("voucherList.out");
+			fos = new FileOutputStream("out//voucherList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(voucherList);	
 			oos.close();
@@ -277,7 +277,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		
 		try{
 			
-			fis=new FileInputStream("voucherList.out");
+			fis=new FileInputStream("out//voucherList.out");
 			ois=new ObjectInputStream(fis);
 			voucherList=(ArrayList<VoucherPO>) ois.readObject();
 			ois.close();

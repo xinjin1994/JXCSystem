@@ -1,7 +1,9 @@
 package businesslogic.promotionbl;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import businesslogic.salesbl.PromotionInfo;
 import po.CommodityPO;
@@ -47,7 +49,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			}
 			
 			if(promotion.addDiscount(dis)){
-				systemlog.add_up("AddDiscount:");
+				systemlog.add_up("AddDiscount: start_money="+start_money+" discount="+discount+" start_time="+time1+" end_time="+time2);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -66,7 +68,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		try {
 			if(promotion.addGift(dis)){
 				commodity.addGift(name, type, number);
-				systemlog.add_up("AddGift:");
+				systemlog.add_up("AddGift: start_money="+start_money+" name="+name+" type="+type+" start_time="+start_time+" end_time="+end_time);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -89,7 +91,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			}
 			
 			if(promotion.addVoucher(dis)){
-				systemlog.add_up("AddDiscount:");
+				systemlog.add_up("AddDiscount: start_money="+start_money+" voucher="+voucher+" start_time="+time1+" end_time="+time2);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -189,38 +191,72 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 
 	public ArrayList<DiscountPO> getAllDiscount() {
 		// TODO Auto-generated method stub
+		 Calendar rightNow = Calendar.getInstance();
+		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		 String sysDatetime = fmt.format(rightNow.getTime());
+		
 		ArrayList<DiscountPO> po=new ArrayList<DiscountPO>();
+		ArrayList<DiscountPO> array=new ArrayList<DiscountPO>();
 		try {
 			po = promotion.showDiscount();
+			for(int i=0;i<po.size();i++){
+				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+					array.add(po.get(i));
+				}
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return po;
+		return array;
 	}
 	
 	public ArrayList<ProGiftPO> getAllProGift() {
 		// TODO Auto-generated method stub
+		 Calendar rightNow = Calendar.getInstance();
+		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		 String sysDatetime = fmt.format(rightNow.getTime());
+		
 		ArrayList<ProGiftPO> po=new ArrayList<ProGiftPO>();
+		ArrayList<ProGiftPO> array=new ArrayList<ProGiftPO>();
+		
 		try {
 			po = promotion.showProGift();
+			
+			for(int i=0;i<po.size();i++){
+				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+					array.add(po.get(i));
+				}
+			}
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return po;
+		return array;
 	}
 	
 	public ArrayList<VoucherPO> getAllVoucher() {
 		// TODO Auto-generated method stub
+		
+		 Calendar rightNow = Calendar.getInstance();
+		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		 String sysDatetime = fmt.format(rightNow.getTime());
+		
 		ArrayList<VoucherPO> po=new ArrayList<VoucherPO>();
+		ArrayList<VoucherPO> array=new ArrayList<VoucherPO>();
 		try {
 			po = promotion.showVoucher();
+			for(int i=0;i<po.size();i++){
+				if(!(sysDatetime.compareTo(po.get(i).getStartTime())<0&&sysDatetime.compareTo(po.get(i).getEndTime())>0)){
+					array.add(po.get(i));
+				}
+			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return po;
+		return array;
 	}
 
 }

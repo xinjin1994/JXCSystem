@@ -28,7 +28,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("operatingConditionList.out");
+			fos = new FileOutputStream("out//operatingConditionList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(operatingConditionList);	
 			oos.close();
@@ -50,7 +50,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		
 		try{
 			
-			fis=new FileInputStream("operatingConditionList.out");
+			fis=new FileInputStream("out//operatingConditionList.out");
 			ois=new ObjectInputStream(fis);
 			operatingConditionList=(ArrayList<OperatingConditionPO>) ois.readObject();
 			ois.close();
@@ -75,7 +75,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("allBillList.out");
+			fos = new FileOutputStream("out//allBillList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(allBillList);	
 			oos.close();
@@ -97,7 +97,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		
 		try{
 			
-			fis=new FileInputStream("allBillList.out");
+			fis=new FileInputStream("out//allBillList.out");
 			ois=new ObjectInputStream(fis);
 			allBillList=(ArrayList<AllBillPO>) ois.readObject();
 			ois.close();
@@ -121,7 +121,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("saleListList.out");
+			fos = new FileOutputStream("out//saleListList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(saleListList);	
 			oos.close();
@@ -143,7 +143,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 		
 		try{
 			
-			fis=new FileInputStream("saleListList.out");
+			fis=new FileInputStream("out//saleListList.out");
 			ois=new ObjectInputStream(fis);
 			saleListList=(ArrayList<SaleListPO>) ois.readObject();
 			ois.close();

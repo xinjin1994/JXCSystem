@@ -88,7 +88,7 @@ public class ClientStart {
 		user=new User();
 		
 		try {
-			
+			System.out.println("before connect");
 			commodity.sto=(CommodityDataService) Naming.lookup("rmi://"+ip+":8888/CommodityDataService");
 			account.account=(AccountDataService) Naming.lookup("rmi://"+ip+":8889/AccountDataService");
 			financial.financial=(FinancialDataService) Naming.lookup("rmi://"+ip+":8890/FinancialDataService");
@@ -98,11 +98,12 @@ public class ClientStart {
 			sales.sale=(SalesDataService) Naming.lookup("rmi://"+ip+":8894/SalesDataService");
 			systemlog.sys=(SystemlogDataService) Naming.lookup("rmi://"+ip+":8895/SystemlogDataService");
 			user.us=(UserDataService) Naming.lookup("rmi://"+ip+":8896/UserDataService");
-
+			System.out.println("after connect");
+			
 			commodity.setInfo(invoice, systemlog,sales);
 			account.setInfo(financial, invoice, sales, systemlog);
 			financial.setInfo(account, commodity, sales, systemlog);
-			invoice.setInfo(account, sales, commodity,financial);
+			invoice.setInfo(account, sales, commodity,financial,systemlog);
 			promotion.setInfo(systemlog, commodity);
 			user.setInfo(systemlog);
 			sales.setInfo(invoice, systemlog, commodity);

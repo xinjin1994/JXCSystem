@@ -21,8 +21,8 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	
 	public UserDataService_Stub() throws RemoteException{
 		
-//		this.writeUserList();
-//		this.writeUserNote();
+		this.writeUserList();
+		this.writeUserNote();
 		
 		this.readUserList();
 		this.readUserNote();
@@ -33,7 +33,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("userList.out");
+			fos = new FileOutputStream("out//userList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(userList);	
 			oos.close();
@@ -55,7 +55,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		
 		try{
 			
-			fis=new FileInputStream("userList.out");
+			fis=new FileInputStream("out//userList.out");
 			ois=new ObjectInputStream(fis);
 			userList=(ArrayList<UserPO>) ois.readObject();
 			ois.close();
@@ -78,7 +78,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("user_note.out");
+			fos = new FileOutputStream("out//user_note.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(user_note);	
 			oos.close();
@@ -99,7 +99,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		
 		try{
 			
-			fis=new FileInputStream("user_note.out");
+			fis=new FileInputStream("out//user_note.out");
 			ois=new ObjectInputStream(fis);
 			user_note=(Integer) ois.readObject();
 			ois.close();

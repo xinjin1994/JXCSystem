@@ -68,7 +68,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("sortList.out");
+			fos = new FileOutputStream("out//sortList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(sortList);	
 			oos.close();
@@ -90,7 +90,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("sortList.out");
+			fis=new FileInputStream("out//sortList.out");
 			ois=new ObjectInputStream(fis);
 			sortList=(ArrayList<SortPO>) ois.readObject();
 			ois.close();
@@ -114,7 +114,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("patchList.out");
+			fos = new FileOutputStream("out//patchList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(patchList);	
 			oos.close();
@@ -136,7 +136,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("patchList.out");
+			fis=new FileInputStream("out//patchList.out");
 			ois=new ObjectInputStream(fis);
 			patchList=(ArrayList<PatchPO>) ois.readObject();
 			ois.close();
@@ -159,7 +159,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("draftPatchList.out");
+			fos = new FileOutputStream("out//draftPatchList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(draftPatchList);	
 			oos.close();
@@ -181,7 +181,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("draftPatchList.out");
+			fis=new FileInputStream("out//draftPatchList.out");
 			ois=new ObjectInputStream(fis);
 			draftPatchList=(ArrayList<PatchPO>) ois.readObject();
 			ois.close();
@@ -205,7 +205,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("giftList.out");
+			fos = new FileOutputStream("out//giftList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(giftList);	
 			oos.close();
@@ -227,7 +227,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("giftList.out");
+			fis=new FileInputStream("out//giftList.out");
 			ois=new ObjectInputStream(fis);
 			giftList=(ArrayList<CommodityPO>) ois.readObject();
 			ois.close();
@@ -250,7 +250,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("sendGiftList.out");
+			fos = new FileOutputStream("out//sendGiftList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(sendGiftList);	
 			oos.close();
@@ -272,7 +272,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("sendGiftList.out");
+			fis=new FileInputStream("out//sendGiftList.out");
 			ois=new ObjectInputStream(fis);
 			sendGiftList=(ArrayList<SendGiftPO>) ois.readObject();
 			ois.close();
@@ -296,7 +296,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("comNote.out");
+			fos = new FileOutputStream("out//comNote.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(comNote);	
 			oos.close();
@@ -317,7 +317,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("comNote.out");
+			fis=new FileInputStream("out//comNote.out");
 			ois=new ObjectInputStream(fis);
 			comNote=(Integer) ois.readObject();
 			ois.close();
@@ -340,7 +340,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("sortNote.out");
+			fos = new FileOutputStream("out//sortNote.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(sortNote);	
 			oos.close();
@@ -362,7 +362,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("sortNote.out");
+			fis=new FileInputStream("out//sortNote.out");
 			ois=new ObjectInputStream(fis);
 			sortNote=(Integer) ois.readObject();
 			ois.close();
@@ -385,7 +385,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("sendNote.out");
+			fos = new FileOutputStream("out//sendNote.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(sendNote);	
 			oos.close();
@@ -407,7 +407,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("sendNote.out");
+			fis=new FileInputStream("out//sendNote.out");
 			ois=new ObjectInputStream(fis);
 			sendNote=(Integer) ois.readObject();
 			ois.close();
@@ -430,7 +430,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("patchNote.out");
+			fos = new FileOutputStream("out//patchNote.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(patchNote);	
 			oos.close();
@@ -452,7 +452,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("patchNote.out");
+			fis=new FileInputStream("out//patchNote.out");
 			ois=new ObjectInputStream(fis);
 			patchNote=(Integer) ois.readObject();
 			ois.close();
@@ -476,7 +476,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("tempSort.out");
+			fos = new FileOutputStream("out//tempSort.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(tempSort);	
 			oos.close();
@@ -498,7 +498,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		
 		try{
 			
-			fis=new FileInputStream("tempSort.out");
+			fis=new FileInputStream("out//tempSort.out");
 			ois=new ObjectInputStream(fis);
 			tempSort=(SortPO) ois.readObject();
 			ois.close();

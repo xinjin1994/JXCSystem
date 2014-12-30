@@ -14,7 +14,7 @@ public class SalesDraftBill extends SalesInPanel{
 	}
 	public void setSalesLabel() {
 		id.setText(exportMenuVO.commodityList.id);
-		supplier.setText(exportMenuVO.cusName);
+		supplier.setSelectedItem(exportMenuVO.cusName);
 		warehouse.setText(exportMenuVO.warehouse);
 		newRemark.setText(exportMenuVO.commodityList.remark);
 		goodsName.setSelectedItem(exportMenuVO.commodityList.name);

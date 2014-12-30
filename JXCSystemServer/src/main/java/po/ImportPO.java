@@ -33,6 +33,11 @@ public class ImportPO extends InvoicePO implements Serializable{
 		for(int i=0;i<importGoodList.size();i++){
 			array.add(importGoodList.get(i).copy());
 		}
+		if(customer==null){
+			System.out.println("ImportPO:copy: null");
+		}else{
+			System.out.println("ImportPO:copy: not null");
+		}
 		ImportPO po=new ImportPO(customer.copy(), array, ps, clerk, operator, wareHouse, total_money);
 		po.setNote(this.getNote());
 		po.setTime(this.getTime());

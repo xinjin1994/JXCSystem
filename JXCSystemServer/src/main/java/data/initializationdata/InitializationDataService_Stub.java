@@ -27,7 +27,7 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("initializationList.out");
+			fos = new FileOutputStream("out//initializationList.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(initializationList);	
 			oos.close();
@@ -49,7 +49,7 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 		
 		try{
 			
-			fis=new FileInputStream("initializationList.out");
+			fis=new FileInputStream("out//initializationList.out");
 			ois=new ObjectInputStream(fis);
 			initializationList=(ArrayList<InitializationPO>) ois.readObject();
 			ois.close();
@@ -73,7 +73,7 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 		FileOutputStream fos;
 		ObjectOutputStream oos;
 		try {
-			fos = new FileOutputStream("nowInitialization.out");
+			fos = new FileOutputStream("out//nowInitialization.out");
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(nowInitialization);	
 			oos.close();
@@ -94,7 +94,7 @@ public class InitializationDataService_Stub extends UnicastRemoteObject implemen
 		
 		try{
 			
-			fis=new FileInputStream("nowInitialization.out");
+			fis=new FileInputStream("out//nowInitialization.out");
 			ois=new ObjectInputStream(fis);
 			nowInitialization=(InitializationPO) ois.readObject();
 			ois.close();
