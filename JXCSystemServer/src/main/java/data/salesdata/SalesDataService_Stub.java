@@ -1307,7 +1307,10 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 			}
 		}
 		for (int i = 0; i < exportList.size(); i++) {
-			if (importList.get(i).getNote().equals(exportPO.getNote())) {
+			if(exportList.size()==0){
+				return false;
+			}
+			if (exportList.get(i).getNote().equals(exportPO.getNote())) {
 
 				exportList.get(i).setCondition(2);
 			}
