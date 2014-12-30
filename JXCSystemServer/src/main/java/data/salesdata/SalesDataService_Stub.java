@@ -669,20 +669,20 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	public SalesDataService_Stub() throws RemoteException {
 		super();
 
-		this.writeCustomerList();
-		this.writeDraftImportList();
-		this.writeDraftImport_ReturnList();
-		this.writeDraftExportList();
-		this.writeDraftExport_ReturnList();
-		this.writeImportList();
-		this.writeImport_ReturnList();
-		this.writeExportList();
-		this.writeExport_ReturnList();
-		this.writeJHDNote();
-		this.writeJHTHDNote();
-		this.writeKHBHNote();
-		this.writeXSDNote();
-		this.writeXSTHDNote();
+//		this.writeCustomerList();
+//		this.writeDraftImportList();
+//		this.writeDraftImport_ReturnList();
+//		this.writeDraftExportList();
+//		this.writeDraftExport_ReturnList();
+//		this.writeImportList();
+//		this.writeImport_ReturnList();
+//		this.writeExportList();
+//		this.writeExport_ReturnList();
+//		this.writeJHDNote();
+//		this.writeJHTHDNote();
+//		this.writeKHBHNote();
+//		this.writeXSDNote();
+//		this.writeXSTHDNote();
 
 		this.readCustomerList();
 		this.readDraftImportList();
@@ -756,7 +756,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	public boolean addImport(ImportPO po) {
 		po = po.copy();
 		po.setTime(SalesDataService_Stub.getNowTime());
-
+		
 		importList.add(po);
 		this.writeImportList();
 		return true;
@@ -1202,13 +1202,13 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 				for (j = 0; j < export_returnList.size(); j++) {
 					if((export_returnList.get(j).getCondition()==2)
 							&&(export_returnList.get(j).getCustomer().getName().equals(exportList.get(i).getCustomer().getName())
-							&&(export_returnList.get(j).getImportGoodList().get(0).getCommodity().getName().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getName())
-							&&(export_returnList.get(j).getImportGoodList().get(0).getCommodity().getType().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getType()))
+							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getName().equals(exportList.get(i).getExportGoodList().get(0).getCommodity().getName())
+							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getType().equals(exportList.get(i).getExportGoodList().get(0).getCommodity().getType()))
 							&&(export_returnList.get(j).getTime().compareTo(exportList.get(i).getTime())>=0)))){
-						sum=sum+export_returnList.get(j).getImportGoodList().get(0).getNumber();
+						sum=sum+export_returnList.get(j).getExportGoodList().get(0).getNumber();
 					}
 				}
-				int exportNumber = exportList.get(i).getImportGoodList().get(0).getNumber();
+				int exportNumber = exportList.get(i).getExportGoodList().get(0).getNumber();
 				return exportNumber - sum;
 			}
 		}
@@ -1231,7 +1231,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 		int i = 0;
 		for (i = 0; i < export_returnList.size(); i++) {
 			if (note.equals(export_returnList.get(i).getOldNote())) {
-				array.add(export_returnList.get(i).getImportGoodList().get(0).getNumber());
+				array.add(export_returnList.get(i).getExportGoodList().get(0).getNumber());
 			}
 		}
 		return array;
@@ -1307,7 +1307,10 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 			}
 		}
 		for (int i = 0; i < exportList.size(); i++) {
-			if (importList.get(i).getNote().equals(exportPO.getNote())) {
+			if(exportList.size()==0){
+				return false;
+			}
+			if (exportList.get(i).getNote().equals(exportPO.getNote())) {
 
 				exportList.get(i).setCondition(2);
 			}
@@ -1421,8 +1424,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	public String getExportOldNote(String cusName, String name, String type) {
 		for (int i = exportList.size()-1; i >=0 ; i--) {
 			if (exportList.get(i).getCustomer().getName().equals(cusName)) {
-				if (exportList.get(i).getImportGoodList().get(0).getCommodity().getName().equals(name)) {
-					if (exportList.get(i).getImportGoodList().get(0).getCommodity().getType().equals(type)) {
+				if (exportList.get(i).getExportGoodList().get(0).getCommodity().getName().equals(name)) {
+					if (exportList.get(i).getExportGoodList().get(0).getCommodity().getType().equals(type)) {
 						if(exportList.get(i).getCondition()==2){
 							return exportList.get(i).getNote();
 						}

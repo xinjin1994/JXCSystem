@@ -395,14 +395,14 @@ public class AccountDataService_Stub extends UnicastRemoteObject implements Acco
 	
 	public AccountDataService_Stub() throws RemoteException {
 		super();
-		this.writeNowAccount();
-		this.writeAccountList();
-		this.writeReceiptList();
-		this.writePaymentList();
-		this.writeDraftReceiptList();
-		this.writeDraftPaymentList();
-		this.writeSKDNote();
-		this.writeFKDNote();
+//		this.writeNowAccount();
+//		this.writeAccountList();
+//		this.writeReceiptList();
+//		this.writePaymentList();
+//		this.writeDraftReceiptList();
+//		this.writeDraftPaymentList();
+//		this.writeSKDNote();
+//		this.writeFKDNote();
 		
 		this.readNowAccount();
 		this.readAccountList();

@@ -41,7 +41,7 @@ public class SalesBackPanel extends SalesInPanel{
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesBackPanel.this);
 			} else if (e.getSource() == forward) {
-				if(id.getText().equals("")||newRemark.getText().equals("")||supplierString.equals("")||
+				if(id.getText().equals("")||newRemark.getText().equals("")||supplierNewString.equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesBackPanel.this);
 					salesResult.failed("请重新确认输入信息！", "export_return_failed");
@@ -50,7 +50,7 @@ public class SalesBackPanel extends SalesInPanel{
 						CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 								goodsTypeSelected, num, price, num*price, newRemark.getText());
 
-						ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierString,person.getText(),
+						ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString,person.getText(),
 								warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
 						exportMenuVO.person = person.getText();
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, SalesBackPanel.this);
@@ -69,7 +69,7 @@ public class SalesBackPanel extends SalesInPanel{
 				else{
 				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 						goodsTypeSelected, num, price, num*price, newRemark.getText());
-				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierString,person.getText(),
+				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString,person.getText(),
 						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,5);
 				exportMenuVO.person = person.getText();
 				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,

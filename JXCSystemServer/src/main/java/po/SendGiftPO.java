@@ -9,6 +9,7 @@ public class SendGiftPO extends InvoicePO implements Serializable{
 	public CommodityPO commodity;
 	public int number;
 	public String customer;
+//	public String note;
 	
 	public SendGiftPO(CommodityPO commodity,int number,String note,String customer){
 		this.commodity=commodity;

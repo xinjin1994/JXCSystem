@@ -48,7 +48,7 @@ public class FindCusPanel extends FatherPanel {
 	}
 
 	public void addSecondTextField() {
-		cusName = new MyTextFieldBorder(254, 218);
+		cusName = new MyTextFieldBorder(254, 250);
 		cusExactFind = new MyTextFieldBorder(254, 424);
 		this.add(cusName);
 		this.add(cusExactFind);
@@ -58,7 +58,7 @@ public class FindCusPanel extends FatherPanel {
 	public void addRestButton() {
 		secondCusBack = new MyButton("Image/Sales/Sales_image/返回.png", 177, 120, "Image/Sales/Sales_image/返回.png",
 				"Image/Sales/Sales_image/返回_press_on.png");
-		forward1 = new MyButton("Image/Sales/对话框/images/前进_黑.png", 630, 301, "Image/Sales/对话框/images/前进_黑.png",
+		forward1 = new MyButton("Image/Sales/对话框/images/前进_黑.png", 629, 246, "Image/Sales/对话框/images/前进_黑.png",
 				"Image/Sales/对话框/images/前进_stop_黑.png");
 		forward2 = new MyButton("Image/Sales/对话框/images/前进_黑.png", 630, 424, "Image/Sales/对话框/images/前进_黑.png",
 				"Image/Sales/对话框/images/前进_stop_黑.png");

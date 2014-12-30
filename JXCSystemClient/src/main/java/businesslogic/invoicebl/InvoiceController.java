@@ -210,11 +210,13 @@ public class InvoiceController implements InvoiceblService{
 				CommodityListVO com2=new CommodityListVO(po2.getImportGoodList().get(0).getCommodity().getNote(), po2.getImportGoodList().get(0).getCommodity().getName(), po2.getImportGoodList().get(0).getCommodity().getType(), po2.getImportGoodList().get(0).getNumber(), po2.getImportGoodList().get(0).getPrice(), po2.getImportGoodList().get(0).getMoney(), po2.getImportGoodList().get(0).getPs()); 
 				ImportMenuVO vo2=new ImportMenuVO(po2.getNote(),po2.getCustomer().getName(),po2.getWareHouse(),po2.getOperator(),
 						com2,po2.getPs(),po2.getTotalMoney(),po2.getTime(),2,null);
+				vo2.person = po2.getClerk();
 				return vo2;
 		case 3: Import_ReturnPO po3=(Import_ReturnPO) po;
 				CommodityListVO com3=new CommodityListVO(po3.getImportGoodList().get(0).getCommodity().getNote(), po3.getImportGoodList().get(0).getCommodity().getName(), po3.getImportGoodList().get(0).getCommodity().getType(), po3.getImportGoodList().get(0).getNumber(), po3.getImportGoodList().get(0).getPrice(), po3.getImportGoodList().get(0).getMoney(), po3.getImportGoodList().get(0).getPs()); 
 				ImportMenuVO vo3=new ImportMenuVO(po3.getNote(),po3.getCustomer().getName(),po3.getWareHouse(),po3.getOperator(),
 						com3,po3.getPs(),po3.getTotalMoney(),po3.getTime(),3,null);
+				vo3.person = po3.getClerk();
 				return vo3;
 		case 4: ExportPO po4=(ExportPO) po;
 				CommodityListVO com4=new CommodityListVO(po4.getExportGoodList().get(0).getCommodity().getNote(), po4.getExportGoodList().get(0).getCommodity().getName(), po4.getExportGoodList().get(0).getCommodity().getType(), po4.getExportGoodList().get(0).getNumber(), po4.getExportGoodList().get(0).getPrice(), po4.getExportGoodList().get(0).getMoney(), po4.getExportGoodList().get(0).getPs()); 

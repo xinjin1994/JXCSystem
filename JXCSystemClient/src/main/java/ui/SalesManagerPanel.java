@@ -156,6 +156,7 @@ public class SalesManagerPanel extends FatherPanel {
 				}
 				thirdPanel.removeAll();
 				setTable(commodityStr);
+				SalesManagerPanel.this.remove(warn);
 			} else if (e.getSource() == cusManage) {
 				setCustomer();
 			}else if(e.getSource() == saveButton) {

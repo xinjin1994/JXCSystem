@@ -40,6 +40,11 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		// TODO Auto-generated method stub
 		//pro=new PromotionDataService_Stub(); 
 		DiscountPO dis=new DiscountPO(discount,time1,time2,start_money,end_money,level);
+		
+		if(time1.compareTo(time2)>0){
+			return -1;
+		}
+		
 		try {
 			
 			DiscountPO lin=promotion.getDiscount(level);
@@ -65,6 +70,11 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		// TODO Auto-generated method stub
 		CommodityPO gift=commodity.findCommodity(name, type);
 		ProGiftPO dis=new ProGiftPO(gift, start_time, end_time,number,start_money,999999,level);
+		
+		if(start_time.compareTo(end_time)>0){
+			return -1;
+		}
+		
 		try {
 			if(promotion.addGift(dis)){
 				commodity.addGift(name, type, number);
@@ -82,6 +92,11 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			String time1, String time2,int level) {
 		// TODO Auto-generated method stub
 		VoucherPO dis=new VoucherPO(time1,time2,start_money,end_money,voucher,level);
+		
+		if(time1.compareTo(time2)>0){
+			return -1;
+		}
+		
 		try {
 			
 			VoucherPO lin=promotion.getVoucher(level);

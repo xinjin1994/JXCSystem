@@ -73,7 +73,7 @@ public class ImInBillPanel extends FatherPanel {
 		goodsPrice.setText(importMenuVO.commodityList.price + "");
 		goodsNum.setText(importMenuVO.commodityList.num + "");
 		goodsTotal.setText(importMenuVO.commodityList.total + "");
-		person.setText(importMenuVO.person+"PERSON");
+		person.setText(importMenuVO.person);
 		//如何获得这个业务员？
 		operator.setText(importMenuVO.operator);
 	}

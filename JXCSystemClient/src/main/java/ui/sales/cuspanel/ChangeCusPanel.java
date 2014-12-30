@@ -21,7 +21,7 @@ public class ChangeCusPanel extends FatherPanel{
 	private UIController controller;
 	private MyButton secondCusBack,forward;
 	private SalesUIController salesUIController;
-	protected MyTextFieldBorder cusName,cusID;
+	protected MyTextFieldBorder cusName;
 	protected CustomerVO customerVO;
 	protected MyLabel failLabel;
 	

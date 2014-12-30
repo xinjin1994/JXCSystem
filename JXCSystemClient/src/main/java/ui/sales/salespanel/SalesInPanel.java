@@ -1,5 +1,7 @@
 package ui.sales.salespanel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
@@ -20,22 +22,25 @@ import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
 import businesslogic.userbl.User;
 
-public class SalesInPanel extends ImInPanel{
+public class SalesInPanel extends ImInPanel {
 
 	MyTextFieldFilled newRemark;
-	SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesInPanel.this);
-	
-	public SalesInPanel(MyFrame frame, String url, UIController controller){
+	SalesResult salesResult = new SalesResult(frame, controller, salesUIController, SalesInPanel.this);
+	protected MyComboBox newSupplier;
+	protected String supplierNewString;
+
+	public SalesInPanel(MyFrame frame, String url, UIController controller) {
 		super(frame, url, controller);
 		this.remove(remark);
 		this.addRestText();
 	}
-	public SalesInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){
-		super(frame, url, controller,salesUIController);
+
+	public SalesInPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
+		super(frame, url, controller, salesUIController);
 		this.remove(remark);
 		this.addRestText();
 	}
-	
+
 	public void addButton() {
 		back = new MyButton("Image/Sales/Sales_image/返回.png", 13, 21, "Image/Sales/Sales_image/返回.png",
 				"Image/Sales/Sales_image/返回_press_on.png");
@@ -46,9 +51,9 @@ public class SalesInPanel extends ImInPanel{
 		back.addMouseListener(new MouListener());
 		forward.addMouseListener(new MouListener());
 	}
-	
-	public void addRestText(){
-		newRemark = new MyTextFieldFilled(104,420,104,118);
+
+	public void addRestText() {
+		newRemark = new MyTextFieldFilled(104, 420, 104, 118);
 		discount = new MyTextFieldFilled(235, 421, 91, 37);
 		voucher = new MyTextFieldFilled(235, 500, 91, 27);
 		this.add(newRemark);
@@ -56,8 +61,8 @@ public class SalesInPanel extends ImInPanel{
 		this.add(voucher);
 		discount.addFocusListener(new disLis());
 	}
-	
-	class disLis implements FocusListener{
+
+	class disLis implements FocusListener {
 
 		public void focusGained(FocusEvent e) {
 		}
@@ -65,94 +70,131 @@ public class SalesInPanel extends ImInPanel{
 		public void focusLost(FocusEvent e) {
 			double dis = Double.parseDouble(discount.getText());
 			int i = User.duty;
-			if(i == 2){
-				//销售人员
-				if(dis>1000){
+			if (i == 2) {
+				// 销售人员
+				if (dis > 1000) {
 					salesResult.failed("您的权限无法制定此价值的折让！", "export_failed");
 				}
-			}else if(i == 3){
-				//销售经理
-				if(dis>5000){
+			} else if (i == 3) {
+				// 销售经理
+				if (dis > 5000) {
 					salesResult.failed("您的权限无法制定此价值的折让！", "export_failed");
 				}
 			}
 		}
-		
+
 	}
 
 	public void getPrice() {
 		goodsTypeSelected = goodsType.getSelectedItem().toString();
-		 commodityVO = salesblService.getCommodity_up(goodsNameSelected,
-		 goodsTypeSelected);
-		 goodsPrice.setText(commodityVO.outValue+"");
-//		goodsPrice.setText("30");
+		commodityVO = salesblService.getCommodity_up(goodsNameSelected, goodsTypeSelected);
+		goodsPrice.setText(commodityVO.outValue + "");
+		// goodsPrice.setText("30");
 		this.add(goodsPrice);
-		try{
-			 price = Double.parseDouble(goodsPrice.getText());
-			 if(price <= 0){
-				 this.addLabel();
-			 	}
-			 }catch(Exception e){
-				 this.addLabel();
-			 }
-		//		price = 30;
-	}
-	public void getTotalPrice() {
-		try{
-			if(Double.parseDouble(voucher.getText()) >  Double.parseDouble(goodsPrice.getText()) * num){
-				totalPriceText = 0;
-			}else{
-			totalPriceText = Double.parseDouble(goodsPrice.getText()) * num-Double.parseDouble(discount.getText())-
-					Double.parseDouble(voucher.getText())-salesblService.getDiscount_up( Double.parseDouble(goodsPrice.getText()) * num, 
-							salesblService.searchExactCustomer_up(supplier.getSelectedItem().toString()).level
-							);
-			if(totalPriceText < 0){
-				totalPriceText = 0;
+		try {
+			price = Double.parseDouble(goodsPrice.getText());
+			if (price <= 0) {
+				this.addLabel();
 			}
-			}
-			goodsTotal.setText(totalPriceText + "");
-			this.add(goodsTotal);
-		}catch(Exception e2){
-			failLabel.setText("请正确输入信息！");
+		} catch (Exception e) {
+			this.addLabel();
 		}
+		// price = 30;
 	}
+
 	
-	public void addWhichCus(){
+	public void addTotalListener() {
+		goodsTotal.addFocusListener(new FocusAdapter());
+		
+	}
+	class FocusAdapter implements FocusListener {
+
+		public void focusGained(FocusEvent e) {
+			goodsTotal.setText("");
+			try {
+				num = Integer.parseInt(goodsNum.getText());
+				if (Double.parseDouble(voucher.getText()) > Double.parseDouble(goodsPrice.getText()) * num) {
+					totalPriceText = 0;
+				} else {
+					int level = salesblService
+							.searchExactCustomer_up(newSupplier.getSelectedItem().toString()).level;
+					double dis_UnSeen = salesblService
+							.getDiscount_up(Double.parseDouble(goodsPrice.getText()) * num, level);
+					System.out.println("level"+level+"dis"+dis_UnSeen);
+					totalPriceText = Double.parseDouble(goodsPrice.getText())
+							* num
+							- Double.parseDouble(discount.getText())
+							- Double.parseDouble(voucher.getText())
+							- dis_UnSeen;
+					if (totalPriceText < 0) {
+						totalPriceText = 0;
+					}
+				}
+				
+					goodsTotal.setText(totalPriceText + "");
+					isGo = true;
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				failLabel.setText("请正确输入信息!");
+			}
+		}
+
+		public void focusLost(FocusEvent e) {
+
+		}
+
+	}
+
+	public void addWhichCus() {
 		ArrayList<CustomerVO> cus = salesblService.getAllExportCustomer_up();
 		String[] cusStr = new String[cus.size()];
-		for(int i = 0;i<cus.size();i++){
+		for (int i = 0; i < cus.size(); i++) {
 			cusStr[i] = cus.get(i).cusName;
 		}
-		supplier = new MyComboBox(cusStr,210, 255, 116, 42);
-		this.add(supplier);
+		newSupplier = new MyComboBox(cusStr, 210, 255, 116, 42);
+		newSupplier.addActionListener(new SupLis());
+		this.add(newSupplier);
 	}
-	
-	public void addSaveButton(){
+
+	class SupLis implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == newSupplier) {
+				supplierNewString = newSupplier.getSelectedItem().toString();
+			}
+		}
+
+	}
+
+	public void addSaveButton() {
 		saveButton = new MyButton("Image/save.png", 670, 550, "Image/save_stop.png", "Image/save_stop");
 		this.add(saveButton);
 		saveButton.addMouseListener(new MouListener());
 	}
-	class MouListener implements MouseListener{
+
+	class MouListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent e) {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesInPanel.this);
 			} else if (e.getSource() == forward) {
-				
-				if(id.getText().equals("")||newRemark.getText().equals("")||supplierString.equals("")||
-						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
+				if (id.getText().equals("") || newRemark.getText().equals("") || supplierNewString.equals("")
+						|| warehouse.getText().equals("") || person.getText().equals("")
+						|| operator.getText().equals("")) {
 					salesResult.failed("请重新确认输入信息！", "export_failed");
-				}else{
-				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
-						goodsTypeSelected, num, price, num*price, newRemark.getText());
+				} else {
+					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+							goodsTypeSelected, num, price, num * price, newRemark.getText());
 
-				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierString,person.getText(),
-						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
-				exportMenuVO.person = person.getText();
-				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
-						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesInPanel.this,salesUIController);
-				frame.remove(SalesInPanel.this);
-				frame.setPanel(makeSureIm);
+					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString, person.getText(),
+							warehouse.getText(), commodityListVO, Double.parseDouble(discount.getText()),
+							Double.parseDouble(voucher.getText()), totalPriceText, 4);
+					exportMenuVO.person = person.getText();
+					MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg",
+							controller, exportMenuVO, commodityListVO, person.getText(), operator.getText(),
+							SalesInPanel.this, salesUIController);
+					frame.remove(SalesInPanel.this);
+					frame.setPanel(makeSureIm);
 				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {
@@ -160,31 +202,30 @@ public class SalesInPanel extends ImInPanel{
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();
 				getPrice();
-			}else if(e.getSource() == supplier){
-				 supplierString = supplier.getSelectedItem().toString();
-			}	else if(e.getSource() == saveButton){
-				try{
+			} else if (e.getSource() == saveButton) {
+				try {
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
-							goodsTypeSelected, num, price, num*price, newRemark.getText());
+							goodsTypeSelected, num, price, num * price, newRemark.getText());
 
-					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierString,person.getText(),
-							warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,4);
+					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString, person.getText(),
+							warehouse.getText(), commodityListVO, Double.parseDouble(discount.getText()),
+							Double.parseDouble(voucher.getText()), totalPriceText, 4);
 					exportMenuVO.person = person.getText();
-				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, SalesInPanel.this);
-//				salesResult.succeeded("成功添加草稿单！");
-				switch(salesblService.addDraftExport_up(exportMenuVO)){
-				case 0:
-					salesResult.succeeded("成功添加草稿单！");
-					break;
-				default:
-					salesResult.failed("添加失败！", "export_failed");
-				}
-				}catch(Exception e2){
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController,
+							SalesInPanel.this);
+					// salesResult.succeeded("成功添加草稿单！");
+					switch (salesblService.addDraftExport_up(exportMenuVO)) {
+					case 0:
+						salesResult.succeeded("成功添加草稿单！");
+						break;
+					default:
+						salesResult.failed("添加失败！", "export_failed");
+					}
+				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
 			}
-			}
-		
+		}
 
 		public void mousePressed(MouseEvent e) {
 		}
@@ -196,9 +237,8 @@ public class SalesInPanel extends ImInPanel{
 		}
 
 		public void mouseExited(MouseEvent e) {
-			
+
 		}
-		
-	
+
 	}
 }

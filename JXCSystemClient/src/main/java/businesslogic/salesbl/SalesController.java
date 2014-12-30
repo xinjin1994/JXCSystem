@@ -67,7 +67,7 @@ public class SalesController implements SalesblService {
 
 	public int addImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGoodPO = new ImportGoodPO(commodityPO,
@@ -88,7 +88,7 @@ public class SalesController implements SalesblService {
 
 	public int addImport_Return_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGoodPO = new ImportGoodPO(commodityPO,
@@ -104,11 +104,6 @@ public class SalesController implements SalesblService {
 				importMenuVO.warehouse, importMenuVO.total,
 				sale.getImportOldNote(customerPO.name, commodityPO.getName(),
 						commodityPO.getType()));
-		System.out.println("addImport_Return_up: "+sale.getImportOldNote(customerPO.name, commodityPO.getName(),
-				commodityPO.getType()));
-		System.out.println(customerPO.name);
-		System.out.println(commodityPO.getName());
-		System.out.println(commodityPO.getType());
 		imp.setNote(importMenuVO.note);
 		int message = sale.addImport_Return(imp);
 		return message;
@@ -116,7 +111,7 @@ public class SalesController implements SalesblService {
 
 	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGoodPO = new ExportGoodPO(commodityPO,
@@ -138,7 +133,7 @@ public class SalesController implements SalesblService {
 
 	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGoodPO = new ExportGoodPO(commodityPO,
@@ -234,7 +229,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGood = new ImportGoodPO(commodity,
@@ -256,7 +251,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGood = new ExportGoodPO(commodity,
@@ -282,7 +277,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftImport_Return_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGood = new ImportGoodPO(commodity,
@@ -305,7 +300,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGood = new ExportGoodPO(commodity,
@@ -351,20 +346,20 @@ public class SalesController implements SalesblService {
 		return sale.getDiscount(money, level);
 	}
 
-	public double getVoucher_up(int money, int level) {
-		// TODO Auto-generated method stub
-		return sale.getVoucher(money, level);
-	}
+	// public double getVoucher_up(int money, int level) {
+	// // TODO Auto-generated method stub
+	// // return sale.getVoucher(money, level);
+	// }
 
-	public ProGiftPO getProGift_up(int money, int level) {
-		// TODO Auto-generated method stub
-		return sale.getProGift(money, level);
-	}
+	// public ProGiftPO getProGift_up(int money, int level) {
+	// // TODO Auto-generated method stub
+	// return sale.getProGift(money, level);
+	// }
 
-	public String getOtherPromotion_up() {
-		// TODO Auto-generated method stub
-		return sale.getOtherPromotion();
-	}
+	// public String getOtherPromotion_up() {
+	// // TODO Auto-generated method stub
+	// return sale.getOtherPromotion();
+	// }
 
 	public String getImportNote_up() {
 		// TODO Auto-generated method stub
@@ -396,11 +391,15 @@ public class SalesController implements SalesblService {
 		return sale.getExport_ReturnMaxNumber(old_note);
 	}
 
-	// 销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
-	public double getClerkDiscount_up() {
-		// TODO Auto-generated method stub
-		return sale.getClerkDiscount();
+	public String getImportOldNote(String cusName, String name, String type) {
+		return sale.getImportOldNote(cusName, name, type);
 	}
+
+	// 销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
+	// public double getClerkDiscount_up() {
+	// // TODO Auto-generated method stub
+	// return sale.getClerkDiscount();
+	// }
 
 	public String getCustomerNote_up() {
 		// TODO Auto-generated method stub
@@ -677,19 +676,45 @@ public class SalesController implements SalesblService {
 	// return 0;
 	// }
 
-	public int getDiscount_up(double money, int level) {
+	public double getDiscount_up(double money, int level) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sale.getDiscount(money, level);
 	}
 
-	public int getVoucher_up(double money, int level) {
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return sale.getVoucher(money, level);
+	// }
+
+	// public CommodityVO getProGift_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	//
+	// return null;
+	// }
+
+	public String getExportOldNote(String cusName, String name, String type) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sale.getExportOldNote(cusName, name, type);
 	}
 
-	public CommodityVO getProGift_up(double money, int level) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// public double getClerkDiscount_up() {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
+	//
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
+
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
+
+	// public double getVoucher_up(double money, int level) {
+	// // TODO Auto-generated method stub
+	// return 0;
+	// }
 
 }

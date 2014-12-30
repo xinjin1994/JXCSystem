@@ -21,8 +21,8 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 	
 	public UserDataService_Stub() throws RemoteException{
 		
-		this.writeUserList();
-		this.writeUserNote();
+//		this.writeUserList();
+//		this.writeUserNote();
 		
 		this.readUserList();
 		this.readUserNote();
@@ -127,6 +127,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		}
 		System.out.println("addUser:"+po.getName()+" Note:"+po.getNote());
 		userList.add(po.copy());
+		this.writeUserList();
 		return true;
 	}
 
@@ -169,6 +170,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		for(int i=0;i<userList.size();i++){
 			if(userList.get(i).getNote().equals(note)){
 				userList.remove(i);
+				this.writeUserList();
 				return true;
 			}
 		}
@@ -195,6 +197,7 @@ public class UserDataService_Stub extends UnicastRemoteObject implements UserDat
 		String part1="User";
 		String part2=Integer.toString(user_note);
 		user_note++;
+		this.writeUserNote();
 		return part1+"-"+part2;
 	}
 

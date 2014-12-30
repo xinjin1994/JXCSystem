@@ -40,16 +40,16 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	
 	public CommodityDataService_Stub() throws RemoteException {
 		super();
-		this.writeSortList();
-		this.writePatchList();
-		this.writeGiftList();
-		this.writeDraftPatchList();
-		this.writeSendGiftList();
-		this.writeComNote();
-		this.writeSortNote();
-		this.writeSendNote();
-		this.writePatchNote();
-		this.writeTempSort();
+//		this.writeSortList();
+//		this.writePatchList();
+//		this.writeGiftList();
+//		this.writeDraftPatchList();
+//		this.writeSendGiftList();
+//		this.writeComNote();
+//		this.writeSortNote();
+//		this.writeSendNote();
+//		this.writePatchNote();
+//		this.writeTempSort();
 		
 		this.readSortList();
 		this.readPatchList();
@@ -1233,15 +1233,15 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 	
 	public boolean passExport(ExportPO po){
-		CommodityPO com=findGood_true(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+		CommodityPO com=findGood_true(po.getExportGoodList().get(0).getCommodity().getName(), po.getExportGoodList().get(0).getCommodity().getType());
 		
 		if(com==null){
 			return false;
 		}
 		
-		CommodityPO gift=findGift(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
-		com.recent_out_price=po.getImportGoodList().get(0).getPrice();
-		com.number=com.number-po.getImportGoodList().get(0).getNumber();
+		CommodityPO gift=findGift(po.getExportGoodList().get(0).getCommodity().getName(), po.getExportGoodList().get(0).getCommodity().getType());
+		com.recent_out_price=po.getExportGoodList().get(0).getPrice();
+		com.number=com.number-po.getExportGoodList().get(0).getNumber();
 		
 		for(int i=0;i<giftList.size();i++){
 			if(giftList.get(i).getName().equals(com.getName())&&giftList.get(i).getType().equals(com.getType())){
@@ -1255,13 +1255,13 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	}
 	
 	public boolean passExport_Return(Export_ReturnPO po){
-	CommodityPO com=findGood_true(po.getImportGoodList().get(0).getCommodity().getName(), po.getImportGoodList().get(0).getCommodity().getType());
+	CommodityPO com=findGood_true(po.getExportGoodList().get(0).getCommodity().getName(), po.getExportGoodList().get(0).getCommodity().getType());
 		
 		if(com==null){
 			return false;
 		}
 		
-		com.number=com.number-po.getImportGoodList().get(0).getNumber();
+		com.number=com.number-po.getExportGoodList().get(0).getNumber();
 		
 		this.writeGiftList();
 		this.writeSortList();

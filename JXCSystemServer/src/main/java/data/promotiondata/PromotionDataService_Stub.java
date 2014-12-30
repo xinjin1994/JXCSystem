@@ -298,12 +298,12 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public PromotionDataService_Stub() throws RemoteException {
 		super();
 		
-		this.writeNowDiscount();
-		this.writeNowProGift();
-		this.writeNowVoucher();
-		this.writeProGiftList();
-		this.writeVoucherList();
-		this.writeDiscountList();
+//		this.writeNowDiscount();
+//		this.writeNowProGift();
+//		this.writeNowVoucher();
+//		this.writeProGiftList();
+//		this.writeVoucherList();
+//		this.writeDiscountList();
 		
 		this.readNowDiscount();
 		this.readNowProGift();
@@ -382,8 +382,10 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	}
 
 	public DiscountPO getDiscount(int level) throws RemoteException {
+		System.out.println("getDiscount"+discountList.size());
 		for(int i=0;i<discountList.size();i++){
 			if(level==discountList.get(i).getLevel()){
+				System.out.println("discountList:"+discountList.get(i).getLevel());
 				return discountList.get(i);
 			}
 		}

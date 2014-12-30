@@ -306,6 +306,7 @@ public class Invoice implements businesslogic.commoditybl.InvoiceInfo,
 		try {
 			po.setCondition(1);
 			invoice.addInvoice(invoicePO);
+			System.out.println("addExport_ReturnPO:" +invoicePO.getNote());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
