@@ -22,7 +22,11 @@ import ui.setting.Button.MyButton;
 import ui.setting.resultPanels.ResultPanelController;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
-
+/**
+ * 登录界面
+ * @author ZYC
+ *
+ */
 public class LoginPanel extends FatherPanel {
 
 	private static final long serialVersionUID = 3788130429021132822L;

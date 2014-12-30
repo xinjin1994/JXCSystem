@@ -15,7 +15,11 @@ import vo.CommodityVO;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 删除商品界面，结束后跳转确认界面
+ * @author ZYC
+ *
+ */
 public class DelComPanel extends FatherPanel implements ActionListener{
 
 	private CommodityAllUIController commodityAllUIController;

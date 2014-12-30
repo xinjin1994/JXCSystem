@@ -14,7 +14,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
-
+/**
+ * 删除用户
+ * @author ZYC
+ *
+ */
 public class DelUserPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
 	private AdminAllUIController adminAllUIController;

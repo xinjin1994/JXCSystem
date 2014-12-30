@@ -52,6 +52,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return sale;
 	}
 
+	
 	public void setSale(SalesDataService sale) {
 		this.sale = sale;
 	}
@@ -63,6 +64,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		this.commodity = commodity;
 	}
 
+	public CommodityPO findCommodity(String name,String type){
+		return commodity.findCommodity(name, type);
+	}
+	
 	public int addCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		try {
@@ -230,17 +235,20 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 				ProGiftPO proGiftPO = promotion.getProGift(po.getCustomer()
 						.getLevel());
-				String time = Sales.getNowTime();
-				int start = time.compareTo(proGiftPO.getStartTime());
-				int end = time.compareTo(proGiftPO.getEndTime());
-				if ((start >= 0) && (end <= 0)) {
-					if (po.getExportGoodList().get(0).getMoney() > proGiftPO
-							.getStartMoney()) {
-						commodity.addSendGift(proGiftPO.getGift(),
-								proGiftPO.getNumber(), po.getCustomer());
+				if(proGiftPO==null){
+					return 0;
+				}else{
+					String time = Sales.getNowTime();
+					int start = time.compareTo(proGiftPO.getStartTime());
+					int end = time.compareTo(proGiftPO.getEndTime());
+					if ((start >= 0) && (end <= 0)) {
+						if (po.getExportGoodList().get(0).getMoney() > proGiftPO.getStartMoney()) {
+							commodity.addSendGift(proGiftPO.getGift(),proGiftPO.getNumber(), po.getCustomer());
+						}
 					}
+					return 0;
 				}
-				return 0;
+				
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

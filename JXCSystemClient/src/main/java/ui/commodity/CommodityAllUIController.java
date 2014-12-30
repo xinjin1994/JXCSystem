@@ -16,6 +16,7 @@ import ui.commodity.sort.ChaSortPanel;
 import ui.commodity.sort.ConfirmSortPanel;
 import ui.commodity.sort.DelSortPanel;
 import ui.commodity.storage.AddPatchPanel;
+import ui.commodity.storage.ConfirmPatchPanel;
 import ui.commodity.storage.ExamineStockPanel;
 import ui.commodity.storage.PatchDetailPanel;
 import ui.setting.MyFrame;
@@ -25,6 +26,11 @@ import vo.CommodityVO;
 import vo.SortVO;
 import vo.bill.PatchVO;
 
+/**
+ * 控制Commodity模块各个界面的跳转
+ * @author ZYC
+ *
+ */
 public class CommodityAllUIController extends UIController{
 	private UIController uiController;
 	private MyFrame frame;

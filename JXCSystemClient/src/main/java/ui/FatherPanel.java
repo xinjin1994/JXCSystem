@@ -12,6 +12,11 @@ import javax.swing.JPanel;
 
 import ui.setting.Button.MyButton;
 
+/**
+ * 所有界面的父类，包括最大化，最小化按钮
+ * @author ZYC
+ *
+ */
 public class FatherPanel extends JPanel {
 
 	/** serialVersionUID */

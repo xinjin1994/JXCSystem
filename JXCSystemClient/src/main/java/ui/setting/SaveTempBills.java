@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ui.UIController;
 import ui.account.payRe.ConfirmPaymentPanel;
 import ui.account.payRe.ConfirmReceiptPanel;
-import ui.commodity.PatchDetailPanel;
+import ui.commodity.storage.PatchDetailPanel;
 import ui.manager.SendGiftPanel;
 import ui.sales.impanel.ImInBillPanel;
 import ui.sales.impanel.ImInDraftBill;
@@ -24,7 +24,12 @@ import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.accountblservice.AccountblService;
 import businesslogicservice.commodityblservice.CommodityblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
-
+/**
+ * 保存临时单据
+ * 用于双击表格显示单据具体信息
+ * @author ZYC
+ *
+ */
 public class SaveTempBills {
 	ArrayList<InvoiceVO> invoiceBills = new ArrayList<InvoiceVO>();
 	InvoiceblService invoiceblService;

@@ -16,7 +16,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
-
+/**
+ * 确认界面，包括确认增加用户，删除用户
+ * @author ZYC
+ *
+ */
 public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	protected MyButton forwardButton,backButtonConfirm;
 	protected ResultPanelController resController;

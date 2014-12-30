@@ -7,7 +7,9 @@ import ui.FatherPanel;
 import ui.UIController;
 import ui.setting.Button.BackButton;
 import ui.setting.Button.MyButton;
-
+/*
+ * 控制所有返回情况
+ */
 public class SetBack {
 	FatherPanel prePanel;
 	MyButton backButton,backButtonConfirm;

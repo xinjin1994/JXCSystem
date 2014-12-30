@@ -1,7 +1,11 @@
 package ui.setting.Button;
 
 import ui.FatherPanel;
-
+/**
+ * 刷新按钮
+ * @author ZYC
+ *
+ */
 public class RefreshButton {
 	public MyButton refreshButton;
 	public RefreshButton(FatherPanel panel) {

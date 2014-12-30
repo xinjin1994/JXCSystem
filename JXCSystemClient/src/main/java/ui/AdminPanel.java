@@ -23,7 +23,11 @@ import vo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
 
-//0 管理员
+/**
+ * 管理员主界面
+ * @author ZYC
+ *
+ */
 public class AdminPanel extends FatherPanel{
 	
 	private AdminAllUIController adminAllUIController;

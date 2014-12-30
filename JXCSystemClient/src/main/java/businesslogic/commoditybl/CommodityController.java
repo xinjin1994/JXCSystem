@@ -84,14 +84,14 @@ public class CommodityController implements CommodityblService{
 	public ArrayList<ExamineVO> Examine_up(String time1, String time2) {
 		// TODO Auto-generated method stub
 		ArrayList<ExamineVO> vo=commodity.Examine(time1, time2);
-		ExamineVO lin;
+//		ExamineVO lin;
 		int i=0;
 		for(i=0;i<vo.size();i++){
 			for(int j=1;j<vo.size();j++){
 				if(vo.get(j).time.compareTo(vo.get(j-1).time)<0){
-					lin=vo.get(j);
-					vo.set(j, vo.get(j-1));
-					vo.set(j-1, lin);
+//					lin=vo.get(j);
+//					vo.set(j, vo.get(j-1));
+//					vo.set(j-1, lin);
 				}	
 			}
 		}

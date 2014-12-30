@@ -9,7 +9,11 @@ import ui.setting.FontFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import vo.CommodityVO;
-
+/**
+ * 显示商品详细信息，用于精确查找商品后显示商品具体信息
+ * @author ZYC
+ *
+ */
 public class ComDetailPanel extends FatherPanel{
 	protected MyFrame frame;
 	protected CommodityAllUIController commodityAllUIController;

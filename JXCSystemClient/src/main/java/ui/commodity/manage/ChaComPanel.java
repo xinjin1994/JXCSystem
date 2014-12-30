@@ -15,7 +15,11 @@ import vo.CommodityVO;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 修改商品对话框界面，结束后跳转修改商品具体界面ChaComDPanel
+ * @author ZYC
+ *
+ */
 public class ChaComPanel extends FatherPanel implements ActionListener {
 
 	private CommodityAllUIController commodityAllUIController;

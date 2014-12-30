@@ -7,7 +7,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import ui.FatherPanel;
-
+/**
+ * 封装审批拒绝按钮
+ * @author ZYC
+ *
+ */
 public class RefuseButton implements ActionListener{
 	public MyButton refuse;
 	FatherPanel panel;

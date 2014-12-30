@@ -1202,13 +1202,13 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 				for (j = 0; j < export_returnList.size(); j++) {
 					if((export_returnList.get(j).getCondition()==2)
 							&&(export_returnList.get(j).getCustomer().getName().equals(exportList.get(i).getCustomer().getName())
-							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getName().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getName())
-							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getType().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getType()))
+							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getName().equals(exportList.get(i).getExportGoodList().get(0).getCommodity().getName())
+							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getType().equals(exportList.get(i).getExportGoodList().get(0).getCommodity().getType()))
 							&&(export_returnList.get(j).getTime().compareTo(exportList.get(i).getTime())>=0)))){
 						sum=sum+export_returnList.get(j).getExportGoodList().get(0).getNumber();
 					}
 				}
-				int exportNumber = exportList.get(i).getImportGoodList().get(0).getNumber();
+				int exportNumber = exportList.get(i).getExportGoodList().get(0).getNumber();
 				return exportNumber - sum;
 			}
 		}
@@ -1307,7 +1307,10 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 			}
 		}
 		for (int i = 0; i < exportList.size(); i++) {
-			if (importList.get(i).getNote().equals(exportPO.getNote())) {
+			if(exportList.size()==0){
+				return false;
+			}
+			if (exportList.get(i).getNote().equals(exportPO.getNote())) {
 
 				exportList.get(i).setCondition(2);
 			}
@@ -1421,8 +1424,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	public String getExportOldNote(String cusName, String name, String type) {
 		for (int i = exportList.size()-1; i >=0 ; i--) {
 			if (exportList.get(i).getCustomer().getName().equals(cusName)) {
-				if (exportList.get(i).getImportGoodList().get(0).getCommodity().getName().equals(name)) {
-					if (exportList.get(i).getImportGoodList().get(0).getCommodity().getType().equals(type)) {
+				if (exportList.get(i).getExportGoodList().get(0).getCommodity().getName().equals(name)) {
+					if (exportList.get(i).getExportGoodList().get(0).getCommodity().getType().equals(type)) {
 						if(exportList.get(i).getCondition()==2){
 							return exportList.get(i).getNote();
 						}

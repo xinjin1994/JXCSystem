@@ -14,7 +14,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 删除商品分类，结束后前往确认界面
+ * @author ZYC
+ *
+ */
 public class DelSortPanel extends FatherPanel implements ActionListener{
 	protected MyFrame frame;
 	protected CommodityAllUIController commodityAllUIController;

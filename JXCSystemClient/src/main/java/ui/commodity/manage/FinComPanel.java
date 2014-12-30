@@ -19,7 +19,12 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.CommodityVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 确认商品界面，精确查找前往商品具体信息界面显示商品具体信息，
+ * 模糊查找返回主界面列表显示信息
+ * @author ZYC
+ *
+ */
 public class FinComPanel extends FatherPanel implements ActionListener{
 	
 	private ColorFactory colors = new ColorFactory();;

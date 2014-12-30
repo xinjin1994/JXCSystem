@@ -67,7 +67,7 @@ public class SalesController implements SalesblService {
 
 	public int addImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGoodPO = new ImportGoodPO(commodityPO,
@@ -88,7 +88,7 @@ public class SalesController implements SalesblService {
 
 	public int addImport_Return_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGoodPO = new ImportGoodPO(commodityPO,
@@ -104,12 +104,6 @@ public class SalesController implements SalesblService {
 				importMenuVO.warehouse, importMenuVO.total,
 				sale.getImportOldNote(customerPO.name, commodityPO.getName(),
 						commodityPO.getType()));
-		System.out.println("addImport_Return_up: "
-				+ sale.getImportOldNote(customerPO.name, commodityPO.getName(),
-						commodityPO.getType()));
-		System.out.println(customerPO.name);
-		System.out.println(commodityPO.getName());
-		System.out.println(commodityPO.getType());
 		imp.setNote(importMenuVO.note);
 		int message = sale.addImport_Return(imp);
 		return message;
@@ -117,7 +111,7 @@ public class SalesController implements SalesblService {
 
 	public int addExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGoodPO = new ExportGoodPO(commodityPO,
@@ -139,7 +133,7 @@ public class SalesController implements SalesblService {
 
 	public int addExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodityPO = new CommodityPO(
+		CommodityPO commodityPO = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGoodPO = new ExportGoodPO(commodityPO,
@@ -235,7 +229,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftImport_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGood = new ImportGoodPO(commodity,
@@ -257,7 +251,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftExport_Return_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGood = new ExportGoodPO(commodity,
@@ -283,7 +277,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftImport_Return_up(ImportMenuVO importMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				importMenuVO.commodityList.name,
 				importMenuVO.commodityList.type);
 		ImportGoodPO importGood = new ImportGoodPO(commodity,
@@ -306,7 +300,7 @@ public class SalesController implements SalesblService {
 
 	public int addDraftExport_up(ExportMenuVO exportMenuVO) {
 		// TODO Auto-generated method stub
-		CommodityPO commodity = new CommodityPO(
+		CommodityPO commodity = sale.findCommodity(
 				exportMenuVO.commodityList.name,
 				exportMenuVO.commodityList.type);
 		ExportGoodPO exportGood = new ExportGoodPO(commodity,

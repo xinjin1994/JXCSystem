@@ -10,7 +10,11 @@ import ui.ManagerPanel;
 import ui.account.AccountAllUIController;
 import ui.commodity.CommodityAllUIController;
 import ui.manager.ManagerAllUIController;
-
+/**
+ * 设置表格
+ * @author ZYC
+ *
+ */
 public class SetTable {
 	
 	private ColorFactory color = new ColorFactory();

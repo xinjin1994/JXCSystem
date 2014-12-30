@@ -6,7 +6,11 @@ import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import vo.SendGiftVO;
-
+/**
+ * 赠送界界面，只有在审批单据的双击表格才会显示
+ * @author ZYC
+ *
+ */
 public class SendGiftPanel extends FatherPanel{
 	protected MyFrame frame;
 	protected SendGiftVO sendGift;

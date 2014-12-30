@@ -22,7 +22,11 @@ import businesslogic.invoicebl.InvoiceController;
 import businesslogic.promotionbl.PromotionController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
 import businesslogicservice.promotionblservice.PromotionblService;
-
+/**
+ * 控制manager主界面secondPanel显示和跳转
+ * @author ZYC
+ *
+ */
 public class ManagerUIController extends UIController{
 	private int secondX = 1;
 	private int secondY = 35;

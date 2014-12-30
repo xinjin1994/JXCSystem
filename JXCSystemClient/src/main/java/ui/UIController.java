@@ -8,7 +8,12 @@ import ui.manager.ManagerAllUIController;
 import ui.sales.SalesUIController;
 import ui.setting.MyFrame;
 import ui.setting.SetBack;
-
+/**
+ * 各个模块的跳转，控制SalesUIController，AdminAllUIController，CommodityAllUIController，ManagerAllUIController
+ * AccountAllUIController
+ * @author ZYC
+ *
+ */
 public class UIController {
 
 	static private MyFrame frame;
@@ -28,38 +33,12 @@ public class UIController {
 	public UIController(){
 		this.frame = frame;
 	}
-//	public UIController(int i) {
-//
-//		this.frame = new MyFrame();
-//	    this.welcomePanel();
-//////	    this.SalesManagerPanel();
-//	}
 	
 	public UIController(int i){
 		this.frame = new MyFrame();
 		this.welcomePanel();
-//		this.connectPanel();
-//		this.CommodityPanel();
-//	  	this.AccountPanel();
-
-//		this.SalesManagerPanel();
-
-//		this.AccountPanel();
-
-//	    this.ManagerPanel();
-//		this.SalesManagerPanel();
-
-//		this.AdminPanel();
-
 	}
 
-//	public UIController(String str){
-//		this.frame = new MyFrame(); 
-////		this.ManagerPanel();
-//		this.CommodityPanel();
-////		this.SalesManagerPanel();
-//		
-//	}
 	public void welcomePanel() {
 		welcomePanel = new WelcomePanel(frame,"Image/welcome.jpg",this);
 		frame.setPanel(welcomePanel);

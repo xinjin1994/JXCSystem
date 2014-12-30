@@ -17,7 +17,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 商品分类确认界面，包括确认添加，删除，修改商品分类
+ * @author ZYC
+ *
+ */
 public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
 	private MyButton forwardButton;
