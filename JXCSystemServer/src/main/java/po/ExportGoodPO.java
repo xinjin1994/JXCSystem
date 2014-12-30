@@ -9,16 +9,16 @@ public class ExportGoodPO implements Serializable{
 	 */
 	private static final long serialVersionUID = 400;
 	CommodityPO commodity;
-	int number;
-	int price;  	//这里是商品的单价，人工输入
-	int money;		//这里是这个商品出库列表的总价
+	public int number;
+	public double price;  	//这里是商品的单价，人工输入
+	public double money;		//这里是这个商品出库列表的总价
 	String ps;
 	
-	public ExportGoodPO(CommodityPO commodity,int number,int price,int money,String ps){
+	public ExportGoodPO(CommodityPO commodity,int number,double price,double money,String ps){
 		this.commodity=commodity;
 		this.number=number;
 		this.price=price;
-		this.money=money;
+		this.money=price*number;
 		this.ps=ps;
 	}
 	
@@ -29,10 +29,10 @@ public class ExportGoodPO implements Serializable{
 	public int getNumber(){
 		return number;
 	}
-	public int getPrice(){
+	public double getPrice(){
 		return price;
 	}
-	public int getMoney(){
+	public double getMoney(){
 		return money;
 	}
 	public String getPs(){

@@ -7,6 +7,10 @@ public class InvoicePO extends AllBillPO implements Serializable{
 //	String submit_condition;//�ύ״̬
 //	String approve_condition;//�����
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 900;
 	int condition;   //0 代表草稿，1代表待审批。2代表通过。3代表失败
 //	int invoice_type;        //1代表SendGoodPO， 2代表ImportPO， 3代表Import_Return， 4代表ExportPO，
 //					 //5代表Export_Return， 6代表PatchPO， 7代表ReceiptPO， 8代表PaymentPO
