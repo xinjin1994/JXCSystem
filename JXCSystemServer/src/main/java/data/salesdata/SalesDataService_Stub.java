@@ -756,7 +756,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 	public boolean addImport(ImportPO po) {
 		po = po.copy();
 		po.setTime(SalesDataService_Stub.getNowTime());
-
+		
 		importList.add(po);
 		this.writeImportList();
 		return true;

@@ -146,6 +146,15 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			if (sale.addImport(po)) {
 				systemlog.add_up("addImport: ");
+				CommodityPO commodityPO=commodity.findCommodity(po.getImportGoodList().get(0)
+						.getCommodity().getName(), po.getImportGoodList()
+						.get(0).getCommodity().getType());
+				ArrayList<CommodityPO> array = new ArrayList<CommodityPO>();
+				array = commodity.getAllCommodity();
+				for(int i=0;i<array.size();i++){
+					if(array.get(i).getName())
+				}
+
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -884,6 +893,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public double getDiscount(double money, int level) {
 		// TODO Auto-generated method stub
 		DiscountPO discountPO = promotion.getDiscount(level);
+		if(discountPO==null){
+			System.out.println("getDiscount: "+discountPO);
+			return 0;
+		}
 		String time = Sales.getNowTime();
 		int start = time.compareTo(discountPO.getStartTime());
 		int end = time.compareTo(discountPO.getEndTime());
