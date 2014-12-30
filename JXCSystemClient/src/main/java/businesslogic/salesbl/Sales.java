@@ -52,6 +52,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return sale;
 	}
 
+	
 	public void setSale(SalesDataService sale) {
 		this.sale = sale;
 	}
@@ -63,6 +64,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		this.commodity = commodity;
 	}
 
+	public CommodityPO findCommodity(String name,String type){
+		return commodity.findCommodity(name, type);
+	}
+	
 	public int addCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		try {
