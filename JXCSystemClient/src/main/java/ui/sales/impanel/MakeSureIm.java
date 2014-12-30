@@ -196,12 +196,12 @@ public class MakeSureIm extends FatherPanel {
 	class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			SalesResult salesResult = new SalesResult(frame, controller, salesUIController, MakeSureIm.this);
+			frame.remove(MakeSureIm.this);
 			if (e.getSource() == back) {
-				frame.remove(MakeSureIm.this);
 				frame.setPanel(imInPanel);
 				frame.repaint();
 			} else if (e.getSource() == forward) {
+				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, imInPanel);
 				switch (salesblService.addImport_up(importMenuVO)) {
 				case 0:
 					System.out.println(importMenuVO.person+"person");
@@ -211,25 +211,25 @@ public class MakeSureIm extends FatherPanel {
 					salesResult.failed("未知错误！", "import_failed");
 				}
 			} else if (e.getSource() == back2) {
-				frame.remove(MakeSureIm.this);
 				frame.setPanel(imBackPanel);
 				frame.repaint();
 			} else if (e.getSource() == forward2) {
+				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, imBackPanel);
 				switch (salesblService.addImport_Return_up(importMenuVO)) {
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
-				case 5:
+				case 6:
 					salesResult.failed("超过最大可退货数量！", "import_returnFailed");
 					break;
 				default:
 					salesResult.failed("添加失败！", "import_return_failed");
 				}
 			} else if (e.getSource() == backSales) {
-				frame.remove(MakeSureIm.this);
 				frame.setPanel(salesInPanel);
 				frame.repaint();
 			} else if (e.getSource() == forwardSales) {
+				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, salesInPanel);
 				int i = salesblService.addExport_up(exportMenuVO);
 //				System.out.println(i);
 				switch(i){
@@ -240,11 +240,13 @@ public class MakeSureIm extends FatherPanel {
 					salesResult.failed("添加失败！", "export_return_failed");
 				}
 			}else if(e.getSource() == backSales2){
-				frame.remove(MakeSureIm.this);
 				frame.setPanel(salesBackPanel);
 				frame.repaint();
 			}else if(e.getSource() == forwardSales2){
-				switch(salesblService.addExport_Return_up(exportMenuVO)){
+				SalesResult salesResult = new SalesResult(frame, controller, salesUIController, salesBackPanel);
+				int i = salesblService.addExport_Return_up(exportMenuVO);
+				System.out.println(i);
+				switch(i){
 				case 0:
 					salesResult.succeeded("添加成功！");
 					break;
