@@ -10,6 +10,7 @@ public class WarnPO extends AllBillPO implements Serializable{
 	public WarnPO(CommodityPO commodity,int warn_number){
 		this.commodity=commodity;
 		this.warn_number=warn_number;
+		this.doc_type=9;
 	}
 	
 	

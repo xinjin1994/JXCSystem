@@ -36,7 +36,7 @@ public class Export_ReturnPO extends InvoicePO implements Serializable{
 		this.discount=discount;
 		this.voucher=voucher;
 		this.old_note=old_note;
-		this.condition=5;
+		this.doc_type=5;
 	}
 	
 	
