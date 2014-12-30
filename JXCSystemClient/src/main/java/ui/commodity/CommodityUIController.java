@@ -298,6 +298,7 @@ public class CommodityUIController {
 			if(e.getSource() == stockButtons[0]){
 				frame.remove(commodityPanel);
 				uiController.examineStock();
+				
 			}else if(e.getSource() == stockButtons[1]){
 				frame.remove(commodityPanel);
 				uiController.inventory();

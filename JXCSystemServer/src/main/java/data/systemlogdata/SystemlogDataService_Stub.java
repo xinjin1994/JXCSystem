@@ -85,7 +85,7 @@ public class SystemlogDataService_Stub extends UnicastRemoteObject implements Sy
 
 	public boolean add(SystemlogPO po) throws RemoteException {
 		SystemlogPO po2=po.copy();
-		po2.setTime(AccountDataService_Stub.getNoteTime());
+		po2.setTime(AccountDataService_Stub.getNowTime());
 		System.out.println("addSystemlog:"+po.getWord());
 		systemlogList.add(po2);
 		return true;
