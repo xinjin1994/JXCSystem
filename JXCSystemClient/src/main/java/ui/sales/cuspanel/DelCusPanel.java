@@ -22,7 +22,6 @@ public class DelCusPanel extends FatherPanel {
 	private MyButton secondCusBack, forward;
 	private SalesUIController salesUIController;
 	protected MyTextFieldBorder cusName;
-	protected MyLabel cusID;
 	protected CustomerVO customerVO;
 	private MyLabel failLabel;
 
