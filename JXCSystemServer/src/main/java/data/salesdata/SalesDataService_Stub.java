@@ -1111,14 +1111,14 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 
 	public static String getNowTime() {
 		Calendar rightNow = Calendar.getInstance();
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		String sysDatetime = fmt.format(rightNow.getTime());
 		return sysDatetime;
 	}
 
 	public static String getNoteTime() {
 		Calendar rightNow = Calendar.getInstance();
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		String sysDatetime = fmt.format(rightNow.getTime());
 		return sysDatetime;
 	}

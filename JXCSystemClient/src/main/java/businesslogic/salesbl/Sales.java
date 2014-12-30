@@ -52,7 +52,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		return sale;
 	}
 
-	
 	public void setSale(SalesDataService sale) {
 		this.sale = sale;
 	}
@@ -64,10 +63,10 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		this.commodity = commodity;
 	}
 
-	public CommodityPO findCommodity(String name,String type){
+	public CommodityPO findCommodity(String name, String type) {
 		return commodity.findCommodity(name, type);
 	}
-	
+
 	public int addCustomer(CustomerVO customerVO) {
 		// TODO Auto-generated method stub
 		try {
@@ -165,7 +164,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public int addImport_Return(Import_ReturnPO po) {
 		// TODO Auto-generated method stub
 		System.out.print(po.getOldNote());
-
+		if (po.getOldNote() == null) {
+			return 6;
+		}
 		int number = getImport_ReturnMaxNumber(po.getOldNote());
 		System.out.println("要求退货数量："
 				+ po.getImportGoodList().get(0).getNumber());
@@ -213,48 +214,41 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public int addExport(ExportPO po) {
 		// TODO Auto-generated method stub
-		invoice.add(po);
-		try {
-			if (sale.addExport(po)) {
-				systemlog.add_up("addExport: ");
-
-				CommodityPO commodityPO = commodity.findCommodity(po
-						.getExportGoodList().get(0).getCommodity().getName(),
-						po.getExportGoodList().get(0).getCommodity().getType());
-				ArrayList<CommodityPO> array = new ArrayList<CommodityPO>();
-				array = commodity.getAllCommodity();
-				for (int i = 0; i < array.size(); i++) {
-					if ((array.get(i).getName() == commodityPO.getName())
-							&& (array.get(i).getType() == commodityPO.getType())) {
-						if (commodityPO.number < po.getExportGoodList().get(0)
-								.getNumber()) {
-							return 7;
-						}
-					}
-				}
-
-				ProGiftPO proGiftPO = promotion.getProGift(po.getCustomer()
-						.getLevel());
-				if(proGiftPO==null){
-					return 0;
-				}else{
-					String time = Sales.getNowTime();
-					int start = time.compareTo(proGiftPO.getStartTime());
-					int end = time.compareTo(proGiftPO.getEndTime());
-					if ((start >= 0) && (end <= 0)) {
-						if (po.getExportGoodList().get(0).getMoney() > proGiftPO.getStartMoney()) {
-							commodity.addSendGift(proGiftPO.getGift(),proGiftPO.getNumber(), po.getCustomer());
-						}
-					}
-					return 0;
-				}
-				
+		CommodityPO commodityPO = commodity.findCommodity(po
+				.getExportGoodList().get(0).getCommodity().getName(), po
+				.getExportGoodList().get(0).getCommodity().getType());
+		if (commodityPO == null) {
+			return 7;
+		} else if (po.getExportGoodList().get(0).getNumber() > commodityPO.number) {
+			return 7;
+		} else {
+			invoice.add(po);
+			try {
+				sale.addExport(po);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ProGiftPO proGiftPO = promotion.getProGift(po.getCustomer()
+					.getLevel());
+			if (proGiftPO == null) {
+				systemlog.add_up("addExport: ");
+				return 0;
+			} else {
+				String time = Sales.getNowTime();
+				int start = time.compareTo(proGiftPO.getStartTime());
+				int end = time.compareTo(proGiftPO.getEndTime());
+				if ((start >= 0) && (end <= 0)) {
+					if (po.getExportGoodList().get(0).getMoney() > proGiftPO
+							.getStartMoney()) {
+						commodity.addSendGift(proGiftPO.getGift(),
+								proGiftPO.getNumber(), po.getCustomer());
+					}
+				}
+				systemlog.add_up("addExport: ");
+				return 0;
+			}
 		}
-		return -1;
 	}
 
 	public int addExport_Return(Export_ReturnPO po) {
@@ -943,22 +937,24 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		if (discountPO == null) {
 			System.out.println("SalesgetDiscount: " + discountPO);
 			return 0;
-		}else{
+		} else {
 			System.out.println("disCount is not null");
-		String time = Sales.getNowTime();
-		int start = time.compareTo(discountPO.getStartTime());
-		int end = time.compareTo(discountPO.getEndTime());
-		System.out.println("time "+time+"start "+discountPO.getStartTime()+"end "+discountPO.getEndTime());
-		if ((start >= 0) && (end <= 0)) {
-			if (money > discountPO.getEndMoney()) {
-				int result = (int) (discountPO.getEndMoney() / discountPO
-						.getStartMoney());
-				return result * discountPO.getDiscountMoney();
-			} else {
-				int result = (int) (money / discountPO.getStartMoney());
-				return result * discountPO.getDiscountMoney();
+			String time = Sales.getNowTime();
+			int start = time.compareTo(discountPO.getStartTime());
+			int end = time.compareTo(discountPO.getEndTime());
+			System.out.println("time " + time + "start "
+					+ discountPO.getStartTime() + "end "
+					+ discountPO.getEndTime());
+			if ((start >= 0) && (end <= 0)) {
+				if (money > discountPO.getEndMoney()) {
+					int result = (int) (discountPO.getEndMoney() / discountPO
+							.getStartMoney());
+					return result * discountPO.getDiscountMoney();
+				} else {
+					int result = (int) (money / discountPO.getStartMoney());
+					return result * discountPO.getDiscountMoney();
+				}
 			}
-		}
 		}
 		return 0;
 
@@ -994,7 +990,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public static String getNowTime() {
 		Calendar rightNow = Calendar.getInstance();
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		String sysDatetime = fmt.format(rightNow.getTime());
 		return sysDatetime;
 	}
