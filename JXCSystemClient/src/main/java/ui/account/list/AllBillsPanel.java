@@ -208,7 +208,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 
 					frame.remove(this);
 					if (type.equals("account")) {
-						setTableA(sales);
+						setTableA(bills);
 						
 						AccountPanel accountPanel = (AccountPanel)(accountController.getMainPanel());
 						
@@ -225,7 +225,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 					} else if (type.equals("manager")) {
 						
 						
-						setTableM(sales);
+						setTableM(bills);
 						ManagerPanel managerPanel = (ManagerPanel)(managerController.getMainPanel());
 						
 						excel = new MyButton("Image/output.png", 350, 450, "Image/output_stop.png", "Image/output_stop.png");	
