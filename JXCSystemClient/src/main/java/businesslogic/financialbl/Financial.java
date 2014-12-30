@@ -90,8 +90,9 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 		
 		try {
 			ArrayList<AllBillPO> fin=financial.getAllBill();
+			System.out.println("AllBill:"+fin.size());
 			
-			for(int i=0;i<array.size();i++){
+			for(int i=0;i<fin.size();i++){
 				
 				if(!((time1==null||time1.equals("")||fin.get(i).getTime().compareTo(time1)>=0)&&(time2==null||time2.equals("")||fin.get(i).getTime().compareTo(time2)<=0))){
 //						&&
@@ -101,6 +102,7 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 //						(clerk==null||fin.get(i).getClerk().equals(clerk))&&
 //						(warehouse==null||fin.get(i).getWareHouse()==wareHouse)){
 					fin.remove(i);
+					i--;
 					continue;
 				}
 				
