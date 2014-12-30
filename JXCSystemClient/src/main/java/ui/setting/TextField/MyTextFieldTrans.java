@@ -3,7 +3,11 @@ package ui.setting.TextField;
 import ui.setting.FontFactory;
 
 
-//对应于类似基本信息一栏 没有边框且透明的
+/**
+ * 没有边框且透明的textField
+ * @author ZYC
+ *
+ */
 public class MyTextFieldTrans extends MyTextField{
 
 	public MyTextFieldTrans(int x, int y, 

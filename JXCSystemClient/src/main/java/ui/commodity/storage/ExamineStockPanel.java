@@ -19,7 +19,11 @@ import vo.CommodityVO;
 import vo.ExamineVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 库存查看界面，结束后返回主界面表格显示信息
+ * @author ZYC
+ *
+ */
 public class ExamineStockPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
 	private CommodityAllUIController commodityAllUIController;

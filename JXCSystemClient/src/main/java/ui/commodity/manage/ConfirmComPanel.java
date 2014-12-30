@@ -13,7 +13,11 @@ import vo.CommodityVO;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 确认商品界面，包括确认添加，删除，修改商品
+ * @author ZYC
+ *
+ */
 public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 
 	private MyButton forwardButton;

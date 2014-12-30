@@ -12,7 +12,11 @@ import vo.promotion.ProGiftVO;
 import vo.promotion.VoucherVO;
 import businesslogic.promotionbl.PromotionController;
 import businesslogicservice.promotionblservice.PromotionblService;
-
+/**
+ * 促销策略确认界面  确认添加
+ * @author ZYC
+ *
+ */
 public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 	
 	private ResultPanelController resControllerF,resControllerS;

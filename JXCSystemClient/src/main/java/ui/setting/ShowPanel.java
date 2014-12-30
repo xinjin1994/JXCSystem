@@ -1,7 +1,12 @@
 package ui.setting;
 
 import javax.swing.JPanel;
-
+/**
+ * 测试
+ * 
+ * @author ZYC
+ *
+ */
 public class ShowPanel extends JPanel{
 	public ShowPanel() {
 		this.setLayout(null);

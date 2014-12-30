@@ -1,5 +1,9 @@
 package ui.setting.Button;
-
+/**
+ * 封装前进按钮
+ * @author ZYC
+ *
+ */
 public class ForwardButton extends MyButton{
 	public MyButton forward_white,forward_black;
 	

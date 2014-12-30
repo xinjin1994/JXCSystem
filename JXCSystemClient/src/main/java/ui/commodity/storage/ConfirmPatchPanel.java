@@ -1,9 +1,9 @@
-package ui.commodity;
+package ui.commodity.storage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import ui.commodity.storage.PatchDetailPanel;
+import ui.commodity.CommodityAllUIController;
 import ui.setting.MyFrame;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
@@ -11,7 +11,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.PatchVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 报溢报损确认界面
+ * @author ZYC
+ *
+ */
 public class ConfirmPatchPanel extends PatchDetailPanel implements ActionListener{
 	private MyButton forwardButton;
 	private CommodityblService commodityblService;

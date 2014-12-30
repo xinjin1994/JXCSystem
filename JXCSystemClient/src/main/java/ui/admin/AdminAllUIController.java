@@ -10,7 +10,11 @@ import ui.setting.SetBack;
 import ui.setting.Button.LogOutButton;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
-
+/**
+ * 控制Admin模块各个界面的跳转
+ * @author ZYC
+ *
+ */
 public class AdminAllUIController extends UIController{
 	private MyFrame frame;
 	private UIController uiController;

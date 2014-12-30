@@ -12,7 +12,11 @@ import ui.setting.MyFrame;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldBorder;
-
+/**
+ * 输入ip与服务器连接界面
+ * @author ZYC
+ *
+ */
 public class ConnectPanel extends FatherPanel implements ActionListener{
 
 	private MyFrame frame;

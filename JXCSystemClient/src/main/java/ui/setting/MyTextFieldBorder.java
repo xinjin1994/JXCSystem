@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.border.LineBorder;
-
+/**
+ * 有边框的textField
+ * @author ZYC
+ *
+ */
 //对应于类似查找客户 有边框的
 public class MyTextFieldBorder extends MyTextField{
 	

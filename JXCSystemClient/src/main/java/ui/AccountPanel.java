@@ -44,7 +44,11 @@ import vo.bill.GetVO;
 import vo.bill.InvoiceVO;
 import vo.bill.PayVO;
 
-//财务经理
+/**
+ * 财务人员财务经理主界面
+ * @author ZYC
+ *
+ */
 public class AccountPanel extends FatherPanel implements ActionListener{
 
 	private int firstX = 0;

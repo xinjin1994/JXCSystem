@@ -12,7 +12,12 @@ import vo.CommodityVO;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 修改商品具体界面
+ * @see ChaComPanel
+ * @author ZYC
+ *
+ */
 public class ChaComDPanel extends AddComPanel implements ActionListener {
 
 	public ChaComDPanel(MyFrame frame, String url, CommodityAllUIController uiController, CommodityVO chaCom) {
@@ -79,6 +84,7 @@ public class ChaComDPanel extends AddComPanel implements ActionListener {
 				inValue = Double.parseDouble(inPrice.getText());
 				outValue = Double.parseDouble(outPrice.getText());
 				warnNum = Integer.parseInt(warnNumber.getText());
+				idString = chaCom.id;
 				// CommodityVO(String id, String name, String type, int num,
 				// double inValue, double outValue,
 				// double latestInValue, double latestOutValue,int warn

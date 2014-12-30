@@ -18,7 +18,7 @@ import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
 
 /**
- * 
+ * 修改账户界面
  * @author ZYC
  * 
  */

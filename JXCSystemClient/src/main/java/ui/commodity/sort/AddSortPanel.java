@@ -16,7 +16,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 添加分类
+ * @author ZYC
+ *
+ */
 public class AddSortPanel extends FatherPanel implements ActionListener{
 	private CommodityAllUIController commodityAllUIController;
 	private ResultPanelController resController;

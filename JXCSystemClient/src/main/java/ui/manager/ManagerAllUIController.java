@@ -21,7 +21,11 @@ import vo.SendGiftVO;
 import vo.promotion.DiscountVO;
 import vo.promotion.ProGiftVO;
 import vo.promotion.VoucherVO;
-
+/**
+ * 控制Manager模块所有界面及控制器的跳转
+ * @author ZYC
+ *
+ */
 public class ManagerAllUIController extends UIController{
 	private MyFrame frame;
 	private UIController uiController;

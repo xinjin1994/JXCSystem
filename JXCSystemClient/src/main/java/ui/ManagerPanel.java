@@ -41,7 +41,7 @@ import businesslogicservice.invoiceblservice.InvoiceblService;
 import businesslogicservice.systemlogblservice.SystemlogblService;
 
 /**
- * 6 总经理
+ * 总经理主界面
  * @author lsy
  * @version 2014年11月28日下午4:21:03
  */

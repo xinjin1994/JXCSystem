@@ -11,7 +11,11 @@ import ui.setting.MyLabel;
 import vo.promotion.DiscountVO;
 import vo.promotion.ProGiftVO;
 import vo.promotion.VoucherVO;
-
+/**
+ * 显示促销具体信息
+ * @author ZYC
+ *
+ */
 public class ProDetailPanel extends FatherPanel{
 	protected ManagerAllUIController uiController;
 	protected MyFrame frame;

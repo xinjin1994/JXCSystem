@@ -7,7 +7,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import ui.FatherPanel;
-
+/**
+ * 提醒按钮，提醒用户审批通过或拒绝
+ * @author ZYC
+ *
+ */
 public class RemindButton implements ActionListener{
 	public MyButton remindButton;
 	FatherPanel panel;

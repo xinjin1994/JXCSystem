@@ -5,7 +5,11 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * 封装Frame
+ * @author ZYC
+ *
+ */
 public class MyFrame extends JFrame{
  
 	private static final long serialVersionUID = -2308734636856199114L;

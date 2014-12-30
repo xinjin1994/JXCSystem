@@ -9,6 +9,11 @@ import javax.swing.JLabel;
 import ui.FatherPanel;
 import ui.setting.MyLabel;
 
+/**
+ * 审批通过按钮
+ * @author ZYC
+ *
+ */
 public class ApproveButton implements ActionListener{
 	public MyButton approveButton;
 	FatherPanel panel;

@@ -1,13 +1,18 @@
 package ui.commodity.storage;
 
 import ui.FatherPanel;
+import ui.UIController;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import vo.CommodityVO;
 import vo.bill.PatchVO;
-
+/**
+ * 库存报溢报损详细信息界面
+ * @author ZYC
+ *
+ */
 public class PatchDetailPanel extends FatherPanel{
 
 	protected MyFrame frame;
@@ -25,6 +30,18 @@ public class PatchDetailPanel extends FatherPanel{
 		this.patch = patch;
 		back();
 		setLabels();
+	}
+
+	public PatchDetailPanel(MyFrame frame, String string,
+			UIController uiController, PatchVO patch) {
+		super(frame, string, uiController);
+		this.patch = patch;
+		this.frame = frame;
+		setLabels();
+		
+		uiController.setBackBills(this);
+	
+	
 	}
 
 	protected void back(){

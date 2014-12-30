@@ -23,7 +23,11 @@ import javax.swing.tree.TreeModel;
 
 import vo.CommodityVO;
 import vo.SortVO;
-
+/**
+ * 封装树（显示商品，及商品分类）
+ * @author ZYC
+ *
+ */
 public class MySortTree {
 	DefaultTreeModel treeModel;
 	static public JTree tree;

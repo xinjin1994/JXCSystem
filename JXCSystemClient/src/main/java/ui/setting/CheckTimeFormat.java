@@ -1,7 +1,11 @@
 package ui.setting;
 
 import java.text.SimpleDateFormat;
-
+/**
+ * 查询时间格式是否正确
+ * @author ZYC
+ *
+ */
 public class CheckTimeFormat {
 	String time;
 	public CheckTimeFormat(String time) {

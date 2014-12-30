@@ -26,7 +26,11 @@ import vo.promotion.ProGiftVO;
 import vo.promotion.VoucherVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 新增促销策略
+ * @author ZYC
+ *
+ */
 
 public class SetProPanel extends FatherPanel implements ActionListener{
 	private ManagerAllUIController uiController;

@@ -11,7 +11,11 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 
 import ui.setting.ColorFactory;
 import ui.setting.FontFactory;
-
+/**
+ * 封装ComboBoxButton
+ * @author ZYC
+ *
+ */
 public class MyComboBox extends JComboBox{
 	public MyComboBox(String [] roleList,int x,int y,int width,int height) {
 		super(roleList);

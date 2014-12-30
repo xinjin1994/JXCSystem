@@ -23,7 +23,7 @@ import vo.AccountVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
 /**
- * 查找账户对话框
+ * 查找账户对话框，查找结果显示在AccountDetailPanel上
  * @author ZYC
  * 
  */
