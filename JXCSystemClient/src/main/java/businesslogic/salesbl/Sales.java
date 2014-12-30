@@ -948,6 +948,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		String time = Sales.getNowTime();
 		int start = time.compareTo(discountPO.getStartTime());
 		int end = time.compareTo(discountPO.getEndTime());
+		System.out.println("time "+time+"start "+start+"end "+end);
 		if ((start >= 0) && (end <= 0)) {
 			System.out.println("here");
 			if (money > discountPO.getEndMoney()) {
