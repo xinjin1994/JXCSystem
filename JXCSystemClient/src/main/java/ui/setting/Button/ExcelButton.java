@@ -13,7 +13,11 @@ import vo.SaleListConditionVO;
 import vo.SalesDetailVO;
 import vo.bill.AllBillConditionVO;
 import vo.bill.AllBillVO;
-
+/**
+ * 封装导出按钮
+ * @author ZYC
+ *
+ */
 public class ExcelButton extends MyButton implements ActionListener{
 	FinancialblService financialblService = new FinancialController();
 	ArrayList<AllBillVO> allBillVOs = new ArrayList<AllBillVO>();

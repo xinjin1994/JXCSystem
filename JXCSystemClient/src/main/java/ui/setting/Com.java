@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import vo.CommodityVO;
 import vo.SortVO;
-
+/**
+ * 测试。。。
+ * @author ZYC
+ *
+ */
 public class Com {
 	public ArrayList<SortVO> allSorts = new ArrayList<SortVO>();
 //	public static void main(String[] args) {

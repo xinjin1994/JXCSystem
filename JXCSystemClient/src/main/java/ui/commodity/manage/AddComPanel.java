@@ -19,7 +19,11 @@ import vo.CommodityVO;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 添加商品界面
+ * @author ZYC
+ *
+ */
 public class AddComPanel extends FatherPanel implements ActionListener{
 	
 	protected CommodityAllUIController commodityAllUIController;
@@ -43,7 +47,7 @@ public class AddComPanel extends FatherPanel implements ActionListener{
 	protected int num,warnNum;
 	
 	protected CommodityVO chaCom;
-	protected String idString = "id";
+	protected String idString;
 	protected String failedAddress;
 	
 	protected CommodityblService commodityblService;

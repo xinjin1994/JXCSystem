@@ -12,7 +12,12 @@ import vo.CommodityVO;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 修改商品具体界面
+ * @see ChaComPanel
+ * @author ZYC
+ *
+ */
 public class ChaComDPanel extends AddComPanel implements ActionListener {
 
 	public ChaComDPanel(MyFrame frame, String url, CommodityAllUIController uiController, CommodityVO chaCom) {

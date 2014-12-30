@@ -2,7 +2,11 @@ package ui.setting.Button;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * 封装系统所需按钮基本属性
+ * @author ZYC
+ *
+ */
 public class MyButton extends JButton{
 	int x;
 	int y;//坐标

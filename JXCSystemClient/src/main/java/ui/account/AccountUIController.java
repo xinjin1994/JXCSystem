@@ -18,7 +18,12 @@ import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogic.userbl.User;
 import businesslogicservice.invoiceblservice.InvoiceblService;
-
+/**
+ * 控制主界面上各个secondPanel
+ * 
+ * @author ZYC
+ *
+ */
 public class AccountUIController extends UIController{
 	private int secondX = 1;
 	private int secondY = 35;

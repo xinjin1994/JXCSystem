@@ -10,7 +10,7 @@ import ui.setting.SetBack;
 import vo.AccountVO;
 import vo.initial.InitialCommodityVO;
 /**
- * 账户具体信息
+ * 账户具体信息界面
  * @see accountVO
  * @author ZYC
  *

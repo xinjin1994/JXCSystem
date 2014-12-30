@@ -17,7 +17,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.UserVO;
 import businesslogic.userbl.UserController;
 import businesslogicservice.userblservice.UserblService;
-
+/**
+ * 添加用户界面对话框
+ * @author ZYC
+ *
+ */
 public class AddUserPanel extends FatherPanel implements ActionListener{
 	
 	private AdminAllUIController uiController;

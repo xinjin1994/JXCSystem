@@ -6,7 +6,11 @@ import ui.FatherPanel;
 import ui.UIController;
 import ui.setting.MyFrame;
 import ui.setting.resultPanels.ResultPanelController;
-
+/**
+ * 库存盘点界面，功能未实现
+ * @author ZYC
+ *
+ */
 public class InventoryPanel extends FatherPanel{
 	MyFrame myFrame;
 	CommodityAllUIController commodityAllUIController;

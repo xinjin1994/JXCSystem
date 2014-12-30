@@ -1,7 +1,11 @@
 package ui.setting;
 
 import java.awt.Color;
-
+/**
+ * 控制客户端所有颜色
+ * @author ZYC
+ *
+ */
 public class ColorFactory {
 	public Color greyFont;
 	public Color accColor;//account界面的主色调

@@ -23,7 +23,7 @@ import businesslogicservice.commodityblservice.CommodityblService;
 import businesslogicservice.salesblservice.SalesblService;
 
 /**
- * 3销售经理
+ * 销售人员，销售经理主界面
  * 
  * @author lsy
  * @version 2014年11月29日下午2:54:20

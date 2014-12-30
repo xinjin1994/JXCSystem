@@ -4,7 +4,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
-
+/**
+ * 欢迎界面，一秒后自动跳转ip界面
+ * @author ZYC
+ *
+ */
 public class WelcomePanel extends FatherPanel {
 
 	ThreadDis thread;

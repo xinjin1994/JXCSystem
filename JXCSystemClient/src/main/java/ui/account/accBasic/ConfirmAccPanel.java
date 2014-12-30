@@ -16,7 +16,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.AccountVO;
 import businesslogic.accountbl.AccountController;
 import businesslogicservice.accountblservice.AccountblService;
-
+/**
+ * 确认账户界面，包括确认添加，确认删除，确认修改
+ * @author ZYC
+ *
+ */
 public class ConfirmAccPanel extends AccountDetailPanel implements ActionListener{
 	
 	MyButton forwardButtonAdd,forwardButtonDel,forwardButtonCha;

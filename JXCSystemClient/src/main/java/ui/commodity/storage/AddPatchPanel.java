@@ -26,7 +26,11 @@ import businesslogic.invoicebl.InvoiceController;
 import businesslogic.userbl.User;
 import businesslogicservice.commodityblservice.CommodityblService;
 import businesslogicservice.invoiceblservice.InvoiceblService;
-
+/**
+ * 添加报溢报损单
+ * @author ZYC
+ *
+ */
 public class AddPatchPanel extends FatherPanel implements ActionListener{
 
 	private MyFrame frame;

@@ -16,7 +16,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.SortVO;
 import businesslogic.commoditybl.CommodityController;
 import businesslogicservice.commodityblservice.CommodityblService;
-
+/**
+ * 修改分类具体界面
+ * @author ZYC
+ *
+ */
 public class ChaSortDPanel extends FatherPanel implements ActionListener{
 	private MyFrame frame;
 	private CommodityAllUIController commodityAllUIController;

@@ -29,7 +29,30 @@ import ui.setting.Button.MyButton;
 import vo.AccountVO;
 import vo.bill.GetVO;
 import vo.bill.PayVO;
-
+/**
+ * 控制Account模块所有模块和控制器的跳转
+ * 包括
+ * AccountPanel
+ * FindAccountPanel
+ * addAccountPanel
+ * delAccountPanel
+ * changeAccountPanel
+ * 
+ * addReceiptPanel
+ * addPaymentPanel
+ * 
+ * salesListPanel
+ * addBillsPanel
+ * opeConPanel
+ * 
+ * confirmAccPanel
+ * confirmReceiptPanel
+ * confirmPayment
+ * 
+ * accountDetailPanel
+ * @author ZYC
+ *
+ */
 public class AccountAllUIController extends UIController{
 	private MyFrame frame;
 	private UIController uiController;

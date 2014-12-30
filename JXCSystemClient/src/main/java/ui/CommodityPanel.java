@@ -34,7 +34,11 @@ import vo.CommodityVO;
 import vo.SortVO;
 import vo.bill.PatchVO;
 
-//1 库存人员
+/**
+ * 库存人员主界面
+ * @author ZYC
+ *
+ */
 public class CommodityPanel extends FatherPanel{
 	private int firstX = 0;
 	private int firstY = 110;

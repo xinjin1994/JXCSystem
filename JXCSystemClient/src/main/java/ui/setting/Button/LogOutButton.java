@@ -8,7 +8,11 @@ import ui.FatherPanel;
 import ui.UIController;
 import ui.setting.MyFrame;
 import ui.setting.resultPanels.ResultPanelController;
-
+/**
+ * 封装注销按钮
+ * @author ZYC
+ *
+ */
 public class LogOutButton implements ActionListener{
 	private MyButton logOutButton;
 	private FatherPanel prePanel;

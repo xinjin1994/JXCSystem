@@ -15,7 +15,11 @@ import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.InvoiceVO;
 import businesslogic.invoicebl.InvoiceController;
 import businesslogicservice.invoiceblservice.InvoiceblService;
-
+/**
+ * 控制Commodity二级界面SecondPAnel的显示跳转
+ * @author ZYC
+ *
+ */
 public class CommodityUIController {
 	private int secondX = 1;
 	private int secondY = 35;

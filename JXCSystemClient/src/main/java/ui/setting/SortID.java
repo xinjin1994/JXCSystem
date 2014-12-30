@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import vo.CommodityVO;
-
+/**
+ * 封装与树相关的结点
+ * @author ZYC
+ *
+ */
 public class SortID {
 	public String fatherNode;
 	public String node;

@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import ui.commodity.CommodityAllUIController;
 import ui.setting.MyFrame;
 import vo.SortVO;
-
+/**
+ * 修改分类对话框，结束后前往修改商品具体界面
+ * @author ZYC
+ *
+ */
 public class ChaSortPanel extends DelSortPanel{
 	
 	public ChaSortPanel(MyFrame frame, String url, CommodityAllUIController controller) {
