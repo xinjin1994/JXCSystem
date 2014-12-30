@@ -644,7 +644,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				if(!(po1.hasCommodity()||po1.hasSort())){
 					sortList.remove(i);
 					this.writeSortList();
-					System.out.println("delSort:");
+//					System.out.println("delSort:");
 					return true;
 				}
 			}
@@ -659,7 +659,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				po.name=po2.name;
 				this.writeSortList();
 			}
-			System.out.println("updateSort:");
+//			System.out.println("updateSort:");
 			return true;
 		}
 		return false;
@@ -714,6 +714,7 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 				}else{
 					giftList.get(i).isGift=false;
 					if(addGood(giftList.get(i),sortList.get(0))){
+						giftList.remove(i);
 						this.writeGiftList();
 						this.writeSortList();
 						return true;

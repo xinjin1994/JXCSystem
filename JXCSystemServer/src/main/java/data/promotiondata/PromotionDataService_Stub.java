@@ -321,7 +321,11 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 				return false;
 			}
 		}
-		return discountList.add(po.copy());
+		if(discountList.add(po.copy())){
+			this.writeDiscountList();
+			return true;
+		}
+		return false;
 	}
 
 	public boolean addGift(ProGiftPO po) {
@@ -332,7 +336,12 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 			}
 		}
 		
-		return proGiftList.add(po.copy());
+		if(proGiftList.add(po.copy())){
+			this.writeProGiftList();
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean addVoucher(VoucherPO po) throws RemoteException {
@@ -344,29 +353,35 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 			}
 		}
 		
-		return voucherList.add(po.copy());
+		if(voucherList.add(po.copy())){
+			this.writeVoucherList();
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean delDiscount(int level) {
-		int note=0;
 		for(int i=0;i<discountList.size();i++){
 			if(level==discountList.get(i).getLevel()){
-				note=i;
+				discountList.remove(i);
+				this.writeDiscountList();
+				return true;
 			}
 		}
-		discountList.remove(note);
-		return true;
+
+		return false;
 	}
 
 	public boolean delGift(int level) {
-		int note=0;
 		for(int i=0;i<proGiftList.size();i++){
 			if(level==proGiftList.get(i).getLevel()){
-				note=i;
+				proGiftList.remove(i);
+				this.writeProGiftList();
+				return true;
 			}
 		}
-		proGiftList.remove(note);
-		return true;
+		return false;
 	}
 	
 	public boolean delVoucher(int level) throws RemoteException {
@@ -374,11 +389,12 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		int note=0;
 		for(int i=0;i<voucherList.size();i++){
 			if(level==voucherList.get(i).getLevel()){
-				note=i;
+				voucherList.remove(note);
+				this.writeVoucherList();
+				return true;
 			}
 		}
-		voucherList.remove(note);
-		return true;
+		return false;
 	}
 
 	public DiscountPO getDiscount(int level) throws RemoteException {
