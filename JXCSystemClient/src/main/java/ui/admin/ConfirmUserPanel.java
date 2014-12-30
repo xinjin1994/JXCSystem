@@ -23,7 +23,7 @@ import businesslogicservice.userblservice.UserblService;
  */
 public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	protected MyButton forwardButton,backButtonConfirm;
-	protected ResultPanelController resController;
+	protected ResultPanelController resControllerS,resControllerF;
 	protected AdminAllUIController adminAllUIController;
 	protected UserVO user;
 	protected String type;
@@ -117,31 +117,36 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 	private void check(int i){
 //		System.out.println(i);
 		
-		AdminPanel temp= AdminAllUIController.adminPanel;
+		AdminPanel temp= (AdminPanel)(adminAllUIController.getMainPanel());
 		temp.setTable();
 		
-		resController = new ResultPanelController(frame, temp);
+		
+		resControllerF = new ResultPanelController(frame, adminAllUIController.getPanel());
+		
 		temp.remove(this);
+		resControllerS = new ResultPanelController(frame, temp);
 		
 		adminAllUIController.setMainPanel(temp);
+		
+		
 		
 		switch (i) {
 		case -1:
 			frame.remove(adminAllUIController.getMainPanel());
-			resController.failedConfirm("操作过程存在错误！","user" );
+			resControllerF.failedConfirm("操作过程存在错误！","user" );
 			break;
 		case 0:
 			frame.remove(adminAllUIController.getMainPanel());
 			
-			resController.succeeded("成功"+type+"用户！", "user");
+			resControllerS.succeeded("成功"+type+"用户！", "user");
 			break;
 		case 1:
 			frame.remove(adminAllUIController.getMainPanel());
-			resController.failedConfirm("用户已存在！", "user");
+			resControllerF.failedConfirm("用户已存在！", "user");
 			break;
 		case 2:
 			frame.remove(adminAllUIController.getMainPanel());
-			resController.failedConfirm("用户不存在！", "user");
+			resControllerF.failedConfirm("用户不存在！", "user");
 			break;
 		default:
 			break;
@@ -160,8 +165,10 @@ public class ConfirmUserPanel extends FatherPanel implements ActionListener{
 			
 			
 		}else if(event.getSource() == backButtonConfirm){
-			frame.remove(AdminAllUIController.adminPanel);
-			frame.setPanel(adminAllUIController.getPanel());
+//			
+//			frame.remove(AdminAllUIController.adminPanel);
+//			frame.setPanel(adminAllUIController.getPanel());
+//			
 		}
 		frame.repaint();		
 	}
