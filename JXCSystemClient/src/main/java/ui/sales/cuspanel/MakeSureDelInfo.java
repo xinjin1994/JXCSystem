@@ -55,13 +55,18 @@ public class MakeSureDelInfo extends MakeSureCusInfo{
 
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == forward) {
-//				System.out.println("qianjing!");
 				frame.remove(MakeSureDelInfo.this);
 				SalesblService salesblService = new SalesController();
 				SalesResult salesResult = new SalesResult(frame,controller,salesUIController,delCusPanel);
 				switch(salesblService.delCustomer_up(customerVO)){
 				case 0:
 					salesResult.succeeded("删除成功！");
+					break;
+				case 2:
+					salesResult.failed("客户名称不存在！", "delCusDFailed");
+					break;
+				case 3:
+					salesResult.failed("客户的应收或者应付不为0，不能删除！", "delCusDFailed");
 					break;
 				default:
 					salesResult.failed("未知错误！", "delCusDFailed");

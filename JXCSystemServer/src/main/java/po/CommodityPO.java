@@ -29,6 +29,7 @@ public class CommodityPO implements Serializable{
 		this.number = number;
 		this.isGift = isGift;
 		this.warn=0;
+		System.out.println("CommodityPO  note:"+note);
 	}
 	
 	public CommodityPO(String name, String type){
@@ -42,6 +43,7 @@ public class CommodityPO implements Serializable{
 		this.number = 0;
 		this.isGift = false;
 		this.warn=0;
+		System.out.println("CommodityPO 2");
 	}
 	
 	public CommodityPO(String name,String type,int in_price,int out_price){
@@ -55,6 +57,7 @@ public class CommodityPO implements Serializable{
 		this.number = 0;
 		this.isGift = false;
 		this.warn=0;
+		System.out.println("CommodityPO 3");
 	}
 	
 	public CommodityPO copy(){
