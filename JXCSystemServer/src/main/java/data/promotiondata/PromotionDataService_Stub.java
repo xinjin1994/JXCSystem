@@ -383,8 +383,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 
 	public DiscountPO getDiscount(int level) throws RemoteException {
 		for(int i=0;i<discountList.size();i++){
-			if(level==discountList.get(i).getLevel()){
-//				System.out.println("discountList:"+discountList.get(i).getLevel());
+			if(level==discountList.get(i).getLevel()&&discountList.get(i).getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0){
 				return discountList.get(i).copy();
 			}
 		}
@@ -393,7 +392,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 
 	public ProGiftPO getGift(int level) throws RemoteException {
 		for(int i=0;i<proGiftList.size();i++){
-			if(level==proGiftList.get(i).getLevel()){
+			if(level==proGiftList.get(i).getLevel()&&proGiftList.get(i).getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0){
 				return proGiftList.get(i).copy();
 			}
 		}
@@ -403,7 +402,7 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public VoucherPO getVoucher(int level) throws RemoteException {
 		// TODO Auto-generated method stub
 		for(int i=0;i<voucherList.size();i++){
-			if(level==voucherList.get(i).getLevel()){
+			if(level==voucherList.get(i).getLevel()&&voucherList.get(i).getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0){
 				return voucherList.get(i).copy();
 			}
 		}
@@ -413,7 +412,9 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public ArrayList<DiscountPO> showDiscount() {
 		ArrayList<DiscountPO> array=new ArrayList<DiscountPO>();
 		for(int i=0;i<discountList.size();i++){
-			array.add(discountList.get(i).copy());
+			if(discountList.get(i).getStartTime().compareTo(AccountDataService_Stub.getNowTime())<=0&&discountList.get(i).getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0){
+				array.add(discountList.get(i).copy());
+			}
 		}
 		return array;
 	}
@@ -421,7 +422,10 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public ArrayList<ProGiftPO> showProGift() {
 		ArrayList<ProGiftPO> array=new ArrayList<ProGiftPO>();
 		for(int i=0;i<proGiftList.size();i++){
-			array.add(proGiftList.get(i).copy());
+			if(proGiftList.get(i).getStartTime().compareTo(AccountDataService_Stub.getNowTime())<=0&&proGiftList.get(i).getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0){
+				array.add(proGiftList.get(i).copy());
+			}
+
 		}
 		return array;
 	}
@@ -430,7 +434,9 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 		// TODO Auto-generated method stub
 		ArrayList<VoucherPO> array=new ArrayList<VoucherPO>();
 		for(int i=0;i<voucherList.size();i++){
-			array.add(voucherList.get(i).copy());
+			if(voucherList.get(i).getStartTime().compareTo(AccountDataService_Stub.getNowTime())<=0&&voucherList.get(i).getEndTime().compareTo(AccountDataService_Stub.getNowTime())>=0){
+				array.add(voucherList.get(i).copy());
+			}
 		}
 		return array;
 	}
