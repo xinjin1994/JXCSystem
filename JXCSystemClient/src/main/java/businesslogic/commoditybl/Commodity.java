@@ -427,6 +427,10 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		
 		ArrayList<ExamineVO> array=new ArrayList<ExamineVO>();
 		
+		if(time1.compareTo(time2)>0){
+			return array;
+		}
+		
 		try {
 		ArrayList<ImportPO> imp=sales.getAllImport();
 		ArrayList<Import_ReturnPO> imp_ret=sales.getAllImport_Return();

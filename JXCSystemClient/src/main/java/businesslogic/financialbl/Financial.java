@@ -48,6 +48,10 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 		int i=0;
 		ArrayList<SaleListPO> array=new ArrayList<SaleListPO>();
 		
+		if(time1.compareTo(time2)>0){
+			return array;
+		}
+		
 		try {
 			ArrayList<SaleListPO> fin=financial.getSaleList();
 			
@@ -79,6 +83,11 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 			String customer_name, String clerk, String warehouse) {
 		// TODO Auto-generated method stub
 		ArrayList<AllBillPO> array=new ArrayList<AllBillPO>();
+		
+		if(time1.compareTo(time2)>0){
+			return array;
+		}
+		
 		try {
 			ArrayList<AllBillPO> fin=financial.getAllBill();
 			
@@ -188,6 +197,11 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 	public ArrayList<OperatingConditionPO> operatingCondition(String time1, String time2) {
 		// TODO Auto-generated method stub
 		ArrayList<OperatingConditionPO> array=new ArrayList<OperatingConditionPO>();
+		
+		if(time1.compareTo(time2)>0){
+			return array;
+		}
+		
 		try {
 			ArrayList<OperatingConditionPO> fin=financial.getOperatingCondition();
 			
