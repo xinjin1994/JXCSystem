@@ -16,12 +16,10 @@ import businesslogicservice.commodityblservice.CommodityblService;
 
 public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 
-	private MyFrame frame;
 	private MyButton forwardButton;
 	private ResultPanelController resControllerS,resControllerF;
 	private String type;
 	private String failedAddress;
-	private CommodityAllUIController commodityAllUIController;
 	private CommodityVO commodityVO,oldVO;
 	private SortVO sortVO;
 	
@@ -29,14 +27,11 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 	public ConfirmComPanel(MyFrame frame, String url, CommodityAllUIController controller,CommodityVO commodityVO,
 			String type,SortVO sortVO) {
 		super(frame, url, controller,commodityVO);
-		this.frame = frame;
-		this.commodityAllUIController = controller;
 		this.type = type;
 		this.sortVO = sortVO;
 		this.failedAddress = "commodity1";
 		this.commodityVO = commodityVO;
 		
-		commodityAllUIController.setBack_first(this);
 
 		commodityblService = new CommodityController();
 		resControllerS = new ResultPanelController(frame,commodityAllUIController.getMainPanel());
@@ -48,15 +43,12 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 	public ConfirmComPanel(MyFrame frame, String url, CommodityAllUIController controller,CommodityVO commodityVO,
 			String type,SortVO sortVO,CommodityVO oldVO) {
 		super(frame, url, controller,commodityVO);
-		this.frame = frame;
 		this.oldVO = oldVO;
-		this.commodityAllUIController = controller;
 		this.type = type;
 		this.sortVO = sortVO;
 		this.failedAddress = "commodity1";
 		this.commodityVO = commodityVO;
 		
-		commodityAllUIController.setBack_first(this);
 
 		commodityblService = new CommodityController();
 		resControllerF = new ResultPanelController(frame, commodityAllUIController.getPanel());
@@ -65,6 +57,9 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 		setForward();
 	}
 
+	protected void initReturn () {
+		commodityAllUIController.setBack_third(this);
+	}
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(680,451 );
 		forwardButton = forward.forward_black;

@@ -121,10 +121,13 @@ public class AddUserPanel extends FatherPanel implements ActionListener{
 				frame.remove(this);
 				resController.failed("输入存在错误！请重新确认您的输入信息！", failedAddress);
 			}else {
+//			uiController.setTempPanel(this);
 			frame.remove(this);
 			frame.setPanel(uiController.getMainPanel());
 			user = new UserVO(textInfos[0].getText(),textInfos[1].getText()
 					,textInfos[3].getText(),dutyGet);
+			
+			uiController.setTempPanel(this);
 			uiController.confirmUserPanel(user,"添加");
 			}
 			frame.repaint();

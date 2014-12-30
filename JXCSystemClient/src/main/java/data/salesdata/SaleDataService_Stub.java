@@ -295,4 +295,15 @@ public class SaleDataService_Stub implements SalesDataService{
 		return false;
 	}
 
+	public String getImportOldNote(String cusName, String name, String type)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getExportOldNote(String cusName, String name, String type) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

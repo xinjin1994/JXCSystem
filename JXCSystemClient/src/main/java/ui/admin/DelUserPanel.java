@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ui.FatherPanel;
+import ui.UIController;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.Button.ForwardButton;
@@ -75,6 +76,7 @@ public class DelUserPanel extends FatherPanel implements ActionListener{
 				 */
 				user = userblService.searchUser_up(id).get(0);
 				//			user = new UserVO("21", "2", "2", 1);
+				adminAllUIController.setTempPanel(this);
 				adminAllUIController.confirmUserPanel(user,"删除");
 				frame.repaint();
 			}

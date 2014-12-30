@@ -75,6 +75,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			po1.father=po2.getName();
 			
 			if (sto.addGood(po1,po2)) {
+				systemlog.add_up("addCommodity:"+po1.getName()+" "+po1.getType());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -101,6 +102,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 					
 					
 					if(sto.delGood(po.get(i))){
+						systemlog.add_up("delCommodity:"+name+" "+type);
 						return 0;
 					}else{
 						return -1;
@@ -150,6 +152,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 2;
 			}
 			sto.updateGood(com1, po2);
+			systemlog.add_up("updateCommodity:"+po1.getName()+" "+po1.getType());
 			return 0;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -173,6 +176,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 			
 			sto.updateGood(com1, sort2);
+			systemlog.add_up("updateCommodity:"+po1.getName()+" "+po1.getType());
 			return 0;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -248,6 +252,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			sort1.father=sort2.getName();
 			
 			if (sto.addSort(sort1,po2)) {
+				systemlog.add_up("addSort:"+sort1.getName());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -285,6 +290,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			}
 			
 			if (sto.delSort(com)) {
+				systemlog.add_up("delSort:"+name);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -324,6 +330,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			com2.name=name2;
 			
 			if (sto.updateSort(com1,com2)) {
+				systemlog.add_up("updateSort:"+name1+"to"+name2);
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -343,6 +350,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 				return 4;
 			}
 			if(sto.updateSort_Mov(sort1, sort2)){
+				systemlog.add_up("moveSort:"+sort1.getName()+"to"+sort2.getName());
 				return 0;
 			}
 		} catch (RemoteException e) {
@@ -584,6 +592,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 			po.setNote(note);
 			invoice.add(po);
 			sto.addPatch(po);
+			systemlog.add_up("addPatch:"+" name="+name+" type="+type+" number="+number);
 			return 0;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -1018,6 +1027,7 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 		po.setCondition(1);
 		sto.addSendGift(po);
 		invoice.add(po);
+		systemlog.add_up("addSendGift:"+note);
 		return true;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

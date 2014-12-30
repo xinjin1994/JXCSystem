@@ -16,7 +16,7 @@ public class AdminAllUIController extends UIController{
 	private UIController uiController;
 	private AddUserPanel addUserPanel;
 	private DelUserPanel delUserPanel;
-	private AdminPanel adminPanel;
+	static public AdminPanel adminPanel;
 	private ConfirmUserPanel confirmUserPanel;
  
 	
@@ -82,6 +82,7 @@ public class AdminAllUIController extends UIController{
 		this.prePanel = prePanel;
 		new SetBack(frame,this,prePanel).setBack_second(x, y);
 	}
+
 	/**
 	 * 返回主界面
 	 * @param type
