@@ -118,7 +118,7 @@ public class SalesInPanel extends ImInPanel {
 				} else {
 					int level = salesblService
 							.searchExactCustomer_up(newSupplier.getSelectedItem().toString()).level;
-					int dis_UnSeen = salesblService
+					double dis_UnSeen = salesblService
 							.getDiscount_up(Double.parseDouble(goodsPrice.getText()) * num, level);
 					System.out.println("level"+level+"dis"+dis_UnSeen);
 					totalPriceText = Double.parseDouble(goodsPrice.getText())

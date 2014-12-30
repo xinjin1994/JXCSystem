@@ -356,10 +356,10 @@ public class SalesController implements SalesblService {
 		return sale.getVoucher(money, level);
 	}
 
-	public ProGiftPO getProGift_up(int money, int level) {
-		// TODO Auto-generated method stub
-		return sale.getProGift(money, level);
-	}
+//	public ProGiftPO getProGift_up(int money, int level) {
+//		// TODO Auto-generated method stub
+//		return sale.getProGift(money, level);
+//	}
 
 	public String getOtherPromotion_up() {
 		// TODO Auto-generated method stub
@@ -396,6 +396,9 @@ public class SalesController implements SalesblService {
 		return sale.getExport_ReturnMaxNumber(old_note);
 	}
 
+	public String getImportOldNote(String cusName, String name, String type){
+		return sale.getImportOldNote(cusName, name, type);
+	}
 	// 销售人员分为销售员和销售经理。销售员最多折让1000元，销售经理可以折让5000元，总经理可以任意金额的折让。
 	public double getClerkDiscount_up() {
 		// TODO Auto-generated method stub
@@ -677,19 +680,25 @@ public class SalesController implements SalesblService {
 	// return 0;
 	// }
 
-	public int getDiscount_up(double money, int level) {
+	public double getDiscount_up(double money, int level) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sale.getDiscount(money, level);
 	}
 
-	public int getVoucher_up(double money, int level) {
+	public double getVoucher_up(double money, int level) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sale.getVoucher(money, level);
 	}
 
-	public CommodityVO getProGift_up(double money, int level) {
+//	public CommodityVO getProGift_up(double money, int level) {
+//		// TODO Auto-generated method stub
+//		
+//		return null;
+//	}
+
+	public String getExportOldNote(String cusName, String name, String type) {
 		// TODO Auto-generated method stub
-		return null;
+		return sale.getExportOldNote(cusName, name, type);
 	}
 
 }

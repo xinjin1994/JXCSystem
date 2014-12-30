@@ -851,7 +851,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 		return "失败";
 	}
 
-	public double getDiscount(int money, int level) {
+	public double getDiscount(double money, int level) {
 		// TODO Auto-generated method stub
 		DiscountPO discountPO = promotion.getDiscount(level);
 		String time = Sales.getNowTime();
@@ -871,7 +871,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 
 	}
 
-	public ProGiftPO getProGift(int money, int level) {
+	public ProGiftPO getProGift(double money, int level) {
 		// TODO Auto-generated method stub
 		ProGiftPO proGiftPO = promotion.getProGift(level);
 		String time = Sales.getNowTime();
@@ -885,7 +885,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo, businesslogic.i
 		return null;
 	}
 
-	public double getVoucher(int money, int level) {
+	public double getVoucher(double money, int level) {
 		// TODO Auto-generated method stub
 		VoucherPO voucherPO = promotion.getVoucher(level);
 		String time = Sales.getNowTime();

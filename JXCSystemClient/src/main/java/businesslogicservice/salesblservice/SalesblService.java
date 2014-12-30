@@ -78,13 +78,13 @@ public interface SalesblService {
 	public double getClerkDiscount_up();
 	
 	// 查看获得的折扣促销
-	public int getDiscount_up(double money, int level);
+	public double getDiscount_up(double money, int level);
 	
 	// 查看获得的代金券促销
-	public int getVoucher_up(double money, int level);
+	public double getVoucher_up(double money, int level);
 	
 	// 查看获得的赠品促销
-	public CommodityVO getProGift_up(double money, int level);
+//	public CommodityVO getProGift_up(double money, int level);
 	
 	// 获得所有供货商信息
 	public ArrayList<CustomerVO> getAllImportCustomer_up();
@@ -146,8 +146,10 @@ public interface SalesblService {
 	
 	// 根据编号查找草稿销售单
 	public ExportMenuVO searchDraftExport_up(String note);
-
 	
+	public String getImportOldNote(String cusName, String name, String type);
+
+	public String getExportOldNote(String cusName,String name,String type);
 
 	// 获得单个客户信息
 //	public CustomerVO getCustomer_up(CustomerVO vo);
