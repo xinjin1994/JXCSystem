@@ -79,6 +79,7 @@ public class ChaComDPanel extends AddComPanel implements ActionListener {
 				inValue = Double.parseDouble(inPrice.getText());
 				outValue = Double.parseDouble(outPrice.getText());
 				warnNum = Integer.parseInt(warnNumber.getText());
+				idString = chaCom.id;
 				// CommodityVO(String id, String name, String type, int num,
 				// double inValue, double outValue,
 				// double latestInValue, double latestOutValue,int warn
