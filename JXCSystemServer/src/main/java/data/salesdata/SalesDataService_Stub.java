@@ -1202,10 +1202,10 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 				for (j = 0; j < export_returnList.size(); j++) {
 					if((export_returnList.get(j).getCondition()==2)
 							&&(export_returnList.get(j).getCustomer().getName().equals(exportList.get(i).getCustomer().getName())
-							&&(export_returnList.get(j).getImportGoodList().get(0).getCommodity().getName().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getName())
-							&&(export_returnList.get(j).getImportGoodList().get(0).getCommodity().getType().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getType()))
+							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getName().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getName())
+							&&(export_returnList.get(j).getExportGoodList().get(0).getCommodity().getType().equals(exportList.get(i).getImportGoodList().get(0).getCommodity().getType()))
 							&&(export_returnList.get(j).getTime().compareTo(exportList.get(i).getTime())>=0)))){
-						sum=sum+export_returnList.get(j).getImportGoodList().get(0).getNumber();
+						sum=sum+export_returnList.get(j).getExportGoodList().get(0).getNumber();
 					}
 				}
 				int exportNumber = exportList.get(i).getImportGoodList().get(0).getNumber();
@@ -1231,7 +1231,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements SalesD
 		int i = 0;
 		for (i = 0; i < export_returnList.size(); i++) {
 			if (note.equals(export_returnList.get(i).getOldNote())) {
-				array.add(export_returnList.get(i).getImportGoodList().get(0).getNumber());
+				array.add(export_returnList.get(i).getExportGoodList().get(0).getNumber());
 			}
 		}
 		return array;
