@@ -64,6 +64,7 @@ public class DelSortPanel extends FatherPanel implements ActionListener{
 	protected void getSort() {
 		nameString = name.getText();
 		if(nameString.equals("")){
+			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
 		} else {
 			frame.remove(this);

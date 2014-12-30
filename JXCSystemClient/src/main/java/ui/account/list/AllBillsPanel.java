@@ -49,7 +49,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 	private String failedAddress;
 	private ResultPanelController resController;
 	ArrayList<AllBillVO> billsArray;
-	ArrayList<InvoiceVO> billIn;
+	ArrayList<InvoiceVO> billIn = new ArrayList<InvoiceVO>();
 	public AllBillsPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -197,8 +197,8 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 					}}catch(Exception e2){
 						System.out.println(bills.get(0));
 						e2.printStackTrace();
-						frame.remove(this);
-						resController.failed("存在输入错误！", failedAddress);
+//						frame.remove(this);
+//						resController.failed("存在输入错误！", failedAddress);
 					}
 				
 				if(bills.size() == 1){

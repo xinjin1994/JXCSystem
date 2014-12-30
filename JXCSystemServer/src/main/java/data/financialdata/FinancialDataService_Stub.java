@@ -203,16 +203,19 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 
 	public boolean addSaleList(SaleListPO po) {
 		saleListList.add(po.copy());
+		this.writeSaleListList();
 		return true;
 	}
 
 	public boolean addAllBill(AllBillPO po) {
 		allBillList.add(po.copy());
+		this.writeAllBillList();
 		return true;
 	}
 
 	public boolean addOperatingCondition(OperatingConditionPO po) {
 		operatingConditionList.add(po.copy());
+		this.writeOperatingConditionList();
 		return true;
 	}
 
