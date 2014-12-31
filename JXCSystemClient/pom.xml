@@ -40,6 +40,46 @@
       <systemPath>${project.basedir}/poi-3.11/poi-3.11-20141221.jar</systemPath>
     </dependency>
     
+    <dependency>
+      <groupId>poi-examples</groupId>
+      <artifactId>poi-examples</artifactId>
+      <version>3.11</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/poi-3.11/poi-examples-3.11-20141221.jar</systemPath>
+    </dependency>
+    
+    <dependency>
+      <groupId>poi-excelant</groupId>
+      <artifactId>poi-excelant</artifactId>
+      <version>3.11</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/poi-3.11/poi-excelant-3.11-20141221.jar</systemPath>
+    </dependency>
+    
+    <dependency>
+      <groupId>poi-ooxml</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.11</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/poi-3.11/poi-ooxml-3.11-20141221.jar</systemPath>
+    </dependency>
+    
+    <dependency>
+      <groupId>poi-ooxml-schemas</groupId>
+      <artifactId>poi-ooxml-schemas</artifactId>
+      <version>3.11</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/poi-3.11/poi-ooxml-schemas-3.11-20141221.jar</systemPath>
+    </dependency>
+    
+    <dependency>
+      <groupId>poi-scratchpad</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>3.11</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/poi-3.11/poi-scratchpad-3.11-20141221.jar</systemPath>
+    </dependency>
+    
   </dependencies>
   
   
