@@ -49,7 +49,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			
 			if(lin!=null){
 //				if(lin.getStartTime().equals())
-				return -1;
+				return 2;
 			}
 			
 			if(promotion.addDiscount(dis)){
@@ -75,6 +75,13 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		}
 		
 		try {
+			
+			ProGiftPO lin=promotion.getGift(level);
+			
+			if(lin!=null){
+				return 2;
+			}
+			
 			if(promotion.addGift(dis)){
 				commodity.addGift(name, type, number);
 				systemlog.add_up("AddGift: start_money="+start_money+" name="+name+" type="+type+" start_time="+start_time+" end_time="+end_time);
@@ -101,7 +108,7 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 			VoucherPO lin=promotion.getVoucher(level);
 			
 			if(lin!=null){
-				return -1;
+				return 2;
 			}
 			
 			if(promotion.addVoucher(dis)){
