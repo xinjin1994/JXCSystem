@@ -14,6 +14,7 @@ import ui.sales.SalesUIController;
 import ui.sales.impanel.ImInPanel;
 import ui.sales.impanel.MakeSureIm;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
 import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldFilled;
@@ -52,6 +53,14 @@ public class SalesInPanel extends ImInPanel {
 		forward.addMouseListener(new MouListener());
 	}
 
+	public void addID() {
+		id = new MyLabel(105, 173, 222, 36);
+		id.setText(salesblService.getExportNote_up());
+		// id.setText("id");
+		this.add(id);
+
+	}
+	
 	public void addRestText() {
 		newRemark = new MyTextFieldFilled(104, 420, 104, 118);
 		discount = new MyTextFieldFilled(235, 421, 91, 37);
@@ -186,9 +195,9 @@ public class SalesInPanel extends ImInPanel {
 				} else {
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
 							goodsTypeSelected, num, price, num * price, newRemark.getText());
-
+					
 					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString, person.getText(),
-							warehouse.getText(), commodityListVO, Double.parseDouble(discount.getText()),
+							warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),
 							Double.parseDouble(voucher.getText()), totalPriceText, 4);
 					exportMenuVO.person = person.getText();
 					MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg",
@@ -223,7 +232,30 @@ public class SalesInPanel extends ImInPanel {
 						salesResult.failed("添加失败！", "export_failed");
 					}
 				} catch (Exception e2) {
-					e2.printStackTrace();
+					double dis = 0, vou = 0;
+					if(!discount.getText().equals("")){
+						dis = Double.parseDouble(discount.getText());
+					}
+					if(!voucher.getText().equals("")){
+						vou = Double.parseDouble(voucher.getText());
+					}
+					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+							goodsTypeSelected, num, price, num * price, newRemark.getText());
+					ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString, person.getText(),
+							warehouse.getText(), commodityListVO, dis,
+							vou, totalPriceText, 4);
+					exportMenuVO.person = person.getText();
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController,
+							SalesInPanel.this);
+					// salesResult.succeeded("成功添加草稿单！");
+					switch (salesblService.addDraftExport_up(exportMenuVO)) {
+					case 0:
+						salesResult.succeeded("成功添加草稿单！");
+						break;
+					default:
+						salesResult.failed("添加失败！", "export_failed");
+					}
+//					e2.printStackTrace();
 				}
 			}
 		}
