@@ -245,10 +245,9 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 				if ((start >= 0) && (end <= 0)) {
 					if (po.getTotalMoneyAfter() >= proGiftPO.getStartMoney()) {
-						if (commodity.findCommodity(
-								proGiftPO.getGift().getName(),
-								proGiftPO.getGift().getType()).getNumber() > proGiftPO
-								.getNumber()) {
+						if (commodity.hasGift(
+								proGiftPO.getGift(),
+								proGiftPO.getNumber())) {
 							commodity.addSendGift(proGiftPO.getGift(),
 									proGiftPO.getNumber(), po.getCustomer());
 						}
@@ -312,7 +311,6 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			ArrayList<ImportPO> po = sale.getAllImport();
 			if (po != null) {
-				systemlog.add_up("GetAllImport");
 				return po;
 			}
 
@@ -328,7 +326,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			ArrayList<Import_ReturnPO> po = sale.getAllImport_Return();
 			if (po != null) {
-				systemlog.add_up("GetAllImport_Return");
+//				systemlog.add_up("GetAllImport_Return");
 				return po;
 			}
 
@@ -344,7 +342,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			ArrayList<ExportPO> po = sale.getAllExport();
 			if (po != null) {
-				systemlog.add_up("getAllExport");
+//				systemlog.add_up("getAllExport");
 				return po;
 			}
 
@@ -360,7 +358,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			ArrayList<Export_ReturnPO> po = sale.getAllExport_Return();
 			if (po != null) {
-				systemlog.add_up("getAllExport_Return");
+//				systemlog.add_up("getAllExport_Return");
 				return po;
 			}
 
@@ -378,7 +376,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 			CustomerPO po = sale.findCustomer(name);
 			ArrayList<CustomerPO> customer = new ArrayList<CustomerPO>();
 			if (po != null) {
-				systemlog.add_up("SearchFuzzyCustomer:" + name);
+//				systemlog.add_up("SearchFuzzyCustomer:" + name);
 				customer.add(po);
 				return customer;
 			}
@@ -394,7 +392,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			CustomerPO po = sale.findCustomer(name);
 			if (po != null) {
-				systemlog.add_up("SearchExactCustomer:" + name);
+//				systemlog.add_up("SearchExactCustomer:" + name);
 				return po;
 			}
 		} catch (RemoteException e) {
@@ -409,7 +407,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			ArrayList<CustomerPO> po = sale.getAllCustomer();
 			if (po != null) {
-				systemlog.add_up("getAllCustomer");
+//				systemlog.add_up("getAllCustomer");
 			}
 			return po;
 		} catch (RemoteException e) {
@@ -423,7 +421,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		try {
 			if (sale.findCustomer(name) != null) {
-				systemlog.add_up("GetCustomer:" + name);
+//				systemlog.add_up("GetCustomer:" + name);
 			}
 			return sale.findCustomer(name);
 		} catch (RemoteException e) {
@@ -449,7 +447,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		// TODO Auto-generated method stub
 		try {
 			ArrayList<ImportPO> importPO = sale.getAllDraftImport();
-			systemlog.add_up("GetAllDraftImport");
+//			systemlog.add_up("GetAllDraftImport");
 			return importPO;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -464,7 +462,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			ArrayList<Import_ReturnPO> import_ReturnPO = sale
 					.getAllDraftImport_Return();
-			systemlog.add_up("GetAllDraftImport_Return");
+//			systemlog.add_up("GetAllDraftImport_Return");
 			return import_ReturnPO;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -479,7 +477,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 		try {
 			ArrayList<ExportPO> export = sale.getAllDraftExport();
-			systemlog.add_up("GetAllDraftExport");
+//			systemlog.add_up("GetAllDraftExport");
 			return export;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -495,7 +493,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 		try {
 			ArrayList<Export_ReturnPO> export_ReturnPO = sale
 					.getAllDraftExport_Return();
-			systemlog.add_up("GetAllDraftExport_Return");
+//			systemlog.add_up("GetAllDraftExport_Return");
 			return export_ReturnPO;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -607,7 +605,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public ImportPO searchDraftImport(String note) {
 		try {
-			systemlog.add_up("SearchDraftImport" + note);
+//			systemlog.add_up("SearchDraftImport" + note);
 			return sale.getDraftImport(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -619,7 +617,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public Export_ReturnPO searchDraftExport_Return(String note) {
 		// TODO Auto-generated method stub
 		try {
-			systemlog.add_up("SearchDraftExport_Return" + note);
+//			systemlog.add_up("SearchDraftExport_Return" + note);
 			return sale.getDraftExport_Return(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -631,7 +629,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ExportPO searchDraftExport(String note) {
 		// TODO Auto-generated method stub
 		try {
-			systemlog.add_up("SearchDraftExport" + note);
+//			systemlog.add_up("SearchDraftExport" + note);
 			return sale.getDraftExport(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -643,7 +641,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public Import_ReturnPO searchDraftImport_Return(String note) {
 		// TODO Auto-generated method stub
 		try {
-			systemlog.add_up(note);
+//			systemlog.add_up(note);
 			return sale.getDraftImport_Return(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -655,7 +653,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ImportPO searchImportNote(String note) {
 		// TODO Auto-generated method stub
 		try {
-			systemlog.add_up(note);
+//			systemlog.add_up(note);
 			return sale.getImport(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -667,7 +665,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 	public ExportPO searchExportNote(String note) {
 		// TODO Auto-generated method stub
 		try {
-			systemlog.add_up(note);
+//			systemlog.add_up(note);
 			return sale.getExport(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -678,7 +676,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public Import_ReturnPO searchImport_ReturnNote(String note) {
 		try {
-			systemlog.add_up(note);
+//			systemlog.add_up(note);
 			return sale.getImport_Return(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -689,7 +687,7 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 
 	public Export_ReturnPO searchExport_ReturnNote(String note) {
 		try {
-			systemlog.add_up(note);
+//			systemlog.add_up(note);
 			return sale.getExport_Return(note);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
