@@ -22,6 +22,9 @@ import businesslogicservice.salesblservice.SalesblService;
 
 public class AddCusPanel extends FatherPanel {
 
+	/*
+	 * 添加客户的界面
+	 */
 	protected MyTextFieldTrans cusName, cusTel, cusAdd, cusEBox, cusCode, cusShouldPay;
 	protected int infoX1 = 495, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,
 			infoHeight = 31;
@@ -55,6 +58,9 @@ public class AddCusPanel extends FatherPanel {
 		setID();
 	}
 
+	/*
+	 * 设置客户id
+	 */
 	public void setID(){
 		idField = new MyLabel(105, 173, 222, 36);
 		this.add(idField);
@@ -62,6 +68,9 @@ public class AddCusPanel extends FatherPanel {
 		failLabel = new MyLabel(418,550,204,35);
 		this.add(failLabel);
 	}
+	/*
+	 * 添加textfield
+	 */
 	public void addTextField() {
 		cusName = new MyTextFieldTrans(infoX1, infoY, infoWidth1, infoHeight);
 		cusTel = new MyTextFieldTrans(infoX1, infoY + infoInter, infoWidth1, infoHeight);
@@ -78,7 +87,9 @@ public class AddCusPanel extends FatherPanel {
 		this.add(cusShouldPay);
 		this.add(salesManField);
 	}
-
+/*
+ * 添加供应商和销售商的button
+ */
 	public void addIdButton() {
 		supplierButton = new MyStopButton("Image/Sales/对话框/images/供货商_ori.png", 105, 255,
 				"Image/Sales/对话框/images/供货商_ori.png");

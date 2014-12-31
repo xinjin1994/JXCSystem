@@ -5,6 +5,9 @@ import ui.setting.MyFrame;
 import vo.bill.ExportMenuVO;
 
 public class SalesDraftBill extends SalesInPanel{
+	/*
+	 * 查看销售单及销售退货单草稿界面
+	 */
 
 	protected ExportMenuVO exportMenuVO;
 	public SalesDraftBill(MyFrame frame, String url, UIController controller,ExportMenuVO exportMenuVO) {

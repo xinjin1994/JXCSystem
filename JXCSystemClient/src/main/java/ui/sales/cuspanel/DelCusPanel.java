@@ -16,6 +16,9 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class DelCusPanel extends FatherPanel {
+	/*
+	 * 删除客户界面
+	 */
 	private ButtonListener buttonListener;
 	private MyFrame frame;
 	private UIController controller;

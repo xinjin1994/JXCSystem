@@ -14,6 +14,9 @@ import vo.bill.CommodityListVO;
 import vo.bill.ExportMenuVO;
 
 public class SalesBackPanel extends SalesInPanel{
+	/*
+	 * 添加销售退货单界面
+	 */
 
 	MyButton saveNewButton;
 	public SalesBackPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController){

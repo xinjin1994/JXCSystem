@@ -1,17 +1,16 @@
 package ui.sales.impanel;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import ui.FatherPanel;
 import ui.UIController;
-import ui.sales.impanel.MakeSureIm.ButtonListener;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
 import vo.bill.ImportMenuVO;
 
 public class ImInBillPanel extends FatherPanel {
+	/*
+	 * 总经理审批的进货单和进货退货单单据界面
+	 */
 
 	protected MyLabel supplier, warehouse, remark, id, goodsID, goodsPrice, goodsNum, goodsTotal, goodsName,
 			goodsType, person, operator, newRemark, discount, voucher;

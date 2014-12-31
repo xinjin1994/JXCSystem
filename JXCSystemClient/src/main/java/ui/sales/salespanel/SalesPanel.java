@@ -8,6 +8,9 @@ import ui.sales.SalesUIController;
 import ui.setting.Button.MyButton;
 
 public class SalesPanel extends SalesSecondPanel{
+	/*
+	 * 销售单相关二级界面
+	 */
 
 	private MyButton salesMenu,salesBackMenu ;
 	public SalesPanel(SalesUIController salesUIController){

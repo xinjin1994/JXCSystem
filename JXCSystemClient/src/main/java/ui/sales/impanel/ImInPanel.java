@@ -26,6 +26,9 @@ import businesslogic.userbl.User;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class ImInPanel extends FatherPanel {
+	/*
+	 * 添加进货单界面
+	 */
 	protected ButtonListener buttonListener;
 	protected MyTextFieldFilled warehouse, remark, discount, voucher;
 	protected MyComboBox supplier;

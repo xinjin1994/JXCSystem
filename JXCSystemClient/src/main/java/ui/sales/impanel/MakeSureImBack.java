@@ -12,6 +12,9 @@ import vo.bill.CommodityListVO;
 import vo.bill.ImportMenuVO;
 
 public class MakeSureImBack extends MakeSureIm{
+	/*
+	 * 确认添加进货退货单界面
+	 */
 
 	public MakeSureImBack(MyFrame frame, String url, UIController controller, ImportMenuVO importMenuVO,
 			CommodityListVO commodityListVO, String personLabel, String operatorLabel, ImInPanel imInPanel,

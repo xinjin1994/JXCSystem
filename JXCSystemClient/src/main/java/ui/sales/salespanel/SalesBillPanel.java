@@ -15,6 +15,9 @@ import vo.bill.ExportMenuVO;
 import vo.bill.ImportMenuVO;
 
 public class SalesBillPanel extends FatherPanel{
+	/*
+	 * 总经理审批销售单及销售退货单草稿界面
+	 */
 	
 	protected ExportMenuVO exportMenuVO;
 	private UIController controller;

@@ -15,6 +15,9 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class MakeSureDelInfo extends MakeSureCusInfo{
+	/*
+	 * 确认删除界面
+	 */
 	private CustomerVO customerVO;
 	private DelCusPanel delCusPanel;
 	private MyFrame frame;

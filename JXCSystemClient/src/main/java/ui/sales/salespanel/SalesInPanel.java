@@ -24,6 +24,9 @@ import vo.bill.ExportMenuVO;
 import businesslogic.userbl.User;
 
 public class SalesInPanel extends ImInPanel {
+	/*
+	 * 添加销售单界面
+	 */
 
 	MyTextFieldFilled newRemark;
 	SalesResult salesResult = new SalesResult(frame, controller, salesUIController, SalesInPanel.this);

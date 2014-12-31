@@ -8,8 +8,6 @@ import java.awt.event.MouseListener;
 import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
-import ui.sales.cuspanel.AddCusPanel;
-import ui.sales.impanel.ImInPanel.FocusAdapter;
 import ui.setting.MyFrame;
 import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
@@ -20,6 +18,9 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class ImBackPanel extends ImInPanel {
+	/*
+	 * 添加进货退货单界面
+	 */
 
 	SalesblService salesblService;
 	public ImBackPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
