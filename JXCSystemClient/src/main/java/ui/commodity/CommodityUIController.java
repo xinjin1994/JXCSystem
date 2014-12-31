@@ -231,7 +231,7 @@ public class CommodityUIController {
 			uiController.setMainPanel(commodityPanel);
 			String type = "待处理";
 			if(e.getSource() == invoiceButtons[0]){
-				billsArray = invoiceblService.show_up();
+				billsArray = invoiceblService.show_pass();
 				System.out.println("billsArray.size()"+billsArray.size());
 			}else if(e.getSource() == invoiceButtons[1]){
 				billsArray = invoiceblService.show_refuse();
