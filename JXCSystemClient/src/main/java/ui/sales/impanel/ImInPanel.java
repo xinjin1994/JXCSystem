@@ -26,6 +26,9 @@ import businesslogic.userbl.User;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class ImInPanel extends FatherPanel {
+	/*
+	 * 添加进货单界面
+	 */
 	protected ButtonListener buttonListener;
 	protected MyTextFieldFilled warehouse, remark, discount, voucher;
 	protected MyComboBox supplier;
@@ -319,7 +322,22 @@ public class ImInPanel extends FatherPanel {
 						salesResult.failed("添加失败！", "importFailed");
 					}
 				} catch (Exception e2) {
-					e2.printStackTrace();
+					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+							goodsNameSelected, num, price, totalPriceText, remark.getText());
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplierString,
+							warehouse.getText(), commodityListVO, 2);
+					importMenuVO.person = person.getText();
+					System.out.println("id.getText()"+id.getText()+"goodsNameSelected"+goodsNameSelected
+							+"supplierString"+supplierString);
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
+					switch (salesblService.addDraftImport_up(importMenuVO)) {
+					case 0:
+						salesResult.succeeded("成功添加草稿单！");
+						break;
+					default:
+						salesResult.failed("添加失败！", "importFailed");
+					}
+//					e2.printStackTrace();
 				}
 			}
 

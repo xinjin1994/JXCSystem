@@ -16,6 +16,10 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class ChangeCusPanel extends FatherPanel{
+	/*
+	 * 修改客户界面
+	 */
+	
 	private ButtonListener buttonListener;
 	private MyFrame frame;
 	private UIController controller;

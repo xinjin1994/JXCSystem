@@ -11,6 +11,9 @@ import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
 
 public class SalesResult implements ActionListener{
+	/*
+	 * sales模块操作返回结果界面
+	 */
 	UIController controller;
 	FatherPanel resultPanel,oldPanel;
 	MyFrame frame;

@@ -18,6 +18,9 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class MakeSureChangeInfo extends AddCusPanel{
+	/*
+	 * 确认查找界面
+	 */
 	private CustomerVO customerVOBefore,customerVOAfter;
 	private ChangeCusPanel changeCusPanel;
 	private MyFrame frame;

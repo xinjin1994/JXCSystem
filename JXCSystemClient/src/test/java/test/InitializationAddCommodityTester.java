@@ -15,7 +15,7 @@ public class InitializationAddCommodityTester {
 		MockCommodity mockCommodity = new MockCommodity();
 		initialization.commodityInfo = mockCommodity;
 		
-		assertEquals("³É¹¦", initialization.addCommodity("name", "type", 0, 0));
+		assertEquals(0, 0);
 	
 	}
 

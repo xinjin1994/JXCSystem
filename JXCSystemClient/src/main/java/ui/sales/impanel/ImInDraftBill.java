@@ -5,6 +5,9 @@ import ui.setting.MyFrame;
 import vo.bill.ImportMenuVO;
 
 public class ImInDraftBill extends ImInPanel{
+	/*
+	 * 显示草稿单界面
+	 */
 	
 	protected ImportMenuVO importMenuVO;
 	public ImInDraftBill(MyFrame frame, String url, UIController controller, ImportMenuVO importMenuVO) {

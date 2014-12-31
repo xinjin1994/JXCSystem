@@ -19,6 +19,9 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class MakeSureIm extends FatherPanel {
+	/*
+	 * 确认添加进货单界面
+	 */
 
 	private static final long serialVersionUID = 7228611459299945797L;
 	protected ButtonListener buttonListener;

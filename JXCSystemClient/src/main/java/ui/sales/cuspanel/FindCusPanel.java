@@ -20,7 +20,9 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class FindCusPanel extends FatherPanel {
-
+/*
+ * 查找客户界面
+ */
 	private static final long serialVersionUID = -4729036564058484629L;
 	private ButtonListener buttonListener;
 	private MyFrame frame;

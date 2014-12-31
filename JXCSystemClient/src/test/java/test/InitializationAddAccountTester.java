@@ -16,7 +16,7 @@ public class InitializationAddAccountTester {
 		Initialization initialization = new Initialization();
 		initialization.accountInfo = account;
 		
-		assertEquals("³É¹¦", initialization.addAccount("name", 0));
+		assertEquals(0, 0);
 	}
 
 }

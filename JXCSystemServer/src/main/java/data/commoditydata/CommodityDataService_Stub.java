@@ -664,6 +664,13 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 						po.commodityList.get(i).father=po2.name;
 					}
 				}
+				
+				if(po.hasSort()){
+					for(int i=0;i<po.sortList.size();i++){
+						po.sortList.get(i).father=po2.name;
+					}
+				}
+				
 				this.writeSortList();
 			}
 //			System.out.println("updateSort:");

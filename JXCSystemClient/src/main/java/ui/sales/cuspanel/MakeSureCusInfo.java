@@ -14,6 +14,9 @@ import ui.setting.TextField.MyTextFieldTrans;
 import vo.CustomerVO;
 
 public class MakeSureCusInfo extends FatherPanel{
+	/*
+	 * 确认界面的父类
+	 */
 
 	protected MyLabel cusName, cusTel, cusAdd, cusEBox, cusCode, cusShouldPay,shouldPay,person,shouldGet,id;
 	protected int infoX1 = 495, infoX2 = 534, infoY = 170, infoInter = 41, infoWidth1 = 237, infoWidth2 = 190,

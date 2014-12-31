@@ -8,6 +8,9 @@ import ui.sales.SalesUIController;
 import ui.setting.Button.MyButton;
 
 public class ImPanel extends SalesSecondPanel{
+	/*
+	 * 进货二级界面
+	 */
 	
 	private MyButton importMenu,importBackMenu;
     ImListener listener;

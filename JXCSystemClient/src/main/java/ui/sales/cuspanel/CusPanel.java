@@ -8,6 +8,9 @@ import ui.sales.SalesSecondPanel;
 import ui.setting.Button.MyButton;
 
 public class CusPanel extends SalesSecondPanel{
+	/*
+	 * 添加客户二级界面（主界面上点击之后第二列出现的）
+	 */
 	private MyButton addCus, delCus, changeCusInfo, seeCusInfo;
 	private int secondX = 1;
 	CusListener listener = new CusListener();

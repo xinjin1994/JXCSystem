@@ -8,9 +8,8 @@ import java.awt.event.MouseListener;
 import ui.UIController;
 import ui.sales.SalesResult;
 import ui.sales.SalesUIController;
-import ui.sales.cuspanel.AddCusPanel;
-import ui.sales.impanel.ImInPanel.FocusAdapter;
 import ui.setting.MyFrame;
+import ui.setting.MyLabel;
 import ui.setting.Button.MyButton;
 import ui.setting.TextField.MyTextFieldTrans;
 import vo.bill.CommodityListVO;
@@ -19,6 +18,9 @@ import businesslogic.salesbl.SalesController;
 import businesslogicservice.salesblservice.SalesblService;
 
 public class ImBackPanel extends ImInPanel {
+	/*
+	 * 添加进货退货单界面
+	 */
 
 	SalesblService salesblService;
 	public ImBackPanel(MyFrame frame, String url, UIController controller, SalesUIController salesUIController) {
@@ -42,6 +44,14 @@ public class ImBackPanel extends ImInPanel {
 //		goodsNum.setText(salesblService.getImport_ReturnMaxNumber_up("")+"");
 		this.add(goodsNum);
 //		goodsNum.addFocusListener(new FocusAdapter());
+	}
+	
+	public void addID() {
+		id = new MyLabel(105, 173, 222, 36);
+		SalesblService salesblService = new SalesController();
+		id.setText(salesblService.getImport_ReturnNote_up());
+		this.add(id);
+
 	}
 	
 	public void addTotalListener(){
@@ -125,7 +135,21 @@ public class ImBackPanel extends ImInPanel {
 					salesResult.failed("添加失败！", "import_return_failed");
 				}
 				}catch(Exception e2){
-					e2.printStackTrace();
+					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+							goodsTypeSelected, num, price, totalPriceText, remark.getText());
+					ImportMenuVO importMenuVO = new ImportMenuVO(id.getText(), supplierString,
+							warehouse.getText(), commodityListVO, 2);
+					importMenuVO.person = person.getText();
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImBackPanel.this);
+//					salesResult.succeeded("成功添加草稿单！");
+					switch(salesblService.addDraftImport_Return_up(importMenuVO)){
+					case 0:
+						salesResult.succeeded("成功添加草稿单！");
+						break;
+					default:
+						salesResult.failed("添加失败！", "import_return_failed");
+					}
+//					e2.printStackTrace();
 				}
 			}
 		}

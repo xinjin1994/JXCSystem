@@ -93,11 +93,6 @@ public class UIController {
 		frame.repaint();
 	}
 	
-	public void FinManagerPanel() {
-		//强迫症患者帮你们改bug o(╯□╰)o
-		//qiang po zheng huan zhe bang ni men gai bug o(╯□╰)o
-	}
-	
 	public void setMainPanel(FatherPanel mainPanel){
 		this.tempMainPanel = mainPanel;
 	}
