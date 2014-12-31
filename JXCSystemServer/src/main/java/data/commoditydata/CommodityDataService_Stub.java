@@ -40,16 +40,16 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 	
 	public CommodityDataService_Stub() throws RemoteException {
 		super();
-//		this.writeSortList();
-//		this.writePatchList();
-//		this.writeGiftList();
-//		this.writeDraftPatchList();
-//		this.writeSendGiftList();
-//		this.writeComNote();
-//		this.writeSortNote();
-//		this.writeSendNote();
-//		this.writePatchNote();
-//		this.writeTempSort();
+		this.writeSortList();
+		this.writePatchList();
+		this.writeGiftList();
+		this.writeDraftPatchList();
+		this.writeSendGiftList();
+		this.writeComNote();
+		this.writeSortNote();
+		this.writeSendNote();
+		this.writePatchNote();
+		this.writeTempSort();
 		
 		this.readSortList();
 		this.readPatchList();

@@ -298,12 +298,12 @@ public class PromotionDataService_Stub extends UnicastRemoteObject implements Pr
 	public PromotionDataService_Stub() throws RemoteException {
 		super();
 		
-//		this.writeNowDiscount();
-//		this.writeNowProGift();
-//		this.writeNowVoucher();
-//		this.writeProGiftList();
-//		this.writeVoucherList();
-//		this.writeDiscountList();
+		this.writeNowDiscount();
+		this.writeNowProGift();
+		this.writeNowVoucher();
+		this.writeProGiftList();
+		this.writeVoucherList();
+		this.writeDiscountList();
 		
 		this.readNowDiscount();
 		this.readNowProGift();

@@ -227,7 +227,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 	private void setGiftText() {
 //		String [] rolesList = new String[]{"a","b"};
 //		commodity = new MyComboBox(rolesList,471, 443, 156, 27);
-		number = new MyTextFieldTrans(471,487, 156, 27);
+//		number = new MyTextFieldTrans(471,487, 156, 27);
 		price = new MyTextFieldTrans(509, 408,130 ,27);
 //		String [] rolesList = new String[]{"a","b"};
 		ArrayList<CommodityVO> accVOArray = commodityblService.getAllCommodity_up();
@@ -236,7 +236,7 @@ public class SetProPanel extends FatherPanel implements ActionListener{
 			rolesList[i] = accVOArray.get(i).name +";"+accVOArray.get(i).type;
 		}
 		commodity = new MyComboBox(rolesList,471, 442, 156, 27);
-		number = new MyTextFieldTrans(471,485, 156, 32);
+		number = new MyTextFieldTrans(471,475, 156, 32);
 		
 		price.setFont(new FontFactory(18).font);
 		number.setFont(new FontFactory(18).font);

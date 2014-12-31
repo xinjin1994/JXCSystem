@@ -164,9 +164,9 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 	public FinancialDataService_Stub() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
-//		writeSaleListList();
-//		writeAllBillList();
-//		writeOperatingConditionList();
+		writeSaleListList();
+		writeAllBillList();
+		writeOperatingConditionList();
 		
 		readSaleListList();
 		readAllBillList();
