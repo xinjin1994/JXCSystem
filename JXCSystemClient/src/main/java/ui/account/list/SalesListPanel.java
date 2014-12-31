@@ -136,7 +136,8 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 //			}catch(Exception e2){
 //				isLegal = false;
 //			}
-
+			String[] t1 = time1.split("-");
+			String[] t2 = time2.split("-");
 			if(!(time1.equals(""))&&!(time2.equals("")) ){
 				if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
 					System.out.println("count");
@@ -144,9 +145,14 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 
 					resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 				}
+				else if(Integer.parseInt(t1[2])>31||Integer.parseInt(t1[1])>12||
+							Integer.parseInt(t2[2])>31||Integer.parseInt(t2[1])>12){
+						frame.remove(this);
+						resController.failed("输入时间不符合客观规律！", failedAddress);
+					}
 			}
 
-		
+			
 				ArrayList<String> sales = new ArrayList<String>();
 				sales.add("时间;商品名称;型号;数量;单价;总额");
 				

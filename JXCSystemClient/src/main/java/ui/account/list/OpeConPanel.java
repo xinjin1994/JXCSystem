@@ -128,16 +128,22 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 //			}catch(Exception e2){
 //				isLegal = false;
 //			}
+			String[] t1 = time1.split("-");
+			String[] t2 = time2.split("-");
 			
 			if(!(time1.equals(""))&&!(time2.equals("")) ){
 				if((new CheckTimeFormat(time1).check() && new CheckTimeFormat(time2).check()) == false ){
-					System.out.println("count");
+					System.out.println("countWrong");
 					frame.remove(this);
 
 					resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
+				}else if(Integer.parseInt(t1[2])>31||Integer.parseInt(t1[1])>12||
+						Integer.parseInt(t2[2])>31||Integer.parseInt(t2[1])>12){
+					frame.remove(this);
+					resController.failed("输入时间不符合客观规律！", failedAddress);
 				}
 			}
-		
+			
 				conditionVO= financialblService.operatingCondition_up(time1, time2);
 				ArrayList<String> info = new ArrayList<String>();
 				info.add("单据编号;銷售收入;商品类收入;折扣;销售成本;商品类支出;利润");

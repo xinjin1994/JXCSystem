@@ -191,6 +191,7 @@ public class SalesInPanel extends ImInPanel {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesInPanel.this);
 			} else if (e.getSource() == forward) {
+				try{
 				if (id.getText().equals("") || supplierNewString.equals("")
 						|| warehouse.getText().equals("") || person.getText().equals("")
 						|| operator.getText().equals("")) {
@@ -208,6 +209,9 @@ public class SalesInPanel extends ImInPanel {
 							SalesInPanel.this, salesUIController);
 					frame.remove(SalesInPanel.this);
 					frame.setPanel(makeSureIm);
+				}
+				}catch(Exception e2){
+					salesResult.failed("请重新确认输入信息！", "export_failed");
 				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {

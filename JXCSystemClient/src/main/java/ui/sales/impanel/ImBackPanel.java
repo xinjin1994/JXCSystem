@@ -97,8 +97,9 @@ public class ImBackPanel extends ImInPanel {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(ImBackPanel.this);
 			} else if (e.getSource() == forward) {
-				if(id.getText().equals("")||remark.getText().equals("")||supplierString.equals("")||
-						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
+				if(id.getText().equals("")||supplierString.equals("")||
+						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")
+						||goodsNameSelected.equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,ImBackPanel.this);
 					salesResult.failed("存在输入为空！", "import_return_failed");
 				}else{
@@ -114,6 +115,7 @@ public class ImBackPanel extends ImInPanel {
 				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {
+				goodsNameSelected = goodsName.getSelectedItem().toString();
 				setType();
 			} else if (e.getSource() == goodsType) {
 				setGoodsID();

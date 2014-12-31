@@ -56,10 +56,30 @@ public class SalesBackPanel extends SalesInPanel{
 			} else if (e.getSource() == forward) {
 				frame.remove(SalesBackPanel.this);
 				if(id.getText().equals("")||supplierNewString.equals("")||
-						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
+						warehouse.getText().equals("")||person.getText().equals("")||
+						operator.getText().equals("")||goodsNameSelected.equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesBackPanel.this);
 					salesResult.failed("请重新确认输入信息！", "export_return_failed");
-				}else if(e.getSource() == saveNewButton){
+				}
+				else{
+					try{
+				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
+						goodsTypeSelected, num, price, num*price, newRemark.getText());
+				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString,person.getText(),
+						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,5);
+				exportMenuVO.person = person.getText();
+				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
+						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesBackPanel.this,salesUIController);
+				frame.remove(SalesBackPanel.this);
+				frame.setPanel(makeSureIm);
+				
+				}catch(Exception e2){
+					salesResult.failed("请重新确认输入信息！", "export_return_failed");
+				}
+				frame.repaint();
+				}
+			}
+				else if(e.getSource() == saveNewButton){
 					System.out.println("saveButtonListener");
 					frame.remove(SalesBackPanel.this);
 					try{
@@ -105,19 +125,6 @@ public class SalesBackPanel extends SalesInPanel{
 					}
 				 }
 				}
-				else{
-				CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,
-						goodsTypeSelected, num, price, num*price, newRemark.getText());
-				ExportMenuVO exportMenuVO = new ExportMenuVO(id.getText(), supplierNewString,person.getText(),
-						warehouse.getText(), commodityListVO,Double.parseDouble(discount.getText()),Double.parseDouble(voucher.getText()),totalPriceText,5);
-				exportMenuVO.person = person.getText();
-				MakeSureIm makeSureIm = new MakeSureIm(frame, "Image/Sales/对话框/创建销售单/创建销售单_背景.jpg", controller,
-						exportMenuVO, commodityListVO, person.getText(), operator.getText(), SalesBackPanel.this,salesUIController);
-				frame.remove(SalesBackPanel.this);
-				frame.setPanel(makeSureIm);
-				}
-				frame.repaint();
-			}
 		}
 
 		public void mousePressed(MouseEvent e) {

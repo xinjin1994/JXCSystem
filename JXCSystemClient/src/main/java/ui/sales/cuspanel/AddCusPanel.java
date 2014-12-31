@@ -40,6 +40,7 @@ public class AddCusPanel extends FatherPanel {
 	protected int level = 0;
 	protected String id;
 	protected boolean classification = true;
+	protected boolean isLevel = false,isSupplier = false;
 	SalesUIController salesUIController;
 	SalesblService salesblService;
 	
@@ -137,15 +138,18 @@ public class AddCusPanel extends FatherPanel {
 			if (e.getSource() == secondCusBack) {
 				salesUIController.backPanel(AddCusPanel.this);
 			}else if(e.getSource() == supplierButton){
+				isSupplier = true;
 				//false代表进货商，true代表销售商
 				supplierButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供应商_press_on_03.png"));
 				sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/销售商_ori.png"));
 				classification = false;
 			}else if(e.getSource() == sellerButton){
+				isSupplier = true;
 				sellerButton.setIcon(new ImageIcon("Image/Sales/对话框/images/销售商_press_on_05.png"));
 				supplierButton.setIcon(new ImageIcon("Image/Sales/对话框/images/供货商_ori.png"));
 				classification = true;
 			}else if(e.getSource() == level1){
+				isLevel = true;
 				level1.setIcon(new ImageIcon("Image/Sales/对话框/images/level1_press_on.png"));
 				level2.setIcon(new ImageIcon("Image/Sales/对话框/images/level2_ori.png"));
 				level3.setIcon(new ImageIcon("Image/Sales/对话框/images/level3_ori.png"));
@@ -153,6 +157,7 @@ public class AddCusPanel extends FatherPanel {
 				level5.setIcon(new ImageIcon("Image/Sales/对话框/images/level5_ori.png"));
 				level = 1;
 			}else if(e.getSource() == level2){
+				isLevel = true;
 				level2.setIcon(new ImageIcon("Image/Sales/对话框/images/level2_press_on.png"));
 				level1.setIcon(new ImageIcon("Image/Sales/对话框/images/level1_ori.png"));
 				level3.setIcon(new ImageIcon("Image/Sales/对话框/images/level3_ori.png"));
@@ -160,6 +165,7 @@ public class AddCusPanel extends FatherPanel {
 				level5.setIcon(new ImageIcon("Image/Sales/对话框/images/level5_ori.png"));
 				level = 2;
 			}else if(e.getSource() == level3){
+				isLevel = true;
 				level3.setIcon(new ImageIcon("Image/Sales/对话框/images/level3_press_on.png"));
 				level2.setIcon(new ImageIcon("Image/Sales/对话框/images/level2_ori.png"));
 				level1.setIcon(new ImageIcon("Image/Sales/对话框/images/level1_ori.png"));
@@ -167,6 +173,7 @@ public class AddCusPanel extends FatherPanel {
 				level5.setIcon(new ImageIcon("Image/Sales/对话框/images/level5_ori.png"));
 				level = 3;
 			}else if(e.getSource() == level4){
+				isLevel = true;
 				level2.setIcon(new ImageIcon("Image/Sales/对话框/images/level2_ori.png"));
 				level3.setIcon(new ImageIcon("Image/Sales/对话框/images/level3_ori.png"));
 				level1.setIcon(new ImageIcon("Image/Sales/对话框/images/level1_ori.png"));
@@ -174,6 +181,7 @@ public class AddCusPanel extends FatherPanel {
 				level4.setIcon(new ImageIcon("Image/Sales/对话框/images/level4_press_on.png"));
 				level = 4;
 			}else if(e.getSource() == level5){
+				isLevel = true;
 				level2.setIcon(new ImageIcon("Image/Sales/对话框/images/level2_ori.png"));
 				level3.setIcon(new ImageIcon("Image/Sales/对话框/images/level3_ori.png"));
 				level4.setIcon(new ImageIcon("Image/Sales/对话框/images/level4_ori.png"));
@@ -193,9 +201,9 @@ public class AddCusPanel extends FatherPanel {
 				String eBox = cusEBox.getText();
 				String person = salesManField.getText();
 				if(name.equals("")||tel.equals("")||add.equals("")||code.equals("")||eBox.equals("")||
-						person.equals("")){
+						person.equals("")||(isLevel == false)||(isSupplier == false)){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,AddCusPanel.this);
-					salesResult.failed("存在输入为空！", "addCusFailed");
+					salesResult.failed("存在输入或选择为空！", "addCusFailed");
 				}else{
 					
 					try{

@@ -95,7 +95,6 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 		
 		String time1 = timeBegin.getText();
 		String time2 = timeEnd.getText();
-
 		SimpleDateFormat dateFormat = null;
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
@@ -107,13 +106,21 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 			isLegal = false;
 		}
 
+		String[] t1 = time1.split("-");
+		String[] t2 = time2.split("-");
+		
 		if(time1.equals("")||time2.equals("")){
 			frame.remove(this);
 			resController.failed("存在输入为空！", failedAddress);
 		}else if(isLegal == false){
 			frame.remove(this);
 			resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
-		}else{
+		}else if(Integer.parseInt(t1[2])>31||Integer.parseInt(t1[1])>12||
+				Integer.parseInt(t2[2])>31||Integer.parseInt(t2[1])>12){
+			frame.remove(this);
+			resController.failed("输入时间不符合客观规律！", failedAddress);
+		}
+		else{
 		ArrayList<ExamineVO> examineVO = commodityblService.Examine_up(time1, time2);
 		ArrayList<String> examStr = new ArrayList<String>();
 		int num = 0;

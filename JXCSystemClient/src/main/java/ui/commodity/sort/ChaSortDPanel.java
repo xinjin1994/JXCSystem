@@ -86,10 +86,9 @@ public class ChaSortDPanel extends FatherPanel implements ActionListener{
 		this.add(name);
 		this.add(id);
 	}
+	
 
 	private void setNewSort() {
-		nameString = name.getText();
-		idString = id.getText();
 		if(nameString.equals("")||idString.equals("")){
 			resController.failed("请重新确认输入信息！", failedAddress);
 		}else{

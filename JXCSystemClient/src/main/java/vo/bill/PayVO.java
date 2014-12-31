@@ -3,7 +3,7 @@ package vo.bill;
 
 //付款单
 public class PayVO extends InvoiceVO{
-//	public String cusName;
+	public String cusName;
 	public String bankAccount;
 	public ItemList itemList;
 //	public double total;

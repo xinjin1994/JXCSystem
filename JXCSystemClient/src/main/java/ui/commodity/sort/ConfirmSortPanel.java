@@ -153,6 +153,9 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 			changeMainPanel();
 			resControllerS.succeeded("成功修改分类信息！", "commodity");
 			break;
+		case 3:
+			resControllerF.failedConfirm("分类已存在！", failedAddress);
+			break;
 		default:
 			resControllerF.failedConfirm("未知错误！",failedAddress);
 		}

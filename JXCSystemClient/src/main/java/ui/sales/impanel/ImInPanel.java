@@ -139,12 +139,10 @@ public class ImInPanel extends FatherPanel {
 			ImInPanel.this.repaint();
 		}
 		i++;
-		System.out.println("goodsType is Null");
 		goodsPrice = new MyTextFieldTrans(488, 293, 237, 31);
-		goodsNameSelected = goodsName.getSelectedItem().toString();
-		System.out.println("goodsName" + goodsNameSelected);
 		ArrayList<CommodityVO> comVOArray = salesblService.getAllCommodity_up();
 		ArrayList<String> commodityType = new ArrayList<String>();
+		goodsNameSelected = goodsName.getSelectedItem().toString();
 		for (int j = 0; j < comVOArray.size(); j++) {
 			if (comVOArray.get(j).name.equals(goodsNameSelected)) {
 				commodityType.add(comVOArray.get(j).type);
@@ -155,7 +153,6 @@ public class ImInPanel extends FatherPanel {
 		for (int i = 0; i < commodityType.size(); i++) {
 			typeString[i] = commodityType.get(i);
 		}
-		System.out.println("size " + typeString.length + " " + typeString[0]);
 		// String[] typeString = { "a", "b" };
 		goodsType = new MyComboBox(typeString, 488, 252, 237, 31);
 		this.add(goodsType);
@@ -276,10 +273,10 @@ public class ImInPanel extends FatherPanel {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(ImInPanel.this);
 			} else if (e.getSource() == forward) {
-
+				try{
 				if (id.getText().equals("") || (supplierString.toString()).equals("")
 						|| warehouse.getText().equals("") || person.getText().equals("")
-						|| operator.getText().equals("")) {
+						|| operator.getText().equals("")||goodsNameSelected.equals("")) {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
 					salesResult.failed("请重新确认输入信息！", "importFailed");
 				} else {
@@ -294,6 +291,10 @@ public class ImInPanel extends FatherPanel {
 							ImInPanel.this, salesUIController);
 					frame.remove(ImInPanel.this);
 					frame.setPanel(makeSureIm);
+				}
+				}catch(Exception e2){
+					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
+					salesResult.failed("请重新确认输入信息！", "importFailed");
 				}
 				frame.repaint();
 			} else if (e.getSource() == goodsName) {
