@@ -161,6 +161,7 @@ public class SalesInPanel extends ImInPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == newSupplier) {
 				supplierNewString = newSupplier.getSelectedItem().toString();
+				person.setText(salesblService.searchExactCustomer_up(supplierNewString).person);
 			}
 		}
 

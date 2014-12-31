@@ -137,12 +137,14 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 					resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 				}
 			}
-			else{
+		
 				conditionVO= financialblService.operatingCondition_up(time1, time2);
 				ArrayList<String> info = new ArrayList<String>();
 				info.add("单据编号;銷售收入;商品类收入;折扣;销售成本;商品类支出;利润");
 				for(int i=0;i<conditionVO.size();i++){
-					info.add(conditionVO.get(i).getProfit()+"");
+					info.add(conditionVO.get(i).note+";"+conditionVO.get(i).sales_income+";"+conditionVO.get(i).com_income+";"+
+							conditionVO.get(i).discount+";"+conditionVO.get(i).sales_outcome+";"+conditionVO.get(i).com_outcome+";"
+							+conditionVO.get(i).profit);
 				}
 				if(info.size() == 1){
 					frame.remove(this);
@@ -182,7 +184,7 @@ public class OpeConPanel extends FatherPanel implements ActionListener {
 						frame.repaint();
 					}
 				}
-			}
+			
 			frame.repaint();
 		}
 		else if (e.getSource() == excel) {

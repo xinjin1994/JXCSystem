@@ -146,7 +146,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 				}
 			}
 
-			else{
+		
 				ArrayList<String> sales = new ArrayList<String>();
 				sales.add("时间;商品名称;型号;数量;单价;总额");
 				
@@ -202,7 +202,7 @@ public class SalesListPanel extends FatherPanel implements ActionListener{
 
 				}
 
-			}
+			
 			frame.repaint();
 		}
 		else if(e.getSource() == excel){

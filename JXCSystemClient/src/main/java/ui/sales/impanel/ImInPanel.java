@@ -274,7 +274,7 @@ public class ImInPanel extends FatherPanel {
 				salesUIController.backPanel(ImInPanel.this);
 			} else if (e.getSource() == forward) {
 
-				if (id.getText().equals("") || remark.getText().equals("") || (supplierString.toString()).equals("")
+				if (id.getText().equals("") || (supplierString.toString()).equals("")
 						|| warehouse.getText().equals("") || person.getText().equals("")
 						|| operator.getText().equals("")) {
 					SalesResult salesResult = new SalesResult(frame, controller, salesUIController, ImInPanel.this);
@@ -300,6 +300,7 @@ public class ImInPanel extends FatherPanel {
 				getPrice();
 			}else if(e.getSource() == supplier){
 				 supplierString = supplier.getSelectedItem().toString();
+				 person.setText(salesblService.searchExactCustomer_up(supplierString).person);
 			}else if (e.getSource() == saveButton) {
 				try {
 					CommodityListVO commodityListVO = new CommodityListVO(id.getText(), goodsNameSelected,

@@ -153,7 +153,6 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 					resController.failed("时间输入格式错误！请按照“yyyy-mm-dd”格式输入！", failedAddress);
 				}
 			}
-			else{
 				ArrayList<String> bills = new ArrayList<String>();
 				try{
 					String warehouse = stock.getText();
@@ -242,7 +241,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 
 				}
 				frame.repaint();
-			}
+			
 
 		}else if (e.getSource() == excel) {
 			financialblService.allBillExcel_up(billsArray);
