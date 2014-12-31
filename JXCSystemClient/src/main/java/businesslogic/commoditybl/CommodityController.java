@@ -160,7 +160,12 @@ public class CommodityController implements CommodityblService{
 	public int updateSort_up_Mov(SortVO vo1, SortVO vo2) {
 		// TODO Auto-generated method stub
 		SortPO po1=new SortPO(vo1.name);
-		SortPO po2=new SortPO(vo2.name);
+		SortPO po2=null;
+		if(vo2!=null){
+			po2=new SortPO(vo2.name);
+		}else{
+			po2=null;
+		}
 		return commodity.updateSort_Mov(po1, po2);
 	}
 
