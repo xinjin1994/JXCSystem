@@ -55,7 +55,7 @@ public class SalesBackPanel extends SalesInPanel{
 				salesUIController.backPanel(SalesBackPanel.this);
 			} else if (e.getSource() == forward) {
 				frame.remove(SalesBackPanel.this);
-				if(id.getText().equals("")||newRemark.getText().equals("")||supplierNewString.equals("")||
+				if(id.getText().equals("")||supplierNewString.equals("")||
 						warehouse.getText().equals("")||person.getText().equals("")||operator.getText().equals("")){
 					SalesResult salesResult = new SalesResult(frame,controller,salesUIController,SalesBackPanel.this);
 					salesResult.failed("请重新确认输入信息！", "export_return_failed");

@@ -191,7 +191,7 @@ public class SalesInPanel extends ImInPanel {
 			if (e.getSource() == back) {
 				salesUIController.backPanel(SalesInPanel.this);
 			} else if (e.getSource() == forward) {
-				if (id.getText().equals("") || newRemark.getText().equals("") || supplierNewString.equals("")
+				if (id.getText().equals("") || supplierNewString.equals("")
 						|| warehouse.getText().equals("") || person.getText().equals("")
 						|| operator.getText().equals("")) {
 					salesResult.failed("请重新确认输入信息！", "export_failed");
