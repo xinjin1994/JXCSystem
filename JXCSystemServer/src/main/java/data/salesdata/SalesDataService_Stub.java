@@ -1485,7 +1485,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			if (customerList.get(i).name.equals(paymentPO.getItemName().get(0))) {
 				System.out.println("neibu: "+customerList.get(i).name+" "+"qian: "+customerList.get(i).getMoneyIn());
 				customerList.get(i).moneyIn = customerList.get(i).moneyIn
-						+ paymentPO.getTotalMoney();
+						- paymentPO.getTotalMoney();
 				System.out.println("neibu2: "+customerList.get(i).name+" "+"qian: "+customerList.get(i).getMoneyIn());
 			}
 		}
