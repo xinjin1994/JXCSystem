@@ -34,8 +34,8 @@ import businesslogicservice.salesblservice.SalesblService;
 public class AddReceiptPanel extends FatherPanel implements ActionListener {
 	AccountAllUIController uiController;
 	MyButton forwardButton,saveButton;
-	MyLabel idLabel, balance, operator, total,failLabel;
-	MyTextFieldTrans ps, agent;
+	MyLabel idLabel, balance, operator, total,failLabel,agent;
+	MyTextFieldTrans ps;
 	MyTextFieldTrans money;
 	MyComboBox customer, account;
 	AccountblService accountblService;
@@ -100,6 +100,10 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		balance = new MyLabel(491, 205, 205, 41);
 		balance.setForeground(new ColorFactory().greyFont);
 		this.add(balance);
+		
+		agent = new MyLabel(406, 369, 150, 54);
+		agent.setForeground(new ColorFactory().accColor);
+		this.add(agent);
 	}
 	
 	private void setInfo(GetVO get) {
@@ -147,14 +151,11 @@ public class AddReceiptPanel extends FatherPanel implements ActionListener {
 		ps = new MyTextFieldTrans(106, 369, 222, 170);
 		ps.setForeground(new ColorFactory().accColor);
 
-		agent = new MyTextFieldTrans(406, 369, 150, 54);
-		agent.setForeground(new ColorFactory().accColor);
 
 		money = new MyTextFieldTrans(491, 248, 205, 43);
 		money.setForeground(new ColorFactory().accColor);
 
 		this.add(ps);
-		this.add(agent);
 		this.add(money);
 
 		// money.getDocument().addDocumentListener(this);

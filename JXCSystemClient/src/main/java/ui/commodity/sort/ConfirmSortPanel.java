@@ -158,6 +158,7 @@ public class ConfirmSortPanel extends FatherPanel implements ActionListener{
 		}
 	}
 	private void delSort() {
+		frame.remove(this);
 		switch(commodityblService.delSort_up(sort)){
 		case 0:
 			changeMainPanel();

@@ -123,7 +123,7 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 					resControllerF.failedConfirm("商品不存在！", failedAddress);
 					break;
 				default:
-					resControllerF.failedConfirm("未知错误！", failedAddress);
+					resControllerF.failedConfirm("信息存在错误！", failedAddress);
 				}
 			}else if (type.equals("cha")) {
 				switch(commodityblService.updateCommodity_up(oldVO, commodityVO)){

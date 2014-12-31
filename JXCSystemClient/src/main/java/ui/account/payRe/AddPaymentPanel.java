@@ -45,8 +45,8 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	
 	MyFrame frame;
 	MyButton forwardButton,saveButton;
-	MyLabel idLabel,balance,operator,total,failLabel;
-	MyTextFieldTrans ps,agent,item;
+	MyLabel idLabel,balance,operator,total,failLabel,agent;
+	MyTextFieldTrans ps,item;
 	MyTextFieldTrans money;
 	MyComboBox customer,account;
 	PayVO newPayment;
@@ -98,6 +98,10 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		total.setForeground(new ColorFactory().accColor);
 		this.add(total);
 		
+		agent = new MyLabel(406,369,150,54);
+		agent.setForeground(new ColorFactory().accColor);
+		this.add(agent);
+		
 		accountblService = new AccountController();
 		salesblService = new SalesController();
 		
@@ -119,6 +123,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		item.setText(pay.itemList.itemName);
 		total.setText(totalValue + "");
 		ps.setText(pay.itemList.remark);
+		
 		
 //		account.setSelectedItem(pay.bankAccount);
 		try {
@@ -171,13 +176,12 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 	private void setTypeIn() {
 		ps = new MyTextFieldTrans(104, 453, 220, 81);
 		
-		agent = new MyTextFieldTrans(406,369,150,54);
 	
 		money = new MyTextFieldTrans(491, 248, 205, 43);		
 
 		item = new MyTextFieldTrans(104, 300, 220, 81);
 		
-		MyTextFieldTrans typeInItem []= new MyTextFieldTrans[]{ps,agent,money,item};
+		MyTextFieldTrans typeInItem []= new MyTextFieldTrans[]{ps,money,item};
 		for(int i = 0;i < typeInItem.length;i++){
 			this.add(typeInItem[i]);
 			typeInItem[i].setForeground(new ColorFactory().accColor);
