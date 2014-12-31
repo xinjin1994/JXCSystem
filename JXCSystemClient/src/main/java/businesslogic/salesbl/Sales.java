@@ -240,15 +240,19 @@ public class Sales implements businesslogic.accountbl.SalesInfo,
 				String time = Sales.getNowTime();
 				int start = time.compareTo(proGiftPO.getStartTime());
 				int end = time.compareTo(proGiftPO.getEndTime());
-//				System.out.println("time:"+time);
-//				System.out.println("money1:"+po.getTotalMoneyAfter()+" money2: "+proGiftPO.getStartMoney());
-			
+				// System.out.println("time:"+time);
+				// System.out.println("money1:"+po.getTotalMoneyAfter()+" money2: "+proGiftPO.getStartMoney());
+
 				if ((start >= 0) && (end <= 0)) {
-					if (po.getTotalMoneyAfter()>= proGiftPO
-							.getStartMoney()) {
-						
-						commodity.addSendGift(proGiftPO.getGift(),
-								proGiftPO.getNumber(), po.getCustomer());
+					if (po.getTotalMoneyAfter() >= proGiftPO.getStartMoney()) {
+						if (commodity.findCommodity(
+								proGiftPO.getGift().getName(),
+								proGiftPO.getGift().getType()).getNumber() > proGiftPO
+								.getNumber()) {
+							commodity.addSendGift(proGiftPO.getGift(),
+									proGiftPO.getNumber(), po.getCustomer());
+						}
+
 					}
 				}
 				systemlog.add_up("addExport: ");
