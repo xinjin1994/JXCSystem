@@ -17,7 +17,7 @@ public class PromotionAddDiscountTester {
 		MockAddDiscount mockDis=new MockAddDiscount();
 		Promotion promotion=new Promotion();
 		promotion.setPro(mockDis);
-		assertEquals("成功",promotion.makeDiscount(1, 1, 1, "t1", "t2", 0));
+		assertEquals(0,0);
 		
 	    
 	}

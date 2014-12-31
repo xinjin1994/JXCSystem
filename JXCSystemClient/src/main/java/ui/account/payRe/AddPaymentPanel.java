@@ -120,7 +120,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 		
 		operator.setText(pay.operator);
 		agent.setText(person);
-		item.setText(pay.itemList.itemName);
+//		item.setText(pay.itemList.itemName);
 		total.setText(totalValue + "");
 		ps.setText(pay.itemList.remark);
 		
@@ -181,7 +181,7 @@ public class AddPaymentPanel extends FatherPanel implements ActionListener{
 
 		item = new MyTextFieldTrans(104, 300, 220, 81);
 		
-		MyTextFieldTrans typeInItem []= new MyTextFieldTrans[]{ps,money,item};
+		MyTextFieldTrans typeInItem []= new MyTextFieldTrans[]{ps,money};
 		for(int i = 0;i < typeInItem.length;i++){
 			this.add(typeInItem[i]);
 			typeInItem[i].setForeground(new ColorFactory().accColor);

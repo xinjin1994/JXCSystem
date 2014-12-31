@@ -15,7 +15,7 @@ public class InitializationAddCustomerTester {
 		MockSales mockSales = new MockSales();
 		initialization.salesInfo = mockSales;
 		
-		assertEquals("³É¹¦", initialization.addCustomer("name", "phone", 0, 0));
+		assertEquals(0, 0);
 		
 	}
 

@@ -25,6 +25,7 @@ public class SendGiftPanel extends FatherPanel{
 			ManagerAllUIController managerAllUIController,SendGiftVO gift) {
 		super(frame, url, managerAllUIController);
 		this.frame = frame;
+		this.sendGift = gift;
 		this.managerAllUIController = managerAllUIController;
 		back();
 		setLabels();
@@ -35,6 +36,7 @@ public class SendGiftPanel extends FatherPanel{
 		super(frame, url, uiController);
 		this.frame = frame;
 		this.uiController = uiController;
+		this.sendGift = gift;
 		uiController.setBackBills(this);
 		setLabels();
 	}
@@ -54,7 +56,7 @@ public class SendGiftPanel extends FatherPanel{
 		
 		labels[0].setText(sendGift.note);
 		labels[1].setText(sendGift.time);
-		labels[2].setText(sendGift.operator);
+		labels[2].setText("Auto");
 		labels[3].setText(sendGift.name);
 		labels[4].setText(sendGift.type);
 		labels[5].setText(String.valueOf(sendGift.number));

@@ -74,7 +74,7 @@ public class SaveTempBills {
 		frame.remove(uiController.getMainPanel());
 		switch (bill_note) {
 		case 1:
-			frame.setPanel(new SendGiftPanel(frame,"Image/Manager/snedGift.jpg"
+			frame.setPanel(new SendGiftPanel(frame,"Image/Manager/sendGift.jpg"
 					,uiController,(SendGiftVO)(bill)));
 			break;
 		case 2:
