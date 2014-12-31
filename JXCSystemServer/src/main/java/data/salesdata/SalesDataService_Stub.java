@@ -1465,10 +1465,14 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public boolean passPayment(PaymentPO paymentPO) throws RemoteException {
 		// TODO Auto-generated method stub
+		System.out.println("passPayment:"+paymentPO.getItemName()+" "+paymentPO.getTotalMoney());
 		for (int i = 0; i < customerList.size(); i++) {
-			if (customerList.get(i).name.equals(paymentPO.getItemName())) {
+			System.out.println(customerList.get(i).name);
+			if (customerList.get(i).name.equals(paymentPO.getItemName().get(0))) {
+				System.out.println("neibu: "+customerList.get(i).name+" "+"qian: "+customerList.get(i).getMoneyIn());
 				customerList.get(i).moneyIn = customerList.get(i).moneyIn
 						+ paymentPO.getTotalMoney();
+				System.out.println("neibu2: "+customerList.get(i).name+" "+"qian: "+customerList.get(i).getMoneyIn());
 			}
 		}
 		return true;
