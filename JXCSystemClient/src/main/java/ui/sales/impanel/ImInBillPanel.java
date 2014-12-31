@@ -68,7 +68,7 @@ public class ImInBillPanel extends FatherPanel {
 		warehouse.setText(importMenuVO.warehouse);
 		remark.setText(importMenuVO.commodityList.remark);
 		goodsName.setText(importMenuVO.commodityList.name);
-		goodsID.setText(importMenuVO.commodityList.id+"GOODSID");
+		goodsID.setText(importMenuVO.commodityList.id);
 		goodsType.setText(importMenuVO.commodityList.type);
 		goodsPrice.setText(importMenuVO.commodityList.price + "");
 		goodsNum.setText(importMenuVO.commodityList.num + "");

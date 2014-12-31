@@ -122,6 +122,10 @@ public class ConfirmComPanel extends ComDetailPanel implements ActionListener{
 				case 2:
 					resControllerF.failedConfirm("商品不存在！", failedAddress);
 					break;
+					//TODO
+				case 7:
+					resControllerF.failedConfirm("商品存在库存，不能删除！", failedAddress);
+					break;
 				default:
 					resControllerF.failedConfirm("信息存在错误！", failedAddress);
 				}

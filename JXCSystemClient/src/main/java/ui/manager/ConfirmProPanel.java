@@ -117,6 +117,9 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 			case 3:
 				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
+			case 13:
+				resControllerF.failedConfirm("当前时间已存在促销策略！", failedAddress);
+				break;
 			case -1:
 				resControllerF.failedConfirm("输入信息存在错误!请检查输入！", failedAddress);
 				break;
@@ -136,6 +139,9 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 			case 3:
 				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
 				break;
+			case 13:
+				resControllerF.failedConfirm("当前时间已存在促销策略！", failedAddress);
+				break;
 			case -1:
 				resControllerF.failedConfirm("输入信息存在错误!请检查输入！", failedAddress);
 				break;
@@ -154,6 +160,9 @@ public class ConfirmProPanel extends ProDetailPanel implements ActionListener{
 				break;
 			case 3:
 				resControllerF.failedConfirm("客户等级不存在!", failedAddress);
+				break;
+			case 13:
+				resControllerF.failedConfirm("当前时间已存在促销策略！", failedAddress);
 				break;
 			case -1:
 				resControllerF.failedConfirm("输入信息存在错误!请检查输入！", failedAddress);

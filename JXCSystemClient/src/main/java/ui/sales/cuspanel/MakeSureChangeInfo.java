@@ -114,7 +114,7 @@ public class MakeSureChangeInfo extends AddCusPanel{
 		}
 
 		public void mouseClicked(MouseEvent e) {
-			SalesResult salesResult = new SalesResult(frame,controller,salesUIController,changeCusPanel);
+			SalesResult salesResult = new SalesResult(frame,controller,salesUIController,MakeSureChangeInfo.this);
 			if (e.getSource() == forward) {
 				frame.remove(MakeSureChangeInfo.this);
 				String ID = idField.getText();
@@ -126,7 +126,7 @@ public class MakeSureChangeInfo extends AddCusPanel{
 				String personText = person.getText();
 				if(ID.equals("")||name.equals("")||tel.equals("")||add.equals("")||
 						code.equals("")||eBox.equals("")||personText.equals("")){
-					salesResult.failed("存在输入为空！", "MakeSureChangeInfo");
+					salesResult.failed("存在输入为空！", "changeCusFailed");
 				}else{
 					try{
 				double mostOwe = Double.parseDouble(cusShouldPay.getText());
@@ -148,7 +148,7 @@ public class MakeSureChangeInfo extends AddCusPanel{
 					salesResult.failed("未知错误！", "changeCusFailed");
 				}
 					}catch(Exception e2){
-						salesResult.failed("请重新确认您的输入！", "MakeSureChangeInfo");
+						salesResult.failed("请重新确认您的输入！", "changeCusFailed");
 					}
 				}
 			} else if (e.getSource() == secondCusBack) {
