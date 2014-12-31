@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class OperatingConditionPO implements Serializable{
 	String old_note;
-	String time;
+	public String time;
 	double sale_income;//���ú�����
 	double good_income;
 	double sale_outcome;
@@ -14,6 +14,7 @@ public class OperatingConditionPO implements Serializable{
 	
 	public OperatingConditionPO(String note,String time,double sale_income,double good_income, double sale_outcome,double good_outcome,double discount) {
 		this.old_note=note;
+		this.time=time;
 		this.sale_income = sale_income;
 		this.good_income=good_income;
 		this.sale_outcome=sale_outcome;

@@ -48,9 +48,9 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 		int i=0;
 		ArrayList<SaleListPO> array=new ArrayList<SaleListPO>();
 		
-		if(time1.compareTo(time2)>0){
-			return array;
-		}
+//		if(time1.compareTo(time2)>0){
+//			return array;
+//		}
 		
 		try {
 			ArrayList<SaleListPO> fin=financial.getSaleList();
@@ -84,23 +84,22 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 		// TODO Auto-generated method stub
 		ArrayList<AllBillPO> array=new ArrayList<AllBillPO>();
 		
-		if(time1.compareTo(time2)>0){
-			return array;
-		}
-		
 		try {
 			ArrayList<AllBillPO> fin=financial.getAllBill();
 			System.out.println("AllBill:"+fin.size());
 			
 			for(int i=0;i<fin.size();i++){
 				
+				if(!(note_type==null||"".equals(note_type))){
+					int type=Integer.parseInt(note_type);
+					if(fin.get(i).getDocType()!=type){
+						fin.remove(i);
+						i--;
+						continue;
+					}
+				}
+				
 				if(!((time1==null||time1.equals("")||fin.get(i).getTime().compareTo(time1)>=0)&&(time2==null||time2.equals("")||fin.get(i).getTime().compareTo(time2)<=0))){
-//						&&
-//						(note_type==null||fin.get(i).getDocType().equals(note_type))&&
-//						(good_type==null||fin.get(i).getCommodity().getType().equals(good_type))&&
-//						(customer_name==null||fin.get(i).getCustomer().getName().equals(customer_name))&&
-//						(clerk==null||fin.get(i).getClerk().equals(clerk))&&
-//						(warehouse==null||fin.get(i).getWareHouse()==wareHouse)){
 					fin.remove(i);
 					i--;
 					continue;
@@ -200,19 +199,40 @@ public class Financial implements businesslogic.accountbl.FinancialInfo,
 		// TODO Auto-generated method stub
 		ArrayList<OperatingConditionPO> array=new ArrayList<OperatingConditionPO>();
 		
-		if(time1.compareTo(time2)>0){
-			return array;
-		}
+//		if(time1.compareTo(time2)>0){
+//			return array;
+//		}
 		
 		try {
 			ArrayList<OperatingConditionPO> fin=financial.getOperatingCondition();
 			
+			
+			
+			
 			for(int i=0;i<fin.size();i++){
-				if((time1==null||time1.equals("")||fin.get(i).getTime().compareTo(time1)>=0)&&
-						(time2==null||time2.equals("")||fin.get(i).getTime().compareTo(time2)<=0)){
-						
+				System.out.println("time");
+				
+				if((time1==null||"".equals(time1))&&(time2==null||"".equals(time2))){
+					array.add(fin.get(i));
+				}else if((time1==null||"".equals(time1))&&time2!=null&&!"".equals(time2)){
+					if(fin.get(i).getTime().compareTo(time2)<=0){
 						array.add(fin.get(i));
 					}
+				}else if(time1!=null&&!"".equals(time1)&&(time2==null||"".equals(time2))){
+					if(fin.get(i).getTime().compareTo(time1)>=0){
+						array.add(fin.get(i));
+					}
+				}else{
+					if((fin.get(i).getTime().compareTo(time1)>=0)&&(fin.get(i).getTime().compareTo(time2)<=0)){
+						array.add(fin.get(i));
+					}
+				}	
+				
+//				if((time1==null||time1.equals("")||fin.get(i).getTime().compareTo(time1)>=0)&&
+//						(time2==null||time2.equals("")||fin.get(i).getTime().compareTo(time2)<=0)){
+//						
+//						array.add(fin.get(i));
+//					}
 			}
 			
 			

@@ -24,8 +24,8 @@ public class InvoiceDataService_Stub extends UnicastRemoteObject implements Invo
 	int invNote=0;
 	
 	public InvoiceDataService_Stub() throws RemoteException{
-		this.writeInvoiceList();
-		this.writeInvNote();
+//		this.writeInvoiceList();
+//		this.writeInvNote();
 		
 		this.readInvoiceList();
 		this.readInvNote();
