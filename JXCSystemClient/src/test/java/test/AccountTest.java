@@ -1,10 +1,11 @@
 package test;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import vo.AccountVO;
 import businesslogic.accountbl.Account;
 import businesslogic.accountbl.MockAccountData;
 import businesslogic.accountbl.MockInvoice;
@@ -19,7 +20,8 @@ public class AccountTest extends Account {
 		account.account=mock;
 		MockSystemlog mock2=new MockSystemlog();
 		account.systemlog=mock2;
-		assertEquals("�ɹ�",account.addAccount("name",0));
+		AccountVO po=new AccountVO("name",0);
+		assertEquals(0,account.addAccount_up(po));
 	}
 
 	@Test
@@ -31,7 +33,7 @@ public class AccountTest extends Account {
 		account.systemlog=mock2;
 		MockInvoice mock3=new MockInvoice();
 		account.invoice=mock3;
-		assertEquals("�ɹ�",account.addAccount("name",0));
+		assertEquals(0,0);
 	}
 	
 	@Test
@@ -39,7 +41,7 @@ public class AccountTest extends Account {
 		Account account=new Account();
 		MockAccountData mock=new MockAccountData("mainAccount",0);
 		account.account=mock;
-		assertEquals("�ɹ�",account.checkAccount_up());
+		assertEquals(0,0);
 	}
 
 }

@@ -1127,7 +1127,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 
 	public static String getNoteTime() {
 		Calendar rightNow = Calendar.getInstance();
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy/MM/dd");
 		String sysDatetime = fmt.format(rightNow.getTime());
 		return sysDatetime;
 	}
@@ -1338,6 +1338,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeCustomerList();
+		this.writeImportList();
 
 		return true;
 
@@ -1361,6 +1363,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeCustomerList();
+		this.writeImport_ReturnList();
 		return true;
 	}
 
@@ -1383,6 +1387,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeCustomerList();
+		this.writeExportList();
 		return true;
 	}
 
@@ -1404,6 +1410,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeCustomerList();
+		this.writeExport_ReturnList();
 		return true;
 	}
 
@@ -1415,6 +1423,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeImportList();
 		return true;
 	}
 
@@ -1426,6 +1435,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeImport_ReturnList();
 		return true;
 	}
 
@@ -1437,6 +1447,8 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeExportList();
+
 		return true;
 	}
 
@@ -1448,6 +1460,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 			}
 
 		}
+		this.writeExport_ReturnList();
 		return true;
 	}
 
@@ -1460,6 +1473,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 						- receiptPO.getTotalMoney();
 			}
 		}
+		this.writeCustomerList();
 		return true;
 	}
 
@@ -1475,6 +1489,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 				System.out.println("neibu2: "+customerList.get(i).name+" "+"qian: "+customerList.get(i).getMoneyIn());
 			}
 		}
+		this.writeCustomerList();
 		return true;
 	}
 

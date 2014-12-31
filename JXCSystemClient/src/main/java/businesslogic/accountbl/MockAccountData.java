@@ -45,7 +45,7 @@ public class MockAccountData implements AccountDataService{
 	public AccountPO findAccount(String name) {
 		// TODO Auto-generated method stub
 		AccountPO acc=new AccountPO("name",0);
-		return acc;
+		return null;
 	}
 
 	public ArrayList<AccountPO> getAllAccount() {
