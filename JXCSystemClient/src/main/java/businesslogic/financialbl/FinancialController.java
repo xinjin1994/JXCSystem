@@ -138,7 +138,6 @@ public class FinancialController implements FinancialblService{
 		for(int i=0;i<po.size();i++){
 			con=new ConditionVO(po.get(i).getOldNote(),po.get(i).getIncome(),po.get(i).getGoodIncome(),po.get(i).getDiscount(),po.get(i).getOutcome(),po.get(i).getGoodOutcome());
 			vo.add(con);
-//			System.out.println("conditionVO:"+i+": getNote:"+po.get(i).getOldNote());
 		}
 		return vo;
 	}

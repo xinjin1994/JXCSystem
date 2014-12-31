@@ -14,6 +14,7 @@ import po.AllBillPO;
 import po.OperatingConditionPO;
 import po.PaymentPO;
 import po.SaleListPO;
+import data.accountdata.AccountDataService_Stub;
 import dataservice.financialdataservice.FinancialDataService;
 
 public class FinancialDataService_Stub extends UnicastRemoteObject implements FinancialDataService{
@@ -214,6 +215,7 @@ public class FinancialDataService_Stub extends UnicastRemoteObject implements Fi
 	}
 
 	public boolean addOperatingCondition(OperatingConditionPO po) {
+//		po.time=AccountDataService_Stub.getNowTime();
 		operatingConditionList.add(po.copy());
 		this.writeOperatingConditionList();
 		return true;
