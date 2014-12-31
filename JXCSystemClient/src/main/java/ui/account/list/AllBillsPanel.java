@@ -21,6 +21,7 @@ import ui.setting.SaveTempBills;
 import ui.setting.SetTable;
 import ui.setting.Button.ForwardButton;
 import ui.setting.Button.MyButton;
+import ui.setting.ComboBox.MyComboBox;
 import ui.setting.TextField.MyTextFieldBorder;
 import ui.setting.resultPanels.ResultPanelController;
 import vo.bill.AllBillVO;
@@ -50,6 +51,8 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 	private ResultPanelController resController;
 	ArrayList<AllBillVO> billsArray;
 	ArrayList<InvoiceVO> billIn = new ArrayList<InvoiceVO>();
+	private MyComboBox typeCombobox;
+	private String noteType = "";
 	public AllBillsPanel(MyFrame frame,String url,
 			AccountAllUIController uiController){
 		super(frame,url,uiController);
@@ -82,8 +85,18 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 	private void init(){
 		setTextField();
 		setForward();
+		setComBox();
 	}
 	
+	private void setComBox() {
+		String [] roleList = {"商品赠送单","进货单","进货退货单","销售单","销售退货单","报溢报损单","收款单","付款单"};
+		
+		typeCombobox = new MyComboBox(roleList, 293, 269, 319, 37);
+		this.add(typeCombobox);
+		typeCombobox.addActionListener(this);
+		
+	}
+
 	private void setForward() {
 		ForwardButton forward = new ForwardButton(677,492);
 		forwardButton = forward.forward_white;
@@ -101,7 +114,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 		agent = new MyTextFieldBorder(293, 495);
 	
 		MyTextFieldBorder []typeIn = new MyTextFieldBorder[]{timeBegin,timeFinish,
-				billType,stock,customer,agent};
+				stock,customer,agent};
 		
 		for(int i = 0;i < typeIn.length;i++){
 			typeIn[i].setForeground(new ColorFactory().greyFont);
@@ -132,7 +145,7 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 		if(e.getSource() == forwardButton){
 			String time1 = timeBegin.getText();
 			String time2 = timeFinish.getText();
-			String note_type = billType.getText();
+//			String note_type = billType.getText();
 			String customer_name = customer.getText();
 			String clerk = agent.getText();
 //
@@ -156,8 +169,8 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 				ArrayList<String> bills = new ArrayList<String>();
 				try{
 					String warehouse = stock.getText();
-					
-					billsArray = financialblService.allBill_up(time1, time2, note_type, 
+					System.out.println(noteType+"000");
+					billsArray = financialblService.allBill_up(time1, time2, noteType, 
 							customer_name, clerk, warehouse);
 
 					bills.add("时间;单据编号;单据类型");
@@ -254,6 +267,8 @@ public class AllBillsPanel extends FatherPanel implements ActionListener{
 			}
 			
 			resController.succeeded("成功导出经营历程表！", type);
+		}else if (e.getSource() == typeCombobox) {
+			noteType = (typeCombobox.getSelectedIndex()+1)+"";
 		}
 	}
 }
