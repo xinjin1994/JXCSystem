@@ -45,11 +45,10 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		
 		try {
 			
-			DiscountPO lin=promotion.getDiscount(level);
+			DiscountPO lin=getDiscount(level);
 			
 			if(lin!=null){
-//				if(lin.getStartTime().equals())
-				return 2;
+				return 13;
 			}
 			
 			if(promotion.addDiscount(dis)){
@@ -76,10 +75,10 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		
 		try {
 			
-			ProGiftPO lin=promotion.getGift(level);
+			ProGiftPO lin=getProGift(level);
 			
 			if(lin!=null){
-				return 2;
+				return 13;
 			}
 			
 			if(promotion.addGift(dis)){
@@ -105,10 +104,10 @@ public class Promotion implements businesslogic.salesbl.PromotionInfo {
 		
 		try {
 			
-			VoucherPO lin=promotion.getVoucher(level);
+			VoucherPO lin=getVoucher(level);
 			
 			if(lin!=null){
-				return 2;
+				return 13;
 			}
 			
 			if(promotion.addVoucher(dis)){
