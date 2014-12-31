@@ -1,6 +1,6 @@
 package ui.admin;
 
-import junit.awtui.Logo;
+//import junit.awtui.Logo;
 import ui.AdminPanel;
 import ui.CommodityPanel;
 import ui.FatherPanel;
