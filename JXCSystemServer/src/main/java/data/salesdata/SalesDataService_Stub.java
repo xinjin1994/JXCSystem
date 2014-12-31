@@ -1467,7 +1467,7 @@ public class SalesDataService_Stub extends UnicastRemoteObject implements
 		// TODO Auto-generated method stub
 		for (int i = 0; i < customerList.size(); i++) {
 			if (customerList.get(i).name.equals(paymentPO.getItemName())) {
-				customerList.get(i).moneyIn = customerList.get(i).moneyOut
+				customerList.get(i).moneyIn = customerList.get(i).moneyIn
 						+ paymentPO.getTotalMoney();
 			}
 		}

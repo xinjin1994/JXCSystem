@@ -1025,9 +1025,16 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public boolean addSendGift(CommodityPO gift, int number,CustomerPO customer) {
 		// TODO Auto-generated method stub
 		try {
+			System.out.println("addSendGift:Commodity:"+gift.getNote());
 		CommodityPO giftpo=sto.findGift(gift);
+		
+		if(giftpo.getNumber()<number){
+			System.out.println("gift number less:");
+			return false;
+		}
+		
 		String note=sto.getSendGiftNote();
-		SendGiftPO po= new SendGiftPO(giftpo,number,note,customer.name);
+		SendGiftPO po= new SendGiftPO(giftpo,number,note,customer.getName());
 		po.setCondition(1);
 		sto.addSendGift(po);
 		invoice.add(po);

@@ -35,7 +35,7 @@ public class SendGiftPO extends InvoicePO implements Serializable{
 		po.setTime(this.getTime());
 		po.setCondition(this.condition);
 		po.setInvoiceNote(this.getInvoiceNote());
-		return null;
+		return po;
 	}
 	
 	public void setNumber(int number){
