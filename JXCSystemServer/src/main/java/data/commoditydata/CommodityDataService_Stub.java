@@ -798,7 +798,12 @@ public class CommodityDataService_Stub extends UnicastRemoteObject implements Co
 		// TODO Auto-generated method stub
 		String father;
 		SortPO po3=findSort_true(po1.getName());
-		SortPO po4=findSort_true(po2.getName());
+		SortPO po4;
+		if(po2!=null){
+			po4=findSort_true(po2.getName());
+		}else{
+			po4=null;
+		}
 		String[] str3=po3.getNote().split("-");
 		
 		if(po3.father==null){

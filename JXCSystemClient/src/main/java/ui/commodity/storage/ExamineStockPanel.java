@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import ui.CommodityPanel;
 import ui.FatherPanel;
 import ui.commodity.CommodityAllUIController;
+import ui.setting.CheckTimeFormat;
 import ui.setting.ColorFactory;
 import ui.setting.MyFrame;
 import ui.setting.MyTable;
@@ -121,6 +122,7 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 			resController.failed("输入时间不符合客观规律！", failedAddress);
 		}
 		else{
+
 		ArrayList<ExamineVO> examineVO = commodityblService.Examine_up(time1, time2);
 		ArrayList<String> examStr = new ArrayList<String>();
 		int num = 0;
@@ -148,6 +150,5 @@ public class ExamineStockPanel extends FatherPanel implements ActionListener{
 		examStr.add("总计;"+";"+import_num+";"+import_return+";"+export_num+";"+export_return+";"+patch_num+";"+sendGift+";"+total+";"+";"+totalNum);
 		setTable(examStr);
 		}
-	}
 	
-}
+	}}

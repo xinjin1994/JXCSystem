@@ -344,11 +344,21 @@ public class Commodity implements businesslogic.financialbl.CommodityInfo,
 	public int updateSort_Mov(SortPO po1,SortPO po2){
 		try {	
 			SortPO sort1=findSort(po1.getName());
-			SortPO sort2=findSort(po2.getName());
-		
-			if(sort1==null||sort2==null){
+			SortPO sort2;
+			
+			if(sort1==null){
 				return 4;
 			}
+			
+			if(po2!=null){
+				sort2=findSort(po2.getName());
+				if(sort2==null){
+					return 4;
+				}
+			}else{
+				sort2=null;
+			}
+			
 			if(sto.updateSort_Mov(sort1, sort2)){
 				systemlog.add_up("moveSort:"+sort1.getName()+"to"+sort2.getName());
 				return 0;
