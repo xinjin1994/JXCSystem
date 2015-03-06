@@ -6,15 +6,23 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import businesslogic.accountbl.Account;
-import businesslogic.accountbl.AccountSingleton;
+import businesslogic.accountbl.AccountController;
 import businesslogic.commoditybl.Commodity;
+import businesslogic.commoditybl.CommodityController;
 import businesslogic.financialbl.Financial;
+import businesslogic.financialbl.FinancialController;
 import businesslogic.initializationlbl.Initialization;
+import businesslogic.initializationlbl.InitializationController;
 import businesslogic.invoicebl.Invoice;
+import businesslogic.invoicebl.InvoiceController;
 import businesslogic.promotionbl.Promotion;
+import businesslogic.promotionbl.PromotionController;
 import businesslogic.salesbl.Sales;
+import businesslogic.salesbl.SalesController;
 import businesslogic.systemlogbl.Systemlog;
+import businesslogic.systemlogbl.SystemlogController;
 import businesslogic.userbl.User;
+import businesslogic.userbl.UserController;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.financialdataservice.FinancialDataService;
@@ -99,8 +107,6 @@ public class ClientStart {
 			promotion.setInfo(systemlog, commodity);
 			user.setInfo(systemlog);
 			sales.setInfo(invoice, systemlog, commodity);
-			
-			AccountSingleton.setInstace(account);
 			
 			System.out.println("Connect Success!");
 			
